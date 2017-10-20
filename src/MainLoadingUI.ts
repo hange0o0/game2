@@ -27,7 +27,12 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////
 
-class LoadingUI extends egret.Sprite {
+class MainLoadingUI extends egret.Sprite {
+    private static instance:MainLoadingUI;
+    public static getInstance() {
+        if (!this.instance) this.instance = new MainLoadingUI();
+        return this.instance;
+    }
 
     public constructor() {
         super();
@@ -35,18 +40,15 @@ class LoadingUI extends egret.Sprite {
     }
 
     private textField;
-    private infoText;
-    private loadingMC
     private shape
+    private icon
 
-    private timer
 
     private createView():void {
 
         this.shape = new eui.Rect();
         this.shape.width = 640;
         this.shape.fillColor = 0;
-        this.shape.fillAlpha = 0.8;
         this.shape.touchEnabled = true;
         this.addChild(this.shape)
 
@@ -56,66 +58,42 @@ class LoadingUI extends egret.Sprite {
 
         this.textField.width = 480;
         this.textField.height = 100;
+        this.textField.text = 'Loading...';
         this.textField.textAlign = "center";
-        this.textField.text = '加载准备中..';
 
-        this.infoText = new eui.Label();
-        this.addChild(this.infoText);
-        this.infoText.x = 70;
-        this.infoText.width = 500;
-        this.infoText.textColor = 0xB59E7D;
-        this.infoText.size = 22;
-        this.infoText.lineSpacing = 6;
-
-
-
-        var data:any = RES.getRes("loading_ani" +  "_json"); //qid
-        var texture:egret.Texture = RES.getRes("loading_ani" + "_png");
-        var mcFactory = new egret.MovieClipDataFactory(data, texture);
-        this.loadingMC = new egret.MovieClip();
-        this.loadingMC.scaleX = this.loadingMC.scaleY = 1.5
-        this.addChild(this.loadingMC);
-        this.loadingMC.movieClipData = mcFactory.generateMovieClipData('loading_ani');
-        this.loadingMC.x = 220;
-
-
-
+        this.icon = new eui.Image();
+        this.addChild(this.icon)
+        //this.icon.source = 'resource/game_assets/logo/logo_180.png';
+        this.icon.x = 230;
 
     }
 
-    public show(){
-        GameManager.container.addChild(this);
+    public show(con){
+        con.addChild(this);
 
         this.width = 640;
-        this.height = GameManager.stage.stageHeight;
-        this.shape.height = GameManager.stage.stageHeight;
-        this.loadingMC.gotoAndPlay(1,-1)
-        this.loadingMC.y = this.height/2 - 100;
+        this.height = con.stage.stageHeight;
+        this.shape.height = con.stage.stageHeight;
         this.textField.y = this.height/2;
-
-        MyTool.setHtml(this.infoText,HelpManager.getInstance().getInfoText());
-        this.infoText.y = this.height - this.infoText.textHeight - 20;
-        if(this.infoText.numLines > 1)
-            this.infoText.textAlign = 'left'
-        else
-            this.infoText.textAlign = 'center'
-
-
-        this.textField.text = '加载准备中..';
-
-        this.visible = false;
-        egret.clearTimeout(this.timer);
-        this.timer = egret.setTimeout(function(){
-            this.visible = true;
-        },this,200)
+        this.icon.y = this.textField.y - 230;
+        this.textField.text = 'Loading...';
     }
 
+    public setFinish(){
+        this.textField.text = '加载完成，正在初始化....'
+    }
+
+    public showLogin(){
+        this.textField.text = '登陆中....'
+    }
+
+
     public setProgress(current, total):void {
-        this.textField.text = "加载中..." + current + "/" + total;
+        this.textField.text = "Loading..." + current + "/" + total;
     }
 
     public hide(){
         MyTool.removeMC(this);
-        this.loadingMC.stop();
     }
+
 }

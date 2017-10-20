@@ -1,7 +1,17 @@
 {
-	"groups":[{
-			"keys":"",
+	"groups":[
+		{
+			"keys":"btn_r1__png",
 			"name":"preload"
-		}],
-	"resources":[]
+		},
+		{
+			"keys":"btn_r1__png",
+			"name":"login_load"
+		}
+	],
+	"resources":[{
+			"name":"btn_r1__png",
+			"type":"image",
+			"url":"game_assets/btn_r1_.png"
+		}]
 }

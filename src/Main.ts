@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////////////
 //
-//  Copyright (c) 2014-present, Egret Technology.
+//  Copyright (c) 2014-2015, Egret Technology Inc.
 //  All rights reserved.
 //  Redistribution and use in source and binary forms, with or without
 //  modification, are permitted provided that the following conditions are met:
@@ -26,29 +26,56 @@
 //  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 //////////////////////////////////////////////////////////////////////////////////////
-
+var UM:UserManager,TM:TimeManager,EM:EventManager,CM:CacheManager,DM;
 class Main extends eui.UILayer {
     /**
      * 加载进度界面
      * loading process interface
      */
-    private loadingView: LoadingUI;
+    private loadingView: MainLoadingUI;
     protected createChildren(): void {
         super.createChildren();
+        Config.init();
         //inject the custom material parser
         //注入自定义的素材解析器
-        let assetAdapter = new AssetAdapter();
-        egret.registerImplementation("eui.IAssetAdapter",assetAdapter);
-        egret.registerImplementation("eui.IThemeAdapter",new ThemeAdapter());
+        var assetAdapter = new AssetAdapter();
+        this.stage.registerImplementation("eui.IAssetAdapter",assetAdapter);
+        this.stage.registerImplementation("eui.IThemeAdapter",new ThemeAdapter());
+
+        //this.stage.addEventListener(egret.Event.RESIZE,this.setScaleMode,this);
+        this.setScaleMode();
         //Config loading process interface
         //设置加载进度界面
-        this.loadingView = new LoadingUI();
-        this.stage.addChild(this.loadingView);
+        this.loadingView = MainLoadingUI.getInstance();
+        if(_get['debug'] != 100 && _get['debug'] != 101)
+        {
+            this.loadingView.show(this);
+        }
+
+
         // initialize the Resource loading library
         //初始化Resource资源加载库
         RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
         RES.loadConfig("resource/default.res.json", "resource/");
+
+
+
+        UM = UserManager.getInstance();
+        TM = TimeManager.getInstance();
+        EM = EventManager.getInstance();
+        CM = CacheManager.getInstance();
+        DM = DebugManager.getInstance();
+        FromManager.getInstance().initData();
     }
+
+    private setScaleMode(){
+        if(this.stage.stageWidth/this.stage.stageHeight > 640/960)
+            this.stage.scaleMode = egret.StageScaleMode.SHOW_ALL;
+        else
+            this.stage.scaleMode = egret.StageScaleMode.FIXED_WIDTH;
+    }
+
+
     /**
      * 配置文件加载完成,开始预加载皮肤主题资源和preload资源组。
      * Loading of configuration file is complete, start to pre-load the theme configuration file and the preload resource group
@@ -57,14 +84,18 @@ class Main extends eui.UILayer {
         RES.removeEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
         // load skin theme configuration file, you can manually modify the file. And replace the default skin.
         //加载皮肤主题配置文件,可以手动修改这个文件。替换默认皮肤。
-        let theme = new eui.Theme("resource/default.thm.json", this.stage);
+        var theme = new eui.Theme("resource/default.thm.json", this.stage);
         theme.addEventListener(eui.UIEvent.COMPLETE, this.onThemeLoadComplete, this);
+
+
+
+
 
         RES.addEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
         RES.addEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
         RES.addEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
         RES.addEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemLoadError, this);
-        RES.loadGroup("preload");
+        RES.loadGroup("login_load");
     }
     private isThemeLoadEnd: boolean = false;
     /**
@@ -73,6 +104,7 @@ class Main extends eui.UILayer {
      */
     private onThemeLoadComplete(): void {
         this.isThemeLoadEnd = true;
+
         this.createScene();
     }
     private isResourceLoadEnd: boolean = false;
@@ -81,19 +113,52 @@ class Main extends eui.UILayer {
      * preload resource group is loaded
      */
     private onResourceLoadComplete(event:RES.ResourceEvent):void {
-        if (event.groupName == "preload") {
-            this.stage.removeChild(this.loadingView);
-            RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
-            RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
-            RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
-            RES.removeEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemLoadError, this);
+        if (event.groupName == "login_load") {
+
             this.isResourceLoadEnd = true;
+
+            CM.initData(RES.getRes("data_json"));
+            CM.initFinish();
+
+            //var LM = LoginManager.getInstance();
+            //if(LM.lastUser && LM.quickPassword) {
+            //    LM.isAuto = true;
+            //    if(LM.lastServer)
+            //    {
+            //        RES.loadGroup("preload_png"); //预加载第一阶段
+            //        return;
+            //    }
+            //}
+
+            this.removeLoadEvent();
+            this.createScene();
+        }
+        else if (event.groupName == "preload_png") {
+            RES.loadGroup("preload_jpg");//预加载第一阶段
+        }
+        else if (event.groupName == "preload_jpg") {
+            this.removeLoadEvent();
             this.createScene();
         }
     }
+
+    private removeLoadEvent(){
+        this.loadingView.setFinish();
+        RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
+        RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
+        RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
+        RES.removeEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemLoadError, this);
+    }
     private createScene(){
         if(this.isThemeLoadEnd && this.isResourceLoadEnd){
+
             this.startCreateScene();
+
+
+            //if(LoginManager.getInstance().isAuto)
+            //    this.loadingView.showLogin();
+            //else
+                MyTool.removeMC(this.loadingView);
         }
     }
     /**
@@ -119,126 +184,79 @@ class Main extends eui.UILayer {
      * loading process of preload resource
      */
     private onResourceProgress(event:RES.ResourceEvent):void {
-        if (event.groupName == "preload") {
+        if (event.groupName == "login_load") {
             this.loadingView.setProgress(event.itemsLoaded, event.itemsTotal);
         }
     }
-    private textfield:egret.TextField;
     /**
      * 创建场景界面
      * Create scene interface
      */
     protected startCreateScene(): void {
-        let sky = this.createBitmapByName("bg_jpg");
-        this.addChild(sky);
-        let stageW = this.stage.stageWidth;
-        let stageH = this.stage.stageHeight;
-        sky.width = stageW;
-        sky.height = stageH;
+        GameManager.stage = this.stage;
+        GameManager.container = this;
+        GameManager.getInstance().init();
+        MonsterTestUI.getInstance().show();
+        //if(Config.isDebug && _get['host'] == 'com')
+        //{
+        //    Config.host = '172.17.196.195:90';
+        //}
+        //GameManager.stage = this.stage;
+        //GameManager.container = this;
+        //GameManager.getInstance().init();
+        //SoundManager.getInstance().preLoad();
+        //if(FromManager.getInstance().login())
+        //    return;
+        //
+        //
+        //if(_get['debug'] == 100)
+        //{
+        //    Net.getInstance().serverHost = 'http://172.17.196.195:90/gameindex.php';
+        //    document.body.style.background='#FFFFFF'
+        //    return
+        //}
+        //if(_get['debug'] == 101)
+        //{
+        //    GameManager.container.visible = false;
+        //}
+        //Config.isDebug =  _get['debug'] || SharedObjectManager.instance.getValue('debug_open');
+        //var LM = LoginManager.getInstance();
+        //if(!(LM.lastUser && LM.quickPassword && LM.lastServer)) {
+        //    egret.setTimeout(function(){
+        //        RES.loadGroup("preload_png");//预加载第一阶段
+        //        RES.loadGroup("preload_jpg");//预加载第一阶段
+        //    },this,200)
+        //}
 
-        let topMask = new egret.Shape();
-        topMask.graphics.beginFill(0x000000, 0.5);
-        topMask.graphics.drawRect(0, 0, stageW, 172);
-        topMask.graphics.endFill();
-        topMask.y = 33;
-        this.addChild(topMask);
 
-        let icon:egret.Bitmap = this.createBitmapByName("egret_icon_png");
-        this.addChild(icon);
-        icon.x = 26;
-        icon.y = 33;
-
-        let line = new egret.Shape();
-        line.graphics.lineStyle(2,0xffffff);
-        line.graphics.moveTo(0,0);
-        line.graphics.lineTo(0,117);
-        line.graphics.endFill();
-        line.x = 172;
-        line.y = 61;
-        this.addChild(line);
+        //if(_get['openid2'])
+        //{
+        //    var arr = _get['openid2'].split('_')
+        //    LoginManager.getInstance().getServerList(function(){
+        //        LoginManager.getInstance().debugLoginServer(arr[1],arr[0],_get['openkey']);
+        //    })
+        //
+        //    return;
+        //}
+        //
+        //if(_get['openid'])
+        //{
+        //    LoginManager.getInstance().login(_get['openid'],'@password');
+        //    return;
+        //}
+        //
+        //LoginUI.getInstance().show();
 
 
-        let colorLabel = new egret.TextField();
-        colorLabel.textColor = 0xffffff;
-        colorLabel.width = stageW - 172;
-        colorLabel.textAlign = "center";
-        colorLabel.text = "Hello Egret";
-        colorLabel.size = 24;
-        colorLabel.x = 172;
-        colorLabel.y = 80;
-        this.addChild(colorLabel);
 
-        let textfield = new egret.TextField();
-        this.addChild(textfield);
-        textfield.alpha = 0;
-        textfield.width = stageW - 172;
-        textfield.textAlign = egret.HorizontalAlign.CENTER;
-        textfield.size = 24;
-        textfield.textColor = 0xffffff;
-        textfield.x = 172;
-        textfield.y = 135;
-        this.textfield = textfield;
-
-        //根据name关键字，异步获取一个json配置文件，name属性请参考resources/resource.json配置文件的内容。
-        // Get asynchronously a json configuration file according to name keyword. As for the property of name please refer to the configuration file of resources/resource.json.
-        RES.getResAsync("description_json", this.startAnimation, this);
-
-        let button = new eui.Button();
-        button.label = "Click!";
-        button.horizontalCenter = 0;
-        button.verticalCenter = 0;
-        this.addChild(button);
-        button.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onButtonClick, this);
-    }
-    /**
-     * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
-     * Create a Bitmap object according to name keyword.As for the property of name please refer to the configuration file of resources/resource.json.
-     */
-    private createBitmapByName(name:string):egret.Bitmap {
-        let result = new egret.Bitmap();
-        let texture:egret.Texture = RES.getRes(name);
-        result.texture = texture;
-        return result;
-    }
-    /**
-     * 描述文件加载成功，开始播放动画
-     * Description file loading is successful, start to play the animation
-     */
-    private startAnimation(result:Array<any>):void {
-     let parser = new egret.HtmlTextParser();
-
-        let textflowArr = result.map( text => parser.parse(text));
-        let textfield = this.textfield;
-        let count = -1;
-        let change = ()=> {
-            count++;
-            if (count >= textflowArr.length) {
-                count = 0;
-            }
-            let textFlow = textflowArr[count];
-
-            // 切换描述内容
-            // Switch to described content
-            textfield.textFlow = textFlow;
-            let tw = egret.Tween.get(textfield);
-            tw.to({"alpha": 1}, 200);
-            tw.wait(2000);
-            tw.to({"alpha": 0}, 200);
-            tw.call(change, this);
-        };
-
-        change();
     }
 
-    /**
-     * 点击按钮
-     * Click the button
-     */
     private onButtonClick(e: egret.TouchEvent) {
-        let panel = new eui.Panel();
-        panel.title = "Title";
-        panel.horizontalCenter = 0;
-        panel.verticalCenter = 0;
-        this.addChild(panel);
+        DebugUI.getInstance().show();
+        //var panel = new eui.Panel();
+        //panel.title = "Title";
+        //panel.horizontalCenter = 0;
+        //panel.verticalCenter = 0;
+        //this.addChild(panel);
     }
 }

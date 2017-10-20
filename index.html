@@ -38,36 +38,100 @@
 
     <!--这个标签会被替换为项目中所有的 javascript 文件。删除 game_files 标签后，项目文件加载列表将不会变化，请谨慎操作！-->
     <!--game_files_start-->
-	<script egret="game" src="bin-debug/AssetAdapter.js"></script>
+	<script egret="game" src="bin-debug/commont/BaseUI.js"></script>
+	<script egret="game" src="bin-debug/manager/DebugManager.js"></script>
+	<script egret="game" src="bin-debug/commont/Config.js"></script>
+	<script egret="game" src="bin-debug/commont/GameEvent.js"></script>
+	<script egret="game" src="bin-debug/commont/MyTool.js"></script>
+	<script egret="game" src="bin-debug/commont/MyWindow.js"></script>
+	<script egret="game" src="bin-debug/commont/Net.js"></script>
+	<script egret="game" src="bin-debug/commont/skin/BasePanel.js"></script>
+	<script egret="game" src="bin-debug/commont/skin/BookBG.js"></script>
+	<script egret="game" src="bin-debug/commont/ui/AlertUI.js"></script>
+	<script egret="game" src="bin-debug/commont/ui/CommonNumInput.js"></script>
+	<script egret="game" src="bin-debug/commont/ui/ConfirmUI.js"></script>
+	<script egret="game" src="bin-debug/commont/ui/TipsUI.js"></script>
+	<script egret="game" src="bin-debug/commont/ui/TopUI.js"></script>
+	<script egret="game" src="bin-debug/commont/ui/TouchTipsUI.js"></script>
+	<script egret="game" src="bin-debug/commont/VScrollerGroup.js"></script>
+	<script egret="game" src="bin-debug/db/PropVO.js"></script>
+	<script egret="game" src="bin-debug/debug/DebugInput.js"></script>
+	<script egret="game" src="bin-debug/debug/DebugSkillItem.js"></script>
+	<script egret="game" src="bin-debug/debug/DebugSkillList.js"></script>
+	<script egret="game" src="bin-debug/debug/DebugUI.js"></script>
+	<script egret="game" src="bin-debug/debug/ScrollTest.js"></script>
+	<script egret="game" src="bin-debug/game/MonsterMV.js"></script>
+	<script egret="game" src="bin-debug/game/MonsterTestUI.js"></script>
 	<script egret="game" src="bin-debug/LoadingUI.js"></script>
 	<script egret="game" src="bin-debug/Main.js"></script>
+	<script egret="game" src="bin-debug/MainLoadingUI.js"></script>
+	<script egret="game" src="bin-debug/manager/AniManager.js"></script>
+	<script egret="game" src="bin-debug/manager/AppManager.js"></script>
+	<script egret="game" src="bin-debug/manager/CacheManager.js"></script>
+	<script egret="game" src="bin-debug/AssetAdapter.js"></script>
+	<script egret="game" src="bin-debug/manager/DragManager.js"></script>
+	<script egret="game" src="bin-debug/manager/EgretManager.js"></script>
+	<script egret="game" src="bin-debug/manager/EventManager.js"></script>
+	<script egret="game" src="bin-debug/manager/GameManager.js"></script>
+	<script egret="game" src="bin-debug/manager/HelpManager.js"></script>
+	<script egret="game" src="bin-debug/manager/RedPointManager.js"></script>
+	<script egret="game" src="bin-debug/manager/SharedObjectManager.js"></script>
+	<script egret="game" src="bin-debug/manager/SoundManager.js"></script>
+	<script egret="game" src="bin-debug/manager/SyncManager.js"></script>
+	<script egret="game" src="bin-debug/manager/TickerManager.js"></script>
+	<script egret="game" src="bin-debug/manager/TimeManager.js"></script>
+	<script egret="game" src="bin-debug/manager/UserManager.js"></script>
+	<script egret="game" src="bin-debug/MsgingUI.js"></script>
+	<script egret="game" src="bin-debug/platform/FromManager.js"></script>
+	<script egret="game" src="bin-debug/platform/QunHeiManager.js"></script>
 	<script egret="game" src="bin-debug/ThemeAdapter.js"></script>
+	<script egret="game" src="bin-debug/util/ArrayUtil.js"></script>
+	<script egret="game" src="bin-debug/util/BadWords.js"></script>
+	<script egret="game" src="bin-debug/util/BadWordsFilter.js"></script>
+	<script egret="game" src="bin-debug/util/Base64.js"></script>
+	<script egret="game" src="bin-debug/util/DateUtil.js"></script>
+	<script egret="game" src="bin-debug/util/LoadingFile.js"></script>
+	<script egret="game" src="bin-debug/util/LoadingQueue.js"></script>
+	<script egret="game" src="bin-debug/util/md5.js"></script>
+	<script egret="game" src="bin-debug/util/NumberUtil.js"></script>
+	<script egret="game" src="bin-debug/util/ObjectUtil.js"></script>
+	<script egret="game" src="bin-debug/util/PopUpManager.js"></script>
+	<script egret="game" src="bin-debug/util/ShapeObject.js"></script>
+	<script egret="game" src="bin-debug/util/StringUtil.js"></script>
 	<!--game_files_end-->
 </head>
 <body>
 
-    <div style="margin: auto;width: 100%;height: 100%;" class="egret-player"
-         data-entry-class="Main"
-         data-orientation="auto"
-         data-scale-mode="showAll"
-         data-frame-rate="30"
-         data-content-width="640"
-         data-content-height="1136"
-         data-show-paint-rect="false"
-         data-multi-fingered="2"
-         data-show-fps="false" data-show-log="false"
-         data-show-fps-style="x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9">
-    </div>
-    <script>
-        /**
-         * {
-         * "renderMode":, //引擎渲染模式，"canvas" 或者 "webgl"
-         * "audioType": 0 //使用的音频类型，0:默认，1:qq audio，2:web audio，3:audio
-         * "antialias": //WebGL模式下是否开启抗锯齿，true:开启，false:关闭，默认为false
-         * "retina": //是否基于devicePixelRatio缩放画布
-         * }
-         **/
-        egret.runEgret({renderMode:"webgl", audioType:0});
-    </script>
+	<div id="gameCon" style="margin: auto;width: 100%;height: 100%;" class="egret-player"
+		 data-entry-class="Main"
+		 data-orientation="portrait"
+		 data-scale-mode="fixedWidth"
+		 data-resolution-mode="retina"
+		 data-frame-rate="30"
+		 data-content-width="640"
+		 data-content-height="960"
+		 data-show-paint-rect="false"
+		 data-multi-fingered="2"
+		 data-show-fps="false" data-show-log="false"
+		 data-log-filter="" data-show-fps-style="x:0,y:0,size:30,textColor:0x00c200,bgAlpha:0.9">
+	</div>
+	<script>
+
+
+		var ua = navigator.userAgent.toLowerCase();
+		var isWindow = ua.indexOf('windows') != -1 || ua.indexOf('macintosh') != -1;
+		if(isWindow){
+			var ww = 640, hh = 960;
+			var dw = document.body.clientWidth;
+			var dh = document.body.clientHeight;
+			var scale = Math.min(1,dh/hh,dw/ww);
+			window["gameCon"].style["width"] = (ww*scale)+"px";
+			window["gameCon"].style["height"] = (hh*scale)+"px";
+		}
+
+		egret.runEgret({renderMode:SharedObjectManager.instance.getValue("renderMode") || "webgl"});
+
+
+	</script>
 </body>
 </html>

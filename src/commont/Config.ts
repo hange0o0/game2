@@ -51,6 +51,15 @@ class Config {
                 "url": "monster/enemy" + i+'_hd.png'
             })
         }
+
+        for(var i=1;i<=1;i++)
+        {
+            arr.push({
+                "name":"pk_bg" + i + "_png",
+                "type":"image",
+                "url": "pk_bg" + i + ".png"
+            })
+        }
         RES.parseConfig(data, Config.localResRoot);
         console.log(data)
     }

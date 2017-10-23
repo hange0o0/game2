@@ -13,7 +13,7 @@ class UserManager {
 
 
 
-    public gameid: string;
+    public openid: string = 'test';
     public landid: string;
 
     public word: string;
@@ -49,7 +49,7 @@ class UserManager {
 
 
     public fill(data:any):void{
-        this.gameid = data.gameid;
+        this.openid = data.openid;
         this.landid = data.land_key;
         this.nick = data.nick;
         this.uid = data.uid;

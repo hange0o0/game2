@@ -3,19 +3,26 @@ class PKMonsterData {
     public die = false;
 
     public hp = 0
-    public maxHp = 0
     public atk  = 0
     public speed  = 0
-    public def  = 0
-    public buff = [];
 
-    public id;//唯一ID
+
+
+
     public x;//当前的位置
     public mid //对应的怪
     public owner//属于哪个玩家
     public actionTime//上次行动的时间
     public atkRota//进攻方向
+
     public target:PKMonsterData//攻击目标
+
+    public id;//唯一ID
+    public def  = 0
+    public maxHp = 0
+    public stopTime = 0
+    public buff = [];
+
 
     constructor(obj?){
         if(obj)
@@ -27,22 +34,39 @@ class PKMonsterData {
         for (var key in obj) {
             this[key] = obj[key];
         }
+        this.maxHp = this.hp;
+        this.def = this.getVO().def;
     }
 
-    public getVO(){
-        return null;
+    public getVO():any{
+        return {};
+    }
+    public getOwner(){
+        return PKData.getInstance().getPlayer(this.owner);
     }
 
-    public canMove(){
-
+    public canMove(t){
+         return this.stopTime < t;
     }
 
     public canBeAtk(user){
-        return !this.die;
+        return !this.die &&
+            user.getOwner().teamData != this.getOwner().teamData;
+    }
+    public canSkill(){
+        var arr = []
+        if(this.die)
+            return arr;
+        return arr;
     }
 
     public move(){
         this.x += this.atkRota * Math.round(this.speed);
+        console.log(this.speed,this.x);
+        PKData.getInstance().addVideo({
+            type:'monster_move',
+            data:this
+        })
     }
 
     public getAtkTarget(list){
@@ -64,7 +88,7 @@ class PKMonsterData {
         for(var i=0;i<list.length;i++)
         {
             var target = list[i];
-            var tDes = Math.abs(this.target.x - this.x);
+            var tDes = Math.abs(target.x - this.x);
             if(tDes < atkRage && target.canBeAtk(this)) {
 
                 var ePlayer = PD.getPlayer(target.owner);
@@ -89,5 +113,10 @@ class PKMonsterData {
         this.hp -= data.hp;
         if(this.hp <= 0)
             this.die = true;
+
+        PKData.getInstance().addVideo({
+            type:'monster_bfAtk',
+            data:this,
+        })
     }
 }

@@ -2,10 +2,13 @@
 class PKPosCardData {
     public id;//唯一ID 1-4
     public mid //对应的怪
-    public actionTime//上次行动的时间
-    public actionResult//是否有等待出手的怪
+    public owner//主人ID
 
-    public num//已使用的次数
+    public actionTime = 0//上次行动的时间
+    public actionResult = 0//是否有等待出手的怪
+
+
+    public num = 0//已使用的次数
 
     constructor(obj?){
         if(obj)
@@ -19,10 +22,18 @@ class PKPosCardData {
         }
     }
 
+    public useEnable(){
+        return this.num < 3;
+    }
+
     //是否可上场
     public testAdd(t){
         if(this.actionResult)
             return true;
+        if(!this.useEnable())
+        {
+            return false;
+        }
         if(t - this.actionTime > 1000*3)
         {
             this.actionTime = t;
@@ -32,14 +43,27 @@ class PKPosCardData {
     }
 
     //组装上阵怪的数据
-    public getMonster(){
+    public getMonster(actionTime){
+        var PD = PKData.getInstance();
+        var owner = PD.getPlayer(this.owner);
+        var atkRota = owner.teamData.atkRota;
+        var base = owner.base[this.mid];
+        var x = atkRota == PKData.ROTA_LEFT ? 0:PKCode.getInstance().floorWidth;
         return {
-
+            hp:base.hp,
+            atk:base.atk,
+            speed:base.speed,
+            mid:this.mid,
+            owner:this.owner,
+            atkRota:atkRota,
+            x:x,
+            actionTime:actionTime,
         }
     }
-    //组装上阵怪的数据
+    //上阵怪后的处理
     public setHaveAdd(actionTime){
         this.actionTime = actionTime;
         this.actionResult = 0;
+        this.num ++;
     }
 }

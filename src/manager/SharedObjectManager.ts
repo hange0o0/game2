@@ -15,7 +15,7 @@ class SharedObjectManager {
     }
     
     private getUserSign():string{
-        return UM.gameid;
+        return UM.openid;
     }
         
     public setMyValue(key:string,value:any){

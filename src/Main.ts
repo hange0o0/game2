@@ -196,7 +196,8 @@ class Main extends eui.UILayer {
         GameManager.stage = this.stage;
         GameManager.container = this;
         GameManager.getInstance().init();
-        MonsterTestUI.getInstance().show();
+        PKingUI.getInstance().show();
+        //MonsterTestUI.getInstance().show();
         //if(Config.isDebug && _get['host'] == 'com')
         //{
         //    Config.host = '172.17.196.195:90';

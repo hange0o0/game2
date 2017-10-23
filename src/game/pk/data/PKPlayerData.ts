@@ -1,16 +1,18 @@
 //玩家数据
 class PKPlayerData {
     public id;//唯一ID
+    public openid;
+    public base;//怪的基础属性
     public teamData:PKTeamData   //对应队伍
 
-    public handCard = [];//当前的手牌  ｛index,id｝
-    public posCard = {};//上阵的手牌 1-4
+    public handcard = [];//当前的手牌  ｛index,id｝
+    public posCard = {};//上阵的手牌 1-4,如果是自动的，不受此限制
 
-    private mp//当前的魔法
-    private lastTime//上一次魔法处理时间
+    private mp = 0//当前的魔法
+    private lastTime = 0//上一次魔法处理时间
 
 
-
+    public autoList;
 
     constructor(obj?){
         if(obj)
@@ -22,6 +24,9 @@ class PKPlayerData {
         for (var key in obj) {
             this[key] = obj[key];
         }
+
+        if(obj['autolist'])
+            this.autoList = PKTool.decodeAutoList(obj['autolist'].split(','))
     }
 
     public addMP(v){
@@ -36,7 +41,7 @@ class PKPlayerData {
     private resetMp(){
         var t = PKData.getInstance().getPassTime();
         var step = 1;
-        var max = 20;
+        var max = PKCode.getInstance().maxMP;
 
         if(this.mp >= max){
             this.lastTime = t;
@@ -59,21 +64,38 @@ class PKPlayerData {
 
     private getNextCD(){
         if(this.lastTime < 1000 * 60)
-            return this.lastTime + 3000;
-        else if(this.lastTime < 1000 * 60 * 2)
             return this.lastTime + 2000;
+        else if(this.lastTime < 1000 * 60 * 2)
+            return this.lastTime + 1500;
         else
             return this.lastTime + 1000;
     }
 
     //取手牌  (5)
     public getHandCard(){
-        return this.handCard.slice(0,5);
+        return this.handcard.slice(0,5);
+    }
+
+    //自动上阵相关
+    public autoAction(t){
+        while(this.autoList && this.autoList[0])
+        {
+            var data = this.autoList[0];
+            if(data.time <= t)
+            {
+                data.owner = this.id;
+                this.posCard[data.id] = new PKPosCardData(data);
+                this.autoList.shift();
+            }
+            else
+                break;
+        }
     }
 
     //取可上战场的怪
     public getAddMonster(t){
         var arr = [];
+
         for(var s in this.posCard)
         {
             var oo:PKPosCardData = this.posCard[s];
@@ -93,6 +115,17 @@ class PKPlayerData {
 
     //取可起作用的技能
     public getAddSkill(){
-        return [];
+        var arr = [];
+        for(var s in this.posCard)
+        {
+            var oo:PKPosCardData = this.posCard[s];
+            if(!oo)continue;
+
+            //if(oo.testAdd(t))
+            //{
+            //    arr.push(oo)
+            //}
+        }
+        return arr;
     }
 }

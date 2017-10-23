@@ -9,7 +9,7 @@ class MonsterMV extends eui.Group {
 
     public frameStep = 5
 
-    private state = 2;
+    public state = 2;
     private index = 0;
 
     private mw = 480/4
@@ -108,6 +108,7 @@ class MonsterMV extends eui.Group {
                 break;
             case MonsterMV.STAT_DIE:
                 this.stop();
+                this.dispatchEventWith('mv_die')
                 break;
         }
     }

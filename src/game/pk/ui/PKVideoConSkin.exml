@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="PKVideoConSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Group id="con" x="0" y="0" width="1600" height="400">
+		<e:Rect width="100%" height="400" x="0" y="0" fillColor="0x383838"/>
+		<e:Image id="bg" width="100%" x="0" bottom="80" fillMode="repeat"/>
+	</e:Group>
+</e:Skin>

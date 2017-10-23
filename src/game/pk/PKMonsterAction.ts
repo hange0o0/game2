@@ -26,11 +26,19 @@ class PKMonsterAction {
                 if(target.die)
                     continue;
 
-                var hp = Math.floor(user.atk * (1-target.def/100));
-                if(hp < 1)
-                    hp = 1;
-                target.beAtkAction({hp:hp})
-                user.atkAction({hp:hp})
+                if(data.type == 'atk')
+                {
+                    var hp = Math.floor(user.atk * (1-target.def/100));
+                    if(hp < 1)
+                        hp = 1;
+                    target.beAtkAction({hp:hp})
+                    user.atkAction({hp:hp})
+                }
+                else
+                {
+
+                }
+
             }
         }
     }
@@ -38,9 +46,35 @@ class PKMonsterAction {
     public atk(user:PKMonsterData,target:PKMonsterData,actionTime){
         var time = actionTime + 300;
         this.atkList.push({
+            type:'atk',
             user:user,
             target:target,
             actionTime:actionTime,
+            time:time
+        })
+
+        PKData.getInstance().addVideo({
+            type:'monster_atk_before',
+            data:user,
+            target:target,
+            time:time
+        })
+    }
+
+    public skill(user:PKMonsterData,targets,actionTime){
+        var time = actionTime + 300;
+        this.atkList.push({
+            type:'skill',
+            user:user,
+            targets:targets,
+            actionTime:actionTime,
+            time:time
+        })
+
+        PKData.getInstance().addVideo({
+            type:'monster_skill_before',
+            data:user,
+            targets:targets,
             time:time
         })
     }

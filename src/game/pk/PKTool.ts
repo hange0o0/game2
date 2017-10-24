@@ -16,8 +16,8 @@ class PKTool {
                 mp1 += 1;
                 mp2 += 0;
             }
-            if(mp1 > PKCode.getInstance().maxMP)
-                mp1 = PKCode.getInstance().maxMP;
+            if(mp1 > PKConfig.maxMP)
+                mp1 = PKConfig.maxMP;
 
             var t = PKTool.getMPTime(mpCost + mp1)//可以同时上阵的时间点
             for(j=0;j<group.length;j++)

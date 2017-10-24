@@ -13,6 +13,7 @@ class PKMonsterAction {
             var data = this.atkList[i];
             if(data.time <= t)
             {
+
                 this.atkList.splice(i,1);
                 i--;
 
@@ -33,6 +34,7 @@ class PKMonsterAction {
                         hp = 1;
                     target.beAtkAction({hp:hp})
                     user.atkAction({hp:hp})
+                    console.log('atk')
                 }
                 else
                 {
@@ -45,6 +47,8 @@ class PKMonsterAction {
 
     public atk(user:PKMonsterData,target:PKMonsterData,actionTime){
         var time = actionTime + 300;
+        user.stopTime = Math.max(user.stopTime,time + 100)
+
         this.atkList.push({
             type:'atk',
             user:user,
@@ -63,6 +67,8 @@ class PKMonsterAction {
 
     public skill(user:PKMonsterData,targets,actionTime){
         var time = actionTime + 300;
+        user.stopTime = Math.max(user.stopTime,time + 100)
+
         this.atkList.push({
             type:'skill',
             user:user,

@@ -39,7 +39,7 @@ class PKMonsterData {
     }
 
     public getVO():any{
-        return {};
+        return {def:0};
     }
     public getOwner(){
         return PKData.getInstance().getPlayer(this.owner);
@@ -53,23 +53,26 @@ class PKMonsterData {
         return !this.die &&
             user.getOwner().teamData != this.getOwner().teamData;
     }
-    public canSkill(){
+    public canSkill(t){
         var arr = []
         if(this.die)
+            return arr;
+        if(this.stopTime > t)
             return arr;
         return arr;
     }
 
     public move(){
         this.x += this.atkRota * Math.round(this.speed);
-        console.log(this.speed,this.x);
         PKData.getInstance().addVideo({
             type:'monster_move',
             data:this
         })
     }
 
-    public getAtkTarget(list){
+    public getAtkTarget(list,t){
+        if(this.stopTime > t)
+            return null;
         var atkRage = 50
         if(this.target)
         {
@@ -115,7 +118,7 @@ class PKMonsterData {
             this.die = true;
 
         PKData.getInstance().addVideo({
-            type:'monster_bfAtk',
+            type:'monster_beAtk',
             data:this,
         })
     }

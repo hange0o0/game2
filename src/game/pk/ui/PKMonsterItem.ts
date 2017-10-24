@@ -37,7 +37,7 @@ class PKMonsterItem extends game.BaseItem {
         this.x = mD.x;
         this.monsterMV.scaleX = -mD.atkRota
 
-        this.bar.fillColor = mD.atkRota == PKData.ROTA_LEFT ? 0x0000FF : 0xFF0000;
+        this.bar.fillColor = mD.atkRota == PKConfig.ROTA_LEFT ? 0x0000FF : 0xFF0000;
         this.barGroup.visible = false;
         this.renewHp();
 
@@ -77,7 +77,7 @@ class PKMonsterItem extends game.BaseItem {
         {
             this.barGroup.visible = true;
         }
-        this.bar.width = 60 * mD.hp / mD.maxHp;
+        this.bar.width = 40 * mD.hp / mD.maxHp;
     }
 
     public winRemove(){

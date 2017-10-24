@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="PKingUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
-	<e:Group id="cardGroup" width="640" height="200" x="2" anchorOffsetX="0" bottom="0" locked="true"/>
-	<e:Group id="placeGroup" width="640" height="250" x="2" anchorOffsetX="0" bottom="200" locked="true"/>
-	<e:Scroller width="640" height="400" x="0" bottom="450">
+	<e:Scroller id="scroller" width="640" height="400" x="0" bottom="450">
 		<e:Group>
 			<ns1:PKVideoCon id="pkVideo" x="0" y="0" skinName="PKVideoConSkin"/>
 		</e:Group>
 	</e:Scroller>
+	<ns1:PKCtrlCon id="pkCtrlCon" x="0" skinName="PKCtrlConSkin" bottom="0"/>
 </e:Skin>

@@ -26,6 +26,21 @@ class PKPosCardData {
         return this.num < 3;
     }
 
+    public getNextCD(){
+        var PD = PKData.getInstance();
+        if(this.actionResult)
+            return 0;
+        var nextTime = this.actionTime + this.getMaxCD();
+        return Math.max(0,nextTime - PD.actionTime);
+    }
+
+    public getMaxCD(){
+        if(this.num == 0)
+            return PKConfig.beforeCD;
+        else
+            return 4 * 1000;
+    }
+
     //是否可上场
     public testAdd(t){
         if(this.actionResult)
@@ -34,7 +49,8 @@ class PKPosCardData {
         {
             return false;
         }
-        if(t - this.actionTime > 1000*3)
+        var cd = this.getMaxCD();
+        if(t - this.actionTime > cd)
         {
             this.actionTime = t;
             this.actionResult = 1;
@@ -48,7 +64,7 @@ class PKPosCardData {
         var owner = PD.getPlayer(this.owner);
         var atkRota = owner.teamData.atkRota;
         var base = owner.base[this.mid];
-        var x = atkRota == PKData.ROTA_LEFT ? 0:PKCode.getInstance().floorWidth;
+        var x = atkRota == PKConfig.ROTA_LEFT ? 0:PKConfig.floorWidth;
         return {
             hp:base.hp,
             atk:base.atk,

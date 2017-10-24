@@ -6,11 +6,7 @@ class PKCode {
         return this.instance;
     }
 
-    public stepCD = 50; //步长
-    public gameTime = 5*60; //游戏时间,超出算平
-    public maxMonster = 10; //同时存活怪的数量
-    public floorWidth = 1600; //战场宽度
-    public maxMP = 20; //MP上限
+
 
 
 
@@ -21,10 +17,10 @@ class PKCode {
     public onStep(){
         var PD = PKData.getInstance();
         var cd = PD.getPassTime() - PD.actionTime
-        while(cd > this.stepCD)
+        while(cd > PKConfig.stepCD)
         {
-            PD.actionTime += this.stepCD;
-            cd -= this.stepCD;
+            PD.actionTime += PKConfig.stepCD;
+            cd -= PKConfig.stepCD;
             this.autoAction();
             this.addMonster();
             //this.actionSkill();
@@ -64,7 +60,7 @@ class PKCode {
             var arr = player.getAddMonster(PD.actionTime)
             if(arr.length > 0)
             {
-                var needNum = this.maxMonster - PD.getMonsterByPlayer(player.id).length;
+                var needNum = PKConfig.maxMonster - PD.getMonsterByPlayer(player.id).length;
                 while(needNum > 0 && arr.length > 0)
                 {
                     var data = arr.shift();
@@ -98,14 +94,14 @@ class PKCode {
         for(var i=0;i<PD.monsterList.length;i++)
         {
             var mvo:PKMonsterData = PD.monsterList[i];
-            var skillTargets = mvo.canSkill();
+            var skillTargets = mvo.canSkill(PD.actionTime);
             if(skillTargets.length > 0)   //用技能
             {
                 PKMonsterAction.getInstance().skill(target,skillTargets,PD.actionTime)
             }
             else
             {
-                var target = mvo.getAtkTarget(PD.monsterList)      //普攻
+                var target = mvo.getAtkTarget(PD.monsterList,PD.actionTime)      //普攻
                 if(target)
                 {
                     PKMonsterAction.getInstance().atk(mvo,target,PD.actionTime);
@@ -143,7 +139,7 @@ class PKCode {
                 })
                 i--;
             }
-            else if(mvo.x < 0 || mvo.x > this.floorWidth) //冲过终点
+            else if(mvo.x < 0 || mvo.x > PKConfig.floorWidth) //冲过终点
             {
                 mvo.die = true;
                 PD.monsterList.splice(i,1);

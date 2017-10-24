@@ -5,9 +5,9 @@ class PKingUI extends game.BaseUI {
         return this.instance;
     }
 
-    private cardGroup: eui.Group;
-    private placeGroup: eui.Group;
+    private scroller: eui.Scroller;
     private pkVideo: PKVideoCon;
+    private pkCtrlCon: PKCtrlCon;
 
 
 
@@ -15,6 +15,9 @@ class PKingUI extends game.BaseUI {
 
 
 
+
+
+    public scrollTime = 0;
 
     public constructor() {
         super();
@@ -24,6 +27,11 @@ class PKingUI extends game.BaseUI {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.scroller.addEventListener(egret.Event.CHANGE,this.onScroll,this)
+    }
+
+    private onScroll(){
+       this.scrollTime = TM.now();
     }
 
     public hide(){
@@ -49,19 +57,22 @@ class PKingUI extends game.BaseUI {
            team1:{id:1,hp:1,maxhp:1},
            team2:{id:2,hp:1,maxhp:1},
             players:[
-                {id:1,openid:'npc',team:2,handcard:[],autolist:'1,2,1,2,1|2|1,1,2',base:{
+                {id:1,openid:'npc',team:2,card:[],autolist:'1,2,1,2,1|2|1,1,2',base:{
                     1:{atk:10,hp:50,speed:5},
                     2:{atk:10,hp:200,speed:5}
                 }},
-                {id:2,openid:UM.openid,team:1,handcard:[1,2,1,2,1,1,2,2,2,1,1,1],base:{
-                    1:{atk:10,hp:50,speed:5},
+                {id:2,openid:UM.openid,team:1,card:[1,2,1,2,1,1,2,2,2,1,1,1],base:{
+                    1:{atk:20,hp:50,speed:5},
                     2:{atk:10,hp:200,speed:5}
                 }}
             ]
         };
 
-        this.pkVideo.init();
+        this.scrollTime = 0;
         PD.init(data)
+        this.pkVideo.init();
+        this.pkCtrlCon.init();
+
         this.onE();
     }
 
@@ -73,11 +84,40 @@ class PKingUI extends game.BaseUI {
         //表现动画
         this.pkVideo.action();
 
+        //控制栏动画
+        this.pkCtrlCon.onTimer();
+
         if(isOver)
         {
 
         }
 
+        if(TM.now() - this.scrollTime > 5)
+        {
+            this.autoMoveScreen();
+        }
+
+    }
+
+    private autoMoveScreen(){
+        var item = this.pkVideo.getFirstItem(PKData.getInstance().myPlayer.teamData.id);
+        if(item)
+        {
+            var scrollH = item.x - 320;
+            var des = Math.abs(this.scroller.viewport.scrollH - scrollH)
+            if(des < 100)
+                return;
+            if(this.scroller.viewport.scrollH > scrollH)
+                scrollH = this.scroller.viewport.scrollH - Math.pow(des - 90,0.5)
+            else
+                scrollH = this.scroller.viewport.scrollH + Math.pow(des - 90,0.5)
+
+            if(scrollH < 0)
+                scrollH = 0;
+            else if(scrollH + this.scroller.viewport.width > this.scroller.viewport.contentWidth)
+                scrollH  =  this.scroller.viewport.contentWidth - this.scroller.viewport.width
+            this.scroller.viewport.scrollH = scrollH
+        }
     }
 
 

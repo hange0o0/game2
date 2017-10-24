@@ -13,6 +13,8 @@ class PKVideoCon extends game.BaseContainer {
     public itemArr = []
     public itempool = []
 
+
+
     public childrenCreated() {
         super.childrenCreated();
 
@@ -27,6 +29,25 @@ class PKVideoCon extends game.BaseContainer {
         }
     }
 
+    //取队伍的最前的怪
+    public getFirstItem(taamID){
+        var atkRota = PKData.getInstance().getTeamByID(taamID).atkRota;
+        var chooseItem
+        for(var i=0;i<this.itemArr.length;i++)
+        {
+            var item = this.itemArr[i];
+            if(item.data.atkRota != atkRota)
+                continue
+            if(!chooseItem)
+                chooseItem = item;
+            else if(atkRota == PKConfig.ROTA_LEFT && chooseItem.x<item.x)
+                chooseItem = item;
+            else if(atkRota == PKConfig.ROTA_RIGHT && chooseItem.x>item.x)
+                chooseItem = item;
+        }
+        return chooseItem
+    }
+
     private createItem():PKMonsterItem{
         var item:PKMonsterItem = this.itempool.pop();
         if(!item)
@@ -35,6 +56,7 @@ class PKVideoCon extends game.BaseContainer {
             //item.y = 350;
         }
         item.needRemove = false;
+        item.y = -25 + Math.random()*50
         return item;
     }
 

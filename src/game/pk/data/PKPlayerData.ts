@@ -5,7 +5,8 @@ class PKPlayerData {
     public base;//怪的基础属性
     public teamData:PKTeamData   //对应队伍
 
-    public handcard = [];//当前的手牌  ｛index,id｝
+    private handCard = [];//当前的手牌  [{index,mid},]  上限5
+    private hideCard = [];//隐藏的手牌  [{index,mid},]
     public posCard = {};//上阵的手牌 1-4,如果是自动的，不受此限制
 
     private mp = 0//当前的魔法
@@ -27,6 +28,18 @@ class PKPlayerData {
 
         if(obj['autolist'])
             this.autoList = PKTool.decodeAutoList(obj['autolist'].split(','))
+        if(obj['card'])
+        {
+            this.handCard = [];
+            this.hideCard = [];
+            for(var i=0;i<obj['card'].length;i++)
+            {
+                  this.hideCard.push({
+                      index:i,
+                      mid:obj['card'][i]
+                  })
+            }
+        }
     }
 
     public addMP(v){
@@ -41,7 +54,7 @@ class PKPlayerData {
     private resetMp(){
         var t = PKData.getInstance().getPassTime();
         var step = 1;
-        var max = PKCode.getInstance().maxMP;
+        var max = PKConfig.maxMP;
 
         if(this.mp >= max){
             this.lastTime = t;
@@ -71,9 +84,24 @@ class PKPlayerData {
             return this.lastTime + 1000;
     }
 
+    //上阵卡
+    public addPosCard(pos,cardData){
+        this.posCard[pos] =  new PKPosCardData({
+            id:pos,
+            mid:cardData.mid,
+            owner:this.id,
+        })
+        var index = this.handCard.indexOf(cardData);
+        this.handCard.splice(index,1)
+    }
+
     //取手牌  (5)
     public getHandCard(){
-        return this.handcard.slice(0,5);
+        while(this.handCard.length < PKConfig.maxHandCard && this.hideCard.length > 0)
+        {
+            this.handCard.push(this.hideCard.shift())
+        }
+        return this.handCard;
     }
 
     //自动上阵相关

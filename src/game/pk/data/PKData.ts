@@ -1,7 +1,4 @@
 class PKData {
-
-    public static ROTA_LEFT = 1
-    public static ROTA_RIGHT = -1
     private static instance:PKData;
 
     public static getInstance() {
@@ -21,7 +18,7 @@ class PKData {
 
     public monsterList = [];//场上的怪的数据
     public playerObj = {};//场上的玩家的数据
-    public myPlayer;
+    public myPlayer:PKPlayerData;
 
     public videoList = [] //所有要触发动画的集合
     constructor(){
@@ -68,15 +65,15 @@ class PKData {
             if(player.openid == UM.openid)
             {
                 this.myPlayer = player;
-                player.teamData.atkRota = PKData.ROTA_LEFT
-                player.teamData.enemy.atkRota = PKData.ROTA_RIGHT
+                player.teamData.atkRota = PKConfig.ROTA_LEFT
+                player.teamData.enemy.atkRota = PKConfig.ROTA_RIGHT
             }
         }
 
         if(!this.myPlayer) //看别人的录像
         {
-            this.team1.atkRota = PKData.ROTA_LEFT
-            this.team2.atkRota = PKData.ROTA_RIGHT
+            this.team1.atkRota = PKConfig.ROTA_LEFT
+            this.team2.atkRota = PKConfig.ROTA_RIGHT
         }
 
     }

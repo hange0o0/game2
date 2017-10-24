@@ -30,8 +30,9 @@
     "src/debug/ScrollTestSkin.exml",
     "src/game/MonsterTestUISkin.exml",
     "src/game/pk/ui/PKCardItemSkin.exml",
-    "src/game/pk/ui/PKMonsterItemSkin.exml",
     "src/game/pk/ui/PKPosItemSkin.exml",
+    "src/game/pk/ui/PKCtrlConSkin.exml",
+    "src/game/pk/ui/PKMonsterItemSkin.exml",
     "src/game/pk/ui/PKVideoConSkin.exml",
     "src/game/pk/ui/PKingUISkin.exml"
   ]

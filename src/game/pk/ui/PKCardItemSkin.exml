@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="PKCardItemSkin" width="400" height="300" xmlns:e="http://ns.egret.com/eui">
+<e:Skin class="PKCardItemSkin" width="100" height="130" xmlns:e="http://ns.egret.com/eui">
+	<e:Rect width="100%" height="100%" x="0" y="0" fillColor="0x315154"/>
+	<e:Label text="Label" x="0" y="0" size="24" anchorOffsetX="0" anchorOffsetY="0" id="desText"/>
 </e:Skin>

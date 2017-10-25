@@ -11,7 +11,7 @@ class PKMonsterAction {
         for(var i=0;i<this.atkList.length;i++)
         {
             var data = this.atkList[i];
-            if(data.time <= t)
+            if(data.endTime <= t)
             {
 
                 this.atkList.splice(i,1);
@@ -34,7 +34,6 @@ class PKMonsterAction {
                         hp = 1;
                     target.beAtkAction({hp:hp})
                     user.atkAction({hp:hp})
-                    console.log('atk')
                 }
                 else
                 {
@@ -47,6 +46,10 @@ class PKMonsterAction {
 
     public atk(user:PKMonsterData,target:PKMonsterData,actionTime){
         var time = actionTime + 300;
+        if(user.mid == 2)
+        {
+            time += Math.abs(user.x - target.x)
+        }
         user.stopTime = Math.max(user.stopTime,time + 100)
 
         this.atkList.push({
@@ -54,14 +57,15 @@ class PKMonsterAction {
             user:user,
             target:target,
             actionTime:actionTime,
-            time:time
+            endTime:time
         })
 
         PKData.getInstance().addVideo({
             type:'monster_atk_before',
             data:user,
             target:target,
-            time:time
+            actionTime:actionTime,
+            endTime:time
         })
     }
 
@@ -74,14 +78,15 @@ class PKMonsterAction {
             user:user,
             targets:targets,
             actionTime:actionTime,
-            time:time
+            endTime:time
         })
 
         PKData.getInstance().addVideo({
             type:'monster_skill_before',
             data:user,
             targets:targets,
-            time:time
+            actionTime:actionTime,
+            endTime:time
         })
     }
 }

@@ -74,6 +74,8 @@ class PKMonsterData {
         if(this.stopTime > t)
             return null;
         var atkRage = 50
+        if(this.mid == 2)
+            atkRage = 200;
         if(this.target)
         {
             if(this.target.canBeAtk(this) && Math.abs(this.target.x - this.x) < atkRage)

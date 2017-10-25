@@ -60,7 +60,16 @@ class Config {
                 "url": "pk_bg" + i + ".png"
             })
         }
+        arr.push(this.createImg('pk_arrow.png','monster/'));
         RES.parseConfig(data, Config.localResRoot);
         console.log(data)
+    }
+
+    private static createImg(name,path=''){
+        return {
+           "name":name.replace('.','_'),
+           "type":"image",
+           "url": path + name
+       }
     }
 }

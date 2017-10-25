@@ -43,8 +43,10 @@ class PKPosItem extends game.BaseItem {
         {
             var cd = data.getNextCD();
             var maxCD = data.getMaxCD();
-            data.useEnable();
-            this.desText.text = 'id:' + data.mid + '\nnum:' +  data.num + '\ncd:' + cd + '/'+maxCD;
+            if(data.useEnable())
+                this.desText.text = 'id:' + data.mid + '\nnum:' +  data.num + '\ncd:' + cd + '/'+maxCD;
+            else
+                this.desText.text = ''
         }
         else
         {

@@ -56,7 +56,7 @@ class PKVideoCon extends game.BaseContainer {
             //item.y = 350;
         }
         item.needRemove = false;
-        item.y = -25 + Math.random()*50
+        item.y =  300 + -25 + Math.random()*50
         return item;
     }
 
@@ -81,6 +81,22 @@ class PKVideoCon extends game.BaseContainer {
         return null;
     }
 
+    //取出现深度
+    private getIndexByY(y){
+        var underItem
+        for(var i=0;i<this.itemArr.length;i++)
+        {
+            var item = this.itemArr[i];
+            if(item.y > y)
+                continue;
+            if(!underItem || underItem.y < item.y)
+                underItem = item;
+        }
+        if(underItem)
+            return this.con.getChildIndex(underItem) + 1;
+        return 1
+    }
+
 
     public action(){
         var PD = PKData.getInstance()
@@ -94,7 +110,7 @@ class PKVideoCon extends game.BaseContainer {
             {
                   case 'monster_add':
                       item = this.createItem();
-                      this.con.addChild(item);
+                      this.con.addChildAt(item,this.getIndexByY(item.y));
                       item.data =data;
                       this.itemArr.push(item);
 
@@ -106,7 +122,13 @@ class PKVideoCon extends game.BaseContainer {
                     break;
                   case 'monster_atk_before':
                       item = this.getItemByID(data.id);
+                      var target = this.getItemByID(videoData.target.id);
                       item.atk();
+                      if(data.mid == 2)
+                      {
+                          var mc = PKBulletManager.getInstance().createArrow(item,target,videoData.actionTime,videoData.endTime)
+                          this.con.addChildAt(mc,this.con.getChildIndex(item) + 1);
+                      }
                     break;
                   case 'monster_skill_before':
                       item = this.getItemByID(data.id);
@@ -138,5 +160,7 @@ class PKVideoCon extends game.BaseContainer {
                 i--;
             }
         }
+
+        PKBulletManager.getInstance().actionAll()
     }
 }

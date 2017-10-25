@@ -18,6 +18,7 @@ class PKMonsterItem extends game.BaseItem {
         this.monsterMV.x = 50;
         this.monsterMV.y = 300;
         this.anchorOffsetX = 50;
+        this.anchorOffsetY = 300;
         this.monsterMV.addEventListener('mv_die',this.onDieFinish,this)
     }
 

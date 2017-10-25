@@ -57,13 +57,13 @@ class PKingUI extends game.BaseUI {
            team1:{id:1,hp:1,maxhp:1},
            team2:{id:2,hp:1,maxhp:1},
             players:[
-                {id:1,openid:'npc',team:2,card:[],autolist:'1,2,1,2,1|2|1,1,2',base:{
-                    1:{atk:10,hp:50,speed:5},
-                    2:{atk:10,hp:200,speed:5}
+                {id:1,openid:'npc',team:2,card:[],autolist:'2,2,2,1,2,1|2|1,1,2',base:{     //,1,2,1,2,1|2|1,1,2
+                    1:{atk:10,hp:100,speed:5},
+                    2:{atk:10,hp:50,speed:5}
                 }},
                 {id:2,openid:UM.openid,team:1,card:[1,2,1,2,1,1,2,2,2,1,1,1],base:{
-                    1:{atk:20,hp:50,speed:5},
-                    2:{atk:10,hp:200,speed:5}
+                    1:{atk:10,hp:50,speed:5},
+                    2:{atk:10,hp:100,speed:5}
                 }}
             ]
         };

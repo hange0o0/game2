@@ -121,7 +121,7 @@ class PKData {
 
         this.addVideo({
             type:'monster_add',
-            data:monster
+            user:monster
         })
         return monster;
     }

@@ -7,13 +7,15 @@ class MonsterMV extends eui.Group {
     private mc:eui.Image;
 
 
-    public frameStep = 5
+    public frameTotal = 20//播放完一轮需要的帧数
 
     public state = 2;
     private index = 0;
 
     private mw = 480/4
     private mh = 480/4
+
+    public vo:MonsterVO;
     constructor(){
         super();
         this.init();
@@ -29,17 +31,11 @@ class MonsterMV extends eui.Group {
 
     public load(id,isHd?){
 
-        if(isHd)
-        {
-            this.mw = 960/4
-            this.mh = 960/4
-            id = id + '_hd'
-        }
-        else
-        {
-            this.mw = 480/4
-            this.mh = 480/4
-        }
+        var vo = this.vo = MonsterVO.getObject(id);
+        this.mw = vo.mcwidth/vo.mcnum
+        this.mh = vo.mcheight/4
+
+
         this.mc.source = 'enemy' + id + '_png'
         this.width = this.mw
         this.height = this.mh
@@ -83,13 +79,16 @@ class MonsterMV extends eui.Group {
     private onE(){
         var w = this.mw
         var h = this.mh
-        var x = Math.floor(this.index/this.frameStep)*w
+        var frameStep = Math.round(this.frameTotal/this.vo.mcnum);
+        //if(this.state == MonsterMV.STAT_ATK)
+        //    frameStep = Math.round(frameStep/this.vo.atkspeed);
+        var x = Math.floor(this.index/frameStep)*w
         var y = (this.state - 1)*h
         this.mc.scrollRect = new egret.Rectangle(x,y,w,h)
         //console.log(new egret.Rectangle(x,y,w,h))
         //this.stop();
         this.index ++;
-        if(this.index>=4*this.frameStep)
+        if(this.index>=this.vo.mcnum*frameStep)
         {
             this.index = 0;
             this.onEnd()

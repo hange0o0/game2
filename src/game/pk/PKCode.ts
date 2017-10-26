@@ -104,7 +104,7 @@ class PKCode {
                 var target = mvo.getAtkTarget(PD.monsterList,PD.actionTime)      //普攻
                 if(target)
                 {
-                    PKMonsterAction.getInstance().atk(mvo,target,PD.actionTime);
+                    PKMonsterAction.getInstance().atk(mvo,PD.actionTime);
                 }
             }
 
@@ -135,7 +135,7 @@ class PKCode {
                 PD.monsterList.splice(i,1);
                 PD.addVideo({
                     type:'monster_die',
-                    data:mvo,
+                    user:mvo,
                 })
                 i--;
             }
@@ -144,11 +144,11 @@ class PKCode {
                 mvo.die = true;
                 PD.monsterList.splice(i,1);
                 i--;
-                PD.getPlayer(mvo.owner).teamData.enemy.hp -= mvo.getVO().hpatk;
+                PD.getPlayer(mvo.owner).teamData.enemy.hp -= mvo.getVO().atk2;
 
                 PD.addVideo({
                     type:'monster_win',
-                    data:mvo,
+                    user:mvo,
                 })
             }
         }

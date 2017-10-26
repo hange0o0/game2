@@ -12,7 +12,7 @@ class CacheManager{
     private cacheLoad = {};
 
     public constructor() {
-        //this.register(MonsterVO);
+        this.register(MonsterVO);
         //this.register(MainGameVO);
         this.register(PropVO);
         //this.register(MonsterSkillVO);
@@ -69,3 +69,20 @@ class CacheManager{
         },this)
     }
 }
+
+
+//var a;
+//var arr1 = [];
+//for(var s in a)
+//{
+//    if(typeof a[s] == 'number')
+//        arr1.push('public ' + s + ': number;')
+//    else
+//        arr1.push('public ' + s + ': string;')
+//
+//}
+//for(var s in a)
+//{
+//    arr1.push('this.' + s + ' = data.' + s)
+//}
+//console.log(arr1.join('\n'))

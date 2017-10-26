@@ -23,7 +23,7 @@ class PKPosCardData {
     }
 
     public useEnable(){
-        return this.num < 3;
+        return this.num < MonsterVO.getObject(this.mid).num;
     }
 
     public getNextCD(){
@@ -38,7 +38,7 @@ class PKPosCardData {
         if(this.num == 0)
             return PKConfig.beforeCD;
         else
-            return 4 * 1000;
+            return MonsterVO.getObject(this.mid).cd;
     }
 
     //是否可上场

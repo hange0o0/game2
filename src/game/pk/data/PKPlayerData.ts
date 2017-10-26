@@ -40,6 +40,7 @@ class PKPlayerData {
                   })
             }
         }
+        this.mp = PKConfig.mpInit;
     }
 
     public addMP(v){

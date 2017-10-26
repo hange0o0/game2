@@ -7,6 +7,12 @@ class PKMonsterAction {
     }
 
     private atkList = [];
+
+    public addAtkList(data){
+        this.atkList.push(data)
+    }
+
+
     public actionAtk(t){
         for(var i=0;i<this.atkList.length;i++)
         {
@@ -29,11 +35,7 @@ class PKMonsterAction {
 
                 if(data.type == 'atk')
                 {
-                    var hp = Math.floor(user.atk * (1-target.def/100));
-                    if(hp < 1)
-                        hp = 1;
-                    target.beAtkAction({hp:hp})
-                    user.atkAction({hp:hp})
+                    MSBase.getData(user.mid).atk(user,target)
                 }
                 else
                 {
@@ -44,34 +46,15 @@ class PKMonsterAction {
         }
     }
 
-    public atk(user:PKMonsterData,target:PKMonsterData,actionTime){
-        var time = actionTime + 300;
-        if(user.mid == 2)
-        {
-            time += Math.abs(user.x - target.x)
-        }
-        user.stopTime = Math.max(user.stopTime,time + 100)
-
-        this.atkList.push({
-            type:'atk',
-            user:user,
-            target:target,
-            actionTime:actionTime,
-            endTime:time
-        })
-
-        PKData.getInstance().addVideo({
-            type:'monster_atk_before',
-            data:user,
-            target:target,
-            actionTime:actionTime,
-            endTime:time
-        })
+    public atk(user:PKMonsterData,actionTime){
+        var time = actionTime + user.getVO().atkcd;
+        user.stopTime = Math.max(user.stopTime,time)
+        MSBase.getData(user.mid).atkBefore(user,actionTime)
     }
 
     public skill(user:PKMonsterData,targets,actionTime){
-        var time = actionTime + 300;
-        user.stopTime = Math.max(user.stopTime,time + 100)
+        var time = actionTime +  user.getVO().atkcd;
+        user.stopTime = Math.max(user.stopTime,time)
 
         this.atkList.push({
             type:'skill',
@@ -83,7 +66,7 @@ class PKMonsterAction {
 
         PKData.getInstance().addVideo({
             type:'monster_skill_before',
-            data:user,
+            user:user,
             targets:targets,
             actionTime:actionTime,
             endTime:time

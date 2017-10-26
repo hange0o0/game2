@@ -38,8 +38,8 @@ class PKMonsterData {
         this.def = this.getVO().def;
     }
 
-    public getVO():any{
-        return {def:0};
+    public getVO():MonsterVO{
+        return MonsterVO.getObject(this.mid);
     }
     public getOwner(){
         return PKData.getInstance().getPlayer(this.owner);
@@ -66,19 +66,17 @@ class PKMonsterData {
         this.x += this.atkRota * Math.round(this.speed);
         PKData.getInstance().addVideo({
             type:'monster_move',
-            data:this
+            user:this
         })
     }
 
     public getAtkTarget(list,t){
         if(this.stopTime > t)
             return null;
-        var atkRage = 50
-        if(this.mid == 2)
-            atkRage = 200;
+        var atkRage = this.getVO().atkrage;
         if(this.target)
         {
-            if(this.target.canBeAtk(this) && Math.abs(this.target.x - this.x) < atkRage)
+            if(this.target.canBeAtk(this) && Math.abs(this.target.x - this.x) < atkRage + this.target.getVO().width/2)
             {
                  return this.target;
             }
@@ -92,9 +90,9 @@ class PKMonsterData {
         var myPlayer = PD.getPlayer(this.owner);
         for(var i=0;i<list.length;i++)
         {
-            var target = list[i];
+            var target:PKMonsterData = list[i];
             var tDes = Math.abs(target.x - this.x);
-            if(tDes < atkRage && target.canBeAtk(this)) {
+            if(tDes < atkRage + target.getVO().width/2 && target.canBeAtk(this)) {
 
                 var ePlayer = PD.getPlayer(target.owner);
                 if(myPlayer.teamData.id == ePlayer.teamData.id)//同一队
@@ -121,7 +119,7 @@ class PKMonsterData {
 
         PKData.getInstance().addVideo({
             type:'monster_beAtk',
-            data:this,
+            user:this,
         })
     }
 }

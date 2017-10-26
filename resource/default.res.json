@@ -1,17 +1,24 @@
 {
 	"groups":[
 		{
-			"keys":"btn_r1__png",
+			"keys":"btn_r1__png,data_json",
 			"name":"preload"
 		},
 		{
-			"keys":"btn_r1__png",
+			"keys":"btn_r1__png,data_json",
 			"name":"login_load"
 		}
 	],
-	"resources":[{
+	"resources":[
+		{
 			"name":"btn_r1__png",
 			"type":"image",
 			"url":"game_assets/btn_r1_.png"
-		}]
+		},
+		{
+			"name":"data_json",
+			"type":"json",
+			"url":"data/data.json"
+		}
+	]
 }

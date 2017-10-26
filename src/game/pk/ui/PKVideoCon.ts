@@ -1,8 +1,12 @@
 class PKVideoCon extends game.BaseContainer {
+    private static instance:PKVideoCon;
+    public static getInstance() {
+        return this.instance;
+    }
 
     public constructor() {
         super();
-
+        PKVideoCon.instance = this;
         this.skinName = "PKVideoConSkin";
     }
     private con: eui.Group;
@@ -105,7 +109,7 @@ class PKVideoCon extends game.BaseContainer {
         while(videoList.length > 0)
         {
             var videoData = videoList.shift();
-            var data:PKMonsterData = videoData.data;
+            var data:PKMonsterData = videoData.user;
             switch(videoData.type)//动画类型
             {
                   case 'monster_add':
@@ -122,13 +126,8 @@ class PKVideoCon extends game.BaseContainer {
                     break;
                   case 'monster_atk_before':
                       item = this.getItemByID(data.id);
-                      var target = this.getItemByID(videoData.target.id);
                       item.atk();
-                      if(data.mid == 2)
-                      {
-                          var mc = PKBulletManager.getInstance().createArrow(item,target,videoData.actionTime,videoData.endTime)
-                          this.con.addChildAt(mc,this.con.getChildIndex(item) + 1);
-                      }
+                      MSBase.getData(data.mid).atkMV(item,videoData)
                     break;
                   case 'monster_skill_before':
                       item = this.getItemByID(data.id);

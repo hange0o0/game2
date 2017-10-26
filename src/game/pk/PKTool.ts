@@ -13,8 +13,9 @@ class PKTool {
             for(var j=0;j<group.length;j++)
             {
                 var id = group[j];
-                mp1 += 1;
-                mp2 += 0;
+                var vo = MonsterVO.getObject(id);
+                mp1 += vo.cost1;
+                mp2 += vo.cost2;
             }
             if(mp1 > PKConfig.maxMP)
                 mp1 = PKConfig.maxMP;
@@ -38,9 +39,14 @@ class PKTool {
     //到这个MP量的时间
     public static getMPTime(mp){
         //30+40+60*3 = 250
+        var step0 = PKConfig.mpInit;//初始值
         var step1 = 30;//第一分钟产量
         var step2 = 40;//第二分钟产量
         var step3 = 60;//之后每分钟的产量
+
+        if(mp <= step0)
+            return 0
+        mp -= step0;
 
         if(mp <= step1)
             return mp/step1 * 60*1000

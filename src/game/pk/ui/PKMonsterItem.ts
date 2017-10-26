@@ -36,10 +36,11 @@ class PKMonsterItem extends game.BaseItem {
         this.alpha = 1;
 
         this.x = mD.x;
-        this.monsterMV.scaleX = -mD.atkRota
+        this.setRota(-mD.atkRota);
 
         this.bar.fillColor = mD.atkRota == PKConfig.ROTA_LEFT ? 0x0000FF : 0xFF0000;
         this.barGroup.visible = false;
+        this.barGroup.y = 300 - mD.getVO().height - 20;
         this.renewHp();
 
     }
@@ -49,16 +50,24 @@ class PKMonsterItem extends game.BaseItem {
     //
     //}
 
+    public setRota(rota){
+        this.monsterMV.scaleX = rota
+        var mD:PKMonsterData = this.data
+        this.barGroup.horizontalCenter = mD.getVO().headoff * rota;
+
+    }
+
     public run(){
         var mD:PKMonsterData = this.data
         if(this.monsterMV.state != MonsterMV.STAT_RUN)
             this.monsterMV.run();
         if(mD.x != this.x)
         {
-            this.monsterMV.scaleX = this.x > mD.x ? 1:-1
+            this.setRota(this.x > mD.x ? 1:-1)
             this.x = mD.x;
         }
     }
+
 
     public stand(){
         this.monsterMV.stand();

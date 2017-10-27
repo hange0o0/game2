@@ -3,6 +3,11 @@ class PKCardItem extends game.BaseItem {
     private desText: eui.Label;
 
     public con:PKCtrlCon;
+
+
+    public isDragMC = false;
+    public stopDrag;
+    public stopMove = true;
     public constructor() {
         super();
 
@@ -17,27 +22,34 @@ class PKCardItem extends game.BaseItem {
     }
 
     private onClick(){
-        console.log('choose')
         this.con.setChooseCard(this);
     }
 
 
     public dataChanged(){
-        this.desText.text = 'index:' + this.data.index + '\nmid:' + this.data.mid;
+        if(!this.data)
+        {
+            this.y = 20;
+            this.desText.text = ''
+            return;
+        }
+        var mp = MonsterVO.getObject(this.data.mid).cost1
+        this.desText.text = 'index:' + this.data.index + '\nmid:' + this.data.mid + '\nmp:' + mp;
         this.renewChoose();
     }
 
     //前5张出现时的动画
     public appear(){
-
+        var tw = egret.Tween.get(this);
+        this.alpha = 0;
+        tw.to({alpha:1},200)
     }
 
-    public remove(){
-        egret.Tween.removeTweens(this);
-        MyTool.removeMC(this);
-    }
+
 
     public renewChoose(){
+        if(this.isDragMC)
+            return;
         this.y = this == this.con.chooseCard?-10:20;
     }
 }

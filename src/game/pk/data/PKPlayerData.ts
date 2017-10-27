@@ -5,7 +5,7 @@ class PKPlayerData {
     public base;//怪的基础属性
     public teamData:PKTeamData   //对应队伍
 
-    private handCard = [];//当前的手牌  [{index,mid},]  上限5
+    private handCard = {};//当前的手牌  [{index,mid},]  上限5
     private hideCard = [];//隐藏的手牌  [{index,mid},]
     public posCard = {};//上阵的手牌 1-4,如果是自动的，不受此限制
 
@@ -30,14 +30,24 @@ class PKPlayerData {
             this.autoList = PKTool.decodeAutoList(obj['autolist'].split(','))
         if(obj['card'])
         {
-            this.handCard = [];
+            this.handCard = {};
             this.hideCard = [];
             for(var i=0;i<obj['card'].length;i++)
             {
-                  this.hideCard.push({
-                      index:i,
-                      mid:obj['card'][i]
-                  })
+                var cardData:any = {
+                    index:i,
+                    cardPos:0,
+                    mid:obj['card'][i]
+                }
+                if(i<PKConfig.maxHandCard)
+                {
+                    cardData.cardPos =  i+1;
+                    this.handCard[cardData.cardPos] = cardData;
+                }
+                else
+                {
+                    this.hideCard.push(cardData)
+                }
             }
         }
         this.mp = PKConfig.mpInit;
@@ -47,13 +57,13 @@ class PKPlayerData {
         this.resetMp();
         this.mp += v;
     }
-    public getMP(v){
+    public getMP(){
         this.resetMp();
         return this.mp;
     }
 
     private resetMp(){
-        var t = PKData.getInstance().getPassTime();
+        var t = PKData.getInstance().actionTime;
         var step = 1;
         var max = PKConfig.maxMP;
 
@@ -76,6 +86,10 @@ class PKPlayerData {
         }
     }
 
+    public nextMpRate(){
+        return  (PKData.getInstance().actionTime - this.lastTime) / (this.getNextCD() - this.lastTime)
+    }
+
     private getNextCD(){
         if(this.lastTime < 1000 * 60)
             return this.lastTime + 2000;
@@ -92,16 +106,25 @@ class PKPlayerData {
             mid:cardData.mid,
             owner:this.id,
         })
-        var index = this.handCard.indexOf(cardData);
-        this.handCard.splice(index,1)
+        for(var i=1;i<=PKConfig.maxHandCard;i++)
+        {
+             if(this.handCard[i] == cardData)
+             {
+                 var newCard:any = this.hideCard.shift();
+                 if(newCard)
+                 {
+                     newCard.cardPos = i
+                 }
+                 this.handCard[i] = newCard;
+                 break;
+             }
+        }
+
+        this.addMP(-MonsterVO.getObject(cardData.mid).cost1)
     }
 
     //取手牌  (5)
     public getHandCard(){
-        while(this.handCard.length < PKConfig.maxHandCard && this.hideCard.length > 0)
-        {
-            this.handCard.push(this.hideCard.shift())
-        }
         return this.handCard;
     }
 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="PKTopSkin" width="640" height="100" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Label id="infoText" text="Label" x="9" y="4" size="24"/>
+	<e:Label id="hpText1" text="Label" y="100" size="24" left="10" stroke="5"/>
+	<e:Label id="hpText2" text="Label" y="100" size="24" right="10" width="59" stroke="5"/>
+</e:Skin>

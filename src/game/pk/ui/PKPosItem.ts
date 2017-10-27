@@ -37,6 +37,12 @@ class PKPosItem extends game.BaseItem {
         return false;
     }
 
+    public setOver(b)
+    {
+        this.desText.scaleX = b?1.1:1
+    }
+
+
     private onTimer(){
         var data:PKPosCardData = PKData.getInstance().myPlayer.posCard[this.index];
         if(data)
@@ -44,7 +50,7 @@ class PKPosItem extends game.BaseItem {
             var cd = data.getNextCD();
             var maxCD = data.getMaxCD();
             if(data.useEnable())
-                this.desText.text = 'id:' + data.mid + '\nnum:' +  data.num + '\ncd:' + cd + '/'+maxCD;
+                this.desText.text = 'id:' + data.mid + '\nnum:' +  data.num + '\ncd:' + cd;
             else
                 this.desText.text = ''
         }

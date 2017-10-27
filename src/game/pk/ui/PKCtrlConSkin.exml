@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="PKCtrlConSkin" width="640" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing" height="450">
-    <e:Group id="cardGroup" width="640" height="200" x="2" anchorOffsetX="0" bottom="0">
+    <e:Group id="cardGroup" width="640" height="200" x="2" anchorOffsetX="0" bottom="0" locked="true">
 	    </e:Group>
-	<e:Group id="placeGroup" width="640" height="250" x="2" anchorOffsetX="0" bottom="200">
+	<e:Group id="placeGroup" width="640" height="250" x="2" anchorOffsetX="0" bottom="200" locked="true">
 		<ns1:PKPosItem id="p0" x="40" y="40" skinName="PKPosItemSkin"/>
 		<ns1:PKPosItem x="187" y="40" skinName="PKPosItemSkin" id="p1"/>
 		<ns1:PKPosItem x="333" y="40" skinName="PKPosItemSkin" id="p2"/>
@@ -13,4 +13,6 @@
 		<e:Rect id="barMC" width="640" height="20" x="0" y="0" fillColor="0x1b125e"/>
 		<e:Label id="rateText" text="Label" bottom="0" horizontalCenter="0" size="24" stroke="2"/>
 	</e:Group>
+	<e:Label id="myInfo" text="Label" x="0" y="-60" stroke="5"/>
+	<e:Label id="otherInfo" text="Label" y="-60" right="0" stroke="5"/>
 </e:Skin>

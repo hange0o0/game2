@@ -31,22 +31,42 @@ class MSBase {
     //攻击前处理（生成PK事件）
     public atkBefore(user:PKMonsterData,actionTime){
         var target = user.target;
-        var endTime = actionTime + user.getVO().atkcd / 2
+        var endTime = actionTime + user.getVO().atkcd / 2//这个时间后发出攻击时件
         this.sendAtkBefore(user,target,actionTime,endTime)
     }
+
+    //攻击发出处理
+    public atkAction(user:PKMonsterData,target:PKMonsterData,actionTime){
+        var target = user.target;
+        var endTime = actionTime //这个时间攻击生效
+        this.sendAtkAction(user,target,actionTime,endTime) //攻击起作用
+    }
+
 
 
 
    //////////////////////////////////////////////////////
     protected getAtkHp(user:PKMonsterData,target:PKMonsterData){
-        var hp = Math.floor(user.atk * (1-target.def/100));
+        var atk = user.atk * user.getAtkRate(target);
+        var hp = Math.floor(atk * (1-target.def/100));
         if(hp < 1)
             hp = 1;
         return hp;
     }
 
     protected sendAtkBefore(user,target,actionTime,endTime){
-        PKMonsterAction.getInstance().addAtkList({
+        PKMonsterAction.getInstance().addAtkList({   //到actionTime后根据条件产生攻击事件
+            type:'before',
+            model:this,
+            user:user,
+            target:target,
+            actionTime:actionTime,
+            endTime:endTime
+        })
+    }
+
+    protected sendAtkAction(user,target,actionTime,endTime){
+        PKMonsterAction.getInstance().addAtkList({   //到actionTime后根据条件产生攻击事件
             type:'atk',
             user:user,
             target:target,
@@ -55,7 +75,7 @@ class MSBase {
         })
 
         PKData.getInstance().addVideo({
-            type:'monster_atk_before',
+            type:'monster_atk_action',
             user:user,
             target:target,
             actionTime:actionTime,

@@ -8,6 +8,7 @@ class PKingUI extends game.BaseUI {
     private scroller: eui.Scroller;
     private pkVideo: PKVideoCon;
     private pkCtrlCon: PKCtrlCon;
+    private pkTop: PKTopUI;
 
 
 
@@ -72,6 +73,7 @@ class PKingUI extends game.BaseUI {
         PD.init(data)
         this.pkVideo.init();
         this.pkCtrlCon.init();
+        this.pkTop.init();
 
         this.onE();
     }
@@ -79,6 +81,7 @@ class PKingUI extends game.BaseUI {
     public onE(){
         var PC = PKCode.getInstance()
         var PD = PKData.getInstance()
+
         var isOver = PC.onStep()     //跑数据
 
         //表现动画

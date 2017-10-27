@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="PKMonsterInfoItemSkin" width="80" height="80" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect width="80" height="80" x="0" y="0" fillColor="0x4c3838"/>
+	<e:Label id="nameText" text="Label" x="6" y="4" size="22"/>
+	<e:Group x="0" bottom="0">
+		<e:Rect width="80" height="10" x="0" y="0" strokeWeight="2"/>
+		<e:Rect id="barMC" width="76" height="6" x="2" y="2" fillColor="0x448777"/>
+	</e:Group>
+</e:Skin>

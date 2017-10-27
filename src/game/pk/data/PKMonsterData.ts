@@ -38,6 +38,24 @@ class PKMonsterData {
         this.def = this.getVO().def;
     }
 
+    //根据属性相克，取攻击比例
+    public getAtkRate(defender:PKMonsterData){
+         var atkType = this.getVO().type
+         var defType = defender.getVO().type
+        var des = Math.abs(atkType - defType)
+        if(des == 0)
+            return 1;
+        if(des == 1)
+        {
+            if(atkType< defType)
+                return 1.5;
+            return 0.5
+        }
+        if(atkType > defType)
+            return 1.5;
+        return 0.5
+    }
+
     public getVO():MonsterVO{
         return MonsterVO.getObject(this.mid);
     }

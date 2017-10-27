@@ -50,14 +50,14 @@ class ArrowMC extends egret.DisplayObjectContainer{
     public type = 'arrow'
 
     public mc = new eui.Image()
-    public fromMC
-    public toMC
+    public fromMC:PKMonsterItem
+    public toMC:PKMonsterItem
     public beginTime
     public endTime
     constructor() {
         super();
         this.mc.source = 'pk_arrow_png'
-        this.mc.anchorOffsetX = 10
+        this.mc.anchorOffsetX = 30
         this.mc.anchorOffsetY = 25
         this.addChild(this.mc)
     }
@@ -75,6 +75,8 @@ class ArrowMC extends egret.DisplayObjectContainer{
             return false;
         var rate = (t - this.beginTime)/(this.endTime - this.beginTime);
         var dis = Math.abs(this.toMC.x - this.fromMC.x);
+        var fromY = this.fromMC.y - this.fromMC.data.getVO().height/2
+        var toY = this.toMC.y - this.toMC.data.getVO().height/2
 
         if(rate<=0.5)
         {
@@ -93,7 +95,7 @@ class ArrowMC extends egret.DisplayObjectContainer{
             var rotation = -(maxAddY - addY)
 
         this.x = this.fromMC.x + (this.toMC.x - this.fromMC.x)*rate
-        this.y =  -50 + this.fromMC.y + (this.toMC.y - this.fromMC.y)*rate - addY
+        this.y =  fromY + (toY - fromY)*rate - addY
         this.rotation = this.fromMC.x < this.toMC.x ? -rotation:rotation
         this.mc.scaleX = this.fromMC.x < this.toMC.x ? 1:-1
         return true;

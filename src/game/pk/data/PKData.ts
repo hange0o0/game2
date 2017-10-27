@@ -1,4 +1,4 @@
-class PKData {
+class PKData extends egret.EventDispatcher{
     private static instance:PKData;
 
     public static getInstance() {
@@ -20,8 +20,11 @@ class PKData {
     public playerObj = {};//场上的玩家的数据
     public myPlayer:PKPlayerData;
 
-    public videoList = [] //所有要触发动画的集合
+    //public videoList = [] //所有要触发动画的集合
+    //public topVideoList = [] //影响关部的动画的集合
+    //private topKey = ['monster_win','monster_add'];
     constructor(){
+        super();
     }
 
     //取经过的时间
@@ -48,7 +51,8 @@ class PKData {
         this.actionTime = 0;
         this.monsterID = 1;
         this.isGameOver = false;
-        this.videoList.length = 0;
+        //this.videoList.length = 0;
+        //this.topVideoList.length = 0;
 
         this.team1 = new PKTeamData(data.team1)
         this.team2 = new PKTeamData(data.team2)
@@ -87,11 +91,17 @@ class PKData {
 
 
     public addVideo(data){
-        this.videoList.push(data)
+        this.dispatchEventWith('video',false,data)
+        //this.videoList.push(data)
+        //if(this.topKey.indexOf(data.type) != -1)
+        //    this.topVideoList.push(data);
     }
 
     public getTeamByID(teamID){
         return this.team1.id == teamID?this.team1:this.team2
+    }
+    public getTeamByRota(rota){
+        return this.team1.atkRota == rota?this.team1:this.team2
     }
 
     public getPlayer(id):PKPlayerData{

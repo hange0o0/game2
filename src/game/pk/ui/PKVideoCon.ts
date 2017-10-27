@@ -23,6 +23,7 @@ class PKVideoCon extends game.BaseContainer {
         super.childrenCreated();
 
         this.bg.source = 'pk_bg1_png'
+        PKData.getInstance().addEventListener('video',this.onVideoEvent,this);
     }
 
     public init(){
@@ -101,52 +102,60 @@ class PKVideoCon extends game.BaseContainer {
         return 1
     }
 
+    public onVideoEvent(e){
+        var item:PKMonsterItem;
+        var videoData = e.data;
+        var data:PKMonsterData = videoData.user;
+        switch(videoData.type)//动画类型
+        {
+            case 'monster_add':
+                item = this.createItem();
+                this.con.addChildAt(item,this.getIndexByY(item.y));
+                item.data =data;
+                this.itemArr.push(item);
+
+                break;
+            case 'monster_move':
+                item = this.getItemByID(data.id);
+                item.run();
+
+                break;
+            case 'monster_atk_before':
+                item = this.getItemByID(data.id);
+                item.atk();
+                break;
+            case 'monster_atk_action':
+                item = this.getItemByID(data.id);
+                MSBase.getData(data.mid).atkMV(item,videoData)
+                break;
+            case 'monster_skill_before':
+                item = this.getItemByID(data.id);
+                item.atk();
+                break;
+            case 'monster_beAtk':
+                item = this.getItemByID(data.id);
+                item.renewHp();
+                break;
+            case 'monster_win':
+                item = this.getItemByID(data.id);
+                item.winRemove();
+                break;
+            case 'monster_die':
+                item = this.getItemByID(data.id);
+                item.die();
+                break;
+        }
+    }
+
 
     public action(){
-        var PD = PKData.getInstance()
-        var videoList = PD.videoList;
+        //var PD = PKData.getInstance()
+        //var videoList = PD.videoList;
         var item:PKMonsterItem;
-        while(videoList.length > 0)
-        {
-            var videoData = videoList.shift();
-            var data:PKMonsterData = videoData.user;
-            switch(videoData.type)//动画类型
-            {
-                  case 'monster_add':
-                      item = this.createItem();
-                      this.con.addChildAt(item,this.getIndexByY(item.y));
-                      item.data =data;
-                      this.itemArr.push(item);
-
-                    break;
-                  case 'monster_move':
-                      item = this.getItemByID(data.id);
-                      item.run();
-
-                    break;
-                  case 'monster_atk_before':
-                      item = this.getItemByID(data.id);
-                      item.atk();
-                      MSBase.getData(data.mid).atkMV(item,videoData)
-                    break;
-                  case 'monster_skill_before':
-                      item = this.getItemByID(data.id);
-                      item.atk();
-                    break;
-                  case 'monster_beAtk':
-                      item = this.getItemByID(data.id);
-                      item.renewHp();
-                    break;
-                  case 'monster_win':
-                      item = this.getItemByID(data.id);
-                      item.winRemove();
-                    break;
-                  case 'monster_die':
-                      item = this.getItemByID(data.id);
-                      item.die();
-                    break;
-            }
-        }
+        //while(videoList.length > 0)
+        //{
+        //
+        //}
 
 
         for(var i=0;i<this.itemArr.length;i++)

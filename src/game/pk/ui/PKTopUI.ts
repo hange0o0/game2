@@ -23,11 +23,11 @@ class PKTopUI extends game.BaseContainer {
         var data:PKMonsterData = videoData.user;
         switch(videoData.type)//动画类型
         {
-            case 'monster_add':
+            case PKConfig.VIDEO_MONSTER_ADD:
                 if(data.getOwner().teamData != PKData.getInstance().myPlayer.teamData)
                     this.addSkillItem(data);
                 break;
-            case 'monster_win':
+            case PKConfig.VIDEO_MONSTER_WIN:
                 this.renewHp();
                 break;
         }
@@ -76,7 +76,7 @@ class PKTopUI extends game.BaseContainer {
             egret.Tween.removeTweens(item)
             var tw = egret.Tween.get(item)
             tw.to({x:targetX},Math.abs(item.x - targetX)*2)
-            if(targetX >= this.getX(3))
+            if(targetX >= this.getX(8))
             {
                 item.disAppear();
             }

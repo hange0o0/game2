@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="PKMonsterInfoSkin" width="400" height="300" xmlns:e="http://ns.egret.com/eui">
+<e:Skin class="PKMonsterInfoSkin" width="460" height="280" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Rect width="100%" height="100%" x="0" y="0"/>
+	<e:List id="list" width="440" height="260" x="10" y="10" anchorOffsetX="0" anchorOffsetY="0">
+		<e:layout>
+			<e:TileLayout requestedColumnCount="4"/>
+		</e:layout>
+	</e:List>
 </e:Skin>

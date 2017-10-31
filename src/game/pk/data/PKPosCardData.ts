@@ -3,6 +3,7 @@ class PKPosCardData {
     public id;//唯一ID 1-4
     public mid //对应的怪
     public owner//主人ID
+    public isAuto = false//是否自动出怪上阵的
 
     public actionTime = 0//上次行动的时间
     public actionResult = 0//是否有等待出手的怪
@@ -23,6 +24,8 @@ class PKPosCardData {
     }
 
     public useEnable(){
+        if(this.isAuto)
+            return this.num < MonsterVO.getObject(this.mid).num2;
         return this.num < MonsterVO.getObject(this.mid).num;
     }
 

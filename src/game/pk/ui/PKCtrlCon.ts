@@ -14,6 +14,12 @@ class PKCtrlCon extends game.BaseContainer {
     private p3: PKPosItem;
     private barMC: eui.Rect;
     private rateText: eui.Label;
+    private info1: eui.Label;
+    private info2: eui.Label;
+    private info4: eui.Label;
+    private info3: eui.Label;
+
+
 
 
 
@@ -26,6 +32,7 @@ class PKCtrlCon extends game.BaseContainer {
 
     private lastAddCardTime = 0//上次加卡的时间
     private needRenewCard = false
+    private needRenewInfo = false
 
 
     public childrenCreated() {
@@ -58,7 +65,50 @@ class PKCtrlCon extends game.BaseContainer {
         this.dragTarget.isDragMC = true;
         this.dragTarget.alpha = 0.5
 
+        this.info1.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.onInfo1,this)
+        this.info2.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.onInfo2,this)
+        this.info3.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.onInfo3,this)
+        this.info4.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.onInfo4,this)
+        this.info1.touchEnabled = true
+        this.info2.touchEnabled = true
+        this.info3.touchEnabled = true
+        this.info4.touchEnabled = true
+
+        PKData.getInstance().addEventListener('video',this.onVideoEvent,this);
     }
+    public onVideoEvent(e){
+        var item:PKMonsterItem;
+        var videoData = e.data;
+        var data:PKMonsterData = videoData.user;
+        switch(videoData.type)//动画类型
+        {
+            case PKConfig.VIDEO_MONSTER_ADD:
+            case PKConfig.VIDEO_MONSTER_WIN:
+            case PKConfig.VIDEO_MONSTER_DIE:
+                this.needRenewInfo = true;
+                break;
+        }
+    }
+
+    private onInfo1(){
+       PKMonsterInfoUI.getInstance().show(this.getInfoPlayer(1))
+    }
+    private onInfo2(){
+       PKMonsterInfoUI.getInstance().show(this.getInfoPlayer(2))
+    }
+    private onInfo3(){
+       PKMonsterInfoUI.getInstance().show(this.getInfoPlayer(3))
+    }
+    private onInfo4(){
+       PKMonsterInfoUI.getInstance().show(this.getInfoPlayer(4))
+    }
+
+    private getInfoPlayer(index){
+        if(index <= 2)
+            return PKData.getInstance().getTeamByRota(PKConfig.ROTA_LEFT).members[index-1]
+        return PKData.getInstance().getTeamByRota(PKConfig.ROTA_RIGHT).members[index-3]
+    }
+
 
     private onPosClick(e){
 
@@ -152,12 +202,14 @@ class PKCtrlCon extends game.BaseContainer {
         this.lastAddCardTime = 0;
         this.chooseCard = null;
         this.needRenewCard = true;
+        this.needRenewInfo = true;
 
         for(var s in this.cardObj)
         {
             this.cardObj[s].data = null;
         }
         this.renewCard();
+        this.renewInfo();
 
     }
 
@@ -168,9 +220,31 @@ class PKCtrlCon extends game.BaseContainer {
             this.placeObj[s].onTimer();
         }
         this.renewCard();
+        this.renewInfo();
 
         this.barMC.width = 640 * ((PD.myPlayer.getMP() + PD.myPlayer.nextMpRate()) / PKConfig.maxMP);
         this.rateText.text = PD.myPlayer.getMP() + '/' + PKConfig.maxMP
+
+
+    }
+
+    private renewInfo(){
+        if(this.needRenewInfo)
+        {
+            var PD = PKData.getInstance();
+            this.needRenewInfo = false;
+            for(var i=1;i<=4;i++)
+            {
+                var player = this.getInfoPlayer(i);
+                var mc = this['info' + i];
+                if(player)
+                {
+                    mc.text = PD.getMonsterByPlayer(player.id).length + ''
+                }
+                else
+                    mc.text = ''
+            }
+        }
     }
 
     public setChooseCard(card){
@@ -204,34 +278,7 @@ class PKCtrlCon extends game.BaseContainer {
                 }
             }
         }
-        //if(this.lastAddCardTime == 0)
-        //{
-        //     for(var i=0;i<handCard.length;i++)
-        //     {
-        //          var item = this.createItem();
-        //         this.cardGroup.addChild(item);
-        //         this.cardArr.push(item);
-        //         item.data = handCard[i];
-        //         item.x = this.getCardPos(i);
-        //         item.appear();
-        //     }
-        //    this.lastAddCardTime = 1;
-        //}
-        //else if(this.lastAddCardTime + PKConfig.addCardCD < PD.actionTime && this.cardArr.length < handCard.length)
-        //{
-        //    var index = this.cardArr.length;
-        //    var item = this.createItem();
-        //    this.cardGroup.addChild(item);
-        //    this.cardArr.push(item);
-        //    item.data = handCard[index];
-        //    item.x = 640;
-        //    this.renewCardPos();
-        //    this.lastAddCardTime = PD.actionTime;
-        //}
-        //else if(this.needRenewCard)
-        //{
-        //     this.renewCardPos();
-        //}
+
     }
 
 

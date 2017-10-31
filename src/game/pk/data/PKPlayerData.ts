@@ -136,6 +136,7 @@ class PKPlayerData {
             if(data.time <= t)
             {
                 data.owner = this.id;
+                data.isAuto = true;
                 this.posCard[data.id] = new PKPosCardData(data);
                 this.autoList.shift();
             }

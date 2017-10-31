@@ -13,6 +13,18 @@
 		<e:Rect id="barMC" width="640" height="20" x="0" y="0" fillColor="0x1b125e"/>
 		<e:Label id="rateText" text="Label" bottom="0" horizontalCenter="0" size="24" stroke="2"/>
 	</e:Group>
-	<e:Label id="myInfo" text="Label" x="0" y="-60" stroke="5"/>
-	<e:Label id="otherInfo" text="Label" y="-60" right="0" stroke="5"/>
+	<e:Group x="0" y="-50">
+		<e:Label id="info1" text="Label" x="0" y="0" stroke="5"/>
+		<e:Label id="info2" text="Label" x="20.000000000000036" y="20.000000000000036" stroke="5"/>
+		<e:layout>
+			<e:HorizontalLayout/>
+		</e:layout>
+	</e:Group>
+	<e:Group y="-50" right="0">
+		<e:Label id="info4" text="Label" x="10.000000000000034" y="10.000000000000036" stroke="5"/>
+		<e:Label id="info3" text="Label" x="0" y="0" stroke="5"/>
+		<e:layout>
+		<e:HorizontalLayout/>
+		</e:layout>
+	</e:Group>
 </e:Skin>

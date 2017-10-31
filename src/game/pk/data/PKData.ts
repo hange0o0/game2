@@ -71,7 +71,10 @@ class PKData extends egret.EventDispatcher{
                 this.myPlayer = player;
                 player.teamData.atkRota = PKConfig.ROTA_LEFT
                 player.teamData.enemy.atkRota = PKConfig.ROTA_RIGHT
+                player.teamData.members.unshift(player);
             }
+            else
+                player.teamData.members.push(player);
         }
 
         if(!this.myPlayer) //看别人的录像
@@ -130,7 +133,7 @@ class PKData extends egret.EventDispatcher{
         this.monsterList.push(monster);
 
         this.addVideo({
-            type:'monster_add',
+            type:PKConfig.VIDEO_MONSTER_ADD,
             user:monster
         })
         return monster;

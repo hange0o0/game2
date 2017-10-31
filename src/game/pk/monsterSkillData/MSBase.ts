@@ -75,7 +75,7 @@ class MSBase {
         })
 
         PKData.getInstance().addVideo({
-            type:'monster_atk_action',
+            type:PKConfig.VIDEO_MONSTER_ATK_ACTION,
             user:user,
             target:target,
             actionTime:actionTime,

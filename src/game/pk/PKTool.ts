@@ -9,13 +9,11 @@ class PKTool {
         {
             var group = arr[i].split('|')
             var mp1 = 0;//上阵MP
-            var mp2 = 0; //上阵后额外扣的MP
             for(var j=0;j<group.length;j++)
             {
                 var id = group[j];
                 var vo = MonsterVO.getObject(id);
                 mp1 += vo.cost1;
-                mp2 += vo.cost2;
             }
             if(mp1 > PKConfig.maxMP)
                 mp1 = PKConfig.maxMP;
@@ -31,7 +29,7 @@ class PKTool {
                 })
                 index ++;
             }
-            mpCost += mp1 + mp2
+            mpCost += mp1;
         }
         return returnArr;
     }

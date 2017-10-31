@@ -108,39 +108,39 @@ class PKVideoCon extends game.BaseContainer {
         var data:PKMonsterData = videoData.user;
         switch(videoData.type)//动画类型
         {
-            case 'monster_add':
+            case PKConfig.VIDEO_MONSTER_ADD:
                 item = this.createItem();
                 this.con.addChildAt(item,this.getIndexByY(item.y));
                 item.data =data;
                 this.itemArr.push(item);
 
                 break;
-            case 'monster_move':
+            case PKConfig.VIDEO_MONSTER_MOVE:
                 item = this.getItemByID(data.id);
                 item.run();
 
                 break;
-            case 'monster_atk_before':
+            case PKConfig.VIDEO_MONSTER_ATK_BEFORE:
                 item = this.getItemByID(data.id);
                 item.atk();
                 break;
-            case 'monster_atk_action':
+            case PKConfig.VIDEO_MONSTER_ATK_ACTION:
                 item = this.getItemByID(data.id);
                 MSBase.getData(data.mid).atkMV(item,videoData)
                 break;
-            case 'monster_skill_before':
+            case PKConfig.VIDEO_MONSTER_SKILL_BEFORE:
                 item = this.getItemByID(data.id);
                 item.atk();
                 break;
-            case 'monster_beAtk':
+            case PKConfig.VIDEO_MONSTER_BEATK:
                 item = this.getItemByID(data.id);
                 item.renewHp();
                 break;
-            case 'monster_win':
+            case PKConfig.VIDEO_MONSTER_WIN:
                 item = this.getItemByID(data.id);
                 item.winRemove();
                 break;
-            case 'monster_die':
+            case PKConfig.VIDEO_MONSTER_DIE:
                 item = this.getItemByID(data.id);
                 item.die();
                 break;

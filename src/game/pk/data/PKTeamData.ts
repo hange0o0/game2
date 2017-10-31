@@ -7,7 +7,7 @@ class PKTeamData {
     public hp  = 0 //城堡的血
     public maxhp  = 0
 
-
+    public members = [];
     constructor(obj?){
         if(obj)
             this.fill(obj);

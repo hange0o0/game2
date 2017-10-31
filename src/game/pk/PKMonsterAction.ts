@@ -53,7 +53,7 @@ class PKMonsterAction {
         user.stopTime = Math.max(user.stopTime,time)
 
         PKData.getInstance().addVideo({   //攻击动画开始
-            type:'monster_atk_before',
+            type:PKConfig.VIDEO_MONSTER_ATK_BEFORE,
             user:user
         })
 

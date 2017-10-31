@@ -1,8 +1,8 @@
 class PKMonsterInfoItem extends game.BaseItem {
 
     private nameText: eui.Label;
+    private barMC: eui.Rect;
 
-    public index;
     public constructor() {
         super();
 
@@ -16,10 +16,11 @@ class PKMonsterInfoItem extends game.BaseItem {
 
 
     public dataChanged(){
-
+         this.nameText.text = this.data.getVO().name
+        this.onTimer();
     }
 
-    private onTimer(){
-
+    public onTimer(){
+       this.barMC.width = 76 * this.data.hp/this.data.maxHp;
     }
 }

@@ -83,7 +83,7 @@ class PKMonsterData {
     public move(){
         this.x += this.atkRota * Math.round(this.speed);
         PKData.getInstance().addVideo({
-            type:'monster_move',
+            type:PKConfig.VIDEO_MONSTER_MOVE,
             user:this
         })
     }
@@ -136,7 +136,7 @@ class PKMonsterData {
             this.die = true;
 
         PKData.getInstance().addVideo({
-            type:'monster_beAtk',
+            type:PKConfig.VIDEO_MONSTER_BEATK,
             user:this,
         })
     }

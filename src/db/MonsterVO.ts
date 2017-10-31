@@ -21,7 +21,7 @@ class MonsterVO {
     public mcheight: number;
     public atkmv: number;
     public name: string;
-    public cost2: number;
+    public num2: number;
     public des: string;
     public speed: number;
     public hp: number;
@@ -47,13 +47,13 @@ class MonsterVO {
         this.def = data.def
         this.cd = data.cd * 1000
         this.num = data.num
+        this.num2 = data.num2
         this.atkrage = data.atkrage
         this.tag = data.tag
         this.mcnum = data.mcnum
         this.mcheight = data.mcheight
         this.atkmv = data.atkmv
         this.name = data.name
-        this.cost2 = data.cost2
         this.des = data.des
         this.speed = data.speed
         this.hp = data.hp

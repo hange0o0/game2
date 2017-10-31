@@ -134,7 +134,7 @@ class PKCode {
             {
                 PD.monsterList.splice(i,1);
                 PD.addVideo({
-                    type:'monster_die',
+                    type:PKConfig.VIDEO_MONSTER_DIE,
                     user:mvo,
                 })
                 i--;
@@ -147,7 +147,7 @@ class PKCode {
                 PD.getPlayer(mvo.owner).teamData.enemy.hp -= mvo.getVO().atk2;
 
                 PD.addVideo({
-                    type:'monster_win',
+                    type:PKConfig.VIDEO_MONSTER_WIN,
                     user:mvo,
                 })
             }

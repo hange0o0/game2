@@ -25,13 +25,12 @@ class PKPlayerData {
         for (var key in obj) {
             this[key] = obj[key];
         }
-
+        this.handCard = {};
+        this.hideCard = [];
         if(obj['autolist'])
             this.autoList = PKTool.decodeAutoList(obj['autolist'].split(','))
         if(obj['card'])
         {
-            this.handCard = {};
-            this.hideCard = [];
             for(var i=0;i<obj['card'].length;i++)
             {
                 var cardData:any = {
@@ -52,6 +51,32 @@ class PKPlayerData {
         }
         this.mp = PKConfig.mpInit;
     }
+
+    //public getPreLoadList(){
+    //    var monsterObj = {};
+    //    if(this.autoList)
+    //    {
+    //         for(var i=0;i<this.autoList.length;i++)
+    //         {
+    //             monsterObj[this.autoList[i].mid] = true;
+    //         }
+    //    }
+    //
+    //    for(var s in this.handCard)
+    //    {
+    //        monsterObj[this.handCard[s].mid] = true;
+    //    }
+    //    for(var i=0;i<this.hideCard.length;i++)
+    //    {
+    //        monsterObj[this.hideCard[i].mid] = true;
+    //    }
+    //
+    //    for(var s in monsterObj)
+    //    {
+    //        var mvo = MonsterVO.getObject(s)
+    //    }
+    //
+    //}
 
     public addMP(v){
         this.resetMp();
@@ -106,6 +131,7 @@ class PKPlayerData {
             mid:cardData.mid,
             owner:this.id,
         })
+
         for(var i=1;i<=PKConfig.maxHandCard;i++)
         {
              if(this.handCard[i] == cardData)

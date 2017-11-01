@@ -16,11 +16,14 @@ class PKMonsterData {
     public atkRota//进攻方向
 
     public target:PKMonsterData//攻击目标
+    public skillTargets//技能目标
 
     public id;//唯一ID
     public def  = 0
     public maxHp = 0
     public stopTime = 0
+    public lastSkill = 0
+    public dieTime = 0
     public buff = [];
 
 
@@ -71,13 +74,19 @@ class PKMonsterData {
         return !this.die &&
             user.getOwner().teamData != this.getOwner().teamData;
     }
+
+    //可以用技能
     public canSkill(t){
-        var arr = []
         if(this.die)
-            return arr;
+            return null;
         if(this.stopTime > t)
-            return arr;
-        return arr;
+            return null;
+        if(!this.getVO().skillcd) //无技能
+            return null;
+        if(this.lastSkill && (this.lastSkill + this.getVO().skillcd > t))
+            return null;
+        this.skillTargets = MSBase.getData(this.mid).getSkillTarget(this);
+        return this.skillTargets
     }
 
     public move(){

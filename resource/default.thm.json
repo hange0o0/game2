@@ -29,6 +29,8 @@
     "src/debug/DebugUISkin.exml",
     "src/debug/ScrollTestSkin.exml",
     "src/game/MonsterTestUISkin.exml",
+    "src/game/pk/result/PKFailUISkin.exml",
+    "src/game/pk/result/PKWinUISkin.exml",
     "src/game/pk/ui/PKCardItemSkin.exml",
     "src/game/pk/ui/PKPosItemSkin.exml",
     "src/game/pk/ui/PKCtrlConSkin.exml",

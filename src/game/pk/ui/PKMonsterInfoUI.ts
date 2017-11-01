@@ -54,7 +54,6 @@ class PKMonsterInfoUI extends game.BaseContainer {
         this.visible = false;
         this.stage.removeEventListener(egret.TouchEvent.TOUCH_END,this.hide,this)
         this.stage.removeEventListener(egret.TouchEvent.TOUCH_CANCEL,this.hide,this)
-        console.log('hide');
     }
 
     public show(playerData){
@@ -71,7 +70,6 @@ class PKMonsterInfoUI extends game.BaseContainer {
 
         this.resetList();
         this.renewFlag = false;
-        console.log('show');
     }
 
     public resetList(){

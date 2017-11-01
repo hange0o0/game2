@@ -38,29 +38,32 @@ class Config {
     public static init(){
         var data = {groups:[],resources:[]}
         var arr = data.resources;
-        for(var i=1;i<=30;i++)
+        var mData = MonsterVO.data;
+        for(var s in mData)
         {
-            arr.push({
-                "name":"enemy" + i + "_png",
-                "type":"image",
-                "url": "monster/enemy" + i+'.png'
-            })
-            arr.push({
-                "name":"enemy" + i + "_hd_png",
-                "type":"image",
-                "url": "monster/enemy" + i+'_hd.png'
-            })
+            arr.push(this.createImg("enemy" + s+'.png','monster/'));
         }
 
         for(var i=1;i<=1;i++)
         {
-            arr.push({
-                "name":"pk_bg" + i + "_png",
-                "type":"image",
-                "url": "pk_bg" + i + ".png"
-            })
+            arr.push(this.createImg("pk_bg" + i + ".png"));
         }
         arr.push(this.createImg('pk_arrow.png','monster/'));
+
+        var aniList = [6, 8, 10, 14, 16, 21, 24, 28, 29, 30, 34, 39, 103, 104, 106, 107, 108, 111, 112, 113, 114, 115, 116, 117, 118, 120, 122, 123, 126, 127, 128, 133, 140, 149, 153];
+        for(var i=0;i<aniList.length;i++)
+        {
+            arr.push(this.createJSON('skill' + aniList[i] + '.json','ani/'));
+            arr.push(this.createImg('skill' + aniList[i] + '.png','ani/'));
+            AniManager.getInstance().aniList.push('skill' + aniList[i]);
+        }
+
+        for(var i=1;i<=8;i++)
+        {
+            this.createImg('bullet' + aniList[i] + '.png','ani/');
+        }
+
+
         RES.parseConfig(data, Config.localResRoot);
         console.log(data)
     }
@@ -69,6 +72,13 @@ class Config {
         return {
            "name":name.replace('.','_'),
            "type":"image",
+           "url": path + name
+       }
+    }
+    private static createJSON(name,path=''){
+        return {
+           "name":name.replace('.','_'),
+           "type":"json",
            "url": path + name
        }
     }

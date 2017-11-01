@@ -48,19 +48,18 @@ class PKData extends egret.EventDispatcher{
 
     //初始化游戏
     public init(data){
+        this.monsterList.length = 0;
+        this.playerObj = {};
+        this.myPlayer = null;
         this.actionTime = 0;
         this.monsterID = 1;
         this.isGameOver = false;
-        //this.videoList.length = 0;
-        //this.topVideoList.length = 0;
+
 
         this.team1 = new PKTeamData(data.team1)
         this.team2 = new PKTeamData(data.team2)
         this.team1.enemy = this.team2
         this.team2.enemy = this.team1
-
-        this.playerObj = {};
-        this.myPlayer = null;
         for(var i=0;i<data.players.length;i++)
         {
             var player = new PKPlayerData(data.players[i])
@@ -82,6 +81,11 @@ class PKData extends egret.EventDispatcher{
             this.team1.atkRota = PKConfig.ROTA_LEFT
             this.team2.atkRota = PKConfig.ROTA_RIGHT
         }
+
+    }
+
+    //得到要预加载的项
+    public getPreLoadList(){
 
     }
 
@@ -109,6 +113,10 @@ class PKData extends egret.EventDispatcher{
 
     public getPlayer(id):PKPlayerData{
         return this.playerObj[id]
+    }
+
+    public isWin(){
+        return this.myPlayer.teamData.hp > 0 &&  this.myPlayer.teamData.enemy.hp <= 0;
     }
 
     //找玩家对应的怪

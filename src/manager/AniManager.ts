@@ -58,7 +58,7 @@ class AniManager {
            16:[11,24,25,26,28,29,34,106,112,115,116,118,120,121,122,123,140,141,142,161,175],
         }
 
-        var aniList = [6, 8, 10, 14, 16, 21, 24, 28, 29, 30, 34, 39, 103, 104, 106, 107, 108, 111, 112, 113, 114, 115, 116, 117, 118, 120, 122, 123, 126, 127, 128, 133, 140, 149, 153];
+       /* var aniList = [6, 8, 10, 14, 16, 21, 24, 28, 29, 30, 34, 39, 103, 104, 106, 107, 108, 111, 112, 113, 114, 115, 116, 117, 118, 120, 122, 123, 126, 127, 128, 133, 140, 149, 153];
         var data = {groups:[],resources:[]}
         var arr = data.resources;
         var addResources = function(name){
@@ -95,7 +95,7 @@ class AniManager {
                 "url": "pk_bg/pk_bg" + i+'.jpg'
             })
         }
-        RES.parseConfig(data, Config.localResRoot);
+        RES.parseConfig(data, Config.localResRoot);*/
 
 
 
@@ -259,6 +259,43 @@ class AniManager {
             e.currentTarget.comFun.apply(e.currentTarget.thisObj);
         this.removeMV(e.currentTarget);
 
+    }
+
+    public getMVKey(key){
+        return 'skill' + parseInt(key);
+    }
+
+    public playOnItem(mvID,item,xy?){
+        var key = this.getMVKey(mvID)
+        if(!this.preLoadMV(key))
+        {
+            return;
+        }
+        var mv = this.getAniOnce(key);
+        if(xy)
+        {
+            mv.x = xy.x;
+            mv.y = xy.y;
+        }
+        else
+        {
+            mv.x = item.x;
+            mv.y = item.y;
+        }
+        //mv.scaleX = mv.scaleY = 0.5
+        item.parent.addChildAt(mv,item.parent.getChildIndex(item) + 1);
+        //item.parent.addChild(mv);
+        var config = this.mvConfig[mvID]
+        if(config)
+        {
+            if(config.scale)
+            {
+                mv.scaleX = mv.scaleY = config.scale;
+            }
+            if(config.frameRate)
+                mv.frameRate = config.frameRate;
+        }
+        return mv;
     }
 
     //在某个位置闪一下

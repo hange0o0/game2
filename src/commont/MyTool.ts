@@ -4,6 +4,12 @@ class MyTool {
 
     public static maxUserHead = 82;
 
+    public setImgSource(img,source){
+        img.visible = false;
+        img.once(egret.Event.COMPLETE,function(){img.visible = true;},this)
+        img.source = source;
+    }
+
     public static randomName(){
         var len = Math.floor(Math.random()*3) + 2;
         var s = '';
@@ -33,6 +39,13 @@ class MyTool {
 
     public static getDis(a,b){
         return Math.pow(Math.pow(a.x-b.x,2) + Math.pow(a.y-b.y,2),0.5)
+    }
+
+    public static getMiddleXY(a,b){
+        return {
+            x:a.x + (b.x - a.x)/2,
+            y:a.y + (b.y - a.y)/2,
+        }
     }
 
     public static changeGray(mc,b=true,isBtn?){

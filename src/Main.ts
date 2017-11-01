@@ -35,7 +35,7 @@ class Main extends eui.UILayer {
     private loadingView: MainLoadingUI;
     protected createChildren(): void {
         super.createChildren();
-        Config.init();
+
         //inject the custom material parser
         //注入自定义的素材解析器
         var assetAdapter = new AssetAdapter();
@@ -193,10 +193,11 @@ class Main extends eui.UILayer {
      * Create scene interface
      */
     protected startCreateScene(): void {
+        Config.init();
         GameManager.stage = this.stage;
         GameManager.container = this;
         GameManager.getInstance().init();
-        PKingUI.getInstance().show();
+        PKManager.getInstance().startPlay();
         //MonsterTestUI.getInstance().show();
         //if(Config.isDebug && _get['host'] == 'com')
         //{

@@ -95,9 +95,9 @@ class PKCode {
         {
             var mvo:PKMonsterData = PD.monsterList[i];
             var skillTargets = mvo.canSkill(PD.actionTime);
-            if(skillTargets.length > 0)   //用技能
+            if(skillTargets && skillTargets.length > 0)   //用技能
             {
-                PKMonsterAction.getInstance().skill(target,skillTargets,PD.actionTime)
+                PKMonsterAction.getInstance().skill(mvo,PD.actionTime)
             }
             else
             {
@@ -130,8 +130,9 @@ class PKCode {
         for(var i=0;i<PD.monsterList.length;i++)
         {
             var mvo:PKMonsterData = PD.monsterList[i];
-            if(mvo.die)
+            if(mvo.die || (mvo.dieTime && mvo.dieTime <= PD.actionTime))
             {
+                mvo.die = true;
                 PD.monsterList.splice(i,1);
                 PD.addVideo({
                     type:PKConfig.VIDEO_MONSTER_DIE,
@@ -145,6 +146,8 @@ class PKCode {
                 PD.monsterList.splice(i,1);
                 i--;
                 PD.getPlayer(mvo.owner).teamData.enemy.hp -= mvo.getVO().atk2;
+                if(PD.getPlayer(mvo.owner).teamData.enemy.hp <= 0)
+                    PD.isGameOver = true;
 
                 PD.addVideo({
                     type:PKConfig.VIDEO_MONSTER_WIN,

@@ -128,10 +128,11 @@ class PKVideoCon extends game.BaseContainer {
                 item = this.getItemByID(data.id);
                 MSBase.getData(data.mid).atkMV(item,videoData)
                 break;
-            case PKConfig.VIDEO_MONSTER_SKILL_BEFORE:
+            case PKConfig.VIDEO_MONSTER_SKILL_ACTION:
                 item = this.getItemByID(data.id);
-                item.atk();
+                MSBase.getData(data.mid).skillMV(item,videoData)
                 break;
+
             case PKConfig.VIDEO_MONSTER_BEATK:
                 item = this.getItemByID(data.id);
                 item.renewHp();
@@ -149,15 +150,7 @@ class PKVideoCon extends game.BaseContainer {
 
 
     public action(){
-        //var PD = PKData.getInstance()
-        //var videoList = PD.videoList;
         var item:PKMonsterItem;
-        //while(videoList.length > 0)
-        //{
-        //
-        //}
-
-
         for(var i=0;i<this.itemArr.length;i++)
         {
             item = this.itemArr[i];
@@ -168,7 +161,41 @@ class PKVideoCon extends game.BaseContainer {
                 i--;
             }
         }
-
         PKBulletManager.getInstance().actionAll()
+    }
+
+    //在AB之间播放动画
+    public playAniBetween(a,b,mvID){
+        var atker = this.getItemByID(a)
+        var defender = this.getItemByID(b)
+        if(!atker || !defender)
+        {
+            throw new Error('XXX')
+            return;
+        }
+        var AM = AniManager.getInstance();
+        if(AM.preLoadMV(AM.getMVKey(mvID)))
+        {
+            var xy = MyTool.getMiddleXY(atker,defender)
+            xy.y -= defender.data.getVO().height/2
+            var index1 = this.con.getChildIndex(atker)
+            var index2 = this.con.getChildIndex(defender)
+            AM.playOnItem(mvID,index1>index2?atker:defender,xy);
+        }
+    }
+
+    //在A上播放动画
+    public playAniOn(a,mvID){
+        var atker = this.getItemByID(a)
+        if(!atker)
+        {
+            throw new Error('XXX')
+            return;
+        }
+        var AM = AniManager.getInstance();
+        if(AM.preLoadMV(AM.getMVKey(mvID)))
+        {
+            AM.playOnItem(mvID,atker);
+        }
     }
 }

@@ -4,6 +4,9 @@ class MonsterVO {
     public static getObject(id: number): MonsterVO{
         return CM.table[this.dataKey][id];
     }
+    public static get data(){
+        return CM.table[this.dataKey]
+    }
 
     public width: number;
     public height: number;
@@ -19,12 +22,12 @@ class MonsterVO {
     public tag: string;
     public mcnum: number;
     public mcheight: number;
-    public atkmv: number;
     public name: string;
     public num2: number;
     public des: string;
     public speed: number;
     public hp: number;
+    public skillcd: number;
     public id: number;
     public mcwidth: number;
     public atk2: number;
@@ -52,7 +55,6 @@ class MonsterVO {
         this.tag = data.tag
         this.mcnum = data.mcnum
         this.mcheight = data.mcheight
-        this.atkmv = data.atkmv
         this.name = data.name
         this.des = data.des
         this.speed = data.speed
@@ -60,10 +62,15 @@ class MonsterVO {
         this.id = data.id
         this.mcwidth = data.mcwidth
         this.atk2 = data.atk2
+        this.skillcd = data.skillcd * 1000
     }
 
     public get thumb(){
         return 'prop_thumb_' + this.id + '_jpg';
+    }
+
+    public preLoad(){
+         MSBase.getData(this.id).preload();
     }
 
 

@@ -21,12 +21,20 @@ class PKPosCardData {
         for (var key in obj) {
             this[key] = obj[key];
         }
+
+        this.getVO().preLoad();
+    }
+
+    public getVO(){
+        if(this.mid < 1000)
+            return MonsterVO.getObject(this.mid)
+        //return SkillVO.getObject(this.mid)
     }
 
     public useEnable(){
         if(this.isAuto)
-            return this.num < MonsterVO.getObject(this.mid).num2;
-        return this.num < MonsterVO.getObject(this.mid).num;
+            return this.num < this.getVO().num2;
+        return this.num < this.getVO().num;
     }
 
     public getNextCD(){
@@ -41,7 +49,7 @@ class PKPosCardData {
         if(this.num == 0)
             return PKConfig.beforeCD;
         else
-            return MonsterVO.getObject(this.mid).cd;
+            return this.getVO().cd;
     }
 
     //是否可上场

@@ -18,6 +18,7 @@ class PKTeamData {
         for (var key in obj) {
             this[key] = obj[key];
         }
+        this.maxhp = this.hp
     }
 
 

@@ -120,18 +120,18 @@ class PKVideoCon extends game.BaseContainer {
                 item.run();
 
                 break;
-            case PKConfig.VIDEO_MONSTER_ATK_BEFORE:
+            case PKConfig.VIDEO_MONSTER_ATK:
                 item = this.getItemByID(data.id);
                 item.atk();
                 break;
-            case PKConfig.VIDEO_MONSTER_ATK_ACTION:
-                item = this.getItemByID(data.id);
-                MSBase.getData(data.mid).atkMV(item,videoData)
-                break;
-            case PKConfig.VIDEO_MONSTER_SKILL_ACTION:
-                item = this.getItemByID(data.id);
-                MSBase.getData(data.mid).skillMV(item,videoData)
-                break;
+            //case PKConfig.VIDEO_MONSTER_ATK_ACTION:
+            //    item = this.getItemByID(data.id);
+            //    MBase.getData(data.mid).atkMV(item,videoData)
+            //    break;
+            //case PKConfig.VIDEO_MONSTER_SKILL_ACTION:
+            //    item = this.getItemByID(data.id);
+            //    MBase.getData(data.mid).skillMV(item,videoData)
+            //    break;
 
             case PKConfig.VIDEO_MONSTER_BEATK:
                 item = this.getItemByID(data.id);
@@ -174,7 +174,7 @@ class PKVideoCon extends game.BaseContainer {
             return;
         }
         var AM = AniManager.getInstance();
-        if(AM.preLoadMV(AM.getMVKey(mvID)))
+        if(AM.preLoadMV(mvID))
         {
             var xy = MyTool.getMiddleXY(atker,defender)
             xy.y -= defender.data.getVO().height/2
@@ -193,9 +193,17 @@ class PKVideoCon extends game.BaseContainer {
             return;
         }
         var AM = AniManager.getInstance();
-        if(AM.preLoadMV(AM.getMVKey(mvID)))
+        AM.playOnItem(mvID,atker);
+    }
+    //在A里播放动画
+    public playAniIn(a,mvID){
+        var atker = this.getItemByID(a)
+        if(!atker)
         {
-            AM.playOnItem(mvID,atker);
+            throw new Error('XXX')
+            return;
         }
+        var AM = AniManager.getInstance();
+        AM.playInItem(mvID,atker);
     }
 }

@@ -29,19 +29,6 @@ class PKMonsterAction {
                 //判断攻击是否生效
                 if(target && target.die)
                     continue;
-                if(data.targets)
-                {
-                    for(var i=0;i<data.targets.length;i++)
-                    {
-                         if(data.targets[i] && data.targets[i].die)
-                         {
-                             data.targets.splice(i,1);
-                             i--
-                         }
-                    }
-                    if(data.targets.length == 0)
-                        continue;
-                }
 
 
                 if(data.type == 'atk_before')   //攻击产生
@@ -50,19 +37,19 @@ class PKMonsterAction {
                         continue;
                     data.model.atkAction(user,target,t)
                 }
-                else if(data.type == 'skill_before')   //攻击产生
+                else if(data.type == 'atk')  //攻击生效
+                {
+                    MBase.getData(user.mid).atk(user,target)
+                }
+                else if(data.type == 'skill_before')   //技能产生
                 {
                     if(user.die)
                         continue;
-                    data.model.skillAction(user,data.targets,t)
+                    data.model.skillAction(user,data.target,t)
                 }
-                else if(data.type == 'atk')  //攻击生效
+                else if(data.type == 'skill')  //技能生效
                 {
-                    MSBase.getData(user.mid).atk(user,target)
-                }
-                else if(data.type == 'skill')  //攻击生效
-                {
-                    MSBase.getData(user.mid).skill(user,data.targets)
+                    MBase.getData(user.mid).skill(user,data.target)
                     user.lastSkill = data.endTime;
                 }
             }
@@ -74,11 +61,11 @@ class PKMonsterAction {
         user.stopTime = Math.max(user.stopTime,time)
 
         PKData.getInstance().addVideo({   //攻击动画开始
-            type:PKConfig.VIDEO_MONSTER_ATK_BEFORE,
+            type:PKConfig.VIDEO_MONSTER_ATK,
             user:user
         })
 
-        MSBase.getData(user.mid).atkBefore(user,actionTime)
+        MBase.getData(user.mid).atkBefore(user,actionTime)
     }
 
     public skill(user:PKMonsterData,actionTime){
@@ -86,12 +73,10 @@ class PKMonsterAction {
         user.stopTime = Math.max(user.stopTime,time)
 
         PKData.getInstance().addVideo({   //攻击动画开始
-            type:PKConfig.VIDEO_MONSTER_ATK_BEFORE,
+            type:PKConfig.VIDEO_MONSTER_ATK,
             user:user
         })
 
-        MSBase.getData(user.mid).skillBefore(user,actionTime)
-
-        console.log('skill')
+        MBase.getData(user.mid).skillBefore(user,actionTime)
     }
 }

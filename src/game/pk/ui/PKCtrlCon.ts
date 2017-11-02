@@ -37,7 +37,7 @@ class PKCtrlCon extends game.BaseContainer {
 
     public childrenCreated() {
         super.childrenCreated();
-        for(var i=0;i<4;i++)
+        for(var i=0;i< PKConfig.maxPosCard;i++)
         {
             var mc = this['p' + i]
             this.addBtnEvent(mc,this.onPosClick)
@@ -128,7 +128,10 @@ class PKCtrlCon extends game.BaseContainer {
 
     private posCard(mc:PKPosItem){
         var PD = PKData.getInstance();
-        var mp = MonsterVO.getObject(this.chooseCard.data.mid).cost1
+        if(this.chooseCard.data.mid < 100)
+            var mp = MonsterVO.getObject(this.chooseCard.data.mid).cost
+        else
+            var mp = SkillVO.getObject(this.chooseCard.data.mid).cost
         if(PD.myPlayer.getMP() < mp)
             return false;
 
@@ -218,6 +221,12 @@ class PKCtrlCon extends game.BaseContainer {
         for(var s in this.placeObj)
         {
             this.placeObj[s].onTimer();
+        }
+        var mp = PD.myPlayer.getMP();
+        for(var s in this.cardObj)
+        {
+            var item = this.cardObj[s];
+            item.onMpTest(mp);
         }
         this.renewCard();
         this.renewInfo();

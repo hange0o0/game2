@@ -26,15 +26,28 @@ class PKPosCardData {
     }
 
     public getVO(){
-        if(this.mid < 1000)
+        if(this.mid < 100)
             return MonsterVO.getObject(this.mid)
-        //return SkillVO.getObject(this.mid)
+        return SkillVO.getObject(this.mid)
+    }
+
+    public getOwner(){
+        return PKData.getInstance().getPlayer(this.owner);
     }
 
     public useEnable(){
-        if(this.isAuto)
-            return this.num < this.getVO().num2;
-        return this.num < this.getVO().num;
+        if(this.mid < 100)
+        {
+            var mvo = MonsterVO.getObject(this.mid)
+            if(this.isAuto)
+                return this.num < mvo.num2;
+            return this.num < mvo.num;
+        }
+
+        var svo = SkillVO.getObject(this.mid)
+        if(svo.num == 0)
+            return this.actionTime + svo.cd <= PKData.getInstance().actionTime;
+        return this.num < svo.num;
     }
 
     public getNextCD(){
@@ -87,6 +100,19 @@ class PKPosCardData {
             actionTime:actionTime,
         }
     }
+
+    public getSkillValue(){
+        var PD = PKData.getInstance();
+        var owner = PD.getPlayer(this.owner);
+        var base = owner.base[this.mid];
+        return base.value;
+    }
+
+    //触发技能
+    public actionSkill(){
+       SBase.getData(this.mid).skill(this);
+    }
+
     //上阵怪后的处理
     public setHaveAdd(actionTime){
         this.actionTime = actionTime;

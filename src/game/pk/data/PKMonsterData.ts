@@ -6,6 +6,10 @@ class PKMonsterData {
     public atk  = 0
     public speed  = 0
 
+    public baseHp = 0
+    public baseAtk  = 0
+    public baseSpeed  = 0
+
 
 
 
@@ -38,7 +42,12 @@ class PKMonsterData {
             this[key] = obj[key];
         }
         this.maxHp = this.hp;
+        this.baseHp = this.hp;
+        this.baseAtk = this.atk;
+        this.baseSpeed = this.speed;
+
         this.def = this.getVO().def;
+        //this.def += this.getVO().def;
     }
 
     //根据属性相克，取攻击比例
@@ -85,7 +94,7 @@ class PKMonsterData {
             return null;
         if(this.lastSkill && (this.lastSkill + this.getVO().skillcd > t))
             return null;
-        this.skillTargets = MSBase.getData(this.mid).getSkillTarget(this);
+        this.skillTargets = MBase.getData(this.mid).getSkillTarget(this);
         return this.skillTargets
     }
 

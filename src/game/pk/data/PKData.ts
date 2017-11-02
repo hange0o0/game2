@@ -6,6 +6,7 @@ class PKData extends egret.EventDispatcher{
         return this.instance;
     }
 
+    public jumpMV = false;
     public isGameOver = false //游戏结束
     public startTime = 0 //游戏开始时间
     public stopTime = 0 //游戏暂停时间
@@ -16,6 +17,7 @@ class PKData extends egret.EventDispatcher{
     public team2:PKTeamData;
     public playerNum = 2;
 
+    public monsterChange = false//怪有变化
     public monsterList = [];//场上的怪的数据
     public playerObj = {};//场上的玩家的数据
     public myPlayer:PKPlayerData;
@@ -54,6 +56,7 @@ class PKData extends egret.EventDispatcher{
         this.actionTime = 0;
         this.monsterID = 1;
         this.isGameOver = false;
+        this.monsterChange = false;
 
 
         this.team1 = new PKTeamData(data.team1)
@@ -132,6 +135,19 @@ class PKData extends egret.EventDispatcher{
         }
         return arr;
     }
+    //找玩家对应的怪
+    public getMonsterByTeam(team){
+        var arr = [];
+        for(var i=0;i<this.monsterList.length;i++)
+        {
+            var oo = this.monsterList[i];
+             if(oo.atkRota == team.atkRota)
+             {
+                 arr.push(oo)
+             }
+        }
+        return arr;
+    }
 
     //加入怪到场上
     public addMonster(data){
@@ -144,7 +160,19 @@ class PKData extends egret.EventDispatcher{
             type:PKConfig.VIDEO_MONSTER_ADD,
             user:monster
         })
+        this.monsterChange = true;
         return monster;
+    }
+
+    //重置战场上的怪的数据
+    public resetMonsterData(){
+        if(!this.monsterChange)
+            return;
+        this.monsterChange = true;
+        for(var i=0;i<this.monsterList.length;i++)
+        {
+
+        }
     }
 
     //移除场上怪物

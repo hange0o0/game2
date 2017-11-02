@@ -27,6 +27,10 @@ class PKCode {
             this.monsterAction();
             this.monsterMove();
             PKMonsterAction.getInstance().actionAtk(PD.actionTime);//攻击落实
+
+
+
+
             this.actionFinish();
 
 
@@ -75,6 +79,7 @@ class PKCode {
     //技能效果作用
     public actionSkill(){
         var PD = PKData.getInstance();
+        PD.resetMonsterData();//重置技能数据，方便技能统计
         for(var i=1;i<=PD.playerNum;i++) //暂时4个玩家
         {
             var player = PD.playerObj[i];
@@ -83,7 +88,12 @@ class PKCode {
             var arr = player.getAddSkill(PD.actionTime)
             if(arr.length > 0)
             {
-
+                for(var i=0;i<arr[i].length;i++)
+                {
+                    var data = arr[i];
+                    data.actionSkill();
+                    data.setHaveAdd(PD.actionTime);
+                }
             }
         }
     }
@@ -139,12 +149,22 @@ class PKCode {
                     user:mvo,
                 })
                 i--;
+                PD.monsterChange = true;
             }
             else if(mvo.x < 0 || mvo.x > PKConfig.floorWidth) //冲过终点
             {
                 mvo.die = true;
                 PD.monsterList.splice(i,1);
                 i--;
+                PD.monsterChange = true;
+                if(mvo.dieTime) //召唤物不算分
+                {
+                    PD.addVideo({
+                        type:PKConfig.VIDEO_MONSTER_DIE,
+                        user:mvo,
+                    })
+                    continue;
+                }
                 PD.getPlayer(mvo.owner).teamData.enemy.hp -= mvo.getVO().atk2;
                 if(PD.getPlayer(mvo.owner).teamData.enemy.hp <= 0)
                     PD.isGameOver = true;

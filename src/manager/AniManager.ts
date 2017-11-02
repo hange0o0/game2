@@ -192,7 +192,8 @@ class AniManager {
         MyTool.removeMC(mc);
     }
 
-    public preLoadMV(name){
+    public preLoadMV(id){
+        var name = this.getMVKey(id);
         if(this.mcFactorys[name])
             return true;
         var data:any = RES.getRes(name + "_json"); //qid
@@ -231,7 +232,8 @@ class AniManager {
     }
 
     //取重复播放的ani
-    public getAni(name){
+    public getAni(id){
+        var name = this.getMVKey(id);
         var mc = this.getMV(name);
         mc.gotoAndPlay(1, -1);
         this.mvList.push(mc);
@@ -239,8 +241,8 @@ class AniManager {
     }
 
     //取播完一次后回调的ani
-    public getAniOnce(name,fun?,thisObj?){
-
+    public getAniOnce(sid,fun?,thisObj?){
+        var name = this.getMVKey(sid);
         var mc = this.getMV(name);
         mc.comFun = fun;
         mc.thisObj = thisObj;
@@ -266,12 +268,11 @@ class AniManager {
     }
 
     public playOnItem(mvID,item,xy?){
-        var key = this.getMVKey(mvID)
-        if(!this.preLoadMV(key))
+        if(!this.preLoadMV(mvID))
         {
             return;
         }
-        var mv = this.getAniOnce(key);
+        var mv = this.getAniOnce(mvID);
         if(xy)
         {
             mv.x = xy.x;
@@ -284,17 +285,16 @@ class AniManager {
         }
         //mv.scaleX = mv.scaleY = 0.5
         item.parent.addChildAt(mv,item.parent.getChildIndex(item) + 1);
-        //item.parent.addChild(mv);
-        var config = this.mvConfig[mvID]
-        if(config)
+        return mv;
+    }
+
+    public playInItem(mvID,item){
+        if(!this.preLoadMV(mvID))
         {
-            if(config.scale)
-            {
-                mv.scaleX = mv.scaleY = config.scale;
-            }
-            if(config.frameRate)
-                mv.frameRate = config.frameRate;
+            return;
         }
+        var mv = this.getAniOnce(mvID);
+        item.addChil(mv);
         return mv;
     }
 

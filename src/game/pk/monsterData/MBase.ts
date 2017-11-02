@@ -1,0 +1,160 @@
+class MBase {
+    private static baseData = {};
+    public static getData(id):MBase{
+        if(!this.baseData[id])
+        {
+            var myClass = eval("M" + id);
+            this.baseData[id] = new myClass();
+        }
+        return this.baseData[id];
+    }
+
+
+
+    public vo:MonsterVO
+    public type = 'monster'
+    constructor() {
+    }
+
+    //预加载
+    public preload(){
+
+    }
+
+    public getAtkBeforeCD(){
+
+    }
+
+
+    //////////////////////////////////////////////////////  skill
+    //取技能目标
+    public getSkillTarget(user:PKMonsterData){
+        return [];
+    }
+
+    //伤害飞行时间
+    protected getSkillArriveCD(user:PKMonsterData,target:PKMonsterData){
+        return 0;
+    }
+
+    //技能动画
+    public skillMV(user,target,actionTime,endTime){
+
+    }
+
+    //实现技能
+    public skill(user:PKMonsterData,target){
+
+    }
+
+
+    //////////////////////////////////////////////////////    atk
+    //取技能目标
+    protected getAtkTargets(user:PKMonsterData){
+        return [user.target];
+    }
+    //伤害飞行时间
+    protected getAtkArriveCD(user:PKMonsterData,target:PKMonsterData){
+        return 0;
+    }
+
+    //攻击发出时的附加动画，如箭，魔发效果
+    public atkMV(user,target,actionTime,endTime){
+
+    }
+
+   //////////////////////////////////////////////////////   other上面的为要处理的函数
+    //技能前处理（生成技能事件）
+    public skillBefore(user:PKMonsterData,actionTime){
+        var endTime = actionTime + user.getVO().mv_atk//这个时间后发出攻击时件(前摇)
+        var targets = this.getSkillTarget(user);
+        for(var i=0;i<targets.length;i++)
+        {
+            this.sendSkillBefore(user,targets[i],actionTime,endTime)
+        }
+    }
+
+    //技能发出处理
+    public skillAction(user:PKMonsterData,target:PKMonsterData,actionTime){
+        var endTime = actionTime + this.getSkillArriveCD(user,target);
+        this.sendSkillAction(user,target,actionTime,endTime) //攻击起作用
+    }
+
+    //攻击前处理（生成PK事件）设攻击发出时间，攻击目标选择
+    public atkBefore(user:PKMonsterData,actionTime){
+        var endTime = actionTime + user.getVO().mv_atk//这个时间后发出攻击时件(前摇)
+        var targets = this.getAtkTargets(user);
+        for(var i=0;i<targets.length;i++)
+        {
+            this.sendAtkBefore(user,targets[i],actionTime,endTime)
+        }
+    }
+
+    //攻击发出，设攻击生效(起作用)时间
+    public atkAction(user:PKMonsterData,target:PKMonsterData,actionTime){
+        var endTime = actionTime + this.getAtkArriveCD(user,target);
+        this.sendAtkAction(user,target,actionTime,endTime) //攻击起作用
+    }
+
+    //a对B攻击到达时的逻辑（攻击正式生效）
+    public atk(user:PKMonsterData,target:PKMonsterData){
+        var hp = this.getAtkHp(user,target);
+        target.beAtkAction({hp:hp})
+        user.atkAction({hp:hp})
+    }
+
+
+    protected getAtkHp(user:PKMonsterData,target:PKMonsterData){
+        var atk = user.atk * user.getAtkRate(target);
+        var hp = Math.floor(atk * (1-target.def/100));
+        if(hp < 1)
+            hp = 1;
+        return hp;
+    }
+
+    protected sendAtkBefore(user,target,actionTime,endTime){
+        PKMonsterAction.getInstance().addAtkList({   //到actionTime后根据条件产生攻击事件
+            type:'atk_before',
+            model:this,
+            user:user,
+            target:target,
+            actionTime:actionTime,
+            endTime:endTime
+        })
+    }
+    protected sendSkillBefore(user,target,actionTime,endTime){
+        PKMonsterAction.getInstance().addAtkList({   //到actionTime后根据条件产生攻击事件
+            type:'skill_before',
+            model:this,
+            user:user,
+            target:target,
+            actionTime:actionTime,
+            endTime:endTime
+        })
+    }
+
+    protected sendAtkAction(user,target,actionTime,endTime){
+        PKMonsterAction.getInstance().addAtkList({   //到actionTime后根据条件攻击起作用
+            type:'atk',
+            user:user,
+            target:target,
+            actionTime:actionTime,
+            endTime:endTime
+        })
+
+        this.atkMV(user,target,actionTime,endTime)
+
+    }
+    protected sendSkillAction(user,target,actionTime,endTime){
+        PKMonsterAction.getInstance().addAtkList({   //到actionTime后根据条件产生攻击事件
+            type:'skill',
+            user:user,
+            target:target,
+            actionTime:actionTime,
+            endTime:endTime
+        })
+
+        this.skillMV(user,target,actionTime,endTime)
+
+    }
+}

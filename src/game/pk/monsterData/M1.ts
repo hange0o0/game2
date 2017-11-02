@@ -1,4 +1,4 @@
-class MS1 extends MSBase{
+class M1 extends MBase{
     constructor() {
         super();
     }

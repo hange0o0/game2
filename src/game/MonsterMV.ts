@@ -36,11 +36,12 @@ class MonsterMV extends eui.Group {
         this.mh = vo.mcheight/4
 
 
-        this.mc.source = 'enemy' + id + '_png'
+        MyTool.setImgSource(this.mc,'enemy' + id + '_png');
         this.width = this.mw
         this.height = this.mh
         this.anchorOffsetX = this.mw/2
         this.anchorOffsetY = this.mh
+        this.mc.scrollRect = new egret.Rectangle(0,0,this.mw,this.mh)
     }
 
     public run(){

@@ -33,8 +33,16 @@ class PKCardItem extends game.BaseItem {
             this.desText.text = ''
             return;
         }
-        var mp = MonsterVO.getObject(this.data.mid).cost1
-        this.desText.text = 'index:' + this.data.index + '\nmid:' + this.data.mid + '\nmp:' + mp;
+        if(this.data.mid < 100)
+        {
+            var mp = MonsterVO.getObject(this.data.mid).cost
+            this.desText.text = 'index:' + this.data.index + '\nmid:' + this.data.mid + '\nmp:' + mp;
+        }
+        else
+        {
+            var mp = SkillVO.getObject(this.data.mid).cost
+            this.desText.text = 'index:' + this.data.index + '\nmid:' + this.data.mid + '\nmp:' + mp;
+        }
         this.renewChoose();
     }
 
@@ -46,6 +54,19 @@ class PKCardItem extends game.BaseItem {
     }
 
 
+    public onMpTest(nowMp){
+        if(!this.data)
+            return;
+
+        if(this.data.mid < 100)
+            var mp = MonsterVO.getObject(this.data.mid).cost
+        else
+            var mp = SkillVO.getObject(this.data.mid).cost
+        if(nowMp < mp)
+            this.desText.textColor = 0xFF0000
+        else
+            this.desText.textColor = 0xFFFFFF
+    }
 
     public renewChoose(){
         if(this.isDragMC)

@@ -14,7 +14,7 @@ class MonsterVO {
     public type: number;
     public headoff: number;
     public atkcd: number;
-    public cost1: number;
+    public cost: number;
     public def: number;
     public cd: number;
     public num: number;
@@ -31,6 +31,7 @@ class MonsterVO {
     public id: number;
     public mcwidth: number;
     public atk2: number;
+    public mv_atk: number;
 
 
     public constructor(data?: any) {
@@ -46,7 +47,7 @@ class MonsterVO {
         this.type = data.type
         this.headoff = data.headoff
         this.atkcd = data.atkcd * 1000
-        this.cost1 = data.cost1
+        this.cost = data.cost
         this.def = data.def
         this.cd = data.cd * 1000
         this.num = data.num
@@ -63,6 +64,7 @@ class MonsterVO {
         this.mcwidth = data.mcwidth
         this.atk2 = data.atk2
         this.skillcd = data.skillcd * 1000
+        this.mv_atk = data.mv_atk * 1000
     }
 
     public get thumb(){
@@ -70,7 +72,7 @@ class MonsterVO {
     }
 
     public preLoad(){
-         MSBase.getData(this.id).preload();
+         MBase.getData(this.id).preload();
     }
 
 

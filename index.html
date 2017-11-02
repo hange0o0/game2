@@ -38,10 +38,10 @@
 
     <!--这个标签会被替换为项目中所有的 javascript 文件。删除 game_files 标签后，项目文件加载列表将不会变化，请谨慎操作！-->
     <!--game_files_start-->
-	<script egret="game" src="bin-debug/game/pk/monsterSkillData/MSBase.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/MBase.js"></script>
 	<script egret="game" src="bin-debug/commont/BaseUI.js"></script>
-	<script egret="game" src="bin-debug/game/pk/ui/PKCtrlCon.js"></script>
-	<script egret="game" src="bin-debug/commont/GameEvent.js"></script>
+	<script egret="game" src="bin-debug/game/pk/skillData/SBase.js"></script>
+	<script egret="game" src="bin-debug/game/pk/ui/PKCardItem.js"></script>
 	<script egret="game" src="bin-debug/commont/MyTool.js"></script>
 	<script egret="game" src="bin-debug/commont/MyWindow.js"></script>
 	<script egret="game" src="bin-debug/commont/Net.js"></script>
@@ -56,6 +56,7 @@
 	<script egret="game" src="bin-debug/commont/VScrollerGroup.js"></script>
 	<script egret="game" src="bin-debug/db/MonsterVO.js"></script>
 	<script egret="game" src="bin-debug/db/PropVO.js"></script>
+	<script egret="game" src="bin-debug/db/SkillVO.js"></script>
 	<script egret="game" src="bin-debug/debug/DebugInput.js"></script>
 	<script egret="game" src="bin-debug/debug/DebugSkillItem.js"></script>
 	<script egret="game" src="bin-debug/debug/DebugSkillList.js"></script>
@@ -68,10 +69,10 @@
 	<script egret="game" src="bin-debug/game/pk/data/PKPlayerData.js"></script>
 	<script egret="game" src="bin-debug/game/pk/data/PKPosCardData.js"></script>
 	<script egret="game" src="bin-debug/game/pk/data/PKTeamData.js"></script>
-	<script egret="game" src="bin-debug/game/pk/monsterSkillData/MS1.js"></script>
-	<script egret="game" src="bin-debug/game/pk/monsterSkillData/MS2.js"></script>
-	<script egret="game" src="bin-debug/game/pk/monsterSkillData/MS3.js"></script>
-	<script egret="game" src="bin-debug/game/pk/monsterSkillData/MS4.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M1.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M2.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M3.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M4.js"></script>
 	<script egret="game" src="bin-debug/AssetAdapter.js"></script>
 	<script egret="game" src="bin-debug/game/pk/PKBulletManager.js"></script>
 	<script egret="game" src="bin-debug/game/pk/PKCode.js"></script>
@@ -81,8 +82,10 @@
 	<script egret="game" src="bin-debug/game/pk/PKTool.js"></script>
 	<script egret="game" src="bin-debug/game/pk/result/PKFailUI.js"></script>
 	<script egret="game" src="bin-debug/game/pk/result/PKWinUI.js"></script>
-	<script egret="game" src="bin-debug/game/pk/ui/PKCardItem.js"></script>
+	<script egret="game" src="bin-debug/game/pk/skillData/S101.js"></script>
 	<script egret="game" src="bin-debug/commont/Config.js"></script>
+	<script egret="game" src="bin-debug/util/StringUtil.js"></script>
+	<script egret="game" src="bin-debug/game/pk/ui/PKCtrlCon.js"></script>
 	<script egret="game" src="bin-debug/game/pk/ui/PKingUI.js"></script>
 	<script egret="game" src="bin-debug/game/pk/ui/PKMonsterInfoItem.js"></script>
 	<script egret="game" src="bin-debug/game/pk/ui/PKMonsterInfoUI.js"></script>
@@ -126,7 +129,7 @@
 	<script egret="game" src="bin-debug/util/ObjectUtil.js"></script>
 	<script egret="game" src="bin-debug/util/PopUpManager.js"></script>
 	<script egret="game" src="bin-debug/util/ShapeObject.js"></script>
-	<script egret="game" src="bin-debug/util/StringUtil.js"></script>
+	<script egret="game" src="bin-debug/commont/GameEvent.js"></script>
 	<!--game_files_end-->
 </head>
 <body>

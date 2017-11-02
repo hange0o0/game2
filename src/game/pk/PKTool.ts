@@ -13,7 +13,7 @@ class PKTool {
             {
                 var id = group[j];
                 var vo = MonsterVO.getObject(id);
-                mp1 += vo.cost1;
+                mp1 += vo.cost;
             }
             if(mp1 > PKConfig.maxMP)
                 mp1 = PKConfig.maxMP;

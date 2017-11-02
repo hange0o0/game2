@@ -18,9 +18,10 @@ class PKManager {
                     3:MonsterVO.getObject(3),
                     4:MonsterVO.getObject(4),
                 }},
-                {id:2,openid:UM.openid,team:1,card:[1,2,1,2,1,1,2,2,2,1,1,1],base:{
+                {id:2,openid:UM.openid,team:1,card:[1,101,1,2,1,1,2,2,2,1,1,1],base:{
                     1:MonsterVO.getObject(1),
-                    2:MonsterVO.getObject(2)//{atk:10,hp:100,speed:5}
+                    2:MonsterVO.getObject(2),//{atk:10,hp:100,speed:5}
+                    101:SkillVO.getObject(101) //{value:20}
                 }}
             ]
         };

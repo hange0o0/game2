@@ -4,12 +4,6 @@ class MyTool {
 
     public static maxUserHead = 82;
 
-    public setImgSource(img,source){
-        img.visible = false;
-        img.once(egret.Event.COMPLETE,function(){img.visible = true;},this)
-        img.source = source;
-    }
-
     public static randomName(){
         var len = Math.floor(Math.random()*3) + 2;
         var s = '';
@@ -70,6 +64,8 @@ class MyTool {
 
     //加载时隐藏，加载完显示
     public static setImgSource(img,source){
+        if(img.source == source)
+            return;
         img.visible = false;
         img.once(egret.Event.COMPLETE,this.onImgComplete,this); //写在外部，防止重复调用
         img.source = source;

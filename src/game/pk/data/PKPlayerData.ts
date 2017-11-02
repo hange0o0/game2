@@ -52,32 +52,6 @@ class PKPlayerData {
         this.mp = PKConfig.mpInit;
     }
 
-    //public getPreLoadList(){
-    //    var monsterObj = {};
-    //    if(this.autoList)
-    //    {
-    //         for(var i=0;i<this.autoList.length;i++)
-    //         {
-    //             monsterObj[this.autoList[i].mid] = true;
-    //         }
-    //    }
-    //
-    //    for(var s in this.handCard)
-    //    {
-    //        monsterObj[this.handCard[s].mid] = true;
-    //    }
-    //    for(var i=0;i<this.hideCard.length;i++)
-    //    {
-    //        monsterObj[this.hideCard[i].mid] = true;
-    //    }
-    //
-    //    for(var s in monsterObj)
-    //    {
-    //        var mvo = MonsterVO.getObject(s)
-    //    }
-    //
-    //}
-
     public addMP(v){
         this.resetMp();
         this.mp += v;
@@ -146,7 +120,10 @@ class PKPlayerData {
              }
         }
 
-        this.addMP(-MonsterVO.getObject(cardData.mid).cost1)
+        if(cardData.mid < 100)
+            this.addMP(-MonsterVO.getObject(cardData.mid).cost)
+        else
+            this.addMP(-SkillVO.getObject(cardData.mid).cost)
     }
 
     //取手牌  (5)
@@ -178,7 +155,7 @@ class PKPlayerData {
         for(var s in this.posCard)
         {
             var oo:PKPosCardData = this.posCard[s];
-            if(!oo)continue;
+            if(!oo || oo.mid>100)continue;
 
             if(oo.testAdd(t))
             {
@@ -193,17 +170,17 @@ class PKPlayerData {
     }
 
     //取可起作用的技能
-    public getAddSkill(){
+    public getAddSkill(t){
         var arr = [];
         for(var s in this.posCard)
         {
             var oo:PKPosCardData = this.posCard[s];
-            if(!oo)continue;
+            if(!oo || oo.mid<100)continue;
 
-            //if(oo.testAdd(t))
-            //{
-            //    arr.push(oo)
-            //}
+            if(oo.testAdd(t) && SBase.getData(oo.mid).useAble())
+            {
+                arr.push(oo)
+            }
         }
         return arr;
     }

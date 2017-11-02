@@ -18,6 +18,8 @@ class PKBulletManager {
             item = new ArrowMC();
         }
         item.init(fromMC,toMC,beginTime,endTime,id);
+        var con = fromMC.parent;
+        con.addChildAt(item,con.getChildIndex(fromMC) + 1);
         this.useItem.push(item);
         return item;
     }
@@ -31,6 +33,8 @@ class PKBulletManager {
             item = new BulletMC();
         }
         item.init(fromMC,toMC,beginTime,endTime,id);
+        var con = fromMC.parent;
+        con.addChildAt(item,con.getChildIndex(fromMC) + 1);
         this.useItem.push(item);
         return item;
     }
@@ -43,6 +47,8 @@ class PKBulletManager {
             item = new BulletAniMC();
         }
         item.init(fromMC,toMC,beginTime,endTime,id);
+        var con = fromMC.parent;
+        con.addChildAt(item,con.getChildIndex(fromMC) + 1);
         this.useItem.push(item);
         return item;
     }
@@ -211,7 +217,7 @@ class BulletAniMC extends egret.DisplayObjectContainer{
         var AM = AniManager.getInstance();
         if(this.mc)
             AniManager.getInstance().removeMV(this.mc);
-        this.mc = AM.getAni(AM.getMVKey(id));
+        this.mc = AM.getAni(id);
         this.mc.scaleX = this.mc.scaleY = 0.3
         this.mc.x = 0
         this.mc.y = 0

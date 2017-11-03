@@ -16,6 +16,8 @@ class PKVideoCon extends game.BaseContainer {
 
     public itemArr = []
     public itempool = []
+    public txtPool = []
+    public txtArr = []
 
 
 
@@ -31,6 +33,11 @@ class PKVideoCon extends game.BaseContainer {
         {
             var item = this.itemArr.pop();
             this.freeItem(item);
+        }
+        while(this.txtArr.length)
+        {
+            var item = this.txtArr.pop();
+            this.freeTxt(item);
         }
     }
 
@@ -76,6 +83,29 @@ class PKVideoCon extends game.BaseContainer {
 
     }
 
+    private createTxt():eui.Label{
+        var item:eui.Label = this.txtPool.pop();
+        if(!item)
+        {
+            item = new eui.Label();
+            item.size = 20;
+            item.stroke = 2;
+            item.width = 160;
+            item.textAlign="center"
+            item.anchorOffsetX = 80;
+        }
+        item.alpha = 1;
+        return item;
+    }
+
+    private freeTxt(item){
+        if(!item)
+            return;
+        egret.Tween.removeTweens(item)
+        MyTool.removeMC(item);
+        this.txtPool.push(item);
+    }
+
     public getItemByID(id){
         for(var i=0;i<this.itemArr.length;i++)
         {
@@ -118,20 +148,21 @@ class PKVideoCon extends game.BaseContainer {
             case PKConfig.VIDEO_MONSTER_MOVE:
                 item = this.getItemByID(data.id);
                 item.run();
-
                 break;
             case PKConfig.VIDEO_MONSTER_ATK:
                 item = this.getItemByID(data.id);
+                if(videoData.target)
+                    item.setRota2(videoData.target.x)
                 item.atk();
                 break;
-            //case PKConfig.VIDEO_MONSTER_ATK_ACTION:
-            //    item = this.getItemByID(data.id);
-            //    MBase.getData(data.mid).atkMV(item,videoData)
-            //    break;
-            //case PKConfig.VIDEO_MONSTER_SKILL_ACTION:
-            //    item = this.getItemByID(data.id);
-            //    MBase.getData(data.mid).skillMV(item,videoData)
-            //    break;
+            case PKConfig.VIDEO_MONSTER_DOUBLE:
+                item = this.getItemByID(data.id);
+                this.playDoubleHit(item,videoData.value);
+                break;
+            case PKConfig.VIDEO_MONSTER_MISS:
+                item = this.getItemByID(data.id);
+                this.playMiss(item);
+                break;
 
             case PKConfig.VIDEO_MONSTER_BEATK:
                 item = this.getItemByID(data.id);
@@ -206,4 +237,40 @@ class PKVideoCon extends game.BaseContainer {
         var AM = AniManager.getInstance();
         AM.playInItem(mvID,atker);
     }
+
+    //暴击动画
+    public playDoubleHit(item:PKMonsterItem,value){
+         var txt = this.createTxt();
+        txt.textColor = 0xFF0000;
+        txt.text = '!' + value;
+        txt.x = item.x;
+        txt.y = item.y - item.data.getVO().height - 30;
+        this.con.addChildAt(txt,item.parent.getChildIndex(item) + 1)
+        this.txtArr.push(txt);
+
+        var tw = egret.Tween.get(txt);
+        tw.to({y:txt.y - 20},300).wait(200).call(function(){
+            ArrayUtil.removeItem(this.txtArr,txt);
+            this.freeTxt(txt);
+        },this)
+
+    }
+
+    //MISS动画
+    public playMiss(item){
+        var txt = this.createTxt();
+        txt.textColor = 0xFFFFFF;
+        txt.text = 'miss';
+        txt.x = item.x;
+        txt.y = item.y - item.data.getVO().height - 30;
+        this.con.addChildAt(txt,item.parent.getChildIndex(item) + 1)
+        this.txtArr.push(txt);
+
+        var tw = egret.Tween.get(txt);
+        tw.to({y:txt.y - 20},300).to({alpha:0},300).call(function(){
+            ArrayUtil.removeItem(this.txtArr,txt);
+            this.freeTxt(txt);
+        },this)
+    }
+
 }

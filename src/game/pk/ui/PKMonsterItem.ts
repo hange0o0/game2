@@ -20,6 +20,8 @@ class PKMonsterItem extends game.BaseItem {
         this.anchorOffsetX = 50;
         this.anchorOffsetY = 300;
         this.monsterMV.addEventListener('mv_die',this.onDieFinish,this)
+
+        //MyTool.addTestBlock(this).y = 300;
     }
 
     private onDieFinish(){
@@ -35,7 +37,7 @@ class PKMonsterItem extends game.BaseItem {
         this.alpha = 1;
 
         this.x = mD.x;
-        this.setRota(-mD.atkRota);
+        this.setRota(-mD.atkRota,true);
 
         this.bar.fillColor = mD.atkRota == PKConfig.ROTA_LEFT ? 0x0000FF : 0xFF0000;
         this.barGroup.visible = false;
@@ -50,11 +52,15 @@ class PKMonsterItem extends game.BaseItem {
     //
     //}
 
-    public setRota(rota){
+    public setRota(rota,init?){
+        if(!init && this.monsterMV.scaleX == rota)
+            return;
         this.monsterMV.scaleX = rota
         var mD:PKMonsterData = this.data
         this.barGroup.horizontalCenter = mD.getVO().headoff * rota;
-
+    }
+    public setRota2(targetX){
+        this.setRota(this.x > targetX ? 1:-1)
     }
 
     public run(){

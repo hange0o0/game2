@@ -18,11 +18,12 @@ class PKData extends egret.EventDispatcher{
     public playerNum = 2;
 
     public monsterChange = false//怪有变化
+    public randomSeed = 0//随机的种子
     public monsterList = [];//场上的怪的数据
     public playerObj = {};//场上的玩家的数据
     public myPlayer:PKPlayerData;
 
-    //public videoList = [] //所有要触发动画的集合
+    //public stateObj = [] //所有要触发动画的集合
     //public topVideoList = [] //影响关部的动画的集合
     //private topKey = ['monster_win','monster_add'];
     constructor(){
@@ -59,6 +60,7 @@ class PKData extends egret.EventDispatcher{
         this.monsterChange = false;
 
 
+        this.randomSeed = data.seed;
         this.team1 = new PKTeamData(data.team1)
         this.team2 = new PKTeamData(data.team2)
         this.team1.enemy = this.team2
@@ -87,9 +89,29 @@ class PKData extends egret.EventDispatcher{
 
     }
 
-    //得到要预加载的项
-    public getPreLoadList(){
+    public random(){
+        var seed = this.randomSeed;
+        seed = ( seed * 9301 + 49297 ) % 233280;
+        var rd = seed / ( 233280.0 );
+        this.randomSeed = rd * 100000000;
+        return rd;
+    }
 
+    //数据乱序
+    public upsetArr(arr){
+        var self = this;
+        arr.sort(rdFun);
+        function rdFun(){
+            return self.random()>0.5?-1:1;
+        }
+    }
+
+    public randomOne(arr:Array<any>,splice = false):any{
+        var index = Math.floor(arr.length * this.random())
+        var data = arr[index];
+        if(splice)
+            arr.splice(index,1);
+        return data;
     }
 
     //开始游戏
@@ -97,6 +119,7 @@ class PKData extends egret.EventDispatcher{
         this.startTime = egret.getTimer()
         this.stopTime = 0;
     }
+
 
 
 
@@ -160,6 +183,8 @@ class PKData extends egret.EventDispatcher{
             type:PKConfig.VIDEO_MONSTER_ADD,
             user:monster
         })
+
+        monster.getOwner().teamData.testState('create',monster);
         this.monsterChange = true;
         return monster;
     }

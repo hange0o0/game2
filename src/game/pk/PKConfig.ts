@@ -14,11 +14,12 @@ class PKConfig {
     public static maxPosCard = 5; //上阵牌上限
 
 
-    //public static VIDEO_MONSTER_ATK_ACTION = 1
+    public static VIDEO_MONSTER_DOUBLE = 1;//爆击
     public static VIDEO_MONSTER_DIE = 2
     public static VIDEO_MONSTER_WIN = 3
     public static VIDEO_MONSTER_ADD = 4
     public static VIDEO_MONSTER_ATK = 5
     public static VIDEO_MONSTER_MOVE = 6
     public static VIDEO_MONSTER_BEATK = 7
+    public static VIDEO_MONSTER_MISS = 8 //闪避
 }

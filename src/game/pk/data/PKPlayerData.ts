@@ -100,6 +100,10 @@ class PKPlayerData {
 
     //上阵卡
     public addPosCard(pos,cardData){
+        if(this.posCard[pos])
+        {
+            this.teamData.removeState(this.posCard[pos])
+        }
         this.posCard[pos] =  new PKPosCardData({
             id:pos,
             mid:cardData.mid,
@@ -177,7 +181,7 @@ class PKPlayerData {
             var oo:PKPosCardData = this.posCard[s];
             if(!oo || oo.mid<100)continue;
 
-            if(oo.testAdd(t) && SBase.getData(oo.mid).useAble())
+            if(oo.testAdd(t) && SBase.getData(oo.mid).useAble(oo))
             {
                 arr.push(oo)
             }

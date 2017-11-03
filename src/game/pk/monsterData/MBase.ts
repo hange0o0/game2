@@ -20,11 +20,10 @@ class MBase {
     public preload(){
 
     }
-
-    public getAtkBeforeCD(){
+    //初始化怪物隐藏属性
+    public initMonster(user:PKMonsterData){
 
     }
-
 
     //////////////////////////////////////////////////////  skill
     //取技能目标
@@ -93,11 +92,33 @@ class MBase {
     //攻击发出，设攻击生效(起作用)时间
     public atkAction(user:PKMonsterData,target:PKMonsterData,actionTime){
         var endTime = actionTime + this.getAtkArriveCD(user,target);
+
+        if(user.doubleRate && PKData.getInstance().random() < user.doubleRate)
+        {
+            user.doubleAction = true;
+            PKData.getInstance().addVideo({
+                type:PKConfig.VIDEO_MONSTER_DOUBLE,
+                user:user,
+                value:user.atk*2,
+            })
+        }
+        else
+            user.doubleAction = false;
+
+
         this.sendAtkAction(user,target,actionTime,endTime) //攻击起作用
     }
 
     //a对B攻击到达时的逻辑（攻击正式生效）
     public atk(user:PKMonsterData,target:PKMonsterData){
+        if(!user.doubleAction && target.missRate && PKData.getInstance().random() < target.doubleRate)  //暴击不可闪
+        {
+            PKData.getInstance().addVideo({
+                type:PKConfig.VIDEO_MONSTER_MISS,
+                user:target
+            })
+            return;
+        }
         var hp = this.getAtkHp(user,target);
         target.beAtkAction({hp:hp})
         user.atkAction({hp:hp})
@@ -106,6 +127,8 @@ class MBase {
 
     protected getAtkHp(user:PKMonsterData,target:PKMonsterData){
         var atk = user.atk * user.getAtkRate(target);
+        if(user.doubleAction)
+            atk *= user.doubleValue;
         var hp = Math.floor(atk * (1-target.def/100));
         if(hp < 1)
             hp = 1;

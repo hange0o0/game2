@@ -10,10 +10,10 @@ var game_file_list = [
 	"libs/modules/tween/tween.js",
 	"libs/modules/socket/socket.js",
 	"polyfill/promise.js",
+	"bin-debug/game/pk/skillData/SBase.js",
 	"bin-debug/game/pk/monsterData/MBase.js",
 	"bin-debug/commont/BaseUI.js",
-	"bin-debug/game/pk/skillData/SBase.js",
-	"bin-debug/game/pk/ui/PKCardItem.js",
+	"bin-debug/commont/GameEvent.js",
 	"bin-debug/commont/MyTool.js",
 	"bin-debug/commont/MyWindow.js",
 	"bin-debug/commont/Net.js",
@@ -55,8 +55,10 @@ var game_file_list = [
 	"bin-debug/game/pk/result/PKFailUI.js",
 	"bin-debug/game/pk/result/PKWinUI.js",
 	"bin-debug/game/pk/skillData/S101.js",
+	"bin-debug/game/pk/skillData/S102.js",
+	"bin-debug/game/pk/skillData/S103.js",
 	"bin-debug/commont/Config.js",
-	"bin-debug/util/StringUtil.js",
+	"bin-debug/game/pk/ui/PKCardItem.js",
 	"bin-debug/game/pk/ui/PKCtrlCon.js",
 	"bin-debug/game/pk/ui/PKingUI.js",
 	"bin-debug/game/pk/ui/PKMonsterInfoItem.js",
@@ -101,7 +103,7 @@ var game_file_list = [
 	"bin-debug/util/ObjectUtil.js",
 	"bin-debug/util/PopUpManager.js",
 	"bin-debug/util/ShapeObject.js",
-	"bin-debug/commont/GameEvent.js",
+	"bin-debug/util/StringUtil.js",
 	//----auto game_file_list end----
 ];
 

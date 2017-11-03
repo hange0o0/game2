@@ -50,7 +50,7 @@ class PKMonsterAction {
                 else if(data.type == 'skill')  //技能生效
                 {
                     MBase.getData(user.mid).skill(user,data.target)
-                    user.lastSkill = data.endTime;
+                    user.setSkillUse();;
                 }
             }
         }
@@ -62,7 +62,8 @@ class PKMonsterAction {
 
         PKData.getInstance().addVideo({   //攻击动画开始
             type:PKConfig.VIDEO_MONSTER_ATK,
-            user:user
+            user:user,
+            target:user.target
         })
 
         MBase.getData(user.mid).atkBefore(user,actionTime)
@@ -74,7 +75,8 @@ class PKMonsterAction {
 
         PKData.getInstance().addVideo({   //攻击动画开始
             type:PKConfig.VIDEO_MONSTER_ATK,
-            user:user
+            user:user,
+            target:user.skillTargets[0]
         })
 
         MBase.getData(user.mid).skillBefore(user,actionTime)

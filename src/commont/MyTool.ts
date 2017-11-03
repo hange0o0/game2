@@ -228,6 +228,7 @@ class MyTool {
         item.graphics.beginFill(0);
         item.graphics.drawRect(0,0,10,10);
         item.graphics.endFill();
+        return item;
     }
 
     //把单个字符翻译为数字

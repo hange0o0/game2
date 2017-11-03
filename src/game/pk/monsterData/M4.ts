@@ -44,6 +44,7 @@ class M4 extends MBase{
             atkRota:atkRota,
             x:user.x,
             actionTime:PD.actionTime,
+            lastSkill:Number.MAX_VALUE,
             dieTime:PD.actionTime + 20*1000,  //存活时间
         }
         PD.addMonster(mData);

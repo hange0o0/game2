@@ -21,7 +21,7 @@ class SBase {
     }
 
     //能否生效
-    public useAble(){
+    public useAble(user:PKPosCardData){
         return true;
     }
 
@@ -41,16 +41,27 @@ class SBase {
     }
 
 
+
     //////////////////////////////////////////////////上面的为要设的内容
 
     //实现技能
     public skill(user:PKPosCardData){
+        var svo = SkillVO.getObject(user.mid);
+        if(svo.state)
+        {
+            user.getOwner().teamData.addStateLister(svo.state,user)
+            return;
+        }
         var targets = this.getSkillTarget(user);
         for(var i=0;i<targets.length;i++)
         {
-            this.onSkill(user,targets[i]);//技能效果
-            this.skillMV(targets[i]);//技能效果
+              this.effectTarget(user,targets[i]);
         }
+    }
+
+    public effectTarget(user:PKPosCardData,target:PKMonsterData){
+        this.onSkill(user,target);//技能效果
+        this.skillMV(target);//技能动画
     }
 
 

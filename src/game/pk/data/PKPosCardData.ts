@@ -46,7 +46,7 @@ class PKPosCardData {
 
         var svo = SkillVO.getObject(this.mid)
         if(svo.num == 0)
-            return this.actionTime + svo.cd <= PKData.getInstance().actionTime;
+            return this.actionTime + svo.cd >= PKData.getInstance().actionTime;
         return this.num < svo.num;
     }
 
@@ -65,7 +65,7 @@ class PKPosCardData {
             return this.getVO().cd;
     }
 
-    //是否可上场
+    //是否可马上起作用
     public testAdd(t){
         if(this.actionResult)
             return true;

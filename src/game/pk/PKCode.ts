@@ -23,7 +23,7 @@ class PKCode {
             cd -= PKConfig.stepCD;
             this.autoAction();
             this.addMonster();
-            //this.actionSkill();
+            this.actionSkill();
             this.monsterAction();
             this.monsterMove();
             PKMonsterAction.getInstance().actionAtk(PD.actionTime);//攻击落实
@@ -86,9 +86,10 @@ class PKCode {
             if(!player)
                 continue
             var arr = player.getAddSkill(PD.actionTime)
+
             if(arr.length > 0)
             {
-                for(var i=0;i<arr[i].length;i++)
+                for(var i=0;i<arr.length;i++)
                 {
                     var data = arr[i];
                     data.actionSkill();
@@ -134,7 +135,7 @@ class PKCode {
         }
     }
 
-    //一轮操作结束,移队死，过线的，结算
+    //一轮操作结束,移队死，过线的，结算,清除BUFF
     public actionFinish(){
         var PD = PKData.getInstance();
         for(var i=0;i<PD.monsterList.length;i++)
@@ -174,7 +175,13 @@ class PKCode {
                     user:mvo,
                 })
             }
+            else { //清除BUFF
+                mvo.cleanBuff(PD.actionTime)
+            }
         }
+
+        PD.team1.removeState()
+        PD.team2.removeState()
     }
 
 

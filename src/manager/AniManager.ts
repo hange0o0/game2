@@ -294,7 +294,8 @@ class AniManager {
             return;
         }
         var mv = this.getAniOnce(mvID);
-        item.addChil(mv);
+        mv.x = mv.y = 0;
+        item.addChild(mv);
         return mv;
     }
 

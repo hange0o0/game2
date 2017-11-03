@@ -13,9 +13,10 @@ class SkillVO {
     public cost: number;
     public name: string;
     public num: number;
-
+    public value: number;
     public id: number;
     public state: string;
+    public type: string;
 
 
     public constructor(data?: any) {
@@ -31,6 +32,7 @@ class SkillVO {
         this.name = data.name
         this.num = data.num
         this.id = data.id
+        this.value = data.value
         this.state = data.state
     }
 

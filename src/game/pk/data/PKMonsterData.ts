@@ -5,6 +5,14 @@ class PKMonsterData {
     public hp = 0
     public atk  = 0
     public speed  = 0
+    public def  = 0
+    public maxHp = 0
+
+    //隐藏属性
+    public doubleRate  = 0
+    public doubleValue  = 0
+    public doubleAction  = false;
+    public missRate  = 0
 
     public baseHp = 0
     public baseAtk  = 0
@@ -23,8 +31,7 @@ class PKMonsterData {
     public skillTargets//技能目标
 
     public id;//唯一ID
-    public def  = 0
-    public maxHp = 0
+
     public stopTime = 0
     public lastSkill = 0
     public dieTime = 0
@@ -47,6 +54,8 @@ class PKMonsterData {
         this.baseSpeed = this.speed;
 
         this.def = this.getVO().def;
+
+        MBase.getData(this.mid).initMonster(this);
         //this.def += this.getVO().def;
     }
 
@@ -66,6 +75,28 @@ class PKMonsterData {
         if(atkType > defType)
             return 1.5;
         return 0.5
+    }
+
+    public addBuff(data){
+         this.buff.push(data);
+    }
+    public cleanBuff(t){
+        for(var i=0;i<this.buff.length;i++)
+        {
+            var oo =  this.buff[i];
+            if(oo.endTime <= t)
+            {
+                this.buff.splice(i,1);
+                i--;
+                for(var s in oo)
+                {
+                    if(s != 'endTime')
+                    {
+                        this[s] -= oo[s];
+                    }
+                }
+            }
+        }
     }
 
     public getVO():MonsterVO{
@@ -96,6 +127,13 @@ class PKMonsterData {
             return null;
         this.skillTargets = MBase.getData(this.mid).getSkillTarget(this);
         return this.skillTargets
+    }
+
+    public setSkillUse(){
+        if(this.getVO().skillcd < 0)
+            this.lastSkill = Number.MAX_VALUE;
+        else
+            this.lastSkill = PKData.getInstance().actionTime;
     }
 
     public move(){

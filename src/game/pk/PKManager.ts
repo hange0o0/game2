@@ -9,6 +9,7 @@ class PKManager {
     public startPlay(){
         var PD = PKData.getInstance()
         var data = {
+            seed:TM.now(),
             team1:{id:1,hp:5},
             team2:{id:2,hp:5},
             players:[
@@ -18,10 +19,11 @@ class PKManager {
                     3:MonsterVO.getObject(3),
                     4:MonsterVO.getObject(4),
                 }},
-                {id:2,openid:UM.openid,team:1,card:[1,101,1,2,1,1,2,2,2,1,1,1],base:{
+                {id:2,openid:UM.openid,team:1,card:[1,102,101,1,1,2,2,2,1,1,1],base:{
                     1:MonsterVO.getObject(1),
                     2:MonsterVO.getObject(2),//{atk:10,hp:100,speed:5}
-                    101:SkillVO.getObject(101) //{value:20}
+                    103:SkillVO.getObject(103), //{value:20}
+                    102:SkillVO.getObject(102) //{value:20}
                 }}
             ]
         };

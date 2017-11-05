@@ -1,11 +1,13 @@
 //队伍数据
 class PKTeamData {
-    public id = 1   //1 or 2
+    public id  //1 or 2  or sys
     public atkRota = 0  //进攻方向  0左路出发，1右路出发
     public enemy:PKTeamData
 
+
     public hp  = 0 //城堡的血
     public maxhp  = 0
+    public def  = 0
 
     public members = [];
     public stateObj = {};
@@ -20,6 +22,12 @@ class PKTeamData {
             this[key] = obj[key];
         }
         this.maxhp = this.hp
+
+
+    }
+
+    public reInit(){
+
     }
 
     //监听状态

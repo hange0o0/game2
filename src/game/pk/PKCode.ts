@@ -106,14 +106,15 @@ class PKCode {
         {
             var mvo:PKMonsterData = PD.monsterList[i];
             var skillTargets = mvo.canSkill(PD.actionTime);
+
             if(skillTargets && skillTargets.length > 0)   //用技能
             {
                 PKMonsterAction.getInstance().skill(mvo,PD.actionTime)
             }
             else
             {
-                var target = mvo.getAtkTarget(PD.monsterList,PD.actionTime)      //普攻
-                if(target)
+                var target = mvo.getAtkTarget()
+                if(target)//普攻
                 {
                     PKMonsterAction.getInstance().atk(mvo,PD.actionTime);
                 }
@@ -152,7 +153,7 @@ class PKCode {
                 i--;
                 PD.monsterChange = true;
             }
-            else if(mvo.x < 0 || mvo.x > PKConfig.floorWidth) //冲过终点
+            else if(mvo.x < PKConfig.appearPos || mvo.x > PKConfig.floorWidth + PKConfig.appearPos) //冲过终点
             {
                 mvo.die = true;
                 PD.monsterList.splice(i,1);

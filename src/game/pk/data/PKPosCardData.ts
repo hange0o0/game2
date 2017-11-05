@@ -87,12 +87,9 @@ class PKPosCardData {
         var PD = PKData.getInstance();
         var owner = PD.getPlayer(this.owner);
         var atkRota = owner.teamData.atkRota;
-        var base = owner.base[this.mid];
-        var x = atkRota == PKConfig.ROTA_LEFT ? 0:PKConfig.floorWidth;
+        var x = atkRota == PKConfig.ROTA_LEFT ? PKConfig.appearPos:PKConfig.floorWidth + PKConfig.appearPos;
         return {
-            hp:base.hp,
-            atk:base.atk,
-            speed:base.speed,
+            force:owner.force,
             mid:this.mid,
             owner:this.owner,
             atkRota:atkRota,
@@ -104,8 +101,10 @@ class PKPosCardData {
     public getSkillValue(){
         var PD = PKData.getInstance();
         var owner = PD.getPlayer(this.owner);
-        var base = owner.base[this.mid];
-        return base.value;
+        var vo = SkillVO.getObject(this.mid)
+        return Math.floor(vo.value * (1+owner.force/100));
+
+
     }
 
     //触发技能

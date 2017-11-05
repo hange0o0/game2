@@ -35,6 +35,8 @@ class MonsterMV extends eui.Group {
         this.mw = vo.mcwidth/vo.mcnum
         this.mh = vo.mcheight/4
 
+        this.mc.y = vo.heightoff
+
 
         MyTool.setImgSource(this.mc,'enemy' + id + '_png');
         this.width = this.mw
@@ -81,8 +83,8 @@ class MonsterMV extends eui.Group {
         var w = this.mw
         var h = this.mh
         var frameStep = Math.round(this.frameTotal/this.vo.mcnum);
-        //if(this.state == MonsterMV.STAT_ATK)
-        //    frameStep = Math.round(frameStep/this.vo.atkspeed);
+        if(this.state == MonsterMV.STAT_ATK && this.vo.id == 99)
+            frameStep = 1;
         var x = Math.floor(this.index/frameStep)*w
         var y = (this.state - 1)*h
         this.mc.scrollRect = new egret.Rectangle(x,y,w,h)
@@ -100,6 +102,8 @@ class MonsterMV extends eui.Group {
         switch(this.state)
         {
             case MonsterMV.STAT_RUN:
+                if(this.vo.id == 99)
+                    this.stand();
                 break;
             case MonsterMV.STAT_STAND:
                 break;

@@ -15,6 +15,7 @@ class PKData extends egret.EventDispatcher{
     public monsterID;//怪物ID下标累计
     public team1:PKTeamData;  //进攻方
     public team2:PKTeamData;
+    public sysTeam:PKTeamData;
     public playerNum = 2;
 
     public monsterChange = false//怪有变化
@@ -22,6 +23,8 @@ class PKData extends egret.EventDispatcher{
     public monsterList = [];//场上的怪的数据
     public playerObj = {};//场上的玩家的数据
     public myPlayer:PKPlayerData;
+    public sysPlayer:PKPlayerData;
+    public diamondData;
 
     //public stateObj = [] //所有要触发动画的集合
     //public topVideoList = [] //影响关部的动画的集合
@@ -81,12 +84,18 @@ class PKData extends egret.EventDispatcher{
                 player.teamData.members.push(player);
         }
 
+        this.sysTeam = new PKTeamData({id:'sys'})
+        this.sysPlayer = new PKPlayerData({id:'sys',openid:'sys',team:'sys'})
+        this.sysPlayer.teamData = this.sysTeam;
+        this.playerObj[this.sysPlayer.id] = this.sysPlayer;
+
         if(!this.myPlayer) //看别人的录像
         {
             this.team1.atkRota = PKConfig.ROTA_LEFT
             this.team2.atkRota = PKConfig.ROTA_RIGHT
         }
-
+        this.team1.reInit();
+        this.team2.reInit();
     }
 
     public random(){
@@ -131,6 +140,8 @@ class PKData extends egret.EventDispatcher{
     }
 
     public getTeamByID(teamID){
+        if(teamID == 'sys')
+            return this.sysTeam;
         return this.team1.id == teamID?this.team1:this.team2
     }
     public getTeamByRota(rota){

@@ -62,6 +62,10 @@ class MBase {
 
     }
 
+    public beAtkAction(user,data){
+
+    }
+
    //////////////////////////////////////////////////////   other上面的为要处理的函数
     //技能前处理（生成技能事件）
     public skillBefore(user:PKMonsterData,actionTime){
@@ -120,7 +124,7 @@ class MBase {
             return;
         }
         var hp = this.getAtkHp(user,target);
-        target.beAtkAction({hp:hp})
+        target.beAtkAction({hp:hp,atker:user})
         user.atkAction({hp:hp})
     }
 
@@ -129,7 +133,8 @@ class MBase {
         var atk = user.atk * user.getAtkRate(target);
         if(user.doubleAction)
             atk *= user.doubleValue;
-        var hp = Math.floor(atk * (1-target.def/100));
+        var teamDef = Math.floor(target.getOwner().teamData.def / 10)
+        var hp = Math.floor(atk * Math.max(1-(target.def + teamDef)/100,0));
         if(hp < 1)
             hp = 1;
         return hp;

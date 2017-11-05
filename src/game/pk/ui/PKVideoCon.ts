@@ -20,6 +20,7 @@ class PKVideoCon extends game.BaseContainer {
     public txtArr = []
 
 
+    private monsterY = 300;
 
     public childrenCreated() {
         super.childrenCreated();
@@ -68,7 +69,7 @@ class PKVideoCon extends game.BaseContainer {
             //item.y = 350;
         }
         item.needRemove = false;
-        item.y =  300 + -25 + Math.random()*50
+        item.y =  this.monsterY + -25 + Math.random()*50
         return item;
     }
 
@@ -143,6 +144,8 @@ class PKVideoCon extends game.BaseContainer {
                 this.con.addChildAt(item,this.getIndexByY(item.y));
                 item.data =data;
                 this.itemArr.push(item);
+                if(data.owner == 'sys')
+                    item.y = this.monsterY;
 
                 break;
             case PKConfig.VIDEO_MONSTER_MOVE:

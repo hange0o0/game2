@@ -2,7 +2,7 @@
 class PKPlayerData {
     public id;//唯一ID
     public openid;
-    public base;//怪的基础属性
+    public force;//怪的基础属性
     public teamData:PKTeamData   //对应队伍
 
     private handCard = {};//当前的手牌  [{index,mid},]  上限5

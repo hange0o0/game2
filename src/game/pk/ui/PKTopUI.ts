@@ -24,10 +24,14 @@ class PKTopUI extends game.BaseContainer {
         switch(videoData.type)//动画类型
         {
             case PKConfig.VIDEO_MONSTER_ADD:
-                if(data.getOwner().teamData != PKData.getInstance().myPlayer.teamData)
+                var teamData = data.getOwner().teamData
+                if(teamData.id != 'sys' && teamData != PKData.getInstance().myPlayer.teamData)
                     this.addSkillItem(data);
                 break;
             case PKConfig.VIDEO_MONSTER_WIN:
+                this.renewHp();
+                break;
+            case PKConfig.VIDEO_TEAM_DEF:
                 this.renewHp();
                 break;
         }
@@ -64,8 +68,8 @@ class PKTopUI extends game.BaseContainer {
         var PD = PKData.getInstance();
         var team1 = PD.getTeamByRota(PKConfig.ROTA_LEFT);
         var team2 = PD.getTeamByRota(PKConfig.ROTA_RIGHT);
-        this.hpText1.text = team1.hp + '/' + team1.maxhp
-        this.hpText2.text = team2.hp + '/' + team2.maxhp
+        this.hpText1.text = team1.hp + '/' + team1.maxhp + ' def:' + team1.def
+        this.hpText2.text = ' def:' + team2.def + ' '+team2.hp + '/' + team2.maxhp
     }
 
     public addSkillItem(data){

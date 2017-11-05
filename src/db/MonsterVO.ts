@@ -13,6 +13,7 @@ class MonsterVO {
     public atk: number;
     public type: number;
     public headoff: number;
+    public heightoff: number;
     public atkcd: number;
     public cost: number;
     public def: number;
@@ -46,6 +47,7 @@ class MonsterVO {
         this.atk = data.atk
         this.type = data.type
         this.headoff = data.headoff
+        this.heightoff = data.heightoff
         this.atkcd = data.atkcd * 1000
         this.cost = data.cost
         this.def = data.def

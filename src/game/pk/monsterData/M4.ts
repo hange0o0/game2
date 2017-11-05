@@ -34,11 +34,8 @@ class M4 extends MBase{
         var mid = 1;
         var owner = PD.getPlayer(user.owner);
         var atkRota = owner.teamData.atkRota;
-        var base = owner.base[1];
         var mData = {
-            hp:base.hp,
-            atk:base.atk,
-            speed:base.speed,
+            force:owner.force,
             mid:mid,
             owner:user.owner,
             atkRota:atkRota,

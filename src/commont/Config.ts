@@ -43,6 +43,8 @@ class Config {
         {
             arr.push(this.createImg("enemy" + s+'.png','monster/'));
         }
+        arr.push(this.createImg('enemy_diamond.png','monster/'));
+
 
         for(var i=1;i<=1;i++)
         {

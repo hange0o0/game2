@@ -48,12 +48,18 @@ class PKMonsterData {
         for (var key in obj) {
             this[key] = obj[key];
         }
+        var mvo = MonsterVO.getObject(this.mid);
+        this.hp = mvo.hp + Math.floor(mvo.hp*obj.force);
+        this.atk = mvo.atk + Math.floor(mvo.atk*obj.force);
+        this.speed = mvo.speed;
+        this.def = mvo.def + Math.floor(this.getOwner().teamData.def/10);
+
         this.maxHp = this.hp;
         this.baseHp = this.hp;
         this.baseAtk = this.atk;
         this.baseSpeed = this.speed;
 
-        this.def = this.getVO().def;
+
 
         MBase.getData(this.mid).initMonster(this);
         //this.def += this.getVO().def;
@@ -107,6 +113,8 @@ class PKMonsterData {
     }
 
     public canMove(t){
+        if(this.owner == 'sys')
+            return false;
          return this.stopTime < t;
     }
 
@@ -117,11 +125,15 @@ class PKMonsterData {
 
     //可以用技能
     public canSkill(t){
+        if(this.owner == 'sys')
+            return null;
         if(this.die)
             return null;
         if(this.stopTime > t)
             return null;
         if(!this.getVO().skillcd) //无技能
+            return null;
+        if(this.getVO().skillcd > 0 && !this.target && !this.getAtkTarget())
             return null;
         if(this.lastSkill && (this.lastSkill + this.getVO().skillcd > t))
             return null;
@@ -144,8 +156,11 @@ class PKMonsterData {
         })
     }
 
-    public getAtkTarget(list,t){
-        if(this.stopTime > t)
+    public getAtkTarget(){
+        if(this.owner == 'sys')
+            return null;
+        var PD = PKData.getInstance();
+        if(this.stopTime > PD.actionTime)
             return null;
         var atkRage = this.getVO().atkrage;
         if(this.target)
@@ -160,7 +175,7 @@ class PKMonsterData {
 
         //找最近的
         var des = 0;
-        var PD = PKData.getInstance();
+        var list = PD.monsterList
         var myPlayer = PD.getPlayer(this.owner);
         for(var i=0;i<list.length;i++)
         {
@@ -190,6 +205,8 @@ class PKMonsterData {
         this.hp -= data.hp;
         if(this.hp <= 0)
             this.die = true;
+
+        MBase.getData(this.mid).beAtkAction(this,data);
 
         PKData.getInstance().addVideo({
             type:PKConfig.VIDEO_MONSTER_BEATK,

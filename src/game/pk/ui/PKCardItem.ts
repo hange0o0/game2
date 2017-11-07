@@ -36,7 +36,7 @@ class PKCardItem extends game.BaseItem {
         if(this.data.mid < 100)
         {
             var mp = MonsterVO.getObject(this.data.mid).cost
-            this.desText.text = 'index:' + this.data.index + '\nmid:' + this.data.mid + '\nmp:' + mp;
+            this.desText.text = 'index:' + this.data.index + '\nmid:' + this.data.mid + '\nmp:' + mp + '\nspace:' + MonsterVO.getObject(this.data.mid).space;
         }
         else
         {

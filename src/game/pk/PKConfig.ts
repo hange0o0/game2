@@ -5,7 +5,7 @@ class PKConfig {
 
     public static stepCD = 50; //步长
     public static gameTime = 5*60; //游戏时间,超出算平
-    public static maxMonster = 10//10; //同时存活怪的数量
+    public static maxMonsterSpace = 20//10; //同时存活怪的占位
     public static floorWidth = 640//1000; //战场宽度
     public static appearPos = 100//出现的位置
     public static diamondPos = 200//出现的位置
@@ -14,6 +14,7 @@ class PKConfig {
     public static beforeCD = 0//3*1000; //上阵前的等待
     public static maxHandCard = 6; //手牌上限
     public static maxPosCard = 5; //上阵牌上限
+    public static typeAdd = 10; //类型加成百分比
 
 
     public static VIDEO_MONSTER_DOUBLE = 1;//爆击

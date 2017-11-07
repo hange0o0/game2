@@ -64,13 +64,17 @@ class PKCode {
             var arr = player.getAddMonster(PD.actionTime)
             if(arr.length > 0)
             {
-                var needNum = PKConfig.maxMonster - PD.getMonsterByPlayer(player.id).length;
-                while(needNum > 0 && arr.length > 0)
+                var needSpace = PKConfig.maxMonsterSpace - PD.getMonsterSpaceByPlayer(player.id);
+                while(needSpace > 0 && arr.length > 0)
                 {
                     var data = arr.shift();
+                    if(data.getVO().space > needSpace)
+                    {
+                         break;
+                    }
+                    needSpace -= data.getVO().space;
                     PD.addMonster(data.getMonster(PD.actionTime));
                     data.setHaveAdd(PD.actionTime);
-                    needNum --;
                 }
             }
         }

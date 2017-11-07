@@ -16,6 +16,7 @@ class MonsterVO {
     public heightoff: number;
     public atkcd: number;
     public cost: number;
+    public space: number;
     public def: number;
     public cd: number;
     public num: number;
@@ -50,6 +51,7 @@ class MonsterVO {
         this.heightoff = data.heightoff
         this.atkcd = data.atkcd * 1000
         this.cost = data.cost
+        this.space = data.space
         this.def = data.def
         this.cd = data.cd * 1000
         this.num = data.num

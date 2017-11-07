@@ -62,6 +62,7 @@ class MBase {
 
     }
 
+    //被攻击时的处理
     public beAtkAction(user,data){
 
     }

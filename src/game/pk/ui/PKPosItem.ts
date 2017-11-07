@@ -50,7 +50,12 @@ class PKPosItem extends game.BaseItem {
             var cd = data.getNextCD();
             var maxCD = data.getMaxCD();
             if(data.useEnable())
-                this.desText.text = 'id:' + data.mid + '\nnum:' +  data.num + '\ncd:' + cd;
+            {
+                if(data.mid < 100)
+                    this.desText.text = 'id:' + data.mid + '\nnum:' +  data.num + '\ncd:' + cd + '\nspace:' + MonsterVO.getObject(data.mid).space;
+                else
+                    this.desText.text = 'id:' + data.mid + '\nnum:' +  data.num + '\ncd:' + cd;
+            }
             else
                 this.desText.text = ''
         }
@@ -58,7 +63,5 @@ class PKPosItem extends game.BaseItem {
         {
             this.desText.text = ''
         }
-
-
     }
 }

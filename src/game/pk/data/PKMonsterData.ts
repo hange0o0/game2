@@ -49,10 +49,12 @@ class PKMonsterData {
             this[key] = obj[key];
         }
         var mvo = MonsterVO.getObject(this.mid);
-        this.hp = mvo.hp + Math.floor(mvo.hp*obj.force);
-        this.atk = mvo.atk + Math.floor(mvo.atk*obj.force);
+        var typeAdd = mvo.type == this.getOwner().type?PKConfig.typeAdd:0
+        var add = (1+obj.force/100)*(1+typeAdd/100);
+        this.hp = Math.floor(mvo.hp * add);
+        this.atk = Math.floor(mvo.atk * add);
         this.speed = mvo.speed;
-        this.def = mvo.def + Math.floor(this.getOwner().teamData.def/10);
+        this.def = mvo.def;
 
         this.maxHp = this.hp;
         this.baseHp = this.hp;
@@ -69,6 +71,8 @@ class PKMonsterData {
     public getAtkRate(defender:PKMonsterData){
          var atkType = this.getVO().type
          var defType = defender.getVO().type
+        if(defType == 0 || atkType == 0)
+            return 1;
         var des = Math.abs(atkType - defType)
         if(des == 0)
             return 1;

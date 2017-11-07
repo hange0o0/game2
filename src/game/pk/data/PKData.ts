@@ -169,13 +169,29 @@ class PKData extends egret.EventDispatcher{
         }
         return arr;
     }
+    //找玩家对应的怪的占位
+    public getMonsterSpaceByPlayer(playerid){
+        var count = 0;
+        for(var i=0;i<this.monsterList.length;i++)
+        {
+            var oo = this.monsterList[i];
+             if(oo.owner == playerid)
+             {
+                 count += oo.getVO().space;
+             }
+        }
+        return count;
+    }
+
+
+
     //找玩家对应的怪
     public getMonsterByTeam(team){
         var arr = [];
         for(var i=0;i<this.monsterList.length;i++)
         {
             var oo = this.monsterList[i];
-             if(oo.atkRota == team.atkRota)
+             if(oo.getOwner().teamData == team)
              {
                  arr.push(oo)
              }

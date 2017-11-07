@@ -2,6 +2,7 @@
 class PKPlayerData {
     public id;//唯一ID
     public openid;
+    public type//类型
     public force;//怪的基础属性
     public teamData:PKTeamData   //对应队伍
 

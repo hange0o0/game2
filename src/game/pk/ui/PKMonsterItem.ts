@@ -94,7 +94,6 @@ class PKMonsterItem extends game.BaseItem {
 
     public renewHp(){
         var mD:PKMonsterData = this.data
-        console.log(PKData.getInstance().diamondData == mD);
         if(mD.mid == 99)
             return;
         if(mD.hp < mD.maxHp)

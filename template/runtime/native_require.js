@@ -11,8 +11,8 @@ var game_file_list = [
 	"libs/modules/socket/socket.js",
 	"polyfill/promise.js",
 	"bin-debug/game/pk/monsterData/MBase.js",
-	"bin-debug/game/pk/skillData/SBase.js",
 	"bin-debug/commont/BaseUI.js",
+	"bin-debug/game/pk/skillData/SBase.js",
 	"bin-debug/game/pk/ui/PKMonsterInfoItem.js",
 	"bin-debug/commont/MyTool.js",
 	"bin-debug/commont/MyWindow.js",
@@ -72,7 +72,7 @@ var game_file_list = [
 	"bin-debug/game/pk/ui/PKCardItem.js",
 	"bin-debug/game/pk/ui/PKCtrlCon.js",
 	"bin-debug/game/pk/ui/PKingUI.js",
-	"bin-debug/commont/GameEvent.js",
+	"bin-debug/util/StringUtil.js",
 	"bin-debug/game/pk/ui/PKMonsterInfoUI.js",
 	"bin-debug/game/pk/ui/PKMonsterItem.js",
 	"bin-debug/game/pk/ui/PKPosItem.js",
@@ -134,7 +134,7 @@ var game_file_list = [
 	"bin-debug/util/ObjectUtil.js",
 	"bin-debug/util/PopUpManager.js",
 	"bin-debug/util/ShapeObject.js",
-	"bin-debug/util/StringUtil.js",
+	"bin-debug/commont/GameEvent.js",
 	//----auto game_file_list end----
 ];
 

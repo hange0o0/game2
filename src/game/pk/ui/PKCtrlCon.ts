@@ -137,7 +137,7 @@ class PKCtrlCon extends game.BaseContainer {
 
         if(mc.canPos())
         {
-            PD.myPlayer.addPosCard(mc.index,this.chooseCard.data);
+            PD.myPlayer.addPrePosCard(mc.index,this.chooseCard.data);
             this.cardObj[this.chooseCard.data.cardPos].data = null;
             this.chooseCard = null
             this.needRenewCard = true

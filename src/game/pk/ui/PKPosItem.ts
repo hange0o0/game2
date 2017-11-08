@@ -29,7 +29,7 @@ class PKPosItem extends game.BaseItem {
 
     //可以上阵
     public canPos(){
-        var data:PKPosCardData = PKData.getInstance().myPlayer.posCard[this.index];
+        var data:PKPosCardData = PKData.getInstance().myPlayer.prePosCard[this.index];
         if(!data)
             return true;
         if(data.num > 0 || data.actionResult)
@@ -45,6 +45,7 @@ class PKPosItem extends game.BaseItem {
 
     private onTimer(){
         var data:PKPosCardData = PKData.getInstance().myPlayer.posCard[this.index];
+        var preData:PKPosCardData = PKData.getInstance().myPlayer.prePosCard[this.index];
         if(data)
         {
             var cd = data.getNextCD();
@@ -62,6 +63,11 @@ class PKPosItem extends game.BaseItem {
         else
         {
             this.desText.text = ''
+        }
+
+        if(preData)
+        {
+            this.desText.text += '\nready:' + preData.mid
         }
     }
 }

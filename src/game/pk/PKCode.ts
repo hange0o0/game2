@@ -50,6 +50,7 @@ class PKCode {
             if (!player)
                 continue
             player.autoAction(PD.actionTime);
+            player.testAddPosCard(PD.actionTime);
         }
     }
 
@@ -68,10 +69,10 @@ class PKCode {
                 while(needSpace > 0 && arr.length > 0)
                 {
                     var data = arr.shift();
-                    if(data.getVO().space > needSpace)
-                    {
-                         break;
-                    }
+                    //if(data.getVO().space > needSpace)
+                    //{
+                    //     break;
+                    //}
                     needSpace -= data.getVO().space;
                     PD.addMonster(data.getMonster(PD.actionTime));
                     data.setHaveAdd(PD.actionTime);

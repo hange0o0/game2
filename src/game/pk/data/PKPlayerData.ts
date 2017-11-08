@@ -8,7 +8,8 @@ class PKPlayerData {
 
     private handCard = {};//当前的手牌  [{index,mid},]  上限5
     private hideCard = [];//隐藏的手牌  [{index,mid},]
-    public posCard = {};//上阵的手牌 1-4,如果是自动的，不受此限制
+    public posCard = {};//已上阵的手牌 1-4,如果是自动的，不受此限制
+    public prePosCard = {};//准备上阵的手牌 1-4,如果是自动的，不受此限制
 
     private mp = 0//当前的魔法
     private lastTime = 0//上一次魔法处理时间
@@ -99,36 +100,48 @@ class PKPlayerData {
             return this.lastTime + 1000;
     }
 
-    //上阵卡
-    public addPosCard(pos,cardData){
-        if(this.posCard[pos])
-        {
-            this.teamData.removeState(this.posCard[pos])
-        }
-        this.posCard[pos] =  new PKPosCardData({
+    public addPrePosCard(pos,cardData){
+        this.prePosCard[pos] =  new PKPosCardData({
             id:pos,
             mid:cardData.mid,
             owner:this.id,
+            actionTime:PKData.getInstance().actionTime,
         })
 
         for(var i=1;i<=PKConfig.maxHandCard;i++)
         {
-             if(this.handCard[i] == cardData)
-             {
-                 var newCard:any = this.hideCard.shift();
-                 if(newCard)
-                 {
-                     newCard.cardPos = i
-                 }
-                 this.handCard[i] = newCard;
-                 break;
-             }
+            if(this.handCard[i] == cardData)
+            {
+                var newCard:any = this.hideCard.shift();
+                if(newCard)
+                {
+                    newCard.cardPos = i
+                }
+                this.handCard[i] = newCard;
+                break;
+            }
         }
 
         if(cardData.mid < 100)
             this.addMP(-MonsterVO.getObject(cardData.mid).cost)
         else
             this.addMP(-SkillVO.getObject(cardData.mid).cost)
+    }
+
+    //上阵卡
+    public testAddPosCard(t){
+        for(var s in this.prePosCard)
+        {
+            if(this.prePosCard[s] && this.prePosCard[s].testAdd(t))
+            {
+                if(this.posCard[s])
+                {
+                    this.teamData.removeState(this.posCard[s])
+                }
+                this.posCard[s] = this.prePosCard[s];
+                this.prePosCard[s] = null;
+            }
+        }
     }
 
     //取手牌  (5)

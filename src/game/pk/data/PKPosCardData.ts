@@ -8,7 +8,6 @@ class PKPosCardData {
     public actionTime = 0//上次行动的时间
     public actionResult = 0//是否有等待出手的怪
 
-
     public num = 0//已使用的次数
 
     constructor(obj?){
@@ -78,6 +77,7 @@ class PKPosCardData {
         {
             this.actionTime = t;
             this.actionResult = 1;
+            return true;
         }
         return false;
     }

@@ -1,7 +1,7 @@
 class PKSettingUI extends game.BaseWindow {
 
     private static _instance: PKSettingUI;
-    public static get instance(): PKSettingUI {
+    public static getInstance(): PKSettingUI {
         if(!this._instance)
             this._instance = new PKSettingUI();
         return this._instance;

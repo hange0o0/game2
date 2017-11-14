@@ -4,12 +4,18 @@ class CardItem extends game.BaseItem {
         this.skinName = "CardItemSkin";
     }
 
+    private des: eui.Label;
+    private nameText: eui.Label;
+    private spaceText: eui.Label;
+    private costText: eui.Label;
+
+
     public childrenCreated() {
         super.childrenCreated();
-        //this.addBtnEvent(this,this.onClick)
+        this.addBtnEvent(this,this.onClick)
     }
 
-    private onClick(){
+    public onClick(){
 
     }
 

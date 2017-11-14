@@ -1,7 +1,7 @@
 class FightUI extends game.BaseWindow {
 
     private static _instance: FightUI;
-    public static get instance(): FightUI {
+    public static getInstance(): FightUI {
         if(!this._instance)
             this._instance = new FightUI();
         return this._instance;

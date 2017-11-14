@@ -1,7 +1,7 @@
 class AwardUI extends game.BaseWindow {
 
     private static _instance: AwardUI;
-    public static get instance(): AwardUI {
+    public static getInstance(): AwardUI {
         if(!this._instance)
             this._instance = new AwardUI();
         return this._instance;

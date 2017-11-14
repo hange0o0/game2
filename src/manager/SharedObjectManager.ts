@@ -8,7 +8,7 @@ class SharedObjectManager {
 	}
         
     private static _instance: SharedObjectManager;
-    public static get instance():SharedObjectManager{
+    public static getInstance():SharedObjectManager{
         if(!SharedObjectManager._instance)
             SharedObjectManager._instance = new SharedObjectManager();
         return SharedObjectManager._instance;

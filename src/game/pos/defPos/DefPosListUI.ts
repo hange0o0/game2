@@ -1,15 +1,22 @@
-class TecInfoUI extends game.BaseWindow {
+class DefPosListUI extends game.BaseUI {
 
-    private static _instance: TecInfoUI;
-    public static getInstance(): TecInfoUI {
+    private static _instance: DefPosListUI;
+    public static getInstance(): DefPosListUI {
         if(!this._instance)
-            this._instance = new TecInfoUI();
+            this._instance = new DefPosListUI();
         return this._instance;
     }
 
+    private scroller: eui.Scroller;
+    private list: eui.List;
+    private bottomUI: BottomUI;
+
+
+
+
     public constructor() {
         super();
-        this.skinName = "TecInfoUISkin";
+        this.skinName = "DefPosListUISkin";
     }
 
     public childrenCreated() {

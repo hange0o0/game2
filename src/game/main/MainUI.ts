@@ -1,7 +1,7 @@
 class MainUI extends game.BaseUI {
 
     private static _instance: MainUI;
-    public static get instance(): MainUI {
+    public static getInstance(): MainUI {
         if(!this._instance)
             this._instance = new MainUI();
         return this._instance;

@@ -1,7 +1,7 @@
 class TecUI extends game.BaseWindow {
 
     private static _instance: TecUI;
-    public static get instance(): TecUI {
+    public static getInstance(): TecUI {
         if(!this._instance)
             this._instance = new TecUI();
         return this._instance;

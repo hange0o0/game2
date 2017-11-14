@@ -1,7 +1,7 @@
 class CardInfoUI extends game.BaseWindow {
 
     private static _instance: CardInfoUI;
-    public static get instance(): CardInfoUI {
+    public static getInstance(): CardInfoUI {
         if(!this._instance)
             this._instance = new CardInfoUI();
         return this._instance;

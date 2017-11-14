@@ -197,6 +197,14 @@ class Main extends eui.UILayer {
         GameManager.stage = this.stage;
         GameManager.container = this;
         GameManager.getInstance().init();
+        UM.fill({
+            level:1,
+            monster:[],
+            skill:[],
+            defend:[],
+            atk:[],
+            force:1
+        })
         PKManager.getInstance().startPlay();
         //MonsterTestUI.getInstance().show();
         //if(Config.isDebug && _get['host'] == 'com')

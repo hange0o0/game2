@@ -1,7 +1,7 @@
 class CardUI extends game.BaseUI {
 
     private static _instance: CardUI;
-    public static get instance(): CardUI {
+    public static getInstance(): CardUI {
         if(!this._instance)
             this._instance = new CardUI();
         return this._instance;

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="AtkPosListUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<ns1:TopUI width="100%" x="0" y="0" skinName="TopUISkin"/>
+	<e:Scroller id="scroller" width="640" x="0" top="50" bottom="100">
+		<e:Group>
+		<e:List id="list" width="200" height="200" x="142" y="175">
+			<e:layout>
+				<e:TileLayout requestedColumnCount="5"/>
+			</e:layout>
+		</e:List>
+		</e:Group>
+	</e:Scroller>
+	<ns1:BottomUI id="bottomUI" x="0" skinName="BottomUISkin" bottom="0"/>
+</e:Skin>

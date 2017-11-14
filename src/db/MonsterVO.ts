@@ -21,7 +21,7 @@ class MonsterVO {
     public cd: number;
     public num: number;
     public atkrage: number;
-    public tag: string;
+    public level: number;
     public mcnum: number;
     public mcheight: number;
     public name: string;
@@ -57,7 +57,7 @@ class MonsterVO {
         this.num = data.num
         this.num2 = data.num2
         this.atkrage = data.atkrage
-        this.tag = data.tag
+        this.level = data.level
         this.mcnum = data.mcnum
         this.mcheight = data.mcheight
         this.name = data.name

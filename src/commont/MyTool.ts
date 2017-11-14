@@ -2,6 +2,13 @@ class MyTool {
     public constructor() {
     }
 
+    public static renewList(list){
+        for(var i=0;i<list.numChildren;i++)
+        {
+            list.getChildAt(i)['dataChanged']();
+        }
+    }
+
     public static maxUserHead = 82;
 
     public static randomName(){

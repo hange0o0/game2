@@ -1,7 +1,7 @@
 class BagInfoUI extends game.BaseWindow {
 
     private static _instance: BagInfoUI;
-    public static get instance(): BagInfoUI {
+    public static getInstance(): BagInfoUI {
         if(!this._instance)
             this._instance = new BagInfoUI();
         return this._instance;

@@ -1,7 +1,7 @@
 class BagUI extends game.BaseUI {
 
     private static _instance: BagUI;
-    public static get instance(): BagUI {
+    public static getInstance(): BagUI {
         if(!this._instance)
             this._instance = new BagUI();
         return this._instance;

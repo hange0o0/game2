@@ -1,7 +1,7 @@
 class HangUI extends game.BaseWindow {
 
     private static _instance: HangUI;
-    public static get instance(): HangUI {
+    public static getInstance(): HangUI {
         if(!this._instance)
             this._instance = new HangUI();
         return this._instance;

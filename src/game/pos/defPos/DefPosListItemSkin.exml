@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="DefPosListItemSkin" width="640" height="140" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="normal,add" >
+	<e:Label text="+" includeIn="add" horizontalCenter="0" verticalCenter="0"/>
+	<e:Label id="desText" text="Label" x="20" y="16" includeIn="normal"/>
+	<e:List id="list" width="600" height="50" y="67" x="20" includeIn="normal"/>
+	<e:Label id="openBtn" text="Label" y="16" x="546" includeIn="normal"/>
+</e:Skin>

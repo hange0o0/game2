@@ -97,6 +97,10 @@ class UserManager {
             this.friendtime = 1;
 
         Config.pk_version = Math.floor(data.pk_version);
+
+
+        CardManager.getInstance().init(data)
+        PosManager.getInstance().init(data)
     }
 
     public initActive(){

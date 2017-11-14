@@ -1,3 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="AtkPosUISkin" width="400" height="300" xmlns:e="http://ns.egret.com/eui">
+<e:Skin class="AtkPosUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
+	<e:Rect id="scrollerBG" width="20" height="1000" x="0" y="80"/>
+	<e:Scroller id="scroller1" width="640" height="400" x="0" y="50" locked="true">
+		<e:Group>
+			<e:List id="list1" width="200" height="200" x="142" y="175">
+				<e:layout>
+					<e:TileLayout requestedColumnCount="5"/>
+				</e:layout>
+			</e:List>
+		</e:Group>
+	</e:Scroller>
+	<e:Scroller id="scroller2" width="640" x="0" top="520" bottom="100" locked="true">
+		<e:Group>
+		<e:List id="list2" width="200" height="200" x="142" y="175">
+			<e:layout>
+				<e:TileLayout requestedColumnCount="5"/>
+			</e:layout>
+		</e:List>
+		</e:Group>
+	</e:Scroller>
+	<e:TabBar id="tab" x="20" y="466.06" itemRendererSkinName="MyTabItemSkin">
+		<e:ArrayCollection>
+			<e:Array>
+				<e:Object label="卡兵"/>
+				<e:Object label="法术"/>
+			</e:Array>
+		</e:ArrayCollection>
+	</e:TabBar>
+	<e:Label id="insertBtn" text="插入点" x="355.03" y="472.12"/>
+	<ns1:DownList id="downList" x="472.73" y="460" skinName="DownListSkin"/>
+	<ns1:AtkPosKeyBoard id="keyBoard" skinName="AtkPosKeyBoardSkin" horizontalCenter="0" bottom="120"/>
+	<ns1:BottomUI id="bottomUI" x="0" skinName="BottomUISkin" bottom="0"/>
+
+    <e:Group y="895.0000000000001" right="20">
+		<e:Label id="deleteBtn" text="delete" x="20.000000000000227" y="19.999999999999886"/>
+		<e:Label id="renameBtn" text="rename" x="10.000000000000227" y="9.999999999999886"/>
+		<e:Label id="saveBtn" text="save" x="0" y="-1.1368683772161603e-13"/>
+		<e:layout>
+			<e:HorizontalLayout gap="20"/>
+		</e:layout>
+	</e:Group>
 </e:Skin>

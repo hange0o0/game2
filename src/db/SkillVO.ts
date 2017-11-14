@@ -16,7 +16,7 @@ class SkillVO {
     public value: number;
     public id: number;
     public state: string;
-    public type: string;
+    public level: number;
 
 
     public constructor(data?: any) {
@@ -34,6 +34,7 @@ class SkillVO {
         this.id = data.id
         this.value = data.value
         this.state = data.state
+        this.level = data.level
     }
 
     public get thumb(){

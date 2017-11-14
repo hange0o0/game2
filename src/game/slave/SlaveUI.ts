@@ -1,7 +1,7 @@
 class SlaveUI extends game.BaseWindow {
 
     private static _instance: SlaveUI;
-    public static get instance(): SlaveUI {
+    public static getInstance(): SlaveUI {
         if(!this._instance)
             this._instance = new SlaveUI();
         return this._instance;

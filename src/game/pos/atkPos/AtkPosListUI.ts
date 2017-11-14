@@ -1,15 +1,22 @@
-class TecInfoUI extends game.BaseWindow {
+class AtkPosListUI extends game.BaseUI {
 
-    private static _instance: TecInfoUI;
-    public static getInstance(): TecInfoUI {
+    private static _instance: AtkPosListUI;
+    public static getInstance(): AtkPosListUI {
         if(!this._instance)
-            this._instance = new TecInfoUI();
+            this._instance = new AtkPosListUI();
         return this._instance;
     }
 
+    private scroller: eui.Scroller;
+    private list: eui.List;
+    private bottomUI: BottomUI;
+
+
+
+
     public constructor() {
         super();
-        this.skinName = "TecInfoUISkin";
+        this.skinName = "AtkPosListUISkin";
     }
 
     public childrenCreated() {

@@ -1,6 +1,6 @@
 class OtherInfoUI extends game.BaseWindow {
     private static _instance: OtherInfoUI;
-    public static get instance(): OtherInfoUI {
+    public static getInstance(): OtherInfoUI {
         if(!this._instance)
             this._instance = new OtherInfoUI();
         return this._instance;

@@ -1,7 +1,7 @@
 class SettingUI extends game.BaseWindow {
 
     private static _instance: SettingUI;
-    public static get instance(): SettingUI {
+    public static getInstance(): SettingUI {
         if(!this._instance)
             this._instance = new SettingUI();
         return this._instance;

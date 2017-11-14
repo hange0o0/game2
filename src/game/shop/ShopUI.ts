@@ -1,7 +1,7 @@
 class ShopUI extends game.BaseUI {
 
     private static _instance: ShopUI;
-    public static get instance(): ShopUI {
+    public static getInstance(): ShopUI {
         if(!this._instance)
             this._instance = new ShopUI();
         return this._instance;

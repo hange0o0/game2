@@ -38,14 +38,14 @@ class RedPointManager {
     //解锁技能
     public onUnlockSkill(){
         this.unlockSkill = 1;
-        SharedObjectManager.instance.setMyValue('unlockSkill',1);
+        SharedObjectManager.getInstance().setMyValue('unlockSkill',1);
         this.testIndex(7);
     }
 
     //查看了技能面板
     public viewSkill(){
         this.unlockSkill = 0;
-        SharedObjectManager.instance.setMyValue('unlockSkill',false);
+        SharedObjectManager.getInstance().setMyValue('unlockSkill',false);
         this.testIndex(7);
     }
 

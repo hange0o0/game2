@@ -12,7 +12,7 @@ class DebugManager {
     public winCardArr;
     public testFinishFun;
     public constructor() {
-        this.myData = SharedObjectManager.instance.getMyValue('share') || {"vedio":-1,};
+        this.myData = SharedObjectManager.getInstance().getMyValue('share') || {"vedio":-1,};
     }
 
     public maxMonsterID = 100;

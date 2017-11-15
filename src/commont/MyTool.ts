@@ -2,6 +2,13 @@ class MyTool {
     public constructor() {
     }
 
+    public static clearList(list){
+        list.dataProvider = null;
+        //必现调用下面2句，并且 需要在hide之前调用
+        list.dataProviderRefreshed();
+        list.validateNow();
+    }
+
     public static renewList(list){
         for(var i=0;i<list.numChildren;i++)
         {

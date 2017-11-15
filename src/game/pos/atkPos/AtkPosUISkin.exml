@@ -2,20 +2,20 @@
 <e:Skin class="AtkPosUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
 	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
 	<e:Rect id="scrollerBG" width="20" height="1000" x="0" y="80"/>
-	<e:Scroller id="scroller1" width="640" height="400" x="0" y="50" locked="true">
+	<e:Scroller id="scroller1" width="640" height="400" x="0" y="50">
 		<e:Group>
 			<e:List id="list1" width="200" height="200" x="142" y="175">
 				<e:layout>
-					<e:TileLayout requestedColumnCount="5"/>
+					<e:TileLayout requestedColumnCount="5" horizontalGap="10" verticalGap="10" paddingLeft="10" paddingTop="10" paddingBottom="10"/>
 				</e:layout>
 			</e:List>
 		</e:Group>
 	</e:Scroller>
-	<e:Scroller id="scroller2" width="640" x="0" top="520" bottom="100" locked="true">
+	<e:Scroller id="scroller2" width="640" x="0" top="520" bottom="100">
 		<e:Group>
 		<e:List id="list2" width="200" height="200" x="142" y="175">
 			<e:layout>
-				<e:TileLayout requestedColumnCount="5"/>
+				<e:TileLayout requestedColumnCount="5" verticalGap="10" paddingLeft="10" horizontalGap="6"/>
 			</e:layout>
 		</e:List>
 		</e:Group>
@@ -28,9 +28,8 @@
 			</e:Array>
 		</e:ArrayCollection>
 	</e:TabBar>
-	<e:Label id="insertBtn" text="插入点" x="355.03" y="472.12"/>
-	<ns1:DownList id="downList" x="472.73" y="460" skinName="DownListSkin"/>
-	<ns1:AtkPosKeyBoard id="keyBoard" skinName="AtkPosKeyBoardSkin" horizontalCenter="0" bottom="120"/>
+	<e:Label id="changeBtn" text="调整顺序" x="327.76" y="472.12"/>
+	<ns1:DownList id="downList" x="472.73" skinName="DownListSkin" height="400" y="460"/>
 	<ns1:BottomUI id="bottomUI" x="0" skinName="BottomUISkin" bottom="0"/>
 
     <e:Group y="895.0000000000001" right="20">

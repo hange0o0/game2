@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="DefPosUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
-	<ns1:TopUI width="100%" x="0" y="0" skinName="TopUISkin"/>
+	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
 	<e:Rect width="10" height="20" y="50" fillColor="0x8e0404" horizontalCenter="0"/>
 	<e:Scroller id="scroller1" width="640" height="400" x="0" y="50" locked="true">
 		<e:Group>

@@ -35,7 +35,7 @@ class CardManager {
         var arr = [];
         for(var s in this.monsterList)
         {
-            var vo =  MonsterVO.getObject[s];
+            var vo =  MonsterVO.getObject(s);
             if(!type || type == vo.type)
                 arr.push(vo);
         }
@@ -46,7 +46,7 @@ class CardManager {
         var arr = [];
         for(var s in this.skillList)
         {
-            var vo =  SkillVO.getObject[s];
+            var vo =  SkillVO.getObject(s);
             if(!type || type == vo.type)
                 arr.push(vo);
         }

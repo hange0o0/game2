@@ -52,6 +52,12 @@ class CacheManager{
         //TaskVO.initFinish();
     }
 
+    public getCardVO(id):MonsterVO|SkillVO{
+        if(id<100)
+            return MonsterVO.getObject(id);
+        return SkillVO.getObject(id);
+    }
+
     public loadCache(url,fun){
         if(this.cacheLoad[url])
         {

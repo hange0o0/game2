@@ -44,7 +44,7 @@ class SoundManager {
             this._bgPlaying = true;
         //}
 
-        var som = SharedObjectManager.instance;
+        var som = SharedObjectManager.getInstance();
         if(som.getValue("sound") != undefined)
             this._soundPlaying = som.getValue("sound");
         if(som.getValue("bgsound") != undefined)
@@ -80,13 +80,13 @@ class SoundManager {
 
     public set soundPlaying(v){
         if(this._soundPlaying!=v)
-            SharedObjectManager.instance.setValue("sound",v)
+            SharedObjectManager.getInstance().setValue("sound",v)
         this._soundPlaying = v;
         this.loadEffectSound();
     }
     public set bgPlaying(v){
         if(this._bgPlaying!=v){
-            SharedObjectManager.instance.setValue("bgsound",v);
+            SharedObjectManager.getInstance().setValue("bgsound",v);
         }
         this._bgPlaying= v;
 
@@ -99,17 +99,17 @@ class SoundManager {
     }
     public set openShake(v){
         if(this._openShake!=v)
-            SharedObjectManager.instance.setValue("openShake",v)
+            SharedObjectManager.getInstance().setValue("openShake",v)
         this._openShake= v;
     }
     public set isPlayMovie(v){
         if(this._isPlayMovie!=v)
-            SharedObjectManager.instance.setValue("playMovie",v)
+            SharedObjectManager.getInstance().setValue("playMovie",v)
         this._isPlayMovie= v;
     }
     public set isMessage(v){
         if(this._isMessage!=v)
-            SharedObjectManager.instance.setValue("showMessage",v)
+            SharedObjectManager.getInstance().setValue("showMessage",v)
         this._isMessage= v;
     }
 

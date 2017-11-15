@@ -14,9 +14,8 @@ class AtkPosUI extends game.BaseUI {
     private scroller2: eui.Scroller;
     private list2: eui.List;
     private tab: eui.TabBar;
-    private insertBtn: eui.Label;
+    private changeBtn: eui.Label;
     private downList: DownList;
-    private keyBoard: AtkPosKeyBoard;
     private bottomUI: BottomUI;
     private deleteBtn: eui.Label;
     private renameBtn: eui.Label;
@@ -24,11 +23,12 @@ class AtkPosUI extends game.BaseUI {
 
 
 
+
     private monsterType = 0
     private skillType = 0
-    private index = 0
-    public insertPos = 0
+    private index = 0  //第X个阵
     public useCard = {}
+    public maxCard = 0;
 
     private posName = ''
     private arrayData:eui.ArrayCollection
@@ -41,10 +41,10 @@ class AtkPosUI extends game.BaseUI {
     public childrenCreated() {
         super.childrenCreated();
         this.bottomUI.setHide(this.hide,this);
-        this.keyBoard.hide();
-        this.keyBoard.addEventListener('key_change',this.onKeyBoard,this)
+        //this.keyBoard.hide();
+        //this.keyBoard.addEventListener('key_change',this.onKeyBoard,this)
 
-        this.addBtnEvent(this.insertBtn,this.onInsert)
+        this.addBtnEvent(this.changeBtn,this.onChange)
         this.addBtnEvent(this.deleteBtn,this.onDelete)
         this.addBtnEvent(this.renameBtn,this.onRename)
         this.addBtnEvent(this.saveBtn,this.onSave)
@@ -52,7 +52,6 @@ class AtkPosUI extends game.BaseUI {
         this.scroller1.viewport = this.list1;
         this.list1.itemRenderer = AtkPosItem
         this.scroller1.addEventListener(egret.Event.CHANGE,this.onScroll,this)
-        this.scroller1.addEventListener(eui.UIEvent.CHANGE_END,this.renewInsert,this)
 
         this.scroller2.viewport = this.list2;
         this.list2.itemRenderer = PosCardItem
@@ -63,6 +62,7 @@ class AtkPosUI extends game.BaseUI {
         this.downList.addEventListener(DownList.SELECT,this.onDownListSelect,this);
 
         this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
+        this.tab.selectedIndex = 0;
     }
 
     private onScroll(){
@@ -79,8 +79,12 @@ class AtkPosUI extends game.BaseUI {
     private onSave(){
 
     }
-    private onInsert(){
-        this.keyBoard.show();
+    private onChange(){
+         AtkPosChangeUI.getInstance().show(this.arrayData)
+    }
+
+    private getListData(){
+        return this.arrayData.source;
     }
 
     private onDownListSelect(){
@@ -99,16 +103,18 @@ class AtkPosUI extends game.BaseUI {
     //选中
     private onSelect(){
         var item = this.list2.selectedItem;
+        if(this.maxCard <= this.arrayData.length)
+            return;
         if(this.useCard[item.id] && this.useCard[item.id] >= 3)
             return;
         this.useCard[item.id] = (this.useCard[item.id] || 0) + 1
-        this.arrayData.addItemAt(item.id,this.index)
-        this.index ++;
-        this.renewInsert();
+        this.arrayData.addItem({id:item.id})
         this.justRenewList2();
+        this.renewTitle();
     }
 
     private renewDownList(){
+        this.downList.height = GameManager.stage.stageHeight - 100 - this.downList.y - 10;
         if(this.tab.selectedIndex == 0)
         {
             var arr = [
@@ -130,27 +136,6 @@ class AtkPosUI extends game.BaseUI {
         }
     }
 
-    private onKeyBoard(e){
-         switch(e.data)
-         {
-             case 'delete':
-                 if(this.index <= 0)
-                    return;
-                 var item = this.arrayData.getItemAt(this.index-1)
-                 this.useCard[item.id] --;
-                 this.arrayData.removeItemAt(this.index);
-                 this.renewInsert();
-                 break
-             case 'up':
-                 break
-             case 'down':
-                 break
-             case 'left':
-                 break
-             case 'right':
-                 break
-         }
-    }
 
     public show(v?){
         this.index = v;
@@ -170,38 +155,41 @@ class AtkPosUI extends game.BaseUI {
         var PM = PosManager.getInstance();
         var data = PM.atkList[this.index]
         this.useCard = {};
+        this.maxCard = UM.level + 20;
         if(data)
         {
             this.posName = data.name;
-            this.arrayData = new eui.ArrayCollection(data.list)
-            this.insertPos = data.list.length;
+            var arr = [];
+
             for(var i=0;i<data.list.length;i++)
             {
-                this.useCard[data.list[i]] = (this.useCard[data.list[i]] || 0) + 1
+                var id = data.list[i];
+                this.useCard[id] = (this.useCard[id] || 0) + 1;
+                arr.push({id:id})
             }
+            this.arrayData = new eui.ArrayCollection(arr)
         }
         else
         {
             this.posName = '未命名' + this.index;
             this.arrayData = new eui.ArrayCollection([])
-            this.insertPos = 0;
         }
         this.list1.dataProvider = this.arrayData
-        this.topUI.setTitle(this.posName)
+        this.renewTitle();
         this.renewList();
-        this.renewInsert();
+        this.renewDownList();
     }
 
-    private renewInsert(){
-        this.once(egret.Event.ENTER_FRAME,function(){
-            for(var i=0;i<this.list1.numChildren;i++)
-            {
-                this.list1.getChildAt(i)['renewInsert'](i);
-            }
-        },this)
+    private renewTitle(){
+        this.topUI.setTitle(this.posName + '('+this.arrayData.length+'/'+this.maxCard+')')
     }
 
-    private justRenewList2(){
+    public deleteID(id){
+        this.useCard[id] --;
+        this.renewTitle();
+    }
+
+    public justRenewList2(){
         MyTool.renewList(this.list2)
     }
 
@@ -215,6 +203,10 @@ class AtkPosUI extends game.BaseUI {
         else
         {
             arr = CardManager.getInstance().getMySkillList(type)
+        }
+        for(var i=0;i<arr.length;i++)
+        {
+            arr[i].temp = this.useCard;
         }
         this.list2.dataProvider = new eui.ArrayCollection(arr)
     }

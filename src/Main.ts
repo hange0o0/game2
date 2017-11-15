@@ -205,7 +205,8 @@ class Main extends eui.UILayer {
             atk:[],
             force:1
         })
-        PKManager.getInstance().startPlay();
+        DefPosUI.getInstance().show(0)
+        //PKManager.getInstance().startPlay();
         //MonsterTestUI.getInstance().show();
         //if(Config.isDebug && _get['host'] == 'com')
         //{
@@ -229,7 +230,7 @@ class Main extends eui.UILayer {
         //{
         //    GameManager.container.visible = false;
         //}
-        //Config.isDebug =  _get['debug'] || SharedObjectManager.instance.getValue('debug_open');
+        //Config.isDebug =  _get['debug'] || SharedObjectManager.getInstance().getValue('debug_open');
         //var LM = LoginManager.getInstance();
         //if(!(LM.lastUser && LM.quickPassword && LM.lastServer)) {
         //    egret.setTimeout(function(){

@@ -38,18 +38,20 @@
 
     <!--这个标签会被替换为项目中所有的 javascript 文件。删除 game_files 标签后，项目文件加载列表将不会变化，请谨慎操作！-->
     <!--game_files_start-->
-	<script egret="game" src="bin-debug/game/pk/monsterData/MBase.js"></script>
 	<script egret="game" src="bin-debug/commont/BaseUI.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/MBase.js"></script>
 	<script egret="game" src="bin-debug/game/pk/skillData/SBase.js"></script>
-	<script egret="game" src="bin-debug/game/pk/ui/PKMonsterInfoItem.js"></script>
-	<script egret="game" src="bin-debug/commont/MyTool.js"></script>
+	<script egret="game" src="bin-debug/game/pos/atkPos/AtkPosItem.js"></script>
+	<script egret="game" src="bin-debug/game/pk/ui/PKTopItem.js"></script>
 	<script egret="game" src="bin-debug/commont/MyWindow.js"></script>
 	<script egret="game" src="bin-debug/commont/Net.js"></script>
 	<script egret="game" src="bin-debug/commont/skin/BasePanel.js"></script>
 	<script egret="game" src="bin-debug/commont/skin/BookBG.js"></script>
 	<script egret="game" src="bin-debug/commont/ui/AlertUI.js"></script>
+	<script egret="game" src="bin-debug/commont/ui/BottomUI.js"></script>
 	<script egret="game" src="bin-debug/commont/ui/CommonNumInput.js"></script>
 	<script egret="game" src="bin-debug/commont/ui/ConfirmUI.js"></script>
+	<script egret="game" src="bin-debug/commont/ui/DownList.js"></script>
 	<script egret="game" src="bin-debug/commont/ui/TipsUI.js"></script>
 	<script egret="game" src="bin-debug/commont/ui/TopUI.js"></script>
 	<script egret="game" src="bin-debug/commont/ui/TouchTipsUI.js"></script>
@@ -65,14 +67,17 @@
 	<script egret="game" src="bin-debug/game/bag/BagInfoUI.js"></script>
 	<script egret="game" src="bin-debug/game/bag/BagItem.js"></script>
 	<script egret="game" src="bin-debug/game/bag/BagUI.js"></script>
+	<script egret="game" src="bin-debug/game/bag/PropManager.js"></script>
 	<script egret="game" src="bin-debug/game/card/CardInfoUI.js"></script>
 	<script egret="game" src="bin-debug/game/card/CardItem.js"></script>
+	<script egret="game" src="bin-debug/game/card/CardManager.js"></script>
 	<script egret="game" src="bin-debug/game/card/CardUI.js"></script>
 	<script egret="game" src="bin-debug/game/common/AwardUI.js"></script>
 	<script egret="game" src="bin-debug/game/common/MonsterMV.js"></script>
 	<script egret="game" src="bin-debug/game/fight/FightItem.js"></script>
 	<script egret="game" src="bin-debug/game/fight/FightUI.js"></script>
 	<script egret="game" src="bin-debug/game/hang/HangItem.js"></script>
+	<script egret="game" src="bin-debug/game/hang/HangManager.js"></script>
 	<script egret="game" src="bin-debug/game/hang/HangUI.js"></script>
 	<script egret="game" src="bin-debug/game/main/MainUI.js"></script>
 	<script egret="game" src="bin-debug/game/MonsterTestUI.js"></script>
@@ -100,29 +105,41 @@
 	<script egret="game" src="bin-debug/game/pk/ui/PKCardItem.js"></script>
 	<script egret="game" src="bin-debug/game/pk/ui/PKCtrlCon.js"></script>
 	<script egret="game" src="bin-debug/game/pk/ui/PKingUI.js"></script>
-	<script egret="game" src="bin-debug/util/StringUtil.js"></script>
+	<script egret="game" src="bin-debug/game/pk/ui/PKMonsterInfoItem.js"></script>
 	<script egret="game" src="bin-debug/game/pk/ui/PKMonsterInfoUI.js"></script>
 	<script egret="game" src="bin-debug/game/pk/ui/PKMonsterItem.js"></script>
 	<script egret="game" src="bin-debug/game/pk/ui/PKPosItem.js"></script>
-	<script egret="game" src="bin-debug/game/pk/ui/PKTopItem.js"></script>
+	<script egret="game" src="bin-debug/commont/GameEvent.js"></script>
 	<script egret="game" src="bin-debug/game/pk/ui/PKTopUI.js"></script>
 	<script egret="game" src="bin-debug/game/pk/ui/PKVideoCon.js"></script>
 	<script egret="game" src="bin-debug/game/pkRelate/before/PKBeforeUI.js"></script>
 	<script egret="game" src="bin-debug/game/pkRelate/PKSettingUI.js"></script>
 	<script egret="game" src="bin-debug/game/pkRelate/result/PKFailUI.js"></script>
 	<script egret="game" src="bin-debug/game/pkRelate/result/PKWinUI.js"></script>
-	<script egret="game" src="bin-debug/game/pos/atkPos/AtkPosItem.js"></script>
+	<script egret="game" src="bin-debug/game/pos/atkPos/AtkPosChangeItem.js"></script>
+	<script egret="game" src="bin-debug/game/pos/atkPos/AtkPosChangeUI.js"></script>
+	<script egret="game" src="bin-debug/commont/MyTool.js"></script>
+	<script egret="game" src="bin-debug/game/pos/atkPos/AtkPosListItem.js"></script>
+	<script egret="game" src="bin-debug/game/pos/atkPos/AtkPosListUI.js"></script>
 	<script egret="game" src="bin-debug/game/pos/atkPos/AtkPosUI.js"></script>
 	<script egret="game" src="bin-debug/game/pos/defPos/DefPosItem.js"></script>
+	<script egret="game" src="bin-debug/game/pos/defPos/DefPosListItem.js"></script>
+	<script egret="game" src="bin-debug/game/pos/defPos/DefPosListUI.js"></script>
 	<script egret="game" src="bin-debug/game/pos/defPos/DefPosUI.js"></script>
+	<script egret="game" src="bin-debug/game/pos/PosCardItem.js"></script>
+	<script egret="game" src="bin-debug/game/pos/PosListHeadItem.js"></script>
+	<script egret="game" src="bin-debug/game/pos/PosManager.js"></script>
+	<script egret="game" src="bin-debug/game/shop/PayManager.js"></script>
 	<script egret="game" src="bin-debug/game/shop/ShopItem.js"></script>
 	<script egret="game" src="bin-debug/game/shop/ShopUI.js"></script>
 	<script egret="game" src="bin-debug/game/slave/SlaveChooseItem.js"></script>
 	<script egret="game" src="bin-debug/game/slave/SlaveChooseUI.js"></script>
 	<script egret="game" src="bin-debug/game/slave/SlaveItem.js"></script>
+	<script egret="game" src="bin-debug/game/slave/SlaveManager.js"></script>
 	<script egret="game" src="bin-debug/game/slave/SlaveUI.js"></script>
 	<script egret="game" src="bin-debug/game/tec/TecInfoUI.js"></script>
 	<script egret="game" src="bin-debug/game/tec/TecItem.js"></script>
+	<script egret="game" src="bin-debug/game/tec/TecManager.js"></script>
 	<script egret="game" src="bin-debug/game/tec/TecUI.js"></script>
 	<script egret="game" src="bin-debug/game/user/OtherInfoUI.js"></script>
 	<script egret="game" src="bin-debug/game/user/SettingUI.js"></script>
@@ -162,7 +179,7 @@
 	<script egret="game" src="bin-debug/util/ObjectUtil.js"></script>
 	<script egret="game" src="bin-debug/util/PopUpManager.js"></script>
 	<script egret="game" src="bin-debug/util/ShapeObject.js"></script>
-	<script egret="game" src="bin-debug/commont/GameEvent.js"></script>
+	<script egret="game" src="bin-debug/util/StringUtil.js"></script>
 	<!--game_files_end-->
 </head>
 <body>
@@ -194,7 +211,7 @@
 			window["gameCon"].style["height"] = (hh*scale)+"px";
 		}
 
-		egret.runEgret({renderMode:SharedObjectManager.instance.getValue("renderMode") || "webgl"});
+		egret.runEgret({renderMode:SharedObjectManager.getInstance().getValue("renderMode") || "webgl"});
 
 
 	</script>

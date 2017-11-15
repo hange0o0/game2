@@ -1,7 +1,7 @@
 class SkillVO {
     public static dataKey = 'skill';
     public static key = 'id';
-    public static getObject(id: number): SkillVO{
+    public static getObject(id): SkillVO{
         return CM.table[this.dataKey][id];
     }
     public static get data(){
@@ -17,6 +17,7 @@ class SkillVO {
     public id: number;
     public state: string;
     public level: number;
+    public type: number;
 
 
     public constructor(data?: any) {
@@ -35,6 +36,7 @@ class SkillVO {
         this.value = data.value
         this.state = data.state
         this.level = data.level
+        this.type = data.type
     }
 
     public get thumb(){

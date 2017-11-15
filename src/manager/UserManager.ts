@@ -80,23 +80,23 @@ class UserManager {
 
 
 
-        if(!UM.tec.leader)
-            UM.tec.leader = {};
-        if(!UM.tec.skill)
-            UM.tec.skill = [];
-        if(!UM.tec.copy_skill)
-            UM.tec.copy_skill = {};
-        if(!UM.main_game.hlevel)
-            UM.main_game.hlevel = 0;
+        //if(!UM.tec.leader)
+        //    UM.tec.leader = {};
+        //if(!UM.tec.skill)
+        //    UM.tec.skill = [];
+        //if(!UM.tec.copy_skill)
+        //    UM.tec.copy_skill = {};
+        //if(!UM.main_game.hlevel)
+        //    UM.main_game.hlevel = 0;
 
-        this.initActive();
-         //DayGameManager.getInstance().resetDay();
-
-        this.friendtime = data.friendtime || 1;
-        if(TM.now() - this.friendtime > 3600*24*3)
-            this.friendtime = 1;
-
-        Config.pk_version = Math.floor(data.pk_version);
+        //this.initActive();
+        // //DayGameManager.getInstance().resetDay();
+        //
+        //this.friendtime = data.friendtime || 1;
+        //if(TM.now() - this.friendtime > 3600*24*3)
+        //    this.friendtime = 1;
+        //
+        //Config.pk_version = Math.floor(data.pk_version);
 
 
         CardManager.getInstance().init(data)

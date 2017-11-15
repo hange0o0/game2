@@ -63,7 +63,7 @@ class FromManager {
     //登录
     public login(){
         var mgr = this.getManager()
-        Config.isDebug =  SharedObjectManager.instance.getValue('debug_open');
+        Config.isDebug =  SharedObjectManager.getInstance().getValue('debug_open');
         if(mgr && mgr.login)
         {
             mgr.login();

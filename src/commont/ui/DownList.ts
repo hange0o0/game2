@@ -61,19 +61,8 @@ class DownList extends game.BaseContainer {
     {
         this.dataArr = arr;
         this.list.dataProvider = new eui.ArrayCollection(arr);
-        this.height = Math.min(this.openHeight,arr.length * 60 +53 );
+        this.height = Math.min(this.openHeight,arr.length * 56 - 6 + 53 - 1);
         this.selectValue = select;
-        //for(var i = 0 ; i < arr.length ; i++)
-        //{
-        //    if(arr[i].data == select)
-        //    {
-        //        this.list.selectedIndex = i;
-        //        break;
-        //    }
-        //}
-        //if(i >= arr.length)
-        //    this.list.selectedIndex = 0;
-        //this.renewBtn(select)
     }
 
     public get selectValue(){

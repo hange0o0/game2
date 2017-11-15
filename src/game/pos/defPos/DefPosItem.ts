@@ -12,15 +12,30 @@ class DefPosItem extends game.BaseItem {
 
     public childrenCreated() {
         super.childrenCreated();
-        //this.addBtnEvent(this,this.onClick)
+        this.addBtnEvent(this.deleteBtn,this.onDelete)
+        this.addBtnEvent(this.splitBtn,this.onSplit)
+        this.addBtnEvent(this.mergeBtn1,this.onMergeBtn1)
+        this.addBtnEvent(this.mergeBtn2,this.onMergeBtn2)
     }
 
-    private onClick(){
+    private onDelete(){
+
+    }
+
+    private onSplit(){
+
+    }
+
+    private onMergeBtn1(){
+
+    }
+
+    private onMergeBtn2(){
 
     }
 
     public dataChanged(){
-
+         this.cdText.text = ''
     }
 
 }

@@ -20,7 +20,7 @@ class CardItem extends game.BaseItem {
     }
 
     public dataChanged(){
-
+        this.nameText
     }
 
 }

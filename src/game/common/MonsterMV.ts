@@ -48,6 +48,7 @@ class MonsterMV extends eui.Group {
 
     public run(){
         this.state = MonsterMV.STAT_RUN
+        //this.state = MonsterMV.STAT_STAND
         this.reset();
     }
 

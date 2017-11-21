@@ -205,8 +205,8 @@ class Main extends eui.UILayer {
             atk:[],
             force:1
         })
-        DefPosUI.getInstance().show(0)
-        //PKManager.getInstance().startPlay();
+        //DefPosUI.getInstance().show(0)
+        PKManager.getInstance().startPlay();
         //MonsterTestUI.getInstance().show();
         //if(Config.isDebug && _get['host'] == 'com')
         //{

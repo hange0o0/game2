@@ -19,8 +19,6 @@ class Net extends egret.EventDispatcher{
     private msgIndex = 0;
 
     public modeNum = 0;
-    public serverID = 1;
-    public serverHost = ''
     public outPut = true;
     public constructor() {
         super();
@@ -69,15 +67,10 @@ class Net extends egret.EventDispatcher{
         loader['msg'] = msg;
         if(serverType == 1)
         {
-            if(!this.serverHost)
-            {
-                Alert('找不到服务器');
-                return;
-            }
-            var request = new egret.URLRequest(this.serverHost);
+            var request = new egret.URLRequest(Config.host);
         }
         else
-            var request = new egret.URLRequest('http://'+Config.host+'/userindex.php');
+            var request = new egret.URLRequest(Config.userHost);
         //var request = new egret.URLRequest('http://qxu1606510485.my3w.com/new_index.php');
         request.method = egret.URLRequestMethod.POST;
         request.data = this.getVariables(head,msg,serverType);

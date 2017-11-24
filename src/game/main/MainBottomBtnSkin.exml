@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="MainBottomBtnSkin" width="120" xmlns:e="http://ns.egret.com/eui" height="120">
+	<e:Label text="Label" y="83.49999999999989" horizontalCenter="0"/>
+	<e:Image source="random_btn_png" y="0" horizontalCenter="0"/>
+</e:Skin>

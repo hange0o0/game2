@@ -47,10 +47,10 @@ class Main extends eui.UILayer {
         //Config loading process interface
         //设置加载进度界面
         this.loadingView = MainLoadingUI.getInstance();
-        if(_get['debug'] != 100 && _get['debug'] != 101)
-        {
-            this.loadingView.show(this);
-        }
+        //if(_get['debug'] != 100 && _get['debug'] != 101)
+        //{
+        //    this.loadingView.show(this);
+        //}
 
 
         // initialize the Resource loading library
@@ -120,23 +120,19 @@ class Main extends eui.UILayer {
             CM.initData(RES.getRes("data_json"));
             CM.initFinish();
 
-            //var LM = LoginManager.getInstance();
-            //if(LM.lastUser && LM.quickPassword) {
-            //    LM.isAuto = true;
-            //    if(LM.lastServer)
-            //    {
-            //        RES.loadGroup("preload_png"); //预加载第一阶段
-            //        return;
-            //    }
-            //}
+            var LM = LoginManager.getInstance();
+            if(LM.quickPassword) {
+                RES.loadGroup("preload_png"); //预加载第一阶段
+                return;
+            }
 
             this.removeLoadEvent();
             this.createScene();
         }
+        //else if (event.groupName == "preload_png") {
+        //    RES.loadGroup("preload_jpg");//预加载第一阶段
+        //}
         else if (event.groupName == "preload_png") {
-            RES.loadGroup("preload_jpg");//预加载第一阶段
-        }
-        else if (event.groupName == "preload_jpg") {
             this.removeLoadEvent();
             this.createScene();
         }
@@ -151,14 +147,7 @@ class Main extends eui.UILayer {
     }
     private createScene(){
         if(this.isThemeLoadEnd && this.isResourceLoadEnd){
-
             this.startCreateScene();
-
-
-            //if(LoginManager.getInstance().isAuto)
-            //    this.loadingView.showLogin();
-            //else
-                MyTool.removeMC(this.loadingView);
         }
     }
     /**
@@ -197,16 +186,33 @@ class Main extends eui.UILayer {
         GameManager.stage = this.stage;
         GameManager.container = this;
         GameManager.getInstance().init();
-        UM.fill({
-            level:1,
-            monster:[],
-            skill:[],
-            defend:[],
-            atk:[],
-            force:1
-        })
+        var LM = LoginManager.getInstance();
+        if(LM.quickPassword)
+        {
+            this.loadingView.showLogin();
+            LoginManager.getInstance().login(LM.lastUser,null)
+        }
+        else
+        {
+            MyTool.removeMC(this.loadingView);
+            egret.setTimeout(function(){
+                RES.loadGroup("preload_png");//预加载第一阶段
+                //RES.loadGroup("preload_jpg");//预加载第一阶段
+            },this,200)
+            LoginUI.getInstance().show();
+        }
+
+
+        //UM.fill({
+        //    level:1,
+        //    monster:[],
+        //    skill:[],
+        //    defend:[],
+        //    atk:[],
+        //    force:1
+        //})
         //DefPosUI.getInstance().show(0)
-        PKManager.getInstance().startPlay();
+        //PKManager.getInstance().startPlay();
         //MonsterTestUI.getInstance().show();
         //if(Config.isDebug && _get['host'] == 'com')
         //{

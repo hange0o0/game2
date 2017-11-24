@@ -8,20 +8,12 @@ class PKTool {
         for(var i=0;i<arr.length;i++)
         {
             var group = arr[i].split('|')
-            var mp1 = 0;//上阵MP
+            var mp = this.getGroupMp(group);//上阵MP
+
+            var t = PKTool.getMPTime(mpCost + mp)//可以同时上阵的时间点
             for(var j=0;j<group.length;j++)
             {
                 var id = group[j];
-                var vo = MonsterVO.getObject(id);
-                mp1 += vo.cost;
-            }
-            if(mp1 > PKConfig.maxMP)
-                mp1 = PKConfig.maxMP;
-
-            var t = PKTool.getMPTime(mpCost + mp1)//可以同时上阵的时间点
-            for(j=0;j<group.length;j++)
-            {
-                id = group[j];
                 returnArr.push({
                     mid:id,
                     time:t,
@@ -29,9 +21,20 @@ class PKTool {
                 })
                 index ++;
             }
-            mpCost += mp1;
+            mpCost += mp;
         }
         return returnArr;
+    }
+
+    public static getGroupMp(group){
+        var mp = 0;
+        for(var j=0;j<group.length;j++)
+        {
+            var id = group[j];
+            var vo = MonsterVO.getObject(id);
+            mp += vo.cost;
+        }
+        return mp;
     }
 
     //到这个MP量的时间

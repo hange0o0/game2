@@ -6,11 +6,12 @@ class PosManager {
         return this._instance;
     }
 
+    public maxNum = 5;
     public defendList
     public atkList
 
     public init(data){
-          this.defendList = data.defend
-          this.atkList = data.atk
+          this.defendList = data.def_list.list
+          this.atkList = data.atk_list.list
     }
 }

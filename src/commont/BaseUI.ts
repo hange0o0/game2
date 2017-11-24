@@ -123,6 +123,7 @@ module game {
         private sizeList: Array<any> = [];
 
         public isWindow: boolean = false;
+        public noMV: boolean = false;
         public isHideFlag:boolean = true;
         public canBGClose:boolean = false;
 
@@ -272,7 +273,7 @@ module game {
             //1102
 //            this.invalidateSkinState();
 //            eui.PopUpManager.addPopUp(this,true);
-            PopUpManager.addPopUp(this,this.isWindow);
+            PopUpManager.addPopUp(this,this.isWindow,this.noMV);
             
             if(this.isInitUI){
                 this.isHideFlag = false

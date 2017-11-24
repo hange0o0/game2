@@ -39,10 +39,10 @@
     <!--这个标签会被替换为项目中所有的 javascript 文件。删除 game_files 标签后，项目文件加载列表将不会变化，请谨慎操作！-->
     <!--game_files_start-->
 	<script egret="game" src="bin-debug/commont/BaseUI.js"></script>
-	<script egret="game" src="bin-debug/game/pk/monsterData/MBase.js"></script>
 	<script egret="game" src="bin-debug/game/pk/skillData/SBase.js"></script>
 	<script egret="game" src="bin-debug/game/pos/atkPos/AtkPosItem.js"></script>
-	<script egret="game" src="bin-debug/game/pk/ui/PKTopItem.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/MBase.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M76.js"></script>
 	<script egret="game" src="bin-debug/commont/MyWindow.js"></script>
 	<script egret="game" src="bin-debug/commont/Net.js"></script>
 	<script egret="game" src="bin-debug/commont/skin/BasePanel.js"></script>
@@ -64,6 +64,7 @@
 	<script egret="game" src="bin-debug/debug/DebugSkillList.js"></script>
 	<script egret="game" src="bin-debug/debug/DebugUI.js"></script>
 	<script egret="game" src="bin-debug/debug/ScrollTest.js"></script>
+	<script egret="game" src="bin-debug/game/active/ActiveManager.js"></script>
 	<script egret="game" src="bin-debug/game/bag/BagInfoUI.js"></script>
 	<script egret="game" src="bin-debug/game/bag/BagItem.js"></script>
 	<script egret="game" src="bin-debug/game/bag/BagUI.js"></script>
@@ -79,6 +80,7 @@
 	<script egret="game" src="bin-debug/game/hang/HangItem.js"></script>
 	<script egret="game" src="bin-debug/game/hang/HangManager.js"></script>
 	<script egret="game" src="bin-debug/game/hang/HangUI.js"></script>
+	<script egret="game" src="bin-debug/game/main/MainBottomBtn.js"></script>
 	<script egret="game" src="bin-debug/game/main/MainUI.js"></script>
 	<script egret="game" src="bin-debug/game/MonsterTestUI.js"></script>
 	<script egret="game" src="bin-debug/game/pk/data/PKData.js"></script>
@@ -87,11 +89,61 @@
 	<script egret="game" src="bin-debug/game/pk/data/PKPosCardData.js"></script>
 	<script egret="game" src="bin-debug/game/pk/data/PKTeamData.js"></script>
 	<script egret="game" src="bin-debug/game/pk/monsterData/M1.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M10.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M11.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M12.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M13.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M14.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M15.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M16.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M17.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M18.js"></script>
 	<script egret="game" src="bin-debug/game/pk/monsterData/M2.js"></script>
 	<script egret="game" src="bin-debug/game/pk/monsterData/M3.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M31.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M32.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M33.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M34.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M35.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M36.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M37.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M38.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M39.js"></script>
 	<script egret="game" src="bin-debug/game/pk/monsterData/M4.js"></script>
-	<script egret="game" src="bin-debug/game/pk/monsterData/M99.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M40.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M41.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M42.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M43.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M44.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M45.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M46.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M47.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M48.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M5.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M6.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M61.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M62.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M63.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M64.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M65.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M66.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M67.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M68.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M69.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M7.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M70.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M71.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M72.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M73.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M74.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M75.js"></script>
 	<script egret="game" src="bin-debug/AssetAdapter.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M77.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M78.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M8.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M9.js"></script>
+	<script egret="game" src="bin-debug/game/pk/monsterData/M99.js"></script>
+	<script egret="game" src="bin-debug/commont/Config.js"></script>
 	<script egret="game" src="bin-debug/game/pk/PKBulletManager.js"></script>
 	<script egret="game" src="bin-debug/game/pk/PKCode.js"></script>
 	<script egret="game" src="bin-debug/game/pk/PKConfig.js"></script>
@@ -101,7 +153,7 @@
 	<script egret="game" src="bin-debug/game/pk/skillData/S101.js"></script>
 	<script egret="game" src="bin-debug/game/pk/skillData/S102.js"></script>
 	<script egret="game" src="bin-debug/game/pk/skillData/S103.js"></script>
-	<script egret="game" src="bin-debug/commont/Config.js"></script>
+	<script egret="game" src="bin-debug/commont/GameEvent.js"></script>
 	<script egret="game" src="bin-debug/game/pk/ui/PKCardItem.js"></script>
 	<script egret="game" src="bin-debug/game/pk/ui/PKCtrlCon.js"></script>
 	<script egret="game" src="bin-debug/game/pk/ui/PKingUI.js"></script>
@@ -109,7 +161,7 @@
 	<script egret="game" src="bin-debug/game/pk/ui/PKMonsterInfoUI.js"></script>
 	<script egret="game" src="bin-debug/game/pk/ui/PKMonsterItem.js"></script>
 	<script egret="game" src="bin-debug/game/pk/ui/PKPosItem.js"></script>
-	<script egret="game" src="bin-debug/commont/GameEvent.js"></script>
+	<script egret="game" src="bin-debug/game/pk/ui/PKTopItem.js"></script>
 	<script egret="game" src="bin-debug/game/pk/ui/PKTopUI.js"></script>
 	<script egret="game" src="bin-debug/game/pk/ui/PKVideoCon.js"></script>
 	<script egret="game" src="bin-debug/game/pkRelate/before/PKBeforeUI.js"></script>
@@ -145,6 +197,10 @@
 	<script egret="game" src="bin-debug/game/user/SettingUI.js"></script>
 	<script egret="game" src="bin-debug/game/user/UserInfoUI.js"></script>
 	<script egret="game" src="bin-debug/LoadingUI.js"></script>
+	<script egret="game" src="bin-debug/login/LoginManager.js"></script>
+	<script egret="game" src="bin-debug/login/LoginUI.js"></script>
+	<script egret="game" src="bin-debug/login/RegisterServerUI.js"></script>
+	<script egret="game" src="bin-debug/login/RegisterUI.js"></script>
 	<script egret="game" src="bin-debug/Main.js"></script>
 	<script egret="game" src="bin-debug/MainLoadingUI.js"></script>
 	<script egret="game" src="bin-debug/manager/AniManager.js"></script>
@@ -199,6 +255,9 @@
 	</div>
 	<script>
 
+		Config.serverID = _get['serverid'] || 1;
+		Config.userHost = 'http://172.17.196.195:90/game2/userindex.php';
+		Config.host = 'http://172.17.196.195:90/game2/gameindex'+Config.serverID+'.php';
 
 		var ua = navigator.userAgent.toLowerCase();
 		var isWindow = ua.indexOf('windows') != -1 || ua.indexOf('macintosh') != -1;

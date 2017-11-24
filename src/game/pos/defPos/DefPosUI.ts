@@ -31,6 +31,7 @@ class DefPosUI extends game.BaseUI {
 
     private posName = ''
     private arrayData:eui.ArrayCollection
+    private itemWidth = 200;
 
     public constructor() {
         super();
@@ -96,9 +97,17 @@ class DefPosUI extends game.BaseUI {
         if(this.useCard[item.id] && this.useCard[item.id] >= 3)
             return;
         this.useCard[item.id] = (this.useCard[item.id] || 0) + 1
-        this.arrayData.addItem({id:item.id})
+
+        var index = Math.min(this.arrayData.length,Math.floor((this.scroller1.viewport.scrollH+this.itemWidth/2)/this.itemWidth));
+        this.arrayData.addItemAt({ids:[item.id],cd:0,preLen:0},index);
+
+        this.resetDefData(true);
         this.justRenewList2();
         this.renewTitle();
+
+        egret.Tween.removeTweens(this.scroller1.viewport)
+        var tw = egret.Tween.get(this.scroller1.viewport)
+        tw.to({scrollH:(index+1)*this.itemWidth},100)
     }
 
     private renewDownList(){
@@ -148,11 +157,16 @@ class DefPosUI extends game.BaseUI {
             this.posName = data.name;
             var arr = [];
 
-            for(var i=0;i<data.list.length;i++)
+            var len = data.list.length;
+            for(var i=0;i<len;i++)
             {
-                var id = data.list[i];
-                this.useCard[id] = (this.useCard[id] || 0) + 1;
-                arr.push({id:id})
+                var ids = (data.list[i] + '').split('|');
+                for(var j=0;j<ids.length;j++)
+                {
+                    var id = ids[j];
+                    this.useCard[id] = (this.useCard[id] || 0) + 1;
+                }
+                arr.push({ids:ids,cd:0,preLen:0})
             }
             this.arrayData = new eui.ArrayCollection(arr)
         }
@@ -161,19 +175,80 @@ class DefPosUI extends game.BaseUI {
             this.posName = '未命名' + this.index;
             this.arrayData = new eui.ArrayCollection([])
         }
+        this.resetDefData();
         this.list1.dataProvider = this.arrayData
         this.renewTitle();
         this.renewList();
         this.renewDownList();
     }
 
-    private renewTitle(){
-        this.topUI.setTitle(this.posName)
+    private resetDefData(renew?){
+        var mpCost = 0;
+        var preLen = 4;
+        for(var i=0;i<this.arrayData.length;i++)
+        {
+            var item = this.arrayData.getItemAt(i);
+            var mp = PKTool.getGroupMp(item.ids);
+            item.cd = PKTool.getMPTime(mp + mpCost);
+            mpCost += mp;
+
+            item.preLen = preLen;
+            preLen = item.ids.length;
+        }
+
+        if(renew)
+            MyTool.renewList(this.list1);
     }
 
-    public deleteID(id){
+    public deleteItem(data){
+        var index = this.arrayData.getItemIndex(data);
+        this.arrayData.removeItemAt(index);
+        var id = data.ids[0];
         this.useCard[id] --;
+        this.resetDefData(true);
+        this.justRenewList2();
         this.renewTitle();
+
+        this.resetScrollH1(1);
+
+    }
+
+    public splitItem(data){
+        var index = this.arrayData.getItemIndex(data);
+        this.arrayData.removeItemAt(index);
+        for(var i=0;i<data.ids.length;i++)
+        {
+            this.arrayData.addItemAt({ids:[data.ids[i]],cd:0,preLen:0},index+i);
+        }
+        this.resetDefData(true);
+    }
+
+    public mergeItem(data){
+        var index = this.arrayData.getItemIndex(data);
+        this.arrayData.removeItemAt(index);
+
+        var preItem = this.arrayData.getItemAt(index - 1);
+        preItem.ids = preItem.ids.concat(data.ids);
+
+        this.resetDefData(true);
+
+        this.resetScrollH1(1);
+    }
+
+    private resetScrollH1(deleteNum){
+        var viewport = this.list1;
+        var newWidth = viewport.contentWidth - deleteNum * this.itemWidth
+        if(viewport.scrollH + viewport.width > newWidth)
+        {
+            egret.Tween.removeTweens(this.scroller1.viewport)
+            var tw = egret.Tween.get(this.scroller1.viewport)
+            tw.to({scrollH:Math.max(0,newWidth - viewport.width)},100)
+        }
+    }
+
+
+    private renewTitle(){
+        this.topUI.setTitle(this.posName)
     }
 
     public justRenewList2(){

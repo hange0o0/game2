@@ -5,4 +5,8 @@ class TecManager {
             this._instance = new TecManager();
         return this._instance;
     }
+
+    public init(data){
+
+    }
 }

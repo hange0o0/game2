@@ -5,4 +5,8 @@ class PropManager {
             this._instance = new PropManager();
         return this._instance;
     }
+
+    public init(data){
+
+    }
 }

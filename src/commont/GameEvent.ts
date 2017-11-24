@@ -42,15 +42,15 @@ class GameEvent {
     };
 
     public static sys = {
-        client_error:'client_error',
-        get_server_list:'get_server_list',
+
         login:'login',
-        login_server:'login_server',
         quick_register:'quick_register',
-        re_register:'re_register',
         register:'register',
-        add_user_server:'add_user_server',
-        register_server:'register_server'
+
+        login_server:'sys.login_server',
+        register_server:'sys.register_server',
+
+        client_error:'sys.client_error'
     }
 
     public static friend = {

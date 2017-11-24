@@ -51,7 +51,6 @@ class GameManager {
         }
         if(!DateUtil.isSameDay(this.lastTime,now))//跨0点
         {
-            UM.initActive();
             //TeamPVEManager.getInstance().passDay();
             //DayGameManager.getInstance().passDay();
             //GuessManager.getInstance().passDay();
@@ -121,8 +120,8 @@ if (url.indexOf(splitStr) != -1) {
 
 function handleErr(msg,url, line, col, errorObj)
 {
-    if(!Net.getInstance().serverHost)
-        return;
+    //if(!Net.getInstance().serverHost)
+    //    return;
     var txt = (url|| '').substr(-30,27)+ ':' + UM.openid + ':' + msg + '|' + line + "--" + col+ "--" + (errorObj && errorObj.stack);
     var str = MyTool.getBtnPath(GameManager.getInstance().lastTouchMC);
     if(str)

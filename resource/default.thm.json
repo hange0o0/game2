@@ -1,15 +1,13 @@
 {
   "autoGenerateExmlsList": true,
   "exmls": [
-    "src/commont/btns/Btn_b1Skin.exml",
-    "src/commont/btns/Btn_b2Skin.exml",
-    "src/commont/btns/Btn_close1Skin.exml",
-    "src/commont/btns/Btn_close2Skin.exml",
-    "src/commont/btns/Btn_d1Skin.exml",
-    "src/commont/btns/Btn_d2Skin.exml",
-    "src/commont/btns/Btn_r1Skin.exml",
-    "src/commont/btns/Btn_r2Skin.exml",
-    "src/commont/btns/Btn_r3Skin.exml",
+    "src/commont/btns/Btn1Skin.exml",
+    "src/commont/btns/Btn2Skin.exml",
+    "src/commont/btns/Btn3Skin.exml",
+    "src/commont/btns/Btn4Skin.exml",
+    "src/commont/btns/Btn5Skin.exml",
+    "src/commont/btns/Btn6Skin.exml",
+    "src/commont/btns/Btn7Skin.exml",
     "src/commont/skin/BasePanelSkin.exml",
     "src/commont/skin/BookBGSkin.exml",
     "src/commont/skin/MyCheckBoxSkin.exml",
@@ -43,6 +41,7 @@
     "src/game/fight/FightUISkin.exml",
     "src/game/hang/HangItemSkin.exml",
     "src/game/hang/HangUISkin.exml",
+    "src/game/main/MainBottomBtnSkin.exml",
     "src/game/main/MainUISkin.exml",
     "src/game/pk/ui/PKCardItemSkin.exml",
     "src/game/pk/ui/PKPosItemSkin.exml",
@@ -80,6 +79,9 @@
     "src/game/tec/TecUISkin.exml",
     "src/game/user/OtherInfoUISkin.exml",
     "src/game/user/SettingUISkin.exml",
-    "src/game/user/UserInfoUISkin.exml"
+    "src/game/user/UserInfoUISkin.exml",
+    "src/login/LoginUISkin.exml",
+    "src/login/RegisterServerUISkin.exml",
+    "src/login/RegisterUISkin.exml"
   ]
 }

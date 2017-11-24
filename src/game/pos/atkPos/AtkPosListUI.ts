@@ -21,6 +21,10 @@ class AtkPosListUI extends game.BaseUI {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.bottomUI.setHide(this.hide,this);
+
+        this.scroller.viewport = this.list;
+        this.list.itemRenderer = AtkPosListItem
     }
 
     public show(){
@@ -37,6 +41,17 @@ class AtkPosListUI extends game.BaseUI {
     }
 
     public renew(){
+        var PM = PosManager.getInstance();
+        var arr = PM.atkList.concat();
+        if(arr.length < PM.maxNum)
+            arr.push({empty:true})
 
+        for(var i=0;i<arr.length;i++)
+        {
+            arr[i].index = i;
+        }
+
+
+        this.list.dataProvider = new eui.ArrayCollection(arr)
     }
 }

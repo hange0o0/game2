@@ -62,32 +62,32 @@ function addBtnTips(mc,str,addStageRemove?){
     }
 
 }
-
-//使用钻石相关前的提示  type:1都提示，2：RMB才提示
-function AlertDiamondUse(num,type,fun)
-{
-    if(num > UM.diamond.free)
-    {
-        var rmb = num - UM.diamond.free;
-        if(type == 1)
-        {
-            Confirm('本次操作需要花费\n点券：'+UM.diamond.free+'\n钻石：' + rmb + '\n是否继续？',fun);
-        }
-        else
-        {
-            Confirm('本次操作需要花费钻石：' + rmb + '\n是否继续？',fun);
-        }
-    }
-    else
-    {
-        if(type == 1)
-        {
-            Confirm('本次操作需要花费点券：'+UM.diamond.free+'\n是否继续？',fun);
-        }
-        else
-        {
-            if(fun)
-                fun();
-        }
-    }
-}
+//
+////使用钻石相关前的提示  type:1都提示，2：RMB才提示
+//function AlertDiamondUse(num,type,fun)
+//{
+//    if(num > UM.diamond.free)
+//    {
+//        var rmb = num - UM.diamond.free;
+//        if(type == 1)
+//        {
+//            Confirm('本次操作需要花费\n点券：'+UM.diamond.free+'\n钻石：' + rmb + '\n是否继续？',fun);
+//        }
+//        else
+//        {
+//            Confirm('本次操作需要花费钻石：' + rmb + '\n是否继续？',fun);
+//        }
+//    }
+//    else
+//    {
+//        if(type == 1)
+//        {
+//            Confirm('本次操作需要花费点券：'+UM.diamond.free+'\n是否继续？',fun);
+//        }
+//        else
+//        {
+//            if(fun)
+//                fun();
+//        }
+//    }
+//}

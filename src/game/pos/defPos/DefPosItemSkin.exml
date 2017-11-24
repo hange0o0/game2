@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="DefPosItemSkin" width="150" height="400" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="DefPosItemSkin" width="200" height="400" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Label id="cdText" text="Label" y="9.56" horizontalCenter="0" size="22"/>
-	<e:Label id="deleteBtn" text="Label" y="293.52" horizontalCenter="0"/>
-	<e:Label id="splitBtn" text="Label" horizontalCenter="0" bottom="20"/>
-	<e:Rect id="mergeBtn1" width="40" height="40" y="145" left="-50"/>
-	<e:Rect id="mergeBtn2" width="40" height="40" y="145" right="-50"/>
+	<e:Label id="deleteBtn" text="delete" y="293.52" horizontalCenter="0"/>
+	<e:Label id="splitBtn" text="split" horizontalCenter="0" bottom="20"/>
+	<e:Rect id="mergeBtn" width="40" height="40" y="145" left="-20"/>
 </e:Skin>

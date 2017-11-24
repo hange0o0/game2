@@ -5,4 +5,11 @@ class HangManager {
             this._instance = new HangManager();
         return this._instance;
     }
+
+    public level;
+    public time;
+    public init(data){
+        this.level = data.level
+        this.time = data.time
+    }
 }

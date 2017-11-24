@@ -15,35 +15,29 @@ class RegisterUI extends game.BaseWindow {
     private passwordText2: eui.TextInput;
     private backBtn: eui.Button;
     private loginBtn: eui.Button;
-    private titleText: eui.Label;
 
-    private openType
 
+    public noMV: boolean = true;
     public childrenCreated() {
         super.childrenCreated();
         this.addBtnEvent(this.loginBtn, this.onClick);
-        this.addBtnEvent(this.backBtn, this.hide);
+        this.addBtnEvent(this.backBtn, this.onClose);
 
         this.nameText.restrict = "^\\\\\"\'"
 
     }
 
+    public onClose(){
+        this.hide();
+        LoginUI.getInstance().show();
+    }
+
     public show(v?){
-        this.openType = v;
-         super.show();
+        LoginUI.getInstance().hide();
+        super.show();
     }
 
     public onShow(){
-        if(this.openType)//转正
-        {
-             this.titleText.text = '游客账号转正'
-            this.currentState = 'guest'
-        }
-        else
-        {
-             this.titleText.text = '注册账号'
-            this.currentState = 'normal'
-        }
         this.nameText.text = ''
         this.passwordText1.text = ''
         this.passwordText2.text = ''
@@ -51,11 +45,11 @@ class RegisterUI extends game.BaseWindow {
 
     private onClick(){
         var LM = LoginManager.getInstance();
-        if(!LM.testName(this.nameText.text))
+        if(!Config.isDebug && !LM.testName(this.nameText.text))
         {
             return;
         }
-        if(!LM.testPassword(this.passwordText1.text))
+        if(!Config.isDebug &&!LM.testPassword(this.passwordText1.text))
         {
             return;
         }
@@ -64,9 +58,6 @@ class RegisterUI extends game.BaseWindow {
             Alert('两次输入密码不一致');
             return;
         }
-        if(this.openType)
-            LM.reRegister(this.nameText.text,this.passwordText1.text);
-        else
-            LM.register(this.nameText.text,this.passwordText1.text);
+        LM.register(this.nameText.text,this.passwordText1.text);
     }
 }

@@ -9,12 +9,17 @@ class RegisterServerUI extends game.BaseWindow {
     private registerBtn: eui.Button;
     private nameText: eui.TextInput;
     private randomBtn: eui.Group;
-    private headGroup: eui.Group;
-    private headMC: eui.Image;
+    private chooseMC: eui.Rect;
+    private arrowMC: eui.Image;
+    private type1: eui.Image;
+    private type2: eui.Image;
+    private type3: eui.Image;
+    private desText: eui.Label;
 
-    private chooseHead = false;
-    private headID = 0;
-    private serverID = 0;
+
+
+
+    private type = 1;
 
     public constructor() {
         super();
@@ -24,48 +29,27 @@ class RegisterServerUI extends game.BaseWindow {
 
     public childrenCreated() {
         super.childrenCreated();
-        this.addBtnEvent(this.backBtn, this.hide);
+        this.addBtnEvent(this.backBtn, this.onClose);
         this.addBtnEvent(this.registerBtn, this.onClick);
         this.addBtnEvent(this.randomBtn, this.onRandom);
-        this.addBtnEvent(this.headGroup, this.onHeadClick);
+        this.addBtnEvent(this.type1, this.onType1);
+        this.addBtnEvent(this.type2, this.onType2);
+        this.addBtnEvent(this.type3, this.onType3);
 
         this.nameText.restrict = "a-zA-Z0-9_\u0391-\uFFE5";
         this.nameText.addEventListener(egret.TextEvent.CHANGE,this.onChange,this);
 
 
-
     }
 
-    private onChange(){
-        this.nameText.text = MyTool.replaceEmoji(this.nameText.text);
-        var len = StringUtil.getStringLength(this.nameText.text);
-        if(len > 14)
-        {
-            this.nameText.text = StringUtil.getStringByLength(this.nameText.text,7);
-        }
+    public onClose(){
+        this.hide();
+        LoginUI.getInstance().show();
     }
 
-    public show(serverID?){
-        this.serverID = serverID;
-        super.show();
-    }
-
-    public onShow(){
-        this.chooseHead = false;
-        this.onRandom();
-        if(FromManager.getInstance().h5Form)
-        {
-            var nick = FromManager.getInstance().getDefaultNick()
-            if(nick)
-                this.nameText.text = nick;
-            MyTool.removeMC(this.backBtn);
-        }
-
-
-        //if(Config.platform == 'egret' && EgretManager.getInstance().nickName)
-        //{
-        //    this.nameText.text = EgretManager.getInstance().nickName;
-        //}
+    public hide(){
+        super.hide();
+        egret.Tween.removeTweens(this.arrowMC)
     }
 
     private onClick(){
@@ -76,29 +60,73 @@ class RegisterServerUI extends game.BaseWindow {
             return;
         }
 
-        LM.registerServer(this.nameText.text,this.headID,this.serverID);
+        LM.registerServer(this.nameText.text,this.type);
     }
+
     private onRandom(){
-        if(!this.chooseHead)
-        {
-            var arr = MonsterVO.getListByLevel(1);
-            this.headID = ArrayUtil.randomOne(arr).id;
-            this.renewHead();
-        }
         this.nameText.text = MyTool.randomName();
     }
 
-    private renewHead(){
-        this.headMC.source =MyTool.getHeadUrl(this.headID);
+    private onType1(){
+        this.type = 1;
+        this.renewType();
+    }
+    private onType2(){
+        this.type = 2;
+        this.renewType();
+    }
+    private onType3(){
+        this.type = 3;
+        this.renewType();
     }
 
-    private onHeadClick(){
-        var self = this;
-         ChangeHeadUI.getInstance().show(this.headID,true,function(id){
-             self.headID = id;
-             self.chooseHead = true;
-             self.renewHead();
-             ChangeHeadUI.getInstance().hide();
-         });
+
+    private onChange(){
+        this.nameText.text = MyTool.replaceEmoji(this.nameText.text);
+        var len = StringUtil.getStringLength(this.nameText.text);
+        if(len > 14)
+        {
+            this.nameText.text = StringUtil.getStringByLength(this.nameText.text,7);
+        }
     }
+
+    public show(){
+        MainLoadingUI.getInstance().hide();
+        super.show();
+    }
+
+    public onShow(){
+        this.onRandom();
+        this.type = Math.floor(Math.random()*3 + 1)
+
+        if(FromManager.getInstance().h5Form)
+        {
+            var nick = FromManager.getInstance().getDefaultNick()
+            if(nick)
+                this.nameText.text = nick;
+            MyTool.removeMC(this.backBtn);
+        }
+        this.renewType();
+    }
+
+
+    private renewType(){
+        var mc = this['type' + this.type]
+        var arr = ['',
+            this.createHtml('兽人系',0x00FFFF),
+            this.createHtml('元素系',0x00FFFF),
+            this.createHtml('暗黑系',0x000000)
+        ]
+
+        this.chooseMC.x = mc.x - 5;
+        this.setHtml(this.desText, '加强' + arr[this.type] + '属性10%')
+
+        egret.Tween.removeTweens(this.arrowMC)
+        this.arrowMC.y = 246
+        this.arrowMC.x = mc.x + 64/2 - 22/2
+        var tw = egret.Tween.get(this.arrowMC,{loop:true});
+        tw.to({y:this.arrowMC.y + 8},500).to({y:246},500);
+    }
+
+
 }

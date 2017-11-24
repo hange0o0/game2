@@ -29,7 +29,7 @@ class PopUpManager {
         MyTool.removeMC(this.shape);
     }
 	
-    public static addPopUp(display: egret.DisplayObject,isWindow:boolean){
+    public static addPopUp(display: egret.DisplayObject,isWindow:boolean,noMV? ){
         var ww = GameManager.container.width;
         var hh = GameManager.container.height;
         if(!this.shape)
@@ -54,7 +54,6 @@ class PopUpManager {
 //            display.x = (ww - display.width) / 2;
 //            display.y = (hh - display.height) / 2;
             display.visible = false
-            
             display.addEventListener(egret.Event.ENTER_FRAME,onEnterFrame,this);
         }
         
@@ -66,23 +65,34 @@ class PopUpManager {
             var y = (hh - display.height) / 2;
             var x2 = (ww - display.width*1.05) / 2;
             var y2 = (hh - display.height*1.05) / 2;
-            display.scaleX = 0;
-            display.scaleY = 0
-            display.x = ww/2
-            display.y = hh/2
             display.visible = true
-            var tw = egret.Tween.get(display);
-            tw.to({
-                scaleX:1.05,
-                scaleY:1.05,
-                x:x2,
-                y:y2
-            },150).to({
-                scaleX:1,
-                scaleY:1,
-                x:x,
-                y:y
-            },150)
+            if(noMV)
+            {
+                display.scaleX = 1;
+                display.scaleY = 1
+                display.x = x
+                display.y = y
+            }
+            else
+            {
+                display.scaleX = 0;
+                display.scaleY = 0
+                display.x = ww/2
+                display.y = hh/2
+                var tw = egret.Tween.get(display);
+                tw.to({
+                    scaleX:1.05,
+                    scaleY:1.05,
+                    x:x2,
+                    y:y2
+                },150).to({
+                    scaleX:1,
+                    scaleY:1,
+                    x:x,
+                    y:y
+                },150)
+            }
+
         }
 
 

@@ -9,7 +9,7 @@ class PKConfig {
     public static floorWidth = 640//1000; //战场宽度
     public static appearPos = 100//出现的位置
     public static diamondPos = 200//出现的位置
-    public static maxMP = 20; //MP上限
+    //public static maxMP = 20; //MP上限
     public static mpInit = 15; //初始的MP值
     public static beforeCD = 3*1000; //上阵前的等待
     public static maxHandCard = 6; //手牌上限

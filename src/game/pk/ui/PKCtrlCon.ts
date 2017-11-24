@@ -231,8 +231,8 @@ class PKCtrlCon extends game.BaseContainer {
         this.renewCard();
         this.renewInfo();
 
-        this.barMC.width = 640 * ((PD.myPlayer.getMP() + PD.myPlayer.nextMpRate()) / PKConfig.maxMP);
-        this.rateText.text = PD.myPlayer.getMP() + '/' + PKConfig.maxMP
+        //this.barMC.width = 640 * ((PD.myPlayer.getMP() + PD.myPlayer.nextMpRate()) / PKConfig.maxMP);
+        //this.rateText.text = PD.myPlayer.getMP() + '/' + PKConfig.maxMP
 
 
     }

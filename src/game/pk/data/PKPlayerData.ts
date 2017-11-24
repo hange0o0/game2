@@ -66,21 +66,21 @@ class PKPlayerData {
     private resetMp(){
         var t = PKData.getInstance().actionTime;
         var step = 1;
-        var max = PKConfig.maxMP;
-
-        if(this.mp >= max){
-            this.lastTime = t;
-            return;
-        }
+        //var max = PKConfig.maxMP;
+        //
+        //if(this.mp >= max){
+        //    this.lastTime = t;
+        //    return;
+        //}
 
         var nextCD = this.getNextCD();
         while (nextCD <= t) {
             this.mp += step;
 
-            if(this.mp >= max){
-                this.lastTime = t;
-                return;
-            }
+            //if(this.mp >= max){
+            //    this.lastTime = t;
+            //    return;
+            //}
 
             this.lastTime = nextCD
             nextCD = this.getNextCD();

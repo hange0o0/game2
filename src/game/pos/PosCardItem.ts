@@ -4,10 +4,13 @@ class PosCardItem extends game.BaseItem {
         this.skinName = "CardItemSkin";
     }
 
-    private des: eui.Label;
+    private bg: eui.Image;
+    private img: eui.Image;
     private nameText: eui.Label;
+    private spaceGroup: eui.Group;
     private spaceText: eui.Label;
     private costText: eui.Label;
+    private skillType: eui.Image;
 
     public childrenCreated() {
         super.childrenCreated();
@@ -23,12 +26,27 @@ class PosCardItem extends game.BaseItem {
     }
 
     public dataChanged(){
-        this.des.text = this.data.id;
-        this.costText.text = this.data.cost;
-        this.spaceText.text = this.data.space || '';
+        var vo:any = this.data
+        this.img.source = vo.getImage();
+        this.bg.source = vo.getBG();
+        if(vo.isMonster)
+        {
+            this.skillType.visible = false
+            this.spaceGroup.visible = true
+            this.spaceText.text = vo.space + '';
+        }
+        else
+        {
+            this.skillType.visible = true
+            this.spaceGroup.visible = false
+            this.skillType.source = vo.getTypeIcon();
+        }
 
-        var useNum = this.data.temp[this.data.id] || 0;
-        this.nameText.text = this.data.name + '('+(3-useNum)+')';
+        this.costText.text = vo.cost;
+
+
+        var useNum = vo.temp[vo.id] || 0;
+        this.nameText.text = vo.name + '('+(3-useNum)+')';
         this.touchChildren = this.touchEnabled = useNum < 3
     }
 }

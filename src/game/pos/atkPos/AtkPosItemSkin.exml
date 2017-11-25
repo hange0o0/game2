@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="AtkPosItemSkin" width="110" height="110" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Rect id="selectMC" width="120" height="120" fillColor="0x64bf33" verticalCenter="0" horizontalCenter="0"/>
+
 	<e:Group x="0" y="0" width="110" height="110">
-		<e:Rect width="100%" height="100%" x="0" y="0"/>
-		<e:Label id="des" text="Label" y="5" size="22" x="5"/>
-		<e:Label id="spaceText" text="6" x="5" size="20" y="85"/>
-		<e:Label id="costText" text="10" size="20" y="85" right="5"/>
+		<e:Image id="bg" source="border_8_png" x="0" y="0" width="100%" height="100%"/>
+		<e:Image id="img" width="100" height="100" verticalCenter="0" horizontalCenter="0"/>
+		<e:Image source="icon_cost_png" y="63.52" x="76.89"/>
+		<e:Group id="spaceGroup" x="-6.27" y="68.84">
+			<e:Image source="icon_pos_png" y="0" x="0"/>
+			<e:Label id="spaceText" text="20" x="4.009999999999991" size="20" stroke="2" textAlign="center" width="30" y="10.679999999999993"/>
+		</e:Group>
+		<e:Label id="costText" text="10" size="20" stroke="2" x="79.57" y="79.52" width="30" textAlign="center"/>
+		<e:Image id="skillType" source="skill_type2_png" x="-4.92" y="70.84"/>
 	</e:Group>
 </e:Skin>

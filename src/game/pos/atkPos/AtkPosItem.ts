@@ -5,9 +5,13 @@ class AtkPosItem extends game.BaseItem {
     }
 
     public selectMC: eui.Rect;
-    private des: eui.Label;
+    private bg: eui.Image;
+    private img: eui.Image;
+    private spaceGroup: eui.Group;
     private spaceText: eui.Label;
     private costText: eui.Label;
+    private skillType: eui.Image;
+
 
 
     public childrenCreated() {
@@ -21,15 +25,22 @@ class AtkPosItem extends game.BaseItem {
 
     public dataChanged(){
         var vo:any = CM.getCardVO(this.data.id);
-        this.des.text = this.data.id
-        if(this.data.id > 100)
+        this.img.source = vo.getImage();
+        this.bg.source = vo.getBG();
+
+        if(vo.isMonster)
         {
-            this.spaceText.text = ''
+            this.skillType.visible = false
+            this.spaceGroup.visible = true
+            this.spaceText.text = vo.space + '';
         }
         else
         {
-            this.spaceText.text = vo.space
+            this.skillType.visible = true
+            this.spaceGroup.visible = false
+            this.skillType.source = vo.getTypeIcon();
         }
+
 
         this.costText.text = vo.cost;
         this.selectMC.visible = false;

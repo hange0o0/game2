@@ -8,8 +8,8 @@
 
 
 
-	<e:Group horizontalCenter="0" bottom="28" locked="true">
-		<e:Button id="backBtn" y="0" label="返回" x="0" skinName="Btn4Skin" width="150"/>
+	<e:Group horizontalCenter="0" bottom="28">
+		<e:Button id="backBtn" y="0" label="返回" x="0" width="150" skinName="Btn3Skin"/>
 		<e:Button id="registerBtn" y="0" label="注册" x="176" skinName="Btn4Skin" width="150"/>
 		<e:layout>
 			<e:HorizontalLayout gap="40"/>

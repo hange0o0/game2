@@ -21,13 +21,13 @@ class AtkPosListItem extends game.BaseItem {
     public dataChanged(){
         if(this.data.empty)
         {
-            this.currentState = 'empty'
+            this.currentState = 'add'
         }
         else
         {
             this.currentState = 'normal'
             this.desText.text = this.data.name;
-            this.list.dataProvider = new eui.ArrayCollection([])
+            this.list.dataProvider = new eui.ArrayCollection(this.data.list)
         }
     }
 

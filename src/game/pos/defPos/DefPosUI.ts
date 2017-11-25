@@ -31,7 +31,7 @@ class DefPosUI extends game.BaseUI {
 
     private posName = ''
     private arrayData:eui.ArrayCollection
-    private itemWidth = 200;
+    private itemWidth = 220;
 
     public constructor() {
         super();

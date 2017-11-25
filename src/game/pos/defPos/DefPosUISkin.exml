@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="DefPosUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect width="100%" height="100%" x="0" y="0" fillColor="0x827048"/>
 	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
-	<e:Rect width="10" height="20" y="50" fillColor="0x8e0404" horizontalCenter="0"/>
-	<e:Scroller id="scroller1" width="640" height="400" x="0" y="50" locked="true">
+	<e:Image source="bg15_png" top="510" bottom="100" scale9Grid="16,16,14,14" left="0" right="0"/>
+	<e:Scroller id="scroller1" width="640" height="400" x="0" y="50">
 		<e:Group>
 			<e:List id="list1" width="200" height="200" x="142" y="175">
 				<e:layout>
@@ -11,7 +12,7 @@
 			</e:List>
 		</e:Group>
 	</e:Scroller>
-	<e:Scroller id="scroller2" width="640" x="0" top="520" bottom="100" locked="true">
+	<e:Scroller id="scroller2" width="640" x="0" top="520" bottom="100">
 		<e:Group>
 		<e:List id="list2" width="200" height="200" x="142" y="175">
 			<e:layout>
@@ -20,7 +21,7 @@
 		</e:List>
 		</e:Group>
 	</e:Scroller>
-	<e:TabBar id="tab" x="20" y="476" itemRendererSkinName="MyTabItemSkin">
+	<e:TabBar id="tab" x="10" itemRendererSkinName="MyTabItemSkin" width="300" y="458">
 		<e:ArrayCollection>
 			<e:Array>
 				<e:Object label="卡兵"/>
@@ -28,7 +29,7 @@
 			</e:Array>
 		</e:ArrayCollection>
 	</e:TabBar>
-	<ns1:DownList id="downList" x="472.73" y="466.88" skinName="DownListSkin"/>
+	<ns1:DownList id="downList" skinName="DownListSkin" width="160" right="10" y="461"/>
 	<ns1:BottomUI id="bottomUI" x="0" skinName="BottomUISkin" bottom="0"/>
 	<e:Group y="895.0000000000001" right="20">
 		<e:Label id="deleteBtn" text="delete" x="20.000000000000227" y="19.999999999999886"/>
@@ -38,4 +39,5 @@
 			<e:HorizontalLayout gap="20"/>
 		</e:layout>
 	</e:Group>
+	<e:Image source="arror4_png" y="62" horizontalCenter="0.5"/>
 </e:Skin>

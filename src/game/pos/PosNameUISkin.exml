@@ -1,3 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="PosNameUISkin" width="400" height="300" xmlns:e="http://ns.egret.com/eui">
+<e:Skin class="PosNameUISkin" width="520" height="280" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+		<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
+	<e:Label text="请输出新的名称" y="43.04000000000002" textColor="0x211402" size="26" bold="true" horizontalCenter="0"/>
+	<e:TextInput id="nameText" y="104" skinName="MyTextInputSkin" height="50" horizontalCenter="0"/>
+	<e:Button id="okBtn" label="确定" width="150" skinName="Btn1Skin" horizontalCenter="0" bottom="30"/>
+	<e:Image id="closeBtn" source="icon_error_png" y="-10" right="-10"/>
 </e:Skin>

@@ -10,7 +10,6 @@ class AtkPosChangeUI extends game.BaseUI {
     private scrollerBG: eui.Rect;
     private bottomUI: BottomUI;
     private deleteBtn: eui.Label;
-    private con: eui.Group;
     private list: eui.List;
 
 

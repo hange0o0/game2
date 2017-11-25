@@ -4,7 +4,9 @@ class PosListHeadItem extends game.BaseItem {
         this.skinName = "PosListHeadItemSkin";
     }
 
-    private desText: eui.Label;
+    private bg: eui.Image;
+    private img: eui.Image;
+
 
 
     public childrenCreated() {

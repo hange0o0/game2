@@ -8,6 +8,8 @@ class SkillVO {
         return CM.table[this.dataKey]
     }
 
+    public isMonster = false;
+
     public des: string;
     public cd: number;
     public cost: number;
@@ -39,8 +41,14 @@ class SkillVO {
         this.type = data.type
     }
 
-    public get thumb(){
-        return 'prop_thumb_' + this.id + '_jpg';
+    public getImage(){
+        return Config.localResRoot + 'card/monster_'+this.id+'.jpg';
+    }
+    public getBG(){
+        return 'border_14_png';
+    }
+    public getTypeIcon(){
+        return 'skill_type'+this.type+'_png';
     }
 
     public preLoad(){

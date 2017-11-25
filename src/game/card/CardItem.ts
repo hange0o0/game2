@@ -4,10 +4,14 @@ class CardItem extends game.BaseItem {
         this.skinName = "CardItemSkin";
     }
 
-    private des: eui.Label;
+    private bg: eui.Image;
+    private img: eui.Image;
     private nameText: eui.Label;
+    private spaceGroup: eui.Group;
     private spaceText: eui.Label;
     private costText: eui.Label;
+    private skillType: eui.Image;
+
 
 
     public childrenCreated() {
@@ -20,7 +24,25 @@ class CardItem extends game.BaseItem {
     }
 
     public dataChanged(){
-        this.nameText
+        var vo:any = this.data
+        this.img.source = vo.getImage();
+        this.bg.source = vo.getBG();
+
+        if(vo.isMonster)
+        {
+            this.skillType.visible = false
+            this.spaceGroup.visible = true
+            this.spaceText.text = vo.space + '';
+        }
+        else
+        {
+            this.skillType.visible = true
+            this.spaceGroup.visible = false
+            this.skillType.source = vo.getTypeIcon();
+        }
+
+        this.costText.text = vo.cost;
+        this.nameText.text = vo.name;
     }
 
 }

@@ -1,4 +1,4 @@
-class LoginUI extends game.BaseUI {
+class LoginUI extends game.BaseWindow {
     private static instance:LoginUI;
     public static getInstance() {
         if (!this.instance) this.instance = new LoginUI();
@@ -13,8 +13,7 @@ class LoginUI extends game.BaseUI {
     private loginBtn: eui.Button;
 
 
-     private showQuickKey = 0;
-
+    public noMV: boolean = true;
     public constructor() {
         super();
         this.skinName = "LoginUISkin";

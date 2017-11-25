@@ -8,6 +8,8 @@ class MonsterVO {
         return CM.table[this.dataKey]
     }
 
+    public isMonster = true;
+
     public width: number;
     public height: number;
     public atk: number;
@@ -71,8 +73,16 @@ class MonsterVO {
         this.mv_atk = data.mv_atk * 1000
     }
 
-    public get thumb(){
-        return 'prop_thumb_' + this.id + '_jpg';
+    public getImage(){
+        return Config.localResRoot + 'card/monster_'+this.id+'.jpg';
+    }
+
+    public getBG(){
+        if(this.type == 1)
+            return 'border_7_png';
+        if(this.type == 2)
+            return 'border_6_png';
+        return 'border_8_png';
     }
 
     public preLoad(){

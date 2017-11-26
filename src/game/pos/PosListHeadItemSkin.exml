@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="PosListHeadItemSkin" width="50" height="50" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="PosListHeadItemSkin" width="49" height="55" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Image id="bg" source="border_8_png" x="0" y="0" width="100%" height="100%"/>
-	<e:Image id="img" width="44" height="44" verticalCenter="0" horizontalCenter="0"/>
+	<e:Image id="img" width="39" height="45" verticalCenter="0" horizontalCenter="0"/>
 </e:Skin>

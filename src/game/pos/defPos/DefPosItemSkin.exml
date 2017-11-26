@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="DefPosItemSkin" width="220" height="400" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
-	<e:Label id="cdText" text="Label" y="9.56" horizontalCenter="0" size="22" stroke="2"/>
 	<e:Image source="pos1_png" y="236.67" horizontalCenter="0.5"/>
 	<e:Button id="deleteBtn" label="移除" skinName="Btn1Skin" horizontalCenter="0" width="140" bottom="20"/>
 	<e:Button id="splitBtn" label="拆分" horizontalCenter="0" width="140" skinName="Btn2Skin" bottom="20"/>
 	<e:Image id="mergeBtn" source="icon_add2_png" x="-20" y="150"/>
-	<ns1:CardItem id="cardItem" y="85" skinName="CardItemSkin" scaleX="0.8" scaleY="0.8" horizontalCenter="0"/>
-	<e:Group id="group" y="90" horizontalCenter="0" height="146">
+	<ns1:CardItem id="cardItem" y="90" skinName="CardItemSkin" scaleX="0.8" scaleY="0.8" horizontalCenter="0"/>
+	<e:Group id="group" y="90" horizontalCenter="0" height="170" locked="true">
 		<ns1:DefPosItem2 id="c0" x="0" y="0" skinName="DefPosItem2Skin"/>
 		<ns1:DefPosItem2 x="10" y="10" skinName="DefPosItem2Skin" id="c1"/>
 		<ns1:DefPosItem2 x="20" y="20" skinName="DefPosItem2Skin" id="c2"/>
@@ -15,4 +14,6 @@
 			<e:TileLayout/>
 		</e:layout>
 	</e:Group>
+	<e:Image source="border_4_png" y="267" width="100" scale9Grid="24,19,3,10" height="44" horizontalCenter="0"/>
+	<e:Label id="cdText" text="Label" y="277.67" horizontalCenter="0" size="22" stroke="2"/>
 </e:Skin>

@@ -32,7 +32,7 @@ class AtkPosChangeUI extends game.BaseUI {
         this.bottomUI.setHide(this.hide,this);
         this.topUI.setTitle('调整卡组顺序');
 
-        this.dragTarget.alpha = 0.5;
+        this.dragTarget.alpha = 0.3;
         this.list.itemRenderer =  AtkPosChangeItem;
         this.list.addEventListener('start_drag',this.onDragStart,this);
         this.list.addEventListener('end_drag',this.onDragEnd,this);

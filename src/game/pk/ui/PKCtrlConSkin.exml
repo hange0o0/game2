@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="PKCtrlConSkin" width="640" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing" height="450">
-    <e:Group id="cardGroup" width="640" height="200" x="2" anchorOffsetX="0" bottom="0" locked="true">
+	<e:Image source="bg15_png" x="0" y="0" width="100%" height="100%" scale9Grid="17,16,13,16"/>
+	<e:Image source="bg14_png" scale9Grid="32,32,3,6" x="0" width="640" height="140" bottom="0"/>
+    <e:Group id="cardGroup" width="640" height="150" x="2" anchorOffsetX="0" bottom="0">
 	    </e:Group>
-	<e:Group id="placeGroup" width="640" height="250" x="2" anchorOffsetX="0" bottom="200">
-		<ns1:PKPosItem id="p0" x="20" y="40" skinName="PKPosItemSkin"/>
-		<ns1:PKPosItem x="143" y="40" skinName="PKPosItemSkin" id="p1"/>
-		<ns1:PKPosItem x="265" y="40" skinName="PKPosItemSkin" id="p2"/>
-		<ns1:PKPosItem y="40" skinName="PKPosItemSkin" id="p3" x="388"/>
-		<ns1:PKPosItem y="40" skinName="PKPosItemSkin" id="p4" x="510"/>
-	</e:Group>
-	<e:Group x="0" bottom="0" height="20">
-		<e:Rect width="640" height="20" x="0" y="0"/>
-		<e:Rect id="barMC" width="640" height="20" x="0" y="0" fillColor="0x1b125e"/>
-		<e:Label id="rateText" text="Label" bottom="0" horizontalCenter="0" size="24" stroke="2"/>
+	<e:Group id="placeGroup" width="640" height="250" x="2" anchorOffsetX="0" bottom="150" locked="true">
+		<ns1:PKPosItem id="p0" x="15" y="40" skinName="PKPosItemSkin"/>
+		<ns1:PKPosItem x="168" y="40" skinName="PKPosItemSkin" id="p1"/>
+		<ns1:PKPosItem x="322" y="40" skinName="PKPosItemSkin" id="p2"/>
+		<ns1:PKPosItem y="40" skinName="PKPosItemSkin" id="p3" x="475"/>
 	</e:Group>
 	<e:Group x="0" y="-50">
 		<e:Label id="info1" text="Label" x="0" y="0" stroke="5"/>
@@ -26,6 +22,25 @@
 		<e:Label id="info3" text="Label" x="0" y="0" stroke="5"/>
 		<e:layout>
 		<e:HorizontalLayout/>
+		</e:layout>
+	</e:Group>
+	<e:Image id="settingBtn" source="icon_setting_png" y="5" x="582"/>
+	<e:Group x="5.00000000000019" y="4.999999999999953">
+		<e:Group x="0" y="0" width="120">
+			<e:Image source="icon_cost_bg_png" x="0" y="0" scaleX="0.4" scaleY="0.4"/>
+			<e:Image id="costMC" source="icon_cost_png" x="4.0100000000000104" y="4.999999999999996"/>
+			<e:Label id="costText" text="Label" x="42.010000000000026" y="11.000000000000007" size="24" stroke="2"/>
+		</e:Group>
+		<e:Group x="0" y="0" width="120">
+			<e:Image source="icon_cost_bg_png" x="0" y="0" scaleX="0.4" scaleY="0.4"/>
+			<e:Label id="cardText" text="Label" x="42.010000000000026" y="11.000000000000007" size="24" stroke="2"/>
+		</e:Group>
+		<e:Group x="0" y="0">
+			<e:Image source="icon_cost_bg_png" x="0" y="0" scaleX="0.4" scaleY="0.4"/>
+			<e:Label id="timeText" text="Label" x="42.010000000000026" y="11.000000000000007" size="24" stroke="2"/>
+		</e:Group>
+		<e:layout>
+			<e:HorizontalLayout gap="30"/>
 		</e:layout>
 	</e:Group>
 </e:Skin>

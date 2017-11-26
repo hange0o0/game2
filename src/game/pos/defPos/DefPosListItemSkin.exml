@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="DefPosListItemSkin" width="640" height="140" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="normal,add" >
+<e:Skin class="DefPosListItemSkin" width="620" height="140" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="normal,add" >
 	<e:Image source="block2_png" x="0" y="0" scale9Grid="9,8,154,156" width="100%" height="100%"/>
-	<e:Image id="disableMC" source="bg8_png" scale9Grid="9,9,9,9" includeIn="normal" left="5" right="5" top="5" bottom="5" visible="false"/>
+	<e:Image id="disableMC" source="bg8_png" scale9Grid="9,9,9,9" includeIn="normal" left="5" right="5" top="5" bottom="5"/>
 	<e:Label id="desText" text="Label" x="30" y="25" includeIn="normal" size="24" stroke="2"/>
 	<e:Image source="icon_add1_png" horizontalCenter="0" verticalCenter="0" horizontalCenter.add="0.5" verticalCenter.add="-16.5" includeIn="add"/>
 	<e:Label text="增加新的防守阵型" includeIn="add" y="86.63" stroke="2" size="24" horizontalCenter="0" strokeColor="0x331401"/>
-	<e:List id="list" width="600" height="50" y="67" x="20" includeIn="normal"/>
+	<e:List id="list" width="562" height="50" y="67" includeIn="normal" x="29">
+		<e:layout>
+			<e:HorizontalLayout gap="8"/>
+		</e:layout>
+	</e:List>
 	<e:CheckBox id="openBtn" label="启用" includeIn="normal" y="20" skinName="MyCheckBoxSkin" right="30"/>
 </e:Skin>

@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="PKCardItemSkin" width="100" height="130" xmlns:e="http://ns.egret.com/eui">
-	<e:Rect width="100%" height="100%" x="0" y="0" fillColor="0x315154"/>
-	<e:Label text="Label" x="0" y="0" size="24" anchorOffsetX="0" anchorOffsetY="0" id="desText"/>
+<e:Skin class="PKCardItemSkin" width="100" height="120" xmlns:e="http://ns.egret.com/eui">
+<e:Image id="bg" source="border_8_png" x="0" y="0" width="100%" height="100%"/>
+		<e:Image id="img" width="90" height="104" horizontalCenter="0" y="7"/>
+		<e:Image source="icon_cost_png" y="82.68" x="71.89"/>
+		<e:Group id="spaceGroup" x="0.73" y="85">
+			<e:Image source="icon_pos_png" y="0" x="0"/>
+			<e:Label id="spaceText" text="20" x="-0.99" size="24" stroke="3" textAlign="center" width="30" y="6.68"/>
+		</e:Group>
+		<e:Label id="costText" text="5" size="24" stroke="3" x="70.09" y="91.68" width="30" textAlign="center"/>
+		<e:Image id="skillType" source="skill_type2_png" x="-0.88" y="84.08" scaleX="0.9" scaleY="0.9"/>
+
 </e:Skin>

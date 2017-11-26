@@ -66,7 +66,7 @@ class AtkPosUI extends game.BaseUI {
     }
 
     private onScroll(){
-        this.scrollerBG.y = 50 - this.scroller2.viewport.scrollV;
+        this.scrollerBG.y = this.scroller1.y - this.scroller1.viewport.scrollV;
     }
 
 

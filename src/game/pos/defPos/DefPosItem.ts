@@ -29,8 +29,8 @@ class DefPosItem extends game.BaseItem {
         this.group.touchChildren = false;
 
         var tw = this.tw1 =  egret.Tween.get(this.cardItem,{loop:true});
-        this.cardItem.y = 85;
-        tw.to({y:65},1000,egret.Ease.sineInOut).to({y:85},1000,egret.Ease.sineInOut)
+        this.cardItem.y = 90;
+        tw.to({y:70},1000,egret.Ease.sineInOut).to({y:90},1000,egret.Ease.sineInOut)
 
         var tw = this.tw2 = egret.Tween.get(this.group,{loop:true});
         this.group.y = 90;
@@ -88,14 +88,14 @@ class DefPosItem extends game.BaseItem {
         }
 
         this.mergeBtn.visible = ids.length + this.data.preLen <= 4;
-        var cd = this.data.cd/1000
+        var cd = Math.round(this.data.cd/1000)
         if(cd <= 60)
         {
             this.cdText.text = MyTool.toFixed(cd,1) + 's'
         }
         else
         {
-            this.cdText.text = Math.floor(cd/60) + 'm ' + MyTool.toFixed(cd%60,1) + 's'
+            this.cdText.text = Math.floor(cd/60) + 'm ' +(cd%60) + 's'
         }
 
         this.addEventListener(egret.Event.REMOVED_FROM_STAGE,this.onRemove,this)

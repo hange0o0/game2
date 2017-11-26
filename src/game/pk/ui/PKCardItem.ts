@@ -1,6 +1,15 @@
 class PKCardItem extends game.BaseItem {
 
     private desText: eui.Label;
+    private bg: eui.Image;
+    private img: eui.Image;
+    private spaceGroup: eui.Group;
+    private spaceText: eui.Label;
+    private costText: eui.Label;
+    private skillType: eui.Image;
+
+
+
 
     public con:PKCtrlCon;
 

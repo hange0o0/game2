@@ -12,12 +12,16 @@ class PKCtrlCon extends game.BaseContainer {
     private p1: PKPosItem;
     private p2: PKPosItem;
     private p3: PKPosItem;
-    private barMC: eui.Rect;
-    private rateText: eui.Label;
     private info1: eui.Label;
     private info2: eui.Label;
     private info4: eui.Label;
     private info3: eui.Label;
+    private settingBtn: eui.Image;
+    private costMC: eui.Image;
+    private costText: eui.Label;
+    private cardText: eui.Label;
+    private timeText: eui.Label;
+
 
 
 

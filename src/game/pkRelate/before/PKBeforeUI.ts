@@ -7,6 +7,16 @@ class PKBeforeUI extends game.BaseWindow {
         return this._instance;
     }
 
+    private scrollerBG: eui.Group;
+    private scroller: eui.Scroller;
+    private list: eui.List;
+    private titleText: eui.Label;
+    private startBtn: eui.Button;
+    private rightBtn: eui.Image;
+    private leftBtn: eui.Image;
+    private closeBtn: eui.Image;
+
+
     public constructor() {
         super();
         this.skinName = "PKBeforeUISkin";

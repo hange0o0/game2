@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="DefPosItem2Skin" width="70" height="70" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="DefPosItem2Skin" width="70" height="80" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Image id="bg" source="border_8_png" x="0" y="0" width="100%" height="100%" scale9Grid="12,12,76,76"/>
-	<e:Image id="img" width="60" height="60" y="5" x="5"/>
+	<e:Image id="img" width="130" height="150" y="6" scaleX="0.45" scaleY="0.45" horizontalCenter="0"/>
 </e:Skin>

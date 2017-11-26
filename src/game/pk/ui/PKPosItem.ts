@@ -2,6 +2,20 @@ class PKPosItem extends game.BaseItem {
 
     private desText: eui.Label;
 
+    private posBG: eui.Image;
+    private carGroup: eui.Group;
+    private bg: eui.Image;
+    private img: eui.Image;
+    private spaceGroup: eui.Group;
+    private spaceText: eui.Label;
+    private timesText: eui.Label;
+    private barGroup1: eui.Group;
+    private barMC1: eui.Image;
+    private barGroup2: eui.Group;
+    private barMC2: eui.Image;
+
+
+
     public index;
     public constructor() {
         super();

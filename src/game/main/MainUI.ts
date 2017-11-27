@@ -60,7 +60,7 @@ class MainUI extends game.BaseUI {
     }
 
     private onMap(){
-
+        HangUI.getInstance().show();
     }
 
 

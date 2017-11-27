@@ -25,7 +25,7 @@ class PKVideoCon extends game.BaseContainer {
     public childrenCreated() {
         super.childrenCreated();
 
-        this.bg.source = 'pk_bg1_png'
+        this.bg.source = Config.localResRoot + 'map/map'+1+'.jpg';
         PKData.getInstance().addEventListener('video',this.onVideoEvent,this);
     }
 

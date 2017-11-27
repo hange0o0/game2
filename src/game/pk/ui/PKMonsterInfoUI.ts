@@ -11,6 +11,9 @@ class PKMonsterInfoUI extends game.BaseContainer {
     }
 
     private list: eui.List;
+    private type: eui.Image;
+    private nameText: eui.Label;
+
 
 
     public playerData:PKPlayerData
@@ -62,6 +65,10 @@ class PKMonsterInfoUI extends game.BaseContainer {
 
         this.visible = true;
         this.playerData = playerData;
+
+        this.type.source = 'icon_type'+playerData.type+'_png'
+        this.nameText.text = playerData.nick;
+        //this.selfIcon.visible = playerData == PKData.getInstance().myPlayer;   //@
 
         if(this.playerData.teamData.atkRota == PKConfig.ROTA_LEFT)
             this.x = 10;

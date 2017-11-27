@@ -12,10 +12,10 @@ class PKCtrlCon extends game.BaseContainer {
     private p1: PKPosItem;
     private p2: PKPosItem;
     private p3: PKPosItem;
-    private info1: eui.Label;
-    private info2: eui.Label;
-    private info4: eui.Label;
-    private info3: eui.Label;
+    private info1: PKInfoBtn;
+    private info2: PKInfoBtn;
+    private info4: PKInfoBtn;
+    private info3: PKInfoBtn;
     private settingBtn: eui.Image;
     private costMC: eui.Image;
     private costText: eui.Label;
@@ -67,19 +67,19 @@ class PKCtrlCon extends game.BaseContainer {
 
         this.dragTarget = new PKCardItem();
         this.dragTarget.isDragMC = true;
-        this.dragTarget.alpha = 0.5
+        this.dragTarget.alpha = 0.3
 
-        this.info1.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.onInfo1,this)
-        this.info2.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.onInfo2,this)
-        this.info3.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.onInfo3,this)
-        this.info4.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.onInfo4,this)
-        this.info1.touchEnabled = true
-        this.info2.touchEnabled = true
-        this.info3.touchEnabled = true
-        this.info4.touchEnabled = true
+        this.addBtnEvent(this.settingBtn,this.onSetting)
 
         PKData.getInstance().addEventListener('video',this.onVideoEvent,this);
     }
+
+    private onSetting(){
+
+    }
+
+
+
     public onVideoEvent(e){
         var item:PKMonsterItem;
         var videoData = e.data;
@@ -92,19 +92,6 @@ class PKCtrlCon extends game.BaseContainer {
                 this.needRenewInfo = true;
                 break;
         }
-    }
-
-    private onInfo1(){
-       PKMonsterInfoUI.getInstance().show(this.getInfoPlayer(1))
-    }
-    private onInfo2(){
-       PKMonsterInfoUI.getInstance().show(this.getInfoPlayer(2))
-    }
-    private onInfo3(){
-       PKMonsterInfoUI.getInstance().show(this.getInfoPlayer(3))
-    }
-    private onInfo4(){
-       PKMonsterInfoUI.getInstance().show(this.getInfoPlayer(4))
     }
 
     private getInfoPlayer(index){
@@ -154,6 +141,7 @@ class PKCtrlCon extends game.BaseContainer {
         //e.stopImmediatePropagation();
         e.target.alpla = 0.8;
         this.chooseCard = e.target;
+        this.renewChooseCard();
         this.dragTarget.data = e.target.data
         this.stage.addChild(this.dragTarget);
         this.dragTarget.x = e.data.x;
@@ -209,14 +197,21 @@ class PKCtrlCon extends game.BaseContainer {
         this.lastAddCardTime = 0;
         this.chooseCard = null;
         this.needRenewCard = true;
-        this.needRenewInfo = true;
+        this.needRenewInfo = false;
 
         for(var s in this.cardObj)
         {
             this.cardObj[s].data = null;
         }
         this.renewCard();
-        this.renewInfo();
+
+
+        for(var i=1;i<=4;i++)
+        {
+            var player = this.getInfoPlayer(i);
+            var mc = this['info' + i];
+            mc.data = player;
+        }
 
     }
 
@@ -238,24 +233,23 @@ class PKCtrlCon extends game.BaseContainer {
         //this.barMC.width = 640 * ((PD.myPlayer.getMP() + PD.myPlayer.nextMpRate()) / PKConfig.maxMP);
         //this.rateText.text = PD.myPlayer.getMP() + '/' + PKConfig.maxMP
 
+        var height = 32*(PD.myPlayer.nextMpRate())
+        this.costMC.mask = new egret.Rectangle(0,32-height,27,height);
+
+        this.costText.text = 'x' + PD.myPlayer.getMP()
+        this.timeText.text = '' + DateUtil.getStringBySecond(PD.actionTime/1000).substr(-5)
+
 
     }
 
     private renewInfo(){
         if(this.needRenewInfo)
         {
-            var PD = PKData.getInstance();
             this.needRenewInfo = false;
             for(var i=1;i<=4;i++)
             {
-                var player = this.getInfoPlayer(i);
                 var mc = this['info' + i];
-                if(player)
-                {
-                    mc.text = PD.getMonsterByPlayer(player.id).length + ''
-                }
-                else
-                    mc.text = ''
+                mc.dataChanged();
             }
         }
     }
@@ -266,6 +260,10 @@ class PKCtrlCon extends game.BaseContainer {
         else
             this.chooseCard = card;
 
+        this.renewChooseCard();
+    }
+
+    private renewChooseCard(){
         for(var s in this.cardObj)
         {
             var item = this.cardObj[s];
@@ -290,10 +288,8 @@ class PKCtrlCon extends game.BaseContainer {
                     item.appear();
                 }
             }
+            this.cardText.text = 'x' + (ObjectUtil.objLength(PD.myPlayer.getHandCard(),true) + PD.myPlayer.hideCard)
         }
 
     }
-
-
-
 }

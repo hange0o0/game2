@@ -1,6 +1,6 @@
 class PKCardItem extends game.BaseItem {
 
-    private desText: eui.Label;
+    //private desText: eui.Label;
     private bg: eui.Image;
     private img: eui.Image;
     private spaceGroup: eui.Group;
@@ -31,7 +31,8 @@ class PKCardItem extends game.BaseItem {
     }
 
     private onClick(){
-        this.con.setChooseCard(this);
+        if(this.data)
+            this.con.setChooseCard(this);
     }
 
 
@@ -39,19 +40,28 @@ class PKCardItem extends game.BaseItem {
         if(!this.data)
         {
             this.y = 20;
-            this.desText.text = ''
+            this.currentState = 'empty'     //@
             return;
         }
-        if(this.data.mid < 100)
+        this.currentState = 'normal'
+        var vo:any = CM.getCardVO(this.data.mid)
+        this.img.source = vo.getImage();
+        this.bg.source = vo.getBG();
+
+        if(vo.isMonster)
         {
-            var mp = MonsterVO.getObject(this.data.mid).cost
-            this.desText.text = 'index:' + this.data.index + '\nmid:' + this.data.mid + '\nmp:' + mp + '\nspace:' + MonsterVO.getObject(this.data.mid).space;
+            this.skillType.visible = false
+            this.spaceGroup.visible = true
+            this.spaceText.text = vo.space + '';
         }
         else
         {
-            var mp = SkillVO.getObject(this.data.mid).cost
-            this.desText.text = 'index:' + this.data.index + '\nmid:' + this.data.mid + '\nmp:' + mp;
+            this.skillType.visible = true
+            this.spaceGroup.visible = false
+            this.skillType.source = vo.getTypeIcon();
         }
+
+        this.costText.text = vo.cost;
         this.renewChoose();
     }
 
@@ -72,9 +82,9 @@ class PKCardItem extends game.BaseItem {
         else
             var mp = SkillVO.getObject(this.data.mid).cost
         if(nowMp < mp)
-            this.desText.textColor = 0xFF0000
+            this.costText.textColor = 0xFF0000
         else
-            this.desText.textColor = 0xFFFFFF
+            this.costText.textColor = 0xFFFFFF
     }
 
     public renewChoose(){

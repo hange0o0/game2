@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="PKMonsterInfoSkin" width="460" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Rect width="100%" height="100%" x="0" y="0"/>
-	<e:List id="list" anchorOffsetX="0" anchorOffsetY="0" top="10" bottom="10" left="10" right="10" minHeight="170">
+<e:Skin class="PKMonsterInfoSkin" width="470" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="bg10_png" scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%"/>
+	<e:List id="list" anchorOffsetX="0" anchorOffsetY="0" top="75" bottom="15" left="15" right="15" minHeight="100">
 		<e:layout>
 			<e:TileLayout requestedColumnCount="5" horizontalGap="10" verticalGap="10"/>
 		</e:layout>
 	</e:List>
+	<e:Group y="15" horizontalCenter="0">
+		<e:Image id="type" source="icon_type1_png" scaleX="0.6" scaleY="0.6" y="0" x="0"/>
+		<e:Label id="nameText" text="苦顶替" x="45" y="8.980000000000018" size="24" stroke="3" verticalAlign="bottom"/>
+		<e:layout>
+			<e:HorizontalLayout verticalAlign="middle"/>
+		</e:layout>
+	</e:Group>
+	<e:Image source="line_png" y="48" horizontalCenter="0" scale9Grid="96,2,175,18" width="450"/>
 </e:Skin>

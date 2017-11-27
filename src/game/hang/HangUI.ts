@@ -7,6 +7,18 @@ class HangUI extends game.BaseWindow {
         return this._instance;
     }
 
+    private cancelBtn: eui.Button;
+    private pKBtn: eui.Button;
+    private awardBtn: eui.Button;
+    private con: eui.Group;
+    private img: eui.Image;
+    private scroller: eui.Scroller;
+    private list: eui.List;
+    private timeText: eui.Label;
+
+
+
+
     public constructor() {
         super();
         this.skinName = "HangUISkin";

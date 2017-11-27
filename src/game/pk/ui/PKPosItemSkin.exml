@@ -9,7 +9,7 @@
 			<e:Label id="spaceText" text="20" x="3.01" size="24" stroke="3" textAlign="center" width="30" y="9.68"/>
 		</e:Group>
 		<e:Group y="113.99" right="3">
-			<e:Image source="icon_times_png" x="0" y="0"/>
+			<e:Image id="timesBG" source="icon_times_png" x="0" y="0"/>
 			<e:Label id="timesText" text="1" x="0.34" y="6.32" size="24" stroke="3" width="30" textAlign="center"/>
 		</e:Group>
 	</e:Group>

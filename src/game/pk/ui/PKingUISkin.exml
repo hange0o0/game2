@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="PKingUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
-	<e:Scroller id="scroller" width="640" height="400" x="0" bottom="460" locked="true">
+<e:Skin class="PKingUISkin" width="640" height="1100" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<e:Scroller id="scroller" width="640" height="512" x="0" bottom="475" locked="true">
 		<e:Group>
 			<ns1:PKVideoCon id="pkVideo" x="0" y="0" skinName="PKVideoConSkin"/>
 		</e:Group>
 	</e:Scroller>
 	<ns1:PKCtrlCon id="pkCtrlCon" x="0" skinName="PKCtrlConSkin" bottom="0"/>
-	<ns1:PKTopUI id="pkTop" x="0" y="0" skinName="PKTopSkin"/>
-	<ns1:PKMonsterInfoUI id="pkInfo" x="180" skinName="PKMonsterInfoSkin" bottom="520"/>
+	<ns1:PKTopUI id="pkTop" x="0" skinName="PKTopSkin"/>
+	<ns1:PKMonsterInfoUI id="pkInfo" skinName="PKMonsterInfoSkin" bottom="540" right="10"/>
 </e:Skin>

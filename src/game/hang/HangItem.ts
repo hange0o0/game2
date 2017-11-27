@@ -4,6 +4,8 @@ class HangItem extends game.BaseItem {
         this.skinName = "HangItemSkin";
     }
 
+    private img: eui.Image;
+
     public childrenCreated() {
         super.childrenCreated();
         //this.addBtnEvent(this,this.onClick)

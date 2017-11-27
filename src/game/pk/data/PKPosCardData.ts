@@ -49,6 +49,19 @@ class PKPosCardData {
         return this.num < svo.num;
     }
 
+    public getMaxNum(){
+        if(this.mid < 100)
+        {
+            var mvo = MonsterVO.getObject(this.mid)
+            if(this.isAuto)
+                return mvo.num2;
+            return mvo.num;
+        }
+
+        var svo = SkillVO.getObject(this.mid)
+        return svo.num;
+    }
+
     public getNextCD(){
         var PD = PKData.getInstance();
         if(this.actionResult)

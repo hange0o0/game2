@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="DefPosItemSkin" width="220" height="400" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
-	<e:Image source="pos1_png" y="236.67" horizontalCenter="0.5"/>
+	<e:Image id="posBG" source="pos1_png" y="236.67" horizontalCenter="0.5"/>
 	<e:Button id="deleteBtn" label="移除" skinName="Btn1Skin" horizontalCenter="0" width="140" bottom="20"/>
 	<e:Button id="splitBtn" label="拆分" horizontalCenter="0" width="140" skinName="Btn2Skin" bottom="20"/>
 	<e:Image id="mergeBtn" source="icon_add2_png" x="-20" y="150"/>

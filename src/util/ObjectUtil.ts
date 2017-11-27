@@ -29,10 +29,14 @@ class ObjectUtil {
     }
     
         	
-    public static objLength(obj: any): number {
+    public static objLength(obj: any,removeEmpty?): number {
         var count = 0;
         for(var key in obj)
+        {
+            if(removeEmpty && !obj[key])
+                continue;
             count++;
+        }
         return count;
     }
 

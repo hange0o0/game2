@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="PKTopItemSkin" width="70" height="70" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="PKTopItemSkin" width="70" height="100" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Group id="group" x="0" y="0" width="100%" height="100%">
-		<e:Rect width="100%" height="100%" x="0" y="0" fillColor="0x4c3838"/>
-		<e:Label id="nameText" text="Label" x="6" y="4" size="20"/>
+		<e:Image id="bg" source="border_8_png" x="0" y="0" width="100%" height="100%"/>
+		<e:Image id="img" width="60" height="70" horizontalCenter="0" y="5"/>
+		<e:Label id="nameText" text="骷髅弓箭手" size="12" bottom="7" horizontalCenter="0" stroke="1"/>
 	</e:Group>
 </e:Skin>

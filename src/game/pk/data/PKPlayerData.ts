@@ -2,12 +2,13 @@
 class PKPlayerData {
     public id;//唯一ID
     public openid;
+    public nick;
     public type//类型
     public force;//怪的基础属性
     public teamData:PKTeamData   //对应队伍
 
     private handCard = {};//当前的手牌  [{index,mid},]  上限5
-    private hideCard = [];//隐藏的手牌  [{index,mid},]
+    public hideCard = [];//隐藏的手牌  [{index,mid},]
     public posCard = {};//已上阵的手牌 1-4,如果是自动的，不受此限制
     public prePosCard = {};//准备上阵的手牌 1-4,如果是自动的，不受此限制
 

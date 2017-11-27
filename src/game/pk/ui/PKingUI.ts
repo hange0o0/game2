@@ -20,6 +20,7 @@ class PKingUI extends game.BaseUI {
 
 
 
+
     public scrollTime = 0;
 
     public constructor() {

@@ -1,7 +1,9 @@
 class PKMonsterInfoItem extends game.BaseItem {
 
-    private nameText: eui.Label;
-    private barMC: eui.Rect;
+    private bg: eui.Image;
+    private img: eui.Image;
+    private barMC: eui.Image;
+
 
     public constructor() {
         super();
@@ -16,7 +18,11 @@ class PKMonsterInfoItem extends game.BaseItem {
 
 
     public dataChanged(){
-         this.nameText.text = this.data.getVO().name
+        var vo:any = this.data.getVO();
+        this.img.source = vo.getImage();
+        this.bg.source = vo.getBG();
+
+        this.img.visible = this.data.dieTime > 0;          //@
         this.onTimer();
     }
 

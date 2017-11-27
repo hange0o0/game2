@@ -8,6 +8,7 @@ class DefPosItem extends game.BaseItem {
     private deleteBtn: eui.Button;
     private splitBtn: eui.Button;
     private mergeBtn: eui.Image;
+    private posBG: eui.Image;
     private cardItem: CardItem;
     private group: eui.Group;
     private c0: DefPosItem2;
@@ -57,6 +58,7 @@ class DefPosItem extends game.BaseItem {
         var ids = this.data.ids;
         this.onRemove();
 
+        var haveSkill = false
         if(ids.length == 1)
         {
              this.deleteBtn.visible = true
@@ -66,6 +68,7 @@ class DefPosItem extends game.BaseItem {
             this.group.visible = false;
             this.cardItem.data = CM.getCardVO(ids[0]);
 
+            haveSkill =  !this.cardItem.data.isMonster
             this.tw1.setPaused(false);
         }
         else
@@ -81,11 +84,18 @@ class DefPosItem extends game.BaseItem {
                 var item = this['c' + i];
                 this.group.addChild(item);
                 item.data = ids[i];
+                if(!CM.getCardVO(item.data).isMonster)
+                    haveSkill = true;
             }
 
             this.tw2.setPaused(false);
 
         }
+
+        if(haveSkill)
+            this.posBG.source = 'pos2_png'
+        else
+            this.posBG.source = 'pos1_png'
 
         this.mergeBtn.visible = ids.length + this.data.preLen <= 4;
         var cd = Math.round(this.data.cd/1000)

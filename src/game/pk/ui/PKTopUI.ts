@@ -1,6 +1,5 @@
 class PKTopUI extends game.BaseContainer {
 
-    private infoText: eui.Label;
     private hpText1: eui.Label;
     private hpText2: eui.Label;
 
@@ -23,7 +22,7 @@ class PKTopUI extends game.BaseContainer {
         var data:PKMonsterData = videoData.user;
         switch(videoData.type)//动画类型
         {
-            case PKConfig.VIDEO_MONSTER_ADD:
+            case PKConfig.VIDEO_POS_ADD:
                 var teamData = data.getOwner().teamData
                 if(teamData.id != 'sys' && teamData != PKData.getInstance().myPlayer.teamData)
                     this.addSkillItem(data);
@@ -43,7 +42,7 @@ class PKTopUI extends game.BaseContainer {
         if(!item)
         {
             item = new PKTopItem();
-            item.y = 40;
+            item.y = 20;
         }
         return item;
     }
@@ -68,8 +67,8 @@ class PKTopUI extends game.BaseContainer {
         var PD = PKData.getInstance();
         var team1 = PD.getTeamByRota(PKConfig.ROTA_LEFT);
         var team2 = PD.getTeamByRota(PKConfig.ROTA_RIGHT);
-        this.hpText1.text = team1.hp + '/' + team1.maxhp + ' def:' + team1.def
-        this.hpText2.text = ' def:' + team2.def + ' '+team2.hp + '/' + team2.maxhp
+        this.hpText1.text = team1.hp + '/' + team1.maxhp + ' 增加防御:' + team1.def
+        this.hpText2.text = ' 增加防御:' + team2.def + ' '+team2.hp + '/' + team2.maxhp
     }
 
     public addSkillItem(data){
@@ -98,12 +97,10 @@ class PKTopUI extends game.BaseContainer {
         this.addChild(item);
         item.data = data;
         item.appear()
-
-
     }
 
     private getX(index){
-        return 19 + index*76
+        return 16 + index*88
     }
 
 

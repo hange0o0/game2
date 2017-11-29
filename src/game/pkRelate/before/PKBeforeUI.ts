@@ -90,7 +90,7 @@ class PKBeforeUI extends game.BaseWindow {
         if(data)
         {
             this.scrollerBG.visible = false
-            this.titleText.text = '新建阵容'            //@
+            this.titleText.text = '新建阵容'
         }
         else
         {

@@ -174,7 +174,10 @@ class PKCode {
                 }
                 PD.getPlayer(mvo.owner).teamData.enemy.hp -= mvo.getVO().atk2;
                 if(PD.getPlayer(mvo.owner).teamData.enemy.hp <= 0)
+                {
+                    console.log(PD.getPlayer(mvo.owner).teamData.enemy)
                     PD.isGameOver = true;
+                }
 
                 PD.addVideo({
                     type:PKConfig.VIDEO_MONSTER_WIN,

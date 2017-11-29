@@ -26,4 +26,5 @@ class PKConfig {
     public static VIDEO_MONSTER_BEATK = 7
     public static VIDEO_MONSTER_MISS = 8 //闪避
     public static VIDEO_TEAM_DEF = 9 //队伍防御
+    public static VIDEO_POS_ADD = 10
 }

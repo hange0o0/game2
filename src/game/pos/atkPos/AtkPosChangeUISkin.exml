@@ -2,11 +2,11 @@
 <e:Skin class="AtkPosChangeUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
 	<e:Rect width="100%" height="100%" x="0" y="0" fillColor="0x827048"/>
 	<e:Group id="scrollerBG" x="0" y="60" width="100%">
-		<e:Rect width="100%" height="290" x="10" y="10" fillColor="0xC18989"/>
-		<e:Rect width="100%" height="145" x="0" y="0" fillColor="0xEFA06E" strokeWeight="1" strokeColor="0x000000"/>
-		<e:Rect width="100%" height="145" x="10" y="10" fillColor="0xCEB846"/>
-		<e:Rect width="100%" height="145" x="10" y="10" fillColor="0xA1D389"/>
-		<e:Rect width="100%" height="300" x="20" y="20" fillColor="0x8797D1"/>
+		<e:Rect width="100%" height="290" x="10" y="10" fillColor="0xe2a75d"/>
+		<e:Rect width="100%" height="145" x="0" y="0" strokeColor="0x000000" fillColor="0xf2c379"/>
+		<e:Rect width="100%" height="145" x="10" y="10" fillColor="0xe2a75d"/>
+		<e:Rect width="100%" height="145" x="10" y="10" fillColor="0xf2c379"/>
+		<e:Rect width="100%" height="300" x="20" y="20" fillColor="0xe2a75d"/>
 		<e:layout>
 		<e:VerticalLayout gap="0"/>
 		</e:layout>

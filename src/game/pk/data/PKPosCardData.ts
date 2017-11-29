@@ -130,5 +130,14 @@ class PKPosCardData {
         this.actionTime = actionTime;
         this.actionResult = 0;
         this.num ++;
+
+        if(this.num == 1)
+        {
+            PKData.getInstance().addVideo({
+                type:PKConfig.VIDEO_POS_ADD,
+                user:this
+            })
+        }
+
     }
 }

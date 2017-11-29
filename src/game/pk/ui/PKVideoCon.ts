@@ -20,7 +20,7 @@ class PKVideoCon extends game.BaseContainer {
     public txtArr = []
 
 
-    private monsterY = 300;
+    private monsterY = 420;
 
     public childrenCreated() {
         super.childrenCreated();

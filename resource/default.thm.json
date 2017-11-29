@@ -45,6 +45,7 @@
     "src/game/main/MainUISkin.exml",
     "src/game/pk/ui/PKCardItemSkin.exml",
     "src/game/pk/ui/PKPosItemSkin.exml",
+    "src/game/pk/ui/PKInfoBtnSkin.exml",
     "src/game/pk/ui/PKCtrlConSkin.exml",
     "src/game/pk/ui/PKMonsterInfoItemSkin.exml",
     "src/game/pk/ui/PKMonsterInfoSkin.exml",

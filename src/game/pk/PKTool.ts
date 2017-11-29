@@ -13,7 +13,9 @@ class PKTool {
             var t = PKTool.getMPTime(mpCost + mp)//可以同时上阵的时间点
             for(var j=0;j<group.length;j++)
             {
-                var id = group[j];
+                var id = Math.floor(group[j]);
+                if(id < 0)
+                    continue;
                 returnArr.push({
                     mid:id,
                     time:t,
@@ -30,7 +32,12 @@ class PKTool {
         var mp = 0;
         for(var j=0;j<group.length;j++)
         {
-            var id = group[j];
+            var id = Math.floor(group[j]);
+            if(id < 0)
+            {
+                mp += -id;
+                continue;
+            }
             var vo = MonsterVO.getObject(id);
             mp += vo.cost;
         }

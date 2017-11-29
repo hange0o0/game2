@@ -1,7 +1,10 @@
 class PKTopItem extends game.BaseItem {
 
     private group: eui.Group;
+    private bg: eui.Image;
+    private img: eui.Image;
     private nameText: eui.Label;
+
 
 
     public removeAble = false;
@@ -20,7 +23,12 @@ class PKTopItem extends game.BaseItem {
     public dataChanged(){
         this.removeAble = false
          this.group.alpha = 1;
-        this.nameText.text = this.data.mid
+
+
+        var vo:any = CM.getCardVO(this.data.mid)
+        this.img.source = vo.getImage();
+        this.bg.source = vo.getBG();
+        this.nameText.text = vo.name
     }
 
     public remove(){

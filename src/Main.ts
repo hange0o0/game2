@@ -186,21 +186,23 @@ class Main extends eui.UILayer {
         GameManager.stage = this.stage;
         GameManager.container = this;
         GameManager.getInstance().init();
-        var LM = LoginManager.getInstance();
-        if(LM.quickPassword)
-        {
-            this.loadingView.showLogin();
-            LoginManager.getInstance().login(LM.lastUser,null)
-        }
-        else
-        {
-            MyTool.removeMC(this.loadingView);
-            egret.setTimeout(function(){
-                RES.loadGroup("preload_png");//预加载第一阶段
-                //RES.loadGroup("preload_jpg");//预加载第一阶段
-            },this,200)
-            LoginUI.getInstance().show();
-        }
+        //var LM = LoginManager.getInstance();
+        //if(LM.quickPassword)
+        //{
+        //    this.loadingView.showLogin();
+        //    LoginManager.getInstance().login(LM.lastUser,null)
+        //}
+        //else
+        //{
+        //    MyTool.removeMC(this.loadingView);
+        //    egret.setTimeout(function(){
+        //        RES.loadGroup("preload_png");//预加载第一阶段
+        //        //RES.loadGroup("preload_jpg");//预加载第一阶段
+        //    },this,200)
+        //    LoginUI.getInstance().show();
+        //}
+
+        PKManager.getInstance().startPlay();
 
 
         //UM.fill({

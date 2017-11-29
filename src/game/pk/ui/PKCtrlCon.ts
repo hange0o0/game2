@@ -55,8 +55,8 @@ class PKCtrlCon extends game.BaseContainer {
             item = new PKCardItem();
             this.cardGroup.addChild(item);
             this.cardObj[i+1] = item;
-            item.y = 20;
-            item.x = i*105 + 10
+            item.y = 30;
+            item.x = i*102 + 20
             item.con = this;
 
             DragManager.getInstance().setDrag(item,true);
@@ -67,7 +67,7 @@ class PKCtrlCon extends game.BaseContainer {
 
         this.dragTarget = new PKCardItem();
         this.dragTarget.isDragMC = true;
-        this.dragTarget.alpha = 0.3
+        this.dragTarget.alpha = 0.6
 
         this.addBtnEvent(this.settingBtn,this.onSetting)
 
@@ -210,7 +210,15 @@ class PKCtrlCon extends game.BaseContainer {
         {
             var player = this.getInfoPlayer(i);
             var mc = this['info' + i];
-            mc.data = player;
+            if(player)
+            {
+                mc.visible = true;
+                mc.data = player;
+            }
+            else
+            {
+                mc.visible = false;
+            }
         }
 
     }
@@ -222,10 +230,11 @@ class PKCtrlCon extends game.BaseContainer {
             this.placeObj[s].onTimer();
         }
         var mp = PD.myPlayer.getMP();
+        var mpRate = PD.myPlayer.nextMpRate()
         for(var s in this.cardObj)
         {
             var item = this.cardObj[s];
-            item.onMpTest(mp);
+            item.onMpTest(mp+mpRate);
         }
         this.renewCard();
         this.renewInfo();
@@ -233,13 +242,11 @@ class PKCtrlCon extends game.BaseContainer {
         //this.barMC.width = 640 * ((PD.myPlayer.getMP() + PD.myPlayer.nextMpRate()) / PKConfig.maxMP);
         //this.rateText.text = PD.myPlayer.getMP() + '/' + PKConfig.maxMP
 
-        var height = 32*(PD.myPlayer.nextMpRate())
+        var height = 32*(mpRate)
         this.costMC.mask = new egret.Rectangle(0,32-height,27,height);
 
         this.costText.text = 'x' + PD.myPlayer.getMP()
         this.timeText.text = '' + DateUtil.getStringBySecond(PD.actionTime/1000).substr(-5)
-
-
     }
 
     private renewInfo(){
@@ -288,7 +295,7 @@ class PKCtrlCon extends game.BaseContainer {
                     item.appear();
                 }
             }
-            this.cardText.text = 'x' + (ObjectUtil.objLength(PD.myPlayer.getHandCard(),true) + PD.myPlayer.hideCard)
+            this.cardText.text = 'x' + (ObjectUtil.objLength(PD.myPlayer.getHandCard(),true) + PD.myPlayer.hideCard.length)
         }
 
     }

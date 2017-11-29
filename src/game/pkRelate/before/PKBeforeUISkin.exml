@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="PKBeforeUISkin" width="600" height="700" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Image source="bg10_png" scale9Grid="26,25,6,7" x="0" width="100%" top="40" bottom="90"/>
+	<e:Group x="204" y="234.63">
+		<e:Image source="icon_add1_png"  y="0" horizontalCenter="0" scaleX="1.5" scaleY="1.5"/>
+		<e:Label text="增加新的进攻阵型"  y="80" stroke="2" size="24" strokeColor="0x331401" x="0"/>
+	</e:Group>
 	<e:Group id="scrollerBG" y="45" width="640" scaleX="0.9" scaleY="0.9" horizontalCenter="0">
-		<e:Rect width="100%" height="290" x="10" y="10" fillColor="0xC18989"/>
-		<e:Rect width="100%" height="145" x="0" y="0" fillColor="0xEFA06E"/>
-		<e:Rect width="100%" height="145" x="10" y="10" fillColor="0xCEB846"/>
-		<e:Rect width="100%" height="145" x="10" y="10" fillColor="0xA1D389"/>
-		<e:Rect width="100%" height="300" x="20" y="20" fillColor="0x8797D1"/>
+		<e:Rect width="100%" height="290" x="20" y="20" fillColor="0xE2A75D"/>
+		<e:Rect width="100%" height="145" x="10" y="10" fillColor="0xF2C379" strokeColor="0x000000"/>
+		<e:Rect width="100%" height="145" x="20" y="20" fillColor="0xE2A75D"/>
+		<e:Rect width="100%" height="145" x="30" y="30" fillColor="0xF2C379"/>
+		<e:Rect width="100%" height="300" x="30" y="30" fillColor="0xE2A75D"/>
 		<e:layout>
 		<e:VerticalLayout gap="0"/>
 		</e:layout>
 	</e:Group>
-	<e:Scroller id="scroller" width="640" anchorOffsetY="0" scaleX="0.9" scaleY="0.9" horizontalCenter="0" top="45" bottom="105">
+	<e:Scroller id="scroller" width="640" anchorOffsetY="0" scaleX="0.9" scaleY="0.9" horizontalCenter="0" top="45" bottom="105" locked="true">
 		<e:Group>
 		<e:List id="list" width="200" height="200" x="142" y="175">
 			<e:layout>

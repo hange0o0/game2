@@ -41,6 +41,7 @@ class PKingUI extends game.BaseUI {
     public hide(){
         super.hide();
         this.removeEventListener(egret.Event.ENTER_FRAME,this.onE,this)
+        console.log(222)
     }
 
     public show(){
@@ -53,8 +54,6 @@ class PKingUI extends game.BaseUI {
     }
 
     public onShow(){
-        this.addEventListener(egret.Event.ENTER_FRAME,this.onE,this)
-
         var PD = PKData.getInstance();
         PD.start();
         this.scrollTime = 0;
@@ -73,6 +72,7 @@ class PKingUI extends game.BaseUI {
         });
 
         this.onE();
+        this.addEventListener(egret.Event.ENTER_FRAME,this.onE,this)
     }
 
     public onE(){

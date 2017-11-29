@@ -6,4 +6,5 @@
 		<e:Image source="bar_bg_png" x="0" y="0"/>
 		<e:Image id="barMC" x="2" y="2" fillMode="clip" width="100" source="bar2_png"/>
 	</e:Group>
+	<e:Image id="callMC" source="skill_type4_png" right="-5" top="-5" scaleX="0.8" scaleY="0.8"/>
 </e:Skin>

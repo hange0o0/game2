@@ -3,6 +3,8 @@ class PKMonsterInfoItem extends game.BaseItem {
     private bg: eui.Image;
     private img: eui.Image;
     private barMC: eui.Image;
+    private callMC: eui.Image;
+
 
 
     public constructor() {
@@ -22,7 +24,7 @@ class PKMonsterInfoItem extends game.BaseItem {
         this.img.source = vo.getImage();
         this.bg.source = vo.getBG();
 
-        this.img.visible = this.data.dieTime > 0;          //@
+        this.callMC.visible = this.data.dieTime > 0;
         this.onTimer();
     }
 

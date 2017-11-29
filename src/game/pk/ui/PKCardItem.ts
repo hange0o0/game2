@@ -3,6 +3,7 @@ class PKCardItem extends game.BaseItem {
     //private desText: eui.Label;
     private bg: eui.Image;
     private img: eui.Image;
+    private cdBar: eui.Rect;
     private spaceGroup: eui.Group;
     private spaceText: eui.Label;
     private costText: eui.Label;
@@ -11,9 +12,11 @@ class PKCardItem extends game.BaseItem {
 
 
 
+
     public con:PKCtrlCon;
 
 
+    private defaultY = 30
     public isDragMC = false;
     public stopDrag;
     public stopMove = true;
@@ -39,10 +42,12 @@ class PKCardItem extends game.BaseItem {
     public dataChanged(){
         if(!this.data)
         {
-            this.y = 20;
-            this.currentState = 'empty'     //@
+            this.stopDrag = true
+            this.y = this.defaultY;
+            this.currentState = 'empty'
             return;
         }
+        this.stopDrag = false
         this.currentState = 'normal'
         var vo:any = CM.getCardVO(this.data.mid)
         this.img.source = vo.getImage();
@@ -81,16 +86,25 @@ class PKCardItem extends game.BaseItem {
             var mp = MonsterVO.getObject(this.data.mid).cost
         else
             var mp = SkillVO.getObject(this.data.mid).cost
+
+        var barW = 92
         if(nowMp < mp)
+        {
             this.costText.textColor = 0xFF0000
+            this.cdBar.visible = true;
+            this.cdBar.height = barW * (mp - nowMp)/mp;
+        }
         else
+        {
             this.costText.textColor = 0xFFFFFF
+            this.cdBar.visible = false;
+        }
     }
 
     public renewChoose(){
         if(this.isDragMC)
             return;
-        this.y = this == this.con.chooseCard?-10:20;
+        this.y = this == this.con.chooseCard?10:this.defaultY;
     }
 }
 

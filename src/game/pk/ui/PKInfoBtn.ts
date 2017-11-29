@@ -21,9 +21,14 @@ class PKInfoBtn extends game.BaseItem {
     }
 
     public dataChanged(){
+        if(!this.data)
+        {
+            return;
+        }
         var PD = PKData.getInstance()
         var player:PKPlayerData = this.data;
-         this.type.source = 'icon_type'+player.type+'_png'
+
+        this.type.source = 'icon_type'+player.type+'_png'
         this.selfIcon.visible = player == PD.myPlayer;
         this.info.text = 'x' + PD.getMonsterSpaceByPlayer(player.id);
     }

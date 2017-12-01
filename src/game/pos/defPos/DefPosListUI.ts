@@ -42,7 +42,7 @@ class DefPosListUI extends game.BaseUI {
 
     public renew(){
         var PM = PosManager.getInstance();
-        var arr = PM.defendList.concat();
+        var arr = PM.defList.concat();
         if(arr.length < PM.maxNum)
             arr.push({empty:true})
 

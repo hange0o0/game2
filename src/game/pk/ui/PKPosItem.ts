@@ -75,7 +75,7 @@ class PKPosItem extends game.BaseItem {
         var preData:PKPosCardData = PKData.getInstance().myPlayer.prePosCard[this.index];
         this.barGroup1.visible = false;
         this.barGroup2.visible = false;
-        this.barGroup2.y = 157;
+        this.barGroup2.y = 160;
         this.cardGroup.visible = false;
         var barWidth = 204
         if(data && data.useEnable())
@@ -91,12 +91,16 @@ class PKPosItem extends game.BaseItem {
                 var maxNum = data.getMaxNum();
                 this.timesText.text = (maxNum - data.num) + ''
                 this.timesBG.visible = maxNum > 0
-                this.barGroup2.y = 175;
+                this.barGroup2.y = 180;
             }
         }
         else if(preData)
         {
             this.renewImg(preData.mid);
+
+            var maxNum = preData.getMaxNum();
+            this.timesText.text = (maxNum - preData.num) + ''
+            this.timesBG.visible = maxNum > 0
         }
         else
         {
@@ -109,6 +113,8 @@ class PKPosItem extends game.BaseItem {
             var cd = preData.getNextCD();
             var maxCD = preData.getMaxCD();
             this.barMC2.width = barWidth * cd / maxCD;
+
+
         }
     }
 

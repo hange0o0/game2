@@ -7,6 +7,7 @@ class MainUI extends game.BaseUI {
         return this._instance;
     }
 
+    private bg: eui.Image;
     private forceText: eui.Label;
     private addForceBtn: eui.Image;
     private energyText: eui.Label;
@@ -21,6 +22,12 @@ class MainUI extends game.BaseUI {
     private b4: MainBottomBtn;
     private defBtn: eui.Button;
     private atkBtn: eui.Button;
+    private mailBtn: eui.Group;
+    private rankBtn: eui.Group;
+    private shopBtn: eui.Group;
+    private settingBtn: eui.Group;
+
+
 
 
     public constructor() {
@@ -37,6 +44,30 @@ class MainUI extends game.BaseUI {
         this.addBtnEvent(this.addEnergyBtn,this.onAddEnergy)
         this.addBtnEvent(this.addDiamondBtn,this.onAddDiamond)
         this.addBtnEvent(this.mapBtn,this.onMap)
+        this.addBtnEvent(this.mailBtn,this.onMail)
+        this.addBtnEvent(this.rankBtn,this.onRank)
+        this.addBtnEvent(this.shopBtn,this.onShop)
+        this.addBtnEvent(this.settingBtn,this.onSetting)
+
+        this.b0.data = {text:'奴隶',source:'main_slave_png',fun:function(){}}
+        this.b1.data = {text:'背包',source:'main_bag_png',fun:function(){}}
+        this.b2.data = {text:'战斗',source:'main_pk_png',fun:function(){}}
+        this.b3.data = {text:'卡牌',source:'main_card_png',fun:function(){}}
+        this.b4.data = {text:'科技',source:'main_tec_png',fun:function(){}}
+    }
+
+    private onMail(){
+
+    }
+    private onRank(){
+
+    }
+    private onShop(){
+
+    }
+    private onSetting(){
+        MainUI.getInstance().hide();
+        LoginUI.getInstance().show();
     }
 
     private onDef(){
@@ -73,21 +104,19 @@ class MainUI extends game.BaseUI {
     }
 
     public onShow(){
+        this.bg.source = Config.localResRoot  + 'main_bg'+UM.type+'.jpg';
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
         this.addPanelOpenEvent(GameEvent.client.force_change,this.renewTop)
         this.addPanelOpenEvent(GameEvent.client.diamond_change,this.renewTop)
         this.addPanelOpenEvent(GameEvent.client.energy_change,this.renewEnergy)
+        this.addPanelOpenEvent(GameEvent.client.pos_change,this.renewPosBtn)
     }
 
-    private renewDefBtn(){
+    private renewPosBtn(){
         var PM = PosManager.getInstance();
-        this.defBtn.label = '防守阵容 ' + PM.defendList.length + '/' + PM.maxNum
-    }
-
-    private renewAtkBtn(){
-        var PM = PosManager.getInstance();
-        this.atkBtn.label = '进攻阵容 ' + PM.defendList.length + '/' + PM.maxNum
+        this.defBtn.label = '防守阵容 ' + PM.defList.length + '/' + PM.maxNum
+        this.atkBtn.label = '进攻阵容 ' + PM.atkList.length + '/' + PM.maxNum
     }
 
     private onTimer(){
@@ -110,7 +139,6 @@ class MainUI extends game.BaseUI {
     public renew(){
         this.renewTop();
         this.renewEnergy();
-        this.renewDefBtn();
-        this.renewAtkBtn();
+        this.renewPosBtn();
     }
 }

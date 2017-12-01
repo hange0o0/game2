@@ -29,6 +29,7 @@ class PKMonsterInfoItem extends game.BaseItem {
     }
 
     public onTimer(){
-       this.barMC.width = 76 * this.data.hp/this.data.maxHp;
+        var barWidth = 204
+       this.barMC.width = barWidth * this.data.hp/this.data.maxHp;
     }
 }

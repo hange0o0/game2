@@ -12,8 +12,7 @@ class PKInfoBtn extends game.BaseItem {
     public childrenCreated() {
         super.childrenCreated();
 
-        this.addBtnEvent(this, this.onClick)
-
+        this.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.onClick,this)
     }
 
     private onClick(){

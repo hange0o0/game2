@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="PKPosItemSkin" width="150" height="200" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
-	<e:Image id="posBG" scaleX="1.2" scaleY="1.2" horizontalCenter="0" source="card_back_bg_png" y="-3.03"/>
-	<e:Group id="cardGroup" y="2.29" width="120" height="145" horizontalCenter="0">
+	<e:Image id="posBG" scaleX="1.25" scaleY="1.25" horizontalCenter="0" source="card_back_bg_png" y="-3.03"/>
+	<e:Group id="cardGroup" y="4.95" width="120" height="145" horizontalCenter="0">
 		<e:Image id="bg" source="border_8_png" scale9Grid="12,12,76,76" left="0" right="0" top="0" bottom="0"/>
-		<e:Image id="img" width="110" height="127" y="8" horizontalCenter="-1"/>
+		<e:Image id="img" width="106" height="125" y="8" horizontalCenter="0"/>
 		<e:Group id="spaceGroup" x="0" y="106.79">
 			<e:Image source="icon_pos_png" y="4.56" x="4.56"/>
 			<e:Label id="spaceText" text="20" x="3.01" size="24" stroke="3" textAlign="center" width="30" y="9.68"/>
@@ -13,11 +13,11 @@
 			<e:Label id="timesText" text="1" x="0.34" y="6.32" size="24" stroke="3" width="30" textAlign="center"/>
 		</e:Group>
 	</e:Group>
-	<e:Group id="barGroup1" y="157.5" scaleX="0.5" scaleY="0.5" horizontalCenter="0">
+	<e:Group id="barGroup1" y="160" scaleX="0.55" scaleY="0.55" horizontalCenter="0">
 		<e:Image source="bar_bg_png" x="0" y="0"/>
 		<e:Image id="barMC1" source="bar1_png" x="2" y="2" fillMode="clip" width="100"/>
 	</e:Group>
-	<e:Group id="barGroup2" y="175.16" scaleX="0.5" scaleY="0.5" horizontalCenter="0">
+	<e:Group id="barGroup2" y="180" scaleX="0.55" scaleY="0.55" horizontalCenter="0">
 		<e:Image source="bar_bg_png" x="0" y="0"/>
 		<e:Image id="barMC2" x="2" y="2" fillMode="clip" width="100" source="bar2_png"/>
 	</e:Group>

@@ -14,5 +14,13 @@ class M99 extends MBase{
             user:user
         })
 
+        if(user.die)
+        {
+            PKData.getInstance().addVideo({
+                type:PKConfig.VIDEO_TEAM_DEF2,
+                user:data.atker
+            })
+        }
+
     }
 }

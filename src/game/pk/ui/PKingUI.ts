@@ -59,7 +59,8 @@ class PKingUI extends game.BaseUI {
         this.scrollTime = 0;
         this.pkVideo.init();
         this.pkCtrlCon.init();
-        this.pkTop.init();
+        this.pkTop.init('PK对战');
+
 
 
         PD.diamondData = PD.addMonster({
@@ -97,9 +98,9 @@ class PKingUI extends game.BaseUI {
                 PKWinUI.getInstance().show();
             else
                 PKFailUI.getInstance().show();
-
+            PKSettingUI.getInstance().hide();
         }
-        else if(TM.now() - this.scrollTime > 5)
+        else if(TM.now() - this.scrollTime > 10)
         {
             this.autoMoveScreen();
         }

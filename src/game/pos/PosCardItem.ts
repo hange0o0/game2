@@ -1,7 +1,7 @@
 class PosCardItem extends game.BaseItem {
     public constructor() {
         super();
-        this.skinName = "CardItemSkin";
+        this.skinName = "PosCardItemSkin";
     }
 
     private bg: eui.Image;
@@ -11,6 +11,8 @@ class PosCardItem extends game.BaseItem {
     private spaceText: eui.Label;
     private costText: eui.Label;
     private skillType: eui.Image;
+    private numText: eui.Label;
+
 
     public childrenCreated() {
         super.childrenCreated();
@@ -46,7 +48,8 @@ class PosCardItem extends game.BaseItem {
 
 
         var useNum = vo.temp[vo.id] || 0;
-        this.nameText.text = vo.name + '('+(3-useNum)+')';
+        this.nameText.text = vo.name
+        this.numText.text = (3-useNum) + '/3';
         this.touchChildren = this.touchEnabled = useNum < 3
     }
 }

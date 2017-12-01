@@ -13,14 +13,14 @@ class CardManager {
         var data = MonsterVO.data;
         for(var s in data)
         {
-            if(data[s].level <= UM.level)
+            if(data[s].level <= 1)
                   this.monsterList[s] = true;
         }
 
         var data = SkillVO.data;
         for(var s in data)
         {
-            if(data[s].level <= UM.level)
+            if(data[s].level <= 1)
                 this.skillList[s] = true;
         }
 

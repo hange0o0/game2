@@ -3,11 +3,13 @@ class PKCardItem extends game.BaseItem {
     //private desText: eui.Label;
     private bg: eui.Image;
     private img: eui.Image;
+    private cdBarBg: eui.Rect;
     private cdBar: eui.Rect;
     private spaceGroup: eui.Group;
     private spaceText: eui.Label;
     private costText: eui.Label;
     private skillType: eui.Image;
+
 
 
 
@@ -92,12 +94,14 @@ class PKCardItem extends game.BaseItem {
         {
             this.costText.textColor = 0xFF0000
             this.cdBar.visible = true;
+            this.cdBarBg.visible = true;
             this.cdBar.height = barW * (mp - nowMp)/mp;
         }
         else
         {
             this.costText.textColor = 0xFFFFFF
             this.cdBar.visible = false;
+            this.cdBarBg.visible = false;
         }
     }
 

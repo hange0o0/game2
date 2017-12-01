@@ -7,19 +7,21 @@ class AtkPosUI extends game.BaseUI {
         return this._instance;
     }
 
+    private scrollerBG: eui.Group;
     private topUI: TopUI;
-    private scrollerBG: eui.Rect;
     private scroller1: eui.Scroller;
     private list1: eui.List;
     private scroller2: eui.Scroller;
     private list2: eui.List;
     private tab: eui.TabBar;
-    private changeBtn: eui.Label;
     private downList: DownList;
     private bottomUI: BottomUI;
-    private deleteBtn: eui.Label;
-    private renameBtn: eui.Label;
-    private saveBtn: eui.Label;
+    private changeBtn: eui.Button;
+    private btnGroup: eui.Group;
+    private renameBtn: eui.Group;
+    private deleteBtn: eui.Group;
+    private saveBtn: eui.Group;
+
 
 
 
@@ -31,6 +33,7 @@ class AtkPosUI extends game.BaseUI {
     public maxCard = 0;
 
     private posName = ''
+    private posData
     private arrayData:eui.ArrayCollection
 
     public constructor() {
@@ -70,15 +73,85 @@ class AtkPosUI extends game.BaseUI {
     }
 
 
+    public changeToServerList(){
+        var arr = [];
+        for(var i=0;i<this.arrayData.length;i++)
+        {
+            arr.push(this.arrayData.getItemAt(i).id)
+        }
+        return arr.join(',');
+    }
+
+    public onClose(){
+        if(!this.posData && this.arrayData.length > 0)
+        {
+            Confirm('还没保存，确定退出吗？',(b)=>{
+                if(b==1)
+                {
+                    this.hide();
+                }
+            })
+            return;
+        }
+        if(this.posData && (this.posData.name != this.posName || this.posData.list != this.changeToServerList()))
+        {
+            Confirm('还没保存，确定退出吗？',(b)=>{
+                if(b==1)
+                {
+                    this.hide();
+                }
+            })
+            return;
+        }
+        this.hide();
+    }
+
+
     private onDelete(){
-
+        Confirm('确定要删除该阵法吗？',(b)=>{
+            if(b==1)
+            {
+                PosManager.getInstance().deletePos('atk',this.posData.id,()=>{
+                    this.hide();
+                })
+            }
+        })
     }
+
     private onRename(){
-
+        PosNameUI.getInstance().show(this.posName)
+        PosNameUI.getInstance().once('nameChange',this.onNameChange,this)
     }
+
+    private onNameChange(e){
+        this.posName = e.data
+        this.renewTitle();
+    }
+
     private onSave(){
-
+        if(this.arrayData.length == 0)
+        {
+            Alert('必须上阵最少一张卡牌')
+            return
+        }
+        var serverList = this.changeToServerList();
+        if(this.posData)
+        {
+            PosManager.getInstance().changePos('atk',this.posData.id,
+                this.posName,serverList,this.posData.close,()=>{
+                    ShowTips('保存成功！')
+                })
+        }
+        else
+        {
+            PosManager.getInstance().addPos('atk',
+                this.posName,serverList,()=>{
+                    ShowTips('保存成功！')
+                    this.posData = PosManager.getInstance().atkList[this.index]
+                })
+        }
     }
+
     private onChange(){
          AtkPosChangeUI.getInstance().show(this.arrayData)
     }
@@ -153,7 +226,7 @@ class AtkPosUI extends game.BaseUI {
 
     public renew(){
         var PM = PosManager.getInstance();
-        var data = PM.atkList[this.index]
+        var data = this.posData = PM.atkList[this.index]
         this.useCard = {};
         this.maxCard = UM.level + 20;
         if(data)
@@ -168,11 +241,13 @@ class AtkPosUI extends game.BaseUI {
                 arr.push({id:id})
             }
             this.arrayData = new eui.ArrayCollection(arr)
+            this.btnGroup.addChildAt(this.deleteBtn,1)
         }
         else
         {
             this.posName = '未命名' + this.index;
             this.arrayData = new eui.ArrayCollection([])
+            MyTool.removeMC(this.deleteBtn)
         }
         this.list1.dataProvider = this.arrayData
         this.renewTitle();

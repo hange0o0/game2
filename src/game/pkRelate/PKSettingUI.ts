@@ -7,6 +7,10 @@ class PKSettingUI extends game.BaseWindow {
         return this._instance;
     }
 
+    private cancelBtn: eui.Button;
+    private okBtn: eui.Button;
+
+
     public constructor() {
         super();
         this.skinName = "PKSettingUISkin";
@@ -14,6 +18,15 @@ class PKSettingUI extends game.BaseWindow {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.addBtnEvent(this.okBtn,this.onClick)
+        this.addBtnEvent(this.cancelBtn,this.hide)
+    }
+
+    private onClick(){
+        var PD = PKData.getInstance();
+        PD.isGameOver = true
+        PD.myPlayer.teamData.hp = 0;
+        this.hide();
     }
 
     public show(){

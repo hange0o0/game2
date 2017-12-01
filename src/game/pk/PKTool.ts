@@ -38,7 +38,7 @@ class PKTool {
                 mp += -id;
                 continue;
             }
-            var vo = MonsterVO.getObject(id);
+            var vo = CM.getCardVO(id);
             mp += vo.cost;
         }
         return mp;

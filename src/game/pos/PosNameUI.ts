@@ -11,7 +11,7 @@ class PosNameUI extends game.BaseWindow {
     private okBtn: eui.Button;
     private closeBtn: eui.Image;
 
-
+    private lastName;
     public constructor() {
         super();
         this.skinName = "PosNameUISkin";
@@ -19,9 +19,22 @@ class PosNameUI extends game.BaseWindow {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.addBtnEvent(this.okBtn,this.onOK)
+        this.addBtnEvent(this.closeBtn,this.hide)
     }
 
-    public show(){
+    private onOK(){
+        if(!this.nameText.text)
+        {
+            Alert('还没输入名称')
+            return;
+        }
+        this.dispatchEventWith('nameChange',false,this.nameText.text);
+        this.hide();
+    }
+
+    public show(v?){
+        this.lastName = v;
         super.show()
     }
 
@@ -35,6 +48,6 @@ class PosNameUI extends game.BaseWindow {
     }
 
     public renew(){
-
+        this.nameText.text = this.lastName;
     }
 }

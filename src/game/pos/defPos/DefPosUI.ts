@@ -7,6 +7,8 @@ class DefPosUI extends game.BaseUI {
         return this._instance;
     }
 
+    private scrollerBG: eui.Image;
+    private arrowBtn: eui.Image;
     private topUI: TopUI;
     private scroller1: eui.Scroller;
     private list1: eui.List;
@@ -15,9 +17,12 @@ class DefPosUI extends game.BaseUI {
     private tab: eui.TabBar;
     private downList: DownList;
     private bottomUI: BottomUI;
-    private deleteBtn: eui.Label;
-    private renameBtn: eui.Label;
-    private saveBtn: eui.Label;
+    private renameBtn: eui.Group;
+    private deleteBtn: eui.Group;
+    private saveBtn: eui.Group;
+    private btnGroup: eui.Group;
+
+
 
 
 
@@ -30,6 +35,7 @@ class DefPosUI extends game.BaseUI {
     public useCard = {}
 
     private posName = ''
+    private posData
     private arrayData:eui.ArrayCollection
     private itemWidth = 220;
 
@@ -40,16 +46,18 @@ class DefPosUI extends game.BaseUI {
 
     public childrenCreated() {
         super.childrenCreated();
-        this.bottomUI.setHide(this.hide,this);
+        this.bottomUI.setHide(this.onClose,this);
         //this.keyBoard.hide();
         //this.keyBoard.addEventListener('key_change',this.onKeyBoard,this)
 
         this.addBtnEvent(this.deleteBtn,this.onDelete)
         this.addBtnEvent(this.renameBtn,this.onRename)
         this.addBtnEvent(this.saveBtn,this.onSave)
+        this.addBtnEvent(this.arrowBtn,this.onArrow)
 
         this.scroller1.viewport = this.list1;
         this.list1.itemRenderer = DefPosItem
+        this.scroller1.addEventListener(egret.Event.CHANGE,this.onScroll,this)
 
         this.scroller2.viewport = this.list2;
         this.list2.itemRenderer = PosCardItem
@@ -63,20 +71,98 @@ class DefPosUI extends game.BaseUI {
         this.tab.selectedIndex = 0;
     }
 
+    private onScroll(){
+        this.scrollerBG.x = -this.scroller1.viewport.scrollH * 0.1;
+        if(this.scrollerBG.x < 640 - this.scrollerBG.width)
+            this.scrollerBG.x = 640 - this.scrollerBG.width
+    }
+
+    private onArrow(){
+         if(Config.isDebug)
+         {
+             this.addItem({id:-1});
+         }
+    }
+
+    public changeToServerList(){
+        var arr = [];
+         for(var i=0;i<this.arrayData.length;i++)
+         {
+             arr.push(this.arrayData.getItemAt(i).ids.join('|'))
+         }
+        return arr.join(',');
+    }
+
+    public onClose(){
+        if(!this.posData && this.arrayData.length > 0)
+        {
+            Confirm('还没保存，确定退出吗？',(b)=>{
+                if(b==1)
+                {
+                    this.hide();
+                }
+            })
+            return;
+        }
+        if(this.posData && (this.posData.name != this.posName || this.posData.list != this.changeToServerList()))
+        {
+            Confirm('还没保存，确定退出吗？',(b)=>{
+                if(b==1)
+                {
+                    this.hide();
+                }
+            })
+            return;
+        }
+        this.hide();
+    }
+
 
     private onDelete(){
-
+         Confirm('确定要删除该阵法吗？',(b)=>{
+             if(b==1)
+             {
+                 PosManager.getInstance().deletePos('def',this.posData.id,()=>{
+                     this.hide();
+                 })
+             }
+         })
     }
+
     private onRename(){
-
+        PosNameUI.getInstance().show(this.posName)
+        PosNameUI.getInstance().once('nameChange',this.onNameChange,this)
     }
+
+    private onNameChange(e){
+        this.posName = e.data
+        this.renewTitle();
+    }
+
     private onSave(){
-
+        if(this.arrayData.length == 0)
+        {
+            Alert('必须上阵最少一张卡牌')
+            return
+        }
+        var serverList = this.changeToServerList();
+         if(this.posData)
+         {
+             PosManager.getInstance().changePos('def',this.posData.id,
+                 this.posName,serverList,this.posData.close,()=>{
+                     ShowTips('保存成功！')
+             })
+         }
+        else
+         {
+             PosManager.getInstance().addPos('def',
+                 this.posName,serverList,()=>{
+                     ShowTips('保存成功！')
+                     this.posData = PosManager.getInstance().defList[this.index]
+                 })
+         }
     }
 
-    private getListData(){
-        return this.arrayData.source;
-    }
 
     private onDownListSelect(){
         if(this.tab.selectedIndex == 0)
@@ -91,24 +177,7 @@ class DefPosUI extends game.BaseUI {
         this.renewList();
     }
 
-    //选中
-    private onSelect(){
-        var item = this.list2.selectedItem;
-        if(this.useCard[item.id] && this.useCard[item.id] >= 3)
-            return;
-        this.useCard[item.id] = (this.useCard[item.id] || 0) + 1
 
-        var index = Math.min(this.arrayData.length,Math.floor((this.scroller1.viewport.scrollH+this.itemWidth/2)/this.itemWidth));
-        this.arrayData.addItemAt({ids:[item.id],cd:0,preLen:0},index);
-
-        this.resetDefData(true);
-        this.justRenewList2();
-        this.renewTitle();
-
-        egret.Tween.removeTweens(this.scroller1.viewport)
-        var tw = egret.Tween.get(this.scroller1.viewport)
-        tw.to({scrollH:(index+1)*this.itemWidth},100)
-    }
 
     private renewDownList(){
         this.downList.height = GameManager.stage.stageHeight - 100 - this.downList.y - 10;
@@ -150,7 +219,7 @@ class DefPosUI extends game.BaseUI {
 
     public renew(){
         var PM = PosManager.getInstance();
-        var data = PM.atkList[this.index]
+        var data = this.posData = PM.defList[this.index]
         this.useCard = {};
         if(data)
         {
@@ -169,11 +238,13 @@ class DefPosUI extends game.BaseUI {
                 arr.push({ids:ids,cd:0,preLen:0})
             }
             this.arrayData = new eui.ArrayCollection(arr)
+            this.btnGroup.addChildAt(this.deleteBtn,1)
         }
         else
         {
             this.posName = '未命名' + this.index;
             this.arrayData = new eui.ArrayCollection([])
+            MyTool.removeMC(this.deleteBtn)
         }
         this.resetDefData();
         this.list1.dataProvider = this.arrayData
@@ -188,16 +259,47 @@ class DefPosUI extends game.BaseUI {
         for(var i=0;i<this.arrayData.length;i++)
         {
             var item = this.arrayData.getItemAt(i);
-            var mp = PKTool.getGroupMp(item.ids);
-            item.cd = PKTool.getMPTime(mp + mpCost);
-            mpCost += mp;
-
             item.preLen = preLen;
-            preLen = item.ids.length;
+            if(item.ids[0] < 0)
+            {
+                var mp = Math.abs(item.ids[0]);
+                item.cd = PKTool.getMPTime(mp + mpCost);
+                mpCost += mp;
+                preLen = 5;
+            }
+            else
+            {
+                var mp = PKTool.getGroupMp(item.ids);
+                item.cd = PKTool.getMPTime(mp + mpCost);
+                mpCost += mp;
+                preLen = item.ids.length;
+            }
         }
 
         if(renew)
             MyTool.renewList(this.list1);
+    }
+
+    //选中
+    private onSelect(){
+        var item = this.list2.selectedItem;
+        if(this.useCard[item.id] && this.useCard[item.id] >= 3)
+            return;
+        this.useCard[item.id] = (this.useCard[item.id] || 0) + 1
+        this.addItem(item)
+    }
+
+    private addItem(item){
+        var index = Math.min(this.arrayData.length,Math.floor((this.scroller1.viewport.scrollH+this.itemWidth/2)/this.itemWidth));
+        this.arrayData.addItemAt({ids:[item.id],cd:0,preLen:0},index);
+
+        this.resetDefData(true);
+        this.justRenewList2();
+        this.renewTitle();
+
+        egret.Tween.removeTweens(this.scroller1.viewport)
+        var tw = egret.Tween.get(this.scroller1.viewport,{onChange:()=>{this.onScroll()}})
+        tw.to({scrollH:(index+1)*this.itemWidth},100)
     }
 
     public deleteItem(data){
@@ -228,7 +330,10 @@ class DefPosUI extends game.BaseUI {
         this.arrayData.removeItemAt(index);
 
         var preItem = this.arrayData.getItemAt(index - 1);
-        preItem.ids = preItem.ids.concat(data.ids);
+        if(preItem.ids[0]<0)
+            preItem.ids[0] += data.ids[0];
+        else
+            preItem.ids = preItem.ids.concat(data.ids);
 
         this.resetDefData(true);
 
@@ -241,7 +346,7 @@ class DefPosUI extends game.BaseUI {
         if(viewport.scrollH + viewport.width > newWidth)
         {
             egret.Tween.removeTweens(this.scroller1.viewport)
-            var tw = egret.Tween.get(this.scroller1.viewport)
+            var tw = egret.Tween.get(this.scroller1.viewport,{onChange:()=>{this.onScroll()}})
             tw.to({scrollH:Math.max(0,newWidth - viewport.width)},100)
         }
     }

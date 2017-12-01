@@ -2,7 +2,8 @@
 <e:Skin class="PKCtrlConSkin" width="640" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing" height="520">
 	<e:Image x="0" width="100%" scale9Grid="17,16,13,16" top="50" height="300" fillMode="clip" source="bg15_png"/>
 	<e:Image source="pk_pos_bg_jpg" x="0" y="48"/>
-	<e:Image source="line_png" y="36.85" scale9Grid="42,2,258,18" width="700" horizontalCenter="0"/>
+	<e:Image source="bg17_png" x="0" scaleY="-1" top="50" height="60" scale9Grid="12,0,51,41" width="400"/>
+	<e:Image source="line_png" y="36.85" scale9Grid="42,2,258,18" left="-30" right="-30" scaleX="1.2" scaleY="1.2"/>
 	<e:Image x="0" width="640" height="190" bottom="-10" source="bg15_png" scale9Grid="16,13,19,11"/>
     <e:Group id="cardGroup" width="640" height="180" x="2" anchorOffsetX="0" bottom="0">
 	    </e:Group>
@@ -33,16 +34,16 @@
 			<e:Image id="costMC" source="icon_cost_png" x="4.0100000000000104" y="4.999999999999996"/>
 			<e:Label id="costText" text="Label" x="42.010000000000026" y="11.000000000000007" size="24" stroke="2"/>
 		</e:Group>
+		<e:Group x="0" y="0" width="130">
+			<e:Image x="0" source="icon_clock_png" scaleX="1.4" scaleY="1.4" y="5"/>
+			<e:Label id="timeText" text="Label" x="42.010000000000026" y="11.000000000000007" size="24" stroke="2"/>
+		</e:Group>
 		<e:Group x="0" y="0" width="120">
 			<e:Image x="0" scaleX="0.5" scaleY="0.5" source="icon_card_png" y="3"/>
 			<e:Label id="cardText" text="Label" x="42" y="11.000000000000007" size="24" stroke="2"/>
 		</e:Group>
-		<e:Group x="0" y="0">
-			<e:Image x="0" source="icon_clock_png" scaleX="1.4" scaleY="1.4" y="5"/>
-			<e:Label id="timeText" text="Label" x="42.010000000000026" y="11.000000000000007" size="24" stroke="2"/>
-		</e:Group>
 		<e:layout>
-			<e:HorizontalLayout gap="30"/>
+			<e:HorizontalLayout gap="0"/>
 		</e:layout>
 	</e:Group>
 </e:Skin>

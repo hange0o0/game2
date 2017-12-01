@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="PKTopSkin" width="640" height="200" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Image x="0" width="640" height="160" y="-10" source="bg15_png" scale9Grid="13,14,22,21"/>
-	<e:Label id="hpText1" text="Label" size="26" left="10" stroke="5" bottom="0"/>
-	<e:Label id="hpText2" text="Label" size="26" right="10" stroke="5" bottom="0"/>
+<e:Skin class="PKTopSkin" width="640" height="230" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<e:Image x="0" width="640" height="160" y="10" source="bg15_png" scale9Grid="13,14,22,21"/>
+	<e:Group id="group1" x="10" y="170">
+		<e:Group x="0" y="0" width="100">
+			<e:Label id="hpText1" text="15" size="26" stroke="5" x="60" y="13"/>
+			<e:Image source="icon_love_png" x="0" y="0"/>
+		</e:Group>
+		<e:Group id="defScoreGroup1" x="110" y="0" width="120" height="50">
+			<e:Label id="defGroupText1" text="+52" size="26" stroke="5" textAlign="center" textColor="0xFFFF00" width="50" horizontalCenter="15" verticalCenter="0"/>
+			<e:Image source="icon_def2_png" x="0" scaleX="1.1" scaleY="1.1" verticalCenter="0"/>
+		</e:Group>
+		<e:Group id="defGroup1" x="110" y="0" width="120">
+			<e:Label id="defText1" text="+10%" size="26" stroke="5" x="50" y="13"/>
+			<e:Image source="icon_def1_png" x="0" y="0" scaleX="0.65" scaleY="0.65"/>
+		</e:Group>
+		<e:layout>
+			<e:HorizontalLayout verticalAlign="middle"/>
+		</e:layout>
+	</e:Group>
+	<e:Group id="group2" y="170" right="10">
+		<e:Group id="defGroup2" x="110" y="0" width="120">
+			<e:Label id="defText2" text="+10%" size="26" stroke="5" x="50" y="13"/>
+			<e:Image source="icon_def1_png" x="0" y="0" scaleX="0.65" scaleY="0.65"/>
+		</e:Group>
+		<e:Group id="defScoreGroup2" x="110" y="0" width="120" height="50">
+			<e:Label id="defGroupText2" text="+52" size="26" stroke="5" textAlign="center" textColor="0xffff00" width="50" horizontalCenter="15" verticalCenter="0"/>
+			<e:Image x="0" scaleX="1.1" scaleY="1.1" source="icon_def2_png" verticalCenter="0"/>
+		</e:Group>
+		<e:Group x="0" y="0" width="100">
+		<e:Label id="hpText2" text="15" size="26" stroke="5" x="60" y="13"/>
+		<e:Image source="icon_love_png" x="0" y="0"/>
+		</e:Group>
+		<e:layout>
+		<e:HorizontalLayout verticalAlign="middle"/>
+		</e:layout>
+	</e:Group>
+	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
 </e:Skin>

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <e:Skin class="MyTabItemSkin" currentState="up" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing"  states="up,upAndSelected"  height="53">
-	<e:Image source="tab2_png" scale9Grid="20,18,10,21" y="0" left="0" right="0" source.up="tab1_png" y.up="5"/>
+	<e:Image source="tab2_png" scale9Grid="20,18,10,21" left="0" right="0" source.up="tab1_png" top="0" bottom="0" top.up="5" bottom.up="0"/>
 
 
 

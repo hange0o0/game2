@@ -58,6 +58,7 @@
     "src/game/pkRelate/before/PKBeforeUISkin.exml",
     "src/game/pkRelate/result/PKFailUISkin.exml",
     "src/game/pkRelate/result/PKWinUISkin.exml",
+    "src/game/pos/PosCardItemSkin.exml",
     "src/game/pos/PosListHeadItemSkin.exml",
     "src/game/pos/PosNameUISkin.exml",
     "src/game/pos/atkPos/AtkPosChangeUISkin.exml",

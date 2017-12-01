@@ -57,58 +57,77 @@ class DefPosItem extends game.BaseItem {
     public dataChanged(){
         var ids = this.data.ids;
         this.onRemove();
+        this.addEventListener(egret.Event.REMOVED_FROM_STAGE,this.onRemove,this)
 
-        //var haveSkill = false
-        if(ids.length == 1)
+        if(ids.length == 1 && ids[0] < 0)
         {
-             this.deleteBtn.visible = true
-             this.splitBtn.visible = false
-
-            this.cardItem.visible = true;
+            this.deleteBtn.visible = true
+            this.splitBtn.visible = false
+            this.cardItem.visible = false;
             this.group.visible = false;
-            this.cardItem.data = CM.getCardVO(ids[0]);
-
-            //haveSkill =  !this.cardItem.data.isMonster
-            this.tw1.setPaused(false);
+            this.cdText.text = (-ids[0]) + ''
+            this.mergeBtn.visible = this.data.preLen == 5;
         }
         else
         {
-            this.deleteBtn.visible = false
-            this.splitBtn.visible = true
-
-            this.cardItem.visible = false;
-            this.group.visible = true;
-            this.group.removeChildren();
-            for(var i=0;i<ids.length;i++)
+            var haveSkill = false
+            if(ids.length == 1)
             {
-                var item = this['c' + i];
-                this.group.addChild(item);
-                item.data = ids[i];
-                //if(!CM.getCardVO(item.data).isMonster)
-                //    haveSkill = true;
+
+                this.deleteBtn.visible = true
+                this.splitBtn.visible = false
+
+                this.cardItem.visible = true;
+                this.group.visible = false;
+                this.cardItem.data = CM.getCardVO(ids[0]);
+
+                haveSkill =  !this.cardItem.data.isMonster
+                this.tw1.setPaused(false);
+
+
+            }
+            else
+            {
+                this.deleteBtn.visible = false
+                this.splitBtn.visible = true
+
+                this.cardItem.visible = false;
+                this.group.visible = true;
+                this.group.removeChildren();
+                for(var i=0;i<ids.length;i++)
+                {
+                    var item = this['c' + i];
+                    this.group.addChild(item);
+                    item.data = ids[i];
+                    if(!CM.getCardVO(item.data).isMonster)
+                        haveSkill = true;
+                }
+
+                this.tw2.setPaused(false);
+
             }
 
-            this.tw2.setPaused(false);
+            if(haveSkill)
+                this.posBG.source = 'pos2_png'
+            else
+                this.posBG.source = 'pos1_png'
 
+            var cd = Math.round(this.data.cd/1000)
+            if(cd <= 60)
+            {
+                this.cdText.text = MyTool.toFixed(cd,1) + 's'
+            }
+            else
+            {
+                this.cdText.text = Math.floor(cd/60) + 'm ' +(cd%60) + 's'
+            }
+            this.mergeBtn.visible = ids.length + this.data.preLen <= 4;
         }
 
-        //if(haveSkill)
-        //    this.posBG.source = 'pos2_png'
-        //else
-        //    this.posBG.source = 'pos1_png'
 
-        this.mergeBtn.visible = ids.length + this.data.preLen <= 4;
-        var cd = Math.round(this.data.cd/1000)
-        if(cd <= 60)
-        {
-            this.cdText.text = MyTool.toFixed(cd,1) + 's'
-        }
-        else
-        {
-            this.cdText.text = Math.floor(cd/60) + 'm ' +(cd%60) + 's'
-        }
 
-        this.addEventListener(egret.Event.REMOVED_FROM_STAGE,this.onRemove,this)
+
+
     }
 
     private onRemove(){

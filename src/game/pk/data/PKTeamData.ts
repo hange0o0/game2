@@ -6,7 +6,6 @@ class PKTeamData {
 
 
     public hp  = 0 //城堡的血
-    public maxhp  = 0
     public def  = 0
 
     public members = [];
@@ -21,9 +20,6 @@ class PKTeamData {
         for (var key in obj) {
             this[key] = obj[key];
         }
-        this.maxhp = this.hp
-
-
     }
 
     public reInit(){
@@ -35,7 +31,7 @@ class PKTeamData {
         if(!this.stateObj[state])
             this.stateObj[state] = [];
         this.stateObj[state].push(posCard)
-        console.log('add')
+        //console.log('add')
     }
     //
     public testState(state,target:PKMonsterData){

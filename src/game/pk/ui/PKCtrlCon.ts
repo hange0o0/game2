@@ -75,7 +75,7 @@ class PKCtrlCon extends game.BaseContainer {
     }
 
     private onSetting(){
-
+         PKSettingUI.getInstance().show();
     }
 
 
@@ -132,6 +132,7 @@ class PKCtrlCon extends game.BaseContainer {
             this.cardObj[this.chooseCard.data.cardPos].data = null;
             this.chooseCard = null
             this.needRenewCard = true
+            this.renewCard()
             return true;
         }
         return false;

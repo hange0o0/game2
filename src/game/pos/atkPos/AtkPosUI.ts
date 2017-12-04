@@ -138,7 +138,7 @@ class AtkPosUI extends game.BaseUI {
         if(this.posData)
         {
             PosManager.getInstance().changePos('atk',this.posData.id,
-                this.posName,serverList,this.posData.close,()=>{
+                this.posName,serverList,()=>{
                     ShowTips('保存成功！')
                 })
         }
@@ -184,6 +184,14 @@ class AtkPosUI extends game.BaseUI {
         this.arrayData.addItem({id:item.id})
         this.justRenewList2();
         this.renewTitle();
+        this.once(egret.Event.ENTER_FRAME,function(){
+            if(this.scroller1.viewport.scrollV < this.scroller1.viewport.contentHeight -  this.scroller1.viewport.height)
+            {
+                this.scroller1.viewport.scrollV = this.scroller1.viewport.contentHeight -  this.scroller1.viewport.height
+                this.onScroll();
+            }
+        },this)
+
     }
 
     private renewDownList(){
@@ -220,6 +228,7 @@ class AtkPosUI extends game.BaseUI {
     }
 
     public onShow(){
+        this.maxCard = PosManager.getInstance().maxPosNum();
         this.renew();
         //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
     }
@@ -228,15 +237,14 @@ class AtkPosUI extends game.BaseUI {
         var PM = PosManager.getInstance();
         var data = this.posData = PM.atkList[this.index]
         this.useCard = {};
-        this.maxCard = UM.level + 20;
         if(data)
         {
-            this.posName = data.name;
+            this.posName = Base64.decode(data.name) || '未命名';
             var arr = [];
-
-            for(var i=0;i<data.list.length;i++)
+            var list = data.list.split(',')
+            for(var i=0;i<list.length;i++)
             {
-                var id = data.list[i];
+                var id = list[i];
                 this.useCard[id] = (this.useCard[id] || 0) + 1;
                 arr.push({id:id})
             }
@@ -266,6 +274,7 @@ class AtkPosUI extends game.BaseUI {
 
     public justRenewList2(){
         MyTool.renewList(this.list2)
+        this.renewTitle();
     }
 
     private renewList(){

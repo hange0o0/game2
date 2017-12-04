@@ -84,6 +84,15 @@ class PKTopUI extends game.BaseContainer {
         {
             this.freeItem(this.itemArr.pop())
         }
+        for(var i=0;i<7;i++)
+        {
+            var item = this.createItem();
+            this.itemArr.push(item)
+            item.x = this.getX(i);
+            this.addChild(item);
+            item.data = null;
+        }
+
 
         MyTool.removeMC(this.defGroup1)
         MyTool.removeMC(this.defGroup2)
@@ -91,6 +100,8 @@ class PKTopUI extends game.BaseContainer {
         this.group2.addChildAt(this.defScoreGroup2,0)
         this.defGroupText1.text = '0'
         this.defGroupText2.text = '0'
+
+
     }
 
     public renewHp(){
@@ -135,7 +146,7 @@ class PKTopUI extends game.BaseContainer {
             egret.Tween.removeTweens(item)
             var tw = egret.Tween.get(item)
             tw.to({x:targetX},Math.abs(item.x - targetX)*2)
-            if(targetX >= this.getX(8))
+            if(targetX >= this.getX(7))
             {
                 item.disAppear();
             }

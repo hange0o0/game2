@@ -34,6 +34,7 @@ class GameEvent {
     public static pos = {
         add_pos:'pos.add_pos',
         change_pos:'pos.change_pos',
+        change_close:'pos.change_close',
         delete_pos:'pos.delete_pos'
     }
 

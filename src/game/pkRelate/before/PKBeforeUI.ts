@@ -15,9 +15,12 @@ class PKBeforeUI extends game.BaseWindow {
     private rightBtn: eui.Image;
     private leftBtn: eui.Image;
     private closeBtn: eui.Image;
+    private nameText: eui.Label;
+
 
 
     public index
+    public dataIn
     public constructor() {
         super();
         this.skinName = "PKBeforeUISkin";
@@ -48,7 +51,15 @@ class PKBeforeUI extends game.BaseWindow {
     }
 
     private onStart(){
-
+        var PM = PosManager.getInstance();
+        var data = PM.atkList[this.index];
+        if(!data)
+        {
+            Alert('还没设置出战卡组',()=>{
+                this.onListClick();
+            })
+            return;
+        }
     }
 
     private onLeft(){
@@ -70,8 +81,15 @@ class PKBeforeUI extends game.BaseWindow {
         this.renew();
     }
 
-    public show(v?){
-        this.index = v;
+    public show(dataIn?){
+        this.dataIn = dataIn;
+
+        this.index = SharedObjectManager.getInstance().getMyValue('pk_choose') || 0
+        var PM = PosManager.getInstance();
+        if(this.index >= PM.atkList.length)
+            this.index = 0;
+
+
         super.show()
     }
 
@@ -80,6 +98,7 @@ class PKBeforeUI extends game.BaseWindow {
     }
 
     public onShow(){
+        this.titleText.text = this.dataIn.name;
         this.renew();
         //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
     }
@@ -90,12 +109,12 @@ class PKBeforeUI extends game.BaseWindow {
         if(data)
         {
             this.scrollerBG.visible = false
-            this.titleText.text = '新建阵容'
+            this.nameText.text = '新建阵容'
         }
         else
         {
             this.scrollerBG.visible = true
-            this.titleText.text = data.name;
+            this.nameText.text = data.name;
             this.list.dataProvider = new eui.ArrayCollection(data.list);
         }
 

@@ -19,7 +19,9 @@ class PosListHeadItem extends game.BaseItem {
     }
 
     public dataChanged(){
-
+        var vo:any = CM.getCardVO(this.data);
+        this.img.source = vo.getImage();
+        this.bg.source = vo.getBG();
     }
 
 }

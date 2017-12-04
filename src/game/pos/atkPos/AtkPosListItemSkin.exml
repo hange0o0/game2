@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="AtkPosListItemSkin" width="620" height="140" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="normal,add" >
+<e:Skin class="AtkPosListItemSkin" width="620" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="normal,add"  minHeight="140">
 	<e:Image source="block2_png" x="0" y="0" scale9Grid="9,8,154,156" width="100%" height="100%"/>
 	<e:Label id="desText" text="Label" x="30" y="25" includeIn="normal" size="24" stroke="2"/>
 	<e:Image source="icon_add1_png" horizontalCenter="0" verticalCenter="0" horizontalCenter.add="0.5" verticalCenter.add="-16.5" includeIn="add"/>
-	<e:Label text="增加新的进攻阵型" includeIn="add" y="86.63" stroke="2" size="24" horizontalCenter="0" strokeColor="0x331401"/>
-	<e:List id="list" width="562" height="50" y="67" x="29" includeIn="normal">
+	<e:Label text="增加新的进攻阵容" includeIn="add" y="110.63" stroke="2" size="24" horizontalCenter="0" strokeColor="0x331401"/>
+	<e:List id="list" width="572" includeIn="normal" top="70" bottom="20" horizontalCenter="0">
 		<e:layout>
-			<e:HorizontalLayout gap="8"/>
+			<e:TileLayout horizontalGap="8" verticalGap="8"/>
 		</e:layout>
 	</e:List>
 </e:Skin>

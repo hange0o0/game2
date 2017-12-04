@@ -45,6 +45,7 @@ class ConfirmUI extends game.BaseWindow {
         var hh = GameManager.container.height;
         this.x = (ww - this.width) / 2;
         this.y = (hh - this.height) / 2;
+        this.closeBtn.visible = false;
     }
 
     private onClick(){

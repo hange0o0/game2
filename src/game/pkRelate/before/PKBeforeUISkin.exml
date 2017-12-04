@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="PKBeforeUISkin" width="600" height="700" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Image source="bg10_png" scale9Grid="26,25,6,7" x="0" width="100%" top="40" bottom="90"/>
+<e:Skin class="PKBeforeUISkin" width="600" height="720" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="bg10_png" scale9Grid="26,25,6,7" x="0" width="100%" top="40" bottom="110"/>
 	<e:Group x="204" y="234.63">
 		<e:Image source="icon_add1_png"  y="0" horizontalCenter="0" scaleX="1.5" scaleY="1.5"/>
-		<e:Label text="增加新的进攻阵型"  y="80" stroke="2" size="24" strokeColor="0x331401" x="0"/>
+		<e:Label text="增加新的进攻阵容"  y="80" stroke="2" size="24" strokeColor="0x331401" x="0"/>
 	</e:Group>
-	<e:Group id="scrollerBG" y="45" width="640" scaleX="0.9" scaleY="0.9" horizontalCenter="0">
+	<e:Group id="scrollerBG" y="45" width="640" scaleX="0.9" scaleY="0.9" horizontalCenter="0" visible="false">
 		<e:Rect width="100%" height="290" x="20" y="20" fillColor="0xE2A75D"/>
 		<e:Rect width="100%" height="145" x="10" y="10" fillColor="0xF2C379" strokeColor="0x000000"/>
 		<e:Rect width="100%" height="145" x="20" y="20" fillColor="0xE2A75D"/>
@@ -15,7 +15,7 @@
 		<e:VerticalLayout gap="0"/>
 		</e:layout>
 	</e:Group>
-	<e:Scroller id="scroller" width="640" anchorOffsetY="0" scaleX="0.9" scaleY="0.9" horizontalCenter="0" top="45" bottom="105" locked="true">
+	<e:Scroller id="scroller" width="640" anchorOffsetY="0" scaleX="0.9" scaleY="0.9" horizontalCenter="0" top="45" bottom="125">
 		<e:Group>
 		<e:List id="list" width="200" height="200" x="142" y="175">
 			<e:layout>
@@ -27,7 +27,11 @@
 	<e:Image source="title_bg3_png" y="0" scale9Grid="70,9,62,61" left="-30" right="-30" scaleX="1.2" scaleY="1.2"/>
 	<e:Label id="titleText" text="进攻阵容1" y="10" horizontalCenter="0" stroke="2" size="24"/>
 	<e:Button id="startBtn" label="战斗开始" skinName="Btn5Skin" horizontalCenter="0.5" bottom="0" width="220"/>
-	<e:Image id="rightBtn" source="arrow1_png" right="100" bottom="15"/>
-	<e:Image id="leftBtn" source="arrow1_png" scaleX="-1" left="100" bottom="15"/>
+	<e:Image id="rightBtn" source="arrow1_png" right="100" bottom="30"/>
+	<e:Image id="leftBtn" source="arrow1_png" scaleX="-1" left="100" bottom="30"/>
 	<e:Image id="closeBtn" source="icon_error_png" top="-6" right="0"/>
+	<e:Group y="582" horizontalCenter="0">
+		<e:Image source="border_4_png" y="0" width="200" scale9Grid="24,19,3,10" height="44" x="0"/>
+		<e:Label id="nameText" text="Label" y="10.670000000000073" size="22" stroke="2" horizontalCenter="0"/>
+	</e:Group>
 </e:Skin>

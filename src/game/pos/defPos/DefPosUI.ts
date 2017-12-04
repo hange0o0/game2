@@ -88,7 +88,7 @@ class DefPosUI extends game.BaseUI {
         var arr = [];
          for(var i=0;i<this.arrayData.length;i++)
          {
-             arr.push(this.arrayData.getItemAt(i).ids.join('|'))
+             arr.push(this.arrayData.getItemAt(i).ids.join('#'))
          }
         return arr.join(',');
     }
@@ -104,7 +104,7 @@ class DefPosUI extends game.BaseUI {
             })
             return;
         }
-        if(this.posData && (this.posData.name != this.posName || this.posData.list != this.changeToServerList()))
+        if(this.posData && (Base64.decode(this.posData.name) != this.posName || this.posData.list != this.changeToServerList()))
         {
             Confirm('还没保存，确定退出吗？',(b)=>{
                 if(b==1)
@@ -149,7 +149,7 @@ class DefPosUI extends game.BaseUI {
          if(this.posData)
          {
              PosManager.getInstance().changePos('def',this.posData.id,
-                 this.posName,serverList,this.posData.close,()=>{
+                 this.posName,serverList,()=>{
                      ShowTips('保存成功！')
              })
          }
@@ -223,13 +223,14 @@ class DefPosUI extends game.BaseUI {
         this.useCard = {};
         if(data)
         {
-            this.posName = data.name;
+            this.posName = Base64.decode(data.name) || '未命名';
             var arr = [];
 
-            var len = data.list.length;
+            var list = data.list.split(',');
+            var len = list.length;
             for(var i=0;i<len;i++)
             {
-                var ids = (data.list[i] + '').split('|');
+                var ids = (list[i] + '').split('#');
                 for(var j=0;j<ids.length;j++)
                 {
                     var id = ids[j];
@@ -280,10 +281,21 @@ class DefPosUI extends game.BaseUI {
             MyTool.renewList(this.list1);
     }
 
+    private getTotalNum(){
+        var count = 0;
+        for(var s in this.useCard)
+        {
+            count += this.useCard[s];
+        }
+        return count;
+    }
+
     //选中
     private onSelect(){
         var item = this.list2.selectedItem;
         if(this.useCard[item.id] && this.useCard[item.id] >= 3)
+            return;
+        if(this.getTotalNum() >= PosManager.getInstance().maxPosNum())
             return;
         this.useCard[item.id] = (this.useCard[item.id] || 0) + 1
         this.addItem(item)
@@ -353,7 +365,7 @@ class DefPosUI extends game.BaseUI {
 
 
     private renewTitle(){
-        this.topUI.setTitle(this.posName)
+        this.topUI.setTitle(this.posName + '  ('+this.getTotalNum() +'/'+ PosManager.getInstance().maxPosNum()+')')
     }
 
     public justRenewList2(){

@@ -15,6 +15,10 @@ class PosManager {
           this.atkList = data.atk_list.list
     }
 
+    public maxPosNum(){
+        return 14 + UM.level;
+    }
+
     public getListByType(type){
         if(type == 'atk')
             return this.atkList;
@@ -59,25 +63,30 @@ class PosManager {
             }
             self.getListByType(type).push({
                 id:msg.id,
-                name:name,
+                name:Base64.encode(name),
                 list:list
             })
+            EM.dispatch(GameEvent.client.pos_change)
             if(fun)
                 fun();
         });
     }
 
-    public changePos(type,id,name,list,close,fun?){
+    public changePos(type,id,name,list,fun?){
         var self = this;
         var oo:any = {};
         var posData = self.getDataByID(type,id);
         oo.type = type;
         oo.id = id;
-        if(name && posData.name != name)
+        if(name && posData.name != Base64.encode(name))
             oo.name = name;
         if(list && posData.list != list)
             oo.list = list;
-        oo.close = close;
+        if(!oo.name && !oo.list)
+        {
+            fun && fun();
+            return;
+        }
         Net.addUser(oo);
         Net.send(GameEvent.pos.change_pos,oo,function(data){
             var msg = data.msg;
@@ -97,11 +106,31 @@ class PosManager {
                 return;
             }
             if(name)
-                posData.name = name
+                posData.name = Base64.encode(name)
             if(list)
                 posData.list = list
-            posData.close = close
 
+            EM.dispatch(GameEvent.client.pos_change)
+            if(fun)
+                fun();
+        });
+    }
+
+    public changeClose(type,id,fun?){
+        var self = this;
+        var oo:any = {};
+        var posData = self.getDataByID(type,id);
+        oo.type = type;
+        oo.id = id;
+        Net.addUser(oo);
+        Net.send(GameEvent.pos.change_close,oo,function(data){
+            var msg = data.msg;
+            if(msg.fail == 1)
+            {
+                Alert('找不到指定阵法')
+                return;
+            }
+            posData.close = !posData.close;
             if(fun)
                 fun();
         });
@@ -120,7 +149,7 @@ class PosManager {
                 Alert('找不到指定阵法')
                 return;
             }
-            var list = this.getListByType(type);
+            var list = self.getListByType(type);
             for(var i=0;i<list.length;i++)
             {
                 if(list[i].id == id)

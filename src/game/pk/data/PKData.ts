@@ -73,7 +73,7 @@ class PKData extends egret.EventDispatcher{
             var player = new PKPlayerData(data.players[i])
             player.teamData = this.getTeamByID(data.players[i].team)
             this.playerObj[player.id] = player;
-            if(player.openid == UM.openid)
+            if(player.gameid == UM.gameid)
             {
                 this.myPlayer = player;
                 player.teamData.atkRota = PKConfig.ROTA_LEFT
@@ -85,7 +85,7 @@ class PKData extends egret.EventDispatcher{
         }
 
         this.sysTeam = new PKTeamData({id:'sys'})
-        this.sysPlayer = new PKPlayerData({id:'sys',openid:'sys',team:'sys'})
+        this.sysPlayer = new PKPlayerData({id:'sys',gameid:'sys',team:'sys'})
         this.sysPlayer.teamData = this.sysTeam;
         this.playerObj[this.sysPlayer.id] = this.sysPlayer;
 

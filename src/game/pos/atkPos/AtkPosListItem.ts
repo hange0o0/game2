@@ -26,8 +26,11 @@ class AtkPosListItem extends game.BaseItem {
         else
         {
             this.currentState = 'normal'
-            this.desText.text = this.data.name;
-            this.list.dataProvider = new eui.ArrayCollection(this.data.list)
+            var str = this.data.list
+            var list = str.split(',');
+            this.list.dataProvider = new eui.ArrayCollection(list)
+
+            this.desText.text = Base64.decode(this.data.name) + '  ('+list.length+'/'+PosManager.getInstance().maxPosNum()+')';
         }
     }
 

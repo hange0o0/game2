@@ -22,12 +22,21 @@ class PKTopItem extends game.BaseItem {
 
     public dataChanged(){
         this.removeAble = false
-         this.group.alpha = 1;
+        this.group.alpha = 1;
+        this.alpha = 1;
 
 
-        var vo:any = CM.getCardVO(this.data.mid)
-        this.img.source = vo.getImage();
-        this.bg.source = vo.getBG();
+        if(this.data)
+        {
+            var vo:any = CM.getCardVO(this.data.mid)
+            this.img.source = vo.getImage();
+            this.bg.source = vo.getBG();
+            this.currentState = 'normal'
+        }
+        else
+            this.currentState = 'empty'
+
+        console.log(111)
         //this.nameText.text = vo.name
     }
 
@@ -44,7 +53,7 @@ class PKTopItem extends game.BaseItem {
         tw.wait(100).to({alpha:1},500)
     }
     public disAppear(){
-        var tw = egret.Tween.get(this.group)
+        var tw = egret.Tween.get(this)
         tw.to({alpha:0},500).wait(500).call(function(){
             this.removeAble = true
         },this)

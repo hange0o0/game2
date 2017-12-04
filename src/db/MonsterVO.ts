@@ -74,7 +74,7 @@ class MonsterVO {
     }
 
     public getImage(){
-        return Config.localResRoot + 'card/monster_'+this.id+'.jpg';
+        return Config.localResRoot + 'card/card_'+this.id+'.jpg';
     }
 
     public getBG(){

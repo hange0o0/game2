@@ -122,7 +122,7 @@ function handleErr(msg,url, line, col, errorObj)
 {
     //if(!Net.getInstance().serverHost)
     //    return;
-    var txt = (url|| '').substr(-30,27)+ ':' + UM.openid + ':' + msg + '|' + line + "--" + col+ "--" + (errorObj && errorObj.stack);
+    var txt = (url|| '').substr(-30,27)+ ':' + UM.gameid + ':' + msg + '|' + line + "--" + col+ "--" + (errorObj && errorObj.stack);
     var str = MyTool.getBtnPath(GameManager.getInstance().lastTouchMC);
     if(str)
         txt += str;

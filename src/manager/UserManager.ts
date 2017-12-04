@@ -13,7 +13,7 @@ class UserManager {
 
 
 
-    public openid: string = 'test';
+    public gameid: string = 'test';
     public landid: string;
 
     public hourcoin: number;
@@ -35,7 +35,7 @@ class UserManager {
 
 
     public fill(data:any):void{
-        this.openid = data.openid;
+        this.gameid = data.gameid;
         this.landid = data.land_key;
         this.nick = data.nick;
         this.uid = data.uid;

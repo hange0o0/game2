@@ -1,7 +1,7 @@
 //玩家数据
 class PKPlayerData {
     public id;//唯一ID
-    public openid;
+    public gameid;
     public nick;
     public type//类型
     public force;//怪的基础属性

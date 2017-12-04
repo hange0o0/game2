@@ -6,7 +6,7 @@ class PKConfig {
     public static stepCD = 50; //步长
     public static gameTime = 5*60; //游戏时间,超出算平
     public static maxMonsterSpace = 20//10; //同时存活怪的占位
-    public static floorWidth = 1000; //战场宽度
+    public static floorWidth = 1300; //战场宽度
     public static appearPos = 100//出现的位置
     public static diamondPos = 200//出现的位置
     //public static maxMP = 20; //MP上限

@@ -12,7 +12,7 @@ class Net extends egret.EventDispatcher{
     //添加用户信息
     public static addUser(msg){
         msg.landid = UM.landid;
-        msg.openid = UM.openid;
+        msg.gameid = UM.gameid;
     }
 
 
@@ -123,6 +123,8 @@ class Net extends egret.EventDispatcher{
         }
         try {
             var data = JSON.parse(e.target.data)
+            if(Config.isDebug && this.outPut)
+                console.log(data.msg);
         }catch(e){
 
             if(Config.isDebug)

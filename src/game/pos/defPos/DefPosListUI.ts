@@ -7,9 +7,11 @@ class DefPosListUI extends game.BaseUI {
         return this._instance;
     }
 
+    private topUI: TopUI;
     private scroller: eui.Scroller;
     private list: eui.List;
     private bottomUI: BottomUI;
+
 
 
 
@@ -36,12 +38,14 @@ class DefPosListUI extends game.BaseUI {
     }
 
     public onShow(){
+
         this.renew();
-        //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
+        this.addPanelOpenEvent(GameEvent.client.pos_change,this.renew)
     }
 
     public renew(){
         var PM = PosManager.getInstance();
+        this.topUI.setTitle('防守阵容 （'+PM.defList.length+'/5）')
         var arr = PM.defList.concat();
         if(arr.length < PM.maxNum)
             arr.push({empty:true})

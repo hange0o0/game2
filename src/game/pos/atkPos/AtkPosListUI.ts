@@ -10,6 +10,7 @@ class AtkPosListUI extends game.BaseUI {
     private scroller: eui.Scroller;
     private list: eui.List;
     private bottomUI: BottomUI;
+    private topUI: TopUI;
 
 
 
@@ -36,12 +37,14 @@ class AtkPosListUI extends game.BaseUI {
     }
 
     public onShow(){
+
         this.renew();
-        //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
+        this.addPanelOpenEvent(GameEvent.client.pos_change,this.renew)
     }
 
     public renew(){
         var PM = PosManager.getInstance();
+        this.topUI.setTitle('进攻阵容 （'+PM.atkList.length+'/5）')
         var arr = PM.atkList.concat();
         if(arr.length < PM.maxNum)
             arr.push({empty:true})

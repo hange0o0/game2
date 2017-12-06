@@ -3,6 +3,7 @@ class PKPlayerData {
     public id;//唯一ID
     public gameid;
     public nick;
+    public hp; //城堡的血量
     public type//类型
     public force;//怪的基础属性
     public teamData:PKTeamData   //对应队伍
@@ -11,6 +12,8 @@ class PKPlayerData {
     public hideCard = [];//隐藏的手牌  [{index,mid},]
     public posCard = {};//已上阵的手牌 1-4,如果是自动的，不受此限制
     public prePosCard = {};//准备上阵的手牌 1-4,如果是自动的，不受此限制
+
+    public posHistory = [];
 
     private mp = 0//当前的魔法
     private lastTime = 0//上一次魔法处理时间
@@ -21,6 +24,11 @@ class PKPlayerData {
     constructor(obj?){
         if(obj)
             this.fill(obj);
+
+        if(this.nick)
+            this.nick = Base64.decode(this.nick);
+        else
+            this.nick = '守卫者' + this.id;
     }
 
     public fill(obj)
@@ -34,12 +42,13 @@ class PKPlayerData {
             this.autoList = PKTool.decodeAutoList(obj['autolist'].split(','))
         if(obj['card'])
         {
-            for(var i=0;i<obj['card'].length;i++)
+            var card = obj['card'].split(',');
+            for(var i=0;i<card.length;i++)
             {
                 var cardData:any = {
                     index:i,
                     cardPos:0,
-                    mid:obj['card'][i]
+                    mid:card[i]
                 }
                 if(i<PKConfig.maxHandCard)
                 {
@@ -127,6 +136,9 @@ class PKPlayerData {
             this.addMP(-MonsterVO.getObject(cardData.mid).cost)
         else
             this.addMP(-SkillVO.getObject(cardData.mid).cost)
+
+        var step = Math.floor(PKData.getInstance().actionTime/PKConfig.stepCD)
+        this.posHistory.push(step + '#' + cardData.mid);
     }
 
     //上阵卡

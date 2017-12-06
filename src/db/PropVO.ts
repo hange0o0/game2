@@ -1,5 +1,5 @@
 class PropVO {
-    public static dataKey = 'prop';
+    public static dataKey = 'prop_base';
     public static key = 'id';
     public static getObject(id: number): PropVO{
         return CM.table[this.dataKey][id];

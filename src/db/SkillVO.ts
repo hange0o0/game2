@@ -1,5 +1,5 @@
 class SkillVO {
-    public static dataKey = 'skill';
+    public static dataKey = 'skill_base';
     public static key = 'id';
     public static getObject(id): SkillVO{
         return CM.table[this.dataKey][id];

@@ -14,8 +14,10 @@ class PKBeforeUI extends game.BaseWindow {
     private startBtn: eui.Button;
     private rightBtn: eui.Image;
     private leftBtn: eui.Image;
-    private closeBtn: eui.Image;
     private nameText: eui.Label;
+    private closeBtn: eui.Button;
+    private changeBtn: eui.Button;
+
 
 
 
@@ -33,17 +35,22 @@ class PKBeforeUI extends game.BaseWindow {
         this.addBtnEvent(this.rightBtn,this.onRight)
         this.addBtnEvent(this.closeBtn,this.hide)
         this.addBtnEvent(this.startBtn,this.onStart)
-        this.addBtnEvent(this.list,this.onListClick)
+        this.addBtnEvent(this.changeBtn,this.onListClick)
 
         this.scroller.addEventListener(egret.Event.CHANGE,this.onScroll,this)
 
         this.scroller.viewport = this.list;
         this.list.itemRenderer = AtkPosItem;
         this.list.touchChildren = false;
+
+        //this.changeBtn.scrollRect = new egret.Rectangle(0,0,50,50)
     }
 
     private onScroll(){
-        this.scrollerBG.y = this.scroller.y - this.scroller.viewport.scrollV*0.9;
+        this.scrollerBG.scrollRect = new egret.Rectangle(0,this.scroller.viewport.scrollV,640,660)
+        //this.scrollerBG.scrollRect = new egret.Rectangle(0,0,50,50)
+        //console.log(this.scrollerBG.scrollRect)
+        //this.scrollerBG.y = this.scroller.y - this.scroller.viewport.scrollV*0.9;
     }
 
     private onListClick(){
@@ -60,6 +67,7 @@ class PKBeforeUI extends game.BaseWindow {
             })
             return;
         }
+        this.dataIn.fun && this.dataIn.fun(data.id);
     }
 
     private onLeft(){
@@ -98,25 +106,37 @@ class PKBeforeUI extends game.BaseWindow {
     }
 
     public onShow(){
-        this.titleText.text = this.dataIn.name;
+        this.titleText.text = this.dataIn.title;
         this.renew();
+        this.once(egret.Event.ENTER_FRAME,this.onScroll,this)
         //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
     }
 
     public renew(){
         var PM = PosManager.getInstance();
         var data = PM.atkList[this.index];
-        if(data)
+        if(!data)
         {
             this.scrollerBG.visible = false
+            this.scroller.visible = false
             this.nameText.text = '新建阵容'
+
         }
         else
         {
             this.scrollerBG.visible = true
-            this.nameText.text = data.name;
-            this.list.dataProvider = new eui.ArrayCollection(data.list);
+            this.scroller.visible = true
+            this.nameText.text = Base64.decode(data.name);
+            var arr = [];
+            var list = data.list.split(',')
+            for(var i=0;i<list.length;i++)
+            {
+                var id = list[i];
+                arr.push({id:id})
+            }
+            this.list.dataProvider = new eui.ArrayCollection(arr);
         }
+        this.onScroll();
 
     }
 }

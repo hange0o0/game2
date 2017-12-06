@@ -56,6 +56,7 @@
 	<script egret="game" src="bin-debug/commont/ui/TopUI.js"></script>
 	<script egret="game" src="bin-debug/commont/ui/TouchTipsUI.js"></script>
 	<script egret="game" src="bin-debug/commont/VScrollerGroup.js"></script>
+	<script egret="game" src="bin-debug/db/HangVO.js"></script>
 	<script egret="game" src="bin-debug/db/MonsterVO.js"></script>
 	<script egret="game" src="bin-debug/db/PropVO.js"></script>
 	<script egret="game" src="bin-debug/db/SkillVO.js"></script>
@@ -261,6 +262,12 @@
 		Config.serverID = _get['serverid'] || 1;
 		Config.userHost = 'http://172.17.196.195:90/game2/userindex.php';
 		Config.host = 'http://172.17.196.195:90/game2/gameindex'+Config.serverID+'.php';
+		if(_get['app'])
+		{
+//			Config.userHost = 'http://hangegame.com/userindex.php';
+			Config.userHost = 'http://hangegame.com/game2/userindex.php';
+			Config.host = 'http://hangegame.com/game2/gameindex'+Config.serverID+'.php';
+		}
 
 		var ua = navigator.userAgent.toLowerCase();
 		var isWindow = ua.indexOf('windows') != -1 || ua.indexOf('macintosh') != -1;

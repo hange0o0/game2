@@ -63,15 +63,17 @@ class PKData extends egret.EventDispatcher{
         this.monsterChange = false;
 
 
+
         this.randomSeed = data.seed;
-        this.team1 = new PKTeamData(data.team1)
-        this.team2 = new PKTeamData(data.team2)
+        this.team1 = new PKTeamData({id:1})
+        this.team2 = new PKTeamData({id:2})
         this.team1.enemy = this.team2
         this.team2.enemy = this.team1
         for(var i=0;i<data.players.length;i++)
         {
             var player = new PKPlayerData(data.players[i])
             player.teamData = this.getTeamByID(data.players[i].team)
+            player.teamData.hp += player.hp;
             this.playerObj[player.id] = player;
             if(player.gameid == UM.gameid)
             {

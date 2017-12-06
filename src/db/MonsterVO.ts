@@ -1,5 +1,5 @@
 class MonsterVO {
-    public static dataKey = 'monster';
+    public static dataKey = 'monster_base';
     public static key = 'id';
     public static getObject(id): MonsterVO{
         return CM.table[this.dataKey][id];

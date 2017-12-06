@@ -38,6 +38,12 @@ class GameEvent {
         delete_pos:'pos.delete_pos'
     }
 
+    public static hang = {
+        award_hang:'hang.award_hang',
+        pk_hang:'hang.pk_hang',
+        pk_hang_result:'hang.pk_hang_result'
+    }
+
 
 
 

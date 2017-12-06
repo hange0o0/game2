@@ -30,7 +30,7 @@ class PKVideoCon extends game.BaseContainer {
     public childrenCreated() {
         super.childrenCreated();
 
-        this.bg.source = Config.localResRoot + 'map/map'+_get['map']+'.jpg';
+
         PKData.getInstance().addEventListener('video',this.onVideoEvent,this);
 
         var tw = this.tw1 =  egret.Tween.get(this.door1,{loop:true});
@@ -45,6 +45,7 @@ class PKVideoCon extends game.BaseContainer {
     }
 
     public init(){
+        this.bg.source = PKManager.getInstance().getPKBG(_get['map']);
         while(this.itemArr.length)
         {
             var item = this.itemArr.pop();

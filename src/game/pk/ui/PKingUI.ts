@@ -95,7 +95,12 @@ class PKingUI extends game.BaseUI {
         {
             this.removeEventListener(egret.Event.ENTER_FRAME,this.onE,this);
             if(PD.isWin())
-                PKWinUI.getInstance().show();
+            {
+
+                PKManager.getInstance().sendResult(()=>{
+                    PKWinUI.getInstance().show();
+                });
+            }
             else
                 PKFailUI.getInstance().show();
             PKSettingUI.getInstance().hide();

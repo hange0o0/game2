@@ -7,7 +7,7 @@ class PKTool {
         var index = 1;
         for(var i=0;i<arr.length;i++)
         {
-            var group = arr[i].split('|')
+            var group = arr[i].split('#')
             var mp = this.getGroupMp(group);//上阵MP
 
             var t = PKTool.getMPTime(mpCost + mp)//可以同时上阵的时间点

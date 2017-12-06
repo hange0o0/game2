@@ -26,6 +26,27 @@ class HangUI extends game.BaseWindow {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.addBtnEvent(this.cancelBtn,this.hide)
+        this.addBtnEvent(this.pKBtn,this.onPK)
+        this.addBtnEvent(this.awardBtn,this.onAward)
+
+        this.con.mask = new egret.Rectangle(this.con.width,this.con.height)
+
+        this.scroller.viewport = this.list
+        this.list.itemRenderer = HangItem;
+    }
+
+    public onPK(){
+        PKBeforeUI.getInstance().show({
+            title:'挂机PK',
+            fun:function(id){
+                HangManager.getInstance().pk(id)
+            }
+        })
+    }
+
+    public onAward(){
+
     }
 
     public show(){
@@ -38,10 +59,18 @@ class HangUI extends game.BaseWindow {
 
     public onShow(){
         this.renew();
-        //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
+        this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
+    }
+
+    private onTimer(){
+        this.timeText.text = DateUtil.getStringBySecond(356)
     }
 
     public renew(){
+        this.img.source = PKManager.getInstance().getPKBG(_get['map']);
+    }
+
+    public showFight(){
 
     }
 }

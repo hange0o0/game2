@@ -2,13 +2,14 @@ class PKCardItem extends game.BaseItem {
 
     //private desText: eui.Label;
     private bg: eui.Image;
-    private img: eui.Image;
+    private img: CardImg;
     private cdBarBg: eui.Rect;
     private cdBar: eui.Rect;
     private spaceGroup: eui.Group;
     private spaceText: eui.Label;
     private costText: eui.Label;
     private skillType: eui.Image;
+
 
 
 
@@ -52,7 +53,7 @@ class PKCardItem extends game.BaseItem {
         this.stopDrag = false
         this.currentState = 'normal'
         var vo:any = CM.getCardVO(this.data.mid)
-        this.img.source = vo.getImage();
+        this.img.data = this.data.mid;
         this.bg.source = vo.getBG();
 
         if(vo.isMonster)

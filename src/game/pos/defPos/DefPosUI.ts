@@ -39,6 +39,8 @@ class DefPosUI extends game.BaseUI {
     private arrayData:eui.ArrayCollection
     private itemWidth = 220;
 
+    public scrollChangeTime = 0
+
     public constructor() {
         super();
         this.skinName = "DefPosUISkin";
@@ -59,6 +61,9 @@ class DefPosUI extends game.BaseUI {
         this.list1.itemRenderer = DefPosItem
         this.scroller1.addEventListener(egret.Event.CHANGE,this.onScroll,this)
 
+        //this.scroller1.addEventListener(egret.TouchEvent.TOUCH_CANCEL,()=>{console.log('cancle')},this)
+        //this.scroller1.addEventListener(egret.TouchEvent.TOUCH_TAP,()=>{console.log('tap')},this)
+
         this.scroller2.viewport = this.list2;
         this.list2.itemRenderer = PosCardItem
         this.list2.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onSelect,this);
@@ -72,6 +77,7 @@ class DefPosUI extends game.BaseUI {
     }
 
     private onScroll(){
+        this.scrollChangeTime = egret.getTimer()
         this.scrollerBG.x = -this.scroller1.viewport.scrollH * 0.1;
         if(this.scrollerBG.x < 640 - this.scrollerBG.width)
             this.scrollerBG.x = 640 - this.scrollerBG.width
@@ -123,7 +129,9 @@ class DefPosUI extends game.BaseUI {
              if(b==1)
              {
                  PosManager.getInstance().deletePos('def',this.posData.id,()=>{
-                     this.hide();
+                     this.index = PosManager.getInstance().defList.length;
+                     this.renew();
+                     //this.hide();
                  })
              }
          })
@@ -151,6 +159,7 @@ class DefPosUI extends game.BaseUI {
              PosManager.getInstance().changePos('def',this.posData.id,
                  this.posName,serverList,()=>{
                      ShowTips('保存成功！')
+                     this.hide();
              })
          }
         else
@@ -158,7 +167,8 @@ class DefPosUI extends game.BaseUI {
              PosManager.getInstance().addPos('def',
                  this.posName,serverList,()=>{
                      ShowTips('保存成功！')
-                     this.posData = PosManager.getInstance().defList[this.index]
+                     this.hide();
+                     //this.posData = PosManager.getInstance().defList[this.index]
                  })
          }
     }
@@ -239,7 +249,10 @@ class DefPosUI extends game.BaseUI {
                 arr.push({ids:ids,cd:0,preLen:0})
             }
             this.arrayData = new eui.ArrayCollection(arr)
-            this.btnGroup.addChildAt(this.deleteBtn,1)
+            if(PM.defList.length > 1)
+                this.btnGroup.addChildAt(this.deleteBtn,1)
+            else
+                MyTool.removeMC(this.deleteBtn)
         }
         else
         {

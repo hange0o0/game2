@@ -5,7 +5,7 @@
 	<e:Button id="splitBtn" label="拆分" horizontalCenter="0" width="140" skinName="Btn2Skin" bottom="20"/>
 	<e:Image id="mergeBtn" source="icon_add2_png" x="-20" y="150"/>
 	<ns1:CardItem id="cardItem" y="90" skinName="CardItemSkin" scaleX="0.8" scaleY="0.8" horizontalCenter="0"/>
-	<e:Group id="group" y="90" horizontalCenter="0" height="170" locked="true">
+	<e:Group id="group" y="90" horizontalCenter="0" height="170" locked="true" visible="false">
 		<ns1:DefPosItem2 id="c0" x="0" y="0" skinName="DefPosItem2Skin"/>
 		<ns1:DefPosItem2 x="10" y="10" skinName="DefPosItem2Skin" id="c1"/>
 		<ns1:DefPosItem2 x="20" y="20" skinName="DefPosItem2Skin" id="c2"/>

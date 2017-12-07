@@ -6,11 +6,12 @@ class AtkPosItem extends game.BaseItem {
 
     public selectMC: eui.Rect;
     private bg: eui.Image;
-    private img: eui.Image;
+    private img: CardImg;
     private spaceGroup: eui.Group;
     private spaceText: eui.Label;
     private costText: eui.Label;
     private skillType: eui.Image;
+
 
 
 
@@ -25,7 +26,7 @@ class AtkPosItem extends game.BaseItem {
 
     public dataChanged(){
         var vo:any = CM.getCardVO(this.data.id);
-        this.img.source = vo.getImage();
+        this.img.data = vo.id;
         this.bg.source = vo.getBG();
 
         if(vo.isMonster)

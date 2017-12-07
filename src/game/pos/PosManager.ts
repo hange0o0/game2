@@ -16,7 +16,7 @@ class PosManager {
     }
 
     public maxPosNum(){
-        return 14 + UM.level;
+        return 20 + UM.level;
     }
 
     public getListByType(type){

@@ -5,7 +5,8 @@ class PosListHeadItem extends game.BaseItem {
     }
 
     private bg: eui.Image;
-    private img: eui.Image;
+    private img: CardImg;
+
 
 
 
@@ -20,7 +21,7 @@ class PosListHeadItem extends game.BaseItem {
 
     public dataChanged(){
         var vo:any = CM.getCardVO(this.data);
-        this.img.source = vo.getImage();
+        this.img.data = vo.id;
         this.bg.source = vo.getBG();
     }
 

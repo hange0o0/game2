@@ -2,7 +2,8 @@ class PKTopItem extends game.BaseItem {
 
     private group: eui.Group;
     private bg: eui.Image;
-    private img: eui.Image;
+    private img: CardImg;
+
 
 
 
@@ -29,7 +30,7 @@ class PKTopItem extends game.BaseItem {
         if(this.data)
         {
             var vo:any = CM.getCardVO(this.data.mid)
-            this.img.source = vo.getImage();
+            this.img.data = vo.id;
             this.bg.source = vo.getBG();
             this.currentState = 'normal'
         }

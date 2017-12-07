@@ -37,6 +37,7 @@
     "src/game/card/CardItemSkin.exml",
     "src/game/card/CardUISkin.exml",
     "src/game/common/AwardUISkin.exml",
+    "src/game/common/CardImgSkin.exml",
     "src/game/fight/FightItemSkin.exml",
     "src/game/fight/FightUISkin.exml",
     "src/game/hang/HangItemSkin.exml",

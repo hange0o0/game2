@@ -9,6 +9,6 @@
 		</e:layout>
 	</e:Group>
 
-	<e:Label id="text" text="标签标签标签标签" left="50" right="50" top="66" bottom="140" textAlign="center" verticalAlign="top" size="26" lineSpacing="5" textColor="0x0f0800"/>
+	<e:Label id="text" text="标签标签标签标签" left="50" right="50" top="66" bottom="140" textAlign="center" verticalAlign="top" size="26" lineSpacing="5" stroke="2" strokeColor="0x000000" textColor="0xffffff"/>
 	<e:Image id="closeBtn" source="icon_error_png" y="-10" right="-10"/>
 </e:Skin>

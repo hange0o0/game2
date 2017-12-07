@@ -109,7 +109,7 @@ class PKBeforeUI extends game.BaseWindow {
         this.titleText.text = this.dataIn.title;
         this.renew();
         this.once(egret.Event.ENTER_FRAME,this.onScroll,this)
-        //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
+        this.addPanelOpenEvent(GameEvent.client.pos_change,this.renew)
     }
 
     public renew(){

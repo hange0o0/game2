@@ -1,9 +1,10 @@
 class PKPosItem extends game.BaseItem {
 
     //private posBG: eui.Image;
+    private posBG: eui.Image;
     private cardGroup: eui.Group;
     private bg: eui.Image;
-    private img: eui.Image;
+    private img: CardImg;
     private spaceGroup: eui.Group;
     private spaceText: eui.Label;
     private timesBG: eui.Image;
@@ -12,6 +13,7 @@ class PKPosItem extends game.BaseItem {
     private barMC1: eui.Image;
     private barGroup2: eui.Group;
     private barMC2: eui.Image;
+
 
 
 
@@ -120,7 +122,7 @@ class PKPosItem extends game.BaseItem {
 
     private renewImg(mid){
         var vo:any = CM.getCardVO(mid)
-        this.img.source = vo.getImage();
+        this.img.data = vo.id;
         this.bg.source = vo.getBG();
         this.cardGroup.visible = true;
         if(vo.isMonster)

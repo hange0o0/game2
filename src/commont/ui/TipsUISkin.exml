@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<e:Skin class="TipsUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="512" height="90">
-	<e:Image source="tips_jpg" left="0" right="0" top="0" bottom="0" scale9Grid="64,29,384,56"/>
-	<e:Label id="text" left="40" right="40" top="25" bottom="30" textAlign="center" verticalAlign="middle" textColor="0xE2CDAA" text="123456" size="26" stroke="2"/>
+<e:Skin class="TipsUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image left="0" right="0" top="0" bottom="0" source="bg11_png" scale9Grid="12,11,18,14" minWidth="300" maxWidth="560"/>
+	<e:Label id="text" left="20" right="20" top="20" bottom="20" textAlign="center" verticalAlign="middle" text="123456" size="26" stroke="3" textColor="0xffffff"/>
 </e:Skin>

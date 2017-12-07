@@ -112,7 +112,8 @@ class AtkPosUI extends game.BaseUI {
             if(b==1)
             {
                 PosManager.getInstance().deletePos('atk',this.posData.id,()=>{
-                    this.hide();
+                    this.index = PosManager.getInstance().atkList.length;
+                    this.renew();
                 })
             }
         })
@@ -140,6 +141,7 @@ class AtkPosUI extends game.BaseUI {
             PosManager.getInstance().changePos('atk',this.posData.id,
                 this.posName,serverList,()=>{
                     ShowTips('保存成功！')
+                    this.hide();
                 })
         }
         else
@@ -147,7 +149,8 @@ class AtkPosUI extends game.BaseUI {
             PosManager.getInstance().addPos('atk',
                 this.posName,serverList,()=>{
                     ShowTips('保存成功！')
-                    this.posData = PosManager.getInstance().atkList[this.index]
+                    this.hide();
+                    //this.posData = PosManager.getInstance().atkList[this.index]
                 })
         }
     }
@@ -249,7 +252,7 @@ class AtkPosUI extends game.BaseUI {
                 arr.push({id:id})
             }
             this.arrayData = new eui.ArrayCollection(arr)
-            this.btnGroup.addChildAt(this.deleteBtn,1)
+            this.btnGroup.addChildAt(this.deleteBtn,2)
         }
         else
         {

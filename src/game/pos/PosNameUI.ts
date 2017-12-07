@@ -8,8 +8,9 @@ class PosNameUI extends game.BaseWindow {
     }
 
     private nameText: eui.TextInput;
+    private cancelBtn: eui.Button;
     private okBtn: eui.Button;
-    private closeBtn: eui.Image;
+
 
     private lastName;
     public constructor() {
@@ -20,7 +21,7 @@ class PosNameUI extends game.BaseWindow {
     public childrenCreated() {
         super.childrenCreated();
         this.addBtnEvent(this.okBtn,this.onOK)
-        this.addBtnEvent(this.closeBtn,this.hide)
+        this.addBtnEvent(this.cancelBtn,this.hide)
     }
 
     private onOK(){

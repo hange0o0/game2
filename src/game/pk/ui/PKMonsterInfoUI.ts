@@ -75,7 +75,7 @@ class PKMonsterInfoUI extends game.BaseContainer {
         if(this.playerData.teamData.atkRota == PKConfig.ROTA_LEFT)
             this.x = 10;
         else
-            this.x = 640-460-10;
+            this.x = 160;
 
         this.resetList();
         this.renewFlag = false;

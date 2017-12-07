@@ -17,8 +17,8 @@ class DefPosItem extends game.BaseItem {
     private c3: DefPosItem2;
 
 
-    private tw1
-    private tw2
+    //private tw1
+    //private tw2
     public childrenCreated() {
         super.childrenCreated();
         this.addBtnEvent(this.deleteBtn,this.onDelete)
@@ -29,13 +29,17 @@ class DefPosItem extends game.BaseItem {
         this.cardItem.touchChildren = this.cardItem.touchEnabled = false;
         this.group.touchChildren = false;
 
-        var tw = this.tw1 =  egret.Tween.get(this.cardItem,{loop:true});
-        this.cardItem.y = 90;
-        tw.to({y:70},1000,egret.Ease.sineInOut).to({y:90},1000,egret.Ease.sineInOut)
+        //var tw = this.tw1 =  egret.Tween.get(this.cardItem,{loop:true});
+        //this.cardItem.y = 90;
+        //tw.to({y:70},1000,egret.Ease.sineInOut).to({y:90},1000,egret.Ease.sineInOut)
+        //
+        //var tw = this.tw2 = egret.Tween.get(this.group,{loop:true});
+        //this.group.y = 90;
+        //tw.to({y:70},1000,egret.Ease.sineInOut).to({y:90},1000,egret.Ease.sineInOut)
+    }
 
-        var tw = this.tw2 = egret.Tween.get(this.group,{loop:true});
-        this.group.y = 90;
-        tw.to({y:70},1000,egret.Ease.sineInOut).to({y:90},1000,egret.Ease.sineInOut)
+    private clickAble(){
+        return egret.getTimer() - DefPosUI.getInstance().scrollChangeTime > 500;       //双滚动BUG
     }
 
     private onGroup(){
@@ -43,21 +47,27 @@ class DefPosItem extends game.BaseItem {
     }
 
     private onDelete(){
+        if(!this.clickAble())
+            return;
         DefPosUI.getInstance().deleteItem(this.data)
     }
 
     private onSplit(){
+        if(!this.clickAble())
+            return;
         DefPosUI.getInstance().splitItem(this.data)
     }
 
     private onMerge(){
+        if(!this.clickAble())
+            return;
         DefPosUI.getInstance().mergeItem(this.data)
     }
 
     public dataChanged(){
         var ids = this.data.ids;
-        this.onRemove();
-        this.addEventListener(egret.Event.REMOVED_FROM_STAGE,this.onRemove,this)
+        //this.onRemove();
+        //this.addEventListener(egret.Event.REMOVED_FROM_STAGE,this.onRemove,this)
 
         if(ids.length == 1 && ids[0] < 0)
         {
@@ -82,7 +92,7 @@ class DefPosItem extends game.BaseItem {
                 this.cardItem.data = CM.getCardVO(ids[0]);
 
                 haveSkill =  !this.cardItem.data.isMonster
-                this.tw1.setPaused(false);
+                //this.tw1.setPaused(false);
 
 
             }
@@ -103,7 +113,7 @@ class DefPosItem extends game.BaseItem {
                         haveSkill = true;
                 }
 
-                this.tw2.setPaused(false);
+                //this.tw2.setPaused(false);
 
             }
 
@@ -130,10 +140,10 @@ class DefPosItem extends game.BaseItem {
 
     }
 
-    private onRemove(){
-        this.removeEventListener(egret.Event.REMOVED_FROM_STAGE,this.onRemove,this)
-        this.tw1.setPaused(true);
-        this.tw2.setPaused(true);
-    }
+    //private onRemove(){
+    //    this.removeEventListener(egret.Event.REMOVED_FROM_STAGE,this.onRemove,this)
+    //    this.tw1.setPaused(true);
+    //    this.tw2.setPaused(true);
+    //}
 
 }

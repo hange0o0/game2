@@ -5,13 +5,14 @@ class PosCardItem extends game.BaseItem {
     }
 
     private bg: eui.Image;
-    private img: eui.Image;
+    private img: CardImg;
     private nameText: eui.Label;
     private spaceGroup: eui.Group;
     private spaceText: eui.Label;
     private costText: eui.Label;
     private skillType: eui.Image;
     private numText: eui.Label;
+
 
 
     public childrenCreated() {
@@ -29,7 +30,7 @@ class PosCardItem extends game.BaseItem {
 
     public dataChanged(){
         var vo:any = this.data
-        this.img.source = vo.getImage();
+        this.img.data = vo.id;
         this.bg.source = vo.getBG();
         if(vo.isMonster)
         {

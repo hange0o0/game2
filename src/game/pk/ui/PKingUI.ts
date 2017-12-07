@@ -10,6 +10,8 @@ class PKingUI extends game.BaseUI {
     private pkCtrlCon: PKCtrlCon;
     private pkTop: PKTopUI;
     private pkInfo: PKMonsterInfoUI;
+    private roundText: eui.Label;
+
 
 
 
@@ -22,6 +24,7 @@ class PKingUI extends game.BaseUI {
 
 
     public scrollTime = 0;
+    public counting = false;
 
     public constructor() {
         super();
@@ -55,7 +58,6 @@ class PKingUI extends game.BaseUI {
 
     public onShow(){
         var PD = PKData.getInstance();
-        PD.start();
         this.scrollTime = 0;
         this.pkVideo.init();
         this.pkCtrlCon.init();
@@ -72,15 +74,40 @@ class PKingUI extends game.BaseUI {
             actionTime:0
         });
 
+        this.scroller.viewport.scrollH = (1500-640)/2
+        this.counting = true;
+        this.roundText.text = '5'
+        this.roundText.alpha = 1;
+        this.roundText.y = GameManager.stage.stageHeight - 720;
+        this.addChild(this.roundText);
+        this.roundText.scaleX =  this.roundText.scaleY = 0;
+        egret.Tween.resumeTweens(this.roundText)
+        var tw = egret.Tween.get(this.roundText)
+        tw.to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '4'})
+            .to({scaleX:0,scaleY:0}).to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '3'})
+            .to({scaleX:0,scaleY:0}).to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '2'})
+            .to({scaleX:0,scaleY:0}).to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '1'})
+            .to({scaleX:0,scaleY:0}).to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = 'START';this.startGame()}).to({
+                alpha:0,scaleX:2,scaleY:2
+            },500).call(()=>{MyTool.removeMC(this.roundText)})
+
         this.onE();
         this.addEventListener(egret.Event.ENTER_FRAME,this.onE,this)
+    }
+
+    public startGame(){
+        var PD = PKData.getInstance();
+        PD.start();
+        this.counting = false;
+
     }
 
     public onE(){
         var PC = PKCode.getInstance()
         var PD = PKData.getInstance()
-
-        var isOver = PC.onStep()     //跑数据
+        var isOver = false;
+        if(!this.counting)
+            isOver = PC.onStep()     //跑数据
 
         //表现动画
         this.pkVideo.action();

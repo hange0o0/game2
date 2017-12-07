@@ -5,7 +5,8 @@ class DefPosItem2 extends game.BaseItem {
     }
 
     private bg: eui.Image;
-    private img: eui.Image;
+    private img: CardImg;
+
 
     public childrenCreated() {
         super.childrenCreated();
@@ -17,7 +18,7 @@ class DefPosItem2 extends game.BaseItem {
 
     public dataChanged(){
         var vo:any = CM.getCardVO(this.data)
-        this.img.source = vo.getImage();
+        this.img.data = vo.id;
         this.bg.source = vo.getBG();
     }
 }

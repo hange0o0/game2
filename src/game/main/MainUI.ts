@@ -15,6 +15,7 @@ class MainUI extends game.BaseUI {
     private diamondText: eui.Label;
     private addDiamondBtn: eui.Image;
     private mapBtn: eui.Rect;
+    private testBtn: eui.Rect;
     private b0: MainBottomBtn;
     private b1: MainBottomBtn;
     private b2: MainBottomBtn;
@@ -44,6 +45,7 @@ class MainUI extends game.BaseUI {
         this.addBtnEvent(this.addEnergyBtn,this.onAddEnergy)
         this.addBtnEvent(this.addDiamondBtn,this.onAddDiamond)
         this.addBtnEvent(this.mapBtn,this.onMap)
+        this.addBtnEvent(this.testBtn,this.onTest)
         this.addBtnEvent(this.mailBtn,this.onMail)
         this.addBtnEvent(this.rankBtn,this.onRank)
         this.addBtnEvent(this.shopBtn,this.onShop)
@@ -54,6 +56,10 @@ class MainUI extends game.BaseUI {
         this.b2.data = {text:'战斗',source:'main_pk_png',fun:function(){}}
         this.b3.data = {text:'卡牌',source:'main_card_png',fun:function(){}}
         this.b4.data = {text:'科技',source:'main_tec_png',fun:function(){}}
+    }
+
+    private onTest(){
+        HangManager.getInstance().pkTest(PosManager.getInstance().atkList[0].id)
     }
 
     private onMail(){

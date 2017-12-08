@@ -14,6 +14,8 @@ class PKMonsterInfoUI extends game.BaseContainer {
     private selfIcon: eui.Image;
     private type: eui.Image;
     private nameText: eui.Label;
+    private spaceText: eui.Label;
+
 
 
 
@@ -93,6 +95,7 @@ class PKMonsterInfoUI extends game.BaseContainer {
             arr.push(mvo);
         }
         this.list.dataProvider = new eui.ArrayCollection(arr);
+        this.spaceText.text = '占位：' + PD.getMonsterSpaceByPlayer(this.playerData.id) + '/' + PKConfig.maxMonsterSpace
     }
 
     public renewList(){

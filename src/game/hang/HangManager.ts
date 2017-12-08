@@ -47,6 +47,29 @@ class HangManager {
         });
     }
 
+    public pkTest(id,fun?) {
+        var self = this;
+        var oo:any = {};
+        oo.id = id;
+        Net.addUser(oo);
+        Net.send(GameEvent.debug.pk_test, oo, function (data) {
+            var msg = data.msg;
+            if(msg.fail == 1)
+            {
+                Alert('体力不足')
+                return;
+            }
+            if(msg.fail == 2)
+            {
+                Alert('找不到指定阵法')
+                return;
+            }
+            PKManager.getInstance().startPK(PKManager.TYPE_HANG,msg.pkdata)
+            if (fun)
+                fun();
+        });
+    }
+
     public pkResult(fun?) {
         var self = this;
         var oo:any = {};

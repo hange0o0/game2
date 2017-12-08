@@ -7,6 +7,7 @@ class PKMonsterData {
     public speed  = 0
     public def  = 0
     public maxHp = 0
+    public hpChange = 0  //每0.5秒改变的HP值
 
     //隐藏属性
     public doubleRate  = 0
@@ -36,6 +37,9 @@ class PKMonsterData {
     public lastSkill = 0
     public dieTime = 0
     public buff = [];
+
+    public currentState = {};//当前的特殊状态
+    public stateChange = false
 
 
     constructor(obj?){
@@ -69,8 +73,8 @@ class PKMonsterData {
 
     //根据属性相克，取攻击比例
     public getAtkRate(defender:PKMonsterData){
-         var atkType = this.getVO().type
-         var defType = defender.getVO().type
+        var atkType = this.getVO().type
+        var defType = defender.getVO().type
         if(defType == 0 || atkType == 0)
             return 1;
         var des = Math.abs(atkType - defType)
@@ -87,27 +91,134 @@ class PKMonsterData {
         return 0.5
     }
 
-    public addBuff(data){
-         this.buff.push(data);
+    public changeValue(key,value){
+        if(key == 'speed' || key == 'def' || key == 'atk' || key == 'hpChange')
+            this[key] += value;
     }
-    public cleanBuff(t){
+
+    //{endTime,  add:{属性名称:增加值}，   state:{状态名：true},   id:唯一ID,   no:这BUFF没生效,   value:技能等级数值}
+    public addBuff(data:PKBuffData){
+        data.owner = this;
+        this.buff.push(data);
+        if(data.id)
+            this.resetBuffID(data.id);
+        else
+            data.enable();
+
+        if(data.ing && data.haveState)
+            this.resetState();
+    }
+
+    //清除状态
+    public cleanBuff(t,user?){
+        var needTestStat = false
+        var needTestId = null
         for(var i=0;i<this.buff.length;i++)
         {
-            var oo =  this.buff[i];
-            if(oo.endTime <= t)
+            var oo:PKBuffData =  this.buff[i];
+            var needClean = oo.endTime && t && oo.endTime <= t
+            if(user && user == oo.user)
+                needClean = true;
+            if(needClean)
             {
                 this.buff.splice(i,1);
                 i--;
-                for(var s in oo)
+                if(oo.ing)
                 {
-                    if(s != 'endTime')
+                    if(oo.haveState)
+                        needTestStat = true;
+                    if(oo.id)
                     {
-                        this[s] -= oo[s];
+                        if(!needTestId)
+                            needTestId = {};
+                        if(!needTestId[oo.id])
+                            needTestId[oo.id] = true;
                     }
+                }
+                oo.disable();
+            }
+        }
+        if(needTestId)
+        {
+            for(var s in needTestId)
+                this.resetBuffID(s);
+        }
+        if(needTestStat)
+            this.resetState();
+    }
+
+    //判断是否在某个状态中
+    public isInState(stateName){
+        return this.currentState[stateName];
+    }
+
+    //重置状态
+    public resetState(){
+        var lastState = this.currentState;
+        this.currentState = {};
+        for(var i=0;i<this.buff.length;i++)
+        {
+            var oo:PKBuffData =  this.buff[i];
+            if(oo.ing && oo.haveState)
+            {
+                for(var s in oo.state)
+                {
+                    this.currentState[s] = true;
+                    if(!lastState[s]) //新增了状态
+                        this.stateChange = true;
                 }
             }
         }
+
+        if(!this.stateChange)
+        {
+            for(var s in lastState)
+            {
+                 if(!this.currentState[s]) //去除了状态
+                 {
+                     this.stateChange = true;
+                     break;
+                 }
+            }
+        }
     }
+
+    //对ID唯一的技能进行重置
+    public resetBuffID(id){
+        var ids = []//所有相同ID的BUFF
+        var current:PKBuffData;
+        for(var i=0;i<this.buff.length;i++)
+        {
+            var oo:PKBuffData =  this.buff[i];
+            if(oo.id == id)
+            {
+                ids.push(oo);
+                if(oo.ing)
+                    current = oo
+            }
+        }
+        if(!ids.length)  //没技能
+            return
+        if(ids.length == 1 && current) //只有唯一技能
+            return
+        var newOne:PKBuffData;
+        for(var i=0;i<ids.length;i++)
+        {
+            var oo:PKBuffData = ids[i];
+            if(!newOne || Math.abs(oo.value) > Math.abs(newOne.value))
+                newOne = oo;
+        }
+        if(!current) //以前没有
+        {
+            newOne.enable();
+        }
+        if(newOne != current && newOne.value != current.value)
+        {
+            newOne.enable();
+            current.disable();
+        }
+    }
+
 
     public getVO():MonsterVO{
         return MonsterVO.getObject(this.mid);
@@ -119,7 +230,19 @@ class PKMonsterData {
     public canMove(t){
         if(this.owner == 'sys')
             return false;
-         return this.stopTime < t;
+        if(!this.canAction())
+            return ;
+        return this.stopTime < t;
+    }
+
+    //可以有行为 如移动，攻击等
+    public canAction(){
+        return !this.die && !this.isInState(PKConfig.STATE_YUN)
+    }
+
+    public canAtk(){
+        var PD =  PKData.getInstance();
+        return  this.canAction() &&  this.stopTime <= PD.actionTime
     }
 
     public canBeAtk(user){
@@ -127,11 +250,11 @@ class PKMonsterData {
             user.getOwner().teamData != this.getOwner().teamData;
     }
 
-    //可以用技能
+//可以用技能
     public canSkill(t){
         if(this.owner == 'sys')
             return null;
-        if(this.die)
+        if(!this.canAction())
             return null;
         if(this.stopTime > t)
             return null;
@@ -164,14 +287,14 @@ class PKMonsterData {
         if(this.owner == 'sys')
             return null;
         var PD = PKData.getInstance();
-        if(this.stopTime > PD.actionTime)
+        if(!this.canAtk())
             return null;
         var atkRage = this.getVO().atkrage;
         if(this.target)
         {
             if(this.target.canBeAtk(this) && Math.abs(this.target.x - this.x) < atkRage + this.target.getVO().width/2)
             {
-                 return this.target;
+                return this.target;
             }
             else
                 this.target = null;
@@ -216,5 +339,9 @@ class PKMonsterData {
             type:PKConfig.VIDEO_MONSTER_BEATK,
             user:this,
         })
+    }
+
+    public getHpRate(){
+        return this.hp / this.maxHp
     }
 }

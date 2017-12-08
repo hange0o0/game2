@@ -5,6 +5,7 @@ class PKMonsterItem extends game.BaseItem {
 
     private monsterMV:MonsterMV
     public needRemove = false
+    public stateMV = {};
     public constructor() {
         super();
         this.skinName = "PKMonsterItemSkin";
@@ -28,6 +29,43 @@ class PKMonsterItem extends game.BaseItem {
         this.needRemove = true;
     }
 
+    private cleanAllState(){
+        for(var s in this.stateMV)
+        {
+            MyTool.removeMC(this.stateMV[s])
+        }
+    }
+
+    public renewState(){
+        var mD:PKMonsterData = this.data
+        if(mD.mid == 99)
+            return;
+        for(var s in this.stateMV)
+        {
+            if(!mD.currentState[s])
+                MyTool.removeMC(this.stateMV[s])
+        }
+        for(var s in mD.currentState)
+        {
+            if(!this.stateMV[s])
+            {
+                var txt = new eui.Label();
+                txt.size = 20;
+                txt.stroke = 2;
+                txt.width = 160;
+                txt.textAlign="center"
+                txt.anchorOffsetX = 80;
+                txt.textColor = 0xFFFFFF;
+                txt.text = s;
+                txt.x = 50;
+                txt.y = 300 - mD.getVO().height - 20
+                this.stateMV[s] = txt;
+            }
+            if(!this.stateMV[s].parent)
+                this.addChild(this.stateMV[s]);
+        }
+    }
+
 
     public dataChanged(){
         var mD:PKMonsterData = this.data
@@ -35,6 +73,7 @@ class PKMonsterItem extends game.BaseItem {
         this.monsterMV.load(mD.mid)
         this.monsterMV.play();
         this.alpha = 1;
+        this.cleanAllState();
 
         this.x = mD.x;
         this.setRota(-mD.atkRota,true);
@@ -100,7 +139,7 @@ class PKMonsterItem extends game.BaseItem {
         {
             this.barGroup.visible = true;
         }
-        this.bar.width = 40 * mD.hp / mD.maxHp;
+        this.bar.width = 40 * mD.getHpRate();
     }
 
     public winRemove(){

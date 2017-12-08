@@ -16,6 +16,13 @@ class MBase {
     constructor() {
     }
 
+    public onCreate(user:PKMonsterData){
+
+    }
+    public onDie(user:PKMonsterData){
+
+    }
+
     //预加载
     public preload(){
 
@@ -122,19 +129,26 @@ class MBase {
                 type:PKConfig.VIDEO_MONSTER_MISS,
                 user:target
             })
-            return;
+            return false;
         }
         var hp = this.getAtkHp(user,target);
         target.beAtkAction({hp:hp,atker:user})
         user.atkAction({hp:hp})
+        return true;
     }
 
-
-    protected getAtkHp(user:PKMonsterData,target:PKMonsterData){
+    //取攻击力
+    protected getAtkerAtk(user:PKMonsterData,target:PKMonsterData){
         var atk = user.atk * user.getAtkRate(target);
         if(user.doubleAction)
             atk *= user.doubleValue;
-        var teamDef = Math.floor(target.getOwner().teamData.def / 10)
+        return atk;
+    }
+
+    //取最终伤害
+    protected getAtkHp(user:PKMonsterData,target:PKMonsterData){
+        var atk = this.getAtkerAtk(user,target);
+        var teamDef = Math.floor(target.getOwner().teamData.def / 5)
         var hp = Math.floor(atk * Math.max(1-(target.def + teamDef)/100,0));
         if(hp < 1)
             hp = 1;

@@ -9,7 +9,7 @@ class PKTeamData {
     public def  = 0
 
     public members = [];
-    public stateObj = {};
+    public stateObj = {};  //监听队伍中的状态，触发
     constructor(obj?){
         if(obj)
             this.fill(obj);
@@ -27,10 +27,10 @@ class PKTeamData {
     }
 
     //监听状态
-    public addStateLister(state,posCard:PKPosCardData){
-        if(!this.stateObj[state])
-            this.stateObj[state] = [];
-        this.stateObj[state].push(posCard)
+    public addStateLister(listener:PKStateListener){
+        if(!this.stateObj[listener.type])
+            this.stateObj[listener.type] = [];
+        this.stateObj[listener.type].push(listener)
         //console.log('add')
     }
     //
@@ -39,34 +39,31 @@ class PKTeamData {
             return
         for(var i=0;i<this.stateObj[state].length;i++)
         {
-            var posCard:PKPosCardData = this.stateObj[state][i];
-            SBase.getData(posCard.mid).effectTarget(posCard,target);
+            var listener:PKStateListener = this.stateObj[state][i];
+            listener.actionFun(target)
         }
     }
 
-    //不带参数表现清除过期的
-    public removeState(posCard?:PKPosCardData){
-        if(posCard)
+    //
+    public removeStateListener(listener:PKStateListener){
+        var state = listener.type
+        if(!state || !this.stateObj[state] || this.stateObj[state].length == 0)
+            return
+        ArrayUtil.removeItem(this.stateObj[state],listener);
+        listener.onRemove()
+    }
+    //
+    public removeStateListerByOwner(owner){
+        for(var state in this.stateObj)
         {
-            if(posCard.mid < 100)
-                return;
-            var state = SkillVO.getObject(posCard.mid).state;
-            if(!state || !this.stateObj[state] || this.stateObj[state].length == 0)
-                return
-            ArrayUtil.removeItem(this.stateObj[state],posCard);
-            return;
-        }
-        for(var s in this.stateObj)
-        {
-            var arr = this.stateObj[s];
-            for(var i=0;i<arr.length;i++)
+            for(var i=0;i<this.stateObj[state].length;i++)
             {
-                var posCard:PKPosCardData = arr[i];
-                if(!posCard.useEnable())
+                var listener:PKStateListener = this.stateObj[state][i];
+                if(listener.owner == owner)
                 {
-                    arr.splice(i,1);
+                    this.stateObj[state].splice(i,1);
                     i--;
-                    console.log('remove')
+                    listener.onRemove()
                 }
             }
         }

@@ -7,6 +7,7 @@ class PosManager {
     }
 
     public maxNum = 5;
+    public oneCardNum = 20;
     public defList
     public atkList
 

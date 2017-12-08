@@ -2,6 +2,13 @@ class M3 extends MBase{
     constructor() {
         super();
     }
+
+    public atkAction(user:PKMonsterData,target:PKMonsterData,actionTime){
+        super.atkAction(user,target,actionTime);
+        var endTime = actionTime + this.getAtkArriveCD(user,target)+50;
+        this.sendAtkAction(user,target,actionTime,endTime) //攻击起作用
+    }
+
     //private mvID = 29;
     //
     //public preload(){

@@ -17,7 +17,7 @@ class SkillVO {
     public num: number;
     public value: number;
     public id: number;
-    public state: string;
+    //public state: string;
     public level: number;
     public type: number;
 
@@ -36,7 +36,7 @@ class SkillVO {
         this.num = data.num
         this.id = data.id
         this.value = data.value
-        this.state = data.state
+        //this.state = data.state
         this.level = data.level
         this.type = data.type
     }

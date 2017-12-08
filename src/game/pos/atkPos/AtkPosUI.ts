@@ -55,6 +55,7 @@ class AtkPosUI extends game.BaseUI {
         this.scroller1.viewport = this.list1;
         this.list1.itemRenderer = AtkPosItem
         this.scroller1.addEventListener(egret.Event.CHANGE,this.onScroll,this)
+        this.list1.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onUnSelect,this);
 
         this.scroller2.viewport = this.list2;
         this.list2.itemRenderer = PosCardItem
@@ -181,16 +182,46 @@ class AtkPosUI extends game.BaseUI {
         var item = this.list2.selectedItem;
         if(this.maxCard <= this.arrayData.length)
             return;
-        if(this.useCard[item.id] && this.useCard[item.id] >= 3)
+        if(this.useCard[item.id] && this.useCard[item.id] >= PosManager.getInstance().oneCardNum)
             return;
         this.useCard[item.id] = (this.useCard[item.id] || 0) + 1
         this.arrayData.addItem({id:item.id})
         this.justRenewList2();
         this.renewTitle();
         this.once(egret.Event.ENTER_FRAME,function(){
-            if(this.scroller1.viewport.scrollV < this.scroller1.viewport.contentHeight -  this.scroller1.viewport.height)
+            var dec = this.scroller1.viewport.contentHeight -  this.scroller1.viewport.height;
+            if(this.scroller1.viewport.scrollV < dec)
             {
-                this.scroller1.viewport.scrollV = this.scroller1.viewport.contentHeight -  this.scroller1.viewport.height
+                this.scroller1.viewport.scrollV = dec
+                this.onScroll();
+            }
+        },this)
+
+    }
+
+    private onUnSelect(){
+        var item = this.list1.selectedItem;
+        this.deleteID(item.id)
+        this.arrayData.removeItemAt(this.arrayData.getItemIndex(item))
+        this.useCard[item.id] --;
+
+
+        this.once(egret.Event.ENTER_FRAME,function(){
+
+            var dec = this.scroller1.viewport.contentHeight -  this.scroller1.viewport.height;
+            if(dec<=0)
+            {
+                if(this.scroller1.viewport.scrollV != 0)
+                {
+                    this.scroller1.viewport.scrollV = 0;
+                    this.onScroll();
+                }
+                return;
+            }
+            console.log(this.scroller1.viewport.contentHeight ,  this.scroller1.viewport.height);
+            if(this.scroller1.viewport.scrollV > dec)
+            {
+                this.scroller1.viewport.scrollV = dec;
                 this.onScroll();
             }
         },this)

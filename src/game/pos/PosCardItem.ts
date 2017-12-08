@@ -48,9 +48,10 @@ class PosCardItem extends game.BaseItem {
         this.costText.text = vo.cost;
 
 
+        var maxNum = PosManager.getInstance().oneCardNum;
         var useNum = vo.temp[vo.id] || 0;
         this.nameText.text = vo.name
-        this.numText.text = (3-useNum) + '/3';
-        this.touchChildren = this.touchEnabled = useNum < 3
+        this.numText.text = (maxNum-useNum) + '/' + maxNum;
+        this.touchChildren = this.touchEnabled = useNum < maxNum
     }
 }

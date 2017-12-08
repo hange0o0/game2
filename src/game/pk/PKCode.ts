@@ -22,8 +22,9 @@ class PKCode {
             PD.actionTime += PKConfig.stepCD;
             cd -= PKConfig.stepCD;
             this.autoAction();
-            this.addMonster();
-            this.actionSkill();
+            this.actionPosCard();
+            //this.addMonster();
+            //this.actionSkill();
             this.monsterAction();
             this.monsterMove();
             PKMonsterAction.getInstance().actionAtk(PD.actionTime);//攻击落实
@@ -54,61 +55,94 @@ class PKCode {
         }
     }
 
-    //上怪,
-    public addMonster(){
+    public actionPosCard(){
         var PD = PKData.getInstance();
         for(var i=1;i<=PD.playerNum;i++) //暂时4个玩家
         {
             var player = PD.playerObj[i];
             if(!player)
                 continue
-            var arr = player.getAddMonster(PD.actionTime)
-            if(arr.length > 0)
+            var arr = player.getEnablePos(PD.actionTime)
+            while(arr.length > 0)
             {
+                PD.resetMonsterData();//重置技能数据，方便技能统计
                 var needSpace = PKConfig.maxMonsterSpace - PD.getMonsterSpaceByPlayer(player.id);
-                while(needSpace > 0 && arr.length > 0)
+                var data = arr.shift();
+                if(data.mid < 100) //上怪
                 {
-                    var data = arr.shift();
-                    //if(data.getVO().space > needSpace)
-                    //{
-                    //     break;
-                    //}
-                    needSpace -= data.getVO().space;
-                    PD.addMonster(data.getMonster(PD.actionTime));
-                    data.setHaveAdd(PD.actionTime);
+                    if(needSpace > 0)
+                    {
+                        needSpace -= data.getVO().space;
+                        PD.addMonster(data.getMonster(PD.actionTime));
+                        data.setHaveAdd(PD.actionTime);
+                    }
                 }
-            }
-        }
-    }
-
-    //技能效果作用
-    public actionSkill(){
-        var PD = PKData.getInstance();
-        PD.resetMonsterData();//重置技能数据，方便技能统计
-        for(var i=1;i<=PD.playerNum;i++) //暂时4个玩家
-        {
-            var player = PD.playerObj[i];
-            if(!player)
-                continue
-            var arr = player.getAddSkill(PD.actionTime)
-
-            if(arr.length > 0)
-            {
-                for(var i=0;i<arr.length;i++)
+                else if(SBase.getData(data.mid).useAble(data))//技能
                 {
-                    var data = arr[i];
                     data.actionSkill();
                     data.setHaveAdd(PD.actionTime);
                 }
+
             }
         }
     }
+
+    ////上怪,
+    //public addMonster(){
+    //    var PD = PKData.getInstance();
+    //    for(var i=1;i<=PD.playerNum;i++) //暂时4个玩家
+    //    {
+    //        var player = PD.playerObj[i];
+    //        if(!player)
+    //            continue
+    //        var arr = player.getAddMonster(PD.actionTime)
+    //        if(arr.length > 0)
+    //        {
+    //            var needSpace = PKConfig.maxMonsterSpace - PD.getMonsterSpaceByPlayer(player.id);
+    //            while(needSpace > 0 && arr.length > 0)
+    //            {
+    //                var data = arr.shift();
+    //                //if(data.getVO().space > needSpace)
+    //                //{
+    //                //     break;
+    //                //}
+    //                needSpace -= data.getVO().space;
+    //                PD.addMonster(data.getMonster(PD.actionTime));
+    //                data.setHaveAdd(PD.actionTime);
+    //            }
+    //        }
+    //    }
+    //}
+    //
+    ////技能效果作用
+    //public actionSkill(){
+    //    var PD = PKData.getInstance();
+    //    //PD.resetMonsterData();//重置技能数据，方便技能统计
+    //    for(var i=1;i<=PD.playerNum;i++) //暂时4个玩家
+    //    {
+    //        var player = PD.playerObj[i];
+    //        if(!player)
+    //            continue
+    //        var arr = player.getAddSkill(PD.actionTime)
+    //
+    //        if(arr.length > 0)
+    //        {
+    //            for(var i=0;i<arr.length;i++)
+    //            {
+    //                var data = arr[i];
+    //                data.actionSkill();
+    //                data.setHaveAdd(PD.actionTime);
+    //            }
+    //        }
+    //    }
+    //}
 
     //怪出手
     public monsterAction(){
         var PD = PKData.getInstance();
         for(var i=0;i<PD.monsterList.length;i++)
         {
+            PD.resetMonsterData();//重置技能数据，方便技能统计
             var mvo:PKMonsterData = PD.monsterList[i];
             var skillTargets = mvo.canSkill(PD.actionTime);
 
@@ -124,7 +158,6 @@ class PKCode {
                     PKMonsterAction.getInstance().atk(mvo,PD.actionTime);
                 }
             }
-
         }
     }
 
@@ -147,7 +180,7 @@ class PKCode {
         for(var i=0;i<PD.monsterList.length;i++)
         {
             var mvo:PKMonsterData = PD.monsterList[i];
-            if(mvo.die || (mvo.dieTime && mvo.dieTime <= PD.actionTime))
+            if(mvo.die || (mvo.dieTime && mvo.dieTime <= PD.actionTime)) //死的
             {
                 mvo.die = true;
                 PD.monsterList.splice(i,1);
@@ -184,13 +217,18 @@ class PKCode {
                     user:mvo,
                 })
             }
-            else { //清除BUFF
-                mvo.cleanBuff(PD.actionTime)
+            else { //其它
+                mvo.cleanBuff(PD.actionTime) //清除BUFF
+                if(mvo.stateChange)
+                {
+                    mvo.stateChange = false;
+                    PD.addVideo({
+                        type:PKConfig.VIDEO_MONSTER_STATE_CHANGE,
+                        user:mvo,
+                    })
+                }
             }
         }
-
-        PD.team1.removeState()
-        PD.team2.removeState()
     }
 
 

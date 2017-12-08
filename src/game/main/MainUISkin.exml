@@ -27,7 +27,7 @@
 	</e:Group>
 	<e:Group horizontalCenter="0" verticalCenter="-50">
 		<e:Rect id="mapBtn" width="240" height="240" x="0" y="0"/>
-		<e:Rect width="240" height="240" x="10" y="10"/>
+		<e:Rect id="testBtn" width="240" height="240" x="10" y="10"/>
 		<e:Rect width="240" height="240" x="20" y="20"/>
 		<e:Rect width="240" height="240" x="30" y="30"/>
 		<e:layout>

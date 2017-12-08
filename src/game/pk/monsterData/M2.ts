@@ -3,6 +3,11 @@ class M2 extends MBase{
         super();
     }
 
+    //初始化怪物隐藏属性
+    public initMonster(user:PKMonsterData){
+        user.missRate = 0.6;
+    }
+
 
     ////伤害飞行时间
     //protected getAtkArriveCD(user:PKMonsterData,target:PKMonsterData){

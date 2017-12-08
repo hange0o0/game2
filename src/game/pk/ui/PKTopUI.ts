@@ -134,8 +134,8 @@ class PKTopUI extends game.BaseContainer {
         MyTool.removeMC(this.defScoreGroup2)
         this.group1.addChild(this.defGroup1)
         this.group2.addChildAt(this.defGroup2,0)
-        this.defText1.text = '+' +  Math.floor(PD.getTeamByRota(PKConfig.ROTA_LEFT).def/10) + '%'
-        this.defText2.text = '+' +  Math.floor(PD.getTeamByRota(PKConfig.ROTA_RIGHT).def/10)  + '%'
+        this.defText1.text = '+' +  Math.floor(PD.getTeamByRota(PKConfig.ROTA_LEFT).def/5) + '%'
+        this.defText2.text = '+' +  Math.floor(PD.getTeamByRota(PKConfig.ROTA_RIGHT).def/5)  + '%'
     }
 
     public addSkillItem(data){

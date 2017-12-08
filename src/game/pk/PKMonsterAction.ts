@@ -33,7 +33,7 @@ class PKMonsterAction {
 
                 if(data.type == 'atk_before')   //攻击产生
                 {
-                    if(user.die)
+                    if(!user.canAction())
                         continue;
                     data.model.atkAction(user,target,t)
                 }
@@ -43,7 +43,7 @@ class PKMonsterAction {
                 }
                 else if(data.type == 'skill_before')   //技能产生
                 {
-                    if(user.die)
+                    if(!user.canAction())
                         continue;
                     data.model.skillAction(user,data.target,t)
                 }

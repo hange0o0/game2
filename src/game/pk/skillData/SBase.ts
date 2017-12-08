@@ -15,6 +15,10 @@ class SBase {
     constructor() {
     }
 
+    public onDie(user:PKPosCardData){
+
+    }
+
     //预加载
     public preload() {
 
@@ -47,11 +51,11 @@ class SBase {
     //实现技能
     public skill(user:PKPosCardData){
         var svo = SkillVO.getObject(user.mid);
-        if(svo.state)
-        {
-            user.getOwner().teamData.addStateLister(svo.state,user)
-            return;
-        }
+        //if(svo.state)
+        //{
+        //    user.getOwner().teamData.addStateLister(svo.state,user)
+        //    return;
+        //}
         var targets = this.getSkillTarget(user);
         for(var i=0;i<targets.length;i++)
         {

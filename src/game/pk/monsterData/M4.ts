@@ -2,6 +2,19 @@ class M4 extends MBase{
     constructor() {
         super();
     }
+
+    public atk(user:PKMonsterData,target:PKMonsterData){
+        var b = super.atk(user,target)
+       if(b && PKData.getInstance().random() < 0.5)
+       {
+           var buff = new PKBuffData()
+           buff.user = user;
+           buff.addState(PKConfig.STATE_YUN);
+           buff.endTime = PKData.getInstance().actionTime + 1000;
+           target.addBuff(buff)
+       }
+        return b;
+    }
     //private mvID = 103;
     //public preload(){
     //    MonsterVO.getObject(1).preLoad();

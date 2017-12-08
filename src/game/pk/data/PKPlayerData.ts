@@ -149,7 +149,7 @@ class PKPlayerData {
             {
                 if(this.posCard[s])
                 {
-                    this.teamData.removeState(this.posCard[s])
+                    this.teamData.removeStateListerByOwner(this.posCard[s])
                 }
                 this.posCard[s] = this.prePosCard[s];
                 this.prePosCard[s] = null;
@@ -177,6 +177,31 @@ class PKPlayerData {
             else
                 break;
         }
+    }
+
+    public getEnablePos(t){
+        var arr = [];
+
+        for(var s in this.posCard)
+        {
+            var oo:PKPosCardData = this.posCard[s];
+            if(!oo)continue;
+
+            if(oo.testAdd(t))
+            {
+                arr.push(oo)
+            }
+            else if(!oo.useEnable())//已失效
+            {
+                this.posCard[s] = null;
+                this.teamData.removeStateListerByOwner(oo)
+            }
+        }
+        if(arr.length > 1)
+        {
+            ArrayUtil.sortByField(arr,['actionTime','id'],[0,0])
+        }
+        return arr;
     }
 
     //取可上战场的怪

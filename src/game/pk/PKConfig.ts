@@ -28,4 +28,15 @@ class PKConfig {
     public static VIDEO_TEAM_DEF = 9 //队伍防御
     public static VIDEO_TEAM_DEF2 = 11 //队伍防御
     public static VIDEO_POS_ADD = 10
+    public static VIDEO_MONSTER_STATE_CHANGE = 12
+
+
+
+    public static STATE_YUN = 1
+
+
+    public static LISTENER_CREATE = 1
+
+
+
 }

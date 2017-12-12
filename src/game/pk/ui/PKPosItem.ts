@@ -33,6 +33,18 @@ class PKPosItem extends game.BaseItem {
         //var tw = this.tw = egret.Tween.get(this.cardGroup,{loop:true});
         //this.cardGroup.y = 5;
         //tw.to({y:-15},1000,egret.Ease.sineInOut).to({y:5},1000,egret.Ease.sineInOut)
+        MyTool.addLongTouch(this,this.onLongTouch,this)
+    }
+
+    private onLongTouch(){
+        var data = PKData.getInstance().myPlayer.posCard[this.index] || PKData.getInstance().myPlayer.prePosCard[this.index]
+        if(!data)
+            return;
+        var player = PKData.getInstance().myPlayer
+        PKCardInfoUI.getInstance().show({
+            mid:data.mid,
+            force:CM.getCardVO(data.mid).getAdd(player.force,player.type)
+        })
     }
 
 

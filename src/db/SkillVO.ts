@@ -55,5 +55,15 @@ class SkillVO {
          SBase.getData(this.id).preload();
     }
 
+    public getDes(){
+        return this.des
+    }
+
+    public getAdd(force,type){
+        var typeAdd = this.type == type?PKConfig.typeAdd:0
+        var add = (1+force/100)*(1+typeAdd/100);
+        return Math.floor(add);
+    }
+
 
 }

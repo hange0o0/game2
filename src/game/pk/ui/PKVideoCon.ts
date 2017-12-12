@@ -203,14 +203,10 @@ class PKVideoCon extends game.BaseContainer {
             case PKConfig.VIDEO_MONSTER_WIN:
                 item = this.getItemByID(data.id);
                 item.winRemove();
-                //if(item.data.getOwner().atkRota == PKConfig.ROTA_LEFT)
-                //    var mc = this.door2
-                //else
-                //    var mc = this.door1
-                //mc.source = 'door2_png'
-                //mc.once(egret.Event.ENTER_FRAME,function(){
-                //    mc.source = 'door_png';
-                //},this)
+                break;
+            case PKConfig.VIDEO_MONSTER_ADD_STATE:
+                item = this.getItemByID(data.id);
+                item.showAddStateMV(videoData.key,videoData.stateType);
                 break;
             case PKConfig.VIDEO_MONSTER_DIE:
                 item = this.getItemByID(data.id);

@@ -31,12 +31,12 @@ class PKTopUI extends game.BaseContainer {
     }
 
     public onVideoEvent(e){
-        var item:PKMonsterItem;
+        //var item:PKMonsterItem;
         var videoData = e.data;
-        var data:PKMonsterData = videoData.user;
         switch(videoData.type)//动画类型
         {
             case PKConfig.VIDEO_POS_ADD:
+                var data:PKPosCardData = videoData.user;
                 var teamData = data.getOwner().teamData
                 if(teamData.id != 'sys' && teamData != PKData.getInstance().myPlayer.teamData)
                     this.addSkillItem(data);

@@ -6,6 +6,7 @@ class PKMonsterItem extends game.BaseItem {
     private monsterMV:MonsterMV
     public needRemove = false
     public stateMV = {};
+    public addStateMV = new PKAddState();
     public constructor() {
         super();
         this.skinName = "PKMonsterItemSkin";
@@ -21,6 +22,13 @@ class PKMonsterItem extends game.BaseItem {
         this.anchorOffsetX = 50;
         this.anchorOffsetY = 300;
         this.monsterMV.addEventListener('mv_die',this.onDieFinish,this)
+
+
+
+        this.addChild(this.addStateMV)
+        this.addStateMV.remove();
+        this.addStateMV.x = 30;
+
 
         //MyTool.addTestBlock(this).y = 300;
     }
@@ -66,6 +74,11 @@ class PKMonsterItem extends game.BaseItem {
         }
     }
 
+    //增加状态时的动画
+    public  showAddStateMV(key,type){
+        this.addStateMV.showState(key,type);
+    }
+
 
     public dataChanged(){
         var mD:PKMonsterData = this.data
@@ -78,10 +91,11 @@ class PKMonsterItem extends game.BaseItem {
         this.x = mD.x;
         this.setRota(-mD.atkRota,true);
 
-        this.bar.fillColor = mD.atkRota == PKConfig.ROTA_LEFT ? 0x0000FF : 0xFF0000;
+
         this.barGroup.visible = false;
         this.barGroup.alpha = 1;
         this.barGroup.y = 300 - mD.getVO().height - 20;
+        this.addStateMV.y = this.barGroup.y - 20
         this.renewHp();
 
     }
@@ -140,6 +154,7 @@ class PKMonsterItem extends game.BaseItem {
             this.barGroup.visible = true;
         }
         this.bar.width = 40 * mD.getHpRate();
+        this.bar.fillColor = mD.atkRota == PKConfig.ROTA_LEFT ? 0x0000FF : 0xFF0000;
     }
 
     public winRemove(){
@@ -155,5 +170,6 @@ class PKMonsterItem extends game.BaseItem {
         egret.Tween.removeTweens(this.barGroup);
         MyTool.removeMC(this);
         this.monsterMV.stop();
+        this.addStateMV.remove();
     }
 }

@@ -189,6 +189,7 @@ class PKCode {
                     user:mvo,
                 })
                 i--;
+                mvo.onDie();
                 PD.monsterChange = true;
             }
             else if(mvo.x < PKConfig.appearPos || mvo.x > PKConfig.floorWidth + PKConfig.appearPos) //冲过终点
@@ -196,6 +197,7 @@ class PKCode {
                 mvo.die = true;
                 PD.monsterList.splice(i,1);
                 i--;
+                mvo.onDie();
                 PD.monsterChange = true;
                 if(mvo.dieTime) //召唤物不算分
                 {

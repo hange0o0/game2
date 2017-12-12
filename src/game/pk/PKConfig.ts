@@ -29,6 +29,7 @@ class PKConfig {
     public static VIDEO_TEAM_DEF2 = 11 //队伍防御
     public static VIDEO_POS_ADD = 10
     public static VIDEO_MONSTER_STATE_CHANGE = 12
+    public static VIDEO_MONSTER_ADD_STATE = 13
 
 
 
@@ -36,6 +37,7 @@ class PKConfig {
 
 
     public static LISTENER_CREATE = 1
+    public static LISTENER_DIE = 2
 
 
 

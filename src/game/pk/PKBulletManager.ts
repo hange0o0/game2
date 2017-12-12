@@ -192,6 +192,7 @@ class BulletMC extends egret.DisplayObjectContainer{
 
     public remove(){
         MyTool.removeMC(this);
+        egret.Tween.removeTweens(this.mc);
     }
 }
 

@@ -89,5 +89,15 @@ class MonsterVO {
          MBase.getData(this.id).preload();
     }
 
+    public getAdd(force,type){
+        var typeAdd = this.type == type?PKConfig.typeAdd:0
+        var add = (1+force/100)*(1+typeAdd/100);
+        return Math.floor(add);
+    }
+
+    public getDes(){
+        return this.des
+    }
+
 
 }

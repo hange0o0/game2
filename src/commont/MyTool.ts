@@ -147,11 +147,15 @@ class MyTool {
                     GameManager.stage.removeEventListener(egret.TouchEvent.TOUCH_CANCEL,onTouchEnd,thisObj);
                     return;
                 }
+                //mc.touchEnabled = false;
+                //egret.callLater(function(){
+                //    mc.touchEnabled = true;
+                //},this)
                 fun.apply(thisObj);
             },this,400)
 
         }
-        function onTouchEnd(){
+        function onTouchEnd(e){
             GameManager.stage.removeEventListener(egret.TouchEvent.TOUCH_END,onTouchEnd,thisObj);
             GameManager.stage.removeEventListener(egret.TouchEvent.TOUCH_CANCEL,onTouchEnd,thisObj);
             egret.clearTimeout(timer);

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="PKCardInfoItemSkin" width="200" height="40" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="stat1,stat2" >
+	<e:Image source="bg2_png" scale9Grid="9,9,11,10" x="0" y="0" width="100%" height="100%" source.stat2="bg5_png"/>
+	<e:Image id="icon" source="icon_cost_png" verticalCenter="0" horizontalCenter="-80"/>
+	<e:Label id="text" text="你好：123745" size="20" x="40" verticalCenter="2" stroke="1"/>
+</e:Skin>

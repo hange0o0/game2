@@ -33,10 +33,24 @@ class PKCardItem extends game.BaseItem {
         super.childrenCreated();
 
         this.addBtnEvent(this,this.onClick)
+        MyTool.addLongTouch(this,this.onLongTouch,this)
+    }
 
+    private onLongTouch(){
+        if(!this.data)
+            return;
+        var player = PKData.getInstance().myPlayer
+        PKCardInfoUI.getInstance().show({
+            mid:this.data.mid,
+            force:CM.getCardVO(this.data.mid).getAdd(player.force,player.type)
+        })
+        //if(this['longTouchTimer'] && egret.getTimer() - this['longTouchTimer'] < 200)
+        //    return;
     }
 
     private onClick(){
+        if(game.BaseUI.isStopEevent)
+            return;
         if(this.data)
             this.con.setChooseCard(this);
     }

@@ -17,7 +17,17 @@ class PKTopItem extends game.BaseItem {
 
     public childrenCreated() {
         super.childrenCreated();
+        MyTool.addLongTouch(this,this.onLongTouch,this)
+    }
 
+    private onLongTouch(){
+        if(!this.data)
+            return;
+        var player = this.data.getOwner()
+        PKCardInfoUI.getInstance().show({
+            mid:this.data.mid,
+            force:CM.getCardVO(this.data.mid).getAdd(player.force,player.type)
+        })
     }
 
 
@@ -36,8 +46,6 @@ class PKTopItem extends game.BaseItem {
         }
         else
             this.currentState = 'empty'
-
-        console.log(111)
         //this.nameText.text = vo.name
     }
 

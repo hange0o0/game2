@@ -14,6 +14,20 @@ class M9 extends MBase {
             buff.user = user;
             buff.addValue('atk',Math.min(1,Math.floor(target.baseAtk*0.2)));
             target.addBuff(buff)
+
+
+
+            if(buff.ing)
+            {
+
+                PKData.getInstance().addVideo({
+                    type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+                    user:target,
+                    key:1,
+                    stateType:1
+                })
+            }
+
         }
 
         var listener = new M9StateListener();
@@ -46,5 +60,15 @@ class M9StateListener extends PKStateListener {
         buff.user = this.owner;
         buff.addValue('atk',Math.min(1,Math.floor(target.baseAtk*0.2)));
         target.addBuff(buff)
+
+        if(buff.ing)
+        {
+            PKData.getInstance().addVideo({
+                type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+                user:target,
+                key:1,
+                stateType:1
+            })
+        }
     }
 }

@@ -213,7 +213,9 @@ class PKData extends egret.EventDispatcher{
             user:monster
         })
 
-        monster.getOwner().teamData.testState('create',monster);
+        MBase.getData(monster.mid).onCreate(monster);
+
+        monster.getOwner().teamData.testState(PKConfig.LISTENER_CREATE,monster);
         this.monsterChange = true;
         return monster;
     }

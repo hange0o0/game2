@@ -53,8 +53,7 @@ class PKMonsterData {
             this[key] = obj[key];
         }
         var mvo = MonsterVO.getObject(this.mid);
-        var typeAdd = mvo.type == this.getOwner().type?PKConfig.typeAdd:0
-        var add = (1+obj.force/100)*(1+typeAdd/100);
+        var add = mvo.getAdd(obj.force,this.getOwner().type);
         this.hp = Math.floor(mvo.hp * add);
         this.atk = Math.floor(mvo.atk * add);
         this.speed = mvo.speed;
@@ -211,6 +210,7 @@ class PKMonsterData {
         if(!current) //以前没有
         {
             newOne.enable();
+            return
         }
         if(newOne != current && newOne.value != current.value)
         {
@@ -343,5 +343,10 @@ class PKMonsterData {
 
     public getHpRate(){
         return this.hp / this.maxHp
+    }
+
+    public onDie(){
+        MBase.getData(this.mid).onDie(this);
+        this.getOwner().teamData.testState(PKConfig.LISTENER_DIE,this);
     }
 }

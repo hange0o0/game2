@@ -102,7 +102,8 @@ class PKCtrlCon extends game.BaseContainer {
 
 
     private onPosClick(e){
-
+        if(game.BaseUI.isStopEevent)
+            return;
          var mc:PKPosItem = e.currentTarget;
         if(this.chooseCard)
         {

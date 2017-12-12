@@ -111,7 +111,7 @@ class MBase {
             PKData.getInstance().addVideo({
                 type:PKConfig.VIDEO_MONSTER_DOUBLE,
                 user:user,
-                value:user.atk*2,
+                value:user.atk*user.doubleValue,
             })
         }
         else

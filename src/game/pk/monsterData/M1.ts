@@ -25,7 +25,9 @@ class M1 extends MBase{
 
 
     public skill(user:PKMonsterData,target){
-       this.atk(user,target);
+        var hp = Math.ceil(this.getAtkHp(user,target)*0.5);
+        target.beAtkAction({hp:hp,atker:user})
+        user.atkAction({hp:hp})
     }
     //对最多3个单位进行一次攻击
     public getSkillTarget(user:PKMonsterData){

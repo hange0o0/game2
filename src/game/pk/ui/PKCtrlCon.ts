@@ -12,15 +12,17 @@ class PKCtrlCon extends game.BaseContainer {
     private p1: PKPosItem;
     private p2: PKPosItem;
     private p3: PKPosItem;
-    private info1: PKInfoBtn;
     private info2: PKInfoBtn;
+    private info1: PKInfoBtn;
     private info4: PKInfoBtn;
     private info3: PKInfoBtn;
     private settingBtn: eui.Image;
+    private timeText: eui.Label;
+    private cardText: eui.Label;
     private costMC: eui.Image;
     private costText: eui.Label;
-    private cardText: eui.Label;
-    private timeText: eui.Label;
+    private smallMap: eui.Group;
+
 
 
 
@@ -37,6 +39,9 @@ class PKCtrlCon extends game.BaseContainer {
     private lastAddCardTime = 0//上次加卡的时间
     private needRenewCard = false
     private needRenewInfo = false
+
+    private mapItemArr = []
+    private mapPoolArr = []
 
 
     public childrenCreated() {
@@ -249,6 +254,55 @@ class PKCtrlCon extends game.BaseContainer {
 
         this.costText.text = 'x' + PD.myPlayer.getMP()
         this.timeText.text = '' + DateUtil.getStringBySecond(PD.actionTime/1000).substr(-5)
+
+        this.renewSmallMap();
+    }
+
+    private renewSmallMap(){
+        var PD = PKData.getInstance();
+        var len = Math.max(this.mapItemArr.length,PD.monsterList.length);
+        for(var i=0;i<len;i++)
+        {
+            var mc = this.mapItemArr[i];
+            var data:PKMonsterData = PD.monsterList[i];
+            if(!mc)
+            {
+                mc = this.mapPoolArr.pop();
+                if(!mc)
+                {
+                    mc = new eui.Rect()
+                    this.mapItemArr.push(mc)
+                    this.smallMap.addChild(mc);
+                }
+            }
+            if(data)
+            {
+                mc.x = data.x/6 + 25
+                mc.y = data.y/2 + 55/2
+                if(data.mid == 99)
+                {
+                    mc.fillColor =0xffff00
+                    mc.width = mc.height = 8
+                    mc.x -= 4
+                    mc.y -= 4
+                }
+                else
+                {
+                    mc.fillColor = data.atkRota == PKConfig.ROTA_LEFT?0x5959FF:0xFF0000
+                    mc.width = mc.height = 4
+                    mc.x -= 2
+                    mc.y -= 2
+                }
+            }
+            else
+            {
+                this.mapPoolArr.push(mc);
+                MyTool.removeMC(mc);
+                this.mapItemArr.splice(i,1);
+                i--;
+                len --;
+            }
+        }
     }
 
     private renewInfo(){

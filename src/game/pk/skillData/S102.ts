@@ -17,7 +17,7 @@ class S102 extends SBase{
 
     //生效时的逻辑
     public onSkill(user:PKPosCardData,target:PKMonsterData){
-        var addValue = Math.floor(target.baseAtk * user.getSkillValue()/100);
+        var addValue = Math.floor(target.baseAtk * user.getSkillValue(1)/100);
         target.atk += addValue;
         //target.addBuff({
         //    atk:addValue,

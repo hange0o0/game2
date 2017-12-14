@@ -6,13 +6,14 @@ class M9 extends MBase {
     public onCreate(user:PKMonsterData){
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData);
+        var rate = user.getSkillValue(1)/100;
         for(var i=0;i<arr.length;i++)
         {
             var target = arr[i];
             var buff = new PKBuffData()
             buff.id = 9;
             buff.user = user;
-            buff.addValue('atk',Math.min(1,Math.floor(target.baseAtk*0.2)));
+            buff.addValue('atk',Math.min(1,Math.floor(target.baseAtk*rate)));
             target.addBuff(buff)
 
 
@@ -54,11 +55,12 @@ class M9StateListener extends PKStateListener {
     }
 
     // 起作用时会调用的方法
-    public actionFun(target:PKMonsterData){
+    public actionFun(target?:PKMonsterData){
+        var rate = this.owner.getSkillValue(1)/100;
         var buff = new PKBuffData()
         buff.id = 9;
         buff.user = this.owner;
-        buff.addValue('atk',Math.min(1,Math.floor(target.baseAtk*0.2)));
+        buff.addValue('atk',Math.min(1,Math.floor(target.baseAtk*rate)));
         target.addBuff(buff)
 
         if(buff.ing)

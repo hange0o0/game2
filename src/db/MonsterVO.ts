@@ -36,6 +36,9 @@ class MonsterVO {
     public mcwidth: number;
     public atk2: number;
     public mv_atk: number;
+    public sv1: number;
+    public sv2: number;
+    public sv3: number;
 
 
     public constructor(data?: any) {
@@ -67,6 +70,9 @@ class MonsterVO {
         this.speed = data.speed
         this.hp = data.hp
         this.id = data.id
+        this.sv1 = data.sv1
+        this.sv2 = data.sv2
+        this.sv3 = data.sv3
         this.mcwidth = data.mcwidth
         this.atk2 = data.atk2
         this.skillcd = data.skillcd * 1000
@@ -93,6 +99,13 @@ class MonsterVO {
         var typeAdd = this.type == type?PKConfig.typeAdd:0
         var add = (1+force/100)*(1+typeAdd/100);
         return Math.floor(add);
+    }
+
+    public getSkillValue(index,force=0){
+        var sv = this['sv' + index];
+        if(!force)
+            return sv
+        return Math.floor(sv * (1+force/100));
     }
 
     public getDes(){

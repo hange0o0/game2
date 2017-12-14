@@ -35,6 +35,6 @@ class S103 extends SBase{
 
     //生效时的逻辑
     public onSkill(user:PKPosCardData,target:PKMonsterData){
-        target.beAtkAction({hp:user.getSkillValue()})
+        target.beAtkAction({hp:user.getSkillValue(1)})
     }
 }

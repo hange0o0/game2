@@ -54,4 +54,6 @@
 			<e:HorizontalLayout gap="0"/>
 		</e:layout>
 	</e:Group>
+	<e:Group id="smallMap" horizontalCenter="0" bottom="472" width="300" height="55">
+	</e:Group>
 </e:Skin>

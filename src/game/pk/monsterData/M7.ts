@@ -5,11 +5,11 @@ class M7 extends MBase {
 
     //初始化怪物隐藏属性
     public initMonster(user:PKMonsterData){
-        user.doubleValue = 2;
+        user.doubleValue = user.getSkillValue(2)/100;
     }
 
     public atkAction(user:PKMonsterData,target:PKMonsterData,actionTime){
-        if(user.getHpRate() < 0.3)
+        if(user.getHpRate() < user.getSkillValue(1)/100)
         {
             user.doubleRate = 1;
         }

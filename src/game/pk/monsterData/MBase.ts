@@ -22,6 +22,10 @@ class MBase {
     public onDie(user:PKMonsterData){
 
     }
+    //被攻击时的处理
+    public beAtkAction(user,data){
+
+    }
 
     //预加载
     public preload(){
@@ -69,10 +73,7 @@ class MBase {
 
     }
 
-    //被攻击时的处理
-    public beAtkAction(user,data){
 
-    }
 
    //////////////////////////////////////////////////////   other上面的为要处理的函数
     //技能前处理（生成技能事件）

@@ -5,7 +5,7 @@ class M2 extends MBase{
 
     //初始化怪物隐藏属性
     public initMonster(user:PKMonsterData){
-        user.missRate = 0.6;
+        user.missRate =  user.getSkillValue(1)/100;
     }
 
 

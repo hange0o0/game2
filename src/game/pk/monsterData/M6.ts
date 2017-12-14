@@ -7,11 +7,12 @@ class M6 extends MBase {
         var b = super.atk(user,target);
         if(!b)
             return false;
-        //溅射 30%
+        //溅射
         var isToRight = user.x<target.x
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
-        var atkRage = user.getVO().atkrage + 100;
+        var atkRage = user.getVO().atkrage + user.getSkillValue(2);
+        var hitRate = user.getSkillValue(1)/100;
         for(var i=0;i<arr.length;i++)
         {
             var newTarget = arr[i];
@@ -31,7 +32,7 @@ class M6 extends MBase {
                 continue;
 
             var hp = this.getAtkHp(user,newTarget);
-            newTarget.beAtkAction({hp:Math.ceil(hp*0.8)})
+            newTarget.beAtkAction({hp:Math.ceil(hp*hitRate)})
         }
         return true;
     }

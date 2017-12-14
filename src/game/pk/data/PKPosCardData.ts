@@ -107,18 +107,25 @@ class PKPosCardData {
             owner:this.owner,
             atkRota:atkRota,
             x:x,
+            y:-25 + Math.random()*50,
             actionTime:actionTime,
         }
     }
 
-    public getSkillValue(){
+    public getSkillValue(index,needForce=false){
         var PD = PKData.getInstance();
-        var owner = PD.getPlayer(this.owner);
-        var vo = SkillVO.getObject(this.mid)
-        return Math.floor(vo.value * (1+owner.force/100));
-
-
+        return CM.getCardVO(this.mid).getSkillValue(index,needForce?PD.getPlayer(this.owner).force:0)
     }
+
+    //public getSkillValue(index=1,noForce=false){
+    //    var PD = PKData.getInstance();
+    //    var owner = PD.getPlayer(this.owner);
+    //    var vo = SkillVO.getObject(this.mid)
+    //    var sv = vo['sv' + index];
+    //    if(noForce)
+    //        return sv
+    //    return Math.floor(sv * (1+owner.force/100));
+    //}
 
     //触发技能
     public actionSkill(){

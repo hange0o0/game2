@@ -71,6 +71,7 @@ class PKingUI extends game.BaseUI {
             owner:'sys',
             atkRota:1,
             x:PKConfig.floorWidth/2 + PKConfig.appearPos,
+            y:0,
             actionTime:0
         });
 

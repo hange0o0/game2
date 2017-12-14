@@ -25,7 +25,7 @@ class M1 extends MBase{
 
 
     public skill(user:PKMonsterData,target){
-        var hp = Math.ceil(this.getAtkHp(user,target)*0.5);
+        var hp = Math.ceil(this.getAtkHp(user,target)*user.getSkillValue(2)/100);
         target.beAtkAction({hp:hp,atker:user})
         user.atkAction({hp:hp})
     }
@@ -38,6 +38,8 @@ class M1 extends MBase{
         for(var i=0;i<arr.length;i++)
         {
             var target = arr[i];
+            if(!target.beSkillAble())
+                continue;
             var des = Math.abs(user.x - target.x);
             if(des<=atkrage)
             {
@@ -45,10 +47,11 @@ class M1 extends MBase{
                 list.push(target)
             }
         }
-        if(list.length>3)
+        var maxNum = user.getSkillValue(1)
+        if(list.length>maxNum)
         {
             ArrayUtil.sortByField(list,['temp','id'],[0,0])
-            list.length = 3;
+            list.length = maxNum;
         }
         return list;
     }

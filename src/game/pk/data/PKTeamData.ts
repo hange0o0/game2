@@ -67,7 +67,26 @@ class PKTeamData {
                 }
             }
         }
+    }
 
+    public onStateTimer(){
+        for(var state in this.stateObj)
+        {
+            for(var i=0;i<this.stateObj[state].length;i++)
+            {
+                var listener:PKStateListener = this.stateObj[state][i];
+                if(listener.endTime && listener.endTime <= PKData.getInstance().actionTime)
+                {
+                    this.stateObj[state].splice(i,1);
+                    i--;
+                    listener.onRemove()
+                }
+                else if(parseInt(state) == PKConfig.LISTENER_TIMER)
+                {
+                    this.stateObj[state][i].actionFun()
+                }
+            }
+        }
     }
 
 }

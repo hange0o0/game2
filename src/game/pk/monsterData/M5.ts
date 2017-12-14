@@ -4,7 +4,7 @@ class M5 extends MBase {
     }
 
     public initMonster(user:PKMonsterData){
-        user.doubleRate = 0.3;
-        user.doubleValue = 2;
+        user.doubleRate = user.getSkillValue(1)/100;
+        user.doubleValue = user.getSkillValue(2)/100;
     }
 }

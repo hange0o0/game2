@@ -15,7 +15,9 @@ class SkillVO {
     public cost: number;
     public name: string;
     public num: number;
-    public value: number;
+    public sv1: number;
+    public sv2: number;
+    public sv3: number;
     public id: number;
     //public state: string;
     public level: number;
@@ -35,10 +37,13 @@ class SkillVO {
         this.name = data.name
         this.num = data.num
         this.id = data.id
-        this.value = data.value
         //this.state = data.state
         this.level = data.level
         this.type = data.type
+
+        this.sv1 = data.sv1
+        this.sv2 = data.sv2
+        this.sv3 = data.sv3
     }
 
     public getImage(){
@@ -63,6 +68,13 @@ class SkillVO {
         var typeAdd = this.type == type?PKConfig.typeAdd:0
         var add = (1+force/100)*(1+typeAdd/100);
         return Math.floor(add);
+    }
+
+    public getSkillValue(index,force=0){
+        var sv = this['sv' + index];
+        if(!force)
+            return sv
+        return Math.floor(sv * (1+force/100));
     }
 
 

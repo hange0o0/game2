@@ -5,7 +5,7 @@ class M8 extends MBase {
 
     //初始化怪物隐藏属性
     public initMonster(user:PKMonsterData){
-        user.doubleValue = 2;
+        user.doubleValue = user.getSkillValue(1)/100;
     }
 
     public atkAction(user:PKMonsterData,target:PKMonsterData,actionTime){
@@ -52,6 +52,10 @@ class M8 extends MBase {
         {
             var target = arr[i];
             if(!target.dieTime)
+                continue;
+            if(target.hp>= user.getSkillValue(2))
+                continue;
+            if(!target.beSkillAble())
                 continue;
             var des = Math.abs(user.x - target.x);
             if(des<=atkrage)

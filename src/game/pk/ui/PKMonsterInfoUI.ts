@@ -44,7 +44,7 @@ class PKMonsterInfoUI extends game.BaseContainer {
             case PKConfig.VIDEO_MONSTER_DIE:
                 this.resetFlag = true;
                 break;
-            case PKConfig.VIDEO_MONSTER_BEATK:
+            case PKConfig.VIDEO_MONSTER_HPCHANGE:
                 this.renewFlag = true;
                 break;
         }

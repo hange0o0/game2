@@ -8,12 +8,14 @@ class PKMonsterData {
     public def  = 0
     public maxHp = 0
     public hpChange = 0  //每0.5秒改变的HP值
+    public lastHpChange = 0  //上次改变的HP值的时间
 
     //隐藏属性
     public doubleRate  = 0
     public doubleValue  = 0
     public doubleAction  = false;
     public missRate  = 0
+    public momian  = false
 
     public baseHp = 0
     public baseAtk  = 0
@@ -23,6 +25,7 @@ class PKMonsterData {
 
 
     public x;//当前的位置
+    public y;//当前的位置
     public mid //对应的怪
     public owner//属于哪个玩家
     public actionTime//上次行动的时间
@@ -90,9 +93,13 @@ class PKMonsterData {
         return 0.5
     }
 
-    public changeValue(key,value){
-        if(key == 'speed' || key == 'def' || key == 'atk' || key == 'hpChange')
-            this[key] += value;
+    //public changeValue(key,value){
+    //    if(key == 'speed' || key == 'def' || key == 'atk' || key == 'hpChange')
+    //        this[key] += value;
+    //}
+
+    public beSkillAble(){
+        return this.momian = false;
     }
 
     //{endTime,  add:{属性名称:增加值}，   state:{状态名：true},   id:唯一ID,   no:这BUFF没生效,   value:技能等级数值}
@@ -329,14 +336,16 @@ class PKMonsterData {
     }
 
     public beAtkAction(data){
-        this.hp -= data.hp;
+        this.addHp(-data.hp)
+        MBase.getData(this.mid).beAtkAction(this,data);
+    }
+
+    public addHp(hp){
+        this.hp += hp;
         if(this.hp <= 0)
             this.die = true;
-
-        MBase.getData(this.mid).beAtkAction(this,data);
-
         PKData.getInstance().addVideo({
-            type:PKConfig.VIDEO_MONSTER_BEATK,
+            type:PKConfig.VIDEO_MONSTER_HPCHANGE,
             user:this,
         })
     }
@@ -348,5 +357,10 @@ class PKMonsterData {
     public onDie(){
         MBase.getData(this.mid).onDie(this);
         this.getOwner().teamData.testState(PKConfig.LISTENER_DIE,this);
+    }
+
+    public getSkillValue(index,needForce=false){
+        var PD = PKData.getInstance();
+        return CM.getCardVO(this.mid).getSkillValue(index,needForce?PD.getPlayer(this.owner).force:0)
     }
 }

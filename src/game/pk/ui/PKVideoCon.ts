@@ -98,7 +98,7 @@ class PKVideoCon extends game.BaseContainer {
             //item.y = 350;
         }
         item.needRemove = false;
-        item.y =  this.monsterY + -25 + Math.random()*50
+
         return item;
     }
 
@@ -170,11 +170,14 @@ class PKVideoCon extends game.BaseContainer {
         {
             case PKConfig.VIDEO_MONSTER_ADD:
                 item = this.createItem();
+                //if(data.owner == 'sys')
+                //    item.y = this.monsterY;
+                //else
+                    item.y =  this.monsterY + data.y;
+
                 this.con.addChildAt(item,this.getIndexByY(item.y));
                 item.data =data;
                 this.itemArr.push(item);
-                if(data.owner == 'sys')
-                    item.y = this.monsterY;
 
                 break;
             case PKConfig.VIDEO_MONSTER_MOVE:
@@ -196,7 +199,7 @@ class PKVideoCon extends game.BaseContainer {
                 this.playMiss(item);
                 break;
 
-            case PKConfig.VIDEO_MONSTER_BEATK:
+            case PKConfig.VIDEO_MONSTER_HPCHANGE:
                 item = this.getItemByID(data.id);
                 item.renewHp();
                 break;

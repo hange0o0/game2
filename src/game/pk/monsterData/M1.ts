@@ -33,7 +33,7 @@ class M1 extends MBase{
     public getSkillTarget(user:PKMonsterData){
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
-        var atkrage = user.getVO().atkrage + 200;
+        var atkrage = user.getVO().getAtkDis() + 200;
         var list = [];
         for(var i=0;i<arr.length;i++)
         {

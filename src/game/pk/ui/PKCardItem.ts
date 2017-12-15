@@ -19,7 +19,7 @@ class PKCardItem extends game.BaseItem {
     public con:PKCtrlCon;
 
 
-    private defaultY = 30
+    public defaultY = 30
     public isDragMC = false;
     public stopDrag;
     public stopMove = true;

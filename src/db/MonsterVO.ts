@@ -27,7 +27,7 @@ class MonsterVO {
     public mcnum: number;
     public mcheight: number;
     public name: string;
-    public num2: number;
+    //public num2: number;
     public des: string;
     public speed: number;
     public hp: number;
@@ -60,7 +60,7 @@ class MonsterVO {
         this.def = data.def
         this.cd = data.cd * 1000
         this.num = data.num
-        this.num2 = data.num2
+        //this.num2 = data.num2
         this.atkrage = data.atkrage
         this.level = data.level
         this.mcnum = data.mcnum
@@ -110,6 +110,10 @@ class MonsterVO {
 
     public getDes(){
         return this.des
+    }
+
+    public getAtkDis(){
+        return this.width/2 + this.atkrage
     }
 
 

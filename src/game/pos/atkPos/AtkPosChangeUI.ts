@@ -63,10 +63,12 @@ class AtkPosChangeUI extends game.BaseUI {
         this.callDelete = false;
         this.deleteBtn.stroke = 0
         var p = this.list.globalToLocal(e.data.x,e.data.y)
-        p.x -= 10;
+        p.x -= 8;
         p.y -= 10;
+        //90*110
+        //8/20
         var maxIndex = this.listData.length - 1;
-        var index = Math.max(0,Math.min(maxIndex,Math.floor(p.x/120) + Math.floor(p.y/120)*5))
+        var index = Math.max(0,Math.min(maxIndex,Math.floor(p.x/98) + Math.floor(p.y/130)*6))
         if(index != this.selectIndex)
         {
             this.listData.removeItemAt(this.selectIndex)
@@ -106,6 +108,7 @@ class AtkPosChangeUI extends game.BaseUI {
         MyTool.clearList(this.list);
         if(this.everDelete)
             AtkPosUI.getInstance().justRenewList2()
+        AtkPosUI.getInstance().addSetting()
         super.hide();
     }
 

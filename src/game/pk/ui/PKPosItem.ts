@@ -9,6 +9,7 @@ class PKPosItem extends game.BaseItem {
     private spaceText: eui.Label;
     private timesBG: eui.Image;
     private timesText: eui.Label;
+    private addText: eui.Label;
     private barGroup1: eui.Group;
     private barMC1: eui.Image;
     private barGroup2: eui.Group;
@@ -37,18 +38,34 @@ class PKPosItem extends game.BaseItem {
     }
 
     private onLongTouch(){
-        var data = PKData.getInstance().myPlayer.posCard[this.index] || PKData.getInstance().myPlayer.prePosCard[this.index]
+        var data:PKPosCardData = PKData.getInstance().myPlayer.posCard[this.index] || PKData.getInstance().myPlayer.prePosCard[this.index]
         if(!data)
             return;
         var player = PKData.getInstance().myPlayer
         PKCardInfoUI.getInstance().show({
             mid:data.mid,
-            force:CM.getCardVO(data.mid).getAdd(player.force,player.type)
+            force:CM.getCardVO(data.mid).getAdd(player.force,player.type),
+            posAdd:data.id
         })
     }
 
 
     public dataChanged(){
+        switch(this.index)
+        {
+            case 1:
+                this.addText.text = '攻击 +10%'
+                break;
+            case 2:
+                this.addText.text = '血量 +10%'
+                break;
+            case 3:
+                this.addText.text = '间隔 +10%'
+                break;
+            case 4:
+                this.addText.text = ''
+                break;
+        }
         //var data:PKPosCardData = PKData.getInstance().myPlayer.posCard[this.index]
         //if(data)
         //{
@@ -89,7 +106,7 @@ class PKPosItem extends game.BaseItem {
         var preData:PKPosCardData = PKData.getInstance().myPlayer.prePosCard[this.index];
         this.barGroup1.visible = false;
         this.barGroup2.visible = false;
-        this.barGroup2.y = 160;
+        this.barGroup2.y = 195;
         this.cardGroup.visible = false;
         var barWidth = 204
         if(data && data.useEnable())
@@ -105,7 +122,7 @@ class PKPosItem extends game.BaseItem {
                 var maxNum = data.getMaxNum();
                 this.timesText.text = (maxNum - data.num) + ''
                 this.timesBG.visible = maxNum > 0
-                this.barGroup2.y = 180;
+                this.barGroup2.y = 215;
             }
         }
         else if(preData)

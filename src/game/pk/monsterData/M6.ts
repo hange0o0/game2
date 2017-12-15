@@ -11,7 +11,7 @@ class M6 extends MBase {
         var isToRight = user.x<target.x
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
-        var atkRage = user.getVO().atkrage + user.getSkillValue(2);
+        var atkRage = user.getVO().getAtkDis() + user.getSkillValue(2);
         var hitRate = user.getSkillValue(1)/100;
         for(var i=0;i<arr.length;i++)
         {

@@ -52,6 +52,7 @@ class PKCtrlCon extends game.BaseContainer {
             this.addBtnEvent(mc,this.onPosClick)
             this.placeObj[i+1] = mc;
             mc.index = i+1
+            mc.dataChanged();
         }
 
         for(var i=0;i<PKConfig.maxHandCard;i++)
@@ -60,7 +61,7 @@ class PKCtrlCon extends game.BaseContainer {
             item = new PKCardItem();
             this.cardGroup.addChild(item);
             this.cardObj[i+1] = item;
-            item.y = 30;
+            item.y = item.defaultY;
             item.x = i*102 + 20
             item.con = this;
 

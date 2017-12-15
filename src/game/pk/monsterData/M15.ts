@@ -10,12 +10,12 @@ class M15 extends MBase {
         {
             user.atk += Math.ceil(user.baseAtk*user.getSkillValue(1)/100)
 
-            PKData.getInstance().addVideo({
-                type:PKConfig.VIDEO_MONSTER_ADD_STATE,
-                user:target,
-                key:1,
-                stateType:1
-            })
+            //PKData.getInstance().addVideo({
+            //    type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+            //    user:user,
+            //    key:1,
+            //    stateType:1
+            //})
         }
         return b;
     }

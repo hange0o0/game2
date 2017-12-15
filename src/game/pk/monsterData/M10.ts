@@ -9,6 +9,10 @@ class M10 extends MBase {
         AniManager.getInstance().preLoadMV(this.mvID)
     }
 
+    public initMonster(user:PKMonsterData){
+        user.atkAble =  false;
+    }
+
     //技能动画
     public skillMV(user,target,actionTime,endTime){
         PKVideoCon.getInstance().playAniOn(target.id,this.mvID)
@@ -22,7 +26,7 @@ class M10 extends MBase {
     public getSkillTarget(user:PKMonsterData){
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData);
-        var atkrage = user.getVO().atkrage + 100;
+        var atkrage = user.getVO().getAtkDis() + 100;
         var selectTarget
         for(var i=0;i<arr.length;i++)
         {

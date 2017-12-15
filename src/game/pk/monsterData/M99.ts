@@ -3,6 +3,10 @@ class M99 extends MBase{
         super();
     }
 
+    public onCreate(user:PKMonsterData){
+        user.momian = true
+    }
+
     public beAtkAction(user,data){
         data.atker.getOwner().teamData.def ++;
         PKData.getInstance().addVideo({
@@ -16,6 +20,7 @@ class M99 extends MBase{
 
         if(user.die)
         {
+            PKData.getInstance().currentState = 'pk'
             PKData.getInstance().addVideo({
                 type:PKConfig.VIDEO_TEAM_DEF2,
                 user:data.atker

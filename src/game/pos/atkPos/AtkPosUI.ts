@@ -16,11 +16,11 @@ class AtkPosUI extends game.BaseUI {
     private tab: eui.TabBar;
     private downList: DownList;
     private bottomUI: BottomUI;
-    private changeBtn: eui.Button;
     private btnGroup: eui.Group;
     private renameBtn: eui.Group;
     private deleteBtn: eui.Group;
     private saveBtn: eui.Group;
+
 
 
 
@@ -47,7 +47,6 @@ class AtkPosUI extends game.BaseUI {
         //this.keyBoard.hide();
         //this.keyBoard.addEventListener('key_change',this.onKeyBoard,this)
 
-        this.addBtnEvent(this.changeBtn,this.onChange)
         this.addBtnEvent(this.deleteBtn,this.onDelete)
         this.addBtnEvent(this.renameBtn,this.onRename)
         this.addBtnEvent(this.saveBtn,this.onSave)
@@ -76,7 +75,7 @@ class AtkPosUI extends game.BaseUI {
 
     public changeToServerList(){
         var arr = [];
-        for(var i=0;i<this.arrayData.length;i++)
+        for(var i=0;i<this.arrayData.length-1;i++)
         {
             arr.push(this.arrayData.getItemAt(i).id)
         }
@@ -84,7 +83,7 @@ class AtkPosUI extends game.BaseUI {
     }
 
     public onClose(){
-        if(!this.posData && this.arrayData.length > 0)
+        if(!this.posData && this.arrayData.length > 1)
         {
             Confirm('还没保存，确定退出吗？',(b)=>{
                 if(b==1)
@@ -157,6 +156,7 @@ class AtkPosUI extends game.BaseUI {
     }
 
     private onChange(){
+        this.arrayData.removeItemAt(this.arrayData.length - 1)
          AtkPosChangeUI.getInstance().show(this.arrayData)
     }
 
@@ -185,7 +185,7 @@ class AtkPosUI extends game.BaseUI {
         if(this.useCard[item.id] && this.useCard[item.id] >= PosManager.getInstance().oneCardNum)
             return;
         this.useCard[item.id] = (this.useCard[item.id] || 0) + 1
-        this.arrayData.addItem({id:item.id})
+        this.arrayData.addItemAt({id:item.id},this.arrayData.length-1)
         this.justRenewList2();
         this.renewTitle();
         this.once(egret.Event.ENTER_FRAME,function(){
@@ -201,6 +201,11 @@ class AtkPosUI extends game.BaseUI {
 
     private onUnSelect(){
         var item = this.list1.selectedItem;
+        if(item.isSetting)
+        {
+            this.onChange();
+            return;
+        }
         this.deleteID(item.id)
         this.arrayData.removeItemAt(this.arrayData.getItemIndex(item))
         this.useCard[item.id] --;
@@ -271,10 +276,11 @@ class AtkPosUI extends game.BaseUI {
         var PM = PosManager.getInstance();
         var data = this.posData = PM.atkList[this.index]
         this.useCard = {};
+        var arr = [];
         if(data)
         {
             this.posName = Base64.decode(data.name) || '未命名';
-            var arr = [];
+
             var list = data.list.split(',')
             for(var i=0;i<list.length;i++)
             {
@@ -282,15 +288,16 @@ class AtkPosUI extends game.BaseUI {
                 this.useCard[id] = (this.useCard[id] || 0) + 1;
                 arr.push({id:id})
             }
-            this.arrayData = new eui.ArrayCollection(arr)
-            this.btnGroup.addChildAt(this.deleteBtn,2)
+
+            this.btnGroup.addChildAt(this.deleteBtn,1)
         }
         else
         {
             this.posName = '未命名' + this.index;
-            this.arrayData = new eui.ArrayCollection([])
             MyTool.removeMC(this.deleteBtn)
         }
+        arr.push({isSetting:true})
+        this.arrayData = new eui.ArrayCollection(arr)
         this.list1.dataProvider = this.arrayData
         this.renewTitle();
         this.renewList();
@@ -309,6 +316,9 @@ class AtkPosUI extends game.BaseUI {
     public justRenewList2(){
         MyTool.renewList(this.list2)
         this.renewTitle();
+    }
+    public addSetting(){
+        this.arrayData.addItem({isSetting:true})
     }
 
     private renewList(){

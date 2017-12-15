@@ -5,6 +5,7 @@ class PKData extends egret.EventDispatcher{
         if (!this.instance) this.instance = new PKData();
         return this.instance;
     }
+    public currentState = 'def'
 
     public jumpMV = false;
     public isGameOver = false //游戏结束
@@ -61,6 +62,7 @@ class PKData extends egret.EventDispatcher{
         this.monsterID = 1;
         this.isGameOver = false;
         this.monsterChange = false;
+        this.currentState = 'def';
 
 
 

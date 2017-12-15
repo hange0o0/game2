@@ -38,8 +38,8 @@ class PKPosCardData {
         if(this.mid < 100)
         {
             var mvo = MonsterVO.getObject(this.mid)
-            if(this.isAuto)
-                return this.num < mvo.num2;
+            //if(this.isAuto)
+            //    return this.num < mvo.num2;
             return this.num < mvo.num;
         }
 
@@ -53,8 +53,8 @@ class PKPosCardData {
         if(this.mid < 100)
         {
             var mvo = MonsterVO.getObject(this.mid)
-            if(this.isAuto)
-                return mvo.num2;
+            //if(this.isAuto)
+            //    return mvo.num2;
             return mvo.num;
         }
 
@@ -74,7 +74,12 @@ class PKPosCardData {
         if(this.num == 0)
             return PKConfig.beforeCD;
         else
-            return this.getVO().cd;
+        {
+            if(this.id == 3)
+                return Math.ceil(this.getVO().cd * 0.9);
+            else
+                return this.getVO().cd;
+        }
     }
 
     //是否可马上起作用
@@ -109,6 +114,7 @@ class PKPosCardData {
             x:x,
             y:-25 + Math.random()*50,
             actionTime:actionTime,
+            posAdd:this.id
         }
     }
 
@@ -129,7 +135,7 @@ class PKPosCardData {
 
     //触发技能
     public actionSkill(){
-       SBase.getData(this.mid).skill(this);
+       SBase.getData(this.mid).skill(this,this.id);
     }
 
     //上阵怪后的处理

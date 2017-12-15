@@ -30,6 +30,7 @@ class PKConfig {
     public static VIDEO_POS_ADD = 10
     public static VIDEO_MONSTER_STATE_CHANGE = 12
     public static VIDEO_MONSTER_ADD_STATE = 13
+    public static VIDEO_MONSTER_STAND = 14
 
 
 

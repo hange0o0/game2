@@ -49,7 +49,7 @@ class SBase {
     //////////////////////////////////////////////////上面的为要设的内容
 
     //实现技能
-    public skill(user:PKPosCardData){
+    public skill(user:PKPosCardData,posIndex){
         var svo = SkillVO.getObject(user.mid);
         //if(svo.state)
         //{

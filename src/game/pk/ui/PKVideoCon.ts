@@ -215,6 +215,10 @@ class PKVideoCon extends game.BaseContainer {
                 item = this.getItemByID(data.id);
                 item.die();
                 break;
+            case PKConfig.VIDEO_MONSTER_STAND:
+                item = this.getItemByID(data.id);
+                item.stand();
+                break;
             case PKConfig.VIDEO_MONSTER_STATE_CHANGE:
                 item = this.getItemByID(data.id);
                 item.renewState();

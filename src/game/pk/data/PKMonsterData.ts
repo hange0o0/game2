@@ -9,6 +9,7 @@ class PKMonsterData {
     public maxHp = 0
     public hpChange = 0  //每0.5秒改变的HP值
     public lastHpChange = 0  //上次改变的HP值的时间
+    public atkAble = true  //可以攻击
 
     //隐藏属性
     public doubleRate  = 0
@@ -20,6 +21,7 @@ class PKMonsterData {
     public baseHp = 0
     public baseAtk  = 0
     public baseSpeed  = 0
+    public posAdd  = 0
 
 
 
@@ -62,6 +64,11 @@ class PKMonsterData {
         this.speed = mvo.speed;
         this.def = mvo.def;
 
+        if(this.posAdd == 1)
+            this.atk = Math.floor(this.atk*1.1);
+        else if(this.posAdd == 2)
+            this.hp = Math.floor(this.hp*1.1);
+
         this.maxHp = this.hp;
         this.baseHp = this.hp;
         this.baseAtk = this.atk;
@@ -99,7 +106,7 @@ class PKMonsterData {
     //}
 
     public beSkillAble(){
-        return this.momian = false;
+        return this.momian == false;
     }
 
     //{endTime,  add:{属性名称:增加值}，   state:{状态名：true},   id:唯一ID,   no:这BUFF没生效,   value:技能等级数值}
@@ -238,7 +245,13 @@ class PKMonsterData {
         if(this.owner == 'sys')
             return false;
         if(!this.canAction())
-            return ;
+            return false
+        if(!this.atkAble && PKData.getInstance().currentState == 'def'){
+             if(this.atkRota == PKConfig.ROTA_LEFT && this.x > PKConfig.floorWidth/2 + PKConfig.appearPos - 100)
+                 return false
+             if(this.atkRota == PKConfig.ROTA_RIGHT && this.x < PKConfig.floorWidth/2 + PKConfig.appearPos + 100)
+                 return false
+        }
         return this.stopTime < t;
     }
 
@@ -249,7 +262,7 @@ class PKMonsterData {
 
     public canAtk(){
         var PD =  PKData.getInstance();
-        return  this.canAction() &&  this.stopTime <= PD.actionTime
+        return  this.atkAble && this.canAction() &&  this.stopTime <= PD.actionTime
     }
 
     public canBeAtk(user){
@@ -267,8 +280,8 @@ class PKMonsterData {
             return null;
         if(!this.getVO().skillcd) //无技能
             return null;
-        if(this.getVO().skillcd > 0 && !this.target && !this.getAtkTarget())
-            return null;
+        //if(this.getVO().skillcd > 0 && !this.target && !this.getAtkTarget())
+        //    return null;
         if(this.lastSkill && (this.lastSkill + this.getVO().skillcd > t))
             return null;
         this.skillTargets = MBase.getData(this.mid).getSkillTarget(this);
@@ -289,6 +302,12 @@ class PKMonsterData {
             user:this
         })
     }
+    public stand(){
+        PKData.getInstance().addVideo({
+            type:PKConfig.VIDEO_MONSTER_STAND,
+            user:this
+        })
+    }
 
     public getAtkTarget(){
         if(this.owner == 'sys')
@@ -296,7 +315,7 @@ class PKMonsterData {
         var PD = PKData.getInstance();
         if(!this.canAtk())
             return null;
-        var atkRage = this.getVO().atkrage;
+        var atkRage = this.getVO().getAtkDis();
         if(this.target)
         {
             if(this.target.canBeAtk(this) && Math.abs(this.target.x - this.x) < atkRage + this.target.getVO().width/2)
@@ -344,6 +363,8 @@ class PKMonsterData {
         this.hp += hp;
         if(this.hp <= 0)
             this.die = true;
+        else if(this.hp > this.maxHp)
+            this.hp = this.maxHp
         PKData.getInstance().addVideo({
             type:PKConfig.VIDEO_MONSTER_HPCHANGE,
             user:this,

@@ -171,6 +171,8 @@ class PKCode {
             {
                 mvo.move();
             }
+            else if(mvo.stopTime < PD.actionTime)
+                mvo.stand();
         }
     }
 

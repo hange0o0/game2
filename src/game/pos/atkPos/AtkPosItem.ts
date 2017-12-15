@@ -4,6 +4,7 @@ class AtkPosItem extends game.BaseItem {
         this.skinName = "AtkPosItemSkin";
     }
 
+
     public selectMC: eui.Rect;
     private bg: eui.Image;
     private img: CardImg;
@@ -25,6 +26,12 @@ class AtkPosItem extends game.BaseItem {
     }
 
     public dataChanged(){
+        if(this.data.isSetting)
+        {
+            this.currentState = 'setting'
+            return;
+        }
+        this.currentState = 'normal'
         var vo:any = CM.getCardVO(this.data.id);
         this.img.data = vo.id;
         this.bg.source = vo.getBG();

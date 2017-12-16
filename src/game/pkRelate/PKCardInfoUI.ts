@@ -11,6 +11,8 @@ class PKCardInfoUI extends game.BaseContainer {
     private nameText: eui.Label;
     private cardGroup: eui.Group;
     private bg: eui.Image;
+    private line: eui.Image;
+    private group: eui.Group;
     private img: CardImg;
     private desText: eui.Label;
     private list1: eui.List;
@@ -69,10 +71,73 @@ class PKCardInfoUI extends game.BaseContainer {
 
 
     public renew(){
-        var vo = CM.getCardVO(this.dataIn.mid)
+        var vo:any = CM.getCardVO(this.dataIn.mid)
         this.img.data = vo.id;
         this.bg.source = vo.getBG();
         this.nameText.text = vo.name;
-        this.desText.text = vo.getDes();
+
+        var baseForce = CM.getCardVO(this.dataIn.mid).getAdd(this.dataIn.force)
+        var force = CM.getCardVO(this.dataIn.mid).getAdd(this.dataIn.force,this.dataIn.type)
+        this.desText.text = vo.getDes(force);
+        //
+        //
+        //if(this.posAdd == 1)
+        //    this.atk = Math.floor(this.atk*1.1);
+        //else if(this.posAdd == 2)
+        //    this.hp = Math.floor(this.hp*1.1);
+        //else if(this.posAdd == 3)
+        //    this.def += 5;
+
+        var arr1 = [
+            {index:1,icon:'icon_cost_png',iconScale:1,title:'费用',value:vo.cost,valueAdd:0},
+            {index:2,icon:'icon_times_png',iconScale:1,title:'次数',value:vo.num || 1,valueAdd:0},
+
+            //{index:1,icon:'',iconScale:1,title:'',value:0,valueAdd:0},
+        ]
+        if(vo.num == 0)
+            arr1.push({index:3,icon:'icon_clock2_png',iconScale:1,title:'持续时间',value:MyTool.toFixed(vo.cd/1000,1)+'秒',valueAdd:0})
+        else if(vo.num > 1)
+            arr1.push({index:3,icon:'icon_clock_png',iconScale:1,title:'召唤间隔',value:MyTool.toFixed(vo.cd/1000,1)+'秒',valueAdd:0})
+
+        this.list1.dataProvider = new eui.ArrayCollection(arr1)
+
+        if(vo.isMonster)
+        {
+            //arr1.push({index:4,icon:'',iconScale:1,title:'间隔',value:vo.cost,valueAdd:0})
+            this.group.addChild(this.line)
+            this.group.addChild(this.list2)
+            var atk = Math.floor(vo.atk * baseForce);
+            var hp = Math.floor(vo.atk * baseForce);
+            var def = vo.def;
+
+            var ark2 = Math.floor(vo.atk * force);
+            var hp2 = Math.floor(vo.atk * force);
+            var def2 = def + (this.dataIn.teamDef || 0);
+            if(this.dataIn.pos == 1)
+                ark2 = Math.floor(ark2*1.1);
+            else if(this.dataIn.pos == 2)
+                hp2 = Math.floor(hp2*1.1);
+            else if(this.dataIn.pos == 3)
+                def2 += 5;
+            var arr2 = [
+                {index:1,icon:'icon_atk_png',iconScale:1,title:'攻击',value:atk,valueAdd:ark2-atk},
+                {index:2,icon:'icon_love_png',iconScale:0.6,title:'血量',value:hp,valueAdd:hp2 - hp},
+                {index:3,icon:'icon_def1_png',iconScale:0.4,title:'防御',value:def,valueAdd:def2 - def},
+                {index:4,icon:'icon_speed_png',iconScale:1,title:'速度',value:vo.speed,valueAdd:0},
+                {index:5,icon:'icon_rage_png',iconScale:1,title:'射程',value:vo.atkrage>20?vo.atkrage:'近战',valueAdd:0},
+                {index:6,icon:'icon_pos_png',iconScale:1,title:'生物体积',value:vo.space,valueAdd:0},
+            ]
+            if(vo.skillcd > 0)
+                arr2.push({index:7,icon:'icon_clock_png',iconScale:1,title:'技能间隔',value:MyTool.toFixed(vo.skillcd/1000,1)+'秒',valueAdd:0});
+            this.list2.dataProvider = new eui.ArrayCollection(arr2)
+        }
+        else
+        {
+            MyTool.removeMC(this.line)
+            MyTool.removeMC(this.list2)
+        }
+
+
+
     }
 }

@@ -1,5 +1,6 @@
 class PKManager {
     public static TYPE_HANG = 1;
+    public static TYPE_TEST = 2;
     private static instance:PKManager;
     public static getInstance() {
         if (!this.instance) this.instance = new PKManager();
@@ -31,12 +32,29 @@ class PKManager {
             case PKManager.TYPE_HANG:
                 HangManager.getInstance().pkResult(fun);
                 break;
+            case PKManager.TYPE_TEST:
+                fun && fun();
+                break;
         }
     }
 
     public startPK(pkType,data){
         this.pkType = pkType;
         var PD = PKData.getInstance();
+        PD.init(data);
+        PKingUI.getInstance().show();
+    }
+
+    public test(atk,def){
+        var PD = PKData.getInstance()
+        var data = {
+            seed:TM.now(),
+            players:[
+                {id:1,gameid:'npc',team:2,autolist:def.list,force:UM.tec_force,type:UM.type,hp:5,nick:def.name},
+                {id:2,gameid:UM.gameid,team:1,card:atk.list,force:UM.tec_force,nick:atk.name,type:UM.type,hp:5}
+            ]
+        };
+        PKManager.getInstance().pkType = PKManager.TYPE_TEST
         PD.init(data);
         PKingUI.getInstance().show();
     }

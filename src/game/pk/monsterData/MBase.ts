@@ -149,7 +149,7 @@ class MBase {
     //取最终伤害
     protected getAtkHp(user:PKMonsterData,target:PKMonsterData){
         var atk = this.getAtkerAtk(user,target);
-        var teamDef = Math.floor(target.getOwner().teamData.def / 5)
+        var teamDef = target.getOwner().teamData.getTeamDef();
         var hp = Math.floor(atk * Math.max(1-(target.def + teamDef)/100,0));
         if(hp < 1)
             hp = 1;

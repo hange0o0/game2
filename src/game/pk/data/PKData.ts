@@ -188,6 +188,20 @@ class PKData extends egret.EventDispatcher{
     }
 
 
+    //找对应的怪
+    public getMonsterByID(id){
+        for(var i=0;i<this.monsterList.length;i++)
+        {
+            var oo = this.monsterList[i];
+             if(oo.id == id)
+             {
+                 return oo;
+             }
+        }
+        return null;
+    }
+
+
 
     //找玩家对应的怪
     public getMonsterByTeam(team){

@@ -3,8 +3,7 @@ class AtkPosChangeItem extends AtkPosItem {
         super();
     }
 
-    public stopDrag;
-    public stopMove = true;
+
     public childrenCreated() {
         super.childrenCreated();
         DragManager.getInstance().setDrag(this,true);

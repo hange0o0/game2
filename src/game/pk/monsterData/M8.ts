@@ -39,6 +39,10 @@ class M8 extends MBase {
     public skill(user:PKMonsterData,target:PKMonsterData){
         target.owner = user.owner
         target.atkRota = user.atkRota;
+        PKData.getInstance().addVideo({
+            type:PKConfig.VIDEO_MONSTER_CHANGE_TEAM,
+            user:target
+        })
         //var hp = Math.ceil(this.getAtkHp(user,target)*0.5);
         //target.beAtkAction({hp:hp,atker:user})
         //user.atkAction({hp:hp})

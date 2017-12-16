@@ -6,6 +6,7 @@ class M17 extends MBase {
     //被攻击时的处理
     public beAtkAction(user,data){
         //{hp:hp,atker:user}
-        data.atker.addHp(-Math.ceil(user.getSkillValue(1,true)*user.getAtkRate(data.atker)));
+        if(data.atker)
+            data.atker.addHp(-Math.ceil(user.getSkillValue(1,true)*user.getAtkRate(data.atker)));
     }
 }

@@ -75,10 +75,7 @@ class PKPosCardData {
             return PKConfig.beforeCD;
         else
         {
-            if(this.id == 3)
-                return Math.ceil(this.getVO().cd * 0.9);
-            else
-                return this.getVO().cd;
+            return this.getVO().cd;
         }
     }
 

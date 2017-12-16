@@ -18,6 +18,7 @@ class PKTopUI extends game.BaseContainer {
 
     public itemArr = []
     public itempool = []
+    private index = 1;
     public constructor() {
         super();
 
@@ -79,6 +80,7 @@ class PKTopUI extends game.BaseContainer {
         else
             this.y = -55;
 
+        this.index = 1;
         this.renewHp()
         while(this.itemArr.length)
         {
@@ -134,8 +136,8 @@ class PKTopUI extends game.BaseContainer {
         MyTool.removeMC(this.defScoreGroup2)
         this.group1.addChild(this.defGroup1)
         this.group2.addChildAt(this.defGroup2,0)
-        this.defText1.text = '+' +  Math.floor(PD.getTeamByRota(PKConfig.ROTA_LEFT).def/5) + '%'
-        this.defText2.text = '+' +  Math.floor(PD.getTeamByRota(PKConfig.ROTA_RIGHT).def/5)  + '%'
+        this.defText1.text = '+' +  PD.getTeamByRota(PKConfig.ROTA_LEFT).getTeamDef() + '%'
+        this.defText2.text = '+' +  PD.getTeamByRota(PKConfig.ROTA_RIGHT).getTeamDef()  + '%'
     }
 
     public addSkillItem(data){
@@ -162,6 +164,8 @@ class PKTopUI extends game.BaseContainer {
         this.itemArr.unshift(item)
         item.x = this.getX(0);
         this.addChild(item);
+        data.topIndex = this.index
+        this.index ++;
         item.data = data;
         item.appear()
     }

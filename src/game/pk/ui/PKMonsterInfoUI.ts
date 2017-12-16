@@ -21,7 +21,6 @@ class PKMonsterInfoUI extends game.BaseContainer {
 
 
     public playerData:PKPlayerData
-    public resetFlag = false
     public renewFlag = false
 
     public childrenCreated() {
@@ -41,8 +40,10 @@ class PKMonsterInfoUI extends game.BaseContainer {
         {
             case PKConfig.VIDEO_MONSTER_ADD:
             case PKConfig.VIDEO_MONSTER_WIN:
+                this.addItem(data);
+                break;
             case PKConfig.VIDEO_MONSTER_DIE:
-                this.resetFlag = true;
+                this.removeItem(data);
                 break;
             case PKConfig.VIDEO_MONSTER_HPCHANGE:
                 this.renewFlag = true;
@@ -53,7 +54,6 @@ class PKMonsterInfoUI extends game.BaseContainer {
     public onTimer(){
         if(!this.visible)
             return;
-        this.resetFlag && this.resetList()
         this.renewFlag && this.renewList()
     }
 
@@ -84,7 +84,6 @@ class PKMonsterInfoUI extends game.BaseContainer {
     }
 
     public resetList(){
-        this.resetFlag = false;
         var PD = PKData.getInstance();
         var arr = [];
         for(var i=0;i<PD.monsterList.length;i++)
@@ -95,6 +94,22 @@ class PKMonsterInfoUI extends game.BaseContainer {
             arr.push(mvo);
         }
         this.list.dataProvider = new eui.ArrayCollection(arr);
+        this.renewNum();
+    }
+
+    private addItem(data){
+        var arr = <eui.ArrayCollection>(this.list.dataProvider);
+        arr.addItem(data);
+    }
+
+    private removeItem(data){
+        var arr = <eui.ArrayCollection>(this.list.dataProvider);
+        var index = arr.getItemIndex(data);
+        arr.removeItemAt(index);
+    }
+
+    private renewNum(){
+        var PD = PKData.getInstance();
         this.spaceText.text = '占位：' + PD.getMonsterSpaceByPlayer(this.playerData.id) + '/' + PKConfig.maxMonsterSpace
     }
 

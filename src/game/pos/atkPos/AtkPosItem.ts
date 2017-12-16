@@ -15,7 +15,8 @@ class AtkPosItem extends game.BaseItem {
 
 
 
-
+    public stopDrag;
+    public stopMove = true;
     public childrenCreated() {
         super.childrenCreated();
         //this.addBtnEvent(this,this.onClick)
@@ -29,6 +30,12 @@ class AtkPosItem extends game.BaseItem {
         if(this.data.isSetting)
         {
             this.currentState = 'setting'
+            return;
+        }
+        if(this.data.back)
+        {
+            this.currentState = 'back'
+            this.stopDrag = true
             return;
         }
         this.currentState = 'normal'

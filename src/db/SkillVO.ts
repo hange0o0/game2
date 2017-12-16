@@ -60,12 +60,21 @@ class SkillVO {
          SBase.getData(this.id).preload();
     }
 
-    public getDes(){
-        return this.des
+    public getDes(force){
+        return this.des.replace('#1',this.sv1 + '').replace('#2',this.sv2 + '').replace('#3',this.sv3 + '')
+            .replace('$1',this.changeValue(this.sv1,force) + '').replace('$2',this.changeValue(this.sv2,force) + '').replace('$3',this.changeValue(this.sv3,force) + '')
+    }
+    private changeValue(v,force){
+        if(!v)
+            return;
+        return Math.ceil(v*(1+force/100));
     }
 
-    public getAdd(force,type){
-        var typeAdd = this.type == type?PKConfig.typeAdd:0
+    public getAdd(force,type?){
+        if(type)
+            var typeAdd = this.type == type?PKConfig.typeAdd:0
+        else
+            var typeAdd = 0;
         var add = (1+force/100)*(1+typeAdd/100);
         return Math.floor(add);
     }

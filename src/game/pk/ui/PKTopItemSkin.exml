@@ -4,5 +4,10 @@
 	<e:Group id="group" x="0" y="0" width="100%" height="100%" includeIn="normal">
 		<e:Image id="bg" source="border_8_png" x="0" y="0" width="100%" height="100%"/>
 		<ns1:CardImg id="img" width="70" height="80" y="5" horizontalCenter="0"/>
+		<e:Image id="addIcon" source="icon_atk_png" y="5" scaleX="1" scaleY="1" x="5"/>
+		<e:Group includeIn="normal" right="0" bottom="0">
+			<e:Image source="bg8_png" scale9Grid="9,9,9,9" x="0" y="0" width="30" height="20"/>
+			<e:Label id="indexText" text="12" size="18" horizontalCenter="0" verticalCenter="0"/>
+		</e:Group>
 	</e:Group>
 </e:Skin>

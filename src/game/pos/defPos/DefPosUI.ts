@@ -20,6 +20,7 @@ class DefPosUI extends game.BaseUI {
     private renameBtn: eui.Group;
     private deleteBtn: eui.Group;
     private saveBtn: eui.Group;
+    private testBtn: eui.Group;
     private btnGroup: eui.Group;
 
 
@@ -56,6 +57,7 @@ class DefPosUI extends game.BaseUI {
         this.addBtnEvent(this.renameBtn,this.onRename)
         this.addBtnEvent(this.saveBtn,this.onSave)
         this.addBtnEvent(this.arrowBtn,this.onArrow)
+        this.addBtnEvent(this.testBtn,this.onTest)
 
         this.scroller1.viewport = this.list1;
         this.list1.itemRenderer = DefPosItem
@@ -74,6 +76,13 @@ class DefPosUI extends game.BaseUI {
 
         this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
         this.tab.selectedIndex = 0;
+    }
+
+    private onTest(){
+        PosTestUI.getInstance().show('def',{
+            list:this.changeToServerList(),
+            name:Base64.encode(this.posName),
+        })
     }
 
     private onScroll(){
@@ -250,7 +259,7 @@ class DefPosUI extends game.BaseUI {
             }
             this.arrayData = new eui.ArrayCollection(arr)
             if(PM.defList.length > 1)
-                this.btnGroup.addChildAt(this.deleteBtn,1)
+                this.btnGroup.addChildAt(this.deleteBtn,0)
             else
                 MyTool.removeMC(this.deleteBtn)
         }

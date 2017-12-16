@@ -26,6 +26,10 @@ class PKTeamData {
 
     }
 
+    public getTeamDef(){
+        return Math.floor(this.def / 5)
+    }
+
     //监听状态
     public addStateLister(listener:PKStateListener){
         if(!this.stateObj[listener.type])

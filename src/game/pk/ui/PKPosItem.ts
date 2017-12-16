@@ -1,7 +1,9 @@
 class PKPosItem extends game.BaseItem {
 
-    //private posBG: eui.Image;
+    private con: eui.Group;
+    private lightBG: eui.Image;
     private posBG: eui.Image;
+    private indexText: eui.Label;
     private cardGroup: eui.Group;
     private bg: eui.Image;
     private img: CardImg;
@@ -9,7 +11,7 @@ class PKPosItem extends game.BaseItem {
     private spaceText: eui.Label;
     private timesBG: eui.Image;
     private timesText: eui.Label;
-    private addText: eui.Label;
+    private addIcon: eui.Image;
     private barGroup1: eui.Group;
     private barMC1: eui.Image;
     private barGroup2: eui.Group;
@@ -20,7 +22,7 @@ class PKPosItem extends game.BaseItem {
 
 
     public index;
-    //public tw;
+    public defaultY;
     public constructor() {
         super();
 
@@ -35,6 +37,8 @@ class PKPosItem extends game.BaseItem {
         //this.cardGroup.y = 5;
         //tw.to({y:-15},1000,egret.Ease.sineInOut).to({y:5},1000,egret.Ease.sineInOut)
         MyTool.addLongTouch(this,this.onLongTouch,this)
+        this.lightBG.visible = false;
+        this.defaultY = this.con.y;
     }
 
     private onLongTouch(){
@@ -44,26 +48,36 @@ class PKPosItem extends game.BaseItem {
         var player = PKData.getInstance().myPlayer
         PKCardInfoUI.getInstance().show({
             mid:data.mid,
-            force:CM.getCardVO(data.mid).getAdd(player.force,player.type),
-            posAdd:data.id
+            force:player.force,
+            type:player.type,
+            pos:data.id,
+            teamDef:player.teamData.getTeamDef()
         })
     }
 
 
     public dataChanged(){
+        this.indexText.text = this.index + ''
         switch(this.index)
         {
             case 1:
-                this.addText.text = '攻击 +10%'
+                this.addIcon.source = 'icon_atk_png'
+                this.addIcon.scaleX = this.addIcon.scaleY = 1.2
+                //this.addText.text = '攻击 +10%'
                 break;
             case 2:
-                this.addText.text = '血量 +10%'
+                this.addIcon.source = 'icon_love_png'
+                this.addIcon.scaleX = this.addIcon.scaleY = 0.5
+                //this.addText.text = '血量 +10%'
                 break;
             case 3:
-                this.addText.text = '间隔 +10%'
+                this.addIcon.source = 'icon_def1_png'
+                this.addIcon.scaleX = this.addIcon.scaleY = 0.4
+                //this.addText.text = '间隔 +10%'
                 break;
             case 4:
-                this.addText.text = ''
+                this.addIcon.visible = false
+                //this.addText.text = ''
                 break;
         }
         //var data:PKPosCardData = PKData.getInstance().myPlayer.posCard[this.index]
@@ -91,7 +105,7 @@ class PKPosItem extends game.BaseItem {
 
     public setOver(b)
     {
-        this.scaleX = this.scaleY = b?1.1:1
+        this.con.y = b?this.defaultY-30:this.defaultY
         if(b)
             this.parent.addChild(this);
     }

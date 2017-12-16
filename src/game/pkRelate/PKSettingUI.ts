@@ -27,6 +27,11 @@ class PKSettingUI extends game.BaseWindow {
         PD.isGameOver = true
         PD.myPlayer.teamData.hp = 0;
         this.hide();
+
+        if(PKingUI.getInstance().counting)
+        {
+            PKingUI.getInstance().callFail()
+        }
     }
 
     public show(){

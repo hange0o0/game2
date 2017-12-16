@@ -42,7 +42,9 @@ class PKCardItem extends game.BaseItem {
         var player = PKData.getInstance().myPlayer
         PKCardInfoUI.getInstance().show({
             mid:this.data.mid,
-            force:CM.getCardVO(this.data.mid).getAdd(player.force,player.type)
+            force:player.force,
+            teamDef:player.teamData.getTeamDef(),
+            type:player.type
         })
         //if(this['longTouchTimer'] && egret.getTimer() - this['longTouchTimer'] < 200)
         //    return;

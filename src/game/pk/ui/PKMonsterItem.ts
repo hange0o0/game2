@@ -1,6 +1,9 @@
 class PKMonsterItem extends game.BaseItem {
     private barGroup: eui.Group;
     private bar: eui.Rect;
+    private teamMC: eui.Image;
+
+
 
 
     private monsterMV:MonsterMV
@@ -96,7 +99,10 @@ class PKMonsterItem extends game.BaseItem {
         this.barGroup.alpha = 1;
         this.barGroup.y = 300 - mD.getVO().height - 20;
         this.addStateMV.y = this.barGroup.y - 20
+        this.teamMC.y = this.barGroup.y - 5
+        this.teamMC.visible =  mD.mid != 99
         this.renewHp();
+        this.setTeam();
 
     }
 
@@ -145,6 +151,14 @@ class PKMonsterItem extends game.BaseItem {
         this.monsterMV.atk();
     }
 
+    public setTeam(){
+        var mD:PKMonsterData = this.data
+        this.bar.fillColor = mD.atkRota == PKConfig.ROTA_LEFT ? 0x0000FF : 0xFF0000;
+        var dec = mD.getVO().width / 2
+        //this.teamMC.x = mD.atkRota == PKConfig.ROTA_LEFT ? 50-dec : 35+dec;
+        this.teamMC.source = mD.atkRota == PKConfig.ROTA_LEFT ? 'card_battle2_png' : 'card_battle_png';
+    }
+
     public renewHp(){
         var mD:PKMonsterData = this.data
         if(mD.mid == 99)
@@ -152,9 +166,10 @@ class PKMonsterItem extends game.BaseItem {
         if(mD.hp < mD.maxHp)
         {
             this.barGroup.visible = true;
+            this.teamMC.visible = false;
         }
         this.bar.width = 40 * mD.getHpRate();
-        this.bar.fillColor = mD.atkRota == PKConfig.ROTA_LEFT ? 0x0000FF : 0xFF0000;
+
     }
 
     public winRemove(){

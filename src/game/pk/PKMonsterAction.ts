@@ -50,7 +50,7 @@ class PKMonsterAction {
                 else if(data.type == 'skill')  //技能生效
                 {
                     MBase.getData(user.mid).skill(user,data.target)
-                    user.setSkillUse();;
+                    user.setSkillUse();
                 }
             }
         }

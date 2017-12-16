@@ -44,7 +44,6 @@ class PKingUI extends game.BaseUI {
     public hide(){
         super.hide();
         this.removeEventListener(egret.Event.ENTER_FRAME,this.onE,this)
-        console.log(222)
     }
 
     public show(){
@@ -82,7 +81,7 @@ class PKingUI extends game.BaseUI {
         this.roundText.y = GameManager.stage.stageHeight - 720;
         this.addChild(this.roundText);
         this.roundText.scaleX =  this.roundText.scaleY = 0;
-        egret.Tween.resumeTweens(this.roundText)
+        egret.Tween.removeTweens(this.roundText)
         var tw = egret.Tween.get(this.roundText)
         tw.to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '4'})
             .to({scaleX:0,scaleY:0}).to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '3'})
@@ -94,6 +93,12 @@ class PKingUI extends game.BaseUI {
 
         this.onE();
         this.addEventListener(egret.Event.ENTER_FRAME,this.onE,this)
+    }
+
+    public callFail(){
+        egret.Tween.removeTweens(this.roundText)
+        this.counting = false
+        this.onE();
     }
 
     public startGame(){

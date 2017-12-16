@@ -19,6 +19,7 @@ class AtkPosUI extends game.BaseUI {
     private btnGroup: eui.Group;
     private renameBtn: eui.Group;
     private deleteBtn: eui.Group;
+    private testBtn: eui.Group;
     private saveBtn: eui.Group;
 
 
@@ -50,6 +51,7 @@ class AtkPosUI extends game.BaseUI {
         this.addBtnEvent(this.deleteBtn,this.onDelete)
         this.addBtnEvent(this.renameBtn,this.onRename)
         this.addBtnEvent(this.saveBtn,this.onSave)
+        this.addBtnEvent(this.testBtn,this.onTest)
 
         this.scroller1.viewport = this.list1;
         this.list1.itemRenderer = AtkPosItem
@@ -66,6 +68,13 @@ class AtkPosUI extends game.BaseUI {
 
         this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
         this.tab.selectedIndex = 0;
+    }
+
+    private onTest(){
+        PosTestUI.getInstance().show('atk',{
+            list:this.changeToServerList(),
+            name:Base64.encode(this.posName),
+        })
     }
 
     private onScroll(){
@@ -289,7 +298,7 @@ class AtkPosUI extends game.BaseUI {
                 arr.push({id:id})
             }
 
-            this.btnGroup.addChildAt(this.deleteBtn,1)
+            this.btnGroup.addChildAt(this.deleteBtn,0)
         }
         else
         {

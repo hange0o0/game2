@@ -75,6 +75,8 @@
     "src/game/pos/defPos/DefPosListItemSkin.exml",
     "src/game/pos/defPos/DefPosListUISkin.exml",
     "src/game/pos/defPos/DefPosUISkin.exml",
+    "src/game/pos/posTest/PosTestItemSkin.exml",
+    "src/game/pos/posTest/PosTestUISkin.exml",
     "src/game/shop/ShopItemSkin.exml",
     "src/game/shop/ShopUISkin.exml",
     "src/game/slave/SlaveChooseItemSkin.exml",

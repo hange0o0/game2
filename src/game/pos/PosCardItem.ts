@@ -20,7 +20,15 @@ class PosCardItem extends game.BaseItem {
         MyTool.addLongTouch(this,this.onLongTouch,this)
     }
 
-    public onLongTouch(){
+    private onLongTouch(){
+        if(!this.data.id)
+            return;
+
+        PKCardInfoUI.getInstance().show({
+            mid:this.data.id,
+            force:UM.tec_force,
+            type:UM.type
+        })
 
     }
 

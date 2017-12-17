@@ -20,6 +20,18 @@ class AtkPosItem extends game.BaseItem {
     public childrenCreated() {
         super.childrenCreated();
         //this.addBtnEvent(this,this.onClick)
+        MyTool.addLongTouch(this,this.onLongTouch,this)
+    }
+
+    private onLongTouch(){
+        if(!this.data.id)
+            return;
+        PKCardInfoUI.getInstance().show({
+            mid:this.data.id,
+            force:UM.tec_force,
+            type:UM.type
+        })
+
     }
 
     private onClick(){

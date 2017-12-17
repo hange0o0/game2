@@ -17,11 +17,13 @@ class PosTestItem extends game.BaseItem {
     private onClick(){
         //
         PosTestUI.getInstance().test(this.data.data)
+        PosTestUI.getInstance().hide();
     }
 
     public dataChanged(){
         var data = this.data.data;
-        var str = data.list
+        //var str = data.list
+        var str = data.list.replace(new RegExp("#","g"),",")
         var list = str.split(',');
         this.list.dataProvider = new eui.ArrayCollection(list)
 

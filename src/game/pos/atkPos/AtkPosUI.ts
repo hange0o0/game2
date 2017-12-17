@@ -188,6 +188,8 @@ class AtkPosUI extends game.BaseUI {
 
     //选中
     private onSelect(){
+        if(game.BaseUI.isStopEevent)
+            return;
         var item = this.list2.selectedItem;
         if(this.maxCard <= this.arrayData.length)
             return;
@@ -215,6 +217,9 @@ class AtkPosUI extends game.BaseUI {
             this.onChange();
             return;
         }
+        if(game.BaseUI.isStopEevent)
+            return;
+
         this.deleteID(item.id)
         this.arrayData.removeItemAt(this.arrayData.getItemIndex(item))
         this.useCard[item.id] --;
@@ -248,19 +253,20 @@ class AtkPosUI extends game.BaseUI {
         {
             var arr = [
                 {label:'全部',data:0},
-                {label:'类型1',data:1},
-                {label:'类型2',data:2},
-                {label:'类型3',data:3}];
+                {label:PKConfig.TYPENAME[1],data:1},
+                {label:PKConfig.TYPENAME[2],data:2},
+                {label:PKConfig.TYPENAME[3],data:3}];
             this.downList.setData(arr,this.monsterType);
         }
         else
         {
             var arr = [
                 {label:'全部',data:0},
-                {label:'攻击',data:1},
-                {label:'治疗',data:2},
-                {label:'辅助',data:3},
-                {label:'召唤',data:4}];
+                {label:PKConfig.SKILLTYPENAME[1],data:1},
+                {label:PKConfig.SKILLTYPENAME[2],data:2},
+                {label:PKConfig.SKILLTYPENAME[3],data:3},
+                {label:PKConfig.SKILLTYPENAME[4],data:4},
+                {label:PKConfig.SKILLTYPENAME[5],data:5}];
             this.downList.setData(arr,this.skillType);
         }
     }
@@ -331,6 +337,7 @@ class AtkPosUI extends game.BaseUI {
     }
 
     private renewList(){
+        this.scroller2.stopAnimation();
          var type = this.downList.selectValue;
         var arr;
         if(this.tab.selectedIndex == 0)

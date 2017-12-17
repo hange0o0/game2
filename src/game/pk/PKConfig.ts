@@ -2,6 +2,20 @@ class PKConfig {
     public static ROTA_LEFT = 1
     public static ROTA_RIGHT = -1
 
+    public static TYPENAME = {
+        1:'堡垒',
+        2:'自然',
+        3:'幽暗'
+    }
+
+    public static SKILLTYPENAME = {
+        1:'伤害',
+        2:'治疗',
+        3:'辅助',
+        4:'召唤',
+        5:'特殊'
+    }
+
 
     public static stepCD = 50; //步长
     public static gameTime = 5*60; //游戏时间,超出算平

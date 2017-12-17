@@ -54,4 +54,5 @@
 			<e:VerticalLayout gap="10"/>
 		</e:layout>
 	</e:Group>
+	<e:Image id="teamIcon" source="" x="22" y="22"/>
 </e:Skin>

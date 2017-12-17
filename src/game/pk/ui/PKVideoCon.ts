@@ -143,12 +143,16 @@ class PKVideoCon extends game.BaseContainer {
             if(item.data.id == id)
                 return item;
         }
+        var str = ''
         var mvo = PKData.getInstance().getMonsterByID(id);
         if(!mvo)
-            throw new Error('can not find monster:' + id + '|' + PKData.getInstance().monsterID)
-        if(mvo.die)
-            throw new Error('monster die and not find:' + id + '|' + PKData.getInstance().monsterID)
-        throw new Error('not die but not find:' + id + '|' + PKData.getInstance().monsterID)
+            str = ('can not find monster:' + id + '|' + PKData.getInstance().monsterID)
+        else if(mvo.die)
+            str = ('monster die and not find:' + id + '|' + PKData.getInstance().monsterID)
+        else
+            str = ('not die but not find:' + id + '|' + PKData.getInstance().monsterID)
+        alert(str);
+        throw new Error(str);
         return null;
     }
 

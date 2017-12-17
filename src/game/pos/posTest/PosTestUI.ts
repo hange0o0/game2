@@ -57,7 +57,7 @@ class PosTestUI extends game.BaseUI {
         var PM = PosManager.getInstance();
         if(this.testType == 'atk')
         {
-            this.topUI.setTitle('我的防守阵容')
+            this.topUI.setTitle('请选择防守阵容')
             var arr = PM.defList.concat();
             for(var i=0;i<arr.length;i++)
             {
@@ -69,7 +69,7 @@ class PosTestUI extends game.BaseUI {
         }
         else
         {
-            this.topUI.setTitle('我的进攻阵容')
+            this.topUI.setTitle('请选择进攻阵容')
             var arr = PM.atkList.concat();
             for(var i=0;i<arr.length;i++)
             {

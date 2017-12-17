@@ -43,6 +43,7 @@ class PKCardItem extends game.BaseItem {
         PKCardInfoUI.getInstance().show({
             mid:this.data.mid,
             force:player.force,
+            rota:player.teamData.atkRota,
             teamDef:player.teamData.getTeamDef(),
             type:player.type
         })

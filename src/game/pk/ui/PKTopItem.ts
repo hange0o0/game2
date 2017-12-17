@@ -33,6 +33,7 @@ class PKTopItem extends game.BaseItem {
             force:player.force,
             type:player.type,
             pos:this.data.id,
+            rota:player.teamData.atkRota,
             def:player.teamData.getTeamDef()
         })
     }
@@ -69,7 +70,7 @@ class PKTopItem extends game.BaseItem {
                     this.addIcon.scaleX = this.addIcon.scaleY = 0.3
                     //this.addText.text = '间隔 +10%'
                     break;
-                case 4:
+               default:
                     this.addIcon.visible = false
                     //this.addText.text = ''
                     break;

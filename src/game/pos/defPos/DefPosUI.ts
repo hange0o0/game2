@@ -8,20 +8,27 @@ class DefPosUI extends game.BaseUI {
     }
 
     private scrollerBG: eui.Image;
-    private arrowBtn: eui.Image;
     private topUI: TopUI;
     private scroller1: eui.Scroller;
     private list1: eui.List;
     private scroller2: eui.Scroller;
     private list2: eui.List;
     private tab: eui.TabBar;
-    private downList: DownList;
+    private downScrollCon: eui.Group;
+    private downScroll: eui.Group;
+    private downScrollMC: eui.Image;
+    private leftBtn: eui.Group;
+    private rightBtn: eui.Group;
     private bottomUI: BottomUI;
-    private renameBtn: eui.Group;
-    private deleteBtn: eui.Group;
-    private saveBtn: eui.Group;
-    private testBtn: eui.Group;
     private btnGroup: eui.Group;
+    private deleteBtn: eui.Group;
+    private renameBtn: eui.Group;
+    private testBtn: eui.Group;
+    private saveBtn: eui.Group;
+    private arrowBtn: eui.Image;
+    private downList: DownList;
+
+
 
 
 
@@ -41,6 +48,8 @@ class DefPosUI extends game.BaseUI {
     private itemWidth = 220;
 
     public scrollChangeTime = 0
+    public downX = 0
+    public isHeightScreen = true
 
     public constructor() {
         super();
@@ -58,6 +67,11 @@ class DefPosUI extends game.BaseUI {
         this.addBtnEvent(this.saveBtn,this.onSave)
         this.addBtnEvent(this.arrowBtn,this.onArrow)
         this.addBtnEvent(this.testBtn,this.onTest)
+        this.addBtnEvent(this.leftBtn,this.onLeft)
+        this.addBtnEvent(this.rightBtn,this.onRight)
+
+        this.downScroll.touchChildren = false;
+        this.downScroll.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.onDownBegin,this)
 
         this.scroller1.viewport = this.list1;
         this.list1.itemRenderer = DefPosItem
@@ -78,6 +92,55 @@ class DefPosUI extends game.BaseUI {
         this.tab.selectedIndex = 0;
     }
 
+    private onLeft(){
+        var index = this.getInjectIndex();
+        if(index > 0)
+        {
+            index--;
+            this.tweenScroll(index*this.itemWidth);
+        }
+    }
+    private onRight(){
+        var index = this.getInjectIndex();
+        if(index < this.arrayData.length)
+        {
+            index++;
+            this.tweenScroll(index*this.itemWidth);
+        }
+    }
+
+    private onDownBegin(e){
+        this.scroller1.stopAnimation();
+       this.onEnd();
+        this.downX = e.stageX
+        GameManager.stage.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.onMove,this)
+        GameManager.stage.addEventListener(egret.TouchEvent.TOUCH_END,this.onEnd,this)
+        GameManager.stage.addEventListener(egret.TouchEvent.TOUCH_CANCEL,this.onEnd,this)
+        GameManager.stage.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE,this.onEnd,this)
+    }
+
+    private onMove(e){
+        var des = e.stageX - this.downX;
+        this.downX = e.stageX
+
+        var content = this.getContentWidth()
+        var maxH = content - 640;
+        //console.log(des)
+        this.scroller1.viewport.scrollH += des*(content/480)
+        if(this.scroller1.viewport.scrollH < 0)
+            this.scroller1.viewport.scrollH = 0;
+        else if(this.scroller1.viewport.scrollH > maxH)
+            this.scroller1.viewport.scrollH = maxH;
+        this.onScroll();
+    }
+
+    private onEnd(){
+        GameManager.stage.removeEventListener(egret.TouchEvent.TOUCH_MOVE,this.onMove,this)
+        GameManager.stage.removeEventListener(egret.TouchEvent.TOUCH_END,this.onEnd,this)
+        GameManager.stage.removeEventListener(egret.TouchEvent.TOUCH_CANCEL,this.onEnd,this)
+        GameManager.stage.removeEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE,this.onEnd,this)
+    }
+
     private onTest(){
         PosTestUI.getInstance().show('def',{
             list:this.changeToServerList(),
@@ -87,9 +150,12 @@ class DefPosUI extends game.BaseUI {
 
     private onScroll(){
         this.scrollChangeTime = egret.getTimer()
+
         this.scrollerBG.x = -this.scroller1.viewport.scrollH * 0.1;
         if(this.scrollerBG.x < 640 - this.scrollerBG.width)
             this.scrollerBG.x = 640 - this.scrollerBG.width
+        if(this.isHeightScreen)
+            this.downScrollMC.x = 10 + this.scroller1.viewport.scrollH*(640/this.getContentWidth())*(480/640)
     }
 
     private onArrow(){
@@ -197,30 +263,29 @@ class DefPosUI extends game.BaseUI {
     }
 
 
-
     private renewDownList(){
         this.downList.height = GameManager.stage.stageHeight - 100 - this.downList.y - 10;
         if(this.tab.selectedIndex == 0)
         {
             var arr = [
                 {label:'全部',data:0},
-                {label:'类型1',data:1},
-                {label:'类型2',data:2},
-                {label:'类型3',data:3}];
+                {label:PKConfig.TYPENAME[1],data:1},
+                {label:PKConfig.TYPENAME[2],data:2},
+                {label:PKConfig.TYPENAME[3],data:3}];
             this.downList.setData(arr,this.monsterType);
         }
         else
         {
             var arr = [
                 {label:'全部',data:0},
-                {label:'攻击',data:1},
-                {label:'治疗',data:2},
-                {label:'辅助',data:3},
-                {label:'召唤',data:4}];
+                {label:PKConfig.SKILLTYPENAME[1],data:1},
+                {label:PKConfig.SKILLTYPENAME[2],data:2},
+                {label:PKConfig.SKILLTYPENAME[3],data:3},
+                {label:PKConfig.SKILLTYPENAME[4],data:4},
+                {label:PKConfig.SKILLTYPENAME[5],data:5}];
             this.downList.setData(arr,this.skillType);
         }
     }
-
 
     public show(v?){
         this.index = v;
@@ -232,11 +297,23 @@ class DefPosUI extends game.BaseUI {
     }
 
     public onShow(){
+        this.isHeightScreen = GameManager.stage.stageHeight > 100//1000
+        if(this.isHeightScreen)
+        {
+            this.downScrollCon.visible = true
+            this.scroller2.bottom = 176
+        }
+        else
+        {
+            this.downScrollCon.visible = false
+            this.scroller2.bottom = 100
+        }
         this.renew();
         //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
     }
 
     public renew(){
+        this.scroller1.viewport.scrollH = 0;
         var PM = PosManager.getInstance();
         var data = this.posData = PM.defList[this.index]
         this.useCard = {};
@@ -273,6 +350,7 @@ class DefPosUI extends game.BaseUI {
         this.list1.dataProvider = this.arrayData
         this.renewTitle();
         this.renewList();
+        this.onScroll()
         this.renewDownList();
     }
 
@@ -300,7 +378,15 @@ class DefPosUI extends game.BaseUI {
         }
 
         if(renew)
+        {
             MyTool.renewList(this.list1);
+        }
+        if(this.isHeightScreen)
+            this.downScrollMC.width = (480*640/this.getContentWidth());
+    }
+
+    private getContentWidth(){
+        return this.arrayData.length*this.itemWidth + 640;
     }
 
     private getTotalNum(){
@@ -314,6 +400,8 @@ class DefPosUI extends game.BaseUI {
 
     //选中
     private onSelect(){
+        if(game.BaseUI.isStopEevent)
+            return;
         var item = this.list2.selectedItem;
         if(this.useCard[item.id] && this.useCard[item.id] >= 3)
             return;
@@ -323,17 +411,19 @@ class DefPosUI extends game.BaseUI {
         this.addItem(item)
     }
 
+    private getInjectIndex(){
+        return Math.min(this.arrayData.length,Math.floor((this.scroller1.viewport.scrollH+this.itemWidth/2)/this.itemWidth));
+    }
+
     private addItem(item){
-        var index = Math.min(this.arrayData.length,Math.floor((this.scroller1.viewport.scrollH+this.itemWidth/2)/this.itemWidth));
+        var index = this.getInjectIndex();
         this.arrayData.addItemAt({ids:[item.id],cd:0,preLen:0},index);
 
         this.resetDefData(true);
         this.justRenewList2();
         this.renewTitle();
 
-        egret.Tween.removeTweens(this.scroller1.viewport)
-        var tw = egret.Tween.get(this.scroller1.viewport,{onChange:()=>{this.onScroll()}})
-        tw.to({scrollH:(index+1)*this.itemWidth},100)
+        this.tweenScroll((index+1)*this.itemWidth);
     }
 
     public deleteItem(data){
@@ -376,13 +466,17 @@ class DefPosUI extends game.BaseUI {
 
     private resetScrollH1(deleteNum){
         var viewport = this.list1;
-        var newWidth = viewport.contentWidth - deleteNum * this.itemWidth
+        var newWidth = this.getContentWidth()- deleteNum * this.itemWidth
         if(viewport.scrollH + viewport.width > newWidth)
         {
-            egret.Tween.removeTweens(this.scroller1.viewport)
-            var tw = egret.Tween.get(this.scroller1.viewport,{onChange:()=>{this.onScroll()}})
-            tw.to({scrollH:Math.max(0,newWidth - viewport.width)},100)
+            this.tweenScroll(Math.max(0,newWidth - viewport.width));
         }
+    }
+
+    private tweenScroll(scrollH){
+        egret.Tween.removeTweens(this.scroller1.viewport)
+        var tw = egret.Tween.get(this.scroller1.viewport,{onChange:()=>{this.onScroll()}})
+        tw.to({scrollH:scrollH},100)
     }
 
 
@@ -392,9 +486,11 @@ class DefPosUI extends game.BaseUI {
 
     public justRenewList2(){
         MyTool.renewList(this.list2)
+
     }
 
     private renewList(){
+        this.scroller2.stopAnimation();
         var type = this.downList.selectValue;
         var arr;
         if(this.tab.selectedIndex == 0)

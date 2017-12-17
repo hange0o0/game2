@@ -75,6 +75,7 @@ class PKingUI extends game.BaseUI {
         });
 
         this.scroller.viewport.scrollH = (1500-640)/2
+        this.scroller.touchEnabled = this.scroller.touchChildren = false;
         this.counting = true;
         this.roundText.text = '5'
         this.roundText.alpha = 1;
@@ -105,6 +106,7 @@ class PKingUI extends game.BaseUI {
         var PD = PKData.getInstance();
         PD.start();
         this.counting = false;
+        this.scroller.touchEnabled = this.scroller.touchChildren = true;
 
     }
 

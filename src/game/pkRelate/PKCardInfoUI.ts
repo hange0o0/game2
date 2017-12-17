@@ -11,12 +11,14 @@ class PKCardInfoUI extends game.BaseContainer {
     private nameText: eui.Label;
     private cardGroup: eui.Group;
     private bg: eui.Image;
-    private line: eui.Image;
-    private group: eui.Group;
     private img: CardImg;
     private desText: eui.Label;
+    private group: eui.Group;
     private list1: eui.List;
+    private line: eui.Image;
     private list2: eui.List;
+    private teamIcon: eui.Image;
+
 
 
     public dataIn
@@ -45,7 +47,7 @@ class PKCardInfoUI extends game.BaseContainer {
         this.stageY = GameManager.stageY
         var w = 480
         this.x = Math.min(Math.max(GameManager.stageX - w/2,0),640-w)
-        if(GameManager.stageY < 400)
+        if(GameManager.stageY < 480)
         {
             this.bottom = undefined
             this.top = GameManager.stageY + 50
@@ -76,6 +78,17 @@ class PKCardInfoUI extends game.BaseContainer {
         this.bg.source = vo.getBG();
         this.nameText.text = vo.name;
 
+        if(this.dataIn.rota)
+        {
+            this.teamIcon.source = this.dataIn.rota == PKConfig.ROTA_LEFT ? 'card_battle2_png' : 'card_battle_png'
+            this.teamIcon.visible = true
+        }
+        else
+        {
+            this.teamIcon.visible = false
+        }
+
+
         var baseForce = CM.getCardVO(this.dataIn.mid).getAdd(this.dataIn.force)
         var force = CM.getCardVO(this.dataIn.mid).getAdd(this.dataIn.force,this.dataIn.type)
         this.desText.text = vo.getDes(force);
@@ -89,15 +102,17 @@ class PKCardInfoUI extends game.BaseContainer {
         //    this.def += 5;
 
         var arr1 = [
-            {index:1,icon:'icon_cost_png',iconScale:1,title:'费用',value:vo.cost,valueAdd:0},
-            {index:2,icon:'icon_times_png',iconScale:1,title:'次数',value:vo.num || 1,valueAdd:0},
+            {index:1,icon:'icon_cost_png',iconScale:1,title:'传送费用',value:vo.cost,valueAdd:0},
+            {index:2,icon:'icon_times_png',iconScale:1,title:'传送次数',value:vo.num || 1,valueAdd:0},
 
             //{index:1,icon:'',iconScale:1,title:'',value:0,valueAdd:0},
         ]
         if(vo.num == 0)
             arr1.push({index:3,icon:'icon_clock2_png',iconScale:1,title:'持续时间',value:MyTool.toFixed(vo.cd/1000,1)+'秒',valueAdd:0})
         else if(vo.num > 1)
-            arr1.push({index:3,icon:'icon_clock_png',iconScale:1,title:'召唤间隔',value:MyTool.toFixed(vo.cd/1000,1)+'秒',valueAdd:0})
+            arr1.push({index:3,icon:'icon_clock_png',iconScale:1,title:'传送间隔',value:MyTool.toFixed(vo.cd/1000,1)+'秒',valueAdd:0})
+        if(arr1.length%2 == 1)
+            arr1.push({index:4,icon:'',iconScale:1,title:'',value:'',valueAdd:0});
 
         this.list1.dataProvider = new eui.ArrayCollection(arr1)
 
@@ -120,15 +135,31 @@ class PKCardInfoUI extends game.BaseContainer {
             else if(this.dataIn.pos == 3)
                 def2 += 5;
             var arr2 = [
-                {index:1,icon:'icon_atk_png',iconScale:1,title:'攻击',value:atk,valueAdd:ark2-atk},
+                //{index:1,icon:'icon_atk_png',iconScale:1,title:'攻击',value:atk,valueAdd:ark2-atk},
                 {index:2,icon:'icon_love_png',iconScale:0.6,title:'血量',value:hp,valueAdd:hp2 - hp},
                 {index:3,icon:'icon_def1_png',iconScale:0.4,title:'防御',value:def,valueAdd:def2 - def},
-                {index:4,icon:'icon_speed_png',iconScale:1,title:'速度',value:vo.speed,valueAdd:0},
-                {index:5,icon:'icon_rage_png',iconScale:1,title:'射程',value:vo.atkrage>20?vo.atkrage:'近战',valueAdd:0},
-                {index:6,icon:'icon_pos_png',iconScale:1,title:'生物体积',value:vo.space,valueAdd:0},
+                {index:4,icon:'icon_speed_png',iconScale:1,title:'移动速度',value:vo.speed,valueAdd:0}
             ]
+            if(atk)
+            {
+                arr2.unshift({index:1,icon:'icon_atk_png',iconScale:1,title:'攻击',value:atk,valueAdd:ark2-atk})
+                arr2.push({index:5,icon:'icon_atkcd_png',iconScale:1,title:'攻击间隔',value:MyTool.toFixed(vo.atkcd/1000,1)+'秒',valueAdd:0})
+                arr2.push({index:6,icon:'icon_rage_png',iconScale:1,title:'攻击距离',value:vo.atkrage>20?vo.atkrage:'近战',valueAdd:0})
+            }
+
+            arr2.push( {index:7,icon:'icon_pos_png',iconScale:1,title:'生物体积',value:vo.space,valueAdd:0},)
             if(vo.skillcd > 0)
-                arr2.push({index:7,icon:'icon_clock_png',iconScale:1,title:'技能间隔',value:MyTool.toFixed(vo.skillcd/1000,1)+'秒',valueAdd:0});
+                arr2.push({index:0,icon:'icon_clock_png',iconScale:1,title:'技能间隔',value:MyTool.toFixed(vo.skillcd/1000,1)+'秒',valueAdd:0});
+            if(arr2.length%2 ==1)
+                arr2.push({index:0,icon:'',iconScale:1,title:'',value:'',valueAdd:0});
+            for(var i=0;i<arr2.length;i++)
+            {
+                arr2[i].index = i+1;
+            }
+
+
+            //else
+            //    arr2.push({index:0,icon:'',iconScale:1,title:'',value:'',valueAdd:0});
             this.list2.dataProvider = new eui.ArrayCollection(arr2)
         }
         else

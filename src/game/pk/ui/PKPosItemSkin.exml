@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="PKPosItemSkin" width="150" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" height="230">
 	<e:Group id="con" x="0.9999999999999948" y="30.310000000000016" width="148" height="160">
-		<e:Image id="lightBG" source="card_back_bg_light1_png" scaleX="1.25" scaleY="1.25" anchorOffsetX="72" anchorOffsetY="81" x="75" y="80"/>
+		<e:Image id="lightBG" source="card_back_bg_light1_png" scaleX="1.1" scaleY="1.1" anchorOffsetX="72" anchorOffsetY="81" x="75" y="80"/>
 		<e:Image id="posBG" scaleX="1.25" scaleY="1.25" source="card_back_bg_png" y="0" x="0"/>
 		<e:Label id="indexText" text="4" y="41.069999999999965" size="40" textColor="0x472c1e" stroke="3" horizontalCenter="0"/>
 		<e:Group id="cardGroup" y="6.98" width="124" height="146" x="12.52">

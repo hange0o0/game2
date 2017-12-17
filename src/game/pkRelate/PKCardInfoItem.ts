@@ -29,8 +29,14 @@ class PKCardInfoItem extends game.BaseItem {
         //{index:1,icon:'icon_cost_png',iconScale:1,title:'费用',value:vo.cost,valueAdd:0},
         this.icon.source = this.data.icon
         this.icon.scaleX = this.icon.scaleY = this.data.iconScale
-        this.setHtml(this.text, this.createHtml(this.data.title,0xffff00) + ':' +  this.data.value
-            + (this.data.valueAdd ? this.createHtml(' +'+this.data.valueAdd,0x00ff00) : ''))
+        if(this.data.title)
+        {
+            this.setHtml(this.text, this.createHtml(this.data.title,0xffff00) + '：' +  this.data.value
+                + (this.data.valueAdd ? this.createHtml(' +'+this.data.valueAdd,0x00ff00) : ''))
+        }
+        else
+            this.text.text = ''
+
     }
 
 }

@@ -23,6 +23,7 @@ class PKPosItem extends game.BaseItem {
 
     public index;
     public defaultY;
+    public tw;
     public constructor() {
         super();
 
@@ -33,9 +34,13 @@ class PKPosItem extends game.BaseItem {
         super.childrenCreated();
 
 
-        //var tw = this.tw = egret.Tween.get(this.cardGroup,{loop:true});
-        //this.cardGroup.y = 5;
-        //tw.to({y:-15},1000,egret.Ease.sineInOut).to({y:5},1000,egret.Ease.sineInOut)
+        var tw = this.tw = egret.Tween.get(this.lightBG,{loop:true});
+        this.lightBG.scaleX = this.lightBG.scaleY = 1.1;
+        tw.to({scaleX:1.3,scaleY:1.3},500,egret.Ease.sineInOut).to({scaleX:1.1,scaleY:1.1},500,egret.Ease.sineInOut)
+        this.tw.setPaused(true)
+
+
+
         MyTool.addLongTouch(this,this.onLongTouch,this)
         this.lightBG.visible = false;
         this.defaultY = this.con.y;
@@ -51,6 +56,7 @@ class PKPosItem extends game.BaseItem {
             force:player.force,
             type:player.type,
             pos:data.id,
+            rota:player.teamData.atkRota,
             teamDef:player.teamData.getTeamDef()
         })
     }
@@ -127,20 +133,23 @@ class PKPosItem extends game.BaseItem {
         {
             var cd = data.getNextCD();
             var maxCD = data.getMaxCD();
-            if(data.useEnable())
-            {
-                this.renewImg(data.mid);
-                this.barGroup1.visible = true;
-                this.barMC1.width = barWidth * cd / maxCD;
 
-                var maxNum = data.getMaxNum();
-                this.timesText.text = (maxNum - data.num) + ''
-                this.timesBG.visible = maxNum > 0
-                this.barGroup2.y = 215;
-            }
+            this.renewImg(data.mid);
+            this.barGroup1.visible = true;
+            this.barMC1.width = barWidth * cd / maxCD;
+
+            var maxNum = data.getMaxNum();
+            this.timesText.text = (maxNum - data.num) + ''
+            this.timesBG.visible = maxNum > 0
+            this.barGroup2.y = 215;
+            if((maxNum - data.num) <=1)
+                this.testTween(cd)
+            else
+                this.testTween()
         }
         else if(preData)
         {
+            this.testTween();
             this.renewImg(preData.mid);
 
             var maxNum = preData.getMaxNum();
@@ -149,7 +158,7 @@ class PKPosItem extends game.BaseItem {
         }
         else
         {
-
+             this.testTween();
         }
 
         if(preData)
@@ -160,6 +169,24 @@ class PKPosItem extends game.BaseItem {
             this.barMC2.width = barWidth * cd / maxCD;
 
 
+        }
+    }
+
+    private testTween(cd=99999){
+
+        if(cd>10000)
+        {
+            this.tw.setPaused(true)
+            this.lightBG.visible = false;
+        }
+        else
+        {
+            this.tw.setPaused(false)
+            this.lightBG.visible = true;
+            if(cd<3000)
+                this.lightBG.source = 'card_back_bg_light1_png'
+            else
+                this.lightBG.source = 'card_back_bg_light2_png'
         }
     }
 

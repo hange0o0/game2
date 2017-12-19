@@ -77,6 +77,7 @@ class PKCardInfoUI extends game.BaseContainer {
         this.img.data = vo.id;
         this.bg.source = vo.getBG();
         this.nameText.text = vo.name;
+        this.type.source = vo.getTypeIcon()
 
         if(this.dataIn.rota)
         {
@@ -92,25 +93,18 @@ class PKCardInfoUI extends game.BaseContainer {
         var baseForce = CM.getCardVO(this.dataIn.mid).getAdd(this.dataIn.force)
         var force = CM.getCardVO(this.dataIn.mid).getAdd(this.dataIn.force,this.dataIn.type)
         this.desText.text = vo.getDes(force);
-        //
-        //
-        //if(this.posAdd == 1)
-        //    this.atk = Math.floor(this.atk*1.1);
-        //else if(this.posAdd == 2)
-        //    this.hp = Math.floor(this.hp*1.1);
-        //else if(this.posAdd == 3)
-        //    this.def += 5;
+        var str = vo.isMonster? '传送':'施法'
 
         var arr1 = [
-            {index:1,icon:'icon_cost_png',iconScale:1,title:'传送费用',value:vo.cost,valueAdd:0},
-            {index:2,icon:'icon_times_png',iconScale:1,title:'传送次数',value:vo.num || 1,valueAdd:0},
+            {index:1,icon:'icon_cost_png',iconScale:1,title:str + '费用',value:vo.cost,valueAdd:0},
+            {index:2,icon:'icon_times_png',iconScale:1,title:str + '次数',value:vo.num || 1,valueAdd:0},
 
             //{index:1,icon:'',iconScale:1,title:'',value:0,valueAdd:0},
         ]
         if(vo.num == 0)
             arr1.push({index:3,icon:'icon_clock2_png',iconScale:1,title:'持续时间',value:MyTool.toFixed(vo.cd/1000,1)+'秒',valueAdd:0})
         else if(vo.num > 1)
-            arr1.push({index:3,icon:'icon_clock_png',iconScale:1,title:'传送间隔',value:MyTool.toFixed(vo.cd/1000,1)+'秒',valueAdd:0})
+            arr1.push({index:3,icon:'icon_clock_png',iconScale:1,title:str + '间隔',value:MyTool.toFixed(vo.cd/1000,1)+'秒',valueAdd:0})
         if(arr1.length%2 == 1)
             arr1.push({index:4,icon:'',iconScale:1,title:'',value:'',valueAdd:0});
 
@@ -122,11 +116,11 @@ class PKCardInfoUI extends game.BaseContainer {
             this.group.addChild(this.line)
             this.group.addChild(this.list2)
             var atk = Math.floor(vo.atk * baseForce);
-            var hp = Math.floor(vo.atk * baseForce);
+            var hp = Math.floor(vo.hp * baseForce);
             var def = vo.def;
 
             var ark2 = Math.floor(vo.atk * force);
-            var hp2 = Math.floor(vo.atk * force);
+            var hp2 = Math.floor(vo.hp * force);
             var def2 = def + (this.dataIn.teamDef || 0);
             if(this.dataIn.pos == 1)
                 ark2 = Math.floor(ark2*1.1);
@@ -147,7 +141,7 @@ class PKCardInfoUI extends game.BaseContainer {
                 arr2.push({index:6,icon:'icon_rage_png',iconScale:1,title:'攻击距离',value:vo.atkrage>20?vo.atkrage:'近战',valueAdd:0})
             }
 
-            arr2.push( {index:7,icon:'icon_pos_png',iconScale:1,title:'生物体积',value:vo.space,valueAdd:0},)
+            arr2.push( {index:7,icon:'icon_pos_png',iconScale:1,title:'生物体积',value:vo.space,valueAdd:0})
             if(vo.skillcd > 0)
                 arr2.push({index:0,icon:'icon_clock_png',iconScale:1,title:'技能间隔',value:MyTool.toFixed(vo.skillcd/1000,1)+'秒',valueAdd:0});
             if(arr2.length%2 ==1)
@@ -161,11 +155,13 @@ class PKCardInfoUI extends game.BaseContainer {
             //else
             //    arr2.push({index:0,icon:'',iconScale:1,title:'',value:'',valueAdd:0});
             this.list2.dataProvider = new eui.ArrayCollection(arr2)
+            this.type.scaleX = this.type.scaleY = 0.6
         }
         else
         {
             MyTool.removeMC(this.line)
             MyTool.removeMC(this.list2)
+            this.type.scaleX = this.type.scaleY = 1
         }
 
 

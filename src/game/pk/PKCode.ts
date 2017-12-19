@@ -222,7 +222,7 @@ class PKCode {
                 })
             }
             else { //其它
-                if(mvo.hpChange && PD.actionTime - mvo.lastHpChange > 500) //改变血量值
+                if(mvo.hpChange && PD.actionTime - mvo.lastHpChange >= 500) //改变血量值
                 {
                     mvo.addHp(mvo.hpChange)
                     mvo.lastHpChange = PD.actionTime;

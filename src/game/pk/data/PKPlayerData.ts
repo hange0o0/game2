@@ -149,7 +149,7 @@ class PKPlayerData {
             {
                 if(this.posCard[s])
                 {
-                    this.teamData.removeStateListerByOwner(this.posCard[s])
+                    this.posCard[s].die();
                 }
                 this.posCard[s] = this.prePosCard[s];
                 this.prePosCard[s] = null;

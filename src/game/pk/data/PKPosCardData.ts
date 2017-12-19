@@ -88,7 +88,7 @@ class PKPosCardData {
             return false;
         }
         var cd = this.getMaxCD();
-        if(t - this.actionTime > cd)
+        if(t - this.actionTime >= cd)
         {
             this.actionTime = t;
             this.actionResult = 1;
@@ -148,6 +148,12 @@ class PKPosCardData {
                 user:this
             })
         }
+    }
 
+    //强行销毁
+    public die(){
+        this.getOwner().teamData.removeStateListerByOwner(this)
+        if(this.mid > 100)
+            SBase.getData(this.mid).onDie(this);
     }
 }

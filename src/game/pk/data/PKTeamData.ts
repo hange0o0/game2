@@ -5,6 +5,9 @@ class PKTeamData {
     public enemy:PKTeamData
 
 
+
+
+
     public hp  = 0 //城堡的血
     public def  = 0
 

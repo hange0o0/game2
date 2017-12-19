@@ -264,7 +264,7 @@ class PKMonsterData {
 
     public canAtk(){
         var PD =  PKData.getInstance();
-        return  this.atkAble && this.canAction() &&  this.stopTime <= PD.actionTime
+        return  this.atkAble && this.canAction() &&  this.stopTime < PD.actionTime
     }
 
     public canBeAtk(user){
@@ -278,13 +278,13 @@ class PKMonsterData {
             return null;
         if(!this.canAction())
             return null;
-        if(this.stopTime > t)
+        if(this.stopTime >= t)
             return null;
         if(!this.getVO().skillcd) //无技能
             return null;
         //if(this.getVO().skillcd > 0 && !this.target && !this.getAtkTarget())
         //    return null;
-        if(this.lastSkill && (this.lastSkill + this.getVO().skillcd > t))
+        if(this.lastSkill && (this.lastSkill + this.getVO().skillcd >= t))
             return null;
         this.skillTargets = MBase.getData(this.mid).getSkillTarget(this);
         return this.skillTargets
@@ -294,7 +294,7 @@ class PKMonsterData {
         if(this.getVO().skillcd < 0)
             this.lastSkill = Number.MAX_VALUE;
         else
-            this.lastSkill = PKData.getInstance().actionTime;
+            this.lastSkill = PKData.getInstance().actionTime - this.getVO().mv_atk;
     }
 
     public move(){

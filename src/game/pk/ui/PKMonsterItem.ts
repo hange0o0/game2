@@ -135,7 +135,8 @@ class PKMonsterItem extends game.BaseItem {
 
 
     public stand(){
-        this.monsterMV.stand();
+        if(this.monsterMV.state != MonsterMV.STAT_STAND)
+            this.monsterMV.stand();
     }
 
     public die(){

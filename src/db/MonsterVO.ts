@@ -91,6 +91,10 @@ class MonsterVO {
         return 'border_8_png';
     }
 
+    public getTypeIcon(){
+        return 'icon_type'+this.type+'_png'
+    }
+
     public preLoad(){
          MBase.getData(this.id).preload();
     }

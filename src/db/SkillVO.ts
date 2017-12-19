@@ -47,13 +47,16 @@ class SkillVO {
     }
 
     public getImage(){
-        return Config.localResRoot + 'card/monster_'+this.id+'.jpg';
+        return Config.localResRoot + 'card/card_'+this.id+'.jpg';
     }
     public getBG(){
         return 'border_14_png';
     }
     public getTypeIcon(){
         return 'skill_type'+this.type+'_png';
+    }
+    public getTypeColor(){
+        return [0x0,0xFC7B64,0x63FF63,0x60B5FF,0xE36BFF,0xFFE460][this.type];
     }
 
     public preLoad(){

@@ -8,7 +8,7 @@ class PKFailUI extends game.BaseWindow {
     }
 
     private okBtn: eui.Label;
-    private retryBtn: eui.Label;
+    //private retryBtn: eui.Label;
 
     public constructor() {
         super();
@@ -19,7 +19,7 @@ class PKFailUI extends game.BaseWindow {
     public childrenCreated() {
         super.childrenCreated();
         this.addBtnEvent(this.okBtn, this.onOK)
-        this.addBtnEvent(this.retryBtn, this.onRetry)
+        //this.addBtnEvent(this.retryBtn, this.onRetry)
     }
 
     private onOK(){

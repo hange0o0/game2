@@ -52,6 +52,7 @@
     "src/game/pk/ui/PKMonsterInfoItemSkin.exml",
     "src/game/pk/ui/PKMonsterInfoSkin.exml",
     "src/game/pk/ui/PKMonsterItemSkin.exml",
+    "src/game/pk/ui/PKSkillItemSkin.exml",
     "src/game/pk/ui/PKTopItemSkin.exml",
     "src/game/pk/ui/PKTopSkin.exml",
     "src/game/pk/ui/PKVideoConSkin.exml",

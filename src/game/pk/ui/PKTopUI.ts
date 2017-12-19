@@ -1,28 +1,36 @@
 class PKTopUI extends game.BaseContainer {
+    private static _instance:PKTopUI
+    public static getInstance() {
+        return this._instance;
+    }
 
-    private group1: eui.Group;
     private hpText1: eui.Label;
     private defScoreGroup1: eui.Group;
     private defGroupText1: eui.Label;
     private defGroup1: eui.Group;
     private defText1: eui.Label;
-    private group2: eui.Group;
     private defGroup2: eui.Group;
     private defText2: eui.Label;
     private defScoreGroup2: eui.Group;
     private defGroupText2: eui.Label;
     private hpText2: eui.Label;
     private topUI: TopUI;
+    private skillGroup: eui.Group;
+
+
 
 
 
     public itemArr = []
     public itempool = []
+    public skillItemArr = []
+    public skillItemPool = []
     private index = 1;
     public constructor() {
         super();
 
         this.skinName = "PKTopSkin";
+        PKTopUI._instance = this;
     }
 
 
@@ -41,6 +49,8 @@ class PKTopUI extends game.BaseContainer {
                 var teamData = data.getOwner().teamData
                 if(teamData.id != 'sys' && teamData != PKData.getInstance().myPlayer.teamData)
                     this.addSkillItem(data);
+                if(data.mid > 100)
+                    this.addSkill(data)
                 break;
             case PKConfig.VIDEO_MONSTER_WIN:
                 this.renewHp();
@@ -52,6 +62,40 @@ class PKTopUI extends game.BaseContainer {
                 this.def2();
                 break;
         }
+    }
+    private createSkillItem():PKSkillItem{
+        var item:PKSkillItem = this.skillItemPool.pop();
+        if(!item)
+        {
+            item = new PKSkillItem();
+            item.y = 66;
+        }
+        return item;
+    }
+
+    public removeSkillItem(item){
+        var index = this.skillItemArr.indexOf(item);
+        if(index != -1)
+        {
+            this.skillItemArr.splice(index,1);
+            this.freeSkillItem(item);
+        }
+    }
+
+    public freeSkillItem(item){
+        if(!item)
+            return;
+        item.remove();
+        this.skillItemPool.push(item);
+
+    }
+
+
+    public addSkill(data){
+         var item = this.createSkillItem();
+        this.skillGroup.addChild(item);
+        item.data = data;
+        this.skillItemArr.push(item)
     }
 
 
@@ -86,6 +130,10 @@ class PKTopUI extends game.BaseContainer {
         {
             this.freeItem(this.itemArr.pop())
         }
+        while(this.skillItemArr.length)
+        {
+            this.freeSkillItem(this.skillItemArr.pop())
+        }
         for(var i=0;i<7;i++)
         {
             var item = this.createItem();
@@ -95,11 +143,11 @@ class PKTopUI extends game.BaseContainer {
             item.data = null;
         }
 
+        this.defGroup1.visible = false
+        this.defGroup2.visible = false
+        this.defScoreGroup1.visible = true
+        this.defScoreGroup2.visible = true
 
-        MyTool.removeMC(this.defGroup1)
-        MyTool.removeMC(this.defGroup2)
-        this.group1.addChild(this.defScoreGroup1)
-        this.group2.addChildAt(this.defScoreGroup2,0)
         this.defGroupText1.text = '0'
         this.defGroupText2.text = '0'
 
@@ -132,10 +180,12 @@ class PKTopUI extends game.BaseContainer {
     }
     public def2(){
         var PD = PKData.getInstance();
-        MyTool.removeMC(this.defScoreGroup1)
-        MyTool.removeMC(this.defScoreGroup2)
-        this.group1.addChild(this.defGroup1)
-        this.group2.addChildAt(this.defGroup2,0)
+
+        this.defGroup1.visible = true
+        this.defGroup2.visible = true
+        this.defScoreGroup1.visible = false
+        this.defScoreGroup2.visible = false
+
         this.defText1.text = '+' +  PD.getTeamByRota(PKConfig.ROTA_LEFT).getTeamDef() + '%'
         this.defText2.text = '+' +  PD.getTeamByRota(PKConfig.ROTA_RIGHT).getTeamDef()  + '%'
     }

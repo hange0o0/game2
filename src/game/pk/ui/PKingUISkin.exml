@@ -5,6 +5,7 @@
 			<ns1:PKVideoCon id="pkVideo" x="0" y="0" skinName="PKVideoConSkin"/>
 		</e:Group>
 	</e:Scroller>
+	<ns1:PKSmallMap id="smallMap" skinName="PKSmallMapSkin" bottom="472" horizontalCenter="0"/>
 	<ns1:PKCtrlCon id="pkCtrlCon" x="0" skinName="PKCtrlConSkin" bottom="0"/>
 	<ns1:PKTopUI id="pkTop" x="0" skinName="PKTopSkin"/>
 	<e:Label id="roundText" text="START" size="60" horizontalCenter="0" textColor="0x000000" stroke="3" strokeColor="0xffffff" anchorOffsetY="40" width="200" textAlign="center" anchorOffsetX="100" y="379"/>

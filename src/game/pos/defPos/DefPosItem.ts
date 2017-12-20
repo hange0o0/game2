@@ -4,17 +4,19 @@ class DefPosItem extends game.BaseItem {
         this.skinName = "DefPosItemSkin";
     }
 
-    private cdText: eui.Label;
+    private posBG: eui.Image;
     private deleteBtn: eui.Button;
     private splitBtn: eui.Button;
     private mergeBtn: eui.Image;
-    private posBG: eui.Image;
     private cardItem: CardItem;
     private group: eui.Group;
     private c0: DefPosItem2;
     private c1: DefPosItem2;
     private c2: DefPosItem2;
     private c3: DefPosItem2;
+    private cdText: eui.Label;
+    private changeBtn: eui.Image;
+
 
 
     //private tw1
@@ -25,6 +27,7 @@ class DefPosItem extends game.BaseItem {
         this.addBtnEvent(this.splitBtn,this.onSplit)
         this.addBtnEvent(this.mergeBtn,this.onMerge)
         this.addBtnEvent(this.group,this.onGroup)
+        this.addBtnEvent(this.changeBtn,this.onChange)
 
         this.cardItem.touchChildren = this.cardItem.touchEnabled = false;
         this.group.touchChildren = false;
@@ -44,6 +47,12 @@ class DefPosItem extends game.BaseItem {
 
     private onGroup(){
 
+    }
+
+    private onChange(){
+        if(!this.clickAble())
+            return;
+        DefPosUI.getInstance().changeItem(this.data)
     }
 
     private onDelete(){
@@ -132,6 +141,7 @@ class DefPosItem extends game.BaseItem {
                 this.cdText.text = Math.floor(cd/60) + 'm ' +(cd%60) + 's'
             }
             this.mergeBtn.visible = ids.length + this.data.preLen <= 4;
+            this.changeBtn.visible = this.data.index > 0;
         }
 
 

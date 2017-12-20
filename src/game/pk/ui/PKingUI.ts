@@ -9,8 +9,10 @@ class PKingUI extends game.BaseUI {
     private pkVideo: PKVideoCon;
     private pkCtrlCon: PKCtrlCon;
     private pkTop: PKTopUI;
-    private pkInfo: PKMonsterInfoUI;
     private roundText: eui.Label;
+    private pkInfo: PKMonsterInfoUI;
+    private smallMap: PKSmallMap;
+
 
 
 
@@ -122,6 +124,7 @@ class PKingUI extends game.BaseUI {
 
         //控制栏动画
         this.pkCtrlCon.onTimer();
+        this.smallMap.onTimer();
 
         //详情栏动画
         this.pkInfo.onTimer();

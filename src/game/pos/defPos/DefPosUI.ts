@@ -361,6 +361,7 @@ class DefPosUI extends game.BaseUI {
         {
             var item = this.arrayData.getItemAt(i);
             item.preLen = preLen;
+            item.index = i;
             if(item.ids[0] < 0)
             {
                 var mp = Math.abs(item.ids[0]);
@@ -462,6 +463,14 @@ class DefPosUI extends game.BaseUI {
         this.resetDefData(true);
 
         this.resetScrollH1(1);
+    }
+
+    public changeItem(data){
+        var index = this.arrayData.getItemIndex(data);
+        this.arrayData.removeItemAt(index);
+        this.arrayData.addItemAt(data,index-1);
+
+        this.resetDefData(true);
     }
 
     private resetScrollH1(deleteNum){

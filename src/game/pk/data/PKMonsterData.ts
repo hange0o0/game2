@@ -298,7 +298,7 @@ class PKMonsterData {
     }
 
     public move(){
-        this.x += this.atkRota * Math.round(this.speed);
+        this.x += this.atkRota * Math.round(this.speed)/10;
         PKData.getInstance().addVideo({
             type:PKConfig.VIDEO_MONSTER_MOVE,
             user:this

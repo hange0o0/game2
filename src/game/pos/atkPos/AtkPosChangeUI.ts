@@ -21,7 +21,7 @@ class AtkPosChangeUI extends game.BaseUI {
     private selectData;
     private selectIndex;
     //private callDelete = false;
-    //private everDelete = false;
+    private everDelete = false;
     public constructor() {
         super();
         this.skinName = "AtkPosChangeUISkin";
@@ -46,6 +46,13 @@ class AtkPosChangeUI extends game.BaseUI {
         if(item.back)
         {
             this.hide();
+        }
+        else if(!game.BaseUI.isStopEevent)
+        {
+            this.everDelete = true;
+            AtkPosUI.getInstance().deleteID(item.id)
+            var index = this.listData.getItemIndex(item);
+            this.listData.removeItemAt(index)
         }
     }
 
@@ -117,8 +124,8 @@ class AtkPosChangeUI extends game.BaseUI {
 
     public hide() {
         MyTool.clearList(this.list);
-        //if(this.everDelete)
-        //    AtkPosUI.getInstance().justRenewList2()
+        if(this.everDelete)
+            AtkPosUI.getInstance().justRenewList2()
         this.listData.removeItemAt(this.listData.length - 1)
         AtkPosUI.getInstance().addSetting()
         super.hide();
@@ -132,7 +139,7 @@ class AtkPosChangeUI extends game.BaseUI {
         //    this.list.top = 0;
         //}
         //this.callDelete = false
-        //this.everDelete = false
+        this.everDelete = false
         this.list.dataProvider = this.listData
         this.renew();
         //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)

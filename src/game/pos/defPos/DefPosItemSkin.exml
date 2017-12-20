@@ -16,4 +16,5 @@
 	</e:Group>
 	<e:Image source="border_4_png" y="267" width="100" scale9Grid="24,19,3,10" height="44" horizontalCenter="0"/>
 	<e:Label id="cdText" text="Label" y="277.67" horizontalCenter="0" size="22" stroke="2"/>
+	<e:Image id="changeBtn" source="change_icon_png" x="-22" y="290"/>
 </e:Skin>

@@ -47,7 +47,8 @@ class SkillVO {
     }
 
     public getImage(){
-        return Config.localResRoot + 'card/card_'+this.id+'.jpg';
+        return Config.localResRoot + 'card/card_'+101+'.jpg';
+        //return Config.localResRoot + 'card/card_'+this.id+'.jpg';
     }
     public getBG(){
         return 'border_14_png';

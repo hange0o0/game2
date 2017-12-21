@@ -3,11 +3,8 @@ class S106 extends SBase {
         super();
     }
 
-    public getSkillTarget(user:PKPosCardData){
-        return [null];
-    }
 
-    public onSkill(user:PKPosCardData,target:PKMonsterData) {
+    public onSkill(user:PKPosCardData) {
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData);
         var selectTarget
@@ -24,7 +21,9 @@ class S106 extends SBase {
         if(selectTarget)
         {
             selectTarget.addHp(user.getSkillValue(1,true))
+            return [selectTarget];
         }
+        return [];
     }
 
 

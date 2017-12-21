@@ -16,6 +16,7 @@ class DefPosUI extends game.BaseUI {
     private tab: eui.TabBar;
     private downScrollCon: eui.Group;
     private downScroll: eui.Group;
+    private downScrollBG: eui.Image;
     private downScrollMC: eui.Image;
     private leftBtn: eui.Group;
     private rightBtn: eui.Group;
@@ -27,6 +28,7 @@ class DefPosUI extends game.BaseUI {
     private saveBtn: eui.Group;
     private arrowBtn: eui.Image;
     private downList: DownList;
+
 
 
 
@@ -69,9 +71,11 @@ class DefPosUI extends game.BaseUI {
         this.addBtnEvent(this.testBtn,this.onTest)
         this.addBtnEvent(this.leftBtn,this.onLeft)
         this.addBtnEvent(this.rightBtn,this.onRight)
+        this.addBtnEvent(this.downScrollBG,this.onClickDownBG)
 
-        this.downScroll.touchChildren = false;
-        this.downScroll.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.onDownBegin,this)
+        //this.downScroll.touchChildren = false;
+        this.downScrollMC.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.onDownBegin,this)
+        this.downScrollMC.touchEnabled = true
 
         this.scroller1.viewport = this.list1;
         this.list1.itemRenderer = DefPosItem
@@ -106,6 +110,26 @@ class DefPosUI extends game.BaseUI {
         {
             index++;
             this.tweenScroll(index*this.itemWidth);
+        }
+    }
+
+    private onClickDownBG(e){
+        var p = this.downScrollMC.localToGlobal(0,0)
+        var rota = 0;
+        if(e.stageX < p.x)
+        {
+            if(this.scroller1.viewport.scrollH > 0)
+            {
+                this.tweenScroll(Math.max(0,this.scroller1.viewport.scrollH - 640));
+            }
+        }
+        else if(e.stageX > p.x + this.downScrollMC.width)
+        {
+            var dec = this.getContentWidth() - 640;
+            if(this.scroller1.viewport.scrollH < dec)
+            {
+                this.tweenScroll(Math.min(dec,this.scroller1.viewport.scrollH + 640));
+            }
         }
     }
 
@@ -485,7 +509,7 @@ class DefPosUI extends game.BaseUI {
     private tweenScroll(scrollH){
         egret.Tween.removeTweens(this.scroller1.viewport)
         var tw = egret.Tween.get(this.scroller1.viewport,{onChange:()=>{this.onScroll()}})
-        tw.to({scrollH:scrollH},100)
+        tw.to({scrollH:scrollH},Math.abs(this.scroller1.viewport.scrollH - scrollH)/2)
     }
 
 

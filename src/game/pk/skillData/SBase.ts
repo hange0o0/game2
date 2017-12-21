@@ -15,6 +15,10 @@ class SBase {
     constructor() {
     }
 
+    public initSkill(user:PKPosCardData){
+
+    }
+
     public onDie(user:PKPosCardData){
 
     }
@@ -24,24 +28,14 @@ class SBase {
 
     }
 
-    //能否生效
-    public useAble(user:PKPosCardData){
-        return true;
-    }
-
-    //取技能目标
-    public getSkillTarget(user:PKPosCardData){
-        return [];
-    }
-
     //技能动画
     public skillMV(target:PKMonsterData){
 
     }
 
     //生效时的逻辑
-    public onSkill(user:PKPosCardData,target:PKMonsterData){
-
+    public onSkill(user:PKPosCardData){
+         return [];
     }
 
 
@@ -49,23 +43,28 @@ class SBase {
     //////////////////////////////////////////////////上面的为要设的内容
 
     //实现技能
-    public skill(user:PKPosCardData,posIndex){
-        var svo = SkillVO.getObject(user.mid);
+    public skill(user:PKPosCardData){
+        //var svo = SkillVO.getObject(user.mid);
+
+        var targets = this.onSkill(user);//技能效果
+        if(targets)
+        {
+            for(var i=0;i<targets.length;i++)
+            {
+                this.skillMV(targets[i]);//技能动画
+            }
+        }
+
         //if(svo.state)
         //{
         //    user.getOwner().teamData.addStateLister(svo.state,user)
         //    return;
         //}
-        var targets = this.getSkillTarget(user);
-        for(var i=0;i<targets.length;i++)
-        {
-              this.effectTarget(user,targets[i]);
-        }
-    }
-
-    public effectTarget(user:PKPosCardData,target:PKMonsterData){
-        this.onSkill(user,target);//技能效果
-        this.skillMV(target);//技能动画
+        //var targets = this.getSkillTarget(user);
+        //for(var i=0;i<targets.length;i++)
+        //{
+        //
+        //}
     }
 
 

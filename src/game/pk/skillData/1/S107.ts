@@ -11,11 +11,8 @@ class S107 extends SBase {
         MonsterVO.getObject(4).preLoad();
     }
 
-    public getSkillTarget(user:PKPosCardData){
-        return [null];
-    }
 
-    public onSkill(user:PKPosCardData,target:PKMonsterData) {
+    public onSkill(user:PKPosCardData) {
         var PD = PKData.getInstance();
         var owner = PD.getPlayer(user.owner);
         var atkRota = owner.teamData.atkRota;
@@ -36,7 +33,7 @@ class S107 extends SBase {
             }
             PD.addMonster(mData);
         }
-
+        return [];
 
     }
 }

@@ -18,7 +18,7 @@ class PKVideoCon extends game.BaseContainer {
 
 
     public itemArr = []
-    public itempool = []
+    public totemArr = []
     public txtPool = []
     public txtArr = []
 
@@ -49,12 +49,17 @@ class PKVideoCon extends game.BaseContainer {
         while(this.itemArr.length)
         {
             var item = this.itemArr.pop();
-            this.freeItem(item);
+            PKMonsterItem.freeItem(item);
         }
         while(this.txtArr.length)
         {
             var item = this.txtArr.pop();
             this.freeTxt(item);
+        }
+        while(this.totemArr.length)
+        {
+            var item = this.totemArr.pop();
+            PKTotem.freeItem(item);
         }
         this.tw1.setPaused(false);
         this.tw2.setPaused(false);
@@ -71,47 +76,8 @@ class PKVideoCon extends game.BaseContainer {
 
     }
 
-    //取队伍的最前的怪
-    public getFirstItem(taamID){
-        var atkRota = PKData.getInstance().getTeamByID(taamID).atkRota;
-        var chooseItem
-        for(var i=0;i<this.itemArr.length;i++)
-        {
-            var item = this.itemArr[i];
-            if(item.data.atkRota != atkRota)
-                continue
-            if(!chooseItem)
-                chooseItem = item;
-            else if(atkRota == PKConfig.ROTA_LEFT && chooseItem.x<item.x)
-                chooseItem = item;
-            else if(atkRota == PKConfig.ROTA_RIGHT && chooseItem.x>item.x)
-                chooseItem = item;
-        }
-        return chooseItem
-    }
 
-    private createItem():PKMonsterItem{
-        var item:PKMonsterItem = this.itempool.pop();
-        if(!item)
-        {
-            item = new PKMonsterItem();
-            //item.y = 350;
-        }
-        item.needRemove = false;
 
-        return item;
-    }
-
-    private freeItem(item){
-        if(!item)
-            return;
-        //if(item.out)
-        //    return;
-        //item.out = true;
-        item.remove();
-        this.itempool.push(item);
-
-    }
 
     private createTxt():eui.Label{
         var item:eui.Label = this.txtPool.pop();
@@ -179,7 +145,7 @@ class PKVideoCon extends game.BaseContainer {
         switch(videoData.type)//动画类型
         {
             case PKConfig.VIDEO_MONSTER_ADD:
-                item = this.createItem();
+                item = PKMonsterItem.createItem();
                 //if(data.owner == 'sys')
                 //    item.y = this.monsterY;
                 //else
@@ -237,6 +203,28 @@ class PKVideoCon extends game.BaseContainer {
                 item = this.getItemByID(data.id);
                 item.setTeam();
                 break;
+            case PKConfig.VIDEO_TOTEM_ADD:
+                var totemItem = PKTotem.createItem();
+                totemItem.y =  this.monsterY + videoData.y;
+                totemItem.x =  videoData.x;
+                this.con.addChildAt(totemItem,this.getIndexByY(totemItem.y));
+                totemItem.data = videoData.totemType;
+                totemItem.owner = videoData.user;
+                this.totemArr.push(totemItem);
+                break;
+            case PKConfig.VIDEO_TOTEM_REMOVE:
+                for(var i=0;i<this.totemArr.length;i++)
+                {
+                    var totem =  this.totemArr[i];
+                    if(totem.owner == videoData.user)
+                    {
+                        PKTotem.freeItem(totem)
+                        this.totemArr.splice(i,1);
+                        i--;
+                        break
+                    }
+                }
+                break;
         }
     }
 
@@ -248,7 +236,7 @@ class PKVideoCon extends game.BaseContainer {
             item = this.itemArr[i];
             if(item.needRemove)//移除过期ID
             {
-                this.freeItem(item);
+                PKMonsterItem.freeItem(item);
                 this.itemArr.splice(i,1);
                 i--;
             }

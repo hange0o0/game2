@@ -193,8 +193,8 @@ class PKPlayerData {
             }
             else if(!oo.useEnable())//已失效
             {
+                this.posCard[s].die();
                 this.posCard[s] = null;
-                this.teamData.removeStateListerByOwner(oo)
             }
         }
         if(arr.length > 1)
@@ -205,39 +205,39 @@ class PKPlayerData {
     }
 
     //取可上战场的怪
-    public getAddMonster(t){
-        var arr = [];
+    //public getAddMonster(t){
+    //    var arr = [];
+    //
+    //    for(var s in this.posCard)
+    //    {
+    //        var oo:PKPosCardData = this.posCard[s];
+    //        if(!oo || oo.mid>100)continue;
+    //
+    //        if(oo.testAdd(t))
+    //        {
+    //            arr.push(oo)
+    //        }
+    //    }
+    //    if(arr.length > 1)
+    //    {
+    //        ArrayUtil.sortByField(arr,['actionTime','id'],[0,0])
+    //    }
+    //    return arr;
+    //}
 
-        for(var s in this.posCard)
-        {
-            var oo:PKPosCardData = this.posCard[s];
-            if(!oo || oo.mid>100)continue;
-
-            if(oo.testAdd(t))
-            {
-                arr.push(oo)
-            }
-        }
-        if(arr.length > 1)
-        {
-            ArrayUtil.sortByField(arr,['actionTime','id'],[0,0])
-        }
-        return arr;
-    }
-
-    //取可起作用的技能
-    public getAddSkill(t){
-        var arr = [];
-        for(var s in this.posCard)
-        {
-            var oo:PKPosCardData = this.posCard[s];
-            if(!oo || oo.mid<100)continue;
-
-            if(oo.testAdd(t) && SBase.getData(oo.mid).useAble(oo))
-            {
-                arr.push(oo)
-            }
-        }
-        return arr;
-    }
+    ////取可起作用的技能
+    //public getAddSkill(t){
+    //    var arr = [];
+    //    for(var s in this.posCard)
+    //    {
+    //        var oo:PKPosCardData = this.posCard[s];
+    //        if(!oo || oo.mid<100)continue;
+    //
+    //        if(oo.testAdd(t))
+    //        {
+    //            arr.push(oo)
+    //        }
+    //    }
+    //    return arr;
+    //}
 }

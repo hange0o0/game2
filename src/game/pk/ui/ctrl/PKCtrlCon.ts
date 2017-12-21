@@ -88,15 +88,19 @@ class PKCtrlCon extends game.BaseContainer {
 
 
     public onVideoEvent(e){
-        var item:PKMonsterItem;
+        //var item:PKMonsterItem;
         var videoData = e.data;
-        var data:PKMonsterData = videoData.user;
+        //var data:PKMonsterData = videoData.user;
         switch(videoData.type)//动画类型
         {
             case PKConfig.VIDEO_MONSTER_ADD:
             case PKConfig.VIDEO_MONSTER_WIN:
             case PKConfig.VIDEO_MONSTER_DIE:
                 this.needRenewInfo = true;
+                break;
+            case PKConfig.VIDEO_POS_FAIL:
+                if(videoData.user.getOwner() == PKData.getInstance().myPlayer)
+                    this.placeObj[videoData.user.id].showFail()
                 break;
         }
     }

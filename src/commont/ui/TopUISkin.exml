@@ -3,4 +3,5 @@
 	<e:Image source="title_bg4_png" x="0" y="-63" fillMode="repeat" width="100%"/>
 
 	<e:Label id="titleText" text="标签" strokeColor="0x110900" stroke="2" size="24" bold="true" textColor="0xef9f32" y="15" horizontalCenter="0.5"/>
+	<e:Image id="helpBtn" source="icon_help_png" y="0" right="0"/>
 </e:Skin>

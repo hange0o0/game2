@@ -18,6 +18,7 @@ class SkillVO {
     public sv1: number;
     public sv2: number;
     public sv3: number;
+    public sv4: number;
     public id: number;
     //public state: string;
     public level: number;
@@ -44,6 +45,7 @@ class SkillVO {
         this.sv1 = data.sv1
         this.sv2 = data.sv2
         this.sv3 = data.sv3
+        this.sv4 = data.sv4
     }
 
     public getImage(){

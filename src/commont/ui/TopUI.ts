@@ -5,11 +5,19 @@ class TopUI extends game.BaseContainer {
 
     //private closeBtn: eui.Button;
     private titleText: eui.Label;
+    private helpBtn: eui.Image;
+
 
 
     public childrenCreated() {
-        //this.addBtnEvent(this.closeBtn,this.backBtnClick);
+        this.addBtnEvent(this.helpBtn,this.onHelp);
+        this.helpBtn.visible = false;
     }
+
+    public onHelp(){
+
+    }
+
     public setTitle(name:string):void{
         this.titleText.text = name;
     }

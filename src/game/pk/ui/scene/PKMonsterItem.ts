@@ -1,4 +1,24 @@
 class PKMonsterItem extends game.BaseItem {
+    private static pool = [];
+     public static createItem():PKMonsterItem{
+         var item:PKMonsterItem = this.pool.pop();
+         if(!item)
+         {
+             item = new PKMonsterItem();
+         }
+         item.needRemove = false;
+         return item;
+     }
+     public static freeItem(item){
+         if(!item)
+             return;
+         item.remove();
+         this.pool.push(item);
+     }
+
+
+
+
     private barGroup: eui.Group;
     private bar: eui.Rect;
     private teamMC: eui.Image;

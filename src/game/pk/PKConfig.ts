@@ -19,10 +19,11 @@ class PKConfig {
 
     public static stepCD = 50; //步长
     public static gameTime = 5*60; //游戏时间,超出算平
-    public static maxMonsterSpace = 20//10; //同时存活怪的占位
+    public static maxMonsterSpace = 20; //同时存活怪的占位
     public static floorWidth = 1300; //战场宽度
     public static appearPos = 100//出现的位置
     public static diamondPos = 200//出现的位置
+    public static remainCD = 3000//能出兵后没出兵保持的时间
     //public static maxMP = 20; //MP上限
     public static mpInit = 15; //初始的MP值
     public static beforeCD = 3*1000; //上阵前的等待
@@ -46,6 +47,9 @@ class PKConfig {
     public static VIDEO_MONSTER_ADD_STATE = 13
     public static VIDEO_MONSTER_STAND = 14
     public static VIDEO_MONSTER_CHANGE_TEAM = 15
+    public static VIDEO_POS_FAIL = 16
+    public static VIDEO_TOTEM_ADD = 17  //加图腾
+    public static VIDEO_TOTEM_REMOVE = 18 //-图腾
 
 
 

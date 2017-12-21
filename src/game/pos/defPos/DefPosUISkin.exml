@@ -34,7 +34,7 @@
 	<e:Group id="downScrollCon" x="0" width="100%" height="76" bottom="100">
 		<e:Image source="bg1_png" scale9Grid="8,8,14,14" x="0" y="0" width="100%" height="100%"/>
 		<e:Group id="downScroll" left="70" right="70" verticalCenter="0">
-			<e:Image source="bg13_png" scale9Grid="15,14,7,10" height="70" y="0" x="0" width="100%"/>
+			<e:Image id="downScrollBG" source="bg13_png" scale9Grid="15,14,7,10" height="70" y="0" x="0" width="100%"/>
 			<e:Image id="downScrollMC" source="btn1_png" scale9Grid="16,15,18,18" x="225" y="10"/>
 		</e:Group>
 		<e:Group id="leftBtn" x="0" verticalCenter="0">

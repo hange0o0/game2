@@ -159,7 +159,7 @@ class PKingUI extends game.BaseUI {
             area = 5;
         }
         else
-            var item = this.pkVideo.getFirstItem(PKData.getInstance().myPlayer.teamData.id);
+            var item = PKData.getInstance().getFirstItem(PKData.getInstance().myPlayer.teamData.id);
         if(item)
         {
             var scrollH = item.x - 320;

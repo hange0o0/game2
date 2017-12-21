@@ -220,6 +220,32 @@ class PKData extends egret.EventDispatcher{
         return arr;
     }
 
+    //取队伍的最前的怪
+    public getFirstItem(taamID){
+        var atkRota = PKData.getInstance().getTeamByID(taamID).atkRota;
+        var chooseItem
+        for(var i=0;i<this.monsterList.length;i++)
+        {
+            var item:PKMonsterData = this.monsterList[i];
+            if(item.atkRota != atkRota)
+                continue
+            if(!chooseItem)
+                chooseItem = item;
+            else if(atkRota == PKConfig.ROTA_LEFT && chooseItem.x<item.x)
+                chooseItem = item;
+            else if(atkRota == PKConfig.ROTA_RIGHT && chooseItem.x>item.x)
+                chooseItem = item;
+        }
+        return chooseItem
+    }
+
+    public getFirstX(teamID){
+         var item = this.getFirstItem(teamID);
+        if(item)
+            return item.x;
+        return  this.getTeamByID(teamID).atkRota == PKConfig.ROTA_LEFT ? PKConfig.appearPos:PKConfig.floorWidth + PKConfig.appearPos;
+    }
+
     //加入怪到场上
     public addMonster(data){
         var monster = new PKMonsterData(data)

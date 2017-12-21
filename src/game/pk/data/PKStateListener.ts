@@ -1,6 +1,8 @@
 class PKStateListener { //图腾类，会针对状态改变进行触发
     public owner:PKMonsterData|PKPosCardData;     //
     public endTime = 0;
+    public mvID = 0;
+    public x = 0; //如果有动画，出现的位置
 
     public type//监听类型
 

@@ -77,7 +77,7 @@ class PKCode {
                         data.setHaveAdd(PD.actionTime);
                     }
                 }
-                else if(SBase.getData(data.mid).useAble(data))//技能
+                else
                 {
                     data.actionSkill();
                     data.setHaveAdd(PD.actionTime);

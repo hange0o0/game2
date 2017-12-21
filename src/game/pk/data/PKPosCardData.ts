@@ -9,6 +9,7 @@ class PKPosCardData {
     public actionResult = 0//是否有等待出手的怪
 
     public num = 0//已使用的次数
+    public needRemoveListener = true//结束后移除对应监听
 
     constructor(obj?){
         if(obj)
@@ -22,6 +23,8 @@ class PKPosCardData {
         }
 
         this.getVO().preLoad();
+        if(this.mid > 100)
+            SBase.getData(this.mid).initSkill(this);
     }
 
     public getVO(){
@@ -82,7 +85,20 @@ class PKPosCardData {
     //是否可马上起作用
     public testAdd(t){
         if(this.actionResult)
+        {
+            if(t - this.actionTime > PKConfig.remainCD) //超时
+            {
+                this.actionTime = t;
+                this.actionResult = 0;
+                this.num ++;
+                PKData.getInstance().addVideo({
+                    type:PKConfig.VIDEO_POS_FAIL,
+                    user:this
+                })
+                return false;
+            }
             return true;
+        }
         if(!this.useEnable())
         {
             return false;
@@ -132,7 +148,7 @@ class PKPosCardData {
 
     //触发技能
     public actionSkill(){
-       SBase.getData(this.mid).skill(this,this.id);
+       SBase.getData(this.mid).skill(this);
     }
 
     //上阵怪后的处理
@@ -152,7 +168,8 @@ class PKPosCardData {
 
     //强行销毁
     public die(){
-        this.getOwner().teamData.removeStateListerByOwner(this)
+        if(this.needRemoveListener)
+            this.getOwner().teamData.removeStateListerByOwner(this)
         if(this.mid > 100)
             SBase.getData(this.mid).onDie(this);
     }

@@ -10,8 +10,22 @@ class S103 extends SBase{
         AniManager.getInstance().preLoadMV(this.mvID)
     }
 
-    //取技能目标
-    public getSkillTarget(user:PKPosCardData){
+    //
+    ////能否生效
+    //public useAble(user:PKPosCardData){
+    //    var PD = PKData.getInstance();
+    //    var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
+    //    return arr.length >= 3;
+    //}
+    //
+    //技能动画
+    public skillMV(target:PKMonsterData){
+        PKVideoCon.getInstance().playAniOn(target.id,this.mvID)
+    }
+    //
+    //生效时的逻辑
+    public onSkill(user:PKPosCardData){
+
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
         var list = []
@@ -29,23 +43,11 @@ class S103 extends SBase{
             ArrayUtil.sortByField(list,['hp'],[1])
             list.length = num;
         }
+        for(var i=0;i<list.length;i++)
+        {
+            list[i].addHp(-user.getSkillValue(1,true))
+        }
         return list;
-    }
-    //
-    ////能否生效
-    //public useAble(user:PKPosCardData){
-    //    var PD = PKData.getInstance();
-    //    var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
-    //    return arr.length >= 3;
-    //}
-    //
-    //技能动画
-    public skillMV(target:PKMonsterData){
-        PKVideoCon.getInstance().playAniOn(target.id,this.mvID)
-    }
-    //
-    //生效时的逻辑
-    public onSkill(user:PKPosCardData,target:PKMonsterData){
-        target.addHp(-user.getSkillValue(1,true))
+
     }
 }

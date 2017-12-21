@@ -11,6 +11,7 @@ class PKPosItem extends game.BaseItem {
     private spaceText: eui.Label;
     private timesBG: eui.Image;
     private timesText: eui.Label;
+    private failMC: eui.Rect;
     private addIcon: eui.Image;
     private barGroup1: eui.Group;
     private barMC1: eui.Image;
@@ -21,9 +22,11 @@ class PKPosItem extends game.BaseItem {
 
 
 
+
     public index;
     public defaultY;
     public tw;
+    public twRemain;
     public constructor() {
         super();
 
@@ -41,8 +44,12 @@ class PKPosItem extends game.BaseItem {
 
 
 
+
+
+
         MyTool.addLongTouch(this,this.onLongTouch,this)
         this.lightBG.visible = false;
+        this.failMC.visible = false
         this.defaultY = this.con.y;
     }
 
@@ -109,6 +116,15 @@ class PKPosItem extends game.BaseItem {
         return false;
     }
 
+    public showFail(){
+        this.failMC.visible = true
+        this.failMC.alpha = 0
+        var tw = egret.Tween.get(this.failMC);
+        tw.to({alpha:0.3},100).to({alpha:0},100).to({alpha:0.3},100).to({alpha:0},100).call(function(){
+            this.failMC.visible = false
+        },this)
+    }
+
     public setOver(b)
     {
         this.con.y = b?this.defaultY-30:this.defaultY
@@ -117,6 +133,12 @@ class PKPosItem extends game.BaseItem {
     }
 
     public onRemove(){
+        egret.Tween.removeTweens(this.barGroup1)
+        egret.Tween.removeTweens(this.failMC)
+        this.barGroup1.alpha = 1;
+        this.twRemain = null;
+        this.failMC.visible = false
+        this.lightBG.visible = false
         //this.tw.setPaused(true);
     }
 
@@ -146,6 +168,22 @@ class PKPosItem extends game.BaseItem {
                 this.testTween(cd)
             else
                 this.testTween()
+
+            if(data.actionResult)
+            {
+                if(!this.twRemain)
+                {
+                    this.barGroup1.alpha = 1;
+                    var tw = this.twRemain = egret.Tween.get(this.barGroup1,{loop:true});
+                    tw.to({alpha:0.2},500,egret.Ease.sineInOut).to({alpha:1},500,egret.Ease.sineInOut)
+                }
+            }
+            else if(this.twRemain)
+            {
+                 egret.Tween.removeTweens(this.barGroup1)
+                this.barGroup1.alpha = 1;
+                this.twRemain = null;
+            }
         }
         else if(preData)
         {

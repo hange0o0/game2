@@ -5,20 +5,20 @@ class S101 extends SBase{
 
     public mvID = 123;
 
-    public getSkillTarget(user:PKPosCardData){
-        return [null];
-    }
 
-    public onSkill(user:PKPosCardData,target:PKMonsterData) {
+    public onSkill(user:PKPosCardData) {
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
+        var targets = [];
         for(var i=0;i<arr.length;i++)
         {
             var targetEnemy = arr[i];
             if(!targetEnemy.beSkillAble())
                 continue;
             targetEnemy.addHp(-user.getSkillValue(1,true))
+            targets.push(targetEnemy);
         }
+        return targets;
         //var listener = new S101StateListener();
         //listener.owner = user;
         //listener.endTime = listener.actionTime + user.getSkillValue(2)

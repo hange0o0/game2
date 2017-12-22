@@ -253,20 +253,20 @@ class AtkPosUI extends game.BaseUI {
         {
             var arr = [
                 {label:'全部',data:0},
-                {label:PKConfig.TYPENAME[1],data:1},
-                {label:PKConfig.TYPENAME[2],data:2},
-                {label:PKConfig.TYPENAME[3],data:3}];
+                {label:PKConfig.TYPENAME[1],data:1,icon: 'icon_type1_png'},
+                {label:PKConfig.TYPENAME[2],data:2,icon: 'icon_type2_png'},
+                {label:PKConfig.TYPENAME[3],data:3,icon: 'icon_type3_png'}];
             this.downList.setData(arr,this.monsterType);
         }
         else
         {
             var arr = [
                 {label:'全部',data:0},
-                {label:PKConfig.SKILLTYPENAME[1],data:1},
-                {label:PKConfig.SKILLTYPENAME[2],data:2},
-                {label:PKConfig.SKILLTYPENAME[3],data:3},
-                {label:PKConfig.SKILLTYPENAME[4],data:4},
-                {label:PKConfig.SKILLTYPENAME[5],data:5}];
+                {label:PKConfig.SKILLTYPENAME[1],data:1,icon: 'skill_type1_png'},
+                {label:PKConfig.SKILLTYPENAME[2],data:2,icon: 'skill_type2_png'},
+                {label:PKConfig.SKILLTYPENAME[3],data:3,icon: 'skill_type3_png'},
+                {label:PKConfig.SKILLTYPENAME[4],data:4,icon: 'skill_type4_png'},
+                {label:PKConfig.SKILLTYPENAME[5],data:5,icon: 'skill_type5_png'}];
             this.downList.setData(arr,this.skillType);
         }
     }

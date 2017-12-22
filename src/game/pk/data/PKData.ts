@@ -229,6 +229,8 @@ class PKData extends egret.EventDispatcher{
             var item:PKMonsterData = this.monsterList[i];
             if(item.atkRota != atkRota)
                 continue
+            if(item.owner == 'sys')
+                continue
             if(!chooseItem)
                 chooseItem = item;
             else if(atkRota == PKConfig.ROTA_LEFT && chooseItem.x<item.x)

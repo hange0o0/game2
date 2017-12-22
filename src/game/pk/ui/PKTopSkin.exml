@@ -5,16 +5,16 @@
 		<e:Image source="icon_love_png" x="0" y="0"/>
 		<e:Label id="hpText1" text="15" size="26" stroke="5" verticalCenter="0" x="60"/>
 	</e:Group>
-	<e:Group id="defScoreGroup1" y="230" width="70" height="90" left="0">
-		<e:Label id="defGroupText1" text="+52" size="26" stroke="5" textAlign="center" textColor="0xFFFF00" width="50" horizontalCenter="0" verticalCenter="28"/>
+	<e:Group id="defScoreGroup1" y="300" width="70" height="50" x="180">
+		<e:Label id="defGroupText1" text="+52" size="26" stroke="5" textAlign="center" textColor="0xFFFF00" width="50" horizontalCenter="-50" verticalCenter="0"/>
 		<e:Image source="icon_def2_png" scaleX="1.1" scaleY="1.1" y="0" horizontalCenter="0"/>
 	</e:Group>
 	<e:Group id="defGroup1" y="230" width="70" left="0">
 		<e:Label id="defText1" text="+10%" size="26" stroke="5" y="60" horizontalCenter="0"/>
 		<e:Image source="icon_def1_png" y="0" scaleX="0.65" scaleY="0.65" horizontalCenter="0"/>
 	</e:Group>
-	<e:Group id="defScoreGroup2" y="230" right="0" height="90" width="70">
-		<e:Label id="defGroupText2" text="+52" size="26" stroke="5" textAlign="center" textColor="0xffff00" width="50" horizontalCenter="0" verticalCenter="28"/>
+	<e:Group id="defScoreGroup2" y="300" width="70" x="390" height="50">
+		<e:Label id="defGroupText2" text="+52" size="26" stroke="5" textAlign="center" textColor="0xffff00" width="50" horizontalCenter="50" verticalCenter="0"/>
 		<e:Image scaleX="1.1" scaleY="1.1" source="icon_def2_png" y="0" horizontalCenter="0"/>
 	</e:Group>
 	<e:Group id="defGroup2" y="230" width="70" right="0">

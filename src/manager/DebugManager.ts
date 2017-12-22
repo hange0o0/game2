@@ -19,7 +19,21 @@ class DebugManager {
     public MML = 100;  //测试出战怪的等级
     public printDetail = false;  //打印胜出怪物
 
-
+    public createHang(){
+        var arr = []
+        for(var i=1;i<=18;i++)
+        {
+            arr.push(i)
+            arr.push(i)
+            arr.push(i)
+        }
+        var newList = [];
+        for(var i=0;i<21;i++)
+        {
+            newList.push(ArrayUtil.randomOne(arr,true))
+        }
+        console.log(newList.join(','))
+    }
 
 }
 

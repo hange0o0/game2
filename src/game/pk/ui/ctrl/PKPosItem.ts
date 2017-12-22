@@ -26,7 +26,7 @@ class PKPosItem extends game.BaseItem {
     public index;
     public defaultY;
     public tw;
-    public twRemain;
+    //public twRemain;
     public constructor() {
         super();
 
@@ -133,10 +133,10 @@ class PKPosItem extends game.BaseItem {
     }
 
     public onRemove(){
-        egret.Tween.removeTweens(this.barGroup1)
+        //egret.Tween.removeTweens(this.barGroup1)
         egret.Tween.removeTweens(this.failMC)
-        this.barGroup1.alpha = 1;
-        this.twRemain = null;
+        //this.barGroup1.alpha = 1;
+        //this.twRemain = null;
         this.failMC.visible = false
         this.lightBG.visible = false
         //this.tw.setPaused(true);
@@ -166,24 +166,26 @@ class PKPosItem extends game.BaseItem {
             this.barGroup2.y = 215;
             if((maxNum - data.num) <=1)
                 this.testTween(cd)
+            else if(data.actionResult)
+                this.testTween(0)
             else
                 this.testTween()
 
-            if(data.actionResult)
-            {
-                if(!this.twRemain)
-                {
-                    this.barGroup1.alpha = 1;
-                    var tw = this.twRemain = egret.Tween.get(this.barGroup1,{loop:true});
-                    tw.to({alpha:0.2},500,egret.Ease.sineInOut).to({alpha:1},500,egret.Ease.sineInOut)
-                }
-            }
-            else if(this.twRemain)
-            {
-                 egret.Tween.removeTweens(this.barGroup1)
-                this.barGroup1.alpha = 1;
-                this.twRemain = null;
-            }
+            //if(data.actionResult)
+            //{
+            //    if(!this.twRemain)
+            //    {
+            //        this.barGroup1.alpha = 1;
+            //        var tw = this.twRemain = egret.Tween.get(this.barGroup1,{loop:true});
+            //        tw.to({alpha:0.2},500,egret.Ease.sineInOut).to({alpha:1},500,egret.Ease.sineInOut)
+            //    }
+            //}
+            //else if(this.twRemain)
+            //{
+            //     egret.Tween.removeTweens(this.barGroup1)
+            //    this.barGroup1.alpha = 1;
+            //    this.twRemain = null;
+            //}
         }
         else if(preData)
         {
@@ -212,7 +214,7 @@ class PKPosItem extends game.BaseItem {
 
     private testTween(cd=99999){
 
-        if(cd>10000)
+        if(cd>5000)
         {
             this.tw.setPaused(true)
             this.lightBG.visible = false;
@@ -221,7 +223,7 @@ class PKPosItem extends game.BaseItem {
         {
             this.tw.setPaused(false)
             this.lightBG.visible = true;
-            if(cd<3000)
+            if(cd<=0)
                 this.lightBG.source = 'card_back_bg_light1_png'
             else
                 this.lightBG.source = 'card_back_bg_light2_png'
@@ -233,15 +235,17 @@ class PKPosItem extends game.BaseItem {
         this.img.data = vo.id;
         this.bg.source = vo.getBG();
         this.cardGroup.visible = true;
-        if(vo.isMonster)
-        {
-            this.spaceGroup.visible = true
-            this.spaceText.text = vo.space + '';
-        }
-        else
-        {
-            this.spaceGroup.visible = false
-        }
+
+        this.spaceGroup.visible = false
+        //if(vo.isMonster)
+        //{
+        //    this.spaceGroup.visible = true
+        //    this.spaceText.text = vo.space + '';
+        //}
+        //else
+        //{
+        //    this.spaceGroup.visible = false
+        //}
 
     }
 }

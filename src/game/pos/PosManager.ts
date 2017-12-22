@@ -7,13 +7,15 @@ class PosManager {
     }
 
     public maxNum = 5;
-    public oneCardNum = 20;
+    public oneCardNum = 3;
     public defList
     public atkList
 
     public init(data){
           this.defList = data.def_list.list
           this.atkList = data.atk_list.list
+
+
     }
 
     public maxPosNum(){

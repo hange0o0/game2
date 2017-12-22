@@ -40,18 +40,21 @@ class PosCardItem extends game.BaseItem {
         var vo:any = this.data
         this.img.data = vo.id;
         this.bg.source = vo.getBG();
-        if(vo.isMonster)
-        {
-            this.skillType.visible = false
-            this.spaceGroup.visible = true
-            this.spaceText.text = vo.space + '';
-        }
-        else
-        {
-            this.skillType.visible = true
-            this.spaceGroup.visible = false
-            this.skillType.source = vo.getTypeIcon();
-        }
+
+        this.skillType.visible = false
+        this.spaceGroup.visible = false
+        //if(vo.isMonster)
+        //{
+        //    this.skillType.visible = false
+        //    this.spaceGroup.visible = true
+        //    this.spaceText.text = vo.space + '';
+        //}
+        //else
+        //{
+        //    this.skillType.visible = true
+        //    this.spaceGroup.visible = false
+        //    this.skillType.source = vo.getTypeIcon();
+        //}
 
         this.costText.text = vo.cost;
 

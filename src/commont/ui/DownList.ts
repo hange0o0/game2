@@ -114,7 +114,11 @@ class DownList extends game.BaseContainer {
 }
 
 class DownListItem extends game.BaseItem {
+    private con: eui.Group;
+    private img: eui.Image;
     private text: eui.Label;
+
+
 
     public constructor() {
         super();
@@ -126,6 +130,15 @@ class DownListItem extends game.BaseItem {
     }
 
     public dataChanged(){
+        if(this.data.icon)
+        {
+            this.img.source = this.data.icon
+            this.con.addChildAt(this.img,0)
+        }
+        else
+        {
+            MyTool.removeMC(this.img)
+        }
         this.text.text = this.data ? (""+this.data.label):"全部";
     }
 }

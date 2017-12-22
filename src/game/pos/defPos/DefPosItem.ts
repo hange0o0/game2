@@ -9,13 +9,17 @@ class DefPosItem extends game.BaseItem {
     private splitBtn: eui.Button;
     private mergeBtn: eui.Image;
     private cardItem: CardItem;
+    private cardsGroup: eui.Group;
     private group: eui.Group;
     private c0: DefPosItem2;
     private c1: DefPosItem2;
     private c2: DefPosItem2;
     private c3: DefPosItem2;
+    private costText: eui.Label;
     private cdText: eui.Label;
     private changeBtn: eui.Image;
+
+
 
 
 
@@ -83,13 +87,13 @@ class DefPosItem extends game.BaseItem {
             this.deleteBtn.visible = true
             this.splitBtn.visible = false
             this.cardItem.visible = false;
-            this.group.visible = false;
+            this.cardsGroup.visible = false;
             this.cdText.text = (-ids[0]) + ''
             this.mergeBtn.visible = this.data.preLen == 5;
         }
         else
         {
-            var haveSkill = false
+            //var haveSkill = false
             if(ids.length == 1)
             {
 
@@ -97,13 +101,13 @@ class DefPosItem extends game.BaseItem {
                 this.splitBtn.visible = false
 
                 this.cardItem.visible = true;
-                this.group.visible = false;
+                this.cardsGroup.visible = false;
                 this.cardItem.data = CM.getCardVO(ids[0]);
 
-                haveSkill =  !this.cardItem.data.isMonster
+                //haveSkill =  !this.cardItem.data.isMonster
                 //this.tw1.setPaused(false);
 
-
+                this.posBG.source = 'pos1_png'
             }
             else
             {
@@ -111,25 +115,29 @@ class DefPosItem extends game.BaseItem {
                 this.splitBtn.visible = true
 
                 this.cardItem.visible = false;
-                this.group.visible = true;
+                this.cardsGroup.visible = true;
                 this.group.removeChildren();
+                var cost = 0;
                 for(var i=0;i<ids.length;i++)
                 {
                     var item = this['c' + i];
                     this.group.addChild(item);
                     item.data = ids[i];
-                    if(!CM.getCardVO(item.data).isMonster)
-                        haveSkill = true;
+                    var vo = CM.getCardVO(item.data);
+                    cost += vo.cost
+                    //if(!vo.isMonster)
+                    //    haveSkill = true;
                 }
 
+                this.costText.text = cost + ''
                 //this.tw2.setPaused(false);
-
+                this.posBG.source = 'pos2_png'
             }
 
-            if(haveSkill)
-                this.posBG.source = 'pos2_png'
-            else
-                this.posBG.source = 'pos1_png'
+            //if(haveSkill)
+            //    this.posBG.source = 'pos2_png'
+            //else
+            //    this.posBG.source = 'pos1_png'
 
             var cd = Math.round(this.data.cd/1000)
             if(cd <= 60)

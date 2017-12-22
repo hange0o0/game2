@@ -11,17 +11,17 @@ class S108 extends SBase {
 
     public initSkill(user:PKPosCardData){
         user.needRemoveListener = false
-        console.log(9990)
     }
 
 
     public onSkill(user:PKPosCardData) {
         var listener = new S108StateListener()
+        var teamData = user.getOwner().teamData;
         listener.owner = user;
         listener.mvID = this.mvID;
         listener.endTime = PKData.getInstance().actionTime + user.getSkillValue(4) *1000;
-        listener.x = PKData.getInstance().getFirstX(user.getOwner().teamData.id);
-        user.getOwner().teamData.addStateLister(listener);
+        listener.x = PKData.getInstance().getFirstX(teamData.id) + teamData.atkRota*(Math.random()*30 + 20);
+        teamData.addStateLister(listener);
 
         //加入动画图腾
         PKData.getInstance().addVideo({

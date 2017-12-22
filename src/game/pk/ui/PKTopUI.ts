@@ -145,11 +145,17 @@ class PKTopUI extends game.BaseContainer {
 
         this.defGroup1.visible = false
         this.defGroup2.visible = false
-        this.defScoreGroup1.visible = true
-        this.defScoreGroup2.visible = true
+        this.defScoreGroup1.visible = false
+        this.defScoreGroup2.visible = false
 
-        this.defGroupText1.text = '0'
-        this.defGroupText2.text = '0'
+        this.defScoreGroup1.x = 180
+        this.defScoreGroup2.x = 390
+        this.defScoreGroup1.y = 250
+        this.defScoreGroup2.y = 250
+
+
+        this.defGroupText1.text = ''
+        this.defGroupText2.text = ''
 
 
     }
@@ -164,6 +170,8 @@ class PKTopUI extends game.BaseContainer {
 
     public def1(user){
         var team = user.getOwner().teamData;
+        this.defScoreGroup1.visible = true
+        this.defScoreGroup2.visible = true
        if(team.atkRota == PKConfig.ROTA_LEFT)
        {
            var txt = this.defGroupText1
@@ -181,13 +189,18 @@ class PKTopUI extends game.BaseContainer {
     public def2(){
         var PD = PKData.getInstance();
 
-        this.defGroup1.visible = true
-        this.defGroup2.visible = true
-        this.defScoreGroup1.visible = false
-        this.defScoreGroup2.visible = false
-
         this.defText1.text = '+' +  PD.getTeamByRota(PKConfig.ROTA_LEFT).getTeamDef() + '%'
         this.defText2.text = '+' +  PD.getTeamByRota(PKConfig.ROTA_RIGHT).getTeamDef()  + '%'
+
+        var tw = egret.Tween.get(this.defScoreGroup1)
+        tw.to({x:10,y:230},300)
+        var tw = egret.Tween.get(this.defScoreGroup2)
+        tw.to({x:570,y:230},300).call(function(){
+            this.defGroup1.visible = true
+            this.defGroup2.visible = true
+            this.defScoreGroup1.visible = false
+            this.defScoreGroup2.visible = false
+        },this)
     }
 
     public addSkillItem(data){

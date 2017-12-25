@@ -8,7 +8,7 @@ class S101 extends SBase{
 
     public onSkill(user:PKPosCardData) {
         var PD = PKData.getInstance();
-        var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
+        var arr = PD.monsterList;
         var targets = [];
         for(var i=0;i<arr.length;i++)
         {

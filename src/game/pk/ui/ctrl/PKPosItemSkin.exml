@@ -7,15 +7,15 @@
 		<e:Group id="cardGroup" y="6.98" width="124" height="146" x="12.52">
 			<e:Image id="bg" source="border_8_png" scale9Grid="12,12,76,76" left="0" right="0" top="0" bottom="0"/>
 			<ns1:CardImg id="img" width="114" height="130" horizontalCenter="0" verticalCenter="-1"/>
-			<e:Group id="spaceGroup" x="-2.66" y="106.79">
+			<e:Group id="spaceGroup" x="-2.66" y="106.79" visible="false">
 			<e:Image source="icon_pos_png" y="4.56" x="4.56"/>
 			<e:Label id="spaceText" text="20" x="3.01" size="24" stroke="3" textAlign="center" width="30" y="8.35"/>
 			</e:Group>
-			<e:Group y="109.47" right="0">
+			<e:Group y="109.47" right="0" visible="false">
 			<e:Image id="timesBG" source="icon_times_png" x="0" y="0"/>
 			<e:Label id="timesText" text="1" x="1.67" y="6.32" size="24" stroke="3" width="30" textAlign="center"/>
 			</e:Group>
-			<e:Rect id="failMC" width="100%" height="100%" x="0" y="0" fillColor="0xff0000" ellipseWidth="30" ellipseHeight="30"/>
+			<e:Rect id="failMC" width="100%" height="100%" x="0" y="0" fillColor="0xff0000" ellipseWidth="30" ellipseHeight="30" visible="false"/>
 		</e:Group>
 		<e:Image id="addIcon" source="icon_atk_png" y="8.209999999999994" scaleX="1" scaleY="1" x="13.00000000000002"/>
 	</e:Group>
@@ -27,5 +27,6 @@
 		<e:Image source="bar_bg_png" x="0" y="0"/>
 		<e:Image id="barMC2" x="2" y="2" fillMode="clip" width="100" source="bar2_png"/>
 	</e:Group>
+	<e:Label id="clockText" text="Label" y="4.560000000000009" size="22" stroke="2" textColor="0xfceea6" horizontalCenter="0"/>
 
 </e:Skin>

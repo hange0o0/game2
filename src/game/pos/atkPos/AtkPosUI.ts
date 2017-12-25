@@ -44,7 +44,7 @@ class AtkPosUI extends game.BaseUI {
 
     public childrenCreated() {
         super.childrenCreated();
-        this.bottomUI.setHide(this.hide,this);
+        this.bottomUI.setHide(this.onClose,this);
         //this.keyBoard.hide();
         //this.keyBoard.addEventListener('key_change',this.onKeyBoard,this)
 
@@ -102,7 +102,7 @@ class AtkPosUI extends game.BaseUI {
             })
             return;
         }
-        if(this.posData && (this.posData.name != this.posName || this.posData.list != this.changeToServerList()))
+        if(this.posData && (Base64.decode(this.posData.name) != this.posName || this.posData.list != this.changeToServerList()))
         {
             Confirm('还没保存，确定退出吗？',(b)=>{
                 if(b==1)
@@ -150,7 +150,7 @@ class AtkPosUI extends game.BaseUI {
             PosManager.getInstance().changePos('atk',this.posData.id,
                 this.posName,serverList,()=>{
                     ShowTips('保存成功！')
-                    this.hide();
+                    //this.hide();
                 })
         }
         else
@@ -158,7 +158,7 @@ class AtkPosUI extends game.BaseUI {
             PosManager.getInstance().addPos('atk',
                 this.posName,serverList,()=>{
                     ShowTips('保存成功！')
-                    this.hide();
+                    //this.hide();
                     //this.posData = PosManager.getInstance().atkList[this.index]
                 })
         }
@@ -190,11 +190,14 @@ class AtkPosUI extends game.BaseUI {
     private onSelect(){
         if(game.BaseUI.isStopEevent)
             return;
+
+
         var item = this.list2.selectedItem;
         if(this.maxCard <= this.arrayData.length)
             return;
         if(this.useCard[item.id] && this.useCard[item.id] >= PosManager.getInstance().oneCardNum)
             return;
+
         this.useCard[item.id] = (this.useCard[item.id] || 0) + 1
         this.arrayData.addItemAt({id:item.id},this.arrayData.length-1)
         this.justRenewList2();
@@ -222,7 +225,8 @@ class AtkPosUI extends game.BaseUI {
 
         this.deleteID(item.id)
         this.arrayData.removeItemAt(this.arrayData.getItemIndex(item))
-        this.useCard[item.id] --;
+        this.justRenewList2()
+        //this.useCard[item.id] --;
 
 
         this.once(egret.Event.ENTER_FRAME,function(){
@@ -237,7 +241,7 @@ class AtkPosUI extends game.BaseUI {
                 }
                 return;
             }
-            console.log(this.scroller1.viewport.contentHeight ,  this.scroller1.viewport.height);
+
             if(this.scroller1.viewport.scrollV > dec)
             {
                 this.scroller1.viewport.scrollV = dec;

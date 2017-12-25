@@ -21,8 +21,17 @@ class PosListHeadItem extends game.BaseItem {
 
     public dataChanged(){
         var vo:any = CM.getCardVO(this.data);
-        this.img.data = vo.id;
-        this.bg.source = vo.getBG();
+        if(vo)
+        {
+            this.img.visible = true
+            this.img.data = vo.id;
+            this.bg.source = vo.getBG();
+        }
+        else
+        {
+            this.img.visible = false
+        }
+
     }
 
 }

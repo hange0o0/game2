@@ -27,7 +27,7 @@ class PKData extends egret.EventDispatcher{
     public sysPlayer:PKPlayerData;
     public diamondData;
 
-    public history = [];
+    public history = {};
 
         //public stateObj = [] //所有要触发动画的集合
     //public topVideoList = [] //影响关部的动画的集合
@@ -57,7 +57,7 @@ class PKData extends egret.EventDispatcher{
 
     //初始化游戏
     public init(data){
-        this.history.length = 0;
+        this.history = {};
         this.monsterList.length = 0;
         this.playerObj = {};
         this.myPlayer = null;
@@ -66,6 +66,7 @@ class PKData extends egret.EventDispatcher{
         this.isGameOver = false;
         this.monsterChange = false;
         this.currentState = 'def';
+        PKMonsterAction.getInstance().init()
 
 
 
@@ -265,12 +266,13 @@ class PKData extends egret.EventDispatcher{
         monster.getOwner().teamData.testState(PKConfig.LISTENER_CREATE,monster);
         this.monsterChange = true;
 
-        this.history.push({
+        this.history[monster.id] = ({
             id:monster.id,
             mid:monster.mid,
             owner:monster.owner,
             actionTime:this.actionTime
         })
+        monster['xxx'] = this.actionTime + '|' + monster.id
         return monster;
     }
 

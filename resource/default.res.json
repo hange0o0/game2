@@ -9,7 +9,7 @@
 			"name":"login_load"
 		},
 		{
-			"keys":"state1_png,card_back_bg_light2_png,card_back_bg_light1_png,card_battle_png,card_battle2_png,totem_png,totem_1_png",
+			"keys":"state1_png,card_back_bg_light2_png,card_back_bg_light1_png,card_battle_png,card_battle2_png,totem_png,totem_1_png,icon_def_bg_png",
 			"name":"pk"
 		}
 	],
@@ -702,6 +702,11 @@
 			"name":"totem_1_png",
 			"type":"image",
 			"url":"game_assets/pk/totem_1.png"
+		},
+		{
+			"name":"icon_def_bg_png",
+			"type":"image",
+			"url":"game_assets/pk/icon_def_bg.png"
 		}
 	]
 }

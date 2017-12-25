@@ -97,14 +97,26 @@ class PKCardInfoUI extends game.BaseContainer {
 
         var arr1 = [
             {index:1,icon:'icon_cost_png',iconScale:1,title:str + '费用',value:vo.cost,valueAdd:0},
-            {index:2,icon:'icon_times_png',iconScale:1,title:str + '次数',value:vo.num || 1,valueAdd:0},
-
             //{index:1,icon:'',iconScale:1,title:'',value:0,valueAdd:0},
         ]
-        if(vo.num == 0)
-            arr1.push({index:3,icon:'icon_clock2_png',iconScale:1,title:'持续时间',value:MyTool.toFixed(vo.cd/1000,1)+'秒',valueAdd:0})
-        else if(vo.num > 1)
+
+        if(vo.isMonster)
+        {
+            arr1.push({index:2,icon:'icon_times_png',iconScale:1,title:'防御数量',value:vo.num || 1,valueAdd:0})
             arr1.push({index:3,icon:'icon_clock_png',iconScale:1,title:str + '间隔',value:MyTool.toFixed(vo.cd/1000,1)+'秒',valueAdd:0})
+        }
+        else
+        {
+            if(vo.num == 0)
+                arr1.push({index:2,icon:'icon_clock2_png',iconScale:1,title:'持续时间',value:MyTool.toFixed(vo.cd/1000,1)+'秒',valueAdd:0})
+            else if(vo.num == 1)
+                arr1.push({index:2,icon:'icon_clock_png',iconScale:1,title:'持续时间',value:'立刻生效',valueAdd:0})
+            else if(vo.num > 1)
+                arr1.push({index:2,icon:'icon_clock_png',iconScale:1,title:'持续时间',value:MyTool.toFixed((vo.num-1) * vo.cd/1000,1)+'秒',valueAdd:0})
+        }
+
+
+
         if(arr1.length%2 == 1)
             arr1.push({index:4,icon:'',iconScale:1,title:'',value:'',valueAdd:0});
 

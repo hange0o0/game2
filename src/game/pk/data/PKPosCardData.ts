@@ -41,9 +41,9 @@ class PKPosCardData {
         if(this.mid < 100)
         {
             var mvo = MonsterVO.getObject(this.mid)
-            //if(this.isAuto)
-            //    return this.num < mvo.num2;
-            return this.num < mvo.num;
+            if(this.isAuto)
+                return this.num < mvo.num;
+            return true;
         }
 
         var svo = SkillVO.getObject(this.mid)
@@ -56,13 +56,17 @@ class PKPosCardData {
         if(this.mid < 100)
         {
             var mvo = MonsterVO.getObject(this.mid)
-            //if(this.isAuto)
-            //    return mvo.num2;
-            return mvo.num;
+            if(this.isAuto)
+                return mvo.num;
+            return 999
         }
 
         var svo = SkillVO.getObject(this.mid)
         return svo.num;
+    }
+
+    public getRemainNum(){
+        return this.getMaxNum() - this.num
     }
 
     public getNextCD(){
@@ -72,6 +76,15 @@ class PKPosCardData {
         var nextTime = this.actionTime + this.getMaxCD();
         return Math.max(0,nextTime - PD.actionTime);
     }
+
+    public getRemainCD(){
+        var maxCD = this.getMaxCD();
+        if(maxCD)
+            return (this.getNextCD() + maxCD*(this.getRemainNum() - 1))
+        return 0;
+    }
+
+
 
     public getMaxCD(){
         if(this.num == 0)
@@ -86,17 +99,17 @@ class PKPosCardData {
     public testAdd(t){
         if(this.actionResult)
         {
-            if(t - this.actionTime > PKConfig.remainCD) //超时
-            {
-                this.actionTime = t;
-                this.actionResult = 0;
-                this.num ++;
-                PKData.getInstance().addVideo({
-                    type:PKConfig.VIDEO_POS_FAIL,
-                    user:this
-                })
-                return false;
-            }
+            //if(t - this.actionTime > PKConfig.remainCD) //超时
+            //{
+            //    this.actionTime = t;
+            //    this.actionResult = 0;
+            //    this.num ++;
+            //    PKData.getInstance().addVideo({
+            //        type:PKConfig.VIDEO_POS_FAIL,
+            //        user:this
+            //    })
+            //    return false;
+            //}
             return true;
         }
         if(!this.useEnable())

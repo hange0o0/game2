@@ -5,17 +5,19 @@ class PKTopUI extends game.BaseContainer {
     }
 
     private hpText1: eui.Label;
-    private defScoreGroup1: eui.Group;
-    private defGroupText1: eui.Label;
     private defGroup1: eui.Group;
     private defText1: eui.Label;
+    private defBG1: eui.Rect;
+    private defBGMask1: eui.Image;
     private defGroup2: eui.Group;
     private defText2: eui.Label;
-    private defScoreGroup2: eui.Group;
-    private defGroupText2: eui.Label;
+    private defBG2: eui.Rect;
+    private defBGMask2: eui.Image;
     private hpText2: eui.Label;
     private topUI: TopUI;
     private skillGroup: eui.Group;
+
+
 
 
 
@@ -37,6 +39,8 @@ class PKTopUI extends game.BaseContainer {
     public childrenCreated() {
         super.childrenCreated();
         PKData.getInstance().addEventListener('video',this.onVideoEvent,this);
+        this.defBG1.mask = this.defBGMask1
+        this.defBG2.mask = this.defBGMask2
     }
 
     public onVideoEvent(e){
@@ -143,19 +147,19 @@ class PKTopUI extends game.BaseContainer {
             item.data = null;
         }
 
-        this.defGroup1.visible = false
-        this.defGroup2.visible = false
-        this.defScoreGroup1.visible = false
-        this.defScoreGroup2.visible = false
+        this.defGroup1.visible = true
+        this.defGroup2.visible = true
+        this.defBG1.visible = false
+        this.defBG2.visible = false
+        //
+        //this.defScoreGroup1.x = 180
+        //this.defScoreGroup2.x = 390
+        //this.defScoreGroup1.y = 250
+        //this.defScoreGroup2.y = 250
 
-        this.defScoreGroup1.x = 180
-        this.defScoreGroup2.x = 390
-        this.defScoreGroup1.y = 250
-        this.defScoreGroup2.y = 250
 
-
-        this.defGroupText1.text = ''
-        this.defGroupText2.text = ''
+        this.defText1.text = '+0%'
+        this.defText2.text = '+0%'
 
 
     }
@@ -170,37 +174,61 @@ class PKTopUI extends game.BaseContainer {
 
     public def1(user){
         var team = user.getOwner().teamData;
-        this.defScoreGroup1.visible = true
-        this.defScoreGroup2.visible = true
+        //this.defScoreGroup1.visible = true
+        //this.defScoreGroup2.visible = true
        if(team.atkRota == PKConfig.ROTA_LEFT)
        {
-           var txt = this.defGroupText1
+           var txt = this.defText1
+           var bg = this.defBG1
        }
         else
        {
-           var txt = this.defGroupText2
+           var txt = this.defText2
+           var bg = this.defBG2
        }
-        txt.text = '+' + team.def;
-        egret.Tween.removeTweens(txt);
-        txt.scaleX = txt.scaleY = 1.3;
-        var tw = egret.Tween.get(txt);
-        tw.to({scaleX:1,scaleY:1},200);
+        var text =  '+' + team.getTeamDef() + '%';
+        if(txt.text != text)
+        {
+            txt.text = text;
+            egret.Tween.removeTweens(txt);
+            txt.scaleX = txt.scaleY = 1.3;
+            var tw = egret.Tween.get(txt);
+            tw.to({scaleX:1,scaleY:1},200);
+        }
+        if(team.def)
+        {
+            bg.visible = true
+            egret.Tween.removeTweens(bg);
+            var tw = egret.Tween.get(bg)
+            var h = 30 * (team.def%5 || 5)/5;
+            if(h < bg.height)
+            {
+                tw.to({height:30},50).to({height:0}).to({height:h},50)
+            }
+            else
+                tw.to({height:h},100)
+        }
+        else
+            bg.visible = false
+
     }
     public def2(){
-        var PD = PKData.getInstance();
-
-        this.defText1.text = '+' +  PD.getTeamByRota(PKConfig.ROTA_LEFT).getTeamDef() + '%'
-        this.defText2.text = '+' +  PD.getTeamByRota(PKConfig.ROTA_RIGHT).getTeamDef()  + '%'
-
-        var tw = egret.Tween.get(this.defScoreGroup1)
-        tw.to({x:10,y:230},300)
-        var tw = egret.Tween.get(this.defScoreGroup2)
-        tw.to({x:570,y:230},300).call(function(){
-            this.defGroup1.visible = true
-            this.defGroup2.visible = true
-            this.defScoreGroup1.visible = false
-            this.defScoreGroup2.visible = false
-        },this)
+        this.defBG1.visible = false
+        this.defBG2.visible = false
+        //var PD = PKData.getInstance();
+        //
+        //this.defText1.text = '+' +  PD.getTeamByRota(PKConfig.ROTA_LEFT).getTeamDef() + '%'
+        //this.defText2.text = '+' +  PD.getTeamByRota(PKConfig.ROTA_RIGHT).getTeamDef()  + '%'
+        //
+        //var tw = egret.Tween.get(this.defScoreGroup1)
+        //tw.to({x:10,y:230},300)
+        //var tw = egret.Tween.get(this.defScoreGroup2)
+        //tw.to({x:570,y:230},300).call(function(){
+        //    this.defGroup1.visible = true
+        //    this.defGroup2.visible = true
+        //    this.defScoreGroup1.visible = false
+        //    this.defScoreGroup2.visible = false
+        //},this)
     }
 
     public addSkillItem(data){

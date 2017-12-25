@@ -258,7 +258,7 @@ class DefPosUI extends game.BaseUI {
              PosManager.getInstance().changePos('def',this.posData.id,
                  this.posName,serverList,()=>{
                      ShowTips('保存成功！')
-                     this.hide();
+                     //this.hide();
              })
          }
         else
@@ -266,7 +266,7 @@ class DefPosUI extends game.BaseUI {
              PosManager.getInstance().addPos('def',
                  this.posName,serverList,()=>{
                      ShowTips('保存成功！')
-                     this.hide();
+                     //this.hide();
                      //this.posData = PosManager.getInstance().defList[this.index]
                  })
          }
@@ -428,10 +428,11 @@ class DefPosUI extends game.BaseUI {
         if(game.BaseUI.isStopEevent)
             return;
         var item = this.list2.selectedItem;
-        if(this.useCard[item.id] && this.useCard[item.id] >= 3)
+        if(this.useCard[item.id] && this.useCard[item.id] >= PosManager.getInstance().oneCardNum)
             return;
         if(this.getTotalNum() >= PosManager.getInstance().maxPosNum())
             return;
+
         this.useCard[item.id] = (this.useCard[item.id] || 0) + 1
         this.addItem(item)
     }

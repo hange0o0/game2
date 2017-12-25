@@ -12,6 +12,10 @@ class PKMonsterAction {
         this.atkList.push(data)
     }
 
+    public init(){
+        this.atkList.length = 0;
+    }
+
 
     public actionAtk(t){
         for(var i=0;i<this.atkList.length;i++)

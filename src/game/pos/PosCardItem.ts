@@ -15,6 +15,7 @@ class PosCardItem extends game.BaseItem {
 
 
 
+    //public selectAble = true
     public childrenCreated() {
         super.childrenCreated();
         MyTool.addLongTouch(this,this.onLongTouch,this)
@@ -32,9 +33,9 @@ class PosCardItem extends game.BaseItem {
 
     }
 
-    public onClick(){
-       this.dispatchEventWith('choose_card',this.data)
-    }
+    //public onClick(){
+    //   this.dispatchEventWith('choose_card',this.data)
+    //}
 
     public dataChanged(){
         var vo:any = this.data
@@ -63,6 +64,6 @@ class PosCardItem extends game.BaseItem {
         var useNum = vo.temp[vo.id] || 0;
         this.nameText.text = vo.name
         this.numText.text = (maxNum-useNum) + '/' + maxNum;
-        this.touchChildren = this.touchEnabled = useNum < maxNum
+        //this.selectAble = useNum < maxNum
     }
 }

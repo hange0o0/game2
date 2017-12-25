@@ -17,6 +17,8 @@ class PKPosItem extends game.BaseItem {
     private barMC1: eui.Image;
     private barGroup2: eui.Group;
     private barMC2: eui.Image;
+    private clockText: eui.Label;
+
 
 
 
@@ -150,26 +152,44 @@ class PKPosItem extends game.BaseItem {
         this.barGroup2.visible = false;
         this.barGroup2.y = 195;
         this.cardGroup.visible = false;
+        this.clockText.text = ''
         var barWidth = 204
         if(data && data.useEnable())
         {
-            var cd = data.getNextCD();
-            var maxCD = data.getMaxCD();
+
 
             this.renewImg(data.mid);
             this.barGroup1.visible = true;
-            this.barMC1.width = barWidth * cd / maxCD;
 
-            var maxNum = data.getMaxNum();
-            this.timesText.text = (maxNum - data.num) + ''
-            this.timesBG.visible = maxNum > 0
+
+            //var maxNum = data.getMaxNum();
+            //this.timesText.text = (maxNum - data.num) + ''
+            //this.timesBG.visible = maxNum > 0
             this.barGroup2.y = 215;
-            if((maxNum - data.num) <=1)
-                this.testTween(cd)
-            else if(data.actionResult)
+            //if((maxNum - data.num) <=1)
+            //    this.testTween(cd)
+            //else
+            if(data.actionResult)
                 this.testTween(0)
             else
                 this.testTween()
+
+            var cd = data.getNextCD();
+            var maxCD = data.getMaxCD();
+
+            if(data.mid > 100)
+            {
+                cd = data.getRemainCD();
+                maxCD = maxCD * Math.max(0,data.getMaxNum()-1);
+                if(cd)
+                {
+                    this.clockText.text = Math.ceil(cd/1000) + 's'
+                    this.barMC1.width = barWidth * cd / maxCD;
+                }
+            }
+
+            this.barMC1.width = barWidth * cd / maxCD;
+
 
             //if(data.actionResult)
             //{
@@ -223,10 +243,10 @@ class PKPosItem extends game.BaseItem {
         {
             this.tw.setPaused(false)
             this.lightBG.visible = true;
-            if(cd<=0)
-                this.lightBG.source = 'card_back_bg_light1_png'
-            else
-                this.lightBG.source = 'card_back_bg_light2_png'
+            //if(cd<=0)
+            //    this.lightBG.source = 'card_back_bg_light1_png'
+            //else
+            this.lightBG.source = 'card_back_bg_light2_png'
         }
     }
 

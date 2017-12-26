@@ -51,7 +51,7 @@ class PKCode {
             if (!player)
                 continue
             player.autoAction(PD.actionTime);
-            player.testAddPosCard(PD.actionTime);
+            //player.testAddPosCard(PD.actionTime);
         }
     }
 

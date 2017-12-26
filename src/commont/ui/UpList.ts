@@ -1,9 +1,4 @@
-/**
- *
- * @author
- *
- */
-class DownList extends game.BaseContainer {
+class UpList extends game.BaseContainer {
     public static SELECT:string = "SELECT";
     private btn: eui.Group;
     private titleText: eui.Label;
@@ -19,7 +14,7 @@ class DownList extends game.BaseContainer {
 
     public constructor() {
         super();
-        this.skinName = "DownListSkin"
+        this.skinName = "UpListSkin"
     }
 
     public childrenCreated() {
@@ -34,17 +29,21 @@ class DownList extends game.BaseContainer {
     }
 
     private onOpen(e:egret.TouchEvent){
-        e.stopImmediatePropagation()
+        //e.stopImmediatePropagation()
         this.isOpen = !this.isOpen;
         if(this.isOpen)
         {
-            this.stage.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onClickStage,this);
+            egret.callLater(function(){
+                this.stage.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onClickStage,this,true);
+            },this)
+
         }
         this.renew();
     }
 
-    private onClickStage(){
-        GameManager.stage.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.onClickStage,this);
+    private onClickStage(e){
+        e.stopImmediatePropagation()
+        GameManager.stage.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.onClickStage,this,true);
         this.isOpen = false;
         this.renew();
     }
@@ -61,7 +60,7 @@ class DownList extends game.BaseContainer {
     {
         this.dataArr = arr;
         this.list.dataProvider = new eui.ArrayCollection(arr);
-        this.height = Math.min(this.openHeight,arr.length * 56 - 6 + 60 - 1);
+        this.listCon.height = arr.length * 56;
         this.selectValue = select;
     }
 
@@ -111,36 +110,4 @@ class DownList extends game.BaseContainer {
         //this.renew();
     }
 
-}
-
-class DownListItem extends game.BaseItem {
-    private con: eui.Group;
-    private img: eui.Image;
-    private text: eui.Label;
-
-
-
-    public constructor() {
-        super();
-        this.skinName = "DownListItemSkin"
-    }
-
-    public childrenCreated(){
-        super.childrenCreated();
-    }
-
-    public dataChanged(){
-        if(this.data.icon)
-        {
-            this.img.source = this.data.icon
-            this.con.addChildAt(this.img,0)
-        }
-        else
-        {
-            MyTool.removeMC(this.img)
-        }
-        this.text.text = this.data ? (""+this.data.label):"全部";
-        if(this.data.label2)
-            this.text.text += this.data.label2;
-    }
 }

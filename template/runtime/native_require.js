@@ -27,6 +27,7 @@ var game_file_list = [
 	"bin-debug/commont/ui/TipsUI.js",
 	"bin-debug/commont/ui/TopUI.js",
 	"bin-debug/commont/ui/TouchTipsUI.js",
+	"bin-debug/commont/ui/UpList.js",
 	"bin-debug/commont/VScrollerGroup.js",
 	"bin-debug/db/HangVO.js",
 	"bin-debug/db/MonsterVO.js",

@@ -11,7 +11,8 @@ class PKPlayerData {
     private handCard = {};//当前的手牌  [{index,mid},]  上限5
     public hideCard = [];//隐藏的手牌  [{index,mid},]
     public posCard = {};//已上阵的手牌 1-4,如果是自动的，不受此限制
-    public prePosCard = {};//准备上阵的手牌 1-4,如果是自动的，不受此限制
+    private posIndex = 1;
+    //public prePosCard = {};//准备上阵的手牌 1-4,如果是自动的，不受此限制
 
     public posHistory = [];
 
@@ -62,6 +63,7 @@ class PKPlayerData {
             }
         }
         this.mp = PKConfig.mpInit;
+        this.posIndex = 1;
     }
 
     public addMP(v){
@@ -110,12 +112,18 @@ class PKPlayerData {
             return this.lastTime + 1000;
     }
 
-    public addPrePosCard(pos,cardData){
-        this.prePosCard[pos] =  new PKPosCardData({
-            id:pos,
+    public addPosCard(cardData){
+        this.posCard[this.posIndex] =  new PKPosCardData({
+            id:this.posIndex,
             mid:cardData.mid,
             owner:this.id,
             actionTime:PKData.getInstance().actionTime,
+        })
+        this.posIndex ++
+
+        PKData.getInstance().addVideo({
+            type:PKConfig.VIDEO_POS_ADD,
+            user:this.posCard[this.posIndex],
         })
 
         for(var i=1;i<=PKConfig.maxHandCard;i++)
@@ -141,21 +149,21 @@ class PKPlayerData {
         this.posHistory.push(step + '#' + cardData.mid);
     }
 
-    //上阵卡
-    public testAddPosCard(t){
-        for(var s in this.prePosCard)
-        {
-            if(this.prePosCard[s] && this.prePosCard[s].testAdd(t))
-            {
-                if(this.posCard[s])
-                {
-                    this.posCard[s].die();
-                }
-                this.posCard[s] = this.prePosCard[s];
-                this.prePosCard[s] = null;
-            }
-        }
-    }
+    ////上阵卡
+    //public testAddPosCard(t){
+    //    for(var s in this.prePosCard)
+    //    {
+    //        if(this.prePosCard[s] && this.prePosCard[s].testAdd(t))
+    //        {
+    //            if(this.posCard[s])
+    //            {
+    //                this.posCard[s].die();
+    //            }
+    //            this.posCard[s] = this.prePosCard[s];
+    //            this.prePosCard[s] = null;
+    //        }
+    //    }
+    //}
 
     //取手牌  (5)
     public getHandCard(){
@@ -194,7 +202,12 @@ class PKPlayerData {
             else if(!oo.useEnable())//已失效
             {
                 this.posCard[s].die();
+                PKData.getInstance().addVideo({   //攻击动画开始
+                    type:PKConfig.VIDEO_POS_REMOVE,
+                    user:this.posCard[s],
+                })
                 this.posCard[s] = null;
+
             }
         }
         if(arr.length > 1)

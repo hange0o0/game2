@@ -11,16 +11,21 @@ class AtkPosUI extends game.BaseUI {
     private topUI: TopUI;
     private scroller1: eui.Scroller;
     private list1: eui.List;
-    private scroller2: eui.Scroller;
     private list2: eui.List;
-    private tab: eui.TabBar;
-    private downList: DownList;
     private bottomUI: BottomUI;
     private btnGroup: eui.Group;
-    private renameBtn: eui.Group;
     private deleteBtn: eui.Group;
+    private renameBtn: eui.Group;
     private testBtn: eui.Group;
     private saveBtn: eui.Group;
+    private rightBtn: eui.Image;
+    private leftBtn: eui.Image;
+    private downList: UpList;
+    private downList2: UpList;
+    private downList3: UpList;
+    private numText: eui.Label;
+
+
 
 
 
@@ -37,6 +42,10 @@ class AtkPosUI extends game.BaseUI {
     private posData
     private arrayData:eui.ArrayCollection
 
+    private page=1;
+    private pageSize=8;
+    private totalPage=1;
+
     public constructor() {
         super();
         this.skinName = "AtkPosUISkin";
@@ -52,22 +61,45 @@ class AtkPosUI extends game.BaseUI {
         this.addBtnEvent(this.renameBtn,this.onRename)
         this.addBtnEvent(this.saveBtn,this.onSave)
         this.addBtnEvent(this.testBtn,this.onTest)
+        this.addBtnEvent(this.rightBtn,this.onRight)
+        this.addBtnEvent(this.leftBtn,this.onLeft)
 
         this.scroller1.viewport = this.list1;
         this.list1.itemRenderer = AtkPosItem
         this.scroller1.addEventListener(egret.Event.CHANGE,this.onScroll,this)
         this.list1.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onUnSelect,this);
 
-        this.scroller2.viewport = this.list2;
+        //this.scroller2.viewport = this.list2;
         this.list2.itemRenderer = PosCardItem
         this.list2.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onSelect,this);
 
         //var arr = CM.m_shows.getLevelList();
         //this.downList.setData(arr,0);
-        this.downList.addEventListener(DownList.SELECT,this.onDownListSelect,this);
+        this.downList.addEventListener(DownList.SELECT,this.onTab,this);
+        this.downList2.addEventListener(DownList.SELECT,this.onDownListSelect,this);
 
-        this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
-        this.tab.selectedIndex = 0;
+        var arr = [
+            {label:'怪物',data:0},
+            {label:'法术',data:1}];
+        this.downList.setData(arr,0);
+
+        //this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
+        //this.tab.selectedIndex = 0;
+    }
+
+    private onRight(){
+        if(this.page < this.totalPage)
+        {
+            this.page ++ ;
+            this.renewList()
+        }
+    }
+    private onLeft(){
+        if(this.page > 1)
+        {
+            this.page -- ;
+            this.renewList()
+        }
     }
 
     private onTest(){
@@ -174,14 +206,16 @@ class AtkPosUI extends game.BaseUI {
     }
 
     private onDownListSelect(){
-        if(this.tab.selectedIndex == 0)
-              this.monsterType = this.downList.selectValue;
+        this.page = 1;
+        if(this.downList.selectValue == 0)
+              this.monsterType = this.downList2.selectValue;
         else
-              this.skillType = this.downList.selectValue;
+              this.skillType = this.downList2.selectValue;
         this.renewList();
     }
 
     private onTab(){
+        this.page = 1;
         this.renewDownList();
         this.renewList();
     }
@@ -252,26 +286,26 @@ class AtkPosUI extends game.BaseUI {
     }
 
     private renewDownList(){
-        this.downList.height = GameManager.stage.stageHeight - 100 - this.downList.y - 10;
-        if(this.tab.selectedIndex == 0)
+        //this.downList.height = GameManager.stage.stageHeight - 100 - this.downList.y - 10;
+        if(this.downList.selectValue == 0)
         {
             var arr = [
-                {label:'全部',data:0},
-                {label:PKConfig.TYPENAME[1],data:1,icon: 'icon_type1_png'},
-                {label:PKConfig.TYPENAME[2],data:2,icon: 'icon_type2_png'},
-                {label:PKConfig.TYPENAME[3],data:3,icon: 'icon_type3_png'}];
-            this.downList.setData(arr,this.monsterType);
+                {label:'全部',label2: 'x' + CardManager.getInstance().getMyMonsterList(0).length,data:0},
+                {label:PKConfig.TYPENAME[1],label2: 'x' + CardManager.getInstance().getMyMonsterList(1).length,data:1,icon: 'icon_type1_png'},
+                {label:PKConfig.TYPENAME[2],label2: 'x' + CardManager.getInstance().getMyMonsterList(2).length,data:2,icon: 'icon_type2_png'},
+                {label:PKConfig.TYPENAME[3],label2: 'x' + CardManager.getInstance().getMyMonsterList(3).length,data:3,icon: 'icon_type3_png'}];
+            this.downList2.setData(arr,this.monsterType);
         }
         else
         {
             var arr = [
-                {label:'全部',data:0},
-                {label:PKConfig.SKILLTYPENAME[1],data:1,icon: 'skill_type1_png'},
-                {label:PKConfig.SKILLTYPENAME[2],data:2,icon: 'skill_type2_png'},
-                {label:PKConfig.SKILLTYPENAME[3],data:3,icon: 'skill_type3_png'},
-                {label:PKConfig.SKILLTYPENAME[4],data:4,icon: 'skill_type4_png'},
-                {label:PKConfig.SKILLTYPENAME[5],data:5,icon: 'skill_type5_png'}];
-            this.downList.setData(arr,this.skillType);
+                {label:'全部',label2: 'x' + CardManager.getInstance().getMySkillList(0).length,data:0},
+                {label:PKConfig.SKILLTYPENAME[1],label2: 'x' + CardManager.getInstance().getMySkillList(1).length,data:1,icon: 'skill_type1_png'},
+                {label:PKConfig.SKILLTYPENAME[2],label2: 'x' + CardManager.getInstance().getMySkillList(2).length,data:2,icon: 'skill_type2_png'},
+                {label:PKConfig.SKILLTYPENAME[3],label2: 'x' + CardManager.getInstance().getMySkillList(3).length,data:3,icon: 'skill_type3_png'},
+                {label:PKConfig.SKILLTYPENAME[4],label2: 'x' + CardManager.getInstance().getMySkillList(4).length,data:4,icon: 'skill_type4_png'},
+                {label:PKConfig.SKILLTYPENAME[5],label2: 'x' + CardManager.getInstance().getMySkillList(5).length,data:5,icon: 'skill_type5_png'}];
+            this.downList2.setData(arr,this.skillType);
         }
     }
 
@@ -341,10 +375,10 @@ class AtkPosUI extends game.BaseUI {
     }
 
     private renewList(){
-        this.scroller2.stopAnimation();
-         var type = this.downList.selectValue;
+        //this.scroller2.stopAnimation();
+         var type = this.downList2.selectValue;
         var arr;
-        if(this.tab.selectedIndex == 0)
+        if(this.downList.selectValue == 0)
         {
             arr = CardManager.getInstance().getMyMonsterList(type)
         }
@@ -352,10 +386,15 @@ class AtkPosUI extends game.BaseUI {
         {
             arr = CardManager.getInstance().getMySkillList(type)
         }
+        ArrayUtil.sortByField(arr,['cost'],[0]);
+        this.totalPage = Math.ceil(arr.length/this.pageSize || 1)
+        this.numText.text = this.page + '/' + this.totalPage
+        arr = arr.splice((this.page-1)*this.pageSize,this.pageSize)
         for(var i=0;i<arr.length;i++)
         {
             arr[i].temp = this.useCard;
         }
         this.list2.dataProvider = new eui.ArrayCollection(arr)
+
     }
 }

@@ -30,6 +30,7 @@ class PKVideoCon extends game.BaseContainer {
     public childrenCreated() {
         super.childrenCreated();
 
+        this.width = PKConfig.floorWidth +  PKConfig.appearPos*2
 
         PKData.getInstance().addEventListener('video',this.onVideoEvent,this);
 

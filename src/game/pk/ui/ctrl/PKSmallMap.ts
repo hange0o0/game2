@@ -9,9 +9,13 @@ class PKSmallMap extends game.BaseContainer {
 
     private mapItemArr = []
     private mapPoolArr = []
+
+    private rate
     public childrenCreated() {
         super.childrenCreated();
         this.touchEnabled = this.touchChildren = false
+
+        this.rate = (300-80)/PKConfig.floorWidth
     }
 
 
@@ -34,7 +38,7 @@ class PKSmallMap extends game.BaseContainer {
             }
             if(data)
             {
-                mc.x = data.x/6 + 25
+                mc.x = (data.x - PKConfig.appearPos)*this.rate + 40
                 mc.y = data.y/2 + 55/2
                 if(data.mid == 99)
                 {

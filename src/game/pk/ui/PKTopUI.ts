@@ -48,7 +48,7 @@ class PKTopUI extends game.BaseContainer {
         var videoData = e.data;
         switch(videoData.type)//动画类型
         {
-            case PKConfig.VIDEO_POS_ADD:
+            case PKConfig.VIDEO_POS_SHOW:
                 var data:PKPosCardData = videoData.user;
                 var teamData = data.getOwner().teamData
                 if(teamData.id != 'sys' && teamData != PKData.getInstance().myPlayer.teamData)
@@ -149,8 +149,10 @@ class PKTopUI extends game.BaseContainer {
 
         this.defGroup1.visible = true
         this.defGroup2.visible = true
-        this.defBG1.visible = false
-        this.defBG2.visible = false
+        this.defBG1.visible = true
+        this.defBG2.visible = true
+        this.defBG1.height = 0
+        this.defBG2.height = 0
         //
         //this.defScoreGroup1.x = 180
         //this.defScoreGroup2.x = 390
@@ -197,10 +199,11 @@ class PKTopUI extends game.BaseContainer {
         }
         if(team.def)
         {
-            bg.visible = true
+            //bg.visible = true
             egret.Tween.removeTweens(bg);
             var tw = egret.Tween.get(bg)
             var h = 30 * (team.def%5 || 5)/5;
+
             if(h < bg.height)
             {
                 tw.to({height:30},50).to({height:0}).to({height:h},50)

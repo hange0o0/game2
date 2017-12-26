@@ -56,9 +56,9 @@ class PKPosCardData {
         if(this.mid < 100)
         {
             var mvo = MonsterVO.getObject(this.mid)
-            if(this.isAuto)
+            //if(this.isAuto)
                 return mvo.num;
-            return 999
+            //return 999
         }
 
         var svo = SkillVO.getObject(this.mid)
@@ -173,7 +173,7 @@ class PKPosCardData {
         if(this.num == 1)
         {
             PKData.getInstance().addVideo({
-                type:PKConfig.VIDEO_POS_ADD,
+                type:PKConfig.VIDEO_POS_SHOW,
                 user:this
             })
         }

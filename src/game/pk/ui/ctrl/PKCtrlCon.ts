@@ -8,10 +8,6 @@ class PKCtrlCon extends game.BaseContainer {
 
     private cardGroup: eui.Group;
     private placeGroup: eui.Group;
-    private p0: PKPosItem;
-    private p1: PKPosItem;
-    private p2: PKPosItem;
-    private p3: PKPosItem;
     private info2: PKInfoBtn;
     private info1: PKInfoBtn;
     private info4: PKInfoBtn;
@@ -30,8 +26,9 @@ class PKCtrlCon extends game.BaseContainer {
 
 
 
+
     public cardObj = {};
-    public placeObj = {};
+    public placeArr = [];
     public chooseCard:PKCardItem;
 
     private dragTarget
@@ -46,14 +43,14 @@ class PKCtrlCon extends game.BaseContainer {
 
     public childrenCreated() {
         super.childrenCreated();
-        for(var i=0;i< PKConfig.maxPosCard;i++)
-        {
-            var mc = this['p' + i]
-            this.addBtnEvent(mc,this.onPosClick)
-            this.placeObj[i+1] = mc;
-            mc.index = i+1
-            mc.dataChanged();
-        }
+        //for(var i=0;i< PKConfig.maxPosCard;i++)
+        //{
+        //    var mc = this['p' + i]
+        //    this.addBtnEvent(mc,this.onPosClick)
+        //    this.placeObj[i+1] = mc;
+        //    mc.index = i+1
+        //    mc.dataChanged();
+        //}
 
         for(var i=0;i<PKConfig.maxHandCard;i++)
         {
@@ -98,10 +95,41 @@ class PKCtrlCon extends game.BaseContainer {
             case PKConfig.VIDEO_MONSTER_DIE:
                 this.needRenewInfo = true;
                 break;
-            case PKConfig.VIDEO_POS_FAIL:
+            //case PKConfig.VIDEO_POS_FAIL:
+            //    if(videoData.user.getOwner() == PKData.getInstance().myPlayer)
+            //        this.placeObj[videoData.user.id].showFail()
+            //    break;
+            case PKConfig.VIDEO_POS_ADD:
                 if(videoData.user.getOwner() == PKData.getInstance().myPlayer)
-                    this.placeObj[videoData.user.id].showFail()
+                {
+                    this.addPosItem(videoData.user)
+                }
                 break;
+            case PKConfig.VIDEO_POS_REMOVE:
+                if(videoData.user.getOwner() == PKData.getInstance().myPlayer)
+                {
+                    this.removePosItem(videoData.user)
+                }
+                break;
+        }
+    }
+
+    private addPosItem(data){
+        var item = PKPosItem.createItem()
+        this.placeGroup.addChild(item);
+        item.data = data;
+        this.placeArr.push(item);
+    }
+
+    private removePosItem(data){
+        for(var i=0;i<this.placeArr.length;i++)
+        {
+            var item = this.placeArr[i];
+              if(item.data == data)
+              {
+                  this.placeArr.splice(i,1);
+                  PKPosItem.freeItem(item)
+              }
         }
     }
 
@@ -112,24 +140,24 @@ class PKCtrlCon extends game.BaseContainer {
     }
 
 
-    private onPosClick(e){
-        if(game.BaseUI.isStopEevent)
-            return;
-         var mc:PKPosItem = e.currentTarget;
-        if(this.chooseCard)
-        {
-             if(this.posCard(mc))
-             {
+    //private onPosClick(e){
+    //    if(game.BaseUI.isStopEevent)
+    //        return;
+    //     var mc:PKPosItem = e.currentTarget;
+    //    if(this.chooseCard)
+    //    {
+    //         if(this.posCard(mc))
+    //         {
+    //
+    //         }
+    //    }
+    //    else //显示上阵卡牌信息
+    //    {
+    //
+    //    }
+    //}
 
-             }
-        }
-        else //显示上阵卡牌信息
-        {
-
-        }
-    }
-
-    private posCard(mc:PKPosItem){
+    private posCard(){
         var PD = PKData.getInstance();
         if(this.chooseCard.data.mid < 100)
             var mp = MonsterVO.getObject(this.chooseCard.data.mid).cost
@@ -138,15 +166,14 @@ class PKCtrlCon extends game.BaseContainer {
         if(PD.myPlayer.getMP() < mp)
             return false;
 
-        if(mc.canPos())
-        {
-            PD.myPlayer.addPrePosCard(mc.index,this.chooseCard.data);
+
+            PD.myPlayer.addPosCard(this.chooseCard.data);
             this.cardObj[this.chooseCard.data.cardPos].data = null;
             this.chooseCard = null
             this.needRenewCard = true
             this.renewCard()
             return true;
-        }
+
         return false;
     }
 
@@ -166,23 +193,29 @@ class PKCtrlCon extends game.BaseContainer {
         this.dragTarget.y = e.data.y - this.dragTarget.height/2;
         this.overTarget = -1;
 
-
-        for(var s in this.placeObj)
+        if(this.placeGroup.hitTestPoint(e.data.x,e.data.y))
         {
-            var mc:PKPosItem = this.placeObj[s];
-            if(mc.canPos())
-            {
-                if(this.overTarget== -1 && mc.hitTestPoint(e.data.x,e.data.y))
-                {
-                    mc.setOver(true)
-                    this.overTarget = mc.index;
-                }
-                else
-                {
-                    mc.setOver(false)
-                }
-            }
+            this.overTarget = 1;
+            console.log(999)
         }
+
+
+        //for(var s in this.placeObj)
+        //{
+        //    var mc:PKPosItem = this.placeObj[s];
+        //    if(mc.canPos())
+        //    {
+        //        if(this.overTarget== -1 && mc.hitTestPoint(e.data.x,e.data.y))
+        //        {
+        //            mc.setOver(true)
+        //            this.overTarget = mc.index;
+        //        }
+        //        else
+        //        {
+        //            mc.setOver(false)
+        //        }
+        //    }
+        //}
     }
 
 
@@ -191,16 +224,15 @@ class PKCtrlCon extends game.BaseContainer {
         //var target = this.getTestTarget(this.dragTarget.x + this.dragTarget.width/2,this.dragTarget.y + this.dragTarget.height/2)
         MyTool.removeMC(this.dragTarget)
 
-        for(var s in this.placeObj)
-        {
-            var mc:PKPosItem = this.placeObj[s];
-            mc.setOver(false)
-        }
-
+        //for(var s in this.placeObj)
+        //{
+        //    var mc:PKPosItem = this.placeObj[s];
+        //    mc.setOver(false)
+        //}
+        console.log(this.overTarget)
         if(this.overTarget != -1)
         {
-            this.posCard(this.placeObj[this.overTarget])
-
+            this.posCard()
         }
     }
 
@@ -215,6 +247,10 @@ class PKCtrlCon extends game.BaseContainer {
         for(var s in this.cardObj)
         {
             this.cardObj[s].data = null;
+        }
+        while(this.placeArr.length)
+        {
+            PKPosItem.freeItem(this.placeArr.pop())
         }
         this.renewCard();
 
@@ -238,9 +274,9 @@ class PKCtrlCon extends game.BaseContainer {
 
     public onTimer(){
         var PD = PKData.getInstance();
-        for(var s in this.placeObj)
+        for(var s in this.placeArr)
         {
-            this.placeObj[s].onTimer();
+            this.placeArr[s].onTimer();
         }
         var mp = PD.myPlayer.getMP();
         var mpRate = PD.myPlayer.nextMpRate()

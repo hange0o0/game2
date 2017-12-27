@@ -16,6 +16,7 @@ class MainUI extends game.BaseUI {
     private addDiamondBtn: eui.Image;
     private mapBtn: eui.Rect;
     private testBtn: eui.Rect;
+    private bottomSelectMC: eui.Rect;
     private b0: MainBottomBtn;
     private b1: MainBottomBtn;
     private b2: MainBottomBtn;
@@ -31,6 +32,8 @@ class MainUI extends game.BaseUI {
 
 
 
+    public currentIndex = 0
+    public bottomItems = []
     public constructor() {
         super();
         this.skinName = "MainUISkin";
@@ -51,11 +54,29 @@ class MainUI extends game.BaseUI {
         this.addBtnEvent(this.shopBtn,this.onShop)
         this.addBtnEvent(this.settingBtn,this.onSetting)
 
-        this.b0.data = {text:'奴隶',source:'main_slave_png',fun:function(){}}
-        this.b1.data = {text:'背包',source:'main_bag_png',fun:function(){}}
-        this.b2.data = {text:'战斗',source:'main_pk_png',fun:function(){}}
-        this.b3.data = {text:'卡牌',source:'main_card_png',fun:function(){}}
-        this.b4.data = {text:'科技',source:'main_tec_png',fun:function(){}}
+        this.b0.data = {text:'奴隶',index:0,source:'main_slave_png'}
+        this.b1.data = {text:'背包',index:1,source:'main_bag_png'}
+        this.b2.data = {text:'战斗',index:2,source:'main_pk_png'}
+        this.b3.data = {text:'卡牌',index:3,source:'main_card_png'}
+        this.b4.data = {text:'科技',index:4,source:'main_tec_png'}
+        this.bottomItems.push(this.b0)
+        this.bottomItems.push(this.b1)
+        this.bottomItems.push(this.b2)
+        this.bottomItems.push(this.b3)
+        this.bottomItems.push(this.b4)
+    }
+
+    public onBottomSelect(index){
+       if(index != this.currentIndex)
+       {
+           this.bottomItems[this.currentIndex].select(false)
+           this.bottomItems[index].select(true)
+           this.currentIndex = index;
+
+           egret.Tween.removeTweens(this.bottomSelectMC)
+           var tw = egret.Tween.get(this.bottomSelectMC)
+           tw.to({x:this.getBottomX()},200)
+       }
     }
 
     private onTest(){
@@ -143,8 +164,18 @@ class MainUI extends game.BaseUI {
     }
 
     public renew(){
+        for(var i=0;i<this.bottomItems.length;i++)
+        {
+            this.bottomItems[i].select(this.currentIndex == i,false)
+        }
+        this.bottomSelectMC.x = this.getBottomX()
+
         this.renewTop();
         this.renewEnergy();
         this.renewPosBtn();
+    }
+
+    private getBottomX(){
+        return this.currentIndex*110
     }
 }

@@ -33,8 +33,8 @@ class MsgingUI extends egret.Sprite {
         this.loadingMC.source = 'ui_loading_png'
         this.addChild(this.loadingMC);
         this.loadingMC.x = 320;
-        this.loadingMC.anchorOffsetX = 42
-        this.loadingMC.anchorOffsetY = 38
+        this.loadingMC.anchorOffsetX = 24
+        this.loadingMC.anchorOffsetY = 24
 
     }
 
@@ -47,7 +47,7 @@ class MsgingUI extends egret.Sprite {
         this.loadingMC.y = this.height/2 - 100;
 
         var tw = egret.Tween.get(this.loadingMC,{loop:true})
-        tw.to({rotation:0}).to({rotation:-360},1000);
+        tw.to({rotation:0}).to({rotation:360},1000);
 
         this.visible = false;
         egret.clearTimeout(this.timer);

@@ -33,7 +33,7 @@ class PKTopItem extends game.BaseItem {
             type:player.type,
             pos:this.data.id,
             rota:player.teamData.atkRota,
-            def:player.teamData.getTeamDef()
+            teamDef:player.teamData.getTeamDef()
         })
     }
 

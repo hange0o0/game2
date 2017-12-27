@@ -20,6 +20,8 @@ class DefPosUI extends game.BaseUI {
     private saveBtn: eui.Group;
     private rightBtn: eui.Image;
     private leftBtn: eui.Image;
+    private leftMC: eui.Image;
+    private rightMC: eui.Image;
     private downList: UpList;
     private downList2: UpList;
     private downList3: UpList;
@@ -395,6 +397,8 @@ class DefPosUI extends game.BaseUI {
             arr[i].temp = this.useCard;
         }
         this.list2.dataProvider = new eui.ArrayCollection(arr)
+        MyTool.changeGray(this.leftMC,this.page == 1)
+        MyTool.changeGray(this.rightMC,this.page == this.totalPage)
 
     }
 }

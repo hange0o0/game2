@@ -36,6 +36,7 @@
 	</e:Group>
 	<e:Group x="0" bottom="-17" height="140">
 		<e:Image source="title_bg4_png" x="0" width="640" fillMode="repeat" y="12.5"/>
+		<e:Rect id="bottomSelectMC" width="200" height="110" x="0" y="15" scaleX="1" scaleY="1" fillAlpha="0.1" fillColor="0xffffff"/>
 		<e:Group x="0" y="0">
 			<ns1:MainBottomBtn id="b0" x="0" skinName="MainBottomBtnSkin" y="0"/>
 			<e:Rect width="1" height="100" x="116" y="39" fillColor="0x3d1604"/>
@@ -47,7 +48,7 @@
 			<e:Rect width="1" height="100" x="146" y="69" fillColor="0x3d1604"/>
 			<ns1:MainBottomBtn x="40" skinName="MainBottomBtnSkin" y="40" id="b4"/>
 			<e:layout>
-				<e:HorizontalLayout verticalAlign="bottom"/>
+				<e:HorizontalLayout verticalAlign="bottom" gap="-1"/>
 			</e:layout>
 		</e:Group>
 	</e:Group>

@@ -14,11 +14,52 @@ class MainBottomBtn extends game.BaseItem {
     }
 
     private onClick(){
-        this.data.fun()
+        MainUI.getInstance().onBottomSelect(this.data.index)
     }
    public dataChanged(){
         this.text.text = this.data.text
         this.mc.source = this.data.source
+    }
+
+    public select(b,mv=true){
+         egret.Tween.removeTweens(this)
+         egret.Tween.removeTweens(this.text)
+         egret.Tween.removeTweens(this.mc)
+        if(mv)
+        {
+            var tw1 = egret.Tween.get(this)
+            var tw2 = egret.Tween.get(this.text)
+            var tw3 = egret.Tween.get(this.mc)
+            var cd = 200
+            if(b)
+            {
+                tw1.to({width:200},cd)
+                tw2.to({alpha:1},cd)
+                tw3.to({bottom:50},cd)
+            }
+            else
+            {
+                tw1.to({width:110},cd)
+                tw2.to({alpha:0},cd)
+                tw3.to({bottom:20},cd)
+            }
+        }
+        else
+        {
+            if(b)
+            {
+                this.width = 200
+                this.text.alpha = 1
+                this.mc.bottom = 50
+            }
+            else
+            {
+                this.width = 110
+                this.text.alpha = 0
+                this.mc.bottom = 20
+            }
+        }
+
     }
 
 }

@@ -10,7 +10,7 @@ class PKTeamData {
 
     public hp  = 0 //城堡的血
     public def  = 0
-    public autoDef  = 0 //防守方增加防御
+    public autoDef  = 10 //防守方增加防御
 
     public members = [];
     public stateObj = {};  //监听队伍中的状态，触发

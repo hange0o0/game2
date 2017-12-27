@@ -41,9 +41,9 @@ class PKPosCardData {
         if(this.mid < 100)
         {
             var mvo = MonsterVO.getObject(this.mid)
-            if(this.isAuto)
+            //if(this.isAuto)
                 return this.num < mvo.num;
-            return true;
+            //return true;
         }
 
         var svo = SkillVO.getObject(this.mid)
@@ -139,8 +139,7 @@ class PKPosCardData {
             atkRota:atkRota,
             x:x,
             y:-25 + Math.random()*50,
-            actionTime:actionTime,
-            posAdd:this.id
+            actionTime:actionTime
         }
     }
 

@@ -74,7 +74,7 @@
     "src/game/pos/atkPos/AtkPosListItemSkin.exml",
     "src/game/pos/atkPos/AtkPosListUISkin.exml",
     "src/game/pos/atkPos/AtkPosUISkin.exml",
-    "src/game/pos/defPos/DefPosItem2Skin.exml",
+    "src/game/pos/defPos/DefPosChangeUISkin.exml",
     "src/game/pos/defPos/DefPosItemSkin.exml",
     "src/game/pos/defPos/DefPosListItemSkin.exml",
     "src/game/pos/defPos/DefPosListUISkin.exml",

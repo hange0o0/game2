@@ -75,6 +75,8 @@ class PKData extends egret.EventDispatcher{
         this.team2 = new PKTeamData({id:2})
         this.team1.enemy = this.team2
         this.team2.enemy = this.team1
+        var team1Auto = true //是否全自动
+        var team2Auto = true
         for(var i=0;i<data.players.length;i++)
         {
             var player = new PKPlayerData(data.players[i])

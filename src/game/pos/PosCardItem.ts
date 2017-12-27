@@ -7,11 +7,10 @@ class PosCardItem extends game.BaseItem {
     private bg: eui.Image;
     private img: CardImg;
     private nameText: eui.Label;
-    private spaceGroup: eui.Group;
-    private spaceText: eui.Label;
     private costText: eui.Label;
-    private skillType: eui.Image;
     private numText: eui.Label;
+
+
 
 
 
@@ -42,8 +41,8 @@ class PosCardItem extends game.BaseItem {
         this.img.data = vo.id;
         this.bg.source = vo.getBG();
 
-        this.skillType.visible = false
-        this.spaceGroup.visible = false
+        //this.skillType.visible = false
+        //this.spaceGroup.visible = false
         //if(vo.isMonster)
         //{
         //    this.skillType.visible = false
@@ -65,5 +64,7 @@ class PosCardItem extends game.BaseItem {
         this.nameText.text = vo.name
         this.numText.text = (maxNum-useNum) + '/' + maxNum;
         //this.selectAble = useNum < maxNum
+
+        MyTool.changeGray(this.img,(maxNum-useNum) == 0)
     }
 }

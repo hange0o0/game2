@@ -10,6 +10,7 @@ class PKTeamData {
 
     public hp  = 0 //城堡的血
     public def  = 0
+    public autoDef  = 0 //防守方增加防御
 
     public members = [];
     public stateObj = {};  //监听队伍中的状态，触发
@@ -30,7 +31,7 @@ class PKTeamData {
     }
 
     public getTeamDef(){
-        return Math.floor(this.def / 5)
+        return Math.floor(this.def / 5)  + this.autoDef
     }
 
     //监听状态

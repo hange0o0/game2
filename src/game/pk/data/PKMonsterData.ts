@@ -21,7 +21,6 @@ class PKMonsterData {
     public baseHp = 0
     public baseAtk  = 0
     public baseSpeed  = 0
-    public posAdd  = 0
 
 
 
@@ -64,12 +63,6 @@ class PKMonsterData {
         this.speed = mvo.speed;
         this.def = mvo.def;
 
-        if(this.posAdd == 1)
-            this.atk = Math.floor(this.atk*1.1);
-        else if(this.posAdd == 2)
-            this.hp = Math.floor(this.hp*1.1);
-        else if(this.posAdd == 3)
-            this.def += 5;
 
         this.maxHp = this.hp;
         this.baseHp = this.hp;

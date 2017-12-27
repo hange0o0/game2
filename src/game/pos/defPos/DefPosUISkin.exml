@@ -1,73 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="DefPosUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
-	<e:Image id="scrollerBG" source="pos_bg_jpg" x="0" y="50" width="1280"/>
-	<e:Image source="title_bg4_png" x="0" y="560" scaleY="-1" width="100%" fillMode="repeat"/>
+	<e:Group id="scrollerBG" x="0" y="60" width="100%" locked="true">
+		<e:Rect width="100%" height="130" x="20" y="20" fillColor="0xE2A75D"/>
+		<e:Rect width="100%" height="130" x="10" y="10" fillColor="0xF2C379" strokeColor="0x000000"/>
+		<e:Rect width="100%" height="130" x="20" y="20" fillColor="0xE2A75D"/>
+		<e:Rect width="100%" height="130" x="30" y="30" fillColor="0xF2C379"/>
+		<e:Rect width="100%" height="130" x="30" y="30" fillColor="0xE2A75D"/>
+		<e:Rect width="100%" height="130" x="40" y="40" fillColor="0xF2C379"/>
+		<e:Rect width="100%" height="130" x="40" y="40" fillColor="0xE2A75D"/>
+		<e:layout>
+		<e:VerticalLayout gap="0"/>
+		</e:layout>
+	</e:Group>
 	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
-	<e:Image source="bg15_png" top="510" bottom="100" scale9Grid="16,16,14,14" left="0" right="0"/>
-	<e:Scroller id="scroller1" width="640" height="400" x="0" y="50" bounces="false" locked="true">
+	<e:Scroller id="scroller1" width="640" x="0" anchorOffsetY="0" bounces="false" top="60" bottom="520">
 		<e:Group>
 			<e:List id="list1" width="200" height="200" x="142" y="175">
 				<e:layout>
-					<e:HorizontalLayout gap="0" paddingLeft="320" paddingRight="320"/>
+					<e:TileLayout requestedColumnCount="6" horizontalGap="8" verticalGap="20" paddingLeft="12" paddingTop="10" paddingBottom="10"/>
 				</e:layout>
 			</e:List>
 		</e:Group>
 	</e:Scroller>
-	<e:Scroller id="scroller2" width="640" x="0" top="515" bottom="170">
-		<e:Group>
-		<e:List id="list2" width="200" height="200" x="142" y="175">
-			<e:layout>
-				<e:TileLayout requestedColumnCount="4" paddingLeft="11" paddingTop="10" verticalGap="10" paddingBottom="15"/>
-			</e:layout>
-		</e:List>
-		</e:Group>
-	</e:Scroller>
-	<e:TabBar id="tab" x="10" itemRendererSkinName="MyTabItemSkin" width="300" y="451" height="60">
-		<e:ArrayCollection>
-			<e:Array>
-				<e:Object label="卡兵"/>
-				<e:Object label="法术"/>
-			</e:Array>
-		</e:ArrayCollection>
-	</e:TabBar>
-	<e:Image source="tab1_png" scale9Grid="21,22,7,20" y="455" right="8" width="160" height="55"/>
-	<e:Group id="downScrollCon" x="0" width="100%" height="76" bottom="100">
-		<e:Image source="bg1_png" scale9Grid="8,8,14,14" x="0" y="0" width="100%" height="100%"/>
-		<e:Group id="downScroll" left="70" right="70" verticalCenter="0">
-			<e:Image id="downScrollBG" source="bg13_png" scale9Grid="15,14,7,10" height="70" y="0" x="0" width="100%"/>
-			<e:Image id="downScrollMC" source="btn1_png" scale9Grid="16,15,18,18" x="225" y="10"/>
-		</e:Group>
-		<e:Group id="leftBtn" x="0" verticalCenter="0">
-			<e:Image source="btn4_png" scale9Grid="20,21,9,5" width="70" height="70" y="0" x="0"/>
-			<e:Image source="arrow1_png" scaleX="-0.6" horizontalCenter="-3" verticalCenter="0" scaleY="0.6"/>
-		</e:Group>
-		<e:Group id="rightBtn" right="0" verticalCenter="0">
-			<e:Image source="btn4_png" scale9Grid="20,21,9,5" width="70" height="70" y="0" x="0"/>
-			<e:Image source="arrow1_png" scaleX="0.6" horizontalCenter="3" verticalCenter="0" scaleY="0.6"/>
-		</e:Group>
-	</e:Group>
+	<e:Image source="bg15_png" bottom="70" scale9Grid="16,16,14,14" left="0" right="0" height="450"/>
+	<e:List id="list2" width="490" height="350" horizontalCenter="0" bottom="155">
+		<e:layout>
+		<e:TileLayout requestedColumnCount="3" verticalGap="10" paddingLeft="0" horizontalGap="20" paddingTop="0" paddingBottom="0"/>
+		</e:layout>
+	</e:List>
 	<ns1:BottomUI id="bottomUI" x="0" skinName="BottomUISkin" bottom="0"/>
+
 	<e:Group id="btnGroup" right="10" bottom="10" locked="true">
 		<e:Group id="deleteBtn" x="1.4210854715202004e-14" y="0" width="100" height="80">
 			<e:Label text="删除" horizontalCenter="0" bottom="0" size="22" stroke="2"/>
 			<e:Image source="icon_error_png" y="4" scaleX="0.75" scaleY="0.75" horizontalCenter="0"/>
 		</e:Group>
 		<e:Group id="renameBtn" x="0" y="0" width="100" height="80">
-			<e:Label text="重命名" horizontalCenter="0" bottom="0" stroke="2" size="22"/>
-			<e:Image source="icon_edit_png" y="0" horizontalCenter="0.5" scaleX="0.55" scaleY="0.55"/>
+		<e:Label text="重命名" horizontalCenter="0" bottom="0" stroke="2" size="22"/>
+		<e:Image y="1" horizontalCenter="0.5" source="icon_edit_png" scaleX="0.55" scaleY="0.55"/>
 		</e:Group>
 		<e:Group id="testBtn" x="10" y="10" width="100" height="80">
 			<e:Label text="测试" horizontalCenter="0" bottom="0" stroke="2" size="22"/>
 			<e:Image y="1" horizontalCenter="0.5" source="icon_atk2_png" scaleX="0.85" scaleY="0.85"/>
 		</e:Group>
 		<e:Group id="saveBtn" x="122.00000000000003" y="0" width="100" height="80">
-			<e:Label text="保存" horizontalCenter="0" bottom="0" stroke="2" size="22"/>
-			<e:Image source="icon_right_png" y="0" scaleX="0.9" scaleY="0.9" horizontalCenter="0"/>
+		<e:Label text="保存" horizontalCenter="0" bottom="0" stroke="2" size="22"/>
+		<e:Image source="icon_right_png" y="0" scaleX="0.9" scaleY="0.9" horizontalCenter="0"/>
 		</e:Group>
 		<e:layout>
-			<e:HorizontalLayout gap="0"/>
+		<e:HorizontalLayout gap="0"/>
 		</e:layout>
 	</e:Group>
-	<e:Image id="arrowBtn" source="arror4_png" y="66" scaleX="0.8" scaleY="0.8" horizontalCenter="0"/>
-	<ns1:DownList id="downList" skinName="DownListSkin" width="160" right="10" y="454" height="400"/>
+	<e:Image source="arrow1_png" width="40" right="15" bottom="280"/>
+	<e:Image source="arrow1_png" bottom="280" scaleX="-1" left="15" width="40"/>
+	<e:Group bottom="100" horizontalCenter="0">
+		<e:Group x="0" y="0" height="50">
+			<e:Image source="bg2_png" scale9Grid="9,9,11,10" width="130" height="40" horizontalCenter="0" verticalCenter="0"/>
+			<ns1:UpList id="downList" width="150" skinName="UpListSkin" x="0" verticalCenter="0"/>
+		</e:Group>
+		<e:Group x="170" y="0" height="50">
+			<e:Image source="bg2_png" scale9Grid="9,9,11,10" width="130" height="40" horizontalCenter="0" verticalCenter="0"/>
+			<ns1:UpList id="downList2" width="150" skinName="UpListSkin" x="0" verticalCenter="0"/>
+		</e:Group>
+		<e:Group x="340" y="0" height="50" visible="false">
+			<e:Image source="bg2_png" scale9Grid="9,9,11,10" width="130" height="40" horizontalCenter="0" verticalCenter="0"/>
+			<ns1:UpList id="downList3" width="150" skinName="UpListSkin" x="0" verticalCenter="0"/>
+		</e:Group>
+		<e:Group x="350" y="10" width="110" height="50">
+			<e:Image height="40" source="bg3_png" scale9Grid="9,9,11,10" left="10" right="10" verticalCenter="0"/>
+			<e:Label id="numText" text="10/20" size="22" stroke="2" horizontalCenter="0" verticalCenter="0"/>
+		</e:Group>
+		<e:layout>
+			<e:HorizontalLayout gap="-10"/>
+		</e:layout>
+	</e:Group>
+	<e:Group id="leftBtn" width="70" height="350" x="0" bottom="155"/>
+	<e:Group id="rightBtn" width="70" height="350" bottom="155" right="0"/>
+	<e:Image source="icon_def1_png" x="0" y="0" scaleX="0.7" scaleY="0.7"/>
 </e:Skin>

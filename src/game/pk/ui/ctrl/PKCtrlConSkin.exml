@@ -2,6 +2,7 @@
 <e:Skin class="PKCtrlConSkin" width="640" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing" height="520">
 	<e:Image source="pk_pos_bg_jpg" x="0" y="48" height="330"/>
 	<e:Image source="bg17_png" x="0" scaleY="-1" top="50" height="60" scale9Grid="12,0,51,41" width="400"/>
+	<e:Image id="overMC" source="card_back_bg_light1_png" x="0" y="50" width="640" height="316" scale9Grid="37,35,3,5"/>
 	<e:Image source="line_png" y="36.85" scale9Grid="42,2,258,18" left="-30" right="-30" scaleX="1.2" scaleY="1.2"/>
 	<e:Image x="0" width="640" height="160" bottom="-10" source="bg15_png" scale9Grid="16,13,19,11"/>
     <e:Group id="cardGroup" width="640" height="160" x="0" anchorOffsetX="0" bottom="0">

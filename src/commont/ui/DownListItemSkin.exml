@@ -7,7 +7,7 @@
 		<e:Image id="img" width="30" height="30" x="0" y="0"/>
 		<e:Label id="text" text="Label" size="25" stroke="2" y="0" x="6"/>
 		<e:layout>
-			<e:HorizontalLayout verticalAlign="middle"/>
+			<e:HorizontalLayout verticalAlign="middle" paddingRight="3"/>
 		</e:layout>
 	</e:Group>
 </e:Skin>

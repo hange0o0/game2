@@ -7,30 +7,23 @@ class DefPosUI extends game.BaseUI {
         return this._instance;
     }
 
-    private scrollerBG: eui.Image;
+    private scrollerBG: eui.Group;
     private topUI: TopUI;
     private scroller1: eui.Scroller;
     private list1: eui.List;
-    private scroller2: eui.Scroller;
     private list2: eui.List;
-    private tab: eui.TabBar;
-    private downScrollCon: eui.Group;
-    private downScroll: eui.Group;
-    private downScrollBG: eui.Image;
-    private downScrollMC: eui.Image;
-    private leftBtn: eui.Group;
-    private rightBtn: eui.Group;
     private bottomUI: BottomUI;
     private btnGroup: eui.Group;
     private deleteBtn: eui.Group;
     private renameBtn: eui.Group;
     private testBtn: eui.Group;
     private saveBtn: eui.Group;
-    private arrowBtn: eui.Image;
-    private downList: DownList;
-
-
-
+    private rightBtn: eui.Image;
+    private leftBtn: eui.Image;
+    private downList: UpList;
+    private downList2: UpList;
+    private downList3: UpList;
+    private numText: eui.Label;
 
 
 
@@ -43,15 +36,15 @@ class DefPosUI extends game.BaseUI {
     private skillType = 0
     private index = 0  //第X个阵
     public useCard = {}
+    public maxCard = 0;
 
     private posName = ''
     private posData
     private arrayData:eui.ArrayCollection
-    private itemWidth = 220;
 
-    public scrollChangeTime = 0
-    public downX = 0
-    public isHeightScreen = true
+    private page=1;
+    private pageSize=6;
+    private totalPage=1;
 
     public constructor() {
         super();
@@ -67,102 +60,46 @@ class DefPosUI extends game.BaseUI {
         this.addBtnEvent(this.deleteBtn,this.onDelete)
         this.addBtnEvent(this.renameBtn,this.onRename)
         this.addBtnEvent(this.saveBtn,this.onSave)
-        this.addBtnEvent(this.arrowBtn,this.onArrow)
         this.addBtnEvent(this.testBtn,this.onTest)
-        this.addBtnEvent(this.leftBtn,this.onLeft)
         this.addBtnEvent(this.rightBtn,this.onRight)
-        this.addBtnEvent(this.downScrollBG,this.onClickDownBG)
-
-        //this.downScroll.touchChildren = false;
-        this.downScrollMC.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.onDownBegin,this)
-        this.downScrollMC.touchEnabled = true
+        this.addBtnEvent(this.leftBtn,this.onLeft)
 
         this.scroller1.viewport = this.list1;
         this.list1.itemRenderer = DefPosItem
         this.scroller1.addEventListener(egret.Event.CHANGE,this.onScroll,this)
+        this.list1.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onUnSelect,this);
 
-        //this.scroller1.addEventListener(egret.TouchEvent.TOUCH_CANCEL,()=>{console.log('cancle')},this)
-        //this.scroller1.addEventListener(egret.TouchEvent.TOUCH_TAP,()=>{console.log('tap')},this)
-
-        this.scroller2.viewport = this.list2;
+        //this.scroller2.viewport = this.list2;
         this.list2.itemRenderer = PosCardItem
         this.list2.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onSelect,this);
 
         //var arr = CM.m_shows.getLevelList();
         //this.downList.setData(arr,0);
-        this.downList.addEventListener(DownList.SELECT,this.onDownListSelect,this);
+        this.downList.addEventListener(DownList.SELECT,this.onTab,this);
+        this.downList2.addEventListener(DownList.SELECT,this.onDownListSelect,this);
 
-        this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
-        this.tab.selectedIndex = 0;
+        var arr = [
+            {label:'怪物',data:0},
+            {label:'法术',data:1}];
+        this.downList.setData(arr,0);
+
+        //this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
+        //this.tab.selectedIndex = 0;
     }
 
-    private onLeft(){
-        var index = this.getInjectIndex();
-        if(index > 0)
-        {
-            index--;
-            this.tweenScroll(index*this.itemWidth);
-        }
-    }
     private onRight(){
-        var index = this.getInjectIndex();
-        if(index < this.arrayData.length)
+        if(this.page < this.totalPage)
         {
-            index++;
-            this.tweenScroll(index*this.itemWidth);
+            this.page ++ ;
+            this.renewList()
         }
     }
-
-    private onClickDownBG(e){
-        var p = this.downScrollMC.localToGlobal(0,0)
-        var rota = 0;
-        if(e.stageX < p.x)
+    private onLeft(){
+        if(this.page > 1)
         {
-            if(this.scroller1.viewport.scrollH > 0)
-            {
-                this.tweenScroll(Math.max(0,this.scroller1.viewport.scrollH - 640));
-            }
+            this.page -- ;
+            this.renewList()
         }
-        else if(e.stageX > p.x + this.downScrollMC.width)
-        {
-            var dec = this.getContentWidth() - 640;
-            if(this.scroller1.viewport.scrollH < dec)
-            {
-                this.tweenScroll(Math.min(dec,this.scroller1.viewport.scrollH + 640));
-            }
-        }
-    }
-
-    private onDownBegin(e){
-        this.scroller1.stopAnimation();
-       this.onEnd();
-        this.downX = e.stageX
-        GameManager.stage.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.onMove,this)
-        GameManager.stage.addEventListener(egret.TouchEvent.TOUCH_END,this.onEnd,this)
-        GameManager.stage.addEventListener(egret.TouchEvent.TOUCH_CANCEL,this.onEnd,this)
-        GameManager.stage.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE,this.onEnd,this)
-    }
-
-    private onMove(e){
-        var des = e.stageX - this.downX;
-        this.downX = e.stageX
-
-        var content = this.getContentWidth()
-        var maxH = content - 640;
-        //console.log(des)
-        this.scroller1.viewport.scrollH += des*(content/480)
-        if(this.scroller1.viewport.scrollH < 0)
-            this.scroller1.viewport.scrollH = 0;
-        else if(this.scroller1.viewport.scrollH > maxH)
-            this.scroller1.viewport.scrollH = maxH;
-        this.onScroll();
-    }
-
-    private onEnd(){
-        GameManager.stage.removeEventListener(egret.TouchEvent.TOUCH_MOVE,this.onMove,this)
-        GameManager.stage.removeEventListener(egret.TouchEvent.TOUCH_END,this.onEnd,this)
-        GameManager.stage.removeEventListener(egret.TouchEvent.TOUCH_CANCEL,this.onEnd,this)
-        GameManager.stage.removeEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE,this.onEnd,this)
     }
 
     private onTest(){
@@ -173,33 +110,21 @@ class DefPosUI extends game.BaseUI {
     }
 
     private onScroll(){
-        this.scrollChangeTime = egret.getTimer()
-
-        this.scrollerBG.x = -this.scroller1.viewport.scrollH * 0.1;
-        if(this.scrollerBG.x < 640 - this.scrollerBG.width)
-            this.scrollerBG.x = 640 - this.scrollerBG.width
-        if(this.isHeightScreen)
-            this.downScrollMC.x = 10 + this.scroller1.viewport.scrollH*(640/this.getContentWidth())*(480/640)
+        this.scrollerBG.y = this.scroller1.y - this.scroller1.viewport.scrollV;
     }
 
-    private onArrow(){
-         if(Config.isDebug)
-         {
-             this.addItem({id:-1});
-         }
-    }
 
     public changeToServerList(){
         var arr = [];
-         for(var i=0;i<this.arrayData.length;i++)
-         {
-             arr.push(this.arrayData.getItemAt(i).ids.join('#'))
-         }
+        for(var i=0;i<this.arrayData.length-1;i++)
+        {
+            arr.push(this.arrayData.getItemAt(i).id)
+        }
         return arr.join(',');
     }
 
     public onClose(){
-        if(!this.posData && this.arrayData.length > 0)
+        if(!this.posData && this.arrayData.length > 1)
         {
             Confirm('还没保存，确定退出吗？',(b)=>{
                 if(b==1)
@@ -224,16 +149,15 @@ class DefPosUI extends game.BaseUI {
 
 
     private onDelete(){
-         Confirm('确定要删除该阵法吗？',(b)=>{
-             if(b==1)
-             {
-                 PosManager.getInstance().deletePos('def',this.posData.id,()=>{
-                     this.index = PosManager.getInstance().defList.length;
-                     this.renew();
-                     //this.hide();
-                 })
-             }
-         })
+        Confirm('确定要删除该阵法吗？',(b)=>{
+            if(b==1)
+            {
+                PosManager.getInstance().deletePos('def',this.posData.id,()=>{
+                    this.index = PosManager.getInstance().defList.length;
+                    this.renew();
+                })
+            }
+        })
     }
 
     private onRename(){
@@ -253,63 +177,138 @@ class DefPosUI extends game.BaseUI {
             return
         }
         var serverList = this.changeToServerList();
-         if(this.posData)
-         {
-             PosManager.getInstance().changePos('def',this.posData.id,
-                 this.posName,serverList,()=>{
-                     ShowTips('保存成功！')
-                     //this.hide();
-             })
-         }
+        if(this.posData)
+        {
+            PosManager.getInstance().changePos('def',this.posData.id,
+                this.posName,serverList,()=>{
+                    ShowTips('保存成功！')
+                    //this.hide();
+                })
+        }
         else
-         {
-             PosManager.getInstance().addPos('def',
-                 this.posName,serverList,()=>{
-                     ShowTips('保存成功！')
-                     //this.hide();
-                     //this.posData = PosManager.getInstance().defList[this.index]
-                 })
-         }
+        {
+            PosManager.getInstance().addPos('def',
+                this.posName,serverList,()=>{
+                    ShowTips('保存成功！')
+                    //this.hide();
+                    this.posData = PosManager.getInstance().defList[this.index]
+                })
+        }
     }
 
+    private onChange(){
+        this.arrayData.removeItemAt(this.arrayData.length - 1)
+         DefPosChangeUI.getInstance().show(this.arrayData)
+    }
+
+    private getListData(){
+        return this.arrayData.source;
+    }
 
     private onDownListSelect(){
-        if(this.tab.selectedIndex == 0)
-            this.monsterType = this.downList.selectValue;
+        this.page = 1;
+        if(this.downList.selectValue == 0)
+              this.monsterType = this.downList2.selectValue;
         else
-            this.skillType = this.downList.selectValue;
+              this.skillType = this.downList2.selectValue;
         this.renewList();
     }
 
     private onTab(){
+        this.page = 1;
         this.renewDownList();
         this.renewList();
     }
 
+    //选中
+    private onSelect(){
+        if(game.BaseUI.isStopEevent)
+            return;
+
+
+        var item = this.list2.selectedItem;
+        if(this.maxCard <= this.arrayData.length)
+            return;
+        if(this.useCard[item.id] && this.useCard[item.id] >= PosManager.getInstance().oneCardNum)
+            return;
+
+        this.useCard[item.id] = (this.useCard[item.id] || 0) + 1
+        this.arrayData.addItemAt({id:item.id},this.arrayData.length-1)
+        this.justRenewList2();
+        this.renewTitle();
+        this.once(egret.Event.ENTER_FRAME,function(){
+            var dec = this.scroller1.viewport.contentHeight -  this.scroller1.viewport.height;
+            if(this.scroller1.viewport.scrollV < dec)
+            {
+                this.scroller1.viewport.scrollV = dec
+                this.onScroll();
+            }
+        },this)
+
+    }
+
+    private onUnSelect(){
+        var item = this.list1.selectedItem;
+        if(item.isSetting)
+        {
+            this.onChange();
+            return;
+        }
+        if(game.BaseUI.isStopEevent)
+            return;
+
+        this.deleteID(item.id)
+        this.arrayData.removeItemAt(this.arrayData.getItemIndex(item))
+        this.justRenewList2()
+        //this.useCard[item.id] --;
+
+
+        this.once(egret.Event.ENTER_FRAME,function(){
+
+            var dec = this.scroller1.viewport.contentHeight -  this.scroller1.viewport.height;
+            if(dec<=0)
+            {
+                if(this.scroller1.viewport.scrollV != 0)
+                {
+                    this.scroller1.viewport.scrollV = 0;
+                    this.onScroll();
+                }
+                return;
+            }
+
+            if(this.scroller1.viewport.scrollV > dec)
+            {
+                this.scroller1.viewport.scrollV = dec;
+                this.onScroll();
+            }
+        },this)
+
+    }
 
     private renewDownList(){
-        this.downList.height = GameManager.stage.stageHeight - 100 - this.downList.y - 10;
-        if(this.tab.selectedIndex == 0)
+        //this.downList.height = GameManager.stage.stageHeight - 100 - this.downList.y - 10;
+        if(this.downList.selectValue == 0)
         {
             var arr = [
-                {label:'全部',data:0},
-                {label:PKConfig.TYPENAME[1],data:1,icon: 'icon_type1_png'},
-                {label:PKConfig.TYPENAME[2],data:2,icon: 'icon_type2_png'},
-                {label:PKConfig.TYPENAME[3],data:3,icon: 'icon_type3_png'}];
-            this.downList.setData(arr,this.monsterType);
+                {label:'全部',label2: 'x' + CardManager.getInstance().getMyMonsterList(0).length,data:0},
+                {label:PKConfig.TYPENAME[1],label2: 'x' + CardManager.getInstance().getMyMonsterList(1).length,data:1,icon: 'icon_type1_png'},
+                {label:PKConfig.TYPENAME[2],label2: 'x' + CardManager.getInstance().getMyMonsterList(2).length,data:2,icon: 'icon_type2_png'},
+                {label:PKConfig.TYPENAME[3],label2: 'x' + CardManager.getInstance().getMyMonsterList(3).length,data:3,icon: 'icon_type3_png'}];
+            this.downList2.setData(arr,this.monsterType);
         }
         else
         {
             var arr = [
-                {label:'全部',data:0},
-                {label:PKConfig.SKILLTYPENAME[1],data:1,icon: 'skill_type1_png'},
-                {label:PKConfig.SKILLTYPENAME[2],data:2,icon: 'skill_type2_png'},
-                {label:PKConfig.SKILLTYPENAME[3],data:3,icon: 'skill_type3_png'},
-                {label:PKConfig.SKILLTYPENAME[4],data:4,icon: 'skill_type4_png'},
-                {label:PKConfig.SKILLTYPENAME[5],data:5,icon: 'skill_type5_png'}];
-            this.downList.setData(arr,this.skillType);
+                {label:'全部',label2: 'x' + CardManager.getInstance().getMySkillList(0).length,data:0},
+                {label:PKConfig.SKILLTYPENAME[1],label2: 'x' + CardManager.getInstance().getMySkillList(1).length,data:1,icon: 'skill_type1_png'},
+                {label:PKConfig.SKILLTYPENAME[2],label2: 'x' + CardManager.getInstance().getMySkillList(2).length,data:2,icon: 'skill_type2_png'},
+                {label:PKConfig.SKILLTYPENAME[3],label2: 'x' + CardManager.getInstance().getMySkillList(3).length,data:3,icon: 'skill_type3_png'},
+                {label:PKConfig.SKILLTYPENAME[4],label2: 'x' + CardManager.getInstance().getMySkillList(4).length,data:4,icon: 'skill_type4_png'},
+                {label:PKConfig.SKILLTYPENAME[5],label2: 'x' + CardManager.getInstance().getMySkillList(5).length,data:5,icon: 'skill_type5_png'}];
+            this.downList2.setData(arr,this.skillType);
         }
     }
+
 
     public show(v?){
         this.index = v;
@@ -321,213 +320,65 @@ class DefPosUI extends game.BaseUI {
     }
 
     public onShow(){
-        this.isHeightScreen = GameManager.stage.stageHeight > 100//1000
-        if(this.isHeightScreen)
-        {
-            this.downScrollCon.visible = true
-            this.scroller2.bottom = 176
-        }
-        else
-        {
-            this.downScrollCon.visible = false
-            this.scroller2.bottom = 100
-        }
+        this.maxCard = PosManager.getInstance().maxPosNum();
         this.renew();
         //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
     }
 
     public renew(){
-        this.scroller1.viewport.scrollH = 0;
         var PM = PosManager.getInstance();
         var data = this.posData = PM.defList[this.index]
         this.useCard = {};
+        var arr = [];
         if(data)
         {
             this.posName = Base64.decode(data.name) || '未命名';
-            var arr = [];
 
-            var list = data.list.split(',');
-            var len = list.length;
-            for(var i=0;i<len;i++)
+            var list = data.list.split(',')
+            for(var i=0;i<list.length;i++)
             {
-                var ids = (list[i] + '').split('#');
-                for(var j=0;j<ids.length;j++)
-                {
-                    var id = ids[j];
-                    this.useCard[id] = (this.useCard[id] || 0) + 1;
-                }
-                arr.push({ids:ids,cd:0,preLen:0})
+                var id = list[i];
+                this.useCard[id] = (this.useCard[id] || 0) + 1;
+                arr.push({id:id})
             }
-            this.arrayData = new eui.ArrayCollection(arr)
-            if(PM.defList.length > 1)
-                this.btnGroup.addChildAt(this.deleteBtn,0)
-            else
-                MyTool.removeMC(this.deleteBtn)
+
+            this.btnGroup.addChildAt(this.deleteBtn,0)
         }
         else
         {
             this.posName = '未命名' + this.index;
-            this.arrayData = new eui.ArrayCollection([])
             MyTool.removeMC(this.deleteBtn)
         }
-        this.resetDefData();
+        arr.push({isSetting:true})
+        this.arrayData = new eui.ArrayCollection(arr)
         this.list1.dataProvider = this.arrayData
         this.renewTitle();
         this.renewList();
-        this.onScroll()
         this.renewDownList();
     }
 
-    private resetDefData(renew?){
-        var mpCost = 0;
-        var preLen = 4;
-        for(var i=0;i<this.arrayData.length;i++)
-        {
-            var item = this.arrayData.getItemAt(i);
-            item.preLen = preLen;
-            item.index = i;
-            if(item.ids[0] < 0)
-            {
-                var mp = Math.abs(item.ids[0]);
-                item.cd = PKTool.getMPTime(mp + mpCost);
-                mpCost += mp;
-                preLen = 5;
-            }
-            else
-            {
-                var mp = PKTool.getGroupMp(item.ids);
-                item.cd = PKTool.getMPTime(mp + mpCost);
-                mpCost += mp;
-                preLen = item.ids.length;
-            }
-        }
-
-        if(renew)
-        {
-            MyTool.renewList(this.list1);
-        }
-        if(this.isHeightScreen)
-            this.downScrollMC.width = (480*640/this.getContentWidth());
-    }
-
-    private getContentWidth(){
-        return this.arrayData.length*this.itemWidth + 640;
-    }
-
-    private getTotalNum(){
-        var count = 0;
-        for(var s in this.useCard)
-        {
-            count += this.useCard[s];
-        }
-        return count;
-    }
-
-    //选中
-    private onSelect(){
-        if(game.BaseUI.isStopEevent)
-            return;
-        var item = this.list2.selectedItem;
-        if(this.useCard[item.id] && this.useCard[item.id] >= PosManager.getInstance().oneCardNum)
-            return;
-        if(this.getTotalNum() >= PosManager.getInstance().maxPosNum())
-            return;
-
-        this.useCard[item.id] = (this.useCard[item.id] || 0) + 1
-        this.addItem(item)
-    }
-
-    private getInjectIndex(){
-        return Math.min(this.arrayData.length,Math.floor((this.scroller1.viewport.scrollH+this.itemWidth/2)/this.itemWidth));
-    }
-
-    private addItem(item){
-        var index = this.getInjectIndex();
-        this.arrayData.addItemAt({ids:[item.id],cd:0,preLen:0},index);
-
-        this.resetDefData(true);
-        this.justRenewList2();
-        this.renewTitle();
-
-        this.tweenScroll((index+1)*this.itemWidth);
-    }
-
-    public deleteItem(data){
-        var index = this.arrayData.getItemIndex(data);
-        this.arrayData.removeItemAt(index);
-        var id = data.ids[0];
-        this.useCard[id] --;
-        this.resetDefData(true);
-        this.justRenewList2();
-        this.renewTitle();
-
-        this.resetScrollH1(1);
-
-    }
-
-    public splitItem(data){
-        var index = this.arrayData.getItemIndex(data);
-        this.arrayData.removeItemAt(index);
-        for(var i=0;i<data.ids.length;i++)
-        {
-            this.arrayData.addItemAt({ids:[data.ids[i]],cd:0,preLen:0},index+i);
-        }
-        this.resetDefData(true);
-    }
-
-    public mergeItem(data){
-        var index = this.arrayData.getItemIndex(data);
-        this.arrayData.removeItemAt(index);
-
-        var preItem = this.arrayData.getItemAt(index - 1);
-        if(preItem.ids[0]<0)
-            preItem.ids[0] += data.ids[0];
-        else
-            preItem.ids = preItem.ids.concat(data.ids);
-
-        this.resetDefData(true);
-
-        this.resetScrollH1(1);
-    }
-
-    public changeItem(data){
-        var index = this.arrayData.getItemIndex(data);
-        this.arrayData.removeItemAt(index);
-        this.arrayData.addItemAt(data,index-1);
-
-        this.resetDefData(true);
-    }
-
-    private resetScrollH1(deleteNum){
-        var viewport = this.list1;
-        var newWidth = this.getContentWidth()- deleteNum * this.itemWidth
-        if(viewport.scrollH + viewport.width > newWidth)
-        {
-            this.tweenScroll(Math.max(0,newWidth - viewport.width));
-        }
-    }
-
-    private tweenScroll(scrollH){
-        egret.Tween.removeTweens(this.scroller1.viewport)
-        var tw = egret.Tween.get(this.scroller1.viewport,{onChange:()=>{this.onScroll()}})
-        tw.to({scrollH:scrollH},Math.abs(this.scroller1.viewport.scrollH - scrollH)/2)
-    }
-
-
     private renewTitle(){
-        this.topUI.setTitle(this.posName + '  ('+this.getTotalNum() +'/'+ PosManager.getInstance().maxPosNum()+')')
+        this.topUI.setTitle(this.posName + '('+this.arrayData.length+'/'+this.maxCard+')')
+    }
+
+    public deleteID(id){
+        this.useCard[id] --;
+        this.renewTitle();
     }
 
     public justRenewList2(){
         MyTool.renewList(this.list2)
-
+        this.renewTitle();
+    }
+    public addSetting(){
+        this.arrayData.addItem({isSetting:true})
     }
 
     private renewList(){
-        this.scroller2.stopAnimation();
-        var type = this.downList.selectValue;
+        //this.scroller2.stopAnimation();
+         var type = this.downList2.selectValue;
         var arr;
-        if(this.tab.selectedIndex == 0)
+        if(this.downList.selectValue == 0)
         {
             arr = CardManager.getInstance().getMyMonsterList(type)
         }
@@ -535,10 +386,15 @@ class DefPosUI extends game.BaseUI {
         {
             arr = CardManager.getInstance().getMySkillList(type)
         }
+        ArrayUtil.sortByField(arr,['cost'],[0]);
+        this.totalPage = Math.ceil(arr.length/this.pageSize || 1)
+        this.numText.text = this.page + '/' + this.totalPage
+        arr = arr.splice((this.page-1)*this.pageSize,this.pageSize)
         for(var i=0;i<arr.length;i++)
         {
             arr[i].temp = this.useCard;
         }
         this.list2.dataProvider = new eui.ArrayCollection(arr)
+
     }
 }

@@ -139,7 +139,7 @@ class PKPosItem extends game.BaseItem {
     //        this.parent.addChild(this);
     //}
 
-    public onRemove(){
+    public remove(){
         MyTool.removeMC(this);
         //egret.Tween.removeTweens(this.barGroup1)
         //egret.Tween.removeTweens(this.failMC)
@@ -165,9 +165,9 @@ class PKPosItem extends game.BaseItem {
         }
 
         if(data.num == 0)
-            this.barMC.source = 'bar1_png'
-        else
             this.barMC.source = 'bar2_png'
+        else
+            this.barMC.source = 'bar1_png'
 
         this.barMC.width = barWidth * (maxCD - cd) / maxCD;
 

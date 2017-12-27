@@ -3,7 +3,6 @@ class PKTopItem extends game.BaseItem {
     private group: eui.Group;
     private bg: eui.Image;
     private img: CardImg;
-    private addIcon: eui.Image;
     private indexText: eui.Label;
 
 
@@ -52,29 +51,6 @@ class PKTopItem extends game.BaseItem {
             this.bg.source = vo.getBG();
             this.indexText.text = this.data.topIndex;
             this.currentState = 'normal'
-
-            switch(this.data.id)
-            {
-                case 1:
-                    this.addIcon.source = 'icon_atk_png'
-                    this.addIcon.scaleX = this.addIcon.scaleY = 1
-                    //this.addText.text = '攻击 +10%'
-                    break;
-                case 2:
-                    this.addIcon.source = 'icon_love_png'
-                    this.addIcon.scaleX = this.addIcon.scaleY = 0.4
-                    //this.addText.text = '血量 +10%'
-                    break;
-                case 3:
-                    this.addIcon.source = 'icon_def1_png'
-                    this.addIcon.scaleX = this.addIcon.scaleY = 0.3
-                    //this.addText.text = '间隔 +10%'
-                    break;
-               default:
-                    this.addIcon.visible = false
-                    //this.addText.text = ''
-                    break;
-            }
         }
         else
             this.currentState = 'empty'

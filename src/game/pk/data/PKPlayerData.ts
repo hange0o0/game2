@@ -119,12 +119,12 @@ class PKPlayerData {
             owner:this.id,
             actionTime:PKData.getInstance().actionTime,
         })
-        this.posIndex ++
-
         PKData.getInstance().addVideo({
             type:PKConfig.VIDEO_POS_ADD,
             user:this.posCard[this.posIndex],
         })
+
+        this.posIndex ++
 
         for(var i=1;i<=PKConfig.maxHandCard;i++)
         {

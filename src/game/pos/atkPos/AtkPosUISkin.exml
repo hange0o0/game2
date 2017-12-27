@@ -13,7 +13,7 @@
 		</e:layout>
 	</e:Group>
 	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
-	<e:Scroller id="scroller1" width="640" x="0" anchorOffsetY="0" bounces="false" top="60" bottom="500">
+	<e:Scroller id="scroller1" width="640" x="0" anchorOffsetY="0" bounces="false" top="60" bottom="520">
 		<e:Group>
 			<e:List id="list1" width="200" height="200" x="142" y="175">
 				<e:layout>
@@ -22,10 +22,10 @@
 			</e:List>
 		</e:Group>
 	</e:Scroller>
-	<e:Image source="bg15_png" bottom="70" scale9Grid="16,16,14,14" left="0" right="0" height="430"/>
-	<e:List id="list2" width="510" height="330" horizontalCenter="0" bottom="155">
+	<e:Image source="bg15_png" bottom="70" scale9Grid="16,16,14,14" left="0" right="0" height="450"/>
+	<e:List id="list2" width="490" height="350" horizontalCenter="0" bottom="155">
 		<e:layout>
-		<e:TileLayout requestedColumnCount="4" verticalGap="10" paddingLeft="0" horizontalGap="10" paddingTop="0" paddingBottom="0"/>
+		<e:TileLayout requestedColumnCount="3" verticalGap="10" paddingLeft="0" horizontalGap="20" paddingTop="0" paddingBottom="0"/>
 		</e:layout>
 	</e:List>
 	<ns1:BottomUI id="bottomUI" x="0" skinName="BottomUISkin" bottom="0"/>
@@ -51,27 +51,30 @@
 		<e:HorizontalLayout gap="0"/>
 		</e:layout>
 	</e:Group>
-	<e:Image id="rightBtn" source="arrow1_png" width="40" right="10" bottom="280"/>
-	<e:Image id="leftBtn" source="arrow1_png" bottom="280" scaleX="-1" left="10" width="40"/>
+	<e:Image source="arrow1_png" width="40" right="15" bottom="280"/>
+	<e:Image source="arrow1_png" bottom="280" scaleX="-1" left="15" width="40"/>
 	<e:Group bottom="100" horizontalCenter="0">
-		<e:Group x="0" y="0">
-			<e:Image source="bg2_png" scale9Grid="9,9,11,10" width="130" height="40" y="8" horizontalCenter="0"/>
-			<ns1:UpList id="downList" width="150" skinName="UpListSkin" x="0" y="0"/>
+		<e:Group x="0" y="0" height="50">
+			<e:Image source="bg2_png" scale9Grid="9,9,11,10" width="130" height="40" horizontalCenter="0" verticalCenter="0"/>
+			<ns1:UpList id="downList" width="150" skinName="UpListSkin" x="0" verticalCenter="0"/>
 		</e:Group>
-		<e:Group x="170" y="0">
-			<e:Image source="bg2_png" scale9Grid="9,9,11,10" width="130" height="40" y="8" horizontalCenter="0"/>
-			<ns1:UpList id="downList2" width="150" skinName="UpListSkin" x="0" y="0"/>
+		<e:Group x="170" y="0" height="50">
+			<e:Image source="bg2_png" scale9Grid="9,9,11,10" width="130" height="40" horizontalCenter="0" verticalCenter="0"/>
+			<ns1:UpList id="downList2" width="150" skinName="UpListSkin" x="0" verticalCenter="0"/>
 		</e:Group>
-		<e:Group x="340" y="0" visible="false">
-			<e:Image source="bg2_png" scale9Grid="9,9,11,10" width="130" height="40" y="8" horizontalCenter="0"/>
-			<ns1:UpList id="downList3" width="150" skinName="UpListSkin" x="0" y="0"/>
+		<e:Group x="340" y="0" height="50" visible="false">
+			<e:Image source="bg2_png" scale9Grid="9,9,11,10" width="130" height="40" horizontalCenter="0" verticalCenter="0"/>
+			<ns1:UpList id="downList3" width="150" skinName="UpListSkin" x="0" verticalCenter="0"/>
 		</e:Group>
-		<e:Group x="350" y="10" width="110">
-			<e:Image height="40" y="8" source="bg3_png" scale9Grid="9,9,11,10" left="10" right="10"/>
-			<e:Label id="numText" text="10/20" size="22" stroke="2" horizontalCenter="0" y="20"/>
+		<e:Group x="350" y="10" width="110" height="50">
+			<e:Image height="40" source="bg3_png" scale9Grid="9,9,11,10" left="10" right="10" verticalCenter="0"/>
+			<e:Label id="numText" text="10/20" size="22" stroke="2" horizontalCenter="0" verticalCenter="0"/>
 		</e:Group>
 		<e:layout>
 			<e:HorizontalLayout gap="-10"/>
 		</e:layout>
 	</e:Group>
+	<e:Group id="leftBtn" width="70" height="350" x="0" bottom="155"/>
+	<e:Group id="rightBtn" width="70" height="350" bottom="155" right="0"/>
+	<e:Image source="icon_force_png" x="8" y="0" scaleX="0.85" scaleY="0.85"/>
 </e:Skin>

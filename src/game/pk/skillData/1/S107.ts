@@ -28,7 +28,6 @@ class S107 extends SBase {
                 y:-25 + Math.random()*50,
                 lastSkill:Number.MAX_VALUE,
                 actionTime:PD.actionTime,
-                posAdd:user.id,
                 dieTime:PD.actionTime + user.getSkillValue(1)*1000
             }
             PD.addMonster(mData);

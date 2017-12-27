@@ -102,7 +102,7 @@ class PKCardInfoUI extends game.BaseContainer {
 
         if(vo.isMonster)
         {
-            arr1.push({index:2,icon:'icon_times_png',iconScale:1,title:'防御数量',value:vo.num || 1,valueAdd:0})
+            arr1.push({index:2,icon:'icon_times_png',iconScale:1,title:'传送次数',value:vo.num || 1,valueAdd:0})
             arr1.push({index:3,icon:'icon_clock_png',iconScale:1,title:str + '间隔',value:MyTool.toFixed(vo.cd/1000,1)+'秒',valueAdd:0})
         }
         else
@@ -110,9 +110,14 @@ class PKCardInfoUI extends game.BaseContainer {
             if(vo.num == 0)
                 arr1.push({index:2,icon:'icon_clock2_png',iconScale:1,title:'持续时间',value:MyTool.toFixed(vo.cd/1000,1)+'秒',valueAdd:0})
             else if(vo.num == 1)
-                arr1.push({index:2,icon:'icon_clock_png',iconScale:1,title:'持续时间',value:'立刻生效',valueAdd:0})
+                arr1.push({index:2,icon:'icon_clock_png',iconScale:1,title:'单次技能',value:'',valueAdd:0})
             else if(vo.num > 1)
+            {
                 arr1.push({index:2,icon:'icon_clock_png',iconScale:1,title:'持续时间',value:MyTool.toFixed((vo.num-1) * vo.cd/1000,1)+'秒',valueAdd:0})
+                arr1.push({index:3,icon:'icon_clock_png',iconScale:1,title:str + '间隔',value:MyTool.toFixed(vo.cd/1000,1)+'秒',valueAdd:0})
+            }
+
+
         }
 
 
@@ -134,12 +139,12 @@ class PKCardInfoUI extends game.BaseContainer {
             var ark2 = Math.floor(vo.atk * force);
             var hp2 = Math.floor(vo.hp * force);
             var def2 = def + (this.dataIn.teamDef || 0);
-            if(this.dataIn.pos == 1)
-                ark2 = Math.floor(ark2*1.1);
-            else if(this.dataIn.pos == 2)
-                hp2 = Math.floor(hp2*1.1);
-            else if(this.dataIn.pos == 3)
-                def2 += 5;
+            //if(this.dataIn.pos == 1)
+            //    ark2 = Math.floor(ark2*1.1);
+            //else if(this.dataIn.pos == 2)
+            //    hp2 = Math.floor(hp2*1.1);
+            //else if(this.dataIn.pos == 3)
+            //    def2 += 5;
             var arr2 = [
                 //{index:1,icon:'icon_atk_png',iconScale:1,title:'攻击',value:atk,valueAdd:ark2-atk},
                 {index:2,icon:'icon_love_png',iconScale:0.6,title:'血量',value:hp,valueAdd:hp2 - hp},

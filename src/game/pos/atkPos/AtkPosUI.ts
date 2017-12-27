@@ -43,7 +43,7 @@ class AtkPosUI extends game.BaseUI {
     private arrayData:eui.ArrayCollection
 
     private page=1;
-    private pageSize=8;
+    private pageSize=6;
     private totalPage=1;
 
     public constructor() {
@@ -191,7 +191,7 @@ class AtkPosUI extends game.BaseUI {
                 this.posName,serverList,()=>{
                     ShowTips('保存成功！')
                     //this.hide();
-                    //this.posData = PosManager.getInstance().atkList[this.index]
+                    this.posData = PosManager.getInstance().atkList[this.index]
                 })
         }
     }

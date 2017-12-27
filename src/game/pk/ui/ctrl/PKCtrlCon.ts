@@ -6,6 +6,7 @@ class PKCtrlCon extends game.BaseContainer {
         this.skinName = "PKCtrlConSkin";
     }
 
+    private overMC: eui.Image;
     private cardGroup: eui.Group;
     private placeGroup: eui.Group;
     private info2: PKInfoBtn;
@@ -17,6 +18,7 @@ class PKCtrlCon extends game.BaseContainer {
     private cardText: eui.Label;
     private costMC: eui.Image;
     private costText: eui.Label;
+
 
 
 
@@ -72,7 +74,7 @@ class PKCtrlCon extends game.BaseContainer {
         this.dragTarget.isDragMC = true;
         this.dragTarget.alpha = 0.6
 
-
+        this.addBtnEvent(this.placeGroup,this.onPosClick)
             this.addBtnEvent(this.settingBtn,this.onSetting)
 
         PKData.getInstance().addEventListener('video',this.onVideoEvent,this);
@@ -140,22 +142,21 @@ class PKCtrlCon extends game.BaseContainer {
     }
 
 
-    //private onPosClick(e){
-    //    if(game.BaseUI.isStopEevent)
-    //        return;
-    //     var mc:PKPosItem = e.currentTarget;
-    //    if(this.chooseCard)
-    //    {
-    //         if(this.posCard(mc))
-    //         {
-    //
-    //         }
-    //    }
-    //    else //显示上阵卡牌信息
-    //    {
-    //
-    //    }
-    //}
+    private onPosClick(e){
+        if(game.BaseUI.isStopEevent)
+            return;
+        if(this.chooseCard)
+        {
+             if(this.posCard())
+             {
+
+             }
+        }
+        else //显示上阵卡牌信息
+        {
+
+        }
+    }
 
     private posCard(){
         var PD = PKData.getInstance();
@@ -192,11 +193,12 @@ class PKCtrlCon extends game.BaseContainer {
         this.dragTarget.x = e.data.x - this.dragTarget.width/2;
         this.dragTarget.y = e.data.y - this.dragTarget.height/2;
         this.overTarget = -1;
+        this.overMC.visible = false
 
-        if(this.placeGroup.hitTestPoint(e.data.x,e.data.y))
+        if(e.data.y> GameManager.stage.stageHeight - 160 - 230 && e.data.y < GameManager.stage.stageHeight - 160)
         {
             this.overTarget = 1;
-            console.log(999)
+            this.overMC.visible = true
         }
 
 
@@ -229,11 +231,11 @@ class PKCtrlCon extends game.BaseContainer {
         //    var mc:PKPosItem = this.placeObj[s];
         //    mc.setOver(false)
         //}
-        console.log(this.overTarget)
         if(this.overTarget != -1)
         {
             this.posCard()
         }
+        this.overMC.visible = false
     }
 
 
@@ -243,6 +245,7 @@ class PKCtrlCon extends game.BaseContainer {
         this.chooseCard = null;
         this.needRenewCard = true;
         this.needRenewInfo = false;
+        this.overMC.visible = false
 
         for(var s in this.cardObj)
         {

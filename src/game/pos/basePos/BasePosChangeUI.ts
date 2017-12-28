@@ -1,8 +1,8 @@
-class DefPosChangeUI extends game.BaseUI {
-    private static _instance: DefPosChangeUI;
-    public static getInstance(): DefPosChangeUI {
+class BasePosChangeUI extends game.BaseUI {
+    private static _instance: BasePosChangeUI;
+    public static getInstance(): BasePosChangeUI {
         if(!this._instance)
-            this._instance = new DefPosChangeUI();
+            this._instance = new BasePosChangeUI();
         return this._instance;
     }
 
@@ -15,16 +15,18 @@ class DefPosChangeUI extends game.BaseUI {
 
 
 
-    private dragTarget = new DefPosItem()
+    private dragTarget = new BasePosItem()
 
     private listData:eui.ArrayCollection
     private selectData;
     private selectIndex;
     //private callDelete = false;
     private everDelete = false;
+
+    public fromUI:BasePosUI
     public constructor() {
         super();
-        this.skinName = "DefPosChangeUISkin";
+        this.skinName = "BasePosChangeUISkin";
     }
 
     public childrenCreated() {
@@ -33,7 +35,7 @@ class DefPosChangeUI extends game.BaseUI {
         this.topUI.setTitle('调整卡组顺序');
 
         this.dragTarget.alpha = 0.3;
-        this.list.itemRenderer =  DefPosChangeItem;
+        this.list.itemRenderer =  BasePosChangeItem;
         this.list.addEventListener('start_drag',this.onDragStart,this);
         this.list.addEventListener('end_drag',this.onDragEnd,this);
         this.list.addEventListener('move_drag',this.onDragMove,this);
@@ -50,7 +52,7 @@ class DefPosChangeUI extends game.BaseUI {
         else if(!game.BaseUI.isStopEevent)
         {
             this.everDelete = true;
-            DefPosUI.getInstance().deleteID(item.id)
+            this.fromUI.deleteID(item.id)
             var index = this.listData.getItemIndex(item);
             this.listData.removeItemAt(index)
         }
@@ -97,13 +99,6 @@ class DefPosChangeUI extends game.BaseUI {
 
     private onDragEnd(e){
         MyTool.removeMC(this.dragTarget)
-        //if(this.callDelete)
-        //{
-        //    this.everDelete = true;
-        //    AtkPosUI.getInstance().deleteID(this.selectData.id)
-        //    this.listData.removeItemAt(this.selectIndex)
-        //    //this.deleteBtn.stroke = 0
-        //}
         this.selectData = null
         this.selectIndex = -1
         this.renewSelectItem();
@@ -116,8 +111,9 @@ class DefPosChangeUI extends game.BaseUI {
         }
     }
 
-    public show(v?){
+    public show(v?,fromUI?){
         this.listData = v;
+        this.fromUI = fromUI;
         this.listData.addItem({back:true})
         super.show()
     }
@@ -125,9 +121,9 @@ class DefPosChangeUI extends game.BaseUI {
     public hide() {
         MyTool.clearList(this.list);
         if(this.everDelete)
-            DefPosUI.getInstance().justRenewList2()
+            this.fromUI.justRenewList2()
         this.listData.removeItemAt(this.listData.length - 1)
-        DefPosUI.getInstance().addSetting()
+        this.fromUI.addSetting()
         super.hide();
     }
 

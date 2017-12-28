@@ -76,7 +76,7 @@ class PKingUI extends game.BaseUI {
             actionTime:0
         });
 
-        this.scroller.viewport.scrollH = (1500-640)/2
+        this.scroller.viewport.scrollH = (PKConfig.floorWidth + PKConfig.appearPos*2-640)/2
         this.scroller.touchEnabled = this.scroller.touchChildren = false;
         this.counting = true;
         this.roundText.text = '5'

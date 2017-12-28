@@ -14,6 +14,7 @@ function Alert(msg,fun?,btnLabel?){
 function Confirm(msg,fun?,btnWord=['取消','确定'],sp?){
     var panel = new ConfirmUI();
     panel.show(msg,fun,btnWord,sp)
+    return panel
 }
 
 function ShowTips(msg,cd=1000){

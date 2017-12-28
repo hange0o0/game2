@@ -64,7 +64,7 @@ class HangManager {
                 Alert('找不到指定阵法')
                 return;
             }
-            PKManager.getInstance().startPK(PKManager.TYPE_HANG,msg.pkdata)
+            PKManager.getInstance().startPK(PKManager.TYPE_TEST,msg.pkdata)
             if (fun)
                 fun();
         });

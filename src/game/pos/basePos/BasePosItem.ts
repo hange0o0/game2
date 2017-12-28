@@ -1,7 +1,7 @@
-class AtkPosItem extends game.BaseItem {
+class BasePosItem extends game.BaseItem {
     public constructor() {
         super();
-        this.skinName = "AtkPosItemSkin";
+        this.skinName = "BasePosItemSkin";
     }
 
 

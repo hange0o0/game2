@@ -6,7 +6,7 @@ class M16 extends MBase {
     //a对B攻击到达时的逻辑（攻击正式生效）
     public atk(user:PKMonsterData,target:PKMonsterData){
         var b = super.atk(user,target)
-        if(b)
+        if(b && target.beSkillAble())
         {
             var skillValue = user.getSkillValue(1,true)
             var buff = new PKBuffData()

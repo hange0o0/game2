@@ -6,7 +6,7 @@ class ConfirmUI extends game.BaseWindow {
 
     private cancelBtn: eui.Button;
     private okBtn: eui.Button;
-    private closeBtn: eui.Button;
+    public closeBtn: eui.Button;
     private text: eui.Label;
 
     private textIn;

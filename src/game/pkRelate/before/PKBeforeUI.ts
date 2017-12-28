@@ -7,16 +7,17 @@ class PKBeforeUI extends game.BaseWindow {
         return this._instance;
     }
 
+    private emptyMC: eui.Group;
     private scrollerBG: eui.Group;
     private scroller: eui.Scroller;
     private list: eui.List;
     private titleText: eui.Label;
-    private startBtn: eui.Button;
     private rightBtn: eui.Image;
     private leftBtn: eui.Image;
-    private nameText: eui.Label;
     private closeBtn: eui.Button;
+    private startBtn: eui.Button;
     private changeBtn: eui.Button;
+
 
 
 
@@ -40,8 +41,8 @@ class PKBeforeUI extends game.BaseWindow {
         this.scroller.addEventListener(egret.Event.CHANGE,this.onScroll,this)
 
         this.scroller.viewport = this.list;
-        this.list.itemRenderer = AtkPosItem;
-        this.list.touchChildren = false;
+        this.list.itemRenderer = BasePosItem;
+        //this.list.touchChildren = false;
 
         //this.changeBtn.scrollRect = new egret.Rectangle(0,0,50,50)
     }
@@ -72,21 +73,25 @@ class PKBeforeUI extends game.BaseWindow {
 
     private onLeft(){
         var PM = PosManager.getInstance();
-        this.index --;
-        if(this.index < 0)
+
+        if(this.index > 0)
         {
-            this.index = Math.min(PM.maxNum-1,PM.atkList.length)
+            this.index --;
+            this.renew();
         }
-        this.renew();
+
     }
 
     private onRight(){
         var PM = PosManager.getInstance();
-        this.index ++;
+
         var max = Math.min(PM.maxNum-1,PM.atkList.length)
-        if(this.index > max)
-            this.index = 0;
-        this.renew();
+        if(this.index < max)
+        {
+            this.index ++;
+            this.renew();
+        }
+
     }
 
     public show(dataIn?){
@@ -106,7 +111,7 @@ class PKBeforeUI extends game.BaseWindow {
     }
 
     public onShow(){
-        this.titleText.text = this.dataIn.title;
+
         this.renew();
         this.once(egret.Event.ENTER_FRAME,this.onScroll,this)
         this.addPanelOpenEvent(GameEvent.client.pos_change,this.renew)
@@ -117,16 +122,20 @@ class PKBeforeUI extends game.BaseWindow {
         var data = PM.atkList[this.index];
         if(!data)
         {
-            this.scrollerBG.visible = false
+            this.scroller.viewport.scrollV = 0
+            this.onScroll()
             this.scroller.visible = false
-            this.nameText.text = '新建阵容'
+            this.emptyMC.visible = true
+            //this.titleText.text = this.dataIn.title;
+            this.titleText.text = '新建阵容'
+            this.changeBtn.label = '新建阵容'
 
         }
         else
         {
-            this.scrollerBG.visible = true
             this.scroller.visible = true
-            this.nameText.text = Base64.decode(data.name);
+            this.emptyMC.visible = false
+            this.titleText.text = Base64.decode(data.name);
             var arr = [];
             var list = data.list.split(',')
             for(var i=0;i<list.length;i++)
@@ -135,8 +144,13 @@ class PKBeforeUI extends game.BaseWindow {
                 arr.push({id:id})
             }
             this.list.dataProvider = new eui.ArrayCollection(arr);
+            this.changeBtn.label = '调整阵容'
         }
         this.onScroll();
+
+        var max = Math.min(PM.maxNum-1,PM.atkList.length)
+        MyTool.changeGray(this.leftBtn,this.index == 0,true)
+        MyTool.changeGray(this.rightBtn,this.index == max,true)
 
     }
 }

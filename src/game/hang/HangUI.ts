@@ -15,6 +15,7 @@ class HangUI extends game.BaseWindow {
     private scroller: eui.Scroller;
     private list: eui.List;
     private timeText: eui.Label;
+    private titleText: eui.Label;
 
 
 
@@ -30,7 +31,7 @@ class HangUI extends game.BaseWindow {
         this.addBtnEvent(this.pKBtn,this.onPK)
         this.addBtnEvent(this.awardBtn,this.onAward)
 
-        this.con.mask = new egret.Rectangle(this.con.width,this.con.height)
+        this.con.mask = new egret.Rectangle(0,0,this.con.width,this.con.height)
 
         this.scroller.viewport = this.list
         this.list.itemRenderer = HangItem;
@@ -67,6 +68,7 @@ class HangUI extends game.BaseWindow {
     }
 
     public renew(){
+        this.titleText.text = '第'+(HangManager.getInstance().level+1)+'关'
         this.img.source = PKManager.getInstance().getPKBG(_get['map']);
     }
 

@@ -7,8 +7,11 @@
     			<e:TileLayout horizontalGap="8" verticalGap="8"/>
     		</e:layout>
     	</e:List>
+	<e:Group includeIn="normal" x="13.999999999999993" y="16.000000000000004" height="42">
+		<e:Image source="bg1_png" scale9Grid="8,8,14,14" includeIn="normal" x="0" y="0" height="100%" width="100%"/>
+		<e:Label id="desText" text="Label" y="8.999999999999996" includeIn="normal" size="24" stroke="2" left="15" right="15"/>
+	</e:Group>
 	<e:Image id="disableMC" source="bg8_png" scale9Grid="9,9,9,9" includeIn="normal" left="5" right="5" top="5" bottom="5"/>
-	<e:Label id="desText" text="Label" x="30" y="25" includeIn="normal" size="24" stroke="2"/>
 	<e:Image source="icon_add1_png" horizontalCenter="0" verticalCenter="0" horizontalCenter.add="0.5" verticalCenter.add="-16.5" includeIn="add"/>
 	<e:Label text="增加新的防守阵容" includeIn="add" y="110.63" stroke="2" size="24" horizontalCenter="0" strokeColor="0x331401"/>
 

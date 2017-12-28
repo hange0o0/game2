@@ -159,9 +159,9 @@ class PKTopUI extends game.BaseContainer {
         //this.defScoreGroup1.y = 250
         //this.defScoreGroup2.y = 250
 
-
-        this.defText1.text = '+0%'
-        this.defText2.text = '+0%'
+        var PD = PKData.getInstance();
+        this.defText1.text = '+'+PD.getTeamByRota(PKConfig.ROTA_LEFT).getTeamDef()+'%'
+        this.defText2.text = '+'+PD.getTeamByRota(PKConfig.ROTA_RIGHT).getTeamDef()+'%'
 
 
     }

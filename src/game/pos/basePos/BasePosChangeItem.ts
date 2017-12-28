@@ -1,4 +1,4 @@
-class DefPosChangeItem extends DefPosItem {
+class BasePosChangeItem extends BasePosItem {
     public constructor() {
         super();
     }

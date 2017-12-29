@@ -23,29 +23,37 @@
 		</e:Group>
 	</e:Scroller>
 	<e:Image source="bg15_png" bottom="70" scale9Grid="16,16,14,14" left="0" right="0" height="450"/>
-	<e:Image source="bg1_png" scale9Grid="8,8,14,14" width="500" height="360" horizontalCenter="0" bottom="150"/>
+	<e:Image source="bg1_png" scale9Grid="8,8,14,14" width="480" height="410" horizontalCenter="0" bottom="100"/>
 	<e:Group id="monsterBG" x="10" bottom="428">
 		<e:Image scale9Grid="8,8,14,14" width="100" height="80" y="0" x="0" source="bg1_png"/>
-		<e:Rect width="50" height="80" x="60" y="2" fillColor="0x5c3a09"/>
+		<e:Rect width="50" height="80" x="70" y="2" fillColor="0x5c3a09"/>
 	</e:Group>
-	<e:Group id="skillBG" x="520" bottom="428">
-		<e:Image scale9Grid="8,8,14,14" width="100" height="80" y="0" source="bg1_png" x="10"/>
+	<e:Group id="skillBG" bottom="428" right="10">
+		<e:Image scale9Grid="8,8,14,14" width="100" height="80" y="0" source="bg1_png" x="20"/>
 		<e:Rect width="50" height="80" y="2" fillColor="0x5C3A09" x="0"/>
 	</e:Group>
-	<e:List id="list2" width="480" height="350" horizontalCenter="0" bottom="155">
+	<e:List id="list2" width="460" height="400" horizontalCenter="0" bottom="108">
 		<e:layout>
-		<e:TileLayout requestedColumnCount="3" verticalGap="10" paddingLeft="0" horizontalGap="15" paddingTop="0" paddingBottom="0"/>
+		<e:TileLayout requestedColumnCount="3" verticalGap="10" paddingLeft="0" horizontalGap="5" paddingTop="0" paddingBottom="0"/>
 		</e:layout>
 	</e:List>
-	<e:Group id="leftBtn" width="55" height="250" x="10" bottom="155" locked="true">
-		<e:Image scale9Grid="12,12,4,5" x="0" y="0" width="100%" height="100%" source="bg3_png"/>
+	<e:Group id="leftBtn" width="65" height="240" x="10" bottom="180">
+		<e:Image scale9Grid="12,12,4,5" x="0" y="0" width="100%" height="100%" source="btn4_png"/>
 		<e:Image id="leftMC" source="arrow1_png" scaleX="-1" width="40" verticalCenter="0" horizontalCenter="0"/>
 	</e:Group>
-	<e:Group id="rightBtn" width="55" height="250" bottom="155" right="10" locked="true">
-		<e:Image scale9Grid="12,12,4,5" x="0" y="0" width="100%" height="100%" scaleX="1" scaleY="1" source="bg3_png"/>
+	<e:Group id="rightBtn" width="65" height="240" bottom="180" right="10">
+		<e:Image scale9Grid="12,12,4,5" x="0" y="0" width="100%" height="100%" scaleX="1" scaleY="1" source="btn4_png"/>
 		<e:Image id="rightMC" source="arrow1_png" width="40" verticalCenter="0" horizontalCenter="0"/>
 	</e:Group>
 	<ns1:BottomUI id="bottomUI" x="0" skinName="BottomUISkin" bottom="0"/>
+	<e:Group width="70" height="70" right="10" bottom="105">
+		<e:Image scale9Grid="9,9,11,10" left="0" right="0" top="0" bottom="0" source="bg2_png"/>
+		<e:Label id="numText" text="10/20" size="20" stroke="2" horizontalCenter="0" verticalCenter="0"/>
+	</e:Group>
+	<e:Group x="10" height="70" bottom="105" width="70">
+		<e:Image source="bg2_png" scale9Grid="9,9,11,10" width="100%" height="100%" horizontalCenter="0" verticalCenter="0"/>
+		<ns1:LeftList id="downList2" x="0" verticalCenter="0" skinName="LeftListSkin" width="100%" height="100%"/>
+	</e:Group>
 
 	<e:Group id="btnGroup" right="10" bottom="10">
 		<e:Group id="deleteBtn" x="1.4210854715202004e-14" y="0" width="100" height="80">
@@ -68,24 +76,6 @@
 		<e:HorizontalLayout gap="0"/>
 		</e:layout>
 	</e:Group>
-	<e:Group bottom="100" horizontalCenter="0">
-		<e:Group x="170" y="0" height="50">
-			<e:Image source="bg2_png" scale9Grid="9,9,11,10" width="160" height="40" horizontalCenter="0" verticalCenter="0"/>
-			<ns1:UpList id="downList2" width="180" skinName="UpListSkin" x="0" verticalCenter="0"/>
-		</e:Group>
-		<e:Group x="0" y="0" height="50" visible="false">
-			<e:Image source="bg2_png" scale9Grid="9,9,11,10" width="130" height="40" horizontalCenter="0" verticalCenter="0"/>
-			<ns1:UpList id="downList" width="150" skinName="UpListSkin" x="0" verticalCenter="0"/>
-		</e:Group>
-		<e:Group x="350" y="10" width="110" height="50">
-			<e:Image height="40" source="bg3_png" scale9Grid="9,9,11,10" left="10" right="10" verticalCenter="0"/>
-			<e:Label id="numText" text="10/20" size="22" stroke="2" horizontalCenter="0" verticalCenter="0"/>
-		</e:Group>
-		<e:layout>
-			<e:HorizontalLayout gap="35"/>
-		</e:layout>
-	</e:Group>
-	<e:Image source="icon_force_png" x="8" y="0" scaleX="0.85" scaleY="0.85"/>
 	<e:Image id="monsterIcon" source="icon_monster_png" x="15" scaleX="0.7" scaleY="0.7" bottom="448"/>
 	<e:Image id="skillIcon" source="icon_skill_png" scaleX="0.7" scaleY="0.7" x="576" bottom="451"/>
 </e:Skin>

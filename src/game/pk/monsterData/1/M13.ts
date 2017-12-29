@@ -45,7 +45,7 @@ class M13StateListener extends PKStateListener {
         var user:PKMonsterData = <PKMonsterData>this.owner;
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
-        var atkrage = user.getSkillValue(1)/2;
+        var atkrage = user.getSkillValue(1);
         var list = [];
 
         for(var i=0;i<arr.length;i++)

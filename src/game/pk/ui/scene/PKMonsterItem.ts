@@ -142,9 +142,11 @@ class PKMonsterItem extends game.BaseItem {
         this.setRota(this.x > targetX ? 1:-1)
     }
 
-    public run(){
+    public run(speed){
         var mD:PKMonsterData = this.data
-        if(this.monsterMV.state != MonsterMV.STAT_RUN)
+        if(this.monsterMV.speed != speed)
+            this.monsterMV.speed = speed;
+        if(this.monsterMV.state != MonsterMV.STAT_RUN )
             this.monsterMV.run();
         if(mD.x != this.x)
         {
@@ -168,7 +170,8 @@ class PKMonsterItem extends game.BaseItem {
 
     }
 
-    public atk(){
+    public atk(speed){
+        this.monsterMV.speed = speed
         this.monsterMV.atk();
     }
 

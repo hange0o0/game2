@@ -21,6 +21,7 @@
     "src/commont/ui/CommonNumInputSkin.exml",
     "src/commont/ui/DownListItemSkin.exml",
     "src/commont/ui/DownListSkin.exml",
+    "src/commont/ui/LeftListSkin.exml",
     "src/commont/ui/TipsUISkin.exml",
     "src/commont/ui/TopUISkin.exml",
     "src/commont/ui/TouchTipsSkin.exml",

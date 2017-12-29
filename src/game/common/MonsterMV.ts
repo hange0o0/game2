@@ -15,6 +15,8 @@ class MonsterMV extends eui.Group {
     private mw = 480/4
     private mh = 480/4
 
+    public speed = 0;//增加or减少速度百分比
+
     public vo:MonsterVO;
     constructor(){
         super();
@@ -44,6 +46,7 @@ class MonsterMV extends eui.Group {
         this.anchorOffsetX = this.mw/2
         this.anchorOffsetY = this.mh
         this.mc.scrollRect = new egret.Rectangle(0,0,this.mw,this.mh)
+        this.speed = 0;
     }
 
     public run(){
@@ -83,7 +86,8 @@ class MonsterMV extends eui.Group {
     private onE(){
         var w = this.mw
         var h = this.mh
-        var frameStep = Math.round(this.frameTotal/this.vo.mcnum);
+        var speed = this.speed || 0;
+        var frameStep = Math.round(this.frameTotal*(1-speed/100)/this.vo.mcnum);
         if(this.state == MonsterMV.STAT_ATK && this.vo.id == 99)
             frameStep = 1;
         var x = Math.floor(this.index/frameStep)*w

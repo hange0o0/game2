@@ -208,9 +208,6 @@ class PKData extends egret.EventDispatcher{
         }
         return null;
     }
-
-
-
     //找玩家对应的怪
     public getMonsterByTeam(team){
         var arr = [];
@@ -218,6 +215,20 @@ class PKData extends egret.EventDispatcher{
         {
             var oo = this.monsterList[i];
              if(oo.getOwner().teamData == team)
+             {
+                 arr.push(oo)
+             }
+        }
+        return arr;
+    }
+
+    //找玩家对应的怪
+    public getMonsterByNoTeam(team){
+        var arr = [];
+        for(var i=0;i<this.monsterList.length;i++)
+        {
+            var oo = this.monsterList[i];
+             if(oo.getOwner().teamData != team)
              {
                  arr.push(oo)
              }

@@ -21,12 +21,15 @@ class PKMonsterData {
     public baseHp = 0
     public baseAtk  = 0
     public baseSpeed  = 0
+    public addSpeed  = 0//速度改变百分比
 
 
 
 
     public x;//当前的位置
     public y;//当前的位置
+    public atkY = 0;//攻击发出的Y值偏移
+    public atkX = 0;//攻击发出的X值偏移
     public mid //对应的怪
     public owner//属于哪个玩家
     public actionTime//上次行动的时间
@@ -77,22 +80,23 @@ class PKMonsterData {
 
     //根据属性相克，取攻击比例
     public getAtkRate(defender:PKMonsterData){
-        var atkType = this.getVO().type
-        var defType = defender.getVO().type
-        if(defType == 0 || atkType == 0)
-            return 1;
-        var des = Math.abs(atkType - defType)
-        if(des == 0)
-            return 1;
-        if(des == 1)
-        {
-            if(atkType< defType)
-                return 1.5;
-            return 0.5
-        }
-        if(atkType > defType)
-            return 1.5;
-        return 0.5
+        return 1//先不考滤相克
+        //var atkType = this.getVO().type
+        //var defType = defender.getVO().type
+        //if(defType == 0 || atkType == 0)
+        //    return 1;
+        //var des = Math.abs(atkType - defType)
+        //if(des == 0)
+        //    return 1;
+        //if(des == 1)
+        //{
+        //    if(atkType< defType)
+        //        return 1.5;
+        //    return 0.5
+        //}
+        //if(atkType > defType)
+        //    return 1.5;
+        //return 0.5
     }
 
     //public changeValue(key,value){
@@ -291,7 +295,7 @@ class PKMonsterData {
     }
 
     public move(){
-        this.x += this.atkRota * Math.round(this.speed)/10;
+        this.x += this.atkRota * Math.round(this.speed*(1+this.addSpeed/100))/10;
         PKData.getInstance().addVideo({
             type:PKConfig.VIDEO_MONSTER_MOVE,
             user:this

@@ -47,6 +47,21 @@ class PKVideoCon extends game.BaseContainer {
 
     public init(){
         this.bg.source = PKManager.getInstance().getPKBG(_get['map']);
+        this.remove();
+        if(PKData.getInstance().myPlayer.teamData.atkRota == PKConfig.ROTA_LEFT)
+        {
+            this.door1.source = 'door_png'
+            this.door2.source = 'door2_png'
+        }
+        else
+        {
+            this.door1.source = 'door2_png'
+            this.door2.source = 'door1_png'
+        }
+
+    }
+
+    public remove(){
         while(this.itemArr.length)
         {
             var item = this.itemArr.pop();
@@ -64,17 +79,6 @@ class PKVideoCon extends game.BaseContainer {
         }
         this.tw1.setPaused(false);
         this.tw2.setPaused(false);
-        if(PKData.getInstance().myPlayer.teamData.atkRota == PKConfig.ROTA_LEFT)
-        {
-            this.door1.source = 'door_png'
-            this.door2.source = 'door2_png'
-        }
-        else
-        {
-            this.door1.source = 'door2_png'
-            this.door2.source = 'door1_png'
-        }
-
     }
 
 
@@ -159,13 +163,13 @@ class PKVideoCon extends game.BaseContainer {
                 break;
             case PKConfig.VIDEO_MONSTER_MOVE:
                 item = this.getItemByID(data.id);
-                item.run();
+                item.run(data.addSpeed);
                 break;
             case PKConfig.VIDEO_MONSTER_ATK:
                 item = this.getItemByID(data.id);
                 if(videoData.target)
                     item.setRota2(videoData.target.x)
-                item.atk();
+                item.atk(data.addSpeed);
                 break;
             case PKConfig.VIDEO_MONSTER_DOUBLE:
                 item = this.getItemByID(data.id);

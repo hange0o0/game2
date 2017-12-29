@@ -66,7 +66,7 @@ class Config {
 
         for(var i=1;i<=8;i++)
         {
-            this.createImg('bullet' + aniList[i] + '.png','ani/');
+            arr.push(this.createImg('bullet' + i + '.png','ani/'));
         }
 
 

@@ -238,6 +238,17 @@ class PKCtrlCon extends game.BaseContainer {
         this.overMC.visible = false
     }
 
+    public remove(){
+        for(var s in this.cardObj)
+        {
+            this.cardObj[s].data = null;
+        }
+        while(this.placeArr.length)
+        {
+            PKPosItem.freeItem(this.placeArr.pop())
+        }
+    }
+
 
     public init(){
         var PD = PKData.getInstance();
@@ -247,14 +258,7 @@ class PKCtrlCon extends game.BaseContainer {
         this.needRenewInfo = false;
         this.overMC.visible = false
 
-        for(var s in this.cardObj)
-        {
-            this.cardObj[s].data = null;
-        }
-        while(this.placeArr.length)
-        {
-            PKPosItem.freeItem(this.placeArr.pop())
-        }
+        this.remove();
         this.renewCard();
 
 

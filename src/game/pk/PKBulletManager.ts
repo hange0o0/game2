@@ -82,6 +82,13 @@ class PKBulletManager {
             this.freeItem(removeArr[i]);
         }
     }
+
+    public freeAll(){
+        while(this.useItem.length)
+        {
+            this.freeItem(this.useItem[0]);
+        }
+    }
 }
 
 class ArrowMC extends egret.DisplayObjectContainer{
@@ -153,7 +160,19 @@ class BulletMC extends egret.DisplayObjectContainer{
     public toMC:PKMonsterItem
     public beginTime
     public endTime
+    public id
 
+    public rota = 0;
+    private config = {
+        1:{w:25,h:75},
+        2:{w:25,h:120},
+        3:{w:25,h:120},
+        4:{w:25,h:80},
+        5:{w:25,h:120},
+        6:{w:25,h:120},
+        7:{w:25,h:120},
+        8:{w:20,h:57},
+    }
     constructor() {
         super();
         this.mc.source = 'pk_arrow_png'
@@ -163,18 +182,30 @@ class BulletMC extends egret.DisplayObjectContainer{
     }
 
     public init(fromMC,toMC,beginTime,endTime,id){
+        this.id = id;
         this.fromMC = fromMC;
         this.toMC = toMC;
         this.beginTime = beginTime;
         this.endTime = endTime;
-
+        if(id)
+        {
+            this.mc.source = 'bullet'+id+'_png'
+            this.rota = 90;
+            this.mc.anchorOffsetX = this.config[id].w/2
+            this.mc.anchorOffsetY = 20
+        }
+        else
+        {
+            this.rota = 0;
+        }
+        this.mc.rotation = 0;//不知什么地方改了
     }
 
     public onAction(t){
         if(t > this.endTime)
             return false;
         var rate = (t - this.beginTime)/(this.endTime - this.beginTime);
-        var fromY = this.fromMC.y - this.fromMC.data.getVO().height/2
+        var fromY = this.fromMC.y - this.fromMC.data.getVO().height/2 + this.fromMC.data.atkY
         var toY = this.toMC.y - this.toMC.data.getVO().height/2
         this.x = this.fromMC.x + (this.toMC.x - this.fromMC.x)*rate
         this.y =  fromY + (toY - fromY)*rate
@@ -182,12 +213,23 @@ class BulletMC extends egret.DisplayObjectContainer{
             {x:this.fromMC.x,y:fromY},
             {x:this.toMC.x,y:toY}
         );
+        var base = 1
+        if(this.id && Math.abs(this.toMC.x - this.fromMC.x) <this.config[this.id].h)
+        {
+            base =  Math.abs(this.toMC.x - this.fromMC.x)/this.config[this.id].h
+        }
+
+        if(rate < 0.5)
+            this.scaleY = rate*2*base
+        else
+            this.scaleY = (1-rate)*2*base
         return true;
 
     }
 
     public getRota(begin,end){
-        return Math.atan2(end.y - begin.y,end.x - begin.x)* 180/3.14// + 90
+
+        return Math.atan2(end.y - begin.y,end.x - begin.x)* 180/3.14 + this.rota
     }
 
     public remove(){

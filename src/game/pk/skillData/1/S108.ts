@@ -53,7 +53,7 @@ class S108StateListener extends PKStateListener {
             return;
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
-        var atkrage = user.getSkillValue(2)/2;
+        var atkrage = user.getSkillValue(2);
         var list = [];
         for(var i=0;i<arr.length;i++)
         {

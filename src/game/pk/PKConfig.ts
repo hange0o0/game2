@@ -17,6 +17,7 @@ class PKConfig {
     }
 
 
+    public static nearRage = 20; //少于等于该值为近战
     public static stepCD = 50; //步长
     public static gameTime = 5*60; //游戏时间,超出算平
     public static maxMonsterSpace = 20; //同时存活怪的占位

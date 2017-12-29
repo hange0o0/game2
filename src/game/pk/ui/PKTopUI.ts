@@ -121,6 +121,17 @@ class PKTopUI extends game.BaseContainer {
 
     }
 
+    public remove(){
+        while(this.itemArr.length)
+        {
+            this.freeItem(this.itemArr.pop())
+        }
+        while(this.skillItemArr.length)
+        {
+            this.freeSkillItem(this.skillItemArr.pop())
+        }
+    }
+
     public init(title){
         this.topUI.setTitle(title);
         if(GameManager.stage.stageHeight > 1050)
@@ -130,14 +141,8 @@ class PKTopUI extends game.BaseContainer {
 
         this.index = 1;
         this.renewHp()
-        while(this.itemArr.length)
-        {
-            this.freeItem(this.itemArr.pop())
-        }
-        while(this.skillItemArr.length)
-        {
-            this.freeSkillItem(this.skillItemArr.pop())
-        }
+
+        this.remove();
         for(var i=0;i<7;i++)
         {
             var item = this.createItem();

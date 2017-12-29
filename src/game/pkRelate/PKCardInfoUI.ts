@@ -155,7 +155,7 @@ class PKCardInfoUI extends game.BaseContainer {
             {
                 arr2.unshift({index:1,icon:'icon_atk_png',iconScale:1,title:'攻击',value:atk,valueAdd:ark2-atk})
                 arr2.push({index:5,icon:'icon_atkcd_png',iconScale:1,title:'攻击间隔',value:MyTool.toFixed(vo.atkcd/1000,1)+'秒',valueAdd:0})
-                arr2.push({index:6,icon:'icon_rage_png',iconScale:1,title:'攻击距离',value:vo.atkrage>20?vo.atkrage:'近战',valueAdd:0})
+                arr2.push({index:6,icon:'icon_rage_png',iconScale:1,title:'攻击距离',value:vo.atkrage>PKConfig.nearRage?vo.atkrage:'近战',valueAdd:0})
             }
 
             arr2.push( {index:7,icon:'icon_pos_png',iconScale:1,title:'生物体积',value:vo.space,valueAdd:0})

@@ -45,6 +45,7 @@ class PKingUI extends game.BaseUI {
 
     public hide(){
         super.hide();
+        this.removeAll();
         this.removeEventListener(egret.Event.ENTER_FRAME,this.onE,this)
     }
 
@@ -55,6 +56,13 @@ class PKingUI extends game.BaseUI {
 
     private superShow(){
         super.show();
+    }
+
+    public removeAll(){
+        PKBulletManager.getInstance().freeAll()
+        this.pkVideo.remove();
+        this.pkCtrlCon.remove();
+        this.pkTop.remove();
     }
 
     public onShow(){

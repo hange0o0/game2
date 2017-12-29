@@ -1,7 +1,7 @@
 {
 	"groups":[
 		{
-			"keys":"data_json,arrow1_png,arrow2_png,bg1_png,bg2_png,bg3_png,bg4_png,bg5_png,bg6_png,bg7_png,bg8_png,bg9_png,bg10_png,bg11_png,bg12_png,bg13_png,block1_png,block2_png,border1_png,border2_png,border3_png,btn1_png,btn2_png,btn3_png,btn4_png,btn5_png,btn6_png,btn7_png,icon_add1_png,icon_add2_png,icon_coin_png,icon_diamond_png,icon_error_png,icon_force_png,icon_love_png,icon_right_png,icon_type1_png,icon_type2_png,icon_type3_png,pos1_png,pos2_png,start1_png,start2_png,tab1_png,tab2_png,tab3_png,title_bg1_png,bg14_png,random_btn_png,title_bg3_png,title_bg2_png,title_bg4_png,icon_help_png,arrow3_png,arror4_png,bg15_png,bg16_png,border_4_png,border_5_png,border_6_png,border_7_png,border_8_png,border_9_png,border_10_png,border_11_png,border_12_png,border_13_png,border_14_png,icon_add3_png,icon_disable_png,icon_lock_png,skill_type1_png,skill_type2_png,skill_type3_png,skill_type4_png,skill_type5_png,tab4_png,title_bg5_png,ui_loading_png,icon_cost_png,icon_pos_png,back_btn_png,icon_setting_png,bar_bg_png,bar1_png,bar2_png,icon_times_png,icon_cost_bg_png,line_png,icon_clock_png,icon_card_png,bg17_png,pk_fail_png,pk_win_png,red_mc_png,pk_pos_bg_jpg,pos_bg_jpg,card_back_bg_png,main_bag_png,main_card_png,main_pk_png,main_slave_png,main_tec_png,icon_atk_png,icon_def1_png,icon_def2_png,icon_vs_png,main_mail_png,main_rank_png,main_shop_png,door_png,door2_png,border_15_png,icon_edit_png,change_icon_png,line2_png,arrow4_png,arrow5_png,icon_atk2_png,icon_clock2_png,icon_rage_png,icon_speed_png,btn8_png,btn9_png,icon_atkcd_png,black_bg_png,icon_skill_png,icon_monster_png",
+			"keys":"data_json,arrow1_png,arrow2_png,bg1_png,bg2_png,bg3_png,bg4_png,bg5_png,bg6_png,bg7_png,bg8_png,bg9_png,bg10_png,bg11_png,bg12_png,bg13_png,block1_png,block2_png,border1_png,border2_png,border3_png,btn1_png,btn2_png,btn3_png,btn4_png,btn5_png,btn6_png,btn7_png,icon_add1_png,icon_add2_png,icon_coin_png,icon_diamond_png,icon_error_png,icon_force_png,icon_love_png,icon_right_png,icon_type1_png,icon_type2_png,icon_type3_png,pos1_png,pos2_png,start1_png,start2_png,tab1_png,tab2_png,tab3_png,title_bg1_png,bg14_png,random_btn_png,title_bg3_png,title_bg2_png,title_bg4_png,icon_help_png,arrow3_png,arror4_png,bg15_png,bg16_png,border_4_png,border_5_png,border_6_png,border_7_png,border_8_png,border_9_png,border_10_png,border_11_png,border_12_png,border_13_png,border_14_png,icon_add3_png,icon_disable_png,icon_lock_png,skill_type1_png,skill_type2_png,skill_type3_png,skill_type4_png,skill_type5_png,tab4_png,title_bg5_png,ui_loading_png,icon_cost_png,icon_pos_png,back_btn_png,icon_setting_png,bar_bg_png,bar1_png,bar2_png,icon_times_png,icon_cost_bg_png,line_png,icon_clock_png,icon_card_png,bg17_png,pk_fail_png,pk_win_png,red_mc_png,pk_pos_bg_jpg,pos_bg_jpg,card_back_bg_png,main_bag_png,main_card_png,main_pk_png,main_slave_png,main_tec_png,icon_atk_png,icon_def1_png,icon_def2_png,icon_vs_png,main_mail_png,main_rank_png,main_shop_png,door_png,door2_png,border_15_png,icon_edit_png,change_icon_png,line2_png,arrow4_png,arrow5_png,icon_atk2_png,icon_clock2_png,icon_rage_png,icon_speed_png,btn8_png,btn9_png,icon_atkcd_png,black_bg_png,icon_skill_png,icon_monster_png,monster_all_icon_png,skill_all_icon_png",
 			"name":"preload_png"
 		},
 		{
@@ -717,6 +717,16 @@
 			"name":"icon_monster_png",
 			"type":"image",
 			"url":"game_assets/icon_monster.png"
+		},
+		{
+			"name":"monster_all_icon_png",
+			"type":"image",
+			"url":"game_assets/monster_all_icon.png"
+		},
+		{
+			"name":"skill_all_icon_png",
+			"type":"image",
+			"url":"game_assets/skill_all_icon.png"
 		}
 	]
 }

@@ -12,15 +12,13 @@ class BasePosUI extends game.BaseUI {
     private rightBtn: eui.Group;
     private rightMC: eui.Image;
     private bottomUI: BottomUI;
+    private numText: eui.Label;
+    private downList2: LeftList;
     private btnGroup: eui.Group;
     private deleteBtn: eui.Group;
     private renameBtn: eui.Group;
     private testBtn: eui.Group;
     private saveBtn: eui.Group;
-    private downList: UpList;
-    private downList2: UpList;
-    private downList3: UpList;
-    private numText: eui.Label;
     private monsterIcon: eui.Image;
     private skillIcon: eui.Image;
 
@@ -31,6 +29,10 @@ class BasePosUI extends game.BaseUI {
 
 
 
+
+
+
+    public selectType
     private monsterType = 0
     private skillType = 0
     private index = 0  //第X个阵
@@ -80,24 +82,26 @@ class BasePosUI extends game.BaseUI {
 
         //var arr = CM.m_shows.getLevelList();
         //this.downList.setData(arr,0);
-        this.downList.addEventListener(DownList.SELECT,this.onTab,this);
+        //this.downList.addEventListener(DownList.SELECT,this.onTab,this);
         this.downList2.addEventListener(DownList.SELECT,this.onDownListSelect,this);
 
-        var arr = [
-            {label:'怪物',data:0},
-            {label:'法术',data:1}];
-        this.downList.setData(arr,0);
+
+        this.selectType = 0;
 
         //this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
         //this.tab.selectedIndex = 0;
     }
 
     private onMonster(){
-        this.downList.selectValue = 0
+        if(this.selectType == 0)
+            return
+        this.selectType = 0
         this.onTab()
     }
     private onSkill(){
-        this.downList.selectValue = 1
+        if(this.selectType == 1)
+            return
+        this.selectType = 1
         this.onTab()
     }
 
@@ -232,7 +236,7 @@ class BasePosUI extends game.BaseUI {
 
     private onDownListSelect(){
         this.page = 1;
-        if(this.downList.selectValue == 0)
+        if(this.selectType == 0)
               this.monsterType = this.downList2.selectValue;
         else
               this.skillType = this.downList2.selectValue;
@@ -316,10 +320,10 @@ class BasePosUI extends game.BaseUI {
 
     private renewDownList(){
         //this.downList.height = GameManager.stage.stageHeight - 100 - this.downList.y - 10;
-        if(this.downList.selectValue == 0)
+        if(this.selectType == 0)
         {
             var arr = [
-                {label:'全部',label2: 'x' + CardManager.getInstance().getMyMonsterList(0).length,data:0},
+                {label:'全部',label2: 'x' + CardManager.getInstance().getMyMonsterList(0).length,data:0,icon: 'monster_all_icon_png'},
                 {label:PKConfig.TYPENAME[1],label2: 'x' + CardManager.getInstance().getMyMonsterList(1).length,data:1,icon: 'icon_type1_png'},
                 {label:PKConfig.TYPENAME[2],label2: 'x' + CardManager.getInstance().getMyMonsterList(2).length,data:2,icon: 'icon_type2_png'},
                 {label:PKConfig.TYPENAME[3],label2: 'x' + CardManager.getInstance().getMyMonsterList(3).length,data:3,icon: 'icon_type3_png'}];
@@ -328,7 +332,7 @@ class BasePosUI extends game.BaseUI {
         else
         {
             var arr = [
-                {label:'全部',label2: 'x' + CardManager.getInstance().getMySkillList(0).length,data:0},
+                {label:'全部',label2: 'x' + CardManager.getInstance().getMySkillList(0).length,data:0,icon:'skill_all_icon_png'},
                 {label:PKConfig.SKILLTYPENAME[1],label2: 'x' + CardManager.getInstance().getMySkillList(1).length,data:1,icon: 'skill_type1_png'},
                 {label:PKConfig.SKILLTYPENAME[2],label2: 'x' + CardManager.getInstance().getMySkillList(2).length,data:2,icon: 'skill_type2_png'},
                 {label:PKConfig.SKILLTYPENAME[3],label2: 'x' + CardManager.getInstance().getMySkillList(3).length,data:3,icon: 'skill_type3_png'},
@@ -388,7 +392,8 @@ class BasePosUI extends game.BaseUI {
     }
 
     private renewTitle(){
-        this.topUI.setTitle(this.posName + '('+this.arrayData.length+'/'+this.maxCard+')')
+        var title = this.type == 'atk'?'【进攻阵容】':'【防御阵容】'
+        this.topUI.setTitle(title + '- ' + this.posName + ' ('+this.arrayData.length+'/'+this.maxCard+')')
     }
 
     public deleteID(id){
@@ -408,12 +413,12 @@ class BasePosUI extends game.BaseUI {
         //this.scroller2.stopAnimation();
         var type = this.downList2.selectValue;
         var arr;
-        if(this.downList.selectValue == 0)
+        if(this.selectType == 0)
         {
             arr = CardManager.getInstance().getMyMonsterList(type)
             this.monsterBG.visible = true
             this.skillBG.visible = false
-            MyTool.addColor(this.monsterIcon,0xFFFF00)
+            MyTool.addColor(this.monsterIcon,0xFF0000)
             MyTool.addColor(this.skillIcon,-1)
         }
         else
@@ -424,7 +429,7 @@ class BasePosUI extends game.BaseUI {
             MyTool.addColor(this.monsterIcon,-1)
             MyTool.addColor(this.skillIcon,0x07B6FF)
         }
-        ArrayUtil.sortByField(arr,['cost'],[0]);
+        ArrayUtil.sortByField(arr,['cost','level','id'],[0,0,0]);
         this.totalPage = Math.ceil(arr.length/this.pageSize || 1)
         this.numText.text = this.page + '/' + this.totalPage
         arr = arr.splice((this.page-1)*this.pageSize,this.pageSize)

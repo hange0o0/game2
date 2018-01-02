@@ -18,10 +18,32 @@ class M70 extends MBase {
         {
             var targetX = arr[i];
             var des = Math.abs(user.x - targetX.x);
-            if(des<=atkrage)
+            if(des<=atkrage + targetX.getVO().width/2)
             {
                 var hp = this.getAtkHp(user,targetX);
                 targetX.beAtkAction({hp:hp,atker:user})
+
+                if(targetX.beSkillAble())
+                {
+                    var skillValue = user.getSkillValue(2);
+                    var buff = new PKBuffData()
+                    buff.id = 34;
+                    buff.value = skillValue;
+                    buff.addValue('addSpeed',-skillValue);
+                    buff.user = user;
+                    buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(3);
+                    targetX.addBuff(buff)
+
+                    if(buff.ing)
+                    {
+                        PKData.getInstance().addVideo({
+                            type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+                            user:targetX,
+                            key:1,
+                            stateType:1
+                        })
+                    }
+                }
             }
         }
         return true;

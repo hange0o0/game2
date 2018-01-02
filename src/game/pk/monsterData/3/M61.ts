@@ -18,10 +18,16 @@ class M61 extends MBase {
         {
             var targetX = arr[i];
             var des = Math.abs(user.x - targetX.x);
-            if(des<=atkrage)
+            if(des<=atkrage + targetX.getVO().width/2)
             {
                 var hp = this.getAtkHp(user,targetX);
                 targetX.beAtkAction({hp:hp,atker:user})
+
+                var buff = new PKBuffData()
+                buff.user = user;
+                buff.addState(PKConfig.STATE_YUN);
+                buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(2);
+                targetX.addBuff(buff)
             }
         }
         return true;

@@ -23,7 +23,11 @@ class MBase {
 
     }
     //被攻击时的处理
-    public beAtkAction(user,data){
+    public beAtkAction(user:PKMonsterData,data){
+
+    }
+    //杀死单位的处理
+    public onKill(user:PKMonsterData,target:PKMonsterData){
 
     }
 

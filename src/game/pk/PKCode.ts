@@ -199,6 +199,7 @@ class PKCode {
                 mvo.die = true;
                 PD.monsterList.splice(i,1);
                 i--;
+                mvo.passEnd = true;
                 mvo.onDie();
                 PD.monsterChange = true;
                 if(mvo.dieTime) //召唤物不算分

@@ -52,12 +52,16 @@ class PKConfig {
     public static VIDEO_TOTEM_ADD = 17  //加图腾
     public static VIDEO_TOTEM_REMOVE = 18 //-图腾
 
-    public static VIDEO_POS_ADD = 19 //
-    public static VIDEO_POS_REMOVE = 20 //
+    public static VIDEO_POS_ADD = 19 //增加
+    public static VIDEO_POS_REMOVE = 20 //结束
+
+    public static VIDEO_MANAHP_CHANGE = 21 //魔盾结果
+    public static VIDEO_MONSTER_NOHIT = 22 //免伤动画
 
 
 
     public static STATE_YUN = 1
+    public static STATE_MOMIAN = 2
 
 
     public static LISTENER_CREATE = 1

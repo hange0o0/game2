@@ -1,6 +1,7 @@
 //场上的怪
 class PKMonsterData {
     public die = false;
+    public passEnd = false;//冲过了终点
 
     public hp = 0
     public atk  = 0
@@ -17,11 +18,14 @@ class PKMonsterData {
     public doubleAction  = false;
     public missRate  = 0
     public momian  = false
+    public skillTemp  = {}//用于存放技能的临时变量
+    public nohitTimes  = 0//不受伤害的次数
 
     public baseHp = 0
     public baseAtk  = 0
     public baseSpeed  = 0
     public addSpeed  = 0//速度改变百分比
+    public manaHp  = 0//魔盾
 
 
 
@@ -105,7 +109,7 @@ class PKMonsterData {
     //}
 
     public beSkillAble(){
-        return this.momian == false;
+        return this.momian == false && !this.isInState(PKConfig.STATE_MOMIAN);
     }
 
     //{endTime,  add:{属性名称:增加值}，   state:{状态名：true},   id:唯一ID,   no:这BUFF没生效,   value:技能等级数值}
@@ -119,6 +123,19 @@ class PKMonsterData {
 
         if(data.ing && data.haveState)
             this.resetState();
+    }
+
+    //拥有指定BUFF
+    public haveBuff(id){
+        for(var i=0;i<this.buff.length;i++)
+        {
+            var oo:PKBuffData =  this.buff[i];
+            if(oo.id == id)
+            {
+                return true
+            }
+        }
+        return false;
     }
 
     //清除状态
@@ -161,6 +178,8 @@ class PKMonsterData {
 
     //判断是否在某个状态中
     public isInState(stateName){
+        if(stateName == PKConfig.STATE_MOMIAN && this.momian)
+            return true;
         return this.currentState[stateName];
     }
 
@@ -356,9 +375,50 @@ class PKMonsterData {
     public beAtkAction(data){
         this.addHp(-data.hp)
         MBase.getData(this.mid).beAtkAction(this,data);
+        if(this.die && data.atker)
+        {
+            MBase.getData(data.atker.mid).onKill(data.atker,this);
+        }
     }
 
     public addHp(hp){
+        if(hp<0)
+        {
+            if(this.nohitTimes)
+            {
+                this.nohitTimes -- ;
+                PKData.getInstance().addVideo({
+                    type:PKConfig.VIDEO_MONSTER_NOHIT,
+                    user:this,
+                })
+                return;
+            }
+            else if(this.manaHp)
+            {
+                this.manaHp += hp;
+                if(this.manaHp < 0)
+                {
+                    hp = this.manaHp
+                    this.manaHp = 0
+                }
+                else
+                {
+                    hp = 0;
+                }
+                //魔盾消失
+                if(this.manaHp == 0)
+                {
+                    PKData.getInstance().addVideo({
+                        type:PKConfig.VIDEO_MANAHP_CHANGE,
+                        user:this,
+                    })
+                }
+            }
+            if(!hp)
+                return;
+        }
+
+
         this.hp += hp;
         if(this.hp <= 0)
             this.die = true;
@@ -375,7 +435,8 @@ class PKMonsterData {
     }
 
     public onDie(){
-        MBase.getData(this.mid).onDie(this);
+        if(!this.passEnd)
+            MBase.getData(this.mid).onDie(this);
         this.getOwner().teamData.testState(PKConfig.LISTENER_DIE,this);
     }
 

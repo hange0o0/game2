@@ -7,5 +7,9 @@
 		<e:Image source="bar_bg_png" x="0" y="0"/>
 		<e:Image id="barMC" source="bar1_png" x="2" y="2" fillMode="clip" width="100"/>
 	</e:Group>
+	<e:Group id="numGroup" includeIn="normal" y="7" right="5">
+		<e:Image source="bg8_png" scale9Grid="9,9,9,9" x="0" y="0" width="30" height="20"/>
+		<e:Label id="numText" text="12" size="18" horizontalCenter="0" verticalCenter="0"/>
+	</e:Group>
 
 </e:Skin>

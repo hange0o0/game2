@@ -16,4 +16,17 @@ class M31 extends MBase {
         var targetItem = PKVideoCon.getInstance().getItemByID(target.id);
         PKBulletManager.getInstance().createBullet(userItem,targetItem,actionTime,endTime,5)
     }
+
+    public atk(user:PKMonsterData,target:PKMonsterData){
+        var b = super.atk(user,target)
+        if(b && PKData.getInstance().random() < user.getSkillValue(1)/100)
+        {
+            var buff = new PKBuffData()
+            buff.user = user;
+            buff.addState(PKConfig.STATE_YUN);
+            buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(2);
+            target.addBuff(buff)
+        }
+        return b;
+    }
 }

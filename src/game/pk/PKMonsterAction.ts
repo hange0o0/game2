@@ -31,7 +31,7 @@ class PKMonsterAction {
                 var target:PKMonsterData = data.target;
 
                 //判断攻击是否生效
-                if(target && target.die)
+                if(target && target.die && !data.stopTestDie)
                     continue;
 
 
@@ -47,7 +47,7 @@ class PKMonsterAction {
                 }
                 else if(data.type == 'skill_before')   //技能产生
                 {
-                    if(!user.canAction())
+                    if(!user.canAction() && !data.stopTestDie)
                         continue;
                     user.setSkillUse();
                     data.model.skillAction(user,data.target,t)
@@ -62,7 +62,7 @@ class PKMonsterAction {
     }
 
     public atk(user:PKMonsterData,actionTime){
-        var time = actionTime + Math.floor(user.getVO().atkcd*(1+user.addSpeed/100));
+        var time = actionTime + Math.floor(user.getVO().atkcd*(1-user.addSpeed/100));
         user.stopTime = Math.max(user.stopTime,time)
 
         PKData.getInstance().addVideo({   //攻击动画开始
@@ -75,7 +75,7 @@ class PKMonsterAction {
     }
 
     public skill(user:PKMonsterData,actionTime){
-        var time = actionTime + Math.floor(user.getVO().atkcd*(1+user.addSpeed/100));
+        var time = actionTime + Math.floor(user.getVO().atkcd*(1-user.addSpeed/100));
         user.stopTime = Math.max(user.stopTime,time)
 
         PKData.getInstance().addVideo({   //攻击动画开始

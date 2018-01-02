@@ -25,15 +25,6 @@
 			<e:HorizontalLayout gap="20"/>
 		</e:layout>
 	</e:Group>
-	<e:Group horizontalCenter="0" verticalCenter="-50">
-		<e:Rect id="mapBtn" width="240" height="240" x="0" y="0"/>
-		<e:Rect id="testBtn" width="240" height="240" x="10" y="10"/>
-		<e:Rect width="240" height="240" x="20" y="20"/>
-		<e:Rect width="240" height="240" x="30" y="30"/>
-		<e:layout>
-			<e:TileLayout horizontalGap="40" verticalGap="40"/>
-		</e:layout>
-	</e:Group>
 	<e:Group x="0" bottom="-17" height="140">
 		<e:Image source="title_bg4_png" x="0" width="640" fillMode="repeat" y="12.5"/>
 		<e:Rect id="bottomSelectMC" width="200" height="110" x="0" y="15" scaleX="1" scaleY="1" fillAlpha="0.1" fillColor="0xffffff"/>
@@ -59,7 +50,7 @@
 			<e:HorizontalLayout gap="30"/>
 		</e:layout>
 	</e:Group>
-	<e:Group y="70" horizontalCenter="0">
+	<e:Group y="65" horizontalCenter="0">
 		<e:Group id="mailBtn" x="10" y="0">
 			<e:Image scale9Grid="33,31,4,6" y="0" width="80" height="80" x="0" source="bg7_png" visible="false"/>
 			<e:Image source="main_mail_png" verticalCenter="0" horizontalCenter="0"/>
@@ -84,4 +75,15 @@
 			<e:HorizontalLayout gap="10" paddingLeft="10"/>
 		</e:layout>
 	</e:Group>
+	<e:Scroller width="560" horizontalCenter="0" top="150" bottom="250" bounces="false">
+		<e:Group>
+			<e:Rect id="mapBtn" width="560" height="160" x="100" y="-6" scaleX="1" scaleY="1" strokeWeight="3" ellipseWidth="40" ellipseHeight="40"/>
+			<e:Rect id="testBtn" width="560" height="160" x="380" y="-6" scaleX="1" scaleY="1" strokeWeight="3" ellipseWidth="40" ellipseHeight="40"/>
+			<e:Rect width="560" height="160" x="100" y="274" scaleX="1" scaleY="1" strokeWeight="3" ellipseWidth="40" ellipseHeight="40"/>
+			<e:Rect width="560" height="160" x="110" y="284" scaleX="1" scaleY="1" strokeWeight="3" ellipseWidth="40" ellipseHeight="40"/>
+			<e:layout>
+				<e:VerticalLayout gap="15"/>
+			</e:layout>
+		</e:Group>
+	</e:Scroller>
 </e:Skin>

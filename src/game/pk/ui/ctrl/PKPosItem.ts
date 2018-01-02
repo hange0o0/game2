@@ -20,6 +20,9 @@ class PKPosItem extends game.BaseItem {
     private img: CardImg;
     private barGroup: eui.Group;
     private barMC: eui.Image;
+    private numGroup: eui.Group;
+    private numText: eui.Label;
+
 
 
 
@@ -162,6 +165,16 @@ class PKPosItem extends game.BaseItem {
         {
             cd = data.getRemainCD();
             maxCD = maxCD * Math.max(0,data.getMaxNum()-1);
+        }
+
+        if(data.mid < 100)
+        {
+            this.numGroup.visible = true;
+            this.numText.text = (data.getMaxNum() - data.num) + '';
+        }
+        else
+        {
+            this.numGroup.visible = false;
         }
 
         if(data.num == 0)

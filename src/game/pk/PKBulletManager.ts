@@ -8,6 +8,7 @@ class PKBulletManager {
     private arrowPool = [];
     private bulletPool = [];
     private bulletAniPool = [];
+    private bulletLinePool = [];
     private useItem = [];
 
     //有抛物线
@@ -53,6 +54,20 @@ class PKBulletManager {
         return item;
     }
 
+    //直线3   fun:每次移动触发的方法
+    public createBulletLine(fromMC,toMC,beginTime,endTime,id?,fun?):ArrowMC{
+        var item:BulletMCLine = this.bulletAniPool.pop();
+        if(!item)
+        {
+            item = new BulletMCLine();
+        }
+        item.init(fromMC,toMC,beginTime,endTime,id,fun);
+        var con = fromMC.parent;
+        con.addChildAt(item,con.getChildIndex(fromMC) + 1);
+        this.useItem.push(item);
+        return item;
+    }
+
     public freeItem(item){
         if(!item)
             return;
@@ -63,6 +78,8 @@ class PKBulletManager {
             this.bulletPool.push(item);
         else if(item.type == 'bullet_ani')
             this.bulletAniPool.push(item);
+        else if(item.type == 'bullet_line')
+            this.bulletLinePool.push(item);
         ArrayUtil.removeItem(this.useItem,item)
     }
 
@@ -164,14 +181,15 @@ class BulletMC extends egret.DisplayObjectContainer{
 
     public rota = 0;
     private config = {
-        1:{w:25,h:75},
-        2:{w:25,h:120},
-        3:{w:25,h:120},
-        4:{w:25,h:80},
-        5:{w:25,h:120},
-        6:{w:25,h:120},
-        7:{w:25,h:120},
-        8:{w:20,h:57},
+        1:{w:25,h:75,rota:90},
+        2:{w:25,h:120,rota:90},
+        3:{w:25,h:120,rota:90},
+        4:{w:25,h:80,rota:90},
+        5:{w:25,h:120,rota:90},
+        6:{w:25,h:120,rota:90},
+        7:{w:25,h:120,rota:90},
+        8:{w:20,h:57,rota:90},
+        9:{w:18,h:18},
     }
     constructor() {
         super();
@@ -187,18 +205,21 @@ class BulletMC extends egret.DisplayObjectContainer{
         this.toMC = toMC;
         this.beginTime = beginTime;
         this.endTime = endTime;
+        this.rota = 0;
+        this.mc.rotation = 0;//有技能会旋转这个MC
+        this.scaleY = 1;
         if(id)
         {
             this.mc.source = 'bullet'+id+'_png'
-            this.rota = 90;
             this.mc.anchorOffsetX = this.config[id].w/2
             this.mc.anchorOffsetY = 20
+            if(this.config[id].rota)
+            {
+                this.rota = this.config[id].rota;
+            }
         }
-        else
-        {
-            this.rota = 0;
-        }
-        this.mc.rotation = 0;//不知什么地方改了
+
+
     }
 
     public onAction(t){
@@ -213,16 +234,20 @@ class BulletMC extends egret.DisplayObjectContainer{
             {x:this.fromMC.x,y:fromY},
             {x:this.toMC.x,y:toY}
         );
-        var base = 1
-        if(this.id && Math.abs(this.toMC.x - this.fromMC.x) <this.config[this.id].h)
+        if(this.id && this.config[this.id].rota)
         {
-            base =  Math.abs(this.toMC.x - this.fromMC.x)/this.config[this.id].h
+            var base = 1
+            if(this.id && Math.abs(this.toMC.x - this.fromMC.x) <this.config[this.id].h)
+            {
+                base =  Math.abs(this.toMC.x - this.fromMC.x)/this.config[this.id].h
+            }
+
+            if(rate < 0.5)
+                this.scaleY = rate*2*base
+            else
+                this.scaleY = (1-rate)*2*base
         }
 
-        if(rate < 0.5)
-            this.scaleY = rate*2*base
-        else
-            this.scaleY = (1-rate)*2*base
         return true;
 
     }
@@ -230,6 +255,63 @@ class BulletMC extends egret.DisplayObjectContainer{
     public getRota(begin,end){
 
         return Math.atan2(end.y - begin.y,end.x - begin.x)* 180/3.14 + this.rota
+    }
+
+    public remove(){
+        MyTool.removeMC(this);
+        egret.Tween.removeTweens(this.mc);
+    }
+}
+
+class BulletMCLine extends egret.DisplayObjectContainer{
+    public type = 'bullet_line'
+
+    public mc = new eui.Image()
+    public fromMC:PKMonsterItem
+    public toMC:any
+    public beginTime
+    public endTime
+    public id
+    public fun
+    constructor() {
+        super();
+        this.mc.source = 'pk_arrow_png'
+        this.mc.anchorOffsetX = 30
+        this.mc.anchorOffsetY = 25
+        this.addChild(this.mc)
+    }
+
+    public init(fromMC,toMC,beginTime,endTime,id,fun?){
+        this.id = id;
+        this.fromMC = fromMC;
+        this.toMC = toMC;
+        this.beginTime = beginTime;
+        this.endTime = endTime;
+        this.fun = fun;
+
+        //if(id)
+        //{
+        //    this.mc.source = 'bullet'+id+'_png'
+        //    this.mc.anchorOffsetX = this.config[id].w/2
+        //    this.mc.anchorOffsetY = 20
+        //
+        //
+        //}
+
+
+    }
+
+    public onAction(t){
+        if(t > this.endTime)
+            return false;
+        var rate = (t - this.beginTime)/(this.endTime - this.beginTime);
+        var fromY = this.fromMC.y - this.fromMC.data.getVO().height/2 + this.fromMC.data.atkY
+        var toY = this.toMC.y - this.toMC.data.getVO().height/2
+        this.x = this.fromMC.x + (this.toMC.x - this.fromMC.x)*rate
+        this.y =  fromY + (toY - fromY)*rate
+        this.fun && this.fun();
+        return true;
+
     }
 
     public remove(){

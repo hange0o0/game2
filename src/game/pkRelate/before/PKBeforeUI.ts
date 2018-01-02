@@ -48,7 +48,7 @@ class PKBeforeUI extends game.BaseWindow {
     }
 
     private onScroll(){
-        this.scrollerBG.scrollRect = new egret.Rectangle(0,this.scroller.viewport.scrollV,640,660)
+        this.scrollerBG.scrollRect = new egret.Rectangle(0,this.scroller.viewport.scrollV,640,600)
         //this.scrollerBG.scrollRect = new egret.Rectangle(0,0,50,50)
         //console.log(this.scrollerBG.scrollRect)
         //this.scrollerBG.y = this.scroller.y - this.scroller.viewport.scrollV*0.9;

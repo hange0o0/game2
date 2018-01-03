@@ -306,11 +306,11 @@ class PKMonsterData {
         return this.skillTargets
     }
 
-    public setSkillUse(){
+    public setSkillUse(actionTime){
         if(this.getVO().skillcd < 0)
             this.lastSkill = Number.MAX_VALUE;
         else
-            this.lastSkill = PKData.getInstance().actionTime - this.getVO().mv_atk;
+            this.lastSkill = actionTime;
     }
 
     public move(){

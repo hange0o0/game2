@@ -292,6 +292,18 @@ class PKVideoCon extends game.BaseContainer {
         AM.playInItem(mvID,atker);
     }
 
+    //掉在头上
+    public dropOn(a,mvID){
+        var atker = this.getItemByID(a)
+        if(!atker)
+        {
+            throw new Error('XXX')
+            return;
+        }
+        var AM = AniManager.getInstance();
+        return AM.drop(mvID,atker);
+    }
+
     //暴击动画
     public playDoubleHit(item:PKMonsterItem,value){
          var txt = this.createTxt();

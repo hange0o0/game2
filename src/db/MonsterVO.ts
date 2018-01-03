@@ -36,6 +36,7 @@ class MonsterVO {
     public mcwidth: number;
     public atk2: number;
     public mv_atk: number;
+    public mv_atk2: number;
     public sv1: number;
     public sv2: number;
     public sv3: number;
@@ -77,6 +78,7 @@ class MonsterVO {
         this.atk2 = data.atk2
         this.skillcd = data.skillcd * 1000
         this.mv_atk = data.mv_atk * 1000
+        this.mv_atk2 = data.mv_atk2
     }
 
     public getImage(){

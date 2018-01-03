@@ -82,7 +82,7 @@ class MBase {
    //////////////////////////////////////////////////////   other上面的为要处理的函数
     //技能前处理（生成技能事件）
     public skillBefore(user:PKMonsterData,actionTime){
-        var endTime = actionTime + user.getVO().mv_atk//这个时间后发出攻击时件(前摇)
+        var endTime = actionTime + this.getAtkMVCD(user)//这个时间后发出攻击时件(前摇)
         var targets = this.getSkillTarget(user);
         for(var i=0;i<targets.length;i++)
         {
@@ -98,12 +98,16 @@ class MBase {
 
     //攻击前处理（生成PK事件）设攻击发出时间，攻击目标选择
     public atkBefore(user:PKMonsterData,actionTime){
-        var endTime = actionTime + user.getVO().mv_atk//这个时间后发出攻击时件(前摇)
+        var endTime = actionTime + this.getAtkMVCD(user)//这个时间后发出攻击时件(前摇)
         var targets = this.getAtkTargets(user);
         for(var i=0;i<targets.length;i++)
         {
             this.sendAtkBefore(user,targets[i],actionTime,endTime)
         }
+    }
+
+    public getAtkMVCD(user:PKMonsterData){
+        return Math.floor(user.getVO().mv_atk*(1-user.addSpeed/100));
     }
 
     //攻击发出，设攻击生效(起作用)时间

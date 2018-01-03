@@ -3,6 +3,10 @@ class M74 extends MBase {
         super();
     }
 
+    public getSkillTarget(user:PKMonsterData){
+        return [null];
+    }
+
     public skill(user:PKMonsterData,targets){
         var PD = PKData.getInstance();
         var mid = 64;

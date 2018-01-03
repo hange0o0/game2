@@ -24,6 +24,18 @@ class M36 extends MBase {
         })
     }
 
+    protected sendSkillAction(user,target,actionTime,endTime){
+        PKMonsterAction.getInstance().addAtkList({   //到actionTime后根据条件产生攻击事件
+            type:'skill',
+            user:user,
+            target:target,
+            stopTestDie:true,
+            actionTime:actionTime,
+            endTime:endTime
+        })
+    }
+
+
     ////技能动画
     //public skillMV(user,target,actionTime,endTime){
     //    PKVideoCon.getInstance().playAniOn(target.id,this.mvID)
@@ -41,6 +53,7 @@ class M36 extends MBase {
             owner:user.owner,
             atkRota:atkRota,
             x:user.x,
+            y:user.y,
             lastSkill:Number.MAX_VALUE,
             dieTime:PD.actionTime + 1000*user.getSkillValue(2),  //存活时间
             actionTime:PD.actionTime

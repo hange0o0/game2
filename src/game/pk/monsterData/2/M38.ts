@@ -5,6 +5,7 @@ class M38 extends MBase {
 
     public initMonster(user:PKMonsterData){
         user.atkY = 10
+        user.atkX = 30
     }
 
     //伤害飞行时间
@@ -42,7 +43,7 @@ class M38 extends MBase {
 
     //技能前处理（生成技能事件）
     public skillBefore(user:PKMonsterData,actionTime){
-        var endTime = actionTime + user.getVO().mv_atk//这个时间后发出攻击时件(前摇)
+        var endTime = actionTime + this.getAtkMVCD(user)//这个时间后发出攻击时件(前摇)
         var target = this.getSkillTarget(user)[0];
         var times = user.getSkillValue(1);
         for(var i=0;i<times;i++)

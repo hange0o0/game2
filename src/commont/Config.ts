@@ -55,6 +55,7 @@ class Config {
             arr.push(this.createImg("pk_bg" + i + ".png"));
         }
         arr.push(this.createImg('pk_arrow.png','monster/'));
+        arr.push(this.createImg('pk_arrow_1.png','monster/'));
 
         var aniList = [6, 8, 10, 14, 16, 21, 24, 28, 29, 30, 34, 39, 103, 104, 106, 107, 108, 111, 112, 113, 114, 115, 116, 117, 118, 120, 122, 123, 126, 127, 128, 133, 140, 149, 153];
         for(var i=0;i<aniList.length;i++)

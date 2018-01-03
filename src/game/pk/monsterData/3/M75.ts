@@ -3,6 +3,12 @@ class M75 extends MBase {
         super();
     }
 
+    public bulleteID = 1;
+
+    public initMonster(user:PKMonsterData){
+        user.atkX = 80
+    }
+
     //伤害飞行时间
     protected getAtkArriveCD(user:PKMonsterData,target:PKMonsterData){
         return 1000;
@@ -14,19 +20,19 @@ class M75 extends MBase {
             x: user.x + user.atkRota * user.getSkillValue(1),
             y:user.y
         }
-        var rd = Math.floor(Math.random()*1000000)
-        var bullet = PKBulletManager.getInstance().createBulletLine(userItem,targetItem,actionTime,endTime,9,()=>{
+        var PD = PKData.getInstance();
+        var rd = this.bulleteID
+        this.bulleteID ++;
+        var bullet = PKBulletManager.getInstance().createBulletLine(userItem,targetItem,actionTime,endTime,'pk_arrow_1_png',()=>{
 
-            var PD = PKData.getInstance();
-            var arr = PD.getMonsterByNoTeam(user.getOwner().teamData.enemy);
+            var arr = PD.getMonsterByNoTeam(user.getOwner().teamData);
             var atkrage = 0
             for(var i=0;i<arr.length;i++)
             {
                 var targetX = arr[i];
                 if(!targetX.skillTemp[75])
                     targetX.skillTemp[75] = {};
-                var des = Math.abs(bullet.x - targetX.x);
-                if(!targetX.skillTemp[75][rd] && des<=atkrage + targetX.getVO().width/2)
+                if(!targetX.skillTemp[75][rd] && Math.abs(bullet.x - targetX.x)<=atkrage + targetX.getVO().width/2)
                 {
                     targetX.skillTemp[75][rd] = true;
                     var hp = this.getAtkHp(user,targetX);
@@ -38,5 +44,17 @@ class M75 extends MBase {
 
     public atk(user:PKMonsterData,target:PKMonsterData){
         return false;
+    }
+
+    protected sendAtkBefore(user,target,actionTime,endTime){
+        PKMonsterAction.getInstance().addAtkList({   //到actionTime后根据条件产生攻击事件
+            type:'atk_before',
+            model:this,
+            stopTestDie:true,
+            user:user,
+            target:target,
+            actionTime:actionTime,
+            endTime:endTime
+        })
     }
 }

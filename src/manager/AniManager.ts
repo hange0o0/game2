@@ -299,120 +299,133 @@ class AniManager {
         return mv;
     }
 
-    //在某个位置闪一下
-    public showStar1(con,point,scaleIn = 0){
-        var mc = new eui.Image()
-        mc.source = 'coin_mv2_png';
-        con.addChild(mc);
-        mc.x = point.x
-        mc.y = point.y
-        mc.anchorOffsetX = 100/2
-        mc.anchorOffsetY = 100/2
-        mc.scaleX = 0
-        mc.scaleY = 0
-        mc.rotation = Math.random()*90
-        var scale = scaleIn || (0.2 + Math.random()*0.5);
-        var cd = 100/scale/scale + Math.random()*700 + 200;
-        if(scaleIn)
-            cd /= 2;
-        var tw:egret.Tween = egret.Tween.get(mc);
-        tw.to({scaleX:scale,scaleY:scale,rotation:mc.rotation + 180},cd).to({scaleX:0,scaleY:0,rotation:mc.rotation + 360},cd).call(function(){
-            MyTool.removeMC(mc);
-        })
-    }
-
-    //流星
-    public showStar2(con,point){
-        var mc = new eui.Image()
-        mc.source = 'coin_mv1_png';
-        con.addChild(mc);
-
-        mc.anchorOffsetX = 10
-        mc.anchorOffsetY = 12
-        mc.scale9Grid = new egret.Rectangle(5,20,10,160)
-        var scale = 0.5 + Math.random()*0.3;
-        mc.scaleX = scale
-        mc.scaleY = scale
-        var rota = Math.random()*20;
-        mc.rotation = rota + 240
-        mc.height = 190/scale
-
-        mc.x = 700
-        mc.y = point.y - Math.tan((270 - mc.rotation)/180*Math.PI) * (mc.x - point.x)
-        var cd = MyTool.getDis(mc,point)*1/scale;
-
-        var tw:egret.Tween = egret.Tween.get(mc);
-        tw.to({x:point.x,y:point.y},cd).to({height:20},100/scale).call(function(){
-            MyTool.removeMC(mc);
-            this.showStar1(con,point,scale)
+    //掉下来
+    public drop(source,target){
+       var mc = this.getImg(source)
+        mc.y = target.y - 500
+        mc.x = target.x
+        target.parent.addChildAt(mc,target.parent.getChildIndex(target) + 1);
+        var tw = egret.Tween.get(mc)
+        tw.to({y:target.y},300).call(function(){
+            this.removeImg(mc);
         },this)
+        return mc
     }
 
-    //闪电
-    public showFlash(con,point){
-        var data:any = RES.getRes('flash' + "_json"); //qid
-        var texture:egret.Texture = RES.getRes('flash' + "_png");
-        if(data == null)
-        {
-            return
-        }
-        var mcFactory = new egret.MovieClipDataFactory(data, texture);
-
-        var mc:any = this.mcPool.pop() || new egret.MovieClip();
-        mc.movieClipData = mcFactory.generateMovieClipData('flash' + Math.floor( 1 + Math.random()*5));
-        var scale = 1 + Math.random();
-        mc.x = point.x
-        mc.y = point.y - (scale - 1) *10;
-        mc.scaleX = scale
-        mc.scaleY = scale
-        con.addChild(mc);
-        mc.gotoAndPlay(1, 1);
-        mc.comFun = null;
-        mc.frameRate = 12//技能动画变慢
-        mc.once(egret.Event.COMPLETE, this.onComp, this);
-        this.mvList.push(mc);
-        return mc;
-    }
-
-
-    //云
-    public showCloud(con,rect,isPlace?){
-        var mc = new eui.Image()
-        var coundID  =  Math.floor(Math.random()*3+1);
-        var cloudWidth = [0,239,193,112][coundID]
-        var cloudHeight = [0,136,138,82][coundID]
-        mc.source = 'cloud'+ coundID +'_png';
-        con.addChild(mc);
-
-
-        var scale = 0.8 + Math.random()*0.6;
-        mc.scaleX = scale
-        mc.scaleY = scale
-        mc.touchEnabled = false;
-        cloudWidth *= scale
-        cloudHeight *= scale
-
-        var rota = Math.random()>0.5?1: -1;
-        var toX =  rota > 0?rect.width:-cloudWidth;
-        mc.y = rect.y + Math.random()*(rect.height-cloudHeight);
-        if(isPlace)
-        {
-            mc.x = Math.random()*(con.width-cloudWidth);
-        }
-        else if(rota > 0)
-        {
-            mc.x = -cloudWidth
-        }
-        else
-        {
-            mc.x = rect.width
-        }
-        var cd = Math.abs(mc.x - toX) * (50 + Math.random()*20)
-
-        var tw:egret.Tween = egret.Tween.get(mc);
-        tw.to({x:toX},cd).call(function(){
-            MyTool.removeMC(mc);
-        },this)
-        return mc;
-    }
+    ////在某个位置闪一下
+    //public showStar1(con,point,scaleIn = 0){
+    //    var mc = new eui.Image()
+    //    mc.source = 'coin_mv2_png';
+    //    con.addChild(mc);
+    //    mc.x = point.x
+    //    mc.y = point.y
+    //    mc.anchorOffsetX = 100/2
+    //    mc.anchorOffsetY = 100/2
+    //    mc.scaleX = 0
+    //    mc.scaleY = 0
+    //    mc.rotation = Math.random()*90
+    //    var scale = scaleIn || (0.2 + Math.random()*0.5);
+    //    var cd = 100/scale/scale + Math.random()*700 + 200;
+    //    if(scaleIn)
+    //        cd /= 2;
+    //    var tw:egret.Tween = egret.Tween.get(mc);
+    //    tw.to({scaleX:scale,scaleY:scale,rotation:mc.rotation + 180},cd).to({scaleX:0,scaleY:0,rotation:mc.rotation + 360},cd).call(function(){
+    //        MyTool.removeMC(mc);
+    //    })
+    //}
+    //
+    ////流星
+    //public showStar2(con,point){
+    //    var mc = new eui.Image()
+    //    mc.source = 'coin_mv1_png';
+    //    con.addChild(mc);
+    //
+    //    mc.anchorOffsetX = 10
+    //    mc.anchorOffsetY = 12
+    //    mc.scale9Grid = new egret.Rectangle(5,20,10,160)
+    //    var scale = 0.5 + Math.random()*0.3;
+    //    mc.scaleX = scale
+    //    mc.scaleY = scale
+    //    var rota = Math.random()*20;
+    //    mc.rotation = rota + 240
+    //    mc.height = 190/scale
+    //
+    //    mc.x = 700
+    //    mc.y = point.y - Math.tan((270 - mc.rotation)/180*Math.PI) * (mc.x - point.x)
+    //    var cd = MyTool.getDis(mc,point)*1/scale;
+    //
+    //    var tw:egret.Tween = egret.Tween.get(mc);
+    //    tw.to({x:point.x,y:point.y},cd).to({height:20},100/scale).call(function(){
+    //        MyTool.removeMC(mc);
+    //        this.showStar1(con,point,scale)
+    //    },this)
+    //}
+    //
+    ////闪电
+    //public showFlash(con,point){
+    //    var data:any = RES.getRes('flash' + "_json"); //qid
+    //    var texture:egret.Texture = RES.getRes('flash' + "_png");
+    //    if(data == null)
+    //    {
+    //        return
+    //    }
+    //    var mcFactory = new egret.MovieClipDataFactory(data, texture);
+    //
+    //    var mc:any = this.mcPool.pop() || new egret.MovieClip();
+    //    mc.movieClipData = mcFactory.generateMovieClipData('flash' + Math.floor( 1 + Math.random()*5));
+    //    var scale = 1 + Math.random();
+    //    mc.x = point.x
+    //    mc.y = point.y - (scale - 1) *10;
+    //    mc.scaleX = scale
+    //    mc.scaleY = scale
+    //    con.addChild(mc);
+    //    mc.gotoAndPlay(1, 1);
+    //    mc.comFun = null;
+    //    mc.frameRate = 12//技能动画变慢
+    //    mc.once(egret.Event.COMPLETE, this.onComp, this);
+    //    this.mvList.push(mc);
+    //    return mc;
+    //}
+    //
+    //
+    ////云
+    //public showCloud(con,rect,isPlace?){
+    //    var mc = new eui.Image()
+    //    var coundID  =  Math.floor(Math.random()*3+1);
+    //    var cloudWidth = [0,239,193,112][coundID]
+    //    var cloudHeight = [0,136,138,82][coundID]
+    //    mc.source = 'cloud'+ coundID +'_png';
+    //    con.addChild(mc);
+    //
+    //
+    //    var scale = 0.8 + Math.random()*0.6;
+    //    mc.scaleX = scale
+    //    mc.scaleY = scale
+    //    mc.touchEnabled = false;
+    //    cloudWidth *= scale
+    //    cloudHeight *= scale
+    //
+    //    var rota = Math.random()>0.5?1: -1;
+    //    var toX =  rota > 0?rect.width:-cloudWidth;
+    //    mc.y = rect.y + Math.random()*(rect.height-cloudHeight);
+    //    if(isPlace)
+    //    {
+    //        mc.x = Math.random()*(con.width-cloudWidth);
+    //    }
+    //    else if(rota > 0)
+    //    {
+    //        mc.x = -cloudWidth
+    //    }
+    //    else
+    //    {
+    //        mc.x = rect.width
+    //    }
+    //    var cd = Math.abs(mc.x - toX) * (50 + Math.random()*20)
+    //
+    //    var tw:egret.Tween = egret.Tween.get(mc);
+    //    tw.to({x:toX},cd).call(function(){
+    //        MyTool.removeMC(mc);
+    //    },this)
+    //    return mc;
+    //}
 }

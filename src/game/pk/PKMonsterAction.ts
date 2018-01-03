@@ -30,6 +30,9 @@ class PKMonsterAction {
                 var user:PKMonsterData = data.user;
                 var target:PKMonsterData = data.target;
 
+                //if(user.mid == 36 && data.type == 'skill_before')
+                //    console.log(99999)
+
                 //判断攻击是否生效
                 if(target && target.die && !data.stopTestDie)
                     continue;
@@ -49,7 +52,7 @@ class PKMonsterAction {
                 {
                     if(!user.canAction() && !data.stopTestDie)
                         continue;
-                    user.setSkillUse();
+                    user.setSkillUse(data.actionTime);
                     data.model.skillAction(user,data.target,t)
                 }
                 else if(data.type == 'skill')  //技能生效

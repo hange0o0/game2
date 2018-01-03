@@ -5,6 +5,7 @@ class MonsterMV extends eui.Group {
     public static STAT_DIE = 4
 
     private mc:eui.Image;
+    private atkMV:MonsterAtkMV = new MonsterAtkMV();
 
 
     public frameTotal = 20//播放完一轮需要的帧数
@@ -26,9 +27,18 @@ class MonsterMV extends eui.Group {
     private init() {
         this.mc = new eui.Image();
         this.addChild(this.mc);
+        this.addChild(this.atkMV);
+        this.atkMV.visible = false;
+        this.atkMV.addEventListener('mv_end',this.onAtkMVEnd,this)
         //
         //MyTool.addTestBlock(this)
 
+    }
+
+    private onAtkMVEnd(){
+        this.atkMV.stop();
+        this.atkMV.visible = false
+        this.play();
     }
 
     public load(id,isHd?){
@@ -80,6 +90,7 @@ class MonsterMV extends eui.Group {
 
     private reset(){
         this.index = 0;
+        this.atkMV.visible = false;
         this.onE();
     }
 
@@ -93,9 +104,17 @@ class MonsterMV extends eui.Group {
         var x = Math.floor(this.index/frameStep)*w
         var y = (this.state - 1)*h
         this.mc.scrollRect = new egret.Rectangle(x,y,w,h)
-        //console.log(new egret.Rectangle(x,y,w,h))
+        //console.log(x,y,w,h, Math.floor(this.index/frameStep),(this.vo.mcnum))
         //this.stop();
+
+        if(this.state == MonsterMV.STAT_ATK && this.vo.mv_atk2 == 1 && Math.floor(this.index/frameStep)>=(this.vo.mcnum-1))
+        {
+            this.index = 0;
+            this.onEnd()
+            return;
+        }
         this.index ++;
+
         if(this.index>=this.vo.mcnum*frameStep)
         {
             this.index = 0;
@@ -113,11 +132,30 @@ class MonsterMV extends eui.Group {
             case MonsterMV.STAT_STAND:
                 break;
             case MonsterMV.STAT_ATK:
-                this.stand();
+                if(this.vo.mv_atk2 == 1)
+                {
+                    this.stop();
+                    this.showAtkMV();
+                }
+                else
+                    this.stand();
                 break;
             case MonsterMV.STAT_DIE:
                 this.stop();
                 this.dispatchEventWith('mv_die')
+                break;
+        }
+    }
+
+    private showAtkMV(){
+        switch(this.vo.id)
+        {
+            case 37:
+                this.atkMV.visible = true;
+                this.atkMV.load(this.vo.id,1,300,240)
+                this.atkMV.x = -180
+                this.atkMV.y = 55
+                this.atkMV.play();
                 break;
         }
     }

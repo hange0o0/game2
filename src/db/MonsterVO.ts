@@ -98,6 +98,7 @@ class MonsterVO {
     }
 
     public preLoad(){
+        RES.getResAsync('"enemy'+this.id+'_png',function(){},this)
          MBase.getData(this.id).preload();
     }
 

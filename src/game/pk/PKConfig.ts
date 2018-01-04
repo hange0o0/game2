@@ -58,6 +58,8 @@ class PKConfig {
     public static VIDEO_MANAHP_CHANGE = 21 //魔盾结果
     public static VIDEO_MONSTER_NOHIT = 22 //免伤动画
 
+    public static VIDEO_MONSTER_CHANGE_SKIN = 23 //改变皮肤
+
 
 
     public static STATE_YUN = 1

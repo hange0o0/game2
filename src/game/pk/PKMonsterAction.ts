@@ -65,7 +65,7 @@ class PKMonsterAction {
     }
 
     public atk(user:PKMonsterData,actionTime){
-        var time = actionTime + Math.floor(user.getVO().atkcd*(1-user.addSpeed/100));
+        var time = actionTime + user.getAtkCD();
         user.stopTime = Math.max(user.stopTime,time)
 
         PKData.getInstance().addVideo({   //攻击动画开始
@@ -78,7 +78,7 @@ class PKMonsterAction {
     }
 
     public skill(user:PKMonsterData,actionTime){
-        var time = actionTime + Math.floor(user.getVO().atkcd*(1-user.addSpeed/100));
+        var time = actionTime + user.getAtkCD();
         user.stopTime = Math.max(user.stopTime,time)
 
         PKData.getInstance().addVideo({   //攻击动画开始

@@ -17,6 +17,7 @@ class MonsterMV extends eui.Group {
     private mh = 480/4
 
     public speed = 0;//增加or减少速度百分比
+    public runing = false
 
     public vo:MonsterVO;
     constructor(){
@@ -81,29 +82,45 @@ class MonsterMV extends eui.Group {
     }
 
     public play(){
+        this.runing = true
         this.addEventListener(egret.Event.ENTER_FRAME,this.onE,this)
     }
 
     public stop(){
+        this.runing = false
         this.removeEventListener(egret.Event.ENTER_FRAME,this.onE,this)
     }
 
-    private reset(){
+    public reset(){
         this.index = 0;
         this.atkMV.visible = false;
+        this.atkMV.stop();
         this.onE();
+        if(!this.runing)
+            this.play();
     }
 
-    private onE(){
+    public onE(){
         var w = this.mw
         var h = this.mh
         var speed = this.speed || 0;
-        var frameStep = Math.round(this.frameTotal*(1-speed/100)/this.vo.mcnum);
+        if(speed)
+        {
+            if(speed > 0)
+                var frameStep = Math.round(this.frameTotal*(1-speed/(100 + speed))/this.vo.mcnum);
+            else
+                var frameStep = Math.round(this.frameTotal*(1-speed/100)/this.vo.mcnum);
+        }
+        else
+        {
+            var frameStep = Math.round(this.frameTotal/this.vo.mcnum);
+        }
         if(this.state == MonsterMV.STAT_ATK && this.vo.id == 99)
             frameStep = 1;
         var x = Math.floor(this.index/frameStep)*w
         var y = (this.state - 1)*h
         this.mc.scrollRect = new egret.Rectangle(x,y,w,h)
+        //if(this.vo.id == 78)
         //console.log(x,y,w,h, Math.floor(this.index/frameStep),(this.vo.mcnum))
         //this.stop();
 
@@ -157,6 +174,14 @@ class MonsterMV extends eui.Group {
                 this.atkMV.y = 55
                 this.atkMV.play();
                 break;
+            //case 77:
+            //case 78:
+            //    this.atkMV.visible = true;
+            //    this.atkMV.load(77,1,300,240)
+            //    this.atkMV.x = -180
+            //    this.atkMV.y = 40
+            //    this.atkMV.play();
+            //    break;
         }
     }
 

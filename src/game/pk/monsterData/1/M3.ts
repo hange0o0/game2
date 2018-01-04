@@ -3,6 +3,10 @@ class M3 extends MBase{
         super();
     }
 
+    public preload(){
+        RES.getResByUrl(Config.localResRoot + 'monster/enemy3_attack.png',function(){},this)
+    }
+
     public atkAction(user:PKMonsterData,target:PKMonsterData,actionTime){
         super.atkAction(user,target,actionTime);
         //第二次伤害

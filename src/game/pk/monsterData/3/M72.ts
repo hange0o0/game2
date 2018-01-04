@@ -3,6 +3,35 @@ class M72 extends MBase {
         super();
     }
 
+    public initMonster(user:PKMonsterData){
+        user.atkX = 20
+        user.atkY = 65
+    }
+
+    public preload(){
+        RES.getResByUrl(Config.localResRoot + 'monster/enemy72_attack.png',function(){},this)
+    }
+
+    //伤害飞行时间
+    protected getAtkArriveCD(user:PKMonsterData,target:PKMonsterData){
+        return Math.abs(user.x - target.x)*2 + 200;
+    }
+
+    public atkMV(user,target,actionTime,endTime){
+        var userItem = PKVideoCon.getInstance().getItemByID(user.id);
+        var targetItem = PKVideoCon.getInstance().getItemByID(target.id);
+        var mc:BulletAniMC2 = <BulletAniMC2>(PKBulletManager.getInstance().createBulletAni2(userItem,targetItem,actionTime,endTime))
+        mc.mc.anchorOffsetX = 560/4/2
+        mc.mc.anchorOffsetY = 90
+        mc.targetOffsetY = target.getVO().height/2
+        if(userItem.x > targetItem.x)
+            mc.mc.scaleX = 1
+        else
+            mc.mc.scaleX = -1
+        mc.mc.load(72,0,560,90)
+        mc.mc.play()
+    }
+
     public getSkillTarget(user:PKMonsterData){
         return [null];
     }

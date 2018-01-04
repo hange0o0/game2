@@ -230,6 +230,10 @@ class PKVideoCon extends game.BaseContainer {
                     }
                 }
                 break;
+            case PKConfig.VIDEO_MONSTER_CHANGE_SKIN:
+                item = this.getItemByID(data.id);
+                item.changeSkin(videoData.skin);
+                break;
         }
     }
 

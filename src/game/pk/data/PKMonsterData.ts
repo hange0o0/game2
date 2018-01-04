@@ -108,6 +108,22 @@ class PKMonsterData {
     //        this[key] += value;
     //}
 
+    public getAtkBeforeCD(){
+        if(!this.addSpeed)
+            return this.getVO().mv_atk
+        if(this.addSpeed < 0)
+            return Math.floor(this.getVO().mv_atk*(1-this.addSpeed/100));
+        return Math.floor(this.getVO().mv_atk*(1-this.addSpeed/(100 + this.addSpeed)));
+    }
+
+    public getAtkCD(){
+        if(!this.addSpeed)
+            return this.getVO().atkcd
+        if(this.addSpeed < 0)
+            return Math.floor(this.getVO().atkcd*(1-this.addSpeed/100));
+        return Math.floor(this.getVO().atkcd*(1-this.addSpeed/(100 + this.addSpeed)));
+    }
+
     public beSkillAble(){
         return this.momian == false && !this.isInState(PKConfig.STATE_MOMIAN);
     }
@@ -314,7 +330,14 @@ class PKMonsterData {
     }
 
     public move(){
-        this.x += this.atkRota * Math.round(this.speed*(1+this.addSpeed/100))/10;
+        if(!this.addSpeed)
+            var rate = 1;
+        else if(this.addSpeed > 0)
+            var rate =  (1+this.addSpeed/100);
+        else
+            var rate = (1+this.addSpeed/(100 - this.addSpeed));
+
+        this.x += this.atkRota * Math.round(this.speed*rate)/10;
         PKData.getInstance().addVideo({
             type:PKConfig.VIDEO_MONSTER_MOVE,
             user:this
@@ -428,6 +451,7 @@ class PKMonsterData {
             type:PKConfig.VIDEO_MONSTER_HPCHANGE,
             user:this,
         })
+        MBase.getData(this.mid).onHpChange(this);
     }
 
     public getHpRate(){

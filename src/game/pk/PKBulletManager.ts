@@ -8,6 +8,7 @@ class PKBulletManager {
     private arrowPool = [];
     private bulletPool = [];
     private bulletAniPool = [];
+    private bulletAniPool2 = [];
     private bulletLinePool = [];
     private useItem = [];
 
@@ -56,12 +57,26 @@ class PKBulletManager {
 
     //直线3   fun:每次移动触发的方法
     public createBulletLine(fromMC,toMC,beginTime,endTime,id?,fun?):ArrowMC{
-        var item:BulletMCLine = this.bulletAniPool.pop();
+        var item:BulletMCLine = this.bulletLinePool.pop();
         if(!item)
         {
             item = new BulletMCLine();
         }
         item.init(fromMC,toMC,beginTime,endTime,id,fun);
+        var con = fromMC.parent;
+        con.addChildAt(item,con.getChildIndex(fromMC) + 1);
+        this.useItem.push(item);
+        return item;
+    }
+
+    //直线4   fun:每次移动触发的方法
+    public createBulletAni2(fromMC,toMC,beginTime,endTime):ArrowMC{
+        var item:BulletAniMC2 = this.bulletAniPool2.pop();
+        if(!item)
+        {
+            item = new BulletAniMC2();
+        }
+        item.init(fromMC,toMC,beginTime,endTime);
         var con = fromMC.parent;
         con.addChildAt(item,con.getChildIndex(fromMC) + 1);
         this.useItem.push(item);
@@ -78,6 +93,8 @@ class PKBulletManager {
             this.bulletPool.push(item);
         else if(item.type == 'bullet_ani')
             this.bulletAniPool.push(item);
+        else if(item.type == 'bullet_ani2')
+            this.bulletAniPool2.push(item);
         else if(item.type == 'bullet_line')
             this.bulletLinePool.push(item);
         ArrayUtil.removeItem(this.useItem,item)
@@ -168,7 +185,7 @@ class ArrowMC extends egret.DisplayObjectContainer{
         MyTool.removeMC(this);
     }
 }
-
+//图片字弹直线有角度
 class BulletMC extends egret.DisplayObjectContainer{
     public type = 'bullet'
 
@@ -228,7 +245,8 @@ class BulletMC extends egret.DisplayObjectContainer{
         var rate = (t - this.beginTime)/(this.endTime - this.beginTime);
         var fromY = this.fromMC.y - this.fromMC.data.getVO().height/2 + this.fromMC.data.atkY
         var toY = this.toMC.y - this.toMC.data.getVO().height/2
-        this.x = this.fromMC.x + (this.toMC.x - this.fromMC.x)*rate + (this.fromMC.data.atkX * this.fromMC.data.atkRota)
+        var addX = (this.fromMC.data.atkX * this.fromMC.data.atkRota);
+        this.x = this.fromMC.x + (this.toMC.x - this.fromMC.x - addX)*rate + addX
         this.y =  fromY + (toY - fromY)*rate
         this.rotation = this.getRota(
             {x:this.fromMC.x,y:fromY},
@@ -263,6 +281,7 @@ class BulletMC extends egret.DisplayObjectContainer{
     }
 }
 
+//图片字弹直线有回调，无角度
 class BulletMCLine extends egret.DisplayObjectContainer{
     public type = 'bullet_line'
 
@@ -308,7 +327,8 @@ class BulletMCLine extends egret.DisplayObjectContainer{
         var rate = (t - this.beginTime)/(this.endTime - this.beginTime);
         var fromY = this.fromMC.y - this.fromMC.data.getVO().height/2 + this.fromMC.data.atkY
         var toY = this.toMC.y
-        this.x = this.fromMC.x + (this.toMC.x - this.fromMC.x)*rate + (this.fromMC.data.atkX * this.fromMC.data.atkRota)
+        var addX = (this.fromMC.data.atkX * this.fromMC.data.atkRota);
+        this.x = this.fromMC.x + (this.toMC.x - this.fromMC.x - addX)*rate + addX
         this.y =  fromY// + (toY - fromY)*rate
         this.fun && this.fun();
         return true;
@@ -321,6 +341,7 @@ class BulletMCLine extends egret.DisplayObjectContainer{
     }
 }
 
+//旧素材子弹动画
 class BulletAniMC extends egret.DisplayObjectContainer{
     public type = 'bullet_ani'
 
@@ -329,6 +350,9 @@ class BulletAniMC extends egret.DisplayObjectContainer{
     public toMC:PKMonsterItem
     public beginTime
     public endTime
+
+    public needRota = true
+    public targetOffsetY = 0
 
     constructor() {
         super();
@@ -344,19 +368,22 @@ class BulletAniMC extends egret.DisplayObjectContainer{
         if(this.mc)
             AniManager.getInstance().removeMV(this.mc);
         this.mc = AM.getAni(id);
-        this.mc.scaleX = this.mc.scaleY = 0.3
+        this.mc.scaleX = this.mc.scaleY = 0.3   //@ani scale
         this.mc.x = 0
         this.mc.y = 0
         this.addChild(this.mc)
+        this.needRota = true;
+        this.targetOffsetY = 0
     }
 
     public onAction(t){
         if(t > this.endTime)
             return false;
         var rate = egret.Ease.sineIn((t - this.beginTime)/(this.endTime - this.beginTime));
-        var fromY = this.fromMC.y - this.fromMC.data.getVO().height/2
-        var toY = this.toMC.y - this.toMC.data.getVO().height/2
-        this.x = this.fromMC.x + (this.toMC.x - this.fromMC.x)*rate
+        var fromY = this.fromMC.y - this.fromMC.data.getVO().height/2 + this.fromMC.data.atkY
+        var toY = this.toMC.y - this.toMC.data.getVO().height/2 + this.targetOffsetY
+        var addX = (this.fromMC.data.atkX * this.fromMC.data.atkRota);
+        this.x = this.fromMC.x + (this.toMC.x - this.fromMC.x - addX)*rate + addX
         this.y =  fromY + (toY - fromY)*rate
         this.rotation = this.getRota(
             {x:this.fromMC.x,y:fromY},
@@ -368,6 +395,8 @@ class BulletAniMC extends egret.DisplayObjectContainer{
     }
 
     public getRota(begin,end){
+        if(!this.needRota)
+            return 0;
         return Math.atan2(end.y - begin.y,end.x - begin.x)* 180/3.14 + 90
     }
 
@@ -375,5 +404,56 @@ class BulletAniMC extends egret.DisplayObjectContainer{
         MyTool.removeMC(this);
         AniManager.getInstance().removeMV(this.mc);
         this.mc = null;
+    }
+}
+
+//用新素材直线
+class BulletAniMC2 extends egret.DisplayObjectContainer{
+    public type = 'bullet_ani2'
+
+    public mc:any = new MonsterAtkMV()
+    public fromMC:PKMonsterItem
+    public toMC:PKMonsterItem
+    public beginTime
+    public endTime
+
+    public targetOffsetY = 0
+
+    constructor() {
+        super();
+        this.addChild(this.mc)
+    }
+
+    public init(fromMC,toMC,beginTime,endTime){
+        this.fromMC = fromMC;
+        this.toMC = toMC;
+        this.beginTime = beginTime;
+        this.endTime = endTime;
+
+        this.mc.x = 0
+        this.mc.y = 0
+        this.targetOffsetY = 0
+
+        //this.mc.load()
+
+    }
+
+    public onAction(t){
+        if(t > this.endTime)
+            return false;
+        var rate = (t - this.beginTime)/(this.endTime - this.beginTime);
+        var fromY = this.fromMC.y - this.fromMC.data.getVO().height/2 + this.fromMC.data.atkY
+        var toY = this.toMC.y - this.toMC.data.getVO().height/2 + this.targetOffsetY
+        var addX = (this.fromMC.data.atkX * this.fromMC.data.atkRota);
+        this.x = this.fromMC.x + (this.toMC.x - this.fromMC.x - addX)*rate + addX
+        this.y =  fromY + (toY - fromY)*rate
+        return true;
+
+    }
+
+
+    public remove(){
+        MyTool.removeMC(this);
+        this.mc.stop();
     }
 }

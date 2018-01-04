@@ -16,6 +16,9 @@ class MBase {
     constructor() {
     }
 
+    public onHpChange(user:PKMonsterData){
+
+    }
     public onCreate(user:PKMonsterData){
 
     }
@@ -107,7 +110,7 @@ class MBase {
     }
 
     public getAtkMVCD(user:PKMonsterData){
-        return Math.floor(user.getVO().mv_atk*(1-user.addSpeed/100));
+        return user.getAtkBeforeCD();
     }
 
     //攻击发出，设攻击生效(起作用)时间

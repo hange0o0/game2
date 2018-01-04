@@ -102,6 +102,11 @@ class PKMonsterItem extends game.BaseItem {
         this.addStateMV.showState(key,type);
     }
 
+    public changeSkin(skinid){
+        this.monsterMV.load(skinid)
+        this.monsterMV.reset();
+    }
+
 
     public dataChanged(){
         var mD:PKMonsterData = this.data

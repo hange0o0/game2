@@ -3,17 +3,28 @@ class M66 extends MBase {
         super();
     }
 
-    //取攻击力
-    protected getAtkerAtk(user:PKMonsterData,target:PKMonsterData){
-        var atk = super.getAtkerAtk(user,target)
-        atk += atk * (target.skillTemp[66] || 0)/100
-        return atk;
+    public onKill(user:PKMonsterData,target:PKMonsterData){
+        var PD = PKData.getInstance();
+        var mid = 65;
+        var owner = PD.getPlayer(user.owner);
+        var atkRota = owner.teamData.atkRota;
+        var num = user.getSkillValue(1)
+        for(var i=0;i<num;i++)
+        {
+            var mData = {
+                force:owner.force,
+                mid:mid,
+                owner:user.owner,
+                atkRota:atkRota,
+                x:target.x,
+                y:target.y,
+                lastSkill:Number.MAX_VALUE,
+                dieTime:PD.actionTime + user.getSkillValue(2)*1000,
+                actionTime:PD.actionTime
+            }
+            PD.addMonster(mData);
+        }
     }
 
-    public atk(user:PKMonsterData,target:PKMonsterData){
-        var b = super.atk(user,target);
-        if(b)
-            target.skillTemp[66] = (target.skillTemp[66] || 0) + user.getSkillValue(1)
-        return b;
-    }
+
 }

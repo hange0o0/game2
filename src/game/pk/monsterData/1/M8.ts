@@ -47,7 +47,7 @@ class M8 extends MBase {
         //target.beAtkAction({hp:hp,atker:user})
         //user.atkAction({hp:hp})
     }
-    //对最多3个单位进行一次攻击
+    //转化
     public getSkillTarget(user:PKMonsterData){
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);

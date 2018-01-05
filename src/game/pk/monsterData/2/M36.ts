@@ -10,7 +10,7 @@ class M36 extends MBase {
     }
 
     public onDie(user:PKMonsterData){
-        if(user.dieTime)
+        if(user.skillTemp[36])
             return;
         var PD = PKData.getInstance();
         PKMonsterAction.getInstance().addAtkList({   //到actionTime后根据条件产生攻击事件
@@ -55,12 +55,15 @@ class M36 extends MBase {
             x:user.x,
             y:user.y,
             lastSkill:Number.MAX_VALUE,
-            dieTime:PD.actionTime + 1000*user.getSkillValue(2),  //存活时间
             actionTime:PD.actionTime
         }
 
         var monster = PD.addMonster(mData);
-        PKVideoCon.getInstance().playAniOn(monster.id,this.mvID)
+        monster.skillTemp[36] = true;
+
+
+        if(!PKData.getInstance().quick)
+            PKVideoCon.getInstance().playAniOn(monster.id,this.mvID)
     }
 
 

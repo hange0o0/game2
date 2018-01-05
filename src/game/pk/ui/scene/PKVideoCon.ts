@@ -273,6 +273,17 @@ class PKVideoCon extends game.BaseContainer {
         }
     }
 
+    //public addMCOn(id,mc){
+    //    var atker = this.getItemByID(id)
+    //    if(!atker)
+    //    {
+    //        throw new Error('XXX')
+    //        return;
+    //    }
+    //
+    //    atker.parent.addChildAt(mc,atker.parent.getChildIndex(atker) + 1);
+    //}
+
     //在A上播放动画
     public playAniOn(a,mvID){
         var atker = this.getItemByID(a)

@@ -7,6 +7,8 @@ class PKData extends egret.EventDispatcher{
     }
     public currentState = 'def'
 
+    public quick = false//快速算出结果
+
     public jumpMV = false;
     public isGameOver = false //游戏结束
     public startTime = 0 //游戏开始时间
@@ -57,6 +59,7 @@ class PKData extends egret.EventDispatcher{
 
     //初始化游戏
     public init(data){
+        this.quick = false
         this.history = {};
         this.monsterList.length = 0;
         this.playerObj = {};
@@ -105,6 +108,7 @@ class PKData extends egret.EventDispatcher{
         {
             this.team1.atkRota = PKConfig.ROTA_LEFT
             this.team2.atkRota = PKConfig.ROTA_RIGHT
+            this.myPlayer = this.getPlayer(1)
         }
         this.team1.reInit();
         this.team2.reInit();
@@ -143,8 +147,10 @@ class PKData extends egret.EventDispatcher{
 
 
 
-
+    //要保证只是通知改变显示，不能有逻辑
     public addVideo(data){
+        if(this.quick)
+            return;
         this.dispatchEventWith('video',false,data)
         //this.videoList.push(data)
         //if(this.topKey.indexOf(data.type) != -1)
@@ -164,8 +170,17 @@ class PKData extends egret.EventDispatcher{
         return this.playerObj[id]
     }
 
+    //赢
     public isWin(){
-        return this.myPlayer.teamData.hp > 0 &&  this.myPlayer.teamData.enemy.hp <= 0;
+        var team1 =  this.myPlayer.teamData
+        var team2 =  this.myPlayer.teamData.enemy
+        return team1.hp > 0 &&  team2.hp <= 0;
+    }
+    //平
+    public isDraw(){
+        var team1 =  this.myPlayer.teamData
+        var team2 =  this.myPlayer.teamData.enemy
+        return (team1.hp > 0 &&  team2.hp > 0) || (team1.hp <= 0 &&  team2.hp <= 0);
     }
 
     //找玩家对应的怪
@@ -209,13 +224,15 @@ class PKData extends egret.EventDispatcher{
         return null;
     }
     //找玩家对应的怪
-    public getMonsterByTeam(team){
+    public getMonsterByTeam(team,fun?,value?){
         var arr = [];
         for(var i=0;i<this.monsterList.length;i++)
         {
             var oo = this.monsterList[i];
              if(oo.getOwner().teamData == team)
              {
+                 if(fun && !fun(oo,value))
+                    continue;
                  arr.push(oo)
              }
         }
@@ -223,13 +240,15 @@ class PKData extends egret.EventDispatcher{
     }
 
     //找玩家对应的怪
-    public getMonsterByNoTeam(team){
+    public getMonsterByNoTeam(team,fun?,value?){
         var arr = [];
         for(var i=0;i<this.monsterList.length;i++)
         {
             var oo = this.monsterList[i];
              if(oo.getOwner().teamData != team)
              {
+                 if(fun && !fun(oo,value))
+                     continue;
                  arr.push(oo)
              }
         }

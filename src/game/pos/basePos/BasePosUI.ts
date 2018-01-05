@@ -13,6 +13,7 @@ class BasePosUI extends game.BaseUI {
     private rightMC: eui.Image;
     private bottomUI: BottomUI;
     private numText: eui.Label;
+    private numText2: eui.Label;
     private downList2: LeftList;
     private btnGroup: eui.Group;
     private deleteBtn: eui.Group;
@@ -431,7 +432,8 @@ class BasePosUI extends game.BaseUI {
         }
         ArrayUtil.sortByField(arr,['cost','level','id'],[0,0,0]);
         this.totalPage = Math.ceil(arr.length/this.pageSize || 1)
-        this.numText.text = this.page + '/' + this.totalPage
+        this.numText.text = this.page + ''
+        this.numText2.text = '' + this.totalPage
         arr = arr.splice((this.page-1)*this.pageSize,this.pageSize)
         for(var i=0;i<arr.length;i++)
         {

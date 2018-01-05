@@ -66,6 +66,9 @@ class Main extends eui.UILayer {
         CM = CacheManager.getInstance();
         DM = DebugManager.getInstance();
         FromManager.getInstance().initData();
+
+        if(_get['hide'])
+            this.visible = false
     }
 
     private setScaleMode(){
@@ -186,6 +189,8 @@ class Main extends eui.UILayer {
         GameManager.stage = this.stage;
         GameManager.container = this;
         GameManager.getInstance().init();
+        if(_get['hide'])
+            return;
         var LM = LoginManager.getInstance();
         if(LM.quickPassword)
         {

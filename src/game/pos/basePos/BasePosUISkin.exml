@@ -48,7 +48,9 @@
 	<ns1:BottomUI id="bottomUI" x="0" skinName="BottomUISkin" bottom="0"/>
 	<e:Group width="70" height="70" right="10" bottom="105">
 		<e:Image scale9Grid="9,9,11,10" left="0" right="0" top="0" bottom="0" source="bg2_png"/>
-		<e:Label id="numText" text="10/20" size="20" stroke="2" horizontalCenter="0" verticalCenter="0"/>
+		<e:Label id="numText" text="10" size="26" stroke="2" verticalCenter="-12" right="36"/>
+		<e:Label id="numText2" text="20" size="24" stroke="2" verticalCenter="15" left="36"/>
+		<e:Rect width="4" height="40" verticalCenter="0" horizontalCenter="0" strokeWeight="1" strokeColor="0x000000" fillColor="0xffffff" rotation="45"/>
 	</e:Group>
 	<e:Group x="10" height="70" bottom="105" width="70">
 		<e:Image source="bg2_png" scale9Grid="9,9,11,10" width="100%" height="100%" horizontalCenter="0" verticalCenter="0"/>

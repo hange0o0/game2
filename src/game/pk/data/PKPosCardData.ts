@@ -22,7 +22,8 @@ class PKPosCardData {
             this[key] = obj[key];
         }
 
-        this.getVO().preLoad();
+        if(!PKData.getInstance().quick)
+            this.getVO().preLoad();
         if(this.mid > 100)
             SBase.getData(this.mid).initSkill(this);
     }

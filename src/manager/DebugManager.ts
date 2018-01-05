@@ -35,8 +35,43 @@ class DebugManager {
         console.log(newList.join(','))
     }
 
-}
+    public test(list1,list2,view=false,hp=5){
+        var PD = PKData.getInstance()
+        var data = {
+            seed:TM.now(),
+            players:[
+                {id:1,gameid:'test1',team:1,autolist:list1,force:0,type:0,hp:hp},
+                {id:2,gameid:'test2',team:2,autolist:list2,force:0,type:0,hp:hp}
+            ]
+        };
+        var t = egret.getTimer();
+        PKManager.getInstance().pkType = PKManager.TYPE_TEST
+        PD.init(data);
+        if(view)
+        {
+           PKingUI.getInstance().show();
+        }
+        else
+        {
+            PD.quick = true;
+            PD.start();
+            PKCode.getInstance().onStep()
 
+            console.log(egret.getTimer() - t)
+            if(PD.isWin())
+                console.log('win')
+            else if(PD.isDraw())
+                console.log('draw')
+            else
+                console.log('fail')
+            console.log('actionTime:' + DateUtil.getStringBySecond(Math.floor(PD.actionTime/1000)).substr(-5))
+        }
+
+
+    }
+
+}
+//DM.test('1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16','1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16')
 //DM.testMV('mv2',10,[30,31])
 //javascript:DM.showAllMV();
 //Net.send('clean_server')

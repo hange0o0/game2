@@ -158,7 +158,7 @@ class MBase {
     }
 
     //取最终伤害
-    protected getAtkHp(user:PKMonsterData,target:PKMonsterData){
+    public getAtkHp(user:PKMonsterData,target:PKMonsterData){
         var atk = this.getAtkerAtk(user,target);
         var teamDef = target.getOwner().teamData.getTeamDef();
         var hp = Math.floor(atk * Math.max(1-(target.def + teamDef)/100,0));
@@ -197,7 +197,8 @@ class MBase {
             endTime:endTime
         })
 
-        this.atkMV(user,target,actionTime,endTime)
+        if(!PKData.getInstance().quick)
+            this.atkMV(user,target,actionTime,endTime)
 
     }
     protected sendSkillAction(user,target,actionTime,endTime){
@@ -209,7 +210,8 @@ class MBase {
             endTime:endTime
         })
 
-        this.skillMV(user,target,actionTime,endTime)
+        if(!PKData.getInstance().quick)
+            this.skillMV(user,target,actionTime,endTime)
 
     }
 }

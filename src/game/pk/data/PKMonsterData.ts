@@ -306,17 +306,14 @@ class PKMonsterData {
 
 //可以用技能
     public canSkill(t){
-        if(this.owner == 'sys')
-            return null;
-        if(!this.canAction())
-            return null;
         if(this.stopTime >= t)
             return null;
-        if(!this.getVO().skillcd) //无技能
+        var vo = this.getVO();
+        if(!vo.skillcd) //无技能
             return null;
-        //if(this.getVO().skillcd > 0 && !this.target && !this.getAtkTarget())
-        //    return null;
-        if(this.lastSkill && (this.lastSkill + this.getVO().skillcd >= t))
+        if(this.lastSkill && (this.lastSkill + vo.skillcd >= t))
+            return null;
+        if(!this.canAction())
             return null;
         this.skillTargets = MBase.getData(this.mid).getSkillTarget(this);
         return this.skillTargets
@@ -374,13 +371,12 @@ class PKMonsterData {
         for(var i=0;i<list.length;i++)
         {
             var target:PKMonsterData = list[i];
+            var ePlayer = PD.getPlayer(target.owner);
+            if(myPlayer.teamData.id == ePlayer.teamData.id)//同一队
+                continue;
+
             var tDes = Math.abs(target.x - this.x);
             if(tDes < atkRage + target.getVO().width/2 && target.canBeAtk(this)) {
-
-                var ePlayer = PD.getPlayer(target.owner);
-                if(myPlayer.teamData.id == ePlayer.teamData.id)//同一队
-                    continue;
-
                 if (!this.target || des > tDes)
                 {
                     this.target = target;

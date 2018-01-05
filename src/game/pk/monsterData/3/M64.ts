@@ -45,7 +45,7 @@ class M64 extends MBase {
         var max = user.getSkillValue(1);
         if(list.length>max)
         {
-            ArrayUtil.sortByField(list,['temp'],[0])
+            //ArrayUtil.sortByField(list,['temp'],[0])
             list.length = max;
         }
         return list;

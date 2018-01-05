@@ -181,15 +181,25 @@ class PKPlayerData {
                 data.isAuto = true;
                 this.posCard[data.id] = new PKPosCardData(data);
                 this.autoList.shift();
+
+                this.addMP(-CM.getCardVO(data.mid).cost)
+                if(this == PKData.getInstance().myPlayer)
+                {
+                    PKData.getInstance().addVideo({
+                        type:PKConfig.VIDEO_POS_ADD,
+                        user:this.posCard[data.id],
+                    })
+                }
             }
             else
                 break;
         }
     }
 
-    public getEnablePos(t){
+    public getEnablePos(t,leftSpace){
         var arr = [];
 
+        var monsterNum = 0;
         for(var s in this.posCard)
         {
             var oo:PKPosCardData = this.posCard[s];
@@ -197,20 +207,26 @@ class PKPlayerData {
 
             if(oo.testAdd(t))
             {
+                if(oo.mid < 100)
+                {
+                    if(leftSpace == 0)
+                        continue;
+                    else
+                        monsterNum ++;
+                }
                 arr.push(oo)
             }
             else if(!oo.useEnable())//已失效
             {
                 this.posCard[s].die();
-                PKData.getInstance().addVideo({   //攻击动画开始
+                PKData.getInstance().addVideo({
                     type:PKConfig.VIDEO_POS_REMOVE,
                     user:this.posCard[s],
                 })
                 this.posCard[s] = null;
-
             }
         }
-        if(arr.length > 1)
+        if(monsterNum > 1)
         {
             ArrayUtil.sortByField(arr,['actionTime','id'],[0,0])
         }

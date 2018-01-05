@@ -17,7 +17,7 @@ class PKCode {
     public onStep(){
         var PD = PKData.getInstance();
         var cd = PD.getPassTime() - PD.actionTime
-        while(cd > PKConfig.stepCD)
+        while(PD.quick || cd > PKConfig.stepCD)
         {
             PD.actionTime += PKConfig.stepCD;
             cd -= PKConfig.stepCD;
@@ -36,6 +36,8 @@ class PKCode {
 
 
             if(PD.isGameOver)
+                return true
+            if(PD.actionTime > PKConfig.drawTime)//5分
                 return true
         }
         return false;
@@ -62,11 +64,12 @@ class PKCode {
             var player = PD.playerObj[i];
             if(!player)
                 continue
-            var arr = player.getEnablePos(PD.actionTime)
+            var needSpace = PKConfig.maxMonsterSpace - PD.getMonsterSpaceByPlayer(player.id);
+            var arr = player.getEnablePos(PD.actionTime,needSpace)
             while(arr.length > 0)
             {
                 PD.resetMonsterData();//重置技能数据，方便技能统计
-                var needSpace = PKConfig.maxMonsterSpace - PD.getMonsterSpaceByPlayer(player.id);
+
                 var data = arr.shift();
                 if(data.mid < 100) //上怪
                 {
@@ -213,7 +216,7 @@ class PKCode {
                 PD.getPlayer(mvo.owner).teamData.enemy.hp -= mvo.getVO().atk2;
                 if(PD.getPlayer(mvo.owner).teamData.enemy.hp <= 0)
                 {
-                    console.log(PD.getPlayer(mvo.owner).teamData.enemy)
+                    //console.log(PD.getPlayer(mvo.owner).teamData.enemy)
                     PD.isGameOver = true;
                 }
 

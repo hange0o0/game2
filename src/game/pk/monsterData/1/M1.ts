@@ -29,28 +29,27 @@ class M1 extends MBase{
         target.beAtkAction({hp:hp,atker:user})
         user.atkAction({hp:hp})
     }
+
+    private testTarget(target,val){
+        if(!target.beSkillAble())
+            return false;
+        var des = Math.abs(val[0].x - target.x);
+        if(des<=val[1])
+        {
+            target.temp = des;
+           return true
+        }
+    }
     //对最多3个单位进行一次攻击
     public getSkillTarget(user:PKMonsterData){
         var PD = PKData.getInstance();
-        var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
         var atkrage = user.getVO().getAtkDis() + 50;
-        var list = [];
-        for(var i=0;i<arr.length;i++)
-        {
-            var target = arr[i];
-            if(!target.beSkillAble())
-                continue;
-            var des = Math.abs(user.x - target.x);
-            if(des<=atkrage)
-            {
-                target.temp = des;
-                list.push(target)
-            }
-        }
+        var list = PD.getMonsterByTeam(user.getOwner().teamData.enemy,this.testTarget,[user,atkrage]);
+
         var maxNum = user.getSkillValue(1)
         if(list.length>maxNum)
         {
-            ArrayUtil.sortByField(list,['temp','id'],[0,0])
+            //ArrayUtil.sortByField(list,['temp','id'],[0,0])
             list.length = maxNum;
         }
         return list;

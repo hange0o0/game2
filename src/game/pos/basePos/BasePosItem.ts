@@ -39,17 +39,19 @@ class BasePosItem extends game.BaseItem {
     }
 
     public dataChanged(){
-        if(this.data.isSetting)
+        if(this.data.setting)
         {
             this.currentState = 'setting'
-            return;
-        }
-        if(this.data.back)
-        {
-            this.currentState = 'back'
             this.stopDrag = true
             return;
         }
+        //if(this.data.back)
+        //{
+        //    this.currentState = 'back'
+        //    this.stopDrag = true
+        //    return;
+        //}
+        this.stopDrag = false
         this.currentState = 'normal'
         var vo:any = CM.getCardVO(this.data.id);
         this.img.data = vo.id;

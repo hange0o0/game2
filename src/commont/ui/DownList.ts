@@ -6,10 +6,12 @@
 class DownList extends game.BaseContainer {
     public static SELECT:string = "SELECT";
     private btn: eui.Group;
+    private img: eui.Image;
     private titleText: eui.Label;
     private listCon: eui.Group;
     private scroller: eui.Scroller;
     private list: eui.List;
+
 
     private openHeight:number;
     private isOpen:boolean
@@ -96,6 +98,7 @@ class DownList extends game.BaseContainer {
             if(select == arr[i].data)
             {
                 this.titleText.text = arr[i].label
+                this.img.source = arr[i].icon
                 return;
             }
         }

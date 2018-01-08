@@ -1,124 +1,68 @@
 class BasePosUI extends game.BaseUI {
 
+
     private scrollerBG: eui.Group;
     private topUI: TopUI;
-    private scroller1: eui.Scroller;
-    private list1: eui.List;
-    private monsterBG: eui.Group;
-    private skillBG: eui.Group;
-    private list2: eui.List;
-    private leftBtn: eui.Group;
-    private leftMC: eui.Image;
-    private rightBtn: eui.Group;
-    private rightMC: eui.Image;
+    private list: eui.List;
     private bottomUI: BottomUI;
-    private numText: eui.Label;
-    private numText2: eui.Label;
-    private downList2: LeftList;
     private btnGroup: eui.Group;
     private deleteBtn: eui.Group;
     private renameBtn: eui.Group;
     private testBtn: eui.Group;
     private saveBtn: eui.Group;
-    private monsterIcon: eui.Image;
-    private skillIcon: eui.Image;
+    private downBtn: eui.Image;
+    private upBtn: eui.Image;
 
 
-
-
-
-
-
-
-
-
-
-    public selectType
-    private monsterType = 0
-    private skillType = 0
+    public type = 'atk'
+    public callDelete;
     private index = 0  //第X个阵
     public useCard = {}
     public maxCard = 0;
 
     private posName = ''
     private posData
-    private arrayData:eui.ArrayCollection
-
-    private page=1;
-    private pageSize=6;
-    private totalPage=1;
 
 
-    public type = 'atk'
-    public callDelete;
+    private dragTarget = new BasePosItem()
+
+    private listData:eui.ArrayCollection
+    private selectData;
+    private selectIndex;
+    //private callDelete = false;
+    //private everDelete = false;
 
     public constructor() {
         super();
-        this.skinName = "BasePosUISkin";
+        this.skinName = "BasePosChangeUISkin";
     }
 
     public childrenCreated() {
         super.childrenCreated();
         this.bottomUI.setHide(this.onClose,this);
-        //this.keyBoard.hide();
-        //this.keyBoard.addEventListener('key_change',this.onKeyBoard,this)
+        this.topUI.setTitle('调整卡组顺序');
+
+        this.dragTarget.alpha = 0.3;
+        this.list.itemRenderer =  BasePosChangeItem;
+        this.list.addEventListener('start_drag',this.onDragStart,this);
+        this.list.addEventListener('end_drag',this.onDragEnd,this);
+        this.list.addEventListener('move_drag',this.onDragMove,this);
+
+        this.list.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onUnSelect,this);
 
         this.addBtnEvent(this.deleteBtn,this.onDelete)
         this.addBtnEvent(this.renameBtn,this.onRename)
         this.addBtnEvent(this.saveBtn,this.onSave)
         this.addBtnEvent(this.testBtn,this.onTest)
-        this.addBtnEvent(this.rightBtn,this.onRight)
-        this.addBtnEvent(this.leftBtn,this.onLeft)
-        this.addBtnEvent(this.monsterIcon,this.onMonster)
-        this.addBtnEvent(this.skillIcon,this.onSkill)
-
-        this.scroller1.viewport = this.list1;
-        this.list1.itemRenderer = BasePosItem
-        this.scroller1.addEventListener(egret.Event.CHANGE,this.onScroll,this)
-        this.list1.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onUnSelect,this);
-
-        //this.scroller2.viewport = this.list2;
-        this.list2.itemRenderer = PosCardItem
-        this.list2.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onSelect,this);
-
-        //var arr = CM.m_shows.getLevelList();
-        //this.downList.setData(arr,0);
-        //this.downList.addEventListener(DownList.SELECT,this.onTab,this);
-        this.downList2.addEventListener(DownList.SELECT,this.onDownListSelect,this);
-
-
-        this.selectType = 0;
-
-        //this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
-        //this.tab.selectedIndex = 0;
+        this.addBtnEvent(this.upBtn,this.onUp)
+        this.addBtnEvent(this.downBtn,this.onDown)
     }
+    
+    private onUp(){
+        
+    }
+    private onDown(){
 
-    private onMonster(){
-        if(this.selectType == 0)
-            return
-        this.selectType = 0
-        this.onTab()
-    }
-    private onSkill(){
-        if(this.selectType == 1)
-            return
-        this.selectType = 1
-        this.onTab()
-    }
-
-    private onRight(){
-        if(this.page < this.totalPage)
-        {
-            this.page ++ ;
-            this.renewList()
-        }
-    }
-    private onLeft(){
-        if(this.page > 1)
-        {
-            this.page -- ;
-            this.renewList()
-        }
     }
 
     private onTest(){
@@ -128,29 +72,25 @@ class BasePosUI extends game.BaseUI {
         })
     }
 
-    private onScroll(){
-        this.scrollerBG.y = this.scroller1.y - this.scroller1.viewport.scrollV;
-    }
-
 
     public changeToServerList(){
         var arr = [];
-        for(var i=0;i<this.arrayData.length-1;i++)
+        for(var i=0;i<this.listData.length-1;i++)
         {
-            arr.push(this.arrayData.getItemAt(i).id)
+            arr.push(this.listData.getItemAt(i).id)
         }
         return arr.join(',');
     }
 
     public onClose(){
-        if(this.callDelete && !this.posData && this.arrayData.length <= 1)
+        if(this.callDelete && !this.posData && this.listData.length <= 1)
         {
             PosManager.getInstance().deletePos(this.type,this.callDelete.id,()=>{
                 this.hide()
             })
             return;
         }
-        var b = !this.posData && this.arrayData.length > 1
+        var b = !this.posData && this.listData.length > 1
         if(!b)
             b = this.posData && (Base64.decode(this.posData.name) != this.posName || this.posData.list != this.changeToServerList())
         if(b)
@@ -195,8 +135,13 @@ class BasePosUI extends game.BaseUI {
         this.renewTitle();
     }
 
+    private renewTitle(){
+        var title = this.type == 'atk'?'【进攻阵容】':'【防御阵容】'
+        this.topUI.setTitle(title + '- ' + this.posName + ' ('+this.listData.length+'/'+this.maxCard+')')
+    }
+
     private onSave(){
-        if(this.arrayData.length == 0)
+        if(this.listData.length == 0)
         {
             Alert('必须上阵最少一张卡牌')
             return false
@@ -226,123 +171,68 @@ class BasePosUI extends game.BaseUI {
         return true
     }
 
-    private onChange(){
-        this.arrayData.removeItemAt(this.arrayData.length - 1)
-         BasePosChangeUI.getInstance().show(this.arrayData,this)
-    }
 
-    private getListData(){
-        return this.arrayData.source;
-    }
-
-    private onDownListSelect(){
-        this.page = 1;
-        if(this.selectType == 0)
-              this.monsterType = this.downList2.selectValue;
-        else
-              this.skillType = this.downList2.selectValue;
-        this.renewList();
-    }
-
-    private onTab(){
-        this.page = 1;
-        this.renewDownList();
-        this.renewList();
-    }
-
-    //选中
-    private onSelect(){
-        if(game.BaseUI.isStopEevent)
-            return;
-
-
-        var item = this.list2.selectedItem;
-        if(this.maxCard <= this.arrayData.length)
-            return;
-        if(this.useCard[item.id] && this.useCard[item.id] >= PosManager.getInstance().oneCardNum)
-            return;
-
-        this.useCard[item.id] = (this.useCard[item.id] || 0) + 1
-        this.arrayData.addItemAt({id:item.id},this.arrayData.length-1)
-        this.justRenewList2();
-        this.renewTitle();
-        this.once(egret.Event.ENTER_FRAME,function(){
-            var dec = this.scroller1.viewport.contentHeight -  this.scroller1.viewport.height;
-            if(this.scroller1.viewport.scrollV < dec)
-            {
-                this.scroller1.viewport.scrollV = dec
-                this.onScroll();
-            }
-        },this)
-
-        this.btnGroup.addChildAt(this.deleteBtn,0)
-
-    }
-
-    private onUnSelect(){
-        var item = this.list1.selectedItem;
-        if(item.isSetting)
+    public onUnSelect(){
+        var item = this.list.selectedItem;
+        if(item.setting)
         {
-            this.onChange();
-            return;
+             BasePosChooseUI.getInstance().show(this.listData,this)
         }
-        if(game.BaseUI.isStopEevent)
-            return;
-
-        this.deleteID(item.id)
-        this.arrayData.removeItemAt(this.arrayData.getItemIndex(item))
-        this.justRenewList2()
-        //this.useCard[item.id] --;
-
-
-        this.once(egret.Event.ENTER_FRAME,function(){
-
-            var dec = this.scroller1.viewport.contentHeight -  this.scroller1.viewport.height;
-            if(dec<=0)
-            {
-                if(this.scroller1.viewport.scrollV != 0)
-                {
-                    this.scroller1.viewport.scrollV = 0;
-                    this.onScroll();
-                }
-                return;
-            }
-
-            if(this.scroller1.viewport.scrollV > dec)
-            {
-                this.scroller1.viewport.scrollV = dec;
-                this.onScroll();
-            }
-        },this)
-
-        if(this.arrayData.length <= 1)
-            MyTool.removeMC(this.deleteBtn)
-    }
-
-    private renewDownList(){
-        //this.downList.height = GameManager.stage.stageHeight - 100 - this.downList.y - 10;
-        if(this.selectType == 0)
+        else if(!game.BaseUI.isStopEevent)
         {
-            var arr = [
-                {label:'全部',label2: 'x' + CardManager.getInstance().getMyMonsterList(0).length,data:0,icon: 'monster_all_icon_png'},
-                {label:PKConfig.TYPENAME[1],label2: 'x' + CardManager.getInstance().getMyMonsterList(1).length,data:1,icon: 'icon_type1_png'},
-                {label:PKConfig.TYPENAME[2],label2: 'x' + CardManager.getInstance().getMyMonsterList(2).length,data:2,icon: 'icon_type2_png'},
-                {label:PKConfig.TYPENAME[3],label2: 'x' + CardManager.getInstance().getMyMonsterList(3).length,data:3,icon: 'icon_type3_png'}];
-            this.downList2.setData(arr,this.monsterType);
-        }
-        else
-        {
-            var arr = [
-                {label:'全部',label2: 'x' + CardManager.getInstance().getMySkillList(0).length,data:0,icon:'skill_all_icon_png'},
-                {label:PKConfig.SKILLTYPENAME[1],label2: 'x' + CardManager.getInstance().getMySkillList(1).length,data:1,icon: 'skill_type1_png'},
-                {label:PKConfig.SKILLTYPENAME[2],label2: 'x' + CardManager.getInstance().getMySkillList(2).length,data:2,icon: 'skill_type2_png'},
-                {label:PKConfig.SKILLTYPENAME[3],label2: 'x' + CardManager.getInstance().getMySkillList(3).length,data:3,icon: 'skill_type3_png'},
-                {label:PKConfig.SKILLTYPENAME[4],label2: 'x' + CardManager.getInstance().getMySkillList(4).length,data:4,icon: 'skill_type4_png'},
-                {label:PKConfig.SKILLTYPENAME[5],label2: 'x' + CardManager.getInstance().getMySkillList(5).length,data:5,icon: 'skill_type5_png'}];
-            this.downList2.setData(arr,this.skillType);
+            var index = this.listData.getItemIndex(item);
+            this.listData.removeItemAt(index)
+            if(!this.listData.getItemAt(this.listData.length-1).setting)
+                this.listData.addItem({setting:true})
+
+            if(this.listData.length <= 1)
+                MyTool.removeMC(this.deleteBtn)
         }
     }
 
+    private onDragStart(e){
+        this.selectData = e.target.data;
+        this.selectIndex = this.listData.source.indexOf(this.selectData);
+        this.dragTarget.data = e.target.data
+        this.stage.addChild(this.dragTarget);
+        this.dragTarget.x = e.data.x;
+        this.dragTarget.y = e.data.y;
+
+        this.renewSelectItem();
+    }
+    private onDragMove(e){
+        this.dragTarget.x = e.data.x - this.dragTarget.width/2;
+        this.dragTarget.y = e.data.y - this.dragTarget.height/2;
+
+        var p = this.list.globalToLocal(e.data.x,e.data.y)
+        p.x -= 8;
+        p.y -= 10;
+        //90*110
+        //8/20
+        var maxIndex = this.listData.length - 2;
+        var index = Math.max(0,Math.min(maxIndex,Math.floor(p.x/98) + Math.floor(p.y/130)*6))
+        if(index != this.selectIndex)
+        {
+            this.listData.removeItemAt(this.selectIndex)
+            this.selectIndex = index;
+            this.listData.addItemAt(this.selectData,index)
+            this.once(egret.Event.ENTER_FRAME,this.renewSelectItem,this)
+        }
+    }
+
+    private onDragEnd(e){
+        MyTool.removeMC(this.dragTarget)
+        this.selectData = null
+        this.selectIndex = -1
+        this.renewSelectItem();
+    }
+
+    private renewSelectItem(){
+        for(var i=0;i<this.list.numChildren;i++)
+        {
+            this.list.getChildAt(i)['renewSelect'](this.selectData);
+        }
+    }
 
     public show(v?){
         this.index = v;
@@ -351,13 +241,28 @@ class BasePosUI extends game.BaseUI {
     }
 
     public hide() {
+        MyTool.clearList(this.list);
         super.hide();
     }
 
     public onShow(){
+        this.callDelete = false
         this.maxCard = PosManager.getInstance().maxPosNum();
         this.renew();
-        //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
+    }
+
+    public resetData(){
+        if(this.listData.length < this.maxCard)
+            this.listData.addItem({setting:true})
+        this.renewBtn();
+        this.renewTitle();
+        if(this.listData.length > 1)
+            this.btnGroup.addChildAt(this.deleteBtn,0)
+    }
+
+    public renewBtn(){
+        this.upBtn.visible = false
+        this.downBtn.visible = false
     }
 
     public renew(noPosData?){
@@ -384,64 +289,11 @@ class BasePosUI extends game.BaseUI {
             this.posName = '新建阵容' + this.index;
             MyTool.removeMC(this.deleteBtn)
         }
-        arr.push({isSetting:true})
-        this.arrayData = new eui.ArrayCollection(arr)
-        this.list1.dataProvider = this.arrayData
+        if(arr.length < this.maxCard)
+            arr.push({setting:true})
+        this.listData = new eui.ArrayCollection(arr)
+        this.list.dataProvider = this.listData
         this.renewTitle();
-        this.renewList();
-        this.renewDownList();
-    }
-
-    private renewTitle(){
-        var title = this.type == 'atk'?'【进攻阵容】':'【防御阵容】'
-        this.topUI.setTitle(title + '- ' + this.posName + ' ('+this.arrayData.length+'/'+this.maxCard+')')
-    }
-
-    public deleteID(id){
-        this.useCard[id] --;
-        this.renewTitle();
-    }
-
-    public justRenewList2(){
-        MyTool.renewList(this.list2)
-        this.renewTitle();
-    }
-    public addSetting(){
-        this.arrayData.addItem({isSetting:true})
-    }
-
-    private renewList(){
-        //this.scroller2.stopAnimation();
-        var type = this.downList2.selectValue;
-        var arr;
-        if(this.selectType == 0)
-        {
-            arr = CardManager.getInstance().getMyMonsterList(type)
-            this.monsterBG.visible = true
-            this.skillBG.visible = false
-            MyTool.addColor(this.monsterIcon,0xFF0000)
-            MyTool.addColor(this.skillIcon,-1)
-        }
-        else
-        {
-            arr = CardManager.getInstance().getMySkillList(type)
-            this.monsterBG.visible = false
-            this.skillBG.visible = true
-            MyTool.addColor(this.monsterIcon,-1)
-            MyTool.addColor(this.skillIcon,0x07B6FF)
-        }
-        ArrayUtil.sortByField(arr,['cost','level','id'],[0,0,0]);
-        this.totalPage = Math.ceil(arr.length/this.pageSize || 1)
-        this.numText.text = this.page + ''
-        this.numText2.text = '' + this.totalPage
-        arr = arr.splice((this.page-1)*this.pageSize,this.pageSize)
-        for(var i=0;i<arr.length;i++)
-        {
-            arr[i].temp = this.useCard;
-        }
-        this.list2.dataProvider = new eui.ArrayCollection(arr)
-        MyTool.changeGray(this.leftMC,this.page == 1)
-        MyTool.changeGray(this.rightMC,this.page == this.totalPage)
-
+        this.renewBtn();
     }
 }

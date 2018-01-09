@@ -34,7 +34,7 @@ class BasePosUI extends game.BaseUI {
 
     public constructor() {
         super();
-        this.skinName = "BasePosChangeUISkin";
+        this.skinName = "BasePosUISkin";
     }
 
     public childrenCreated() {
@@ -59,10 +59,10 @@ class BasePosUI extends game.BaseUI {
     }
     
     private onUp(){
-        
+        this.renewBtn(false)
     }
     private onDown(){
-
+        this.renewBtn(true)
     }
 
     private onTest(){
@@ -254,15 +254,32 @@ class BasePosUI extends game.BaseUI {
     public resetData(){
         if(this.listData.length < this.maxCard)
             this.listData.addItem({setting:true})
-        this.renewBtn();
+        this.renewBtn(true);
         this.renewTitle();
         if(this.listData.length > 1)
             this.btnGroup.addChildAt(this.deleteBtn,0)
     }
 
-    public renewBtn(){
+    public renewBtn(toBottom?){
         this.upBtn.visible = false
         this.downBtn.visible = false
+        var listHeight = Math.ceil(this.listData.length/4)*130
+        var scrollHeight = GameManager.stage.stageHeight-60-100
+        if( listHeight > scrollHeight)
+        {
+            if(toBottom)
+            {
+                this.upBtn.visible = true
+                this.list.y = 60 + scrollHeight - listHeight
+
+            }
+            else
+            {
+                this.downBtn.visible = true
+                this.list.y = 60
+            }
+            this.scrollerBG.y = this.list.y
+        }
     }
 
     public renew(noPosData?){

@@ -1,6 +1,7 @@
 class PKManager {
     public static TYPE_HANG = 1;
-    public static TYPE_TEST = 2;
+    public static TYPE_TEST = 101;
+    public static TYPE_MAIN_HANG = 102;
     private static instance:PKManager;
     public static getInstance() {
         if (!this.instance) this.instance = new PKManager();

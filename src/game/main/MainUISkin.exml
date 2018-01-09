@@ -1,89 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="MainUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
 	<e:Rect width="100%" height="100%" x="0" y="0" fillColor="0x000000"/>
-	<e:Image id="bg" width="640" height="1136" x="0" verticalCenter="0"/>
-	<e:Group y="20" horizontalCenter="0">
-		<e:Group x="0" y="0">
-			<e:Image source="border1_png" scale9Grid="28,20,26,2" x="0" y="0" width="190"/>
-			<e:Label id="forceText" text="12345" x="50" size="24" y="9"/>
-			<e:Image source="icon_force_png" x="10" y="-19.5"/>
-			<e:Image id="addForceBtn" source="icon_add2_png" y="0" right="0"/>
-		</e:Group>
-		<e:Group x="0" y="0">
-			<e:Image source="border1_png" scale9Grid="28,20,26,2" x="0" y="0" width="190"/>
-			<e:Label id="energyText" text="12345" x="50" size="24" y="9"/>
-			<e:Image id="addEnergyBtn" source="icon_add2_png" y="0" right="0"/>
-			<e:Image x="-4" y="-3.5" source="icon_love_png"/>
-		</e:Group>
-		<e:Group x="0" y="0">
-			<e:Image source="border1_png" scale9Grid="28,20,26,2" x="0" y="0" width="190"/>
-			<e:Label id="diamondText" text="12345" x="50" size="24" y="9"/>
-			<e:Image id="addDiamondBtn" source="icon_add2_png" y="0" right="0"/>
-			<e:Image x="-10" y="-1.5" source="icon_diamond_png"/>
-		</e:Group>
-		<e:layout>
-			<e:HorizontalLayout gap="20"/>
-		</e:layout>
-	</e:Group>
-	<e:Group x="0" bottom="-17" height="140">
+	<e:Group id="con" width="640" x="0" top="0" bottom="110"/>
+	<e:Group x="0" bottom="-17" height="140" locked="true">
 		<e:Image source="title_bg4_png" x="0" width="640" fillMode="repeat" y="12.5"/>
 		<e:Rect id="bottomSelectMC" width="200" height="110" x="0" y="15" scaleX="1" scaleY="1" fillAlpha="0.1" fillColor="0xffffff"/>
 		<e:Group x="0" y="0">
-			<ns1:MainBottomBtn id="b0" x="0" skinName="MainBottomBtnSkin" y="0"/>
-			<e:Rect width="1" height="100" x="116" y="39" fillColor="0x3d1604"/>
-			<ns1:MainBottomBtn x="10" skinName="MainBottomBtnSkin" y="10" id="b1"/>
-			<e:Rect width="1" height="100" x="126" y="49" fillColor="0x3d1604"/>
-			<ns1:MainBottomBtn x="20" skinName="MainBottomBtnSkin" y="20" id="b2"/>
-			<e:Rect width="1" height="100" x="136" y="59" fillColor="0x3d1604"/>
-			<ns1:MainBottomBtn x="30" skinName="MainBottomBtnSkin" y="30" id="b3"/>
-			<e:Rect width="1" height="100" x="146" y="69" fillColor="0x3d1604"/>
-			<ns1:MainBottomBtn x="40" skinName="MainBottomBtnSkin" y="40" id="b4"/>
-			<e:layout>
-				<e:HorizontalLayout verticalAlign="bottom" gap="-1"/>
-			</e:layout>
-		</e:Group>
-	</e:Group>
-	<e:Group horizontalCenter="0" bottom="150">
-		<e:Button id="defBtn" label="防守阵容 1/5" x="0" y="0" width="240" skinName="Btn7Skin" height="83"/>
-		<e:Button id="atkBtn" label="进攻阵容 1/5" x="0" y="0" width="240" height="83" skinName="Btn5Skin"/>
+		<ns1:MainBottomBtn id="b0" x="0" skinName="MainBottomBtnSkin" y="0"/>
+		<e:Rect width="1" height="100" x="116" y="39" fillColor="0x3d1604"/>
+		<ns1:MainBottomBtn x="10" skinName="MainBottomBtnSkin" y="10" id="b1"/>
+		<e:Rect width="1" height="100" x="126" y="49" fillColor="0x3d1604"/>
+		<ns1:MainBottomBtn x="20" skinName="MainBottomBtnSkin" y="20" id="b2"/>
+		<e:Rect width="1" height="100" x="136" y="59" fillColor="0x3d1604"/>
+		<ns1:MainBottomBtn x="30" skinName="MainBottomBtnSkin" y="30" id="b3"/>
+		<e:Rect width="1" height="100" x="146" y="69" fillColor="0x3d1604"/>
+		<ns1:MainBottomBtn x="40" skinName="MainBottomBtnSkin" y="40" id="b4"/>
 		<e:layout>
-			<e:HorizontalLayout gap="30"/>
+			<e:HorizontalLayout verticalAlign="bottom" gap="-1"/>
 		</e:layout>
+		</e:Group>
 	</e:Group>
-	<e:Group y="65" horizontalCenter="0">
-		<e:Group id="mailBtn" x="10" y="0">
-			<e:Image scale9Grid="33,31,4,6" y="0" width="80" height="80" x="0" source="bg7_png" visible="false"/>
-			<e:Image source="main_mail_png" verticalCenter="0" horizontalCenter="0"/>
-			<e:Label text="邮件" size="22" horizontalCenter="0" stroke="2" bottom="10"/>
-		</e:Group>
-		<e:Group id="rankBtn" x="100" y="0">
-			<e:Image source="bg7_png" scale9Grid="33,31,4,6" y="0" width="80" height="80" x="0" visible="false"/>
-			<e:Image source="main_rank_png" horizontalCenter="0" verticalCenter="0"/>
-			<e:Label text="排行" size="22" horizontalCenter="0" stroke="2" bottom="10"/>
-		</e:Group>
-		<e:Group id="shopBtn" x="100" y="0">
-			<e:Image source="bg7_png" scale9Grid="33,31,4,6" y="0" width="80" height="80" x="0" visible="false"/>
-			<e:Image source="main_shop_png" verticalCenter="0" horizontalCenter="0"/>
-			<e:Label text="商店" size="22" horizontalCenter="0" stroke="2" bottom="10"/>
-		</e:Group>
-		<e:Group id="settingBtn" x="100" y="0">
-			<e:Image source="bg7_png" scale9Grid="33,31,4,6" y="0" width="80" height="80" x="0" visible="false"/>
-			<e:Image source="icon_setting_png" horizontalCenter="0" verticalCenter="0"/>
-			<e:Label text="设置" size="22" horizontalCenter="0" stroke="2" bottom="10"/>
-		</e:Group>
-		<e:layout>
-			<e:HorizontalLayout gap="10" paddingLeft="10"/>
-		</e:layout>
-	</e:Group>
-	<e:Scroller width="560" horizontalCenter="0" top="150" bottom="250" bounces="false">
-		<e:Group>
-			<e:Rect id="mapBtn" width="560" height="160" x="100" y="-6" scaleX="1" scaleY="1" strokeWeight="3" ellipseWidth="40" ellipseHeight="40"/>
-			<e:Rect id="testBtn" width="560" height="160" x="380" y="-6" scaleX="1" scaleY="1" strokeWeight="3" ellipseWidth="40" ellipseHeight="40"/>
-			<e:Rect width="560" height="160" x="100" y="274" scaleX="1" scaleY="1" strokeWeight="3" ellipseWidth="40" ellipseHeight="40"/>
-			<e:Rect width="560" height="160" x="110" y="284" scaleX="1" scaleY="1" strokeWeight="3" ellipseWidth="40" ellipseHeight="40"/>
-			<e:layout>
-				<e:VerticalLayout gap="15"/>
-			</e:layout>
-		</e:Group>
-	</e:Scroller>
+	
 </e:Skin>

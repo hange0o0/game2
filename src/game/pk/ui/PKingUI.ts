@@ -6,10 +6,10 @@ class PKingUI extends game.BaseUI {
     }
 
     private scroller: eui.Scroller;
-    private pkVideo: PKVideoCon;
     private pkCtrlCon: PKCtrlCon;
     private pkTop: PKTopUI;
     private roundText: eui.Label;
+    private con: eui.Group;
     private pkInfo: PKMonsterInfoUI;
     private smallMap: PKSmallMap;
 
@@ -47,6 +47,7 @@ class PKingUI extends game.BaseUI {
         super.hide();
         this.removeAll();
         this.removeEventListener(egret.Event.ENTER_FRAME,this.onE,this)
+        EM.dispatchEventWith(GameEvent.client.pk_end)
     }
 
     public show(){
@@ -60,18 +61,22 @@ class PKingUI extends game.BaseUI {
 
     public removeAll(){
         PKBulletManager.getInstance().freeAll()
-        this.pkVideo.remove();
+        PKVideoCon.getInstance().remove();
         this.pkCtrlCon.remove();
         this.pkTop.remove();
     }
 
     public onShow(){
+        EM.dispatchEventWith(GameEvent.client.pk_begin)
         var PD = PKData.getInstance();
         this.scrollTime = 0;
-        this.pkVideo.init();
+        PKVideoCon.getInstance().init();
         this.pkCtrlCon.init();
         this.pkTop.init('PK对战');
 
+        this.con.addChild(PKVideoCon.getInstance())
+        PKVideoCon.getInstance().x = 0;
+        PKVideoCon.getInstance().y = 0;
 
 
         PD.diamondData = PD.addMonster({
@@ -128,7 +133,7 @@ class PKingUI extends game.BaseUI {
             isOver = PC.onStep()     //跑数据
 
         //表现动画
-        this.pkVideo.action();
+        PKVideoCon.getInstance().action();
 
         //控制栏动画
         this.pkCtrlCon.onTimer();
@@ -163,7 +168,7 @@ class PKingUI extends game.BaseUI {
         var area = 100
         if(PD.diamondData.hp > 0)
         {
-            var item = this.pkVideo.getItemByID(PD.diamondData.id);
+            var item = PKVideoCon.getInstance().getItemByID(PD.diamondData.id);
             area = 5;
         }
         else

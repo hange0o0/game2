@@ -24,7 +24,7 @@ class BasePosChooseUI extends game.BaseUI {
 
     public constructor() {
         super();
-        this.skinName = "BasePosUISkin";
+        this.skinName = "BasePosChooseUISkin";
     }
 
     public childrenCreated() {

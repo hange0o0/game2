@@ -1,4 +1,4 @@
-class BagUI extends game.BaseUI {
+class BagUI extends MainBase {
 
     private static _instance: BagUI;
     public static getInstance(): BagUI {
@@ -7,6 +7,9 @@ class BagUI extends game.BaseUI {
         return this._instance;
     }
 
+    private topUI: TopUI;
+
+
     public constructor() {
         super();
         this.skinName = "BagUISkin";
@@ -14,11 +17,9 @@ class BagUI extends game.BaseUI {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.topUI.setTitle('背包')
     }
 
-    public show(){
-        super.show()
-    }
 
     public hide() {
         super.hide();

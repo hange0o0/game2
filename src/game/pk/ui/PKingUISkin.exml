@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="PKingUISkin" width="640" height="1100" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
 	<e:Scroller id="scroller" width="640" height="512" x="0" bottom="475" bounces="false" locked="true">
-		<e:Group>
-			<ns1:PKVideoCon id="pkVideo" x="0" y="0" skinName="PKVideoConSkin"/>
+		<e:Group id="con">
 		</e:Group>
 	</e:Scroller>
 	<ns1:PKSmallMap id="smallMap" skinName="PKSmallMapSkin" bottom="472" horizontalCenter="0"/>

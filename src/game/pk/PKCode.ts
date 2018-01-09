@@ -149,6 +149,7 @@ class PKCode {
             var mvo:PKMonsterData = PD.monsterList[i];
             var skillTargets = mvo.canSkill(PD.actionTime);
 
+
             if(skillTargets && skillTargets.length > 0)   //用技能
             {
                 PKMonsterAction.getInstance().skill(mvo,PD.actionTime)

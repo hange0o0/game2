@@ -1,4 +1,4 @@
-class SlaveUI extends game.BaseWindow {
+class SlaveUI extends MainBase {
 
     private static _instance: SlaveUI;
     public static getInstance(): SlaveUI {
@@ -7,6 +7,8 @@ class SlaveUI extends game.BaseWindow {
         return this._instance;
     }
 
+    private topUI: TopUI;
+
     public constructor() {
         super();
         this.skinName = "SlaveUISkin";
@@ -14,12 +16,8 @@ class SlaveUI extends game.BaseWindow {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.topUI.setTitle('奴隶')
     }
-
-    public show(){
-        super.show()
-    }
-
     public hide() {
         super.hide();
     }

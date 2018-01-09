@@ -1,4 +1,4 @@
-class CardUI extends game.BaseUI {
+class CardUI extends MainBase {
 
     private static _instance: CardUI;
     public static getInstance(): CardUI {
@@ -7,6 +7,8 @@ class CardUI extends game.BaseUI {
         return this._instance;
     }
 
+    private topUI: TopUI;
+
     public constructor() {
         super();
         this.skinName = "CardUISkin";
@@ -14,11 +16,10 @@ class CardUI extends game.BaseUI {
 
     public childrenCreated() {
         super.childrenCreated();
+
+        this.topUI.setTitle('卡牌')
     }
 
-    public show(){
-        super.show()
-    }
 
     public hide() {
         super.hide();

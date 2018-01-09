@@ -1,4 +1,4 @@
-class TecUI extends game.BaseWindow {
+class TecUI extends MainBase {
 
     private static _instance: TecUI;
     public static getInstance(): TecUI {
@@ -7,6 +7,8 @@ class TecUI extends game.BaseWindow {
         return this._instance;
     }
 
+    private topUI: TopUI;
+
     public constructor() {
         super();
         this.skinName = "TecUISkin";
@@ -14,10 +16,7 @@ class TecUI extends game.BaseWindow {
 
     public childrenCreated() {
         super.childrenCreated();
-    }
-
-    public show(){
-        super.show()
+        this.topUI.setTitle('科技')
     }
 
     public hide() {

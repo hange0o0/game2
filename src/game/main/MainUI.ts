@@ -7,33 +7,22 @@ class MainUI extends game.BaseUI {
         return this._instance;
     }
 
-    private bg: eui.Image;
-    private forceText: eui.Label;
-    private addForceBtn: eui.Image;
-    private energyText: eui.Label;
-    private addEnergyBtn: eui.Image;
-    private diamondText: eui.Label;
-    private addDiamondBtn: eui.Image;
-    private mapBtn: eui.Rect;
-    private testBtn: eui.Rect;
+    private con: eui.Group;
     private bottomSelectMC: eui.Rect;
     private b0: MainBottomBtn;
     private b1: MainBottomBtn;
     private b2: MainBottomBtn;
     private b3: MainBottomBtn;
     private b4: MainBottomBtn;
-    private defBtn: eui.Button;
-    private atkBtn: eui.Button;
-    private mailBtn: eui.Group;
-    private rankBtn: eui.Group;
-    private shopBtn: eui.Group;
-    private settingBtn: eui.Group;
 
 
 
 
-    public currentIndex = 0
+
+    public currentIndex = 2
     public bottomItems = []
+    public currentUI:MainBase;
+    public lastUI:MainBase;
     public constructor() {
         super();
         this.skinName = "MainUISkin";
@@ -41,18 +30,6 @@ class MainUI extends game.BaseUI {
 
     public childrenCreated() {
         super.childrenCreated();
-
-        this.addBtnEvent(this.defBtn,this.onDef)
-        this.addBtnEvent(this.atkBtn,this.onAtk)
-        this.addBtnEvent(this.addForceBtn,this.onAddForce)
-        this.addBtnEvent(this.addEnergyBtn,this.onAddEnergy)
-        this.addBtnEvent(this.addDiamondBtn,this.onAddDiamond)
-        this.addBtnEvent(this.mapBtn,this.onMap)
-        this.addBtnEvent(this.testBtn,this.onTest)
-        this.addBtnEvent(this.mailBtn,this.onMail)
-        this.addBtnEvent(this.rankBtn,this.onRank)
-        this.addBtnEvent(this.shopBtn,this.onShop)
-        this.addBtnEvent(this.settingBtn,this.onSetting)
 
         this.b0.data = {text:'奴隶',index:0,source:'main_slave_png'}
         this.b1.data = {text:'背包',index:1,source:'main_bag_png'}
@@ -75,51 +52,34 @@ class MainUI extends game.BaseUI {
 
            egret.Tween.removeTweens(this.bottomSelectMC)
            var tw = egret.Tween.get(this.bottomSelectMC)
-           tw.to({x:this.getBottomX()},200)
+           var bottomX = this.getBottomX()
+           tw.to({x:bottomX},200)
+
+           if(this.lastUI)
+               this.lastUI.hide();
+           this.lastUI = this.currentUI
+           this.setCurrentUI();
+           var rota = 1;
+           if(this.bottomSelectMC.x > bottomX)
+               rota = -1
+           if(this.lastUI)
+               this.lastUI.x = 0
+           this.currentUI.x = 640*rota;
+           egret.Tween.removeTweens(this.con)
+           var tw = egret.Tween.get(this.con)
+           tw.to({x:-640*rota},200).call(function(){
+               this.con.x = 0
+               this.currentUI.x = 0
+               if(this.lastUI)
+               {
+                   this.lastUI.hide()
+                   this.lastUI = null;
+               }
+           },this)
        }
     }
 
-    private onTest(){
-        HangManager.getInstance().pkTest(PosManager.getInstance().atkList[0].id)
-    }
 
-    private onMail(){
-
-    }
-    private onRank(){
-
-    }
-    private onShop(){
-
-    }
-    private onSetting(){
-        MainUI.getInstance().hide();
-        LoginUI.getInstance().show();
-    }
-
-    private onDef(){
-         DefPosListUI.getInstance().show();
-    }
-
-    private onAtk(){
-        AtkPosListUI.getInstance().show();
-    }
-
-    private onAddForce(){
-
-    }
-
-    private onAddEnergy(){
-
-    }
-
-    private onAddDiamond(){
-
-    }
-
-    private onMap(){
-        HangUI.getInstance().show();
-    }
 
 
     public show(){
@@ -131,36 +91,7 @@ class MainUI extends game.BaseUI {
     }
 
     public onShow(){
-        this.bg.source = Config.localResRoot  + 'main_bg'+UM.type+'.jpg';
         this.renew();
-        this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
-        this.addPanelOpenEvent(GameEvent.client.force_change,this.renewTop)
-        this.addPanelOpenEvent(GameEvent.client.diamond_change,this.renewTop)
-        this.addPanelOpenEvent(GameEvent.client.energy_change,this.renewEnergy)
-        this.addPanelOpenEvent(GameEvent.client.pos_change,this.renewPosBtn)
-    }
-
-    private renewPosBtn(){
-        var PM = PosManager.getInstance();
-        this.defBtn.label = '防守阵容 ' + PM.defList.length + '/' + PM.maxNum
-        this.atkBtn.label = '进攻阵容 ' + PM.atkList.length + '/' + PM.maxNum
-    }
-
-    private onTimer(){
-        this.renewEnergy();
-    }
-
-    public renewTop(){
-       this.forceText.text = UM.tec_force + ''
-       this.diamondText.text = UM.diamond + ''
-    }
-
-    public renewEnergy(){
-        var energy = UM.getEnergy();
-        if(energy)
-            this.energyText.text = energy + '/' + UM.maxEnergy;
-        else
-            this.setHtml(this.energyText,this.createHtml(DateUtil.getStringBySecond(UM.getNextEnergyCD()).substr(-5),0xFF0000));
     }
 
     public renew(){
@@ -170,9 +101,38 @@ class MainUI extends game.BaseUI {
         }
         this.bottomSelectMC.x = this.getBottomX()
 
-        this.renewTop();
-        this.renewEnergy();
-        this.renewPosBtn();
+        if(this.lastUI)
+            this.lastUI.hide();
+        if(this.currentUI)
+            this.currentUI.hide();
+        this.setCurrentUI();
+        egret.Tween.removeTweens(this.con)
+        this.currentUI.x = 0
+        this.con.x = 0
+    }
+
+
+    public setCurrentUI(){
+        switch(this.currentIndex)
+        {
+            case 0:
+                this.currentUI = SlaveUI.getInstance();
+                break;
+            case 1:
+                this.currentUI = BagUI.getInstance();
+                break;
+            case 2:
+                this.currentUI = MainFightUI.getInstance();
+                break;
+            case 3:
+                this.currentUI = CardUI.getInstance();
+                break;
+            case 4:
+                this.currentUI = TecUI.getInstance();
+                break;
+        }
+        this.currentUI.show(this.con)
+
     }
 
     private getBottomX(){

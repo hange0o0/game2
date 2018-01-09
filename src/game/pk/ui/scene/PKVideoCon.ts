@@ -1,12 +1,13 @@
 class PKVideoCon extends game.BaseContainer {
-    private static instance:PKVideoCon;
+    private static _instance:PKVideoCon;
     public static getInstance() {
-        return this.instance;
+        if(!this._instance)
+            this._instance = new PKVideoCon();
+        return this._instance;
     }
 
     public constructor() {
         super();
-        PKVideoCon.instance = this;
         this.skinName = "PKVideoConSkin";
     }
     private con: eui.Group;

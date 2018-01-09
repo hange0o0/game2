@@ -1,32 +1,24 @@
 <?xml version='1.0' encoding='utf-8'?>
-<e:Skin class="HangUISkin" width="600" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" height="850">
-	<e:Image scale9Grid="33,31,4,6" x="0" width="100%" source="bg14_png" top="30" bottom="0"/>
-	<e:Group horizontalCenter="0" bottom="25">
-		<e:Button id="cancelBtn" y="4" label="返回" x="0" width="150" skinName="Btn3Skin"/>
-		<e:Button id="pKBtn" label="00:00:00" x="198" y="0" width="150" skinName="Btn1Skin"/>
-		<e:Button id="awardBtn" label="获取收益" x="208" y="10" width="150" skinName="Btn4Skin"/>
-		<e:layout>
-			<e:HorizontalLayout gap="30"/>
-		</e:layout>
+<e:Skin class="HangUISkin" width="620" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" height="360">
+	<e:Image x="0" width="100%" top="0" bottom="0" source="bg15_png" scale9Grid="20,20,9,10"/>
+	<e:Group id="con" width="604" x="8" height="344" y="8" locked="true">
+		<e:Image id="img" bottom="-100" horizontalCenter="0"/>
 	</e:Group>
-	<e:Group id="con" height="400" width="596" top="40" left="2" right="2">
-		<e:Image id="img" width="100%" height="100%" x="0" y="0"/>
-	</e:Group>
-	<e:Image source="bg17_png" x="2" y="377.68" height="60" width="180" scale9Grid="12,0,50,41"/>
 
-	<e:Image source="bg10_png" scale9Grid="32,32,3,6" y="430.3" anchorOffsetX="0" anchorOffsetY="0" height="320" left="2" right="2"/>
-	<e:Image source="title_bg3_png" y="0" scale9Grid="54,9,98,61" left="-30" right="-30" scaleX="1.2" scaleY="1.2"/>
-	<e:Label id="titleText" text="战  役" y="12.12" horizontalCenter="0.5" stroke="3"/>
-	<e:Label text="关 卡 掉 落" y="417.97" horizontalCenter="0" stroke="3"/>
-	<e:Scroller id="scroller" height="270" y="460.3" left="30" right="30">
-		<e:Group>
-			<e:List id="list" width="200" height="200" x="86" y="43">
-				<e:layout>
-					<e:TileLayout requestedColumnCount="5" horizontalGap="10" verticalGap="10"/>
-				</e:layout>
-			</e:List>
-		</e:Group>
-	</e:Scroller>
-	<e:Label id="timeText" text="00:00:00" x="46.82" y="396.3" size="24" stroke="2"/>
-	<e:Image source="icon_clock_png" y="394.3" x="15"/>
+	<e:Group x="8" bottom="10" locked="true">
+		<e:Image source="bg17_png" x="0" y="0" height="60" width="180" scale9Grid="12,0,50,41"/>
+		<e:Label id="timeText" text="00:00:00" x="50" size="24" stroke="2" verticalCenter="0"/>
+		<e:Image source="icon_clock_png" x="13" verticalCenter="0"/>
+	</e:Group>
+	<e:Group horizontalCenter="0" y="15" locked="true">
+		<e:Image source="title_bg1_png" y="0" scale9Grid="29,5,13,30" width="150" x="0"/>
+		<e:Label id="titleText" text="第5关" size="22" stroke="2" verticalCenter="0" horizontalCenter="0"/>
+	</e:Group>
+	<e:Button id="awardBtn" label="获取收益" width="150" skinName="Btn4Skin" right="10" bottom="10"/>
+	<e:Group id="lockGroup" horizontalCenter="0" bottom="15">
+		<e:Image source="bg9_png" scale9Grid="12,12,4,5" x="0" y="0" width="200" height="50"/>
+		<e:Rect id="lockBar" width="100" height="40" x="5" y="5" fillAlpha="0.3"/>
+		<e:Image source="icon_lock_png" x="15" verticalCenter="0"/>
+		<e:Label id="lockText" text="12:15" verticalCenter="0" size="24" horizontalCenter="0" stroke="2"/>
+	</e:Group>
 </e:Skin>

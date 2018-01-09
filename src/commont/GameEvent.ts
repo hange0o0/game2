@@ -9,6 +9,10 @@ class GameEvent {
         pos_change:'pos_change',
 
 
+        pk_begin:'pk_begin',
+        pk_end:'pk_end',
+
+
 
         //task_change:'task_change',
         //card_change:'card_change',

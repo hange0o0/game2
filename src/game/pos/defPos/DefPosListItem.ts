@@ -4,10 +4,11 @@ class DefPosListItem extends game.BaseItem {
         this.skinName = "DefPosListItemSkin";
     }
 
-    private disableMC: eui.Image;
-    private desText: eui.Label;
+    private bg2: eui.Image;
     private list: eui.List;
+    private desText: eui.Label;
     private openBtn: eui.CheckBox;
+
 
 
 
@@ -24,7 +25,8 @@ class DefPosListItem extends game.BaseItem {
     private onOpen(e){
         e.stopImmediatePropagation();
         PosManager.getInstance().changeClose('def',this.data.id,()=>{
-            this.dataChanged();
+            //this.dataChanged();
+            this.bg2.source = this.data.close?'bg5_png':'bg2_png'
         })
     }
 
@@ -37,10 +39,18 @@ class DefPosListItem extends game.BaseItem {
         {
             this.currentState = 'normal'
 
-            this.disableMC.visible = this.data.close
             this.openBtn.selected = !this.data.close
             var str = this.data.list.replace(new RegExp("#","g"),",")
             var list = str.split(',');
+            this.bg2.source = this.data.close?'bg5_png':'bg2_png'
+
+            //if(this.data.close)
+            //{
+            //    for(var i=0;i<list.length;i++)
+            //    {
+            //        list[i] = '@' + list[i]
+            //    }
+            //}
             this.list.dataProvider = new eui.ArrayCollection(list)
 
             this.desText.text = Base64.decode(this.data.name) + '  ('+list.length+'/'+PosManager.getInstance().maxPosNum()+')';

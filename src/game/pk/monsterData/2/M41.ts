@@ -24,8 +24,8 @@ class M41 extends MBase {
                     PKData.getInstance().addVideo({
                         type:PKConfig.VIDEO_MONSTER_ADD_STATE,
                         user:target,
-                        key:1,
-                        stateType:1
+                        key:'speed',
+                        stateType:2
                     })
                 }
             }

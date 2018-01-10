@@ -105,10 +105,10 @@ class MainFightUI extends MainBase {
         this.addPanelOpenEvent(GameEvent.client.pk_end,this.onPKEnd)
     }
 
-    private onPKBegin(){
+    public onPKBegin(){
         this.mapBtn.clean()
     }
-    private onPKEnd(){
+    public onPKEnd(){
         this.mapBtn.renew()
     }
 

@@ -73,28 +73,49 @@ class PKMonsterItem extends game.BaseItem {
             return;
         for(var s in this.stateMV)
         {
+            if(!this.stateMV[s].parent)
+                continue;
+            if(parseInt(s) == PKConfig.STATE_MIANSHANG)
+                continue;
+            if(parseInt(s) == PKConfig.STATE_MODUN)
+            {
+                if(mD.manaHp <= 0)
+                    this.stateMV[PKConfig.STATE_MODUN].remove()
+                continue;
+            }
             if(!mD.currentState[s])
-                MyTool.removeMC(this.stateMV[s])
+            {
+                this.stateMV[s].remove()
+            }
         }
         for(var s in mD.currentState)
         {
-            if(!this.stateMV[s])
-            {
-                var txt = new eui.Label();
-                txt.size = 20;
-                txt.stroke = 2;
-                txt.width = 160;
-                txt.textAlign="center"
-                txt.anchorOffsetX = 80;
-                txt.textColor = 0xFFFFFF;
-                txt.text = s;
-                txt.x = 50;
-                txt.y = 300 - mD.getVO().height - 20
-                this.stateMV[s] = txt;
-            }
-            if(!this.stateMV[s].parent)
-                this.addChild(this.stateMV[s]);
+            if(parseInt(s) == PKConfig.STATE_MIANSHANG)
+                continue;
+            this.initStateMV(s)
         }
+
+        if(mD.manaHp > 0)
+            this.initStateMV(PKConfig.STATE_MODUN)
+    }
+
+    private initStateMV(s){
+        var mD:PKMonsterData = this.data
+        if(!this.stateMV[s])
+        {
+            var img = new PKState();
+            this.stateMV[s] = img;
+            img.data = s;
+        }
+        if(!this.stateMV[s].parent)
+        {
+            this.addChild(this.stateMV[s]);
+            this.stateMV[s].show(this);
+        }
+    }
+
+    public showMianShang(){
+         this.initStateMV(PKConfig.STATE_MIANSHANG)
     }
 
     //增加状态时的动画
@@ -123,7 +144,7 @@ class PKMonsterItem extends game.BaseItem {
         this.barGroup.visible = false;
         this.barGroup.alpha = 1;
         this.barGroup.y = 300 - mD.getVO().height - 20;
-        this.addStateMV.y = this.barGroup.y - 20
+        this.addStateMV.y = this.barGroup.y - 30
         this.teamMC.y = this.barGroup.y - 5
         this.teamMC.visible =  mD.mid != 99
         this.renewHp();

@@ -2,7 +2,7 @@ class M44 extends MBase {
     constructor() {
         super();
     }
-    private mvID = 103;
+    private mvID = 112;
     private mvID2 = 8;
 
     public initMonster(user:PKMonsterData){
@@ -48,5 +48,13 @@ class M44 extends MBase {
                 continue;
             newTarget.beAtkAction({hp:hurt})
         }
+        var mv = PKVideoCon.getInstance().playAniOn(target.id,this.mvID)
+        if(mv)
+        {
+            mv.scaleX = mv.scaleY = 0.5;
+            mv.x -= 10
+            mv.y -= 30
+        }
+
     }
 }

@@ -15,12 +15,16 @@ class BasePosChooseUI extends game.BaseUI {
     private list: eui.List;
 
 
+
     //public selectType
     private monsterType = 0
     private skillType = 0
 
     private arrayData:eui.ArrayCollection
     private fromUI:BasePosUI
+    private posCard = new PosCardItem()
+
+    public isFull
 
     public constructor() {
         super();
@@ -49,6 +53,9 @@ class BasePosChooseUI extends game.BaseUI {
 
         this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
         this.tab.selectedIndex = 0;
+
+        this.posCard.touchChildren = this.posCard.touchEnabled = false
+        this.posCard.stopGay = true
     }
     //
     //
@@ -85,8 +92,19 @@ class BasePosChooseUI extends game.BaseUI {
 
         this.fromUI.useCard[item.id] = (this.fromUI.useCard[item.id] || 0) + 1
         this.arrayData.addItem({id:item.id})
+        this.isFull = this.fromUI.maxCard <= this.arrayData.length
         this.renewTitle();
         this.justRenewList2();
+
+        for(var i=0;i<this.list.numChildren;i++)
+        {
+            var mc:any = this.list.getChildAt(i);
+            if(mc.data == item)
+            {
+                this.showAdd(mc)
+                break;
+            }
+        }
         //this.once(egret.Event.ENTER_FRAME,function(){
         //    var dec = this.scroller1.viewport.contentHeight -  this.scroller1.viewport.height;
         //    if(this.scroller1.viewport.scrollV < dec)
@@ -98,6 +116,20 @@ class BasePosChooseUI extends game.BaseUI {
         //
         //this.btnGroup.addChildAt(this.deleteBtn,0)
 
+    }
+
+    private showAdd(mc){
+        var p = mc.localToGlobal(0,0)
+        this.posCard.x = p.x;
+        this.posCard.y = p.y;
+        this.addChild(this.posCard);
+        this.posCard.data = mc.data;
+        egret.Tween.removeTweens(this.posCard)
+        this.posCard.alpha = 1;
+        var tw = egret.Tween.get(this.posCard)
+        tw.to({alpha:0,y:p.y-100},200).call(function(){
+             MyTool.removeMC(this.posCard)
+        },this)
     }
 
 
@@ -140,7 +172,7 @@ class BasePosChooseUI extends game.BaseUI {
     }
 
     public onShow(){
-
+        this.isFull = false;
         this.renew();
         this.renewTitle();
         //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)

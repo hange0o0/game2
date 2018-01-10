@@ -13,7 +13,7 @@ class PosCardItem extends game.BaseItem {
 
 
 
-
+    public stopGay = false;
     //public selectAble = true
     public childrenCreated() {
         super.childrenCreated();
@@ -65,6 +65,7 @@ class PosCardItem extends game.BaseItem {
         this.numText.text = (maxNum-useNum) + '/' + maxNum;
         //this.selectAble = useNum < maxNum
 
-        MyTool.changeGray(this.img,(maxNum-useNum) == 0)
+        if(!this.stopGay)
+            this.img.changeGay((maxNum-useNum) == 0 || BasePosChooseUI.getInstance().isFull)
     }
 }

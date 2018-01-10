@@ -94,6 +94,16 @@ class MainUI extends game.BaseUI {
         this.renew();
     }
 
+    public onVisibleChange(){
+         if(this.currentIndex = 2)
+         {
+             if(this.visible)
+                 MainFightUI.getInstance().onPKEnd()
+             else
+                 MainFightUI.getInstance().onPKBegin()
+         }
+    }
+
     public renew(){
         for(var i=0;i<this.bottomItems.length;i++)
         {

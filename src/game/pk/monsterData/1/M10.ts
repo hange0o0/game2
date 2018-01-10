@@ -3,7 +3,7 @@ class M10 extends MBase {
         super();
     }
 
-    private mvID = 103;
+    private mvID = 30;
     public preload(){
         //MonsterVO.getObject(1).preLoad();
         AniManager.getInstance().preLoadMV(this.mvID)
@@ -15,7 +15,14 @@ class M10 extends MBase {
 
     //技能动画
     public skillMV(user,target,actionTime,endTime){
-        PKVideoCon.getInstance().playAniOn(target.id,this.mvID)
+        var mv = PKVideoCon.getInstance().playAniOn(target.id,this.mvID)
+        if(mv)
+        {
+            mv.scaleX = mv.scaleY = 0.5;
+            mv.x -= 10
+            mv.y -= 30
+        }
+
     }
 
     public skill(user:PKMonsterData,target:PKMonsterData){

@@ -65,6 +65,8 @@ class PKConfig {
 
     public static STATE_YUN = 1
     public static STATE_MOMIAN = 2
+    public static STATE_MODUN = 3
+    public static STATE_MIANSHANG = 4
 
 
     public static LISTENER_CREATE = 1

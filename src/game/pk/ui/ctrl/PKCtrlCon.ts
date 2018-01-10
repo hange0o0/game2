@@ -87,6 +87,8 @@ class PKCtrlCon extends game.BaseContainer {
 
 
     public onVideoEvent(e){
+        if(!this.stage)
+            return;
         //var item:PKMonsterItem;
         var videoData = e.data;
         //var data:PKMonsterData = videoData.user;

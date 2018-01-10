@@ -76,6 +76,7 @@
     "src/game/pos/basePos/BasePosChooseUISkin.exml",
     "src/game/pos/basePos/BasePosItemSkin.exml",
     "src/game/pos/basePos/BasePosUISkin.exml",
+    "src/game/pos/defPos/DefCheckBoxSkin.exml",
     "src/game/pos/defPos/DefPosListItemSkin.exml",
     "src/game/pos/defPos/DefPosListUISkin.exml",
     "src/game/pos/posTest/PosTestItemSkin.exml",

@@ -44,6 +44,8 @@ class PKTopUI extends game.BaseContainer {
     }
 
     public onVideoEvent(e){
+        if(!this.stage)
+            return;
         //var item:PKMonsterItem;
         var videoData = e.data;
         switch(videoData.type)//动画类型

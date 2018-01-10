@@ -205,6 +205,14 @@ class PKVideoCon extends game.BaseContainer {
                 item = this.getItemByID(data.id);
                 item.renewState();
                 break;
+            case PKConfig.VIDEO_MONSTER_NOHIT:
+                item = this.getItemByID(data.id);
+                item.showMianShang();
+                break;
+            case PKConfig.VIDEO_MANAHP_CHANGE:
+                item = this.getItemByID(data.id);
+                item.renewState();
+                break;
             case PKConfig.VIDEO_MONSTER_CHANGE_TEAM:
                 item = this.getItemByID(data.id);
                 item.setTeam();
@@ -294,7 +302,7 @@ class PKVideoCon extends game.BaseContainer {
             return;
         }
         var AM = AniManager.getInstance();
-        AM.playOnItem(mvID,atker);
+        return AM.playOnItem(mvID,atker);
     }
     //在A里播放动画
     public playAniIn(a,mvID){

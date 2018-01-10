@@ -9,4 +9,18 @@ class M71 extends MBase {
             return 1
         return Math.ceil(target.maxHp/100*user.getSkillValue(1));
     }
+
+    public atk(user:PKMonsterData,target:PKMonsterData){
+        var b = super.atk(user,target);
+        if(b && target.mid != 99)
+        {
+            var hp = this.getAtkHp(user,target);
+            PKData.getInstance().addVideo({
+                type:PKConfig.VIDEO_MONSTER_DOUBLE,
+                user:user,
+                value:hp,
+            })
+        }
+        return b;
+    }
 }

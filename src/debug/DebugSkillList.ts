@@ -36,19 +36,19 @@ class DebugSkillList extends game.BaseUI {
             30,109,119,126,134,
             112,116,120,161,
             102,105,113,149,
-            15,21,22,14,27,111,175,176
+            15,21,22,14,27,111,175,176,200
 
         ]
 
 
         var arr = [];
         //var noArr = [1,2,155,156,169,101,171,165]
-        for(var i=1;i<180;i++)
+        for(var i=1;i<list.length;i++)
         {
-            if(!RES.hasRes('skill' + i + '_json'))
-                continue;
-
-            //if(noArr.indexOf(i) == -1)
+            //if(!RES.hasRes('skill' + i + '_json'))
+            //    continue;
+            //
+            ////if(noArr.indexOf(i) == -1)
                 arr.push('skill' + i);
         }
         //for(var i=0;i<list.length;i++)

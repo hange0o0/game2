@@ -229,7 +229,7 @@ class PKCode {
             else { //其它
                 if(mvo.hpChange && PD.actionTime - mvo.lastHpChange >= 500) //改变血量值
                 {
-                    mvo.addHp(mvo.hpChange)
+                    mvo.addHp(Math.floor(mvo.hpChange/2)
                     mvo.lastHpChange = PD.actionTime;
                 }
                 mvo.cleanBuff(PD.actionTime) //清除BUFF

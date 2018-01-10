@@ -56,7 +56,28 @@ class PKAddState extends game.BaseItem {
         },this)
 
         this.arrowMC.alpha = 0;
-        this.stateMC.source = 'state'+key+'_png'
+        switch(key)
+        {
+            case 'atk':
+                this.stateMC.source = 'icon_atk_png';
+                break;
+            case 'def':
+                this.stateMC.source = 'icon_def1_png';
+                break;
+            case 'hp':
+                this.stateMC.source = 'icon_love_png';
+                break;
+            case 'speed':
+                this.stateMC.source = 'icon_speed_png';
+                break;
+            case 'momian':
+                this.stateMC.source = 'icon_def2_png';
+                break;
+            case 'change':
+                this.stateMC.source = 'change_icon_png';
+                break;
+        }
+
         if(type == 0)//只是图标
         {
             this.stateMC.x = 10

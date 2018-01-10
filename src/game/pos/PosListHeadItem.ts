@@ -20,11 +20,16 @@ class PosListHeadItem extends game.BaseItem {
     }
 
     public dataChanged(){
+        //var gay = this.data.indexOf('@') == 0;
+        //if(gay)
+        //    this.data = this.data.substr(1);
         var vo:any = CM.getCardVO(this.data);
         if(vo)
         {
             this.img.visible = true
             this.img.data = vo.id;
+            //if(gay)
+            //    this.img.changeGay(true)
             this.bg.source = vo.getBG();
         }
         else
@@ -33,5 +38,6 @@ class PosListHeadItem extends game.BaseItem {
         }
 
     }
+
 
 }

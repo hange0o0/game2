@@ -126,7 +126,7 @@ class HangUI extends game.BaseItem {
             PC.actionFinish();
         }
         videoCon.action();
-        if(PD.isGameOver || PD.actionTime > 180*1000)
+        if(PD.isGameOver || PD.monsterList.length == 0 || PD.actionTime > 180000)
         {
             this.overCount ++;
             if(this.overCount == 50)
@@ -147,11 +147,15 @@ class HangUI extends game.BaseItem {
             else if(scrollH < w - videoCon.width)
                 scrollH = w - videoCon.width;
             var dec = Math.abs(videoCon.x - scrollH)
+            egret.Tween.removeTweens(videoCon)
             if(dec > 10)
             {
-                egret.Tween.removeTweens(videoCon)
                 var tw = egret.Tween.get(videoCon)
                 tw.to({x:scrollH},Math.min(300,dec*10))
+            }
+            else
+            {
+                videoCon.x = scrollH;
             }
         }
     }

@@ -22,8 +22,14 @@ class M12 extends MBase {
                 PKData.getInstance().addVideo({
                     type:PKConfig.VIDEO_MONSTER_ADD_STATE,
                     user:target,
-                    key:1,
-                    stateType:1
+                    key:'atk',
+                    stateType:2
+                })
+                PKData.getInstance().addVideo({
+                    type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+                    user:target,
+                    key:'def',
+                    stateType:2
                 })
             }
         }

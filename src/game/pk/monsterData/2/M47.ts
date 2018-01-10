@@ -25,11 +25,15 @@ class M47 extends MBase {
         var skillValue = user.getSkillValue(1);
         target.manaHp += skillValue
         PKData.getInstance().addVideo({
-            type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+            type:PKConfig.VIDEO_MANAHP_CHANGE,
             user:target,
-            key:1,
-            stateType:1
         })
+        //PKData.getInstance().addVideo({
+        //    type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+        //    user:target,
+        //    key:1,
+        //    stateType:1
+        //})
     }
 
     //
@@ -40,7 +44,7 @@ class M47 extends MBase {
         for(var i=0;i<arr.length;i++)
         {
             var target = arr[i];
-            if(target.haveBuff(46))
+            if(target.manaHp > 0)
                 continue;
 
             var des = Math.abs(user.x - target.x);

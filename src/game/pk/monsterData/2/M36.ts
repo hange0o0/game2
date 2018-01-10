@@ -3,7 +3,7 @@ class M36 extends MBase {
         super();
     }
 
-    private mvID = 103;
+    private mvID = 128;
     public preload(){
         //MonsterVO.getObject(1).preLoad();
         AniManager.getInstance().preLoadMV(this.mvID)

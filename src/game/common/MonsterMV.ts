@@ -5,7 +5,7 @@ class MonsterMV extends eui.Group {
     public static STAT_DIE = 4
 
     private mc:eui.Image;
-    private atkMV:MonsterAtkMV = new MonsterAtkMV();
+    private atkMV:MonsterAtkMV;
 
 
     public frameTotal = 20//播放完一轮需要的帧数
@@ -28,12 +28,19 @@ class MonsterMV extends eui.Group {
     private init() {
         this.mc = new eui.Image();
         this.addChild(this.mc);
-        this.addChild(this.atkMV);
-        this.atkMV.visible = false;
-        this.atkMV.addEventListener('mv_end',this.onAtkMVEnd,this)
+
         //
         //MyTool.addTestBlock(this)
 
+    }
+
+    private initAtkMV(){
+        if(this.atkMV)
+            return;
+        this.atkMV = new MonsterAtkMV();
+        this.addChild(this.atkMV);
+        this.atkMV.visible = false;
+        this.atkMV.addEventListener('mv_end',this.onAtkMVEnd,this)
     }
 
     private onAtkMVEnd(){
@@ -93,8 +100,12 @@ class MonsterMV extends eui.Group {
 
     public reset(){
         this.index = 0;
-        this.atkMV.visible = false;
-        this.atkMV.stop();
+        if(this.atkMV)
+        {
+            this.atkMV.visible = false;
+            this.atkMV.stop();
+        }
+
         this.onE();
         if(!this.runing)
             this.play();
@@ -152,7 +163,7 @@ class MonsterMV extends eui.Group {
                 if(this.vo.mv_atk2 == 1)
                 {
                     this.stop();
-                    this.showAtkMV();
+                    //this.showAtkMV();
                 }
                 else
                     this.stand();
@@ -164,25 +175,26 @@ class MonsterMV extends eui.Group {
         }
     }
 
-    private showAtkMV(){
-        switch(this.vo.id)
-        {
-            case 37:
-                this.atkMV.visible = true;
-                this.atkMV.load(this.vo.id,1,300,240)
-                this.atkMV.x = -180
-                this.atkMV.y = 55
-                this.atkMV.play();
-                break;
-            //case 77:
-            //case 78:
-            //    this.atkMV.visible = true;
-            //    this.atkMV.load(77,1,300,240)
-            //    this.atkMV.x = -180
-            //    this.atkMV.y = 40
-            //    this.atkMV.play();
-            //    break;
-        }
-    }
+    //private showAtkMV(){
+    //      this.initAtkMV();
+    //    switch(this.vo.id)
+    //    {
+    //        case 37:
+    //            this.atkMV.visible = true;
+    //            this.atkMV.load(this.vo.id,1,300,240)
+    //            this.atkMV.x = -180
+    //            this.atkMV.y = 55
+    //            this.atkMV.play();
+    //            break;
+    //        //case 77:
+    //        //case 78:
+    //        //    this.atkMV.visible = true;
+    //        //    this.atkMV.load(77,1,300,240)
+    //        //    this.atkMV.x = -180
+    //        //    this.atkMV.y = 40
+    //        //    this.atkMV.play();
+    //        //    break;
+    //    }
+    //}
 
 }

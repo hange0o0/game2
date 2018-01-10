@@ -9,9 +9,8 @@ class MonsterAtkMV extends eui.Group {
     private mw = 480/4
     private mh = 480/4
 
-    public speed = 0;//增加or减少速度百分比
 
-    public vo:MonsterVO;
+    private frameNum = 4
     constructor(){
         super();
         this.init();
@@ -25,29 +24,27 @@ class MonsterAtkMV extends eui.Group {
 
     }
 
-    public load(id,rota,w,h){
+    public load(id,rota,w,h,num=4){
 
         this.rota = rota;
-        var vo = this.vo = MonsterVO.getObject(id);
+        this.frameNum = num;
         if(rota == 0)
         {
-            this.mw = w / 4
+            this.mw = w / num
             this.mh = h
         }
         else
         {
             this.mw = w
-            this.mh = h/4
+            this.mh = h/num
         }
 
 
-        this.mc.y = vo.heightoff
-        MyTool.setImgSource(this.mc,Config.localResRoot + 'monster/enemy' + id + '_attack.png');
+        MyTool.setImgSource(this.mc,id);
 
         this.width = this.mw
         this.height = this.mh
         this.mc.scrollRect = new egret.Rectangle(0,0,this.mw,this.mh)
-        this.speed = 0;
     }
 
 
@@ -68,8 +65,7 @@ class MonsterAtkMV extends eui.Group {
     private onE(){
         var w = this.mw
         var h = this.mh
-        var speed = this.speed || 0;
-        var frameStep = Math.round(this.frameTotal*(1-speed/100)/4);
+        var frameStep = Math.round(this.frameTotal*(1)/this.frameNum);
 
         if(this.rota == 0)
         {
@@ -83,7 +79,7 @@ class MonsterAtkMV extends eui.Group {
         }
         this.mc.scrollRect = new egret.Rectangle(x,y,w,h)
         this.index ++;
-        if(this.index>=this.vo.mcnum*frameStep)
+        if(this.index>=this.frameNum*frameStep)
         {
             this.index = 0;
             this.onEnd()

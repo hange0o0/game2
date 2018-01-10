@@ -3,7 +3,7 @@ class M43 extends MBase {
         super();
     }
 
-    private mvID = 103;
+    //private mvID = 103;
     private mvID2 = 8;
 
     public initMonster(user:PKMonsterData){
@@ -13,7 +13,7 @@ class M43 extends MBase {
 
     public preload(){
         //MonsterVO.getObject(1).preLoad();
-        AniManager.getInstance().preLoadMV(this.mvID)
+        //AniManager.getInstance().preLoadMV(this.mvID)
         AniManager.getInstance().preLoadMV(this.mvID2)
     }
 
@@ -34,7 +34,8 @@ class M43 extends MBase {
 
     //技能动画
     public skillMV(user,target,actionTime,endTime){
-        PKVideoCon.getInstance().playAniOn(target.id,this.mvID)
+        //PKVideoCon.getInstance().playAniOn(target.id,this.mvID)
+
     }
 
     public skill(user:PKMonsterData,target:PKMonsterData){
@@ -43,6 +44,13 @@ class M43 extends MBase {
         buff.addState(PKConfig.STATE_MOMIAN);
         buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(2);
         target.addBuff(buff)
+
+        PKData.getInstance().addVideo({
+            type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+            user:target,
+            key:'momian',
+            stateType:0
+        })
     }
 
     //

@@ -7,7 +7,10 @@ class BagUI extends MainBase {
         return this._instance;
     }
 
-    private topUI: TopUI;
+    private scroller: eui.Scroller;
+    private list: eui.List;
+
+
 
 
     public constructor() {
@@ -17,8 +20,16 @@ class BagUI extends MainBase {
 
     public childrenCreated() {
         super.childrenCreated();
-        this.topUI.setTitle('背包')
+
+        this.scroller.viewport = this.list;
+        this.list.itemRenderer = BagItem
+        this.scroller.addEventListener(egret.Event.CHANGE,this.onScroll,this)
     }
+
+    private onScroll(){
+        MainUI.getInstance().setTopPos(this.scroller.viewport.scrollV)
+    }
+
 
 
     public hide() {

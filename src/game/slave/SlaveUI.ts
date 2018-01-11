@@ -7,7 +7,11 @@ class SlaveUI extends MainBase {
         return this._instance;
     }
 
-    private topUI: TopUI;
+    private scroller: eui.Scroller;
+    private list: eui.List;
+    private tab: eui.TabBar;
+
+
 
     public constructor() {
         super();
@@ -16,7 +20,15 @@ class SlaveUI extends MainBase {
 
     public childrenCreated() {
         super.childrenCreated();
-        this.topUI.setTitle('奴隶')
+        this.scroller.viewport = this.list;
+        this.list.itemRenderer = SlaveItem
+
+        this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
+        this.tab.selectedIndex = 0;
+    }
+
+    private onTab(){
+
     }
     public hide() {
         super.hide();

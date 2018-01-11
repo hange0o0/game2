@@ -9,23 +9,22 @@ class MainFightUI extends MainBase {
     }
 
     private bg: eui.Image;
-    private forceText: eui.Label;
-    private addForceBtn: eui.Image;
-    private energyText: eui.Label;
-    private addEnergyBtn: eui.Image;
-    private diamondText: eui.Label;
-    private addDiamondBtn: eui.Image;
-    private defBtn: eui.Button;
-    private atkBtn: eui.Button;
+    private scroller: eui.Scroller;
     private mailBtn: eui.Group;
     private rankBtn: eui.Group;
     private shopBtn: eui.Group;
     private settingBtn: eui.Group;
     private mapBtn: HangUI;
     private testBtn: eui.Rect;
+    private bottomGroup: eui.Group;
+    private defBtn: eui.Button;
+    private atkBtn: eui.Button;
 
 
 
+
+
+    private hideTopState
 
     public constructor() {
         super();
@@ -37,9 +36,7 @@ class MainFightUI extends MainBase {
 
         this.addBtnEvent(this.defBtn, this.onDef)
         this.addBtnEvent(this.atkBtn, this.onAtk)
-        this.addBtnEvent(this.addForceBtn, this.onAddForce)
-        this.addBtnEvent(this.addEnergyBtn, this.onAddEnergy)
-        this.addBtnEvent(this.addDiamondBtn, this.onAddDiamond)
+
         //this.addBtnEvent(this.mapBtn, this.onMap)
         this.addBtnEvent(this.testBtn, this.onTest)
         this.addBtnEvent(this.mailBtn, this.onMail)
@@ -47,6 +44,31 @@ class MainFightUI extends MainBase {
         this.addBtnEvent(this.shopBtn, this.onShop)
         this.addBtnEvent(this.settingBtn, this.onSetting)
 
+        this.scroller.addEventListener(egret.Event.CHANGE,this.onScroll,this)
+
+    }
+
+    public setTopPos(scrollV){
+        if(this.hideTopState)
+        {
+            if(scrollV >= 30)
+                return;
+        }
+        else if(scrollV <= 50)
+            return;
+
+        this.hideTopState = !this.hideTopState
+        egret.Tween.removeTweens(this.bottomGroup)
+        var tw = egret.Tween.get(this.bottomGroup)
+        if(this.hideTopState)
+            tw.to({bottom:-130},Math.abs(this.bottomGroup.bottom - (-130))*2)
+        else
+            tw.to({bottom:25},Math.abs(this.bottomGroup.bottom - (25))*2)
+    }
+
+    private onScroll(){
+        MainUI.getInstance().setTopPos(this.scroller.viewport.scrollV)
+        this.setTopPos(this.scroller.viewport.scrollV)
     }
 
     private onTest(){
@@ -75,30 +97,17 @@ class MainFightUI extends MainBase {
         AtkPosListUI.getInstance().show();
     }
 
-    private onAddForce(){
 
-    }
-
-    private onAddEnergy(){
-
-    }
-
-    private onAddDiamond(){
-
-    }
 
     //private onMap(){
     //    HangUI.getInstance().show();
     //}
 
     public onShow(){
-        this.bg.source = Config.localResRoot  + 'main_bg'+UM.type+'.jpg';
+
         this.renew();
-        this.renewHang();
+
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
-        this.addPanelOpenEvent(GameEvent.client.force_change,this.renewTop)
-        this.addPanelOpenEvent(GameEvent.client.diamond_change,this.renewTop)
-        this.addPanelOpenEvent(GameEvent.client.energy_change,this.renewEnergy)
         this.addPanelOpenEvent(GameEvent.client.pos_change,this.renewPosBtn)
 
         this.addPanelOpenEvent(GameEvent.client.pk_begin,this.onPKBegin)
@@ -119,27 +128,18 @@ class MainFightUI extends MainBase {
     }
 
     private onTimer(){
-        this.renewEnergy();
         this.mapBtn.onTimer()
     }
 
-    public renewTop(){
-        this.forceText.text = UM.tec_force + ''
-        this.diamondText.text = UM.diamond + ''
-    }
 
-    public renewEnergy(){
-        var energy = UM.getEnergy();
-        if(energy)
-            this.energyText.text = energy + '/' + UM.maxEnergy;
-        else
-            this.setHtml(this.energyText,this.createHtml(DateUtil.getStringBySecond(UM.getNextEnergyCD()).substr(-5),0xFF0000));
-    }
 
     public renew(){
-        this.renewTop();
-        this.renewEnergy();
+        egret.Tween.removeTweens(this.bottomGroup)
+        this.bottomGroup.bottom = 25
+        this.scroller.viewport.scrollV = 0;
+        this.bg.source = Config.localResRoot  + 'main_bg'+UM.type+'.jpg';
         this.renewPosBtn();
+        this.renewHang();
     }
 
     public renewHang(){

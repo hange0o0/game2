@@ -8,6 +8,13 @@ class MainUI extends game.BaseUI {
     }
 
     private con: eui.Group;
+    private topCon: eui.Group;
+    private forceText: eui.Label;
+    private addForceBtn: eui.Image;
+    private energyText: eui.Label;
+    private addEnergyBtn: eui.Image;
+    private diamondText: eui.Label;
+    private addDiamondBtn: eui.Image;
     private bottomSelectMC: eui.Rect;
     private b0: MainBottomBtn;
     private b1: MainBottomBtn;
@@ -19,6 +26,9 @@ class MainUI extends game.BaseUI {
 
 
 
+
+
+    public hideTopState = false
     public currentIndex = 2
     public bottomItems = []
     public currentUI:MainBase;
@@ -31,6 +41,10 @@ class MainUI extends game.BaseUI {
     public childrenCreated() {
         super.childrenCreated();
 
+        this.addBtnEvent(this.addForceBtn, this.onAddForce)
+        this.addBtnEvent(this.addEnergyBtn, this.onAddEnergy)
+        this.addBtnEvent(this.addDiamondBtn, this.onAddDiamond)
+
         this.b0.data = {text:'奴隶',index:0,source:'main_slave_png'}
         this.b1.data = {text:'背包',index:1,source:'main_bag_png'}
         this.b2.data = {text:'战斗',index:2,source:'main_pk_png'}
@@ -42,6 +56,19 @@ class MainUI extends game.BaseUI {
         this.bottomItems.push(this.b3)
         this.bottomItems.push(this.b4)
     }
+
+    private onAddForce(){
+
+    }
+
+    private onAddEnergy(){
+
+    }
+
+    private onAddDiamond(){
+
+    }
+
 
     public onBottomSelect(index){
        if(index != this.currentIndex)
@@ -76,9 +103,28 @@ class MainUI extends game.BaseUI {
                    this.lastUI = null;
                }
            },this)
+           this.setTopPos(0);
        }
     }
 
+
+    public setTopPos(scrollV){
+        if(this.hideTopState)
+        {
+            if(scrollV >= 30)
+                return;
+        }
+        else if(scrollV <= 50)
+            return;
+
+        this.hideTopState = !this.hideTopState
+        egret.Tween.removeTweens(this.topCon)
+        var tw = egret.Tween.get(this.topCon)
+        if(this.hideTopState)
+            tw.to({y:-50},Math.abs(this.topCon.y - (-50))*4)
+        else
+            tw.to({y:20},Math.abs(this.topCon.y - (20))*4)
+    }
 
 
 
@@ -92,6 +138,27 @@ class MainUI extends game.BaseUI {
 
     public onShow(){
         this.renew();
+        this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
+        this.addPanelOpenEvent(GameEvent.client.force_change,this.renewTop)
+        this.addPanelOpenEvent(GameEvent.client.diamond_change,this.renewTop)
+        this.addPanelOpenEvent(GameEvent.client.energy_change,this.renewEnergy)
+    }
+
+    private onTimer(){
+        this.renewEnergy();
+    }
+
+    public renewTop(){
+        this.forceText.text = UM.tec_force + ''
+        this.diamondText.text = UM.diamond + ''
+    }
+
+    public renewEnergy(){
+        var energy = UM.getEnergy();
+        if(energy)
+            this.energyText.text = energy + '/' + UM.maxEnergy;
+        else
+            this.setHtml(this.energyText,this.createHtml(DateUtil.getStringBySecond(UM.getNextEnergyCD()).substr(-5),0xFF0000));
     }
 
     public onVisibleChange(){
@@ -105,6 +172,9 @@ class MainUI extends game.BaseUI {
     }
 
     public renew(){
+        this.renewTop();
+        this.renewEnergy();
+
         for(var i=0;i<this.bottomItems.length;i++)
         {
             this.bottomItems[i].select(this.currentIndex == i,false)

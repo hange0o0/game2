@@ -44,17 +44,22 @@ class PKData extends egret.EventDispatcher{
     }
 
     //暂停
-    public stop(isLase?){
-        if(isLase)//在最后一次行动是暂停
-            this.stopTime = this.actionTime + 1;
-        else
+    public stop(){
+        //if(isLast)//在最后一次行动后暂停(马上停)
+        //    this.stopTime = this.actionTime + 1;
+        //else
             this.stopTime = egret.getTimer();
     }
 
     //继续
     public play(){
-        this.startTime += egret.getTimer() - this.stopTime;
-        this.stopTime = 0;
+        if(this.stopTime)
+        {
+            var add = egret.getTimer() - this.stopTime;
+            this.startTime += add
+            //this.actionTime += add;
+            this.stopTime = 0;
+        }
     }
 
     //初始化游戏
@@ -65,6 +70,7 @@ class PKData extends egret.EventDispatcher{
         this.playerObj = {};
         this.myPlayer = null;
         this.actionTime = 0;
+        this.stopTime = 0;
         this.monsterID = 1;
         this.isGameOver = false;
         this.monsterChange = false;

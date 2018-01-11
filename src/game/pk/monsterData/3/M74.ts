@@ -28,7 +28,7 @@ class M74 extends MBase {
             mc.mc.scaleX = 1
         else
             mc.mc.scaleX = -1
-        mc.mc.load(72,0,560,90)
+        mc.mc.load(Config.localResRoot + 'monster/enemy72_attack.png',0,560,90)
         mc.mc.play()
     }
 

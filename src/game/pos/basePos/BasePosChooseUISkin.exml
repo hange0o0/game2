@@ -21,7 +21,7 @@
 		</e:Array>
 		</e:ArrayCollection>
 	</e:TabBar>
-	<e:Image y="65" width="200" height="50" right="10" source="bg5_png" scale9Grid="11,10,8,8"/>
-	<ns1:DownList id="downList2" skinName="DownListSkin" y="64" right="10" width="200" height="600"/>
+	<e:Image y="69" width="200" height="50" right="10" source="bg5_png" scale9Grid="11,10,8,8"/>
+	<ns1:DownList id="downList2" skinName="DownListSkin" y="68" right="10" width="200" height="600"/>
 
 </e:Skin>

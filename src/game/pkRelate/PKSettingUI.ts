@@ -19,14 +19,19 @@ class PKSettingUI extends game.BaseWindow {
     public childrenCreated() {
         super.childrenCreated();
         this.addBtnEvent(this.okBtn,this.onClick)
-        this.addBtnEvent(this.cancelBtn,this.hide)
+        this.addBtnEvent(this.cancelBtn,this.onClose)
+    }
+
+    private onClose(){
+        PKingUI.getInstance().setStop(false)
+        this.hide();
     }
 
     private onClick(){
         var PD = PKData.getInstance();
         PD.isGameOver = true
         PD.myPlayer.teamData.hp = 0;
-        this.hide();
+        this.onClose();
 
         if(PKingUI.getInstance().counting)
         {

@@ -27,6 +27,7 @@ class PKingUI extends game.BaseUI {
 
     public scrollTime = 0;
     public counting = false;
+    public tw:egret.Tween;
 
     public constructor() {
         super();
@@ -57,6 +58,21 @@ class PKingUI extends game.BaseUI {
 
     private superShow(){
         super.show();
+    }
+
+    public setStop(b){
+        if(b)
+        {
+            if(this.tw)
+                this.tw.setPaused(true)
+            else
+                PKData.getInstance().stop()
+            return
+        }
+        if(this.tw)
+            this.tw.setPaused(false)
+        else
+            PKData.getInstance().play()
     }
 
     public removeAll(){
@@ -98,12 +114,12 @@ class PKingUI extends game.BaseUI {
         this.addChild(this.roundText);
         this.roundText.scaleX =  this.roundText.scaleY = 0;
         egret.Tween.removeTweens(this.roundText)
-        var tw = egret.Tween.get(this.roundText)
+        var tw = this.tw = egret.Tween.get(this.roundText)
         tw.to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '4'})
             .to({scaleX:0,scaleY:0}).to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '3'})
             .to({scaleX:0,scaleY:0}).to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '2'})
             .to({scaleX:0,scaleY:0}).to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '1'})
-            .to({scaleX:0,scaleY:0}).to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = 'START';this.startGame()}).to({
+            .to({scaleX:0,scaleY:0}).to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = 'START';this.startGame();this.tw = null}).to({
                 alpha:0,scaleX:2,scaleY:2
             },500).call(()=>{MyTool.removeMC(this.roundText)})
 

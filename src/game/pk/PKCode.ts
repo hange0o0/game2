@@ -15,8 +15,12 @@ class PKCode {
 
     //每一步执行
     public onStep(){
+
         var PD = PKData.getInstance();
+        if(PD.stopTime)
+            return;
         var cd = PD.getPassTime() - PD.actionTime
+        //console.log(cd)
         while(PD.quick || cd > PKConfig.stepCD)
         {
             PD.actionTime += PKConfig.stepCD;
@@ -229,7 +233,7 @@ class PKCode {
             else { //其它
                 if(mvo.hpChange && PD.actionTime - mvo.lastHpChange >= 500) //改变血量值
                 {
-                    mvo.addHp(Math.floor(mvo.hpChange/2)
+                    mvo.addHp(Math.floor(mvo.hpChange/2))
                     mvo.lastHpChange = PD.actionTime;
                 }
                 mvo.cleanBuff(PD.actionTime) //清除BUFF

@@ -12,6 +12,8 @@ class BasePosUI extends game.BaseUI {
     private saveBtn: eui.Group;
     private downBtn: eui.Image;
     private upBtn: eui.Image;
+    private titleText: eui.Label;
+
 
 
     public type = 'atk'
@@ -136,8 +138,10 @@ class BasePosUI extends game.BaseUI {
     }
 
     private renewTitle(){
-        var title = this.type == 'atk'?'【进攻阵容】':'【防御阵容】'
-        this.topUI.setTitle(title + '- ' + this.posName + ' ('+this.listData.length+'/'+this.maxCard+')')
+        var length = this.listData.length
+        if(this.listData.getItemAt(this.listData.length-1).setting)
+            length --;
+        this.topUI.setTitle(this.posName + ' ('+length+'/'+this.maxCard+')')
     }
 
     private onSave(){
@@ -187,6 +191,7 @@ class BasePosUI extends game.BaseUI {
 
             if(this.listData.length <= 1)
                 MyTool.removeMC(this.deleteBtn)
+            this.renewTitle()
         }
     }
 
@@ -248,6 +253,7 @@ class BasePosUI extends game.BaseUI {
     public onShow(){
         this.callDelete = false
         this.maxCard = PosManager.getInstance().maxPosNum();
+        this.titleText.text = this.type == 'atk'?'【进攻阵容】':'【防御阵容】'
         this.renew();
     }
 

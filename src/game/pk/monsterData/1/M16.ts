@@ -16,7 +16,7 @@ class M16 extends MBase {
     //被攻击时的处理
     public beAtkAction(user,data){
         var target = data.atker
-        if(target)
+        if(target && target.getVO().atkrage <= PKConfig.nearRage)
         {
             this.addBuff(user,target)
         }

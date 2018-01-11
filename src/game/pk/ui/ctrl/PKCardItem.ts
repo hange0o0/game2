@@ -1,14 +1,16 @@
 class PKCardItem extends game.BaseItem {
 
-    //private desText: eui.Label;
     private bg: eui.Image;
     private img: CardImg;
-    private cdBarBg: eui.Rect;
+    private img2: CardImg;
     private cdBar: eui.Rect;
     private spaceGroup: eui.Group;
     private spaceText: eui.Label;
     private costText: eui.Label;
     private skillType: eui.Image;
+
+
+
 
 
 
@@ -71,7 +73,16 @@ class PKCardItem extends game.BaseItem {
         this.currentState = 'normal'
         var vo:any = CM.getCardVO(this.data.mid)
         this.img.data = this.data.mid;
+        this.img2.data = this.data.mid;
+        this.img2.changeGay(true)
         this.bg.source = vo.getBG();
+
+        if(this.isDragMC)
+        {
+            this.costText.textColor = 0xFFFFFF
+            this.img2.visible = false;
+            this.cdBar.visible = false;
+        }
 
 
         this.skillType.visible = false
@@ -110,19 +121,23 @@ class PKCardItem extends game.BaseItem {
         else
             var mp = SkillVO.getObject(this.data.mid).cost
 
-        var barW = 92
+        var barW = 80
+        var barH = 92
         if(nowMp < mp)
         {
             this.costText.textColor = 0xFF0000
+            this.img2.visible = true;
             this.cdBar.visible = true;
-            this.cdBarBg.visible = true;
-            this.cdBar.height = barW * (mp - nowMp)/mp;
+
+            var h = barH * (mp - nowMp)/mp;
+            this.img2.mask = new egret.Rectangle(0,barH - h,barW,h)
+            this.cdBar.y = this.img.y + barH - h;
         }
         else
         {
             this.costText.textColor = 0xFFFFFF
+            this.img2.visible = false;
             this.cdBar.visible = false;
-            this.cdBarBg.visible = false;
         }
     }
 

@@ -66,6 +66,8 @@ class HangUI extends game.BaseItem {
         this.onTimer();
         this.addEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
 
+        this.lockGroup.visible = false;
+
         var pkvideo = PKVideoCon.getInstance()
         this.con.addChild(pkvideo)
         pkvideo.y = -150;
@@ -98,6 +100,7 @@ class HangUI extends game.BaseItem {
     }
 
     public clean(){
+        egret.Tween.removeTweens(PKVideoCon.getInstance())
         this.removeEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
         PKBulletManager.getInstance().freeAll()
         PKVideoCon.getInstance().remove();

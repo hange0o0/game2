@@ -45,5 +45,6 @@
 	</e:Group>
 	<e:Image id="downBtn" source="arrow1_png" rotation="90" right="10" bottom="120"/>
 	<e:Image id="upBtn" source="arrow1_png" rotation="270" right="10" top="80"/>
+	<e:Label id="titleText" text="标签" strokeColor="0x110900" stroke="2" size="24" bold="true" textColor="0xEF9F32" y="15" x="10"/>
 
 </e:Skin>

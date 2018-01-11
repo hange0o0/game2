@@ -179,8 +179,8 @@ class BasePosChooseUI extends game.BaseUI {
     }
 
     private renewTitle(){
-        var title = this.fromUI.type == 'atk'?'选择进攻卡牌':'选择防御卡牌'
-        this.topUI.setTitle(title + ' ('+this.arrayData.length+'/'+this.fromUI.maxCard+')')
+        var title = this.fromUI.type == 'atk'?'进攻卡牌':'防御卡牌'
+        this.topUI.setTitle('添加' + title + ' ('+this.arrayData.length+'/'+this.fromUI.maxCard+')')
     }
 
     public renew(){

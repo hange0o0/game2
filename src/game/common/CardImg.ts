@@ -9,6 +9,7 @@ class CardImg extends game.BaseItem{
 
 
 
+    public lastSource;
     public childrenCreated() {
         super.childrenCreated();
     }
@@ -18,7 +19,12 @@ class CardImg extends game.BaseItem{
     }
 
     public changeGay(b){
-        this.img.source = CM.getCardVO(this.data).getImage(b);
+        var source = CM.getCardVO(this.data).getImage(b);
+        if(source != this.lastSource)
+        {
+            this.img.source = source
+            this.lastSource = source;
+        }
         if(this.data > 100)
             this.txt.text = CM.getCardVO(this.data).name + '\n' + this.data;
         else

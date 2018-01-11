@@ -81,7 +81,8 @@ class PKCtrlCon extends game.BaseContainer {
     }
 
     private onSetting(){
-         PKSettingUI.getInstance().show();
+        PKingUI.getInstance().setStop(true)
+        PKSettingUI.getInstance().show();
     }
 
 

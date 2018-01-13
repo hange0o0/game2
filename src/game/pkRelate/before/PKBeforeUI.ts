@@ -55,7 +55,7 @@ class PKBeforeUI extends game.BaseWindow {
     }
 
     private onListClick(){
-        AtkPosUI.getInstance().show(this.index)
+        BasePosUI.getInstance().show('atk',this.index);
     }
 
     private onStart(){

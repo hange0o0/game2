@@ -21,6 +21,7 @@ class BasePosItem extends game.BaseItem {
         super.childrenCreated();
         //this.addBtnEvent(this,this.onClick)
         MyTool.addLongTouch(this,this.onLongTouch,this)
+        console.log('create')
     }
 
     private onLongTouch(){

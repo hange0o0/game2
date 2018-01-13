@@ -73,6 +73,7 @@ class MainUI extends game.BaseUI {
     public onBottomSelect(index){
        if(index != this.currentIndex)
        {
+           var t = egret.getTimer();
            this.bottomItems[this.currentIndex].select(false)
            this.bottomItems[index].select(true)
            this.currentIndex = index;
@@ -104,6 +105,7 @@ class MainUI extends game.BaseUI {
                }
            },this)
            this.setTopPos(0);
+           console.log(egret.getTimer() - t)
        }
     }
 
@@ -129,6 +131,13 @@ class MainUI extends game.BaseUI {
 
 
     public show(){
+        //先初始化，加快切换速度
+        MainFightUI.getInstance()
+        SlaveUI.getInstance()
+        BagUI.getInstance()
+        CardUI.getInstance()
+        TecUI.getInstance()
+
         super.show()
     }
 

@@ -17,6 +17,7 @@ class PKPlayerData {
     public posHistory = [];
 
     private mp = 0//当前的魔法
+    public userMP = 0//已使用的魔法
     private lastTime = 0//上一次魔法处理时间
 
 
@@ -69,6 +70,7 @@ class PKPlayerData {
     public addMP(v){
         this.resetMp();
         this.mp += v;
+        this.userMP -= v;
     }
     public getMP(){
         this.resetMp();

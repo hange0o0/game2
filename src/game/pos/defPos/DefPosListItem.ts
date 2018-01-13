@@ -10,17 +10,18 @@ class DefPosListItem extends game.BaseItem {
     private openBtn: eui.CheckBox;
 
 
-
+   private dataArray = new eui.ArrayCollection()
 
     public childrenCreated() {
         super.childrenCreated();
         this.list.itemRenderer = PosListHeadItem
+        this.list.dataProvider = this.dataArray
         this.addBtnEvent(this,this.onClick)
         this.addBtnEvent(this.openBtn,this.onOpen)
     }
 
     private onClick(){
-        DefPosUI.getInstance().show(this.data.index);
+        BasePosUI.getInstance().show('def',this.data.index);
     }
     private onOpen(e){
         e.stopImmediatePropagation();
@@ -40,7 +41,7 @@ class DefPosListItem extends game.BaseItem {
             this.currentState = 'normal'
 
             this.openBtn.selected = !this.data.close
-            var str = this.data.list.replace(new RegExp("#","g"),",")
+            var str = this.data.list//.replace(new RegExp("#","g"),",")
             var list = str.split(',');
             this.bg2.source = this.data.close?'bg5_png':'bg2_png'
 
@@ -51,7 +52,8 @@ class DefPosListItem extends game.BaseItem {
             //        list[i] = '@' + list[i]
             //    }
             //}
-            this.list.dataProvider = new eui.ArrayCollection(list)
+            this.dataArray.source = list;
+            this.dataArray.refresh()
 
             this.desText.text = Base64.decode(this.data.name) + '  ('+list.length+'/'+PosManager.getInstance().maxPosNum()+')';
         }

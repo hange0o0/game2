@@ -167,6 +167,7 @@ class BasePosChooseUI extends game.BaseUI {
     }
 
     public hide() {
+        MyTool.clearList(this.list)
         super.hide();
         this.fromUI.resetData()
     }

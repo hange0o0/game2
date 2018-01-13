@@ -7,6 +7,11 @@ class BagInfoUI extends game.BaseWindow {
         return this._instance;
     }
 
+    private nameText: eui.Label;
+    private desText: eui.Label;
+    private mc: eui.Image;
+
+
     public constructor() {
         super();
         this.skinName = "BagInfoUISkin";
@@ -30,6 +35,8 @@ class BagInfoUI extends game.BaseWindow {
     }
 
     public renew(){
-
+        this.nameText.text = ''
+        this.desText.text = ''
+        this.mc.source = ''
     }
 }

@@ -15,6 +15,9 @@ class CardUI extends MainBase {
 
     private monsterType = 0
     private skillType = 0
+    private dataArray = new eui.ArrayCollection()
+
+    //public isFirst = true
 
     public constructor() {
         super();
@@ -26,6 +29,7 @@ class CardUI extends MainBase {
 
         this.scroller.viewport = this.list;
         this.list.itemRenderer = CardItem
+        this.list.dataProvider = this.dataArray
         this.downList2.addEventListener(DownList.SELECT,this.onDownListSelect,this);
 
 
@@ -99,7 +103,9 @@ class CardUI extends MainBase {
             arr = CardManager.getInstance().getMySkillList(type)
         }
         ArrayUtil.sortByField(arr,['cost','level','id'],[0,0,0]);
-        this.list.dataProvider = new eui.ArrayCollection(arr)
+        this.dataArray.source = arr;
+        this.dataArray.refresh()
+        //this.list.dataProvider = new eui.ArrayCollection(arr)
 
     }
 }

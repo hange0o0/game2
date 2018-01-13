@@ -1,5 +1,11 @@
 class BasePosUI extends game.BaseUI {
 
+    private static _instance: BasePosUI;
+    public static getInstance(): BasePosUI {
+        if(!this._instance)
+            this._instance = new BasePosUI();
+        return this._instance;
+    }
 
     private scrollerBG: eui.Group;
     private topUI: TopUI;
@@ -49,6 +55,8 @@ class BasePosUI extends game.BaseUI {
         this.list.addEventListener('start_drag',this.onDragStart,this);
         this.list.addEventListener('end_drag',this.onDragEnd,this);
         this.list.addEventListener('move_drag',this.onDragMove,this);
+        this.listData = new eui.ArrayCollection()
+        this.list.dataProvider = this.listData
 
         this.list.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onUnSelect,this);
 
@@ -239,14 +247,14 @@ class BasePosUI extends game.BaseUI {
         }
     }
 
-    public show(v?){
-        this.index = v;
+    public show(type?,index?){
+        this.type = type;
+        this.index = index;
         this.callDelete = null;
         super.show()
     }
 
     public hide() {
-        MyTool.clearList(this.list);
         super.hide();
     }
 
@@ -314,8 +322,8 @@ class BasePosUI extends game.BaseUI {
         }
         if(arr.length < this.maxCard)
             arr.push({setting:true})
-        this.listData = new eui.ArrayCollection(arr)
-        this.list.dataProvider = this.listData
+        this.listData.source = arr;
+        this.listData.refresh()
         this.renewTitle();
         this.renewBtn();
     }

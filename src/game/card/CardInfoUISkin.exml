@@ -1,3 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="CardInfoUISkin" width="400" height="300" xmlns:e="http://ns.egret.com/eui">
+<e:Skin class="CardInfoUISkin" height="180" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="480">
+	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
+	<e:Label id="nameText" text="苦顶替" x="170" y="25" size="22" stroke="3" verticalAlign="bottom"/>
+	<e:Group y="60" height="90" width="280" x="170">
+		<e:Image source="bg1_png" scale9Grid="8,8,14,14" x="0" y="0" width="100%" height="100%"/>
+		<e:Label id="desText" text="Label" size="22" left="10" right="10" top="10" bottom="10" lineSpacing="5"/>
+	</e:Group>
+	<e:Image width="134" height="134" x="20" y="20" source="bg5_png" scale9Grid="9,9,12,11"/>
+	<e:Image id="mc" width="130" height="130" x="22" y="22" source="bg5_png"/>
 </e:Skin>

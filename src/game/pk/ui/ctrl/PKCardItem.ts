@@ -3,11 +3,12 @@ class PKCardItem extends game.BaseItem {
     private bg: eui.Image;
     private img: CardImg;
     private img2: CardImg;
-    private cdBar: eui.Rect;
     private spaceGroup: eui.Group;
     private spaceText: eui.Label;
     private costText: eui.Label;
     private skillType: eui.Image;
+    private cdText: eui.Label;
+
 
 
 
@@ -81,7 +82,7 @@ class PKCardItem extends game.BaseItem {
         {
             this.costText.textColor = 0xFFFFFF
             this.img2.visible = false;
-            this.cdBar.visible = false;
+            this.cdText.visible = false;
         }
 
 
@@ -127,17 +128,20 @@ class PKCardItem extends game.BaseItem {
         {
             this.costText.textColor = 0xFF0000
             this.img2.visible = true;
-            this.cdBar.visible = true;
+            this.cdText.visible = true;
 
             var h = barH * (mp - nowMp)/mp;
             this.img2.mask = new egret.Rectangle(0,barH - h,barW,h)
-            this.cdBar.y = this.img.y + barH - h;
+
+            var PD = PKData.getInstance();
+            var cd = ((PKTool.getMPTime(mp + PD.myPlayer.userMP) - PD.actionTime)/1000).toFixed(1);
+            this.cdText.text = cd + 's';
         }
         else
         {
             this.costText.textColor = 0xFFFFFF
             this.img2.visible = false;
-            this.cdBar.visible = false;
+            this.cdText.visible = false;
         }
     }
 

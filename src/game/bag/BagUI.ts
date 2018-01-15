@@ -11,7 +11,7 @@ class BagUI extends MainBase {
     private list: eui.List;
 
 
-
+    private dataArray = new eui.ArrayCollection()
 
     public constructor() {
         super();
@@ -23,6 +23,8 @@ class BagUI extends MainBase {
 
         this.scroller.viewport = this.list;
         this.list.itemRenderer = BagItem
+        this.list.dataProvider = this.dataArray
+
         this.scroller.addEventListener(egret.Event.CHANGE,this.onScroll,this)
     }
 
@@ -42,6 +44,8 @@ class BagUI extends MainBase {
     }
 
     public renew(){
-
+        var arr = [1,1];
+        this.dataArray.source = arr
+        this.dataArray.refresh()
     }
 }

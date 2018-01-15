@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="SlaveItemSkin" width="580" height="110" currentState="normal" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="normal,empty,lock" >
-	<e:Image x="0" y="0" width="100%" height="100%" source="bg2_png" scale9Grid="11,8,9,13"/>
+<e:Skin class="SlaveItemSkin" width="580" height="110" currentState="normal" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="normal,empty,lock,btn" >
+	<e:Button id="getAllBtn" label="一键收取" horizontalCenter="0" skinName="Btn1Skin" width="200" includeIn="btn" verticalCenter="0"/>
+	<e:Image x="0" y="0" width="100%" height="100%" source="bg2_png" scale9Grid="11,8,9,13" includeIn="normal,empty,lock"/>
 	<e:Image source="icon_add1_png" includeIn="empty" horizontalCenter="0" verticalCenter="0"/>
 	<e:Image source="icon_lock_png" includeIn="lock" horizontalCenter="0" y="24.09"/>
 	<e:Label id="lockText" text="Label" includeIn="lock" y="67.09" horizontalCenter="0" size="26" stroke="2"/>
 	<e:Label id="nameText" text="苦顶替" size="26" stroke="3" verticalAlign="bottom" includeIn="normal" x="120" verticalCenter="-18" textColor="0xffffff" strokeColor="0x231507"/>
-	<e:Label id="coinText" text="苦顶替" size="20" stroke="3" verticalAlign="bottom" includeIn="normal" x="160" verticalCenter="24" strokeColor="0x231507" textColor="0xfcdb79"/>
+	<e:Label id="coinText" text="苦顶替" size="20" stroke="3" verticalAlign="bottom" includeIn="normal" x="155" verticalCenter="22" strokeColor="0x231507" textColor="0xfcdb79"/>
 	<e:Image id="type" source="icon_type1_png" x="20" includeIn="normal" verticalCenter="0"/>
 	<e:Button id="getBtn" label="收取" skinName="Btn1Skin" width="160" includeIn="normal" right="20" bottom="8"/>
-	<e:Image source="icon_coin_png" x="120" y="58.03" scaleX="0.6" scaleY="0.6" includeIn="normal"/>
+	<e:Image source="icon_coin_png" x="120" y="62.03" scaleX="0.6" scaleY="0.6" includeIn="normal"/>
 	<e:Group includeIn="normal" y="12" width="160" right="20">
 		<e:Image source="icon_clock_png" includeIn="normal" x="0" y="0"/>
 		<e:Label id="cdText" text="Label" includeIn="normal" size="24" stroke="2" textAlign="center" y="16" x="45"/>
@@ -16,4 +17,6 @@
 			<e:HorizontalLayout verticalAlign="middle" horizontalAlign="center"/>
 		</e:layout>
 	</e:Group>
+	<e:Image id="redMC" source="red_mc_png" x="544" y="40" includeIn="normal"/>
+	<e:Group id="clickArea" width="400" height="100%" includeIn="normal" x="0" y="0"/>
 </e:Skin>

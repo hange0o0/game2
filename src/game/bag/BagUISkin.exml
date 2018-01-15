@@ -4,7 +4,7 @@
 		<e:Group>
 		<e:List id="list" width="200" height="200" x="142" y="175">
 			<e:layout>
-				<e:TileLayout paddingTop="70"/>
+				<e:TileLayout paddingTop="80" horizontalGap="8" verticalGap="10" requestedColumnCount="4" paddingLeft="8"/>
 			</e:layout>
 		</e:List>
 		</e:Group>

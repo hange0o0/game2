@@ -1,7 +1,7 @@
-class SlaveChooseItem extends game.BaseItem {
+class InfoItem extends game.BaseItem {
     public constructor() {
         super();
-        this.skinName = "SlaveChooseItemSkin";
+        this.skinName = "InfoItemSkin";
     }
 
     private nameText: eui.Label;
@@ -10,20 +10,18 @@ class SlaveChooseItem extends game.BaseItem {
     private forceText: eui.Label;
 
 
+
     public childrenCreated() {
         super.childrenCreated();
-        this.addBtnEvent(this,this.onClick)
+        //this.addBtnEvent(this,this.onClick)
     }
 
     private onClick(){
-        OtherInfoUI.getInstance().show();
+
     }
 
     public dataChanged(){
-        this.nameText.text = ''
-        this.coinText.text = ''
-        this.forceText.text = ''
-        this.type.source = ''
+
     }
 
 }

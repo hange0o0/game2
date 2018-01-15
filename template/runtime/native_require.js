@@ -276,6 +276,7 @@ var game_file_list = [
 	"bin-debug/game/slave/SlaveChooseUI.js",
 	"bin-debug/game/slave/SlaveItem.js",
 	"bin-debug/game/slave/SlaveManager.js",
+	"bin-debug/game/slave/SlaveMasterItem.js",
 	"bin-debug/game/slave/SlaveUI.js",
 	"bin-debug/game/tec/TecInfoUI.js",
 	"bin-debug/game/tec/TecItem.js",

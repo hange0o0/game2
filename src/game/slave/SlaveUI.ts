@@ -11,7 +11,7 @@ class SlaveUI extends MainBase {
     private list: eui.List;
     private tab: eui.TabBar;
 
-
+    private dataArray = new eui.ArrayCollection()
 
     public constructor() {
         super();
@@ -21,7 +21,13 @@ class SlaveUI extends MainBase {
     public childrenCreated() {
         super.childrenCreated();
         this.scroller.viewport = this.list;
-        this.list.itemRenderer = SlaveItem
+        this.list.useVirtualLayout = false
+        this.list.itemRendererFunction = function(item:any){
+             if(item.isMaster)
+                return SlaveMasterItem
+            return SlaveItem
+        }
+        this.list.dataProvider = this.dataArray
 
         this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
         this.tab.selectedIndex = 0;
@@ -40,6 +46,8 @@ class SlaveUI extends MainBase {
     }
 
     public renew(){
-
+        var arr = [{isMaster:true},{},{empty:true},{lock:true},{btn:true}];
+        this.dataArray.source = arr
+        this.dataArray.refresh()
     }
 }

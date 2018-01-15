@@ -7,6 +7,11 @@ class SlaveChooseUI extends game.BaseWindow {
         return this._instance;
     }
 
+    private list: eui.List;
+    private cancelBtn: eui.Button;
+    private okBtn: eui.Button;
+
+
     public constructor() {
         super();
         this.skinName = "SlaveChooseUISkin";
@@ -14,6 +19,13 @@ class SlaveChooseUI extends game.BaseWindow {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.list.itemRenderer = SlaveChooseItem;
+        this.addBtnEvent(this.okBtn,this.onClick)
+        this.addBtnEvent(this.cancelBtn,this.hide)
+    }
+
+    private onClick(){
+
     }
 
     public show(){

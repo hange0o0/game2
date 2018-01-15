@@ -11,7 +11,7 @@ class TecUI extends MainBase {
     private list: eui.List;
     private tab: eui.TabBar;
 
-
+    private dataArray = new eui.ArrayCollection()
 
     public constructor() {
         super();
@@ -22,6 +22,7 @@ class TecUI extends MainBase {
         super.childrenCreated();
         this.scroller.viewport = this.list;
         this.list.itemRenderer = TecItem
+        this.list.dataProvider = this.dataArray
 
         this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
         this.tab.selectedIndex = 0;
@@ -41,6 +42,8 @@ class TecUI extends MainBase {
     }
 
     public renew(){
-
+        var arr = [1,1];
+        this.dataArray.source = arr
+        this.dataArray.refresh()
     }
 }

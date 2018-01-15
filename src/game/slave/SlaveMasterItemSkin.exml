@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="SlaveMasterItemSkin" width="580" height="250" currentState="normal" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Image x="0" width="100%" source="bg2_png" scale9Grid="11,8,9,13" top="60" bottom="0"/>
-	<e:Group y="178.79" x="79.85">
+<e:Skin class="SlaveMasterItemSkin" width="580" height="330" currentState="normal" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image x="0" width="100%" top="40" height="195" source="bg7_png" scale9Grid="33,31,3,7"/>
+	<e:Group y="163.64" x="79.85">
 		<e:Image source="border1_png" scale9Grid="28,20,26,2" x="0" y="0" width="190"/>
 		<e:Label id="forceText" text="12345" x="50" size="24" y="9"/>
 		<e:Image source="icon_force_png" x="10" y="-19.5"/>
 	</e:Group>
-	<e:Group y="83.24" horizontalCenter="0">
-		<e:Image id="type" source="icon_type1_png" x="0" y="23.24"/>
-		<e:Label id="nameText" text="苦顶替" size="40" stroke="3" verticalAlign="bottom" x="100" textColor="0xffffff" strokeColor="0x231507" y="0"/>
+	<e:Group y="80" horizontalCenter="0">
+		<e:Image id="type" source="icon_type1_png" x="0" y="23.24" scaleX="0.8" scaleY="0.8"/>
+		<e:Label id="nameText" text="苦顶替" size="30" stroke="3" verticalAlign="bottom" x="100" textColor="0xffffff" strokeColor="0x231507" y="0"/>
 		<e:layout>
-			<e:HorizontalLayout verticalAlign="middle"/>
+			<e:HorizontalLayout verticalAlign="middle" gap="10"/>
 		</e:layout>
 	</e:Group>
-	<e:Button id="pkBtn" label="反抗" skinName="Btn1Skin" width="160" right="105" y="172.91"/>
+	<e:Button id="pkBtn" label="反抗" skinName="Btn1Skin" width="160" right="105" y="157.76"/>
 	<e:Image source="title_bg3_png" y="0" horizontalCenter="0" scale9Grid="83,9,37,61" width="400"/>
 	<e:Label text="你的主人" y="11.06" size="24" horizontalCenter="0"/>
+	<e:Group y="260" horizontalCenter="0">
+		<e:Image source="title_bg3_png" y="0" scale9Grid="83,9,37,61" width="400" x="0"/>
+		<e:Label text="你的奴隶" y="11.06" size="24" horizontalCenter="0"/>
+	</e:Group>
+	<e:Group id="clickArea" width="400" height="100" y="58.34" horizontalCenter="0"/>
 </e:Skin>

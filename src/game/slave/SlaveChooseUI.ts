@@ -29,7 +29,9 @@ class SlaveChooseUI extends game.BaseWindow {
     }
 
     public show(){
-        super.show()
+        SlaveManager.getInstance().slave_miss(()=>{
+            this.renew();
+        })
     }
 
     public hide() {
@@ -42,6 +44,8 @@ class SlaveChooseUI extends game.BaseWindow {
     }
 
     public renew(){
-
+        var SM =  SlaveManager.getInstance()
+        var arr = SM.missList;
+        this.list.dataProvider = new eui.ArrayCollection(arr)
     }
 }

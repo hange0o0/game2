@@ -49,6 +49,23 @@ class GameEvent {
         pk_hang_result:'hang.pk_hang_result'
     }
 
+    public static tec = {
+        tec_up:'tec.tec_up'
+    }
+
+    public static user = {
+        user_info:'user.user_info'
+    }
+
+    public static slave = {
+        slave_award:'slave.slave_award',
+        slave_delete:'slave.slave_delete',
+        slave_list:'slave.slave_list',
+        slave_miss:'slave.slave_miss',
+        slave_pk_begin:'slave.slave_pk_begin',
+        slave_pk_result:'slave.slave_pk_result'
+    }
+
     public static debug = {
         pk_test:'debug.pk_test'
     }

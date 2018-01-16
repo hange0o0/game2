@@ -23,7 +23,7 @@ class SlaveUI extends MainBase {
         this.scroller.viewport = this.list;
         this.list.useVirtualLayout = false
         this.list.itemRendererFunction = function(item:any){
-             if(item.isMaster)
+             if(item.gameid == UM.gameid)
                 return SlaveMasterItem
             return SlaveItem
         }
@@ -41,12 +41,28 @@ class SlaveUI extends MainBase {
     }
 
     public onShow(){
-        this.renew();
+        SlaveManager.getInstance().slave_list(()=>{
+            this.renew();
+        })
+
         //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
     }
 
     public renew(){
-        var arr = [{isMaster:true},{},{empty:true},{lock:true},{btn:true}];
+        var SM =  SlaveManager.getInstance()
+        var arr = SM.slaveList.concat();
+        var len = SM.getMySlaveNum();
+        var maxLen = SM.getCurrentMax();
+        while(len < maxLen)
+        {
+            arr.push({empty:true})
+            len ++;
+        }
+
+        if(maxLen < SM.maxNum)
+            arr.push({lock:true})
+        arr.push({btn:true})
+
         this.dataArray.source = arr
         this.dataArray.refresh()
     }

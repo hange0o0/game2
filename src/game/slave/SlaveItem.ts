@@ -38,7 +38,7 @@ class SlaveItem extends game.BaseItem {
         }
     }
     private onInfo(){
-        OtherInfoUI.getInstance().show();
+        OtherInfoUI.getInstance().show(this.data.gameid);
     }
     private onGet(e){
 

@@ -80,10 +80,12 @@ class HangManager {
             if(msg.fail == 1)
             {
                 Alert('找不到对战记录')
+                PKingUI.getInstance().hide();
                 return;
             }
             if(msg.fail && PKManager.getInstance().testFail(msg.fail))
             {
+                PKingUI.getInstance().hide();
                 return;
             }
             if (fun)

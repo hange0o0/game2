@@ -1,7 +1,8 @@
 class PKManager {
     public static TYPE_HANG = 1;
     public static TYPE_TEST = 101;
-    public static TYPE_MAIN_HANG = 102;
+    public static TYPE_MAIN_HANG = 102; //挂机动画用
+    public static TYPE_SLAVE = 103;
     private static instance:PKManager;
     public static getInstance() {
         if (!this.instance) this.instance = new PKManager();
@@ -36,6 +37,9 @@ class PKManager {
             case PKManager.TYPE_TEST:
                 fun && fun();
                 break;
+            case PKManager.TYPE_SLAVE:
+                SlaveManager.getInstance().slave_pk_result(fun);
+                break;
         }
     }
 
@@ -48,15 +52,41 @@ class PKManager {
 
     public test(atk,def){
         var PD = PKData.getInstance()
-        var data = {
+
+        //攻击列表乱序
+        var tempList = atk.list.concat();
+        var atkList = [];
+        var b = true
+        while(tempList.length > 0)
+        {
+            var temp = [];
+            for(var i=0;i<6;i++)
+            {
+                var data = tempList.shift();
+                if(!data)
+                    break;
+                if(b)
+                    atkList.push(data)
+                else
+                    temp.push(data)
+            }
+            b = false;
+            if(temp.length > 0)
+            {
+                ArrayUtil.random(temp,3)
+                atkList = atkList.concat(temp)
+            }
+        }
+
+        var pkData = {
             seed:TM.now(),
             players:[
                 {id:1,gameid:'npc',team:2,autolist:def.list,force:UM.tec_force,type:UM.type,hp:5,nick:def.name},
-                {id:2,gameid:UM.gameid,team:1,card:atk.list,force:UM.tec_force,nick:atk.name,type:UM.type,hp:5}
+                {id:2,gameid:UM.gameid,team:1,card:atkList,force:UM.tec_force,nick:atk.name,type:UM.type,hp:5}
             ]
         };
         PKManager.getInstance().pkType = PKManager.TYPE_TEST
-        PD.init(data);
+        PD.init(pkData);
         PKingUI.getInstance().show();
     }
 

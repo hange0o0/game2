@@ -30,6 +30,7 @@ class PopUpManager {
     }
 	
     public static addPopUp(display: egret.DisplayObject,isWindow:boolean,noMV? ){
+        var haveShow = display.stage && display.visible;
         var ww = GameManager.container.width;
         var hh = GameManager.container.height;
         if(!this.shape)
@@ -53,7 +54,8 @@ class PopUpManager {
 //            console.log(display.width,display.height);
 //            display.x = (ww - display.width) / 2;
 //            display.y = (hh - display.height) / 2;
-            display.visible = false
+            if(!haveShow)
+                display.visible = false
             display.addEventListener(egret.Event.ENTER_FRAME,onEnterFrame,this);
         }
         
@@ -66,7 +68,7 @@ class PopUpManager {
             var x2 = (ww - display.width*1.05) / 2;
             var y2 = (hh - display.height*1.05) / 2;
             display.visible = true
-            if(noMV)
+            if(noMV || haveShow)
             {
                 display.scaleX = 1;
                 display.scaleY = 1
@@ -145,11 +147,9 @@ class PopUpManager {
                 if(!setVisible)
                 {
                     ui.visible = true;
-                    if(!ui.isWindow)
+                    if(!ui.isWindow && ui.hideBehind)
                         setVisible = true;
                 }
-                else if(ui.hideVisible)
-                    ui.visible = true;
                 else
                     ui.visible = false;
                 if(lastVisible != ui.visible)

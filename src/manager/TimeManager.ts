@@ -20,7 +20,10 @@ class TimeManager {
     public now():number{
         return Math.floor(Date.now() / 1000) - this.timeDiff //+ 24*3600 *7;
     }
-    
+    public nowMS():number{
+        return Date.now() - this.timeDiff*1000
+    }
+
     public getLastDayOfWeekDate(time:number, endDay:any):Date{
         endDay = endDay || 5;
         //得到今天是周几

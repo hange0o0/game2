@@ -11,6 +11,7 @@ class GameEvent {
 
         pk_begin:'pk_begin',
         pk_end:'pk_end',
+        info_change:'info_change',
 
 
 

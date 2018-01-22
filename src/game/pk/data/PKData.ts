@@ -40,7 +40,7 @@ class PKData extends egret.EventDispatcher{
 
     //取经过的时间
     public getPassTime(){
-        return egret.getTimer() - this.startTime;
+        return TM.nowMS() - this.startTime;
     }
 
     //暂停
@@ -48,14 +48,14 @@ class PKData extends egret.EventDispatcher{
         //if(isLast)//在最后一次行动后暂停(马上停)
         //    this.stopTime = this.actionTime + 1;
         //else
-            this.stopTime = egret.getTimer();
+            this.stopTime = TM.nowMS();
     }
 
     //继续
     public play(){
         if(this.stopTime)
         {
-            var add = egret.getTimer() - this.stopTime;
+            var add = TM.nowMS() - this.stopTime;
             this.startTime += add
             //this.actionTime += add;
             this.stopTime = 0;
@@ -147,7 +147,7 @@ class PKData extends egret.EventDispatcher{
 
     //开始游戏
     public start(){
-        this.startTime = egret.getTimer()
+        this.startTime = TM.nowMS()
         this.stopTime = 0;
     }
 

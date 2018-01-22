@@ -16,14 +16,15 @@ class SlaveChooseItem extends game.BaseItem {
     }
 
     private onClick(){
-        OtherInfoUI.getInstance().show();
+        OtherInfoUI.getInstance().show(this.data.gameid);
     }
 
     public dataChanged(){
-        this.nameText.text = ''
-        this.coinText.text = ''
-        this.forceText.text = ''
-        this.type.source = ''
+        //{"gameid":"1_10001","nick":"1","type":"1","hourcoin":"0","tec_force":"0","level":"1","master":"","addtime":null,"protime":null,"gettime":null}
+        this.nameText.text = '' + this.data.nick;
+        this.coinText.text = '产出：' + this.data.hourcoin + '/小时';
+        this.forceText.text = '战力：'  + this.data.tec_force;
+        this.type.source = 'icon_type' + this.data.type + '_png'
     }
 
 }

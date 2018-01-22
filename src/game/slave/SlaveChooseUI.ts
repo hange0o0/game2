@@ -30,7 +30,7 @@ class SlaveChooseUI extends game.BaseWindow {
 
     public show(){
         SlaveManager.getInstance().slave_miss(()=>{
-            this.renew();
+            super.show();
         })
     }
 

@@ -1,3 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="OtherInfoUISkin" width="400" height="300" xmlns:e="http://ns.egret.com/eui">
+<e:Skin class="OtherInfoUISkin" width="620" height="720" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+		<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
+	<e:Image source="bg15_png" left="10" right="13" top="15" scale9Grid="20,14,11,15" height="160"/>
+
+	<e:Group y="30" horizontalCenter="-25">
+		<e:Image id="type" source="icon_type1_png" x="0" scaleX="0.8" scaleY="0.8" y="0"/>
+		<e:Label id="nameText" text="苦顶替" size="30" stroke="3" verticalAlign="bottom" x="60" textColor="0xFFFFFF" strokeColor="0x231507" y="15"/>
+		<e:layout>
+			<e:HorizontalLayout verticalAlign="middle"/>
+		</e:layout>
+	</e:Group>
+	<e:Group x="90" y="102">
+		<e:Image source="icon_coin_png" x="0" y="0" scaleX="0.8" scaleY="0.8"/>
+		<e:Label id="coinText" text="收益：123.5k/小时" size="22" stroke="3" verticalAlign="bottom" x="45" strokeColor="0x231507" textColor="0xFCDB79" y="7.6"/>
+	</e:Group>
+	<e:Group x="360" y="102">
+		<e:Image source="icon_force_png" x="2.66" y="-12" scaleX="0.7" scaleY="0.7"/>
+		<e:Label id="forceText" text="战力：1234" size="22" stroke="3" verticalAlign="bottom" x="40" strokeColor="0x231507" textColor="0xFCDB79" y="7.6"/>
+	</e:Group>
+	<e:Group horizontalCenter="0" bottom="20">
+		<e:Button id="cancelBtn" label="返回" width="150" x="0" y="0" skinName="Btn2Skin"/>
+		<e:Button id="okBtn" label="收服奴隶" width="150" skinName="Btn1Skin" x="0" y="0"/>
+		<e:layout>
+			<e:HorizontalLayout gap="30"/>
+		</e:layout>
+	</e:Group>
+	<e:Scroller id="scroller" left="20" right="20" top="175" bottom="100">
+		<e:Group>
+			<e:List id="list" width="540" height="500" horizontalCenter="0" x="5" scaleX="1" scaleY="1">
+				<e:layout>
+				<e:VerticalLayout paddingBottom="10" gap="10" paddingTop="10"/>
+				</e:layout>
+			</e:List>
+		</e:Group>
+	</e:Scroller>
 </e:Skin>

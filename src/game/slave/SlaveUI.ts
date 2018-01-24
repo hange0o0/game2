@@ -45,7 +45,7 @@ class SlaveUI extends MainBase {
             this.renew();
         })
 
-        //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
+        this.addPanelOpenEvent(GameEvent.client.slave_change,this.renew)
     }
 
     public renew(){

@@ -57,6 +57,7 @@ var game_file_list = [
 	"bin-debug/game/hang/HangItem.js",
 	"bin-debug/game/hang/HangManager.js",
 	"bin-debug/game/hang/HangUI.js",
+	"bin-debug/game/mail/MailManager.js",
 	"bin-debug/AssetAdapter.js",
 	"bin-debug/game/main/MainBottomBtn.js",
 	"bin-debug/game/main/MainFightUI.js",

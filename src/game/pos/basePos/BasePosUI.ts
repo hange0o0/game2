@@ -193,6 +193,7 @@ class BasePosUI extends game.BaseUI {
         else if(!game.BaseUI.isStopEevent)
         {
             var index = this.listData.getItemIndex(item);
+            this.useCard[item.id] --;
             this.listData.removeItemAt(index)
             if(!this.listData.getItemAt(this.listData.length-1).setting)
                 this.listData.addItem({setting:true})

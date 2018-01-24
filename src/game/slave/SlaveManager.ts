@@ -26,6 +26,31 @@ class SlaveManager {
         return count;
     }
 
+    //取最近一个主人的有效开始时间
+    public getMasterTime(){
+        var mtime = 0;
+        if(this.lastGetSlaveTime)//有取过奴隶数据
+        {
+             if(this.slaveList[0] && this.slaveList[0].gameid == UM.gameid && this.slaveList[0].master != UM.gameid)
+                 mtime = this.slaveList[0].addtime;
+        }
+        var master = UM.openData.masterstep.split(',').pop().split('|');
+        if(master.length == 2 && master[0] == 1)
+        {
+            var mtime2 = parseInt(master[1]);
+            if(mtime2 != mtime)//奴隶数据库与玩家的open数据不一致
+            {
+                 //@han
+            }
+            if(!this.lastGetSlaveTime)
+                mtime = mtime2
+        }
+        return mtime
+    }
+
+
+
+
     public slave_award(fun?) {
         var self = this;
         var oo:any = {};
@@ -183,6 +208,10 @@ class SlaveManager {
                 PKingUI.getInstance().hide();
                 return;
             }
+            self.lastGetSlaveTime = 0;
+            self.slave_list(()=>{
+                EM.dispatchEventWith(GameEvent.client.slave_change)
+            });
 
             if (fun)
                 fun();

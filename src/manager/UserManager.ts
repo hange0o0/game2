@@ -19,7 +19,7 @@ class UserManager {
     public hourcoin: number;
     public nick: string;
     public type: number;
-    public coin: number;
+
     public diamond: number;
     public uid: number;
     public level: number;
@@ -28,6 +28,8 @@ class UserManager {
     public last_land: number;
 
     public energy: any;
+    public openData: any;
+    public coin: any;
 
 
     public maxEnergy = 60;
@@ -48,6 +50,7 @@ class UserManager {
         this.last_land = data.last_land;
         this.diamond = data.diamond;
         this.energy = data.energy; //  '{"v":0,"t":0,"rmb":0}'
+        this.openData = data.openData; //  '{"v":0,"t":0,"rmb":0}'
 
 
 
@@ -57,6 +60,36 @@ class UserManager {
         ActiveManager.getInstance().init(data.active)
         TecManager.getInstance().init(data.tec)
         PropManager.getInstance().init(data.prop)
+    }
+
+    public getCoin(){
+        var time = TM.now();
+
+        //生产影响
+        var cd = 60;
+        var step = Math.round(this.hourcoin/60);
+        var add = Math.floor((time - this.coin.t)/cd);
+        if(add > 0)
+        {
+            this.coin.v += add*step;
+            this.coin.t = this.coin.t + add*cd;
+        }
+
+        //主人影响
+        var masterTime = SlaveManager.getInstance().getMasterTime();
+        if(masterTime)
+        {
+            if(this.coin.st < masterTime)
+                this.coin.st += masterTime;
+            var num = Math.floor((time - this.coin.st)/3600)//每小时结算一次
+            if(num)
+            {
+                this.coin.st += num*3600;
+                this.coin.v -= num*Math.floor(this.hourcoin*0.2);
+            }
+        }
+
+        return this.coin.v;
     }
 
 
@@ -101,9 +134,10 @@ class UserManager {
         return true;
     }
     public testCoin(v){
-        if(UM.coin < v)
+        var coin = UM.getCoin()
+        if(coin < v)
         {
-            Confirm('金币不足！\n需要：' +v+'\n当前：'+UM.coin + '\n是否前往购买金币？',function(v){
+            Confirm('金币不足！\n需要：' +v+'\n当前：'+coin + '\n是否前往购买金币？',function(v){
                 if(v == 1)
                 {
                     //ShopUI.getInstance().show('coin');

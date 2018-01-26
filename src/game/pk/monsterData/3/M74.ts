@@ -14,7 +14,7 @@ class M74 extends MBase {
 
     //伤害飞行时间
     protected getAtkArriveCD(user:PKMonsterData,target:PKMonsterData){
-        return Math.abs(user.x - target.x)*2 + 200;
+        return Math.abs(user.x - target.x)*1.5 + 200;
     }
 
     public atkMV(user,target,actionTime,endTime){

@@ -70,7 +70,7 @@ class HangUI extends game.BaseItem {
 
         var pkvideo = PKVideoCon.getInstance()
         this.con.addChild(pkvideo)
-        pkvideo.y = -150;
+        pkvideo.y = -120;
         pkvideo.x = 0
 
         this.reset();

@@ -62,6 +62,7 @@ class UserManager {
         PropManager.getInstance().init(data.prop)
     }
 
+    //1小时内有调用过可保证准确性
     public getCoin(){
         var time = TM.now();
 
@@ -118,12 +119,27 @@ class UserManager {
         return  this.energy.t + v -  TM.now();
     }
 
+    public onOpenDataChange(){
+        var mailTime = UM.openData.mailtime
+        var slaveTime = UM.openData.slavetime
+        if(slaveTime > SlaveManager.getInstance().lastGetSlaveTime)
+        {
+            SlaveManager.getInstance().lastGetSlaveTime = 0
+            if(SlaveUI.getInstance().stage)
+            {
+                SlaveManager.getInstance().slave_list(()=>{
+                    SlaveUI.getInstance().renew();
+                })
+            }
+        }
+    }
+
 
 
     public testDiamond(v){
         if(UM.diamond < v)
         {
-            Confirm('钻石不足！\n需要：' +v+'\n当前：'+UM.diamond + '\n是否前往购买钻石？',function(v){
+            MyWindow.Confirm('钻石不足！\n需要：' +v+'\n当前：'+UM.diamond + '\n是否前往购买钻石？',function(v){
                 if(v == 1)
                 {
                     //ShopUI.getInstance().show('diamond');
@@ -137,7 +153,7 @@ class UserManager {
         var coin = UM.getCoin()
         if(coin < v)
         {
-            Confirm('金币不足！\n需要：' +v+'\n当前：'+coin + '\n是否前往购买金币？',function(v){
+            MyWindow.Confirm('金币不足！\n需要：' +v+'\n当前：'+coin + '\n是否前往购买金币？',function(v){
                 if(v == 1)
                 {
                     //ShopUI.getInstance().show('coin');
@@ -151,7 +167,7 @@ class UserManager {
     public testEnergy(v){
         if(UM.getEnergy() < v)
         {
-            Confirm('体力不足！\n需要：' +v+'\n当前：'+UM.getEnergy() + '\n是否前往购买体力？',function(v){
+            MyWindow.Confirm('体力不足！\n需要：' +v+'\n当前：'+UM.getEnergy() + '\n是否前往购买体力？',function(v){
                 if(v == 1)
                 {
                     //ShopUI.getInstance().show('energy');

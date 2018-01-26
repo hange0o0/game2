@@ -23,6 +23,7 @@ class OtherInfoUI extends game.BaseWindow {
 
     private gameid;
     private master;
+    private isMyMaster;
 
     public childrenCreated() {
         super.childrenCreated();
@@ -38,11 +39,33 @@ class OtherInfoUI extends game.BaseWindow {
     private onPK(){
         var gameid = this.gameid
         var master = this.master
-        PKBeforeUI.getInstance().show({
-            fun:function(id){
-                SlaveManager.getInstance().slave_pk_begin(gameid,master,id)
-            }
-        })
+        var self = this
+        if(this.isMyMaster)
+        {
+            PKBeforeUI.getInstance().show({
+                fun:function(id){
+                    SlaveManager.getInstance().slave_pk_begin(UM.gameid,gameid,id)
+                }
+            })
+        }
+        else if(this.master == UM.gameid)
+        {
+            MyWindow.Confirm('确定要释放该奴隶吗？',(b)=>{
+                if(b==1)
+                {
+                    SlaveManager.getInstance().slave_delete(gameid)
+                }
+            })
+        }
+        else
+        {
+            PKBeforeUI.getInstance().show({
+                fun:function(id){
+                    SlaveManager.getInstance().slave_pk_begin(gameid,master,id)
+                }
+            })
+        }
+
 
     }
 
@@ -59,10 +82,18 @@ class OtherInfoUI extends game.BaseWindow {
 
     public onShow(){
         this.renew();
-        this.addPanelOpenEvent(GameEvent.client.info_change,this.renew)
+        this.addPanelOpenEvent(GameEvent.client.info_change,this.regetInfo)
+    }
+
+    private regetInfo(){
+        delete InfoManager.getInstance().otherInfo[this.gameid]
+        InfoManager.getInstance().getInfo(this.gameid,()=>{
+            this.renew()
+        })
     }
 
     public renew(){
+        this.isMyMaster = false
         var data = InfoManager.getInstance().otherInfo[this.gameid]
         var slave = InfoManager.getInstance().otherSlave[this.gameid];
         this.nameText.text = '' + data.nick;
@@ -74,5 +105,18 @@ class OtherInfoUI extends game.BaseWindow {
         this.master = this.gameid;
         if(slave[0] && slave[0].gameid == this.gameid && slave[0].master)
             this.master = slave[0].master;
+
+        for(var i=0;i<slave.length;i++)
+        {
+             if(slave[i].gameid == UM.gameid)
+             {
+                 this.isMyMaster = true;
+                 break;
+             }
+        }
+        if(this.isMyMaster)
+            this.okBtn.label = '反抗';
+        else
+            this.okBtn.label = this.master == UM.gameid?'释放奴隶':'收服奴隶'
     }
 }

@@ -25,6 +25,10 @@ class SyncManager{
                     UM.diamond = value;
                     EM.dispatch(GameEvent.client.diamond_change);
                     break;
+                case 'sync_opendata':
+                    UM.openData = value;
+                    UM.onOpenDataChange()
+                    break;
                 //case 'sync_prop':
                 //    for(ss in value)
                 //    {

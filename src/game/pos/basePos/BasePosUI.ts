@@ -105,7 +105,7 @@ class BasePosUI extends game.BaseUI {
             b = this.posData && (Base64.decode(this.posData.name) != this.posName || this.posData.list != this.changeToServerList())
         if(b)
         {
-            Confirm('还没保存，确定退出吗？',(b)=>{
+            MyWindow.Confirm('还没保存，确定退出吗？',(b)=>{
                 if(b==2)
                 {
                     this.hide();
@@ -124,7 +124,7 @@ class BasePosUI extends game.BaseUI {
 
 
     private onDelete(){
-        Confirm('确定要删除该阵法吗？',(b)=>{
+        MyWindow.Confirm('确定要删除该阵法吗？',(b)=>{
             if(b==1)
             {
                 this.callDelete = this.posData;
@@ -155,7 +155,7 @@ class BasePosUI extends game.BaseUI {
     private onSave(){
         if(this.listData.length == 0)
         {
-            Alert('必须上阵最少一张卡牌')
+            MyWindow.Alert('必须上阵最少一张卡牌')
             return false
         }
         var serverList = this.changeToServerList();
@@ -167,7 +167,7 @@ class BasePosUI extends game.BaseUI {
         {
             PosManager.getInstance().changePos(this.type,this.posData.id,
                 this.posName,serverList,()=>{
-                    ShowTips('保存成功！')
+                    MyWindow.ShowTips('保存成功！')
                     this.callDelete = null
                 })
         }
@@ -175,7 +175,7 @@ class BasePosUI extends game.BaseUI {
         {
             PosManager.getInstance().addPos(this.type,
                 this.posName,serverList,()=>{
-                    ShowTips('保存成功！')
+                    MyWindow.ShowTips('保存成功！')
                     this.callDelete = null
                     this.posData = PosManager.getInstance().getListByType(this.type)[this.index]
                 })

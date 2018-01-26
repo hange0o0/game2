@@ -39,7 +39,7 @@ class LoginManager{
         var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         if (filter.test(mail)) return true;
         else {
-            Alert('用户邮箱格式不对');
+            MyWindow.Alert('用户邮箱格式不对');
             return false;
         }
     }
@@ -50,7 +50,7 @@ class LoginManager{
             return true;
         }
         else {
-            Alert('密码的格式为6-12位，只能是字母、数字和下划线');
+            MyWindow.Alert('密码的格式为6-12位，只能是字母、数字和下划线');
             return false;
         }
     }
@@ -79,7 +79,7 @@ class LoginManager{
             {
                 if(password)
                 {
-                    Alert('用户或密码错误');
+                    MyWindow.Alert('用户或密码错误');
                 }
                 else
                 {
@@ -93,7 +93,7 @@ class LoginManager{
             if(msg.fail == 2)
             {
                 if(password)
-                    Alert('登陆失败');
+                    MyWindow.Alert('登陆失败');
                 self.quickPassword = null;
                 LoginUI.getInstance().show();
                 self.writeDB();
@@ -125,13 +125,13 @@ class LoginManager{
             var msg = data.msg;
             if(msg.fail == 1)
             {
-                Alert('注册失败');
+                MyWindow.Alert('注册失败');
                 return;
             }
 
             if(msg.fail == 2)
             {
-                Alert('该用户邮箱已被注册');
+                MyWindow.Alert('该用户邮箱已被注册');
                 return;
             }
 
@@ -172,7 +172,7 @@ class LoginManager{
             var msg = data.msg;
             if(msg.fail == 1)
             {
-                Alert('用户状态已过期!');
+                MyWindow.Alert('用户状态已过期!');
                 return;
             }
 
@@ -285,17 +285,17 @@ class LoginManager{
             var msg = data.msg;
             if(msg.fail == 1)
             {
-                Alert('用户状态已过期');
+                MyWindow.Alert('用户状态已过期');
                 return;
             }
             if(msg.fail == 3)
             {
-                Alert('该用户名已被使用');
+                MyWindow.Alert('该用户名已被使用');
                 return;
             }
             if(msg.fail == 4)
             {
-                Alert('注册失败');
+                MyWindow.Alert('注册失败');
                 return;
             }
 

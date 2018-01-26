@@ -64,6 +64,7 @@ class GameEvent {
         slave_delete:'slave.slave_delete',
         slave_list:'slave.slave_list',
         slave_miss:'slave.slave_miss',
+        slave_reset_open:'slave.slave_reset_open',
         slave_pk_begin:'slave.slave_pk_begin',
         slave_pk_result:'slave.slave_pk_result'
     }

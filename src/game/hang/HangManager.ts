@@ -33,12 +33,12 @@ class HangManager {
             var msg = data.msg;
             if(msg.fail == 1)
             {
-                Alert('体力不足')
+                MyWindow.Alert('体力不足')
                 return;
             }
             if(msg.fail == 2)
             {
-                Alert('找不到指定阵法')
+                MyWindow.Alert('找不到指定阵法')
                 return;
             }
             PKManager.getInstance().startPK(PKManager.TYPE_HANG,msg.pkdata)
@@ -56,12 +56,12 @@ class HangManager {
             var msg = data.msg;
             if(msg.fail == 1)
             {
-                Alert('体力不足')
+                MyWindow.Alert('体力不足')
                 return;
             }
             if(msg.fail == 2)
             {
-                Alert('找不到指定阵法')
+                MyWindow.Alert('找不到指定阵法')
                 return;
             }
             PKManager.getInstance().startPK(PKManager.TYPE_TEST,msg.pkdata)
@@ -79,7 +79,7 @@ class HangManager {
             var msg = data.msg;
             if(msg.fail == 1)
             {
-                Alert('找不到对战记录')
+                MyWindow.Alert('找不到对战记录')
                 PKingUI.getInstance().hide();
                 return;
             }

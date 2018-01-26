@@ -7,6 +7,12 @@ class AwardUI extends game.BaseWindow {
         return this._instance;
     }
 
+    private okBtn: eui.Button;
+    private list: eui.List;
+    private titleText: eui.Label;
+
+
+    private dataIn;
     public constructor() {
         super();
         this.skinName = "AwardUISkin";
@@ -14,9 +20,11 @@ class AwardUI extends game.BaseWindow {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.addBtnEvent(this.okBtn,this.hide)
     }
 
-    public show(){
+    public show(v?){
+        this.dataIn = v;
         super.show()
     }
 
@@ -30,6 +38,9 @@ class AwardUI extends game.BaseWindow {
     }
 
     public renew(){
-
+        var arr = [];
+        if(this.dataIn.coin)
+            arr.push({img:'icon_coin_png',name:'金币','num':'×' + NumberUtil.addNumSeparator(this.dataIn.coin)})
+        this.list.dataProvider = new eui.ArrayCollection(arr);
     }
 }

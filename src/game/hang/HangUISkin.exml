@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<e:Skin class="HangUISkin" width="620" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" height="360">
+<e:Skin class="HangUISkin" width="620" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" height="400">
 	<e:Image x="0" width="100%" top="0" bottom="0" source="bg15_png" scale9Grid="20,20,9,10"/>
-	<e:Group id="con" width="604" x="8" height="344" y="8" locked="true">
-		<e:Image id="img" bottom="-100" horizontalCenter="0"/>
+	<e:Group id="con" width="604" x="8" height="384" y="8">
+
 	</e:Group>
 
 	<e:Group x="8" bottom="10" locked="true">

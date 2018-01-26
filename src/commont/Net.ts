@@ -128,9 +128,9 @@ class Net extends egret.EventDispatcher{
         }catch(e){
 
             if(Config.isDebug)
-                Alert('通信数据异常');
+                MyWindow.Alert('通信数据异常');
             else
-                Alert('通信数据异常',this.refresh,'重新登陆');
+                MyWindow.Alert('通信数据异常',this.refresh,'重新登陆');
             return;
         }
         if(data.error)
@@ -141,28 +141,28 @@ class Net extends egret.EventDispatcher{
             {
                 case 1:
                     if(_get['app'])
-                        Alert('游戏已更新，请重新下载');
+                        MyWindow.Alert('游戏已更新，请重新下载');
                     else
-                        Alert('游戏已更新，请退出重进',this.refresh,'重新登陆');
+                        MyWindow.Alert('游戏已更新，请退出重进',this.refresh,'重新登陆');
                     GameManager.getInstance().stopTimer();
                     break;
                 case 2:
-                    Alert('该用户已在其它地方登录',this.refresh,'重新登陆');
+                    MyWindow.Alert('该用户已在其它地方登录',this.refresh,'重新登陆');
                     GameManager.getInstance().stopTimer();
                     break;
                 case 3:
-                    Alert('通信出错',this.refresh,'重新登陆');
+                    MyWindow.Alert('通信出错',this.refresh,'重新登陆');
                     break;
                 case 4:
-                    Alert('用户数据写入失败',this.refresh,'重新登陆');
+                    MyWindow.Alert('用户数据写入失败',this.refresh,'重新登陆');
                     GameManager.getInstance().stopTimer();
                     break;
                 case 5:
-                    Alert('服务器正在维护中，请稍后再试',this.refresh);
+                    MyWindow.Alert('服务器正在维护中，请稍后再试',this.refresh);
                     GameManager.getInstance().stopTimer();
                     break;
                 case 99:
-                    Alert(data.error_str,this.refresh);
+                    MyWindow.Alert(data.error_str,this.refresh);
                     GameManager.getInstance().stopTimer();
                     break;
             }
@@ -182,7 +182,7 @@ class Net extends egret.EventDispatcher{
         var loader = e.currentTarget;
         loader.removeEventListener(egret.Event.COMPLETE, this.onComplete, this);
         loader.removeEventListener(egret.IOErrorEvent.IO_ERROR, this.onError, this);
-        Alert('与服务器失去连接！',this.refresh);
+        MyWindow.Alert('与服务器失去连接！',this.refresh);
         GameManager.getInstance().stopTimer();
         GameManager.container.touchChildren = GameManager.container.touchEnabled = true;
         this.removeLoading();

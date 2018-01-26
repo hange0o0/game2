@@ -25,7 +25,7 @@
 			<e:HorizontalLayout gap="30"/>
 		</e:layout>
 	</e:Group>
-	<e:Scroller id="scroller" left="20" right="20" top="175" bottom="100">
+	<e:Scroller id="scroller" left="20" right="20" top="175" bottom="100" locked="true">
 		<e:Group>
 			<e:List id="list" width="540" height="500" horizontalCenter="0" x="5" scaleX="1" scaleY="1">
 				<e:layout>

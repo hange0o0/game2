@@ -6,7 +6,6 @@ class InfoManager {
         return this._instance;
     }
     public otherInfo = {};
-    public otherInfoNick = {};
     public otherSlave = {};
     public errorOpenID = {};
 
@@ -24,7 +23,7 @@ class InfoManager {
         }
         var self = this;
         if(self.errorOpenID[otherid]){
-            Alert(stopAlert || '没有找到该用户')
+            MyWindow.Alert(stopAlert || '没有找到该用户')
             return;
         }
         var self = this;
@@ -36,14 +35,13 @@ class InfoManager {
             if(msg.fail == 1)
             {
                 self.errorOpenID[otherid] = true;
-                Alert(stopAlert || '没有找到该用户')
+                MyWindow.Alert(stopAlert || '没有找到该用户')
                 return;
             }
 
             var info = msg.info;
             info.getTime = TM.now();
             self.otherInfo[info.gameid] = info;
-            self.otherInfoNick[info.nick] = info;
             var slave = self.otherSlave[info.gameid] = msg.slave || [];
 
             for(var i=0;i<slave.length;i++)
@@ -51,7 +49,10 @@ class InfoManager {
                 if(slave[i].gameid == info.gameid)
                 {
                     if(!slave[i].master || slave[i].master == slave[i].gameid)
+                    {
+                        info.protime = slave[i].protime
                         slave.splice(i,1)
+                    }
                     break;
                 }
             }

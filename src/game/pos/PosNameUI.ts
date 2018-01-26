@@ -27,7 +27,7 @@ class PosNameUI extends game.BaseWindow {
     private onOK(){
         if(!this.nameText.text)
         {
-            Alert('还没输入名称')
+            MyWindow.Alert('还没输入名称')
             return;
         }
         this.dispatchEventWith('nameChange',false,this.nameText.text);

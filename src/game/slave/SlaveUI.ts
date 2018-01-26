@@ -22,11 +22,12 @@ class SlaveUI extends MainBase {
         super.childrenCreated();
         this.scroller.viewport = this.list;
         this.list.useVirtualLayout = false
-        this.list.itemRendererFunction = function(item:any){
-             if(item.gameid == UM.gameid)
-                return SlaveMasterItem
-            return SlaveItem
-        }
+        this.list.itemRenderer = SlaveItem
+        //this.list.itemRendererFunction = function(item:any){
+        //     if(item.gameid == UM.gameid)
+        //        return SlaveMasterItem
+        //    return SlaveItem
+        //}
         this.list.dataProvider = this.dataArray
 
         this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
@@ -46,12 +47,29 @@ class SlaveUI extends MainBase {
         })
 
         this.addPanelOpenEvent(GameEvent.client.slave_change,this.renew)
+        this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
+    }
+
+    private onTimer(){
+        for(var i=0;i<this.list.numChildren;i++)
+        {
+            this.list.getChildAt(i)['onTimer']();
+        }
     }
 
     public renew(){
         var SM =  SlaveManager.getInstance()
         var arr = SM.slaveList.concat();
         var len = SM.getMySlaveNum();
+        if(len != arr.length)//有主人
+        {
+            arr.splice(1,0,{title:'我的奴隶'})
+            arr.unshift({title:'我的主人'})
+        }
+        else
+        {
+            arr.unshift({title:'我的奴隶'})
+        }
         var maxLen = SM.getCurrentMax();
         while(len < maxLen)
         {

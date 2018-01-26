@@ -84,7 +84,7 @@ class BasePosChooseUI extends game.BaseUI {
         var item = this.list.selectedItem;
         if(this.fromUI.maxCard <= this.arrayData.length)
         {
-            ShowTips('上阵卡牌已达上限')
+            MyWindow.ShowTips('上阵卡牌已达上限')
             return;
         }
         if(this.fromUI.useCard[item.id] && this.fromUI.useCard[item.id] >= PosManager.getInstance().oneCardNum)

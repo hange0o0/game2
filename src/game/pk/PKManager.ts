@@ -19,10 +19,10 @@ class PKManager {
         switch(failID)
         {
             case 101:
-                Alert('PK异常！MP数值不对！');
+                MyWindow.Alert('PK异常！MP数值不对！');
                 return true;
             case 102:
-                Alert('PK异常！使用了无效的卡牌！');
+                MyWindow.Alert('PK异常！使用了无效的卡牌！');
                 return true;
         }
         return false;
@@ -48,6 +48,7 @@ class PKManager {
         var PD = PKData.getInstance();
         PD.init(data);
         PKingUI.getInstance().show();
+        PKBeforeUI.getInstance().hide();
     }
 
     public test(atk,def){

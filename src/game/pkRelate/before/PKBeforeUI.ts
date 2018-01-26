@@ -63,7 +63,7 @@ class PKBeforeUI extends game.BaseWindow {
         var data = PM.atkList[this.index];
         if(!data)
         {
-            Alert('还没设置出战卡组',()=>{
+            MyWindow.Alert('还没设置出战卡组',()=>{
                 this.onListClick();
             })
             return;

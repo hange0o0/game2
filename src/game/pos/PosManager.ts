@@ -51,17 +51,17 @@ class PosManager {
             var msg = data.msg;
             if(msg.fail == 1)
             {
-                Alert('最多只能有5个')
+                MyWindow.Alert('最多只能有5个')
                 return;
             }
             if(msg.fail == 2)
             {
-                Alert('传入卡牌非法')
+                MyWindow.Alert('传入卡牌非法')
                 return;
             }
             if(msg.fail == 3)
             {
-                Alert('每个卡牌最多只能上阵3个')
+                MyWindow.Alert('每个卡牌最多只能上阵3个')
                 return;
             }
             self.getListByType(type).push({
@@ -95,17 +95,17 @@ class PosManager {
             var msg = data.msg;
             if(msg.fail == 1)
             {
-                Alert('找不到指定阵法')
+                MyWindow.Alert('找不到指定阵法')
                 return;
             }
             if(msg.fail == 2)
             {
-                Alert('传入卡牌非法')
+                MyWindow.Alert('传入卡牌非法')
                 return;
             }
             if(msg.fail == 3)
             {
-                Alert('每个卡牌最多只能上阵3个')
+                MyWindow.Alert('每个卡牌最多只能上阵3个')
                 return;
             }
             if(name)
@@ -130,7 +130,7 @@ class PosManager {
             var msg = data.msg;
             if(msg.fail == 1)
             {
-                Alert('找不到指定阵法')
+                MyWindow.Alert('找不到指定阵法')
                 return;
             }
             posData.close = !posData.close;
@@ -149,7 +149,7 @@ class PosManager {
             var msg = data.msg;
             if(msg.fail == 1)
             {
-                Alert('找不到指定阵法')
+                MyWindow.Alert('找不到指定阵法')
                 return;
             }
             var list = self.getListByType(type);

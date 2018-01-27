@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="RankItemSkin" width="620" height="80" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="normal,self" >
+	<e:Image source="bg2_png" scale9Grid="9,9,11,10" x="0" y="0" width="100%" height="100%" source.self="bg11_png"/>
+	<e:Label id="nameText" text="苦顶替" size="26" stroke="3" verticalAlign="bottom" x="140" textColor="0xFFFFFF" strokeColor="0x231507" verticalCenter="0"/>
+	<e:Image id="type" source="icon_type1_png" x="90" verticalCenter="0" scaleX="0.6" scaleY="0.6"/>
+	<e:Label id="rankText" text="100" x="11" width="60" textAlign="center" y="25" stroke="2"/>
+	<e:Label id="scoreText" text="100" width="60" textAlign="center" stroke="2" verticalCenter="0" right="20"/>
+	<e:Rect width="2" x="79" fillColor="0x84551b" top="10" bottom="10"/>
+</e:Skin>

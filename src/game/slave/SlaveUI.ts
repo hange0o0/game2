@@ -60,10 +60,11 @@ class SlaveUI extends MainBase {
     public renew(){
         var SM =  SlaveManager.getInstance()
         var arr = SM.slaveList.concat();
-        var len = SM.getMySlaveNum();
-        if(len != arr.length)//有主人
+        var len = SM.slaveList.length
+        if(SM.master)//有主人
         {
-            arr.splice(1,0,{title:'我的奴隶'})
+            arr.unshift({title:'我的奴隶'})
+            arr.unshift(SM.master)
             arr.unshift({title:'我的主人'})
         }
         else

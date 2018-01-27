@@ -1,22 +1,23 @@
-class RankUI extends game.BaseUI {
+class MailInfoUI extends game.BaseWindow {
 
-    private static _instance: RankUI;
-    public static getInstance(): RankUI {
+    private static _instance: MailInfoUI;
+    public static getInstance(): MailInfoUI {
         if(!this._instance)
-            this._instance = new RankUI();
+            this._instance = new MailInfoUI();
         return this._instance;
     }
 
-    private topUI: TopUI;
-    private bottomUI: BottomUI;
-    private scroller: eui.Scroller;
+    private cancelBtn: eui.Button;
+    private okBtn: eui.Button;
     private list: eui.List;
-    private tab: eui.TabBar;
+    private titleText: eui.Label;
+    private desText: eui.Label;
+
 
 
     public constructor() {
         super();
-        this.skinName = "RankUISkin";
+        this.skinName = "MailInfoUISkin";
     }
 
     public childrenCreated() {

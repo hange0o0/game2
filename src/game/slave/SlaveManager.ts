@@ -7,7 +7,11 @@ class SlaveManager {
     }
     public lastGetSlaveTime = 0
     public protime = 0//保护到期时间
+
+
     public slaveList = [];
+    public master;
+    public selfData;
 
 
     public lastMissTime = 0
@@ -19,23 +23,15 @@ class SlaveManager {
     public getCurrentMax(){
         return 3
     }
-    public getMySlaveNum(){
-        var count = 0;
-        for(var i=0;i<this.slaveList.length;i++)
-        {
-            if(this.slaveList[i].master == UM.gameid)
-                count ++;
-        }
-        return count;
-    }
+
 
     //取最近一个主人的有效开始时间
     public getMasterTime(){
         var mtime = 0;
         if(this.lastGetSlaveTime)//有取过奴隶数据
         {
-             if(this.slaveList[0] && this.slaveList[0].gameid == UM.gameid && this.slaveList[0].master != UM.gameid)
-                 mtime = this.slaveList[0].addtime;
+             if(this.master)
+                 mtime = this.master.addtime;
         }
         var master = UM.openData.masterstep.split(',').pop().split('|');
         if(master.length == 2 && master[0] == 1)
@@ -71,7 +67,7 @@ class SlaveManager {
         for(var i=0;i<this.slaveList.length;i++)
         {
             var oo = this.slaveList[i];
-            if(oo.master == UM.gameid && t - oo.awardtime >= 3600)
+            if(t - oo.awardtime >= 3600)
             {
                 arr.push(oo.gameid)
             }
@@ -91,15 +87,6 @@ class SlaveManager {
         }
         return null;
     }
-
-    //取主人数据
-    public getMaster(){
-        if(this.slaveList[0].gameid == UM.gameid && this.slaveList[0].master != UM.gameid)
-            return this.slaveList[0];
-        return null;
-    }
-
-
 
     public slave_reset_open(fun?) {
         var self = this;
@@ -187,24 +174,15 @@ class SlaveManager {
         Net.send(GameEvent.slave.slave_list, oo, function (data) {
             var msg = data.msg;
             self.lastGetSlaveTime = TM.now();
-            self.slaveList = msg.list || [];
-            for(var i=0;i<self.slaveList.length;i++)
-            {
-                if(self.slaveList[i].gameid == UM.gameid)
-                {
-                    if(!self.slaveList[i].master  || self.slaveList[i].master == self.slaveList[i].gameid)
-                    {
-                        self.protime = self.slaveList[i].protime
-                        self.slaveList.splice(i,1)
-                    }
-                    break;
-                }
-            }
+            self.slaveList = msg.slave || [];
+            self.master = msg.master;
+            self.selfData = msg.self;
+            if(msg.self)
+                self.protime = msg.self.protime
+            if(msg.master)
+                self.master.isMaster = true
+
             self.slaveList.sort(function(a:any,b:any){
-                if(a.master == UM.gameid && b.master != UM.gameid)
-                    return 1;
-                if(a.master != UM.gameid && b.master == UM.gameid)
-                    return -1;
                 if(a.addtime < b.addtime)
                     return -1
                 return 1
@@ -239,7 +217,7 @@ class SlaveManager {
     private resetMissList(){
         if(this.missNoUse.length == 0)
             return false;
-        var myMaster = this.getMaster()?this.getMaster().gameid:null
+        var myMaster = this.master
 
         this.missUse = this.missUse.concat(this.missList)
         for(var i=0;i<this.missNoUse.length;i++)//去除主人和奴隶

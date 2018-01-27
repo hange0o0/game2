@@ -7,7 +7,8 @@ class PKWinUI extends game.BaseWindow {
         return this._instance;
     }
 
-    private okBtn: eui.Label;
+    private list: eui.List;
+
 
     public constructor() {
         super();
@@ -17,7 +18,7 @@ class PKWinUI extends game.BaseWindow {
 
     public childrenCreated() {
         super.childrenCreated();
-        this.addBtnEvent(this.okBtn, this.onOK)
+        this.addBtnEvent(this, this.onOK)
     }
 
     private onOK(){

@@ -71,6 +71,7 @@ class MainUI extends game.BaseUI {
 
 
     public onBottomSelect(index){
+        console.log(index,this.currentIndex)
        if(index != this.currentIndex)
        {
            var t = egret.getTimer();
@@ -171,7 +172,7 @@ class MainUI extends game.BaseUI {
     }
 
     public onVisibleChange(){
-         if(this.currentIndex = 2)
+         if(this.currentIndex == 2)
          {
              if(this.visible)
                  MainFightUI.getInstance().onPKEnd()

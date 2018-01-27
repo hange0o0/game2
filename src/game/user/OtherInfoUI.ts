@@ -1,4 +1,4 @@
-class OtherInfoUI extends game.BaseWindow {
+class OtherInfoUI extends game.BaseUI {
     private static _instance: OtherInfoUI;
     public static getInstance(): OtherInfoUI {
         if(!this._instance)
@@ -11,28 +11,33 @@ class OtherInfoUI extends game.BaseWindow {
         this.skinName = "OtherInfoUISkin";
     }
 
-    private nameText: eui.Label;
-    private type: eui.Image;
-    private coinText: eui.Label;
-    private forceText: eui.Label;
-    private cancelBtn: eui.Button;
-    private okBtn: eui.Button;
     private scroller: eui.Scroller;
+    private type: eui.Image;
+    private nameText: eui.Label;
+    private infoList: eui.List;
+    private cardList: eui.List;
     private list: eui.List;
+    private bottomUI: BottomUI;
+    private okBtn: eui.Button;
+
 
 
     private gameid;
     private master;
     private isMyMaster;
 
+    private dataArray = new eui.ArrayCollection()
+
     public childrenCreated() {
         super.childrenCreated();
+        this.bottomUI.setHide(this.hide,this);
 
-
-        this.scroller.viewport = this.list;
+        //this.scroller.viewport = this.list;
         this.list.itemRenderer = InfoItem
 
-        this.addBtnEvent(this.cancelBtn,this.hide)
+        this.cardList.itemRenderer = PosListHeadItem
+        this.cardList.dataProvider = this.dataArray
+
         this.addBtnEvent(this.okBtn,this.onPK)
     }
 
@@ -97,18 +102,30 @@ class OtherInfoUI extends game.BaseWindow {
         var data = InfoManager.getInstance().otherInfo[this.gameid]
         var slave = InfoManager.getInstance().otherSlave[this.gameid];
         this.nameText.text = '' + data.nick;
-        this.coinText.text = '产出：' + data.hourcoin + '/小时';
-        this.forceText.text = '战力：'  + data.tec_force;
+
+        this.infoList.dataProvider = new eui.ArrayCollection([
+            {title:'召唤战力：',value:data.tec_force},
+            {title:'金币产出：',value:data.hourcoin + '/小时'}
+
+        ])
+        //this.coinText.text = '产出：' + data.hourcoin + '/小时';
+        //this.forceText.text = '战力：'  + data.tec_force;
         this.type.source = 'icon_type' + data.type + '_png'
 
-        this.list.dataProvider = new eui.ArrayCollection(slave)
-        this.master = this.gameid;
-        if(slave[0] && slave[0].gameid == this.gameid && slave[0].master)
-            this.master = slave[0].master;
+        var slaveList = slave.slave.concat();
 
-        for(var i=0;i<slave.length;i++)
+
+        this.master = this.gameid;
+        if(slave.master)
         {
-             if(slave[i].gameid == UM.gameid)
+            slaveList.unshift(slave.master)
+            this.master = slave.master;
+        }
+        this.list.dataProvider = new eui.ArrayCollection(slaveList)
+
+        for(var i=0;i<slaveList.length;i++)
+        {
+             if(slaveList[i].gameid == UM.gameid)
              {
                  this.isMyMaster = true;
                  break;
@@ -117,6 +134,18 @@ class OtherInfoUI extends game.BaseWindow {
         if(this.isMyMaster)
             this.okBtn.label = '反抗';
         else
-            this.okBtn.label = this.master == UM.gameid?'释放奴隶':'收服奴隶'
+            this.okBtn.label = this.master == UM.gameid?'释放\n奴隶':'收服\n奴隶'
+
+        if(data.last_card)
+        {
+            var list = data.last_card.split(',');
+            this.dataArray.source = list;
+        }
+        else
+        {
+            this.dataArray.source = [];
+        }
+        this.dataArray.refresh()
+
     }
 }

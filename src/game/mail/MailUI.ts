@@ -7,6 +7,13 @@ class MailUI extends game.BaseUI {
         return this._instance;
     }
 
+    private topUI: TopUI;
+    private bottomUI: BottomUI;
+    private scroller: eui.Scroller;
+    private list: eui.List;
+    private tab: eui.TabBar;
+
+
     public constructor() {
         super();
         this.skinName = "MailUISkin";

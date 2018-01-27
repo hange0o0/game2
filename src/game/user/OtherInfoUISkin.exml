@@ -1,37 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="OtherInfoUISkin" width="620" height="720" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-		<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
-	<e:Image source="bg15_png" left="10" right="13" top="15" scale9Grid="20,14,11,15" height="160"/>
-
-	<e:Group y="30" horizontalCenter="-25">
-		<e:Image id="type" source="icon_type1_png" x="0" scaleX="0.8" scaleY="0.8" y="0"/>
-		<e:Label id="nameText" text="苦顶替" size="30" stroke="3" verticalAlign="bottom" x="60" textColor="0xFFFFFF" strokeColor="0x231507" y="15"/>
-		<e:layout>
-			<e:HorizontalLayout verticalAlign="middle"/>
-		</e:layout>
-	</e:Group>
-	<e:Group x="90" y="102">
-		<e:Image source="icon_coin_png" x="0" y="0" scaleX="0.8" scaleY="0.8"/>
-		<e:Label id="coinText" text="收益：123.5k/小时" size="22" stroke="3" verticalAlign="bottom" x="45" strokeColor="0x231507" textColor="0xFCDB79" y="7.6"/>
-	</e:Group>
-	<e:Group x="360" y="102">
-		<e:Image source="icon_force_png" x="2.66" y="-12" scaleX="0.7" scaleY="0.7"/>
-		<e:Label id="forceText" text="战力：1234" size="22" stroke="3" verticalAlign="bottom" x="40" strokeColor="0x231507" textColor="0xFCDB79" y="7.6"/>
-	</e:Group>
-	<e:Group horizontalCenter="0" bottom="20">
-		<e:Button id="cancelBtn" label="返回" width="150" x="0" y="0" skinName="Btn2Skin"/>
-		<e:Button id="okBtn" label="收服奴隶" width="150" skinName="Btn1Skin" x="0" y="0"/>
-		<e:layout>
-			<e:HorizontalLayout gap="30"/>
-		</e:layout>
-	</e:Group>
-	<e:Scroller id="scroller" left="20" right="20" top="175" bottom="100" locked="true">
+<e:Skin class="OtherInfoUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<e:Rect width="100%" height="100%" x="0" y="0" fillColor="0x827048"/>
+	<e:Scroller id="scroller" width="640" x="0" top="0" bottom="100" bounces="false">
 		<e:Group>
-			<e:List id="list" width="540" height="500" horizontalCenter="0" x="5" scaleX="1" scaleY="1">
-				<e:layout>
-				<e:VerticalLayout paddingBottom="10" gap="10" paddingTop="10"/>
-				</e:layout>
-			</e:List>
+			<e:Group x="10" y="15" width="640">
+				<e:Image source="bg15_png" height="100%" x="0" y="0" width="100%" scale9Grid="20,14,11,15"/>
+				<e:Group y="30" horizontalCenter="0" minWidth="300">
+					<e:Image source="bg16_png" x="0" y="0" scaleX="1" scaleY="1" width="100%" height="100%" scale9Grid="18,22,13,6"/>
+					<e:Group left="15" right="15" top="8" bottom="8">
+						<e:Image id="type" source="icon_type1_png" x="0" scaleX="0.7" scaleY="0.7" y="0"/>
+						<e:Label id="nameText" text="苦顶替" size="30" stroke="3" verticalAlign="bottom" x="60" textColor="0xFFFFFF" strokeColor="0x231507" y="15"/>
+						<e:layout>
+						<e:HorizontalLayout verticalAlign="middle" horizontalAlign="center"/>
+						</e:layout>
+					</e:Group>
+				</e:Group>
+				<e:Group x="20" top="120" bottom="30">
+					<e:Group x="0" y="0">
+						<e:Image source="bg2_png" scale9Grid="9,9,11,10" width="600" x="0" top="35" bottom="0"/>
+						<e:Image y="0" source="title_bg3_png" scale9Grid="101,9,7,61" width="400" x="100"/>
+						<e:Label text="基本信息" y="10" size="24" stroke="2" x="252"/>
+						<e:List id="infoList" itemRendererSkinName="InfoItem2Skin" horizontalCenter="0" top="90" bottom="20">
+							<e:ArrayCollection>
+								<e:Array>
+									<e:Object title="null" value="null"/>
+									<e:Object title="null" value="null"/>
+									<e:Object title="null" value="null"/>
+								</e:Array>
+							</e:ArrayCollection>
+							<e:layout>
+								<e:TileLayout requestedColumnCount="2" horizontalGap="50" verticalGap="10"/>
+							</e:layout>
+						</e:List>
+					</e:Group>
+					<e:Group x="0" y="0">
+						<e:Image source="bg2_png" scale9Grid="9,9,11,10" width="600" x="0" top="35" bottom="0"/>
+						<e:List id="cardList" width="572" x="14" top="90" bottom="20">
+						<e:layout>
+							<e:TileLayout horizontalGap="8" verticalGap="8"/>
+						</e:layout>
+						</e:List>
+						<e:Image y="0" source="title_bg3_png" scale9Grid="101,9,7,61" width="400" x="100"/>
+						<e:Label text="出战卡组" y="10" size="24" stroke="2" x="252"/>
+					</e:Group>
+					<e:layout>
+						<e:VerticalLayout gap="30"/>
+					</e:layout>
+				</e:Group>
+			</e:Group>
+		<e:List id="list" width="640" x="142" y="175">
+			<e:layout>
+			<e:VerticalLayout gap="10" paddingLeft="10" paddingTop="0"/>
+			</e:layout>
+		</e:List>
+			<e:layout>
+				<e:VerticalLayout paddingBottom="10"/>
+			</e:layout>
 		</e:Group>
 	</e:Scroller>
+	<ns1:BottomUI id="bottomUI" x="0" skinName="BottomUISkin" bottom="0"/>
+	<e:Button id="okBtn" label="收服奴隶" width="90" skinName="Btn1Skin" right="10" bottom="5" height="90"/>
+
 </e:Skin>

@@ -3,12 +3,12 @@
 	<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="400" includeIn="title" horizontalCenter="0" verticalCenter="6.5"/>
 	<e:Label id="titleText" text="你的奴隶" y="17.12" size="24" horizontalCenter="0" includeIn="title" stroke="2" strokeColor="0x140000"/>
 	<e:Button id="getAllBtn" label="一键收取" skinName="Btn1Skin" width="200" includeIn="btn" verticalCenter="0" right="20"/>
-	<e:Image x="0" y="0" width="100%" height="100%" source="bg2_png" scale9Grid="11,8,9,13" includeIn="normal,empty,lock,master"/>
+	<e:Image source="bg2_png" scale9Grid="11,8,9,13" includeIn="normal,empty,lock,master" source.master="bg11_png"  left="0" right="0" top="0" bottom="0" top.master="-10" bottom.master="-10" left.master="-15" right.master="-15"/>
 	<e:Image source="icon_add1_png" includeIn="empty" horizontalCenter="0" verticalCenter="0"/>
 	<e:Image source="icon_lock_png" includeIn="lock" horizontalCenter="0" y="24.09"/>
 	<e:Label id="lockText" text="Label" includeIn="lock" y="67.09" horizontalCenter="0" size="26" stroke="2"/>
 	<e:Label id="nameText" text="苦顶替" size="26" stroke="3" verticalAlign="bottom" includeIn="normal,master" x="120" verticalCenter="-18" textColor="0xffffff" strokeColor="0x231507"/>
-	<e:Label id="coinText" text="苦顶替" size="20" stroke="3" verticalAlign="bottom" includeIn="normal,master" x="155" verticalCenter="22" strokeColor="0x231507" textColor="0xfcdb79"/>
+	<e:Label id="coinText" text="苦顶替" size="20" stroke="3" verticalAlign="bottom" includeIn="normal,master" x="155" verticalCenter="22" strokeColor="0x231507" textColor="0xfcdb79" textColor.master="0xfce77e"/>
 	<e:Image id="type" source="icon_type1_png" x="20" includeIn="normal,master" verticalCenter="0"/>
 	<e:Button id="getBtn" label="收取" skinName="Btn1Skin" width="160" includeIn="normal,master" right="20" bottom="8" label.master="反抗" skinName.master="Btn2Skin"/>
 	<e:Image source="icon_coin_png" x="120" y="62.03" scaleX="0.6" scaleY="0.6" includeIn="normal,master" source.master="icon_force_png" y.master="59"/>

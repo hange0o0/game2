@@ -42,26 +42,32 @@ class InfoManager {
             var info = msg.info;
             info.getTime = TM.now();
             self.otherInfo[info.gameid] = info;
-            var slave = self.otherSlave[info.gameid] = msg.slave || [];
-
-            for(var i=0;i<slave.length;i++)
-            {
-                if(slave[i].gameid == info.gameid)
-                {
-                    if(!slave[i].master || slave[i].master == slave[i].gameid)
-                    {
-                        info.protime = slave[i].protime
-                        slave.splice(i,1)
-                    }
-                    break;
-                }
+            var slave = self.otherSlave[info.gameid] = {
+                slave: msg.slave || [],
+                self: msg.self,
+                master: msg.master
             }
+            if(msg.self)
+                info.protime = msg.self.protime
+            if(msg.master)
+                msg.master.isMaster  = true;
 
-            slave.sort(function(a:any,b:any){
-                if(a.master == info.gameid && b.master != info.gameid)
-                    return 1;
-                if(a.master != info.gameid && b.master == info.gameid)
-                    return -1;
+            //for(var i=0;i<slave.length;i++)
+            //{
+            //    if(slave[i].gameid == info.gameid)
+            //    {
+            //        if(slave[i].master == slave[i].gameid)
+            //        {
+            //            info.protime = slave[i].protime
+            //            slave.splice(i,1)
+            //        }
+            //        else
+            //            slave[i].isMaster = true;
+            //        break;
+            //    }
+            //}
+
+            slave.slave.sort(function(a:any,b:any){
                 if(a.addtime < b.addtime)
                     return -1
                 return 1

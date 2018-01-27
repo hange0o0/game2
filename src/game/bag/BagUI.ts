@@ -9,7 +9,7 @@ class BagUI extends MainBase {
 
     private scroller: eui.Scroller;
     private list: eui.List;
-
+    private tab: eui.TabBar;
 
     private dataArray = new eui.ArrayCollection()
 
@@ -20,19 +20,17 @@ class BagUI extends MainBase {
 
     public childrenCreated() {
         super.childrenCreated();
-
         this.scroller.viewport = this.list;
         this.list.itemRenderer = BagItem
         this.list.dataProvider = this.dataArray
 
-        this.scroller.addEventListener(egret.Event.CHANGE,this.onScroll,this)
+        this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
+        this.tab.selectedIndex = 0;
     }
 
-    private onScroll(){
-        MainUI.getInstance().setTopPos(this.scroller.viewport.scrollV)
+    private onTab(){
+
     }
-
-
 
     public hide() {
         super.hide();

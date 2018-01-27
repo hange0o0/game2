@@ -33,8 +33,8 @@ class MsgingUI extends egret.Sprite {
         this.loadingMC.source = 'ui_loading_png'
         this.addChild(this.loadingMC);
         this.loadingMC.x = 320;
-        this.loadingMC.anchorOffsetX = 24
-        this.loadingMC.anchorOffsetY = 24
+        this.loadingMC.anchorOffsetX = 70/2
+        this.loadingMC.anchorOffsetY = 70/2
 
     }
 

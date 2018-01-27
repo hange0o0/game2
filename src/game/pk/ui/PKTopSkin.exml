@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="PKTopSkin" width="640" height="230" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
 	<e:Image x="0" width="640" height="160" y="10" source="bg15_png" scale9Grid="13,14,22,21"/>
-	<e:Group y="170.00000000000006" left="10" width="51">
+	<e:Group y="175" left="10" width="51">
 		<e:Image source="icon_love_png" y="0" horizontalCenter="0"/>
 		<e:Label id="hpText1" text="15" size="22" stroke="2" verticalCenter="0" horizontalCenter="0"/>
 	</e:Group>
-	<e:Group id="defGroup1" y="230" width="70" left="0" height="80">
+	<e:Group id="defGroup1" y="235" width="70" left="0" height="80">
 		<e:Rect id="defBG1" width="40" height="30" fillColor="0xffff00" bottom="39" x="15"/>
 		<e:Image id="defBGMask1" source="icon_def_bg_png" fillMode="scale" y="10" width="35" height="34" x="18"/>
 		<e:Image source="icon_def1_png" y="0" scaleX="0.65" scaleY="0.65" horizontalCenter="0"/>
 		<e:Label id="defText1" text="+10%" size="22" stroke="5" horizontalCenter="0" verticalCenter="25"/>
 	</e:Group>
-	<e:Group id="defGroup2" y="230" width="70" right="0" height="80">
+	<e:Group id="defGroup2" y="235" width="70" right="0" height="80">
 		<e:Rect id="defBG2" width="40" height="30" fillColor="0xFFFF00" bottom="39" x="15"/>
 		<e:Image id="defBGMask2" source="icon_def_bg_png" y="10" width="35" height="34" x="18"/>
 		<e:Image source="icon_def1_png" y="0" scaleX="0.65" scaleY="0.65" x="12"/>
 		<e:Label id="defText2" text="+10%" size="22" stroke="5" horizontalCenter="0" verticalCenter="25"/>
 	</e:Group>
-	<e:Group y="170.00000000000006" right="10" width="51">
+	<e:Group y="175" right="10" width="51">
 		<e:Image source="icon_love_png" y="0" horizontalCenter="0"/>
 		<e:Label id="hpText2" text="15" size="22" stroke="2" verticalCenter="0" horizontalCenter="0"/>
 	</e:Group>

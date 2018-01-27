@@ -112,7 +112,7 @@ class SlaveItem extends game.BaseItem {
         }
         else
         {
-            if(this.data.gameid == UM.gameid)
+            if(this.data.isMaster)
             {
                 this.currentState = 'master'
                 this.coinText.text = '战力：'  + this.data.tec_force;

@@ -24,7 +24,7 @@ class InfoItem extends game.BaseItem {
         this.nameText.text = '' + this.data.nick;
         this.coinText.text = '产出：' + this.data.hourcoin + '/小时';
         this.forceText.text = '战力：'  + this.data.tec_force;
-        this.type.source = 'icon_type' + this.data.type + '_png'
+        this.type.source = MyTool.getTypeImg(this.data.type)
 
         this.currentState = this.data.isMaster?'msater':'slave'
     }

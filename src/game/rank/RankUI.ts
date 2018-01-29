@@ -14,6 +14,11 @@ class RankUI extends game.BaseUI {
     private tab: eui.TabBar;
 
 
+    private typeObj = {
+        0:{key:'force',name:'战力'},
+        1:{key:'hang',name:'战役'},
+        2:{key:'hourcoin',name:'生产'},
+    }
     public constructor() {
         super();
         this.skinName = "RankUISkin";
@@ -21,6 +26,20 @@ class RankUI extends game.BaseUI {
 
     public childrenCreated() {
         super.childrenCreated();
+
+
+        this.bottomUI.setHide(this.hide,this);
+
+        this.scroller.viewport = this.list;
+        this.list.itemRenderer = RankItem
+
+        this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
+        this.tab.selectedIndex = 0;
+    }
+
+    private onTab(){
+        this.topUI.setTitle(this.typeObj[this.tab.selectedIndex].name);
+        this.getData();
     }
 
     public show(){
@@ -32,11 +51,18 @@ class RankUI extends game.BaseUI {
     }
 
     public onShow(){
-        this.renew();
+        this.topUI.setTitle(this.typeObj[this.tab.selectedIndex].name);
+        this.getData();
         //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
     }
 
-    public renew(){
+    public getData(){
+       RankManager.getInstance().getServerRank(this.typeObj[this.tab.selectedIndex].key,()=>{
+          this.renew();
+       })
+    }
 
+    public renew(){
+        this.list.dataProvider = new eui.ArrayCollection(RankManager.getInstance().getRankList(this.typeObj[this.tab.selectedIndex].key))
     }
 }

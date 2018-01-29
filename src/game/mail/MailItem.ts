@@ -13,15 +13,20 @@ class MailItem extends game.BaseItem {
 
     public childrenCreated() {
         super.childrenCreated();
-        //this.addBtnEvent(this,this.onClick)
+        this.addBtnEvent(this,this.onClick)
     }
 
     private onClick(){
-
+        MailInfoUI.getInstance().show(this.data)
     }
 
     public dataChanged(){
-
+         var content = JSON.parse(this.data.content);
+        this.nameText.text = Base64.decode(content.nick)
+        this.type.source = MyTool.getTypeImg(content.type)
+        this.timeText.text = DateUtil.formatDate('MM-dd hh:mm:ss',DateUtil.timeToChineseDate(this.data.time))
+        this.redMC.visible = false;
+        this.desText.text = MailManager.getInstance().getMailDes(this.data);
     }
 
 }

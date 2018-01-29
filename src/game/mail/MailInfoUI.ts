@@ -14,7 +14,7 @@ class MailInfoUI extends game.BaseWindow {
     private desText: eui.Label;
 
 
-
+    public dataIn
     public constructor() {
         super();
         this.skinName = "MailInfoUISkin";
@@ -22,9 +22,16 @@ class MailInfoUI extends game.BaseWindow {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.addBtnEvent(this.okBtn,this.onClick)
+        this.addBtnEvent(this.cancelBtn,this.hide)
     }
 
-    public show(){
+    public onClick(){
+
+    }
+
+    public show(v?){
+        this.dataIn = v
         super.show()
     }
 
@@ -38,6 +45,10 @@ class MailInfoUI extends game.BaseWindow {
     }
 
     public renew(){
+        var content = JSON.parse(this.dataIn.content);
+        this.titleText.text = '【'+Base64.decode(content.nick) + '】的邮件'
 
+        //this.timeText.text = DateUtil.formatDate('MM-dd hh:mm:ss',DateUtil.timeToChineseDate(this.data.time))
+        this.desText.text = MailManager.getInstance().getMailDes(this.dataIn);
     }
 }

@@ -4,6 +4,6 @@
 	<e:Label id="nameText" text="苦顶替" size="26" stroke="3" verticalAlign="bottom" x="64" textColor="0xFFFFFF" strokeColor="0x231507" y="14"/>
 	<e:Label id="timeText" text="2011/12/1" size="24" stroke="1" verticalAlign="bottom" strokeColor="0x231507" y="14" right="10" textColor="0xdbd3c7"/>
 	<e:Image id="type" source="icon_type1_png" x="14" scaleX="0.6" scaleY="0.6" y="7.72"/>
-	<e:Label id="desText" text="100" textAlign="left" stroke="2" y="57.4" size="24" left="25" right="25" lineSpacing="5" textColor="0xfcd6a4"/>
+	<e:Label id="desText" text="100" textAlign="left" stroke="2" y="57.4" size="24" left="25" right="25" lineSpacing="5" textColor="0xfcd6a4" anchorOffsetY="0" height="63.39" verticalAlign="middle"/>
 	<e:Image id="redMC" source="red_mc_png" right="-12" top="-4"/>
 </e:Skin>

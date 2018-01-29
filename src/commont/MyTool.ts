@@ -2,6 +2,10 @@ class MyTool {
     public constructor() {
     }
 
+    public static getTypeImg(type){
+        return 'icon_type' + type + '_png'
+    }
+
     public static clearList(list){
         list.dataProvider = null;
         //必现调用下面2句，并且 需要在hide之前调用

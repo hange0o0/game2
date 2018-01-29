@@ -100,4 +100,22 @@ class ArrayUtil {
         }
         return -1;
     }
+
+    public static indexOf(arr,value,key?){
+        for(var i=0;i<arr.length;i++)
+        {
+            if(key)
+            {
+                if(arr[i][key] == value)
+                    return i;
+            }
+            else
+            {
+                if(arr[i] == value)
+                    return i;
+            }
+
+        }
+        return -1;
+    }
 }

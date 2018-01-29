@@ -13,6 +13,10 @@ class MailUI extends game.BaseUI {
     private list: eui.List;
     private tab: eui.TabBar;
 
+    private typeObj = {
+        0:{type:[1,2],name:'奴隶'},
+        1:{type:[0],name:'系统'}
+    }
 
     public constructor() {
         super();
@@ -21,9 +25,25 @@ class MailUI extends game.BaseUI {
 
     public childrenCreated() {
         super.childrenCreated();
+
+        this.bottomUI.setHide(this.hide,this);
+
+        this.scroller.viewport = this.list;
+        this.list.itemRenderer = MailItem
+
+        this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
+        this.tab.selectedIndex = 0;
+    }
+
+    private onTab(){
+        this.topUI.setTitle(this.typeObj[this.tab.selectedIndex].name);
+        this.renew();
     }
 
     public show(){
+        MailManager.getInstance().getMail(()=>{
+            this.renew();
+        })
         super.show()
     }
 
@@ -32,11 +52,13 @@ class MailUI extends game.BaseUI {
     }
 
     public onShow(){
+        this.topUI.setTitle(this.typeObj[this.tab.selectedIndex].name);
         this.renew();
         //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
     }
 
     public renew(){
-
+        var list = MailManager.getInstance().getListByTpyes(this.typeObj[this.tab.selectedIndex].type)
+        this.list.dataProvider = new eui.ArrayCollection(list);
     }
 }

@@ -37,6 +37,14 @@ class GameEvent {
     }
 
 
+    public static rank = {
+        get_rank:'rank.get_rank'
+    }
+
+    public static mail = {
+        get_mail:'mail.get_mail'
+    }
+
     public static pos = {
         add_pos:'pos.add_pos',
         change_pos:'pos.change_pos',

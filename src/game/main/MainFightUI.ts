@@ -76,10 +76,10 @@ class MainFightUI extends MainBase {
     }
 
     private onMail(){
-
+         MailUI.getInstance().show();
     }
     private onRank(){
-
+        RankUI.getInstance().show();
     }
     private onShop(){
 

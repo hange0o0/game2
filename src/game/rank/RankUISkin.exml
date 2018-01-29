@@ -8,16 +8,17 @@
 		<e:Group>
 		<e:List id="list" width="200" height="200" x="56" y="68">
 			<e:layout>
-				<e:TileLayout requestedColumnCount="4" horizontalGap="6" verticalGap="10" paddingLeft="11" paddingTop="10" paddingBottom="10"/>
+				<e:VerticalLayout paddingLeft="10"/>
 			</e:layout>
 		</e:List>
 		</e:Group>
 	</e:Scroller>
-	<e:TabBar id="tab" x="8" y="67" itemRendererSkinName="MyTabItemSkin" width="300">
+	<e:TabBar id="tab" x="8" y="67" itemRendererSkinName="MyTabItemSkin" width="450">
 		<e:ArrayCollection>
 		<e:Array>
-			<e:Object label="单位"/>
-			<e:Object label="法术"/>
+			<e:Object label="战力"/>
+			<e:Object label="战役"/>
+			<e:Object label="生产"/>
 		</e:Array>
 		</e:ArrayCollection>
 	</e:TabBar>

@@ -22,5 +22,5 @@
 		<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="560" x="0" y="0"/>
 		<e:Label id="titleText" text="afasd " y="10.18" size="24" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
 	</e:Group>
-	<e:Label id="desText" text="Label" y="30" size="24" left="25" right="25" stroke="2" verticalAlign="middle" height="200"/>
+	<e:Label id="desText" text="Label" y="30" size="24" left="25" right="25" stroke="2" verticalAlign="middle" height="200" lineSpacing="10"/>
 </e:Skin>

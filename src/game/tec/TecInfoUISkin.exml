@@ -1,3 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="TecInfoUISkin" width="400" height="300" xmlns:e="http://ns.egret.com/eui">
+<e:Skin class="TecInfoUISkin" width="460" height="460" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
+	<e:Group x="25" y="25">
+		<e:Group x="0" y="0">
+			<e:Image width="130" height="130" x="0" y="0" source="bg5_png" scale9Grid="9,9,12,11"/>
+			<e:Image id="mc" width="120" height="120" x="5" y="5" source="bg5_png"/>
+		</e:Group>
+		<e:Group right="5" bottom="5">
+			<e:Rect width="100%" height="100%" x="0" y="0"/>
+			<e:Label id="levelText" text="LV.20" size="22" textColor="0xFFFFFF" left="5" right="5" top="2" bottom="2"/>
+		</e:Group>
+	</e:Group>
+	<e:Label id="nameText" text="Label" y="30" size="28" textColor="0x230e01" x="170"/>
+	<e:Group horizontalCenter="0" bottom="20">
+		<e:Button id="cancelBtn" label="返回" width="130" x="0" y="0" skinName="Btn2Skin"/>
+		<e:Button id="okBtn" label="升级" width="130" skinName="Btn1Skin" x="0" y="0"/>
+		<e:layout>
+		<e:HorizontalLayout gap="30"/>
+		</e:layout>
+	</e:Group>
+	<e:Label id="desText" text="LabelLabelLLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" y="68" size="22" textColor="0x562608" lineSpacing="10" left="170" right="30"/>
+	<e:List id="list" y="185" left="30" right="30">
+		<e:layout>
+		<e:VerticalLayout paddingLeft="20"/>
+		</e:layout>
+	</e:List>
+
 </e:Skin>

@@ -21,7 +21,7 @@ class BagUI extends MainBase {
     public childrenCreated() {
         super.childrenCreated();
         this.scroller.viewport = this.list;
-        this.list.itemRenderer = BagItem
+
         this.list.dataProvider = this.dataArray
 
         this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
@@ -29,7 +29,7 @@ class BagUI extends MainBase {
     }
 
     private onTab(){
-
+        this.renew();
     }
 
     public hide() {
@@ -42,7 +42,21 @@ class BagUI extends MainBase {
     }
 
     public renew(){
-        var arr = [1,1];
+        var arr = [1,1,1,1,1,1,1,1,1];
+        if(this.tab.selectedIndex == 1)
+        {
+            this.list.itemRenderer = BagItem
+            this.list.layout['requestedColumnCount'] = 1
+            this.list.layout['paddingLeft'] = 15
+            this.list.layout['verticalGap'] = 10
+        }
+        else
+        {
+            this.list.itemRenderer = BagItem2
+            this.list.layout['requestedColumnCount'] = 3
+            this.list.layout['paddingLeft'] = 50
+            this.list.layout['verticalGap'] = 20
+        }
         this.dataArray.source = arr
         this.dataArray.refresh()
     }

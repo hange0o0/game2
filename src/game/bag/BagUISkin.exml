@@ -5,7 +5,7 @@
 		<e:Group>
 		<e:List id="list" width="200" height="200" x="142" y="175">
 			<e:layout>
-				<e:VerticalLayout paddingLeft="15" paddingTop="5"/>
+				<e:TileLayout paddingLeft="10" requestedColumnCount="1" horizontalGap="40" verticalGap="10" paddingTop="10"/>
 			</e:layout>
 		</e:List>
 		</e:Group>

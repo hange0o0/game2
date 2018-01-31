@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="SlaveChooseItemSkin" width="540" height="90" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="SlaveChooseItemSkin" width="540" height="90" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
 	<e:Image x="0" y="0" width="100%" height="100%" source="bg2_png" scale9Grid="11,8,9,13"/>
-	<e:Label id="nameText" text="苦顶替" size="26" stroke="3" verticalAlign="bottom" x="90" textColor="0xFFFFFF" strokeColor="0x231507" verticalCenter="0"/>
-	<e:Image id="type" source="icon_type1_png" x="20" verticalCenter="0" scaleX="0.8" scaleY="0.8"/>
-	<e:Group x="320" y="10">
-    		<e:Image source="icon_coin_png" x="0" y="0" scaleX="0.6" scaleY="0.6"/>
+	<e:Rect right="2" fillColor="0x000000" left="2" top="45" bottom="0" fillAlpha="0.2"/>
+	<e:Label id="nameText" text="苦顶替" size="26" stroke="3" verticalAlign="bottom" x="100" textColor="0xFFFFFF" strokeColor="0x231507" y="12"/>
+	<e:Group x="280" height="32" bottom="8">
+    		<e:Image source="icon_coin_png" x="0" y="2" scaleX="0.6" scaleY="0.6"/>
     		<e:Label id="coinText" text="收益：123.5k/小时" size="20" stroke="3" verticalAlign="bottom" x="35" strokeColor="0x231507" textColor="0xFCDB79" y="7.6"/>
     	</e:Group>
-    	<e:Group x="320" bottom="8">
+    	<e:Group x="100" bottom="8">
     		<e:Image source="icon_force_png" x="2.66" y="0" scaleX="0.5" scaleY="0.5"/>
     		<e:Label id="forceText" text="战力：1234" size="20" stroke="3" verticalAlign="bottom" x="35" strokeColor="0x231507" textColor="0xFCDB79" y="7.6"/>
     	</e:Group>
-    	<e:Rect width="220" height="1" fillColor="0x491e03" verticalCenter="0" right="5"/>
+	<ns1:HeadMC id="headMC" width="80" height="80" x="5" skinName="HeadMCSkin" y="5"/>
 </e:Skin>

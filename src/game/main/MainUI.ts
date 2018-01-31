@@ -6,7 +6,7 @@ class MainUI extends game.BaseUI {
             this._instance = new MainUI();
         return this._instance;
     }
-
+    private bg: eui.Image;
     private con: eui.Group;
     private topCon: eui.Group;
     private forceText: eui.Label;
@@ -147,6 +147,7 @@ class MainUI extends game.BaseUI {
     }
 
     public onShow(){
+        this.bg.source = Config.localResRoot  + 'main_bg'+UM.type+'.jpg';
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
         this.addPanelOpenEvent(GameEvent.client.force_change,this.renewTop)

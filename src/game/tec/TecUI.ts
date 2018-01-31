@@ -42,7 +42,7 @@ class TecUI extends MainBase {
     }
 
     public renew(){
-        var arr = [1,1];
+        var arr = [1,1,3,4,5,6,8];
         this.dataArray.source = arr
         this.dataArray.refresh()
     }

@@ -8,6 +8,12 @@ class PKConfig {
         3:'幽暗'
     }
 
+    public static TYPECOLOR = {
+        1:0x4093b6,
+        2:0x3eaf6a,
+        3:0xb03d3d
+    }
+
     public static SKILLTYPENAME = {
         1:'伤害',
         2:'治疗',

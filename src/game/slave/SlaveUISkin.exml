@@ -1,13 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="SlaveUISkin" width="640" height="800" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="SlaveUISkin" width="640" height="1200" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
 	<e:Image source="bg15_png" x="0" top="133" bottom="-10" width="640" scale9Grid="19,18,10,8"/>
-	<e:Scroller id="scroller" width="640" top="143" bottom="0" bounces="false" horizontalCenter="0">
+	<e:Scroller id="scroller2" width="640" top="143" bottom="0" bounces="false" horizontalCenter="0" locked="true">
 		<e:Group>
 		<e:List id="list" width="200" height="200" x="142" y="175">
 			<e:layout>
 				<e:VerticalLayout paddingBottom="10" gap="10" paddingTop="10" paddingLeft="30"/>
 			</e:layout>
 		</e:List>
+		</e:Group>
+	</e:Scroller>
+	<e:Scroller id="scroller" width="640" top="143" bottom="0" bounces="false" horizontalCenter="0">
+		<e:Group id="scrollGroup">
+		<e:Group id="masterGroup" x="0" y="0" height="400">
+			<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="400" x="0" y="0"/>
+			<e:Label text="你的主人" y="9.09" size="24" stroke="2" strokeColor="0x140000" x="152"/>
+			<ns1:SlaveMasterItem id="masterItem" y="60" skinName="SlaveMasterItemSkin" x="0" scaleX="1" scaleY="1"/>
+		</e:Group>
+		<e:Group x="0" y="0" height="60">
+			<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="630" x="0" y="0"/>
+			<e:Label text="你的奴隶" y="9.09" size="24" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
+		</e:Group>
+		<e:List id="slaveList" y="96" horizontalCenter="0" itemRendererSkinName="SlaveItemSkin">
+			<e:layout>
+			<e:TileLayout requestedColumnCount="3" horizontalGap="20" verticalGap="20"/>
+			</e:layout>
+			<e:ArrayCollection>
+			<e:Array>
+				<e:Object null=""/>
+				<e:Object null=""/>
+				<e:Object null=""/>
+			</e:Array>
+			</e:ArrayCollection>
+		</e:List>
+		<e:layout>
+			<e:VerticalLayout horizontalAlign="center" paddingTop="20" paddingBottom="20"/>
+		</e:layout>
 		</e:Group>
 	</e:Scroller>
 	<e:TabBar id="tab" x="8" y="80" itemRendererSkinName="MyTabItemSkin" width="300">
@@ -18,4 +46,5 @@
 		</e:Array>
 		</e:ArrayCollection>
 	</e:TabBar>
+	
 </e:Skin>

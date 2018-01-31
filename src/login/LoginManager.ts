@@ -55,7 +55,7 @@ class LoginManager{
         }
     }
 
-    private writeDB(){
+    public writeDB(){
         var oo:any = {user:this.lastUser,password:this.quickPassword}
         SharedObjectManager.getInstance().setValue('user',oo)
     }

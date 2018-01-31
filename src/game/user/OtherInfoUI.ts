@@ -12,13 +12,14 @@ class OtherInfoUI extends game.BaseUI {
     }
 
     private scroller: eui.Scroller;
-    private type: eui.Image;
+    private headMC: HeadMC;
     private nameText: eui.Label;
     private infoList: eui.List;
     private cardList: eui.List;
     private list: eui.List;
     private bottomUI: BottomUI;
     private okBtn: eui.Button;
+
 
 
 
@@ -110,7 +111,7 @@ class OtherInfoUI extends game.BaseUI {
         ])
         //this.coinText.text = '产出：' + data.hourcoin + '/小时';
         //this.forceText.text = '战力：'  + data.tec_force;
-        this.type.source = 'icon_type' + data.type + '_png'
+        this.headMC.setData(data.head,data.type);
 
         var slaveList = slave.slave.concat();
 

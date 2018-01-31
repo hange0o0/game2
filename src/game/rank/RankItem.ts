@@ -5,9 +5,12 @@ class RankItem extends game.BaseItem {
     }
 
     private nameText: eui.Label;
-    private type: eui.Image;
     private rankText: eui.Label;
+    private headMC: HeadMC;
     private scoreText: eui.Label;
+    private indexMC: eui.Image;
+
+
 
 
     public childrenCreated() {
@@ -20,10 +23,22 @@ class RankItem extends game.BaseItem {
     }
 
     public dataChanged(){
-        this.rankText.text = this.data.index
+
         this.nameText.text = this.data.nick
-        this.type.source = MyTool.getTypeImg(this.data.type);
+        this.headMC.setData(this.data.head,this.data.type);
         this.scoreText.text = this.data.score;
+
+        if(this.data.index <=3)
+        {
+            this.indexMC.visible = true
+            this.indexMC.source = this.data.index + 'th_png'
+            this.rankText.text = ''
+        }
+        else
+        {
+            this.indexMC.visible = false
+            this.rankText.text = this.data.index
+        }
     }
 
 }

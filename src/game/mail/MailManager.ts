@@ -71,7 +71,8 @@ class MailManager {
             {
                 this.mailData.list = this.mailData.list.concat(msg.list)
                 ArrayUtil.sortByField(this.mailData.list,['time'],[1])
-                this.mailData.msgtime = this.mailData.list[0].time;
+                if(this.mailData.list[0])
+                    this.mailData.msgtime = this.mailData.list[0].time;
                 this.saveData()
             }
             if(fun)

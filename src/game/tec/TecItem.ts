@@ -5,29 +5,26 @@ class TecItem extends game.BaseItem {
     }
 
     private mc: eui.Image;
+    private levelText: eui.Label;
     private nameText: eui.Label;
-    private desText: eui.Label;
-    private upBtn: eui.Button;
-    private coinText: eui.Label;
-    private propGroup1: eui.Group;
-    private propText1: eui.Label;
-    private propMC1: eui.Image;
-    private propGroup2: eui.Group;
-    private propText2: eui.Label;
-    private propMC2: eui.Image;
+    private redMC: eui.Image;
+
 
 
     public childrenCreated() {
         super.childrenCreated();
-        //this.addBtnEvent(this,this.onClick)
+        this.addBtnEvent(this,this.onClick)
     }
 
     private onClick(){
-
+        TecInfoUI.getInstance().show();
     }
 
     public dataChanged(){
-
+         this.levelText.text = 'LV.12'
+         this.nameText.text = 'XXXXX'
+        this.redMC.visible = false;
+        this.mc.source = Config.localResRoot + 'head/m_head'+1+'.jpg';
     }
 
 }

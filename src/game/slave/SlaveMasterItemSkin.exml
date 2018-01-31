@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="SlaveMasterItemSkin" width="580" height="330" currentState="normal" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Image x="0" width="100%" top="40" height="195" source="bg7_png" scale9Grid="33,31,3,7"/>
-	<e:Group y="163.64" x="79.85">
+<e:Skin class="SlaveMasterItemSkin" width="400" height="320" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
+	<e:Image source="bg11_png" scale9Grid="11,8,9,13" left="-15" right="-15" top="-10" bottom="-10" visible="false"/>
+	<ns1:HeadMC width="180" height="180" skinName="HeadMCSkin" id="headMC" y="0" horizontalCenter="0"/>
+	<e:Label id="nameText" text="苦顶替" size="26" stroke="3" verticalAlign="bottom" textColor="0xFFFFFF" strokeColor="0x231507" y="224" horizontalCenter="0"/>
+	<e:Button id="getBtn" label="反抗" skinName="Btn2Skin" width="180" bottom="0" horizontalCenter="0"/>
+	<e:Group id="cdGroup" width="160" bottom="18" horizontalCenter="0">
+		<e:Image source="icon_clock_png" x="0" y="0"/>
+		<e:Label id="cdText" text="Label" size="24" stroke="2" textAlign="center" y="16" x="45"/>
+		<e:layout>
+		<e:HorizontalLayout verticalAlign="middle" horizontalAlign="center"/>
+		</e:layout>
+	</e:Group>
+	<e:Group y="166" horizontalCenter="0">
 		<e:Image source="border1_png" scale9Grid="28,20,26,2" x="0" y="0" width="190"/>
 		<e:Label id="forceText" text="12345" x="50" size="24" y="9"/>
 		<e:Image source="icon_force_png" x="10" y="-19.5"/>
 	</e:Group>
-	<e:Group y="80" horizontalCenter="0">
-		<e:Image id="type" source="icon_type1_png" x="0" y="23.24" scaleX="0.8" scaleY="0.8"/>
-		<e:Label id="nameText" text="苦顶替" size="30" stroke="3" verticalAlign="bottom" x="100" textColor="0xffffff" strokeColor="0x231507" y="0"/>
-		<e:layout>
-			<e:HorizontalLayout verticalAlign="middle" gap="10"/>
-		</e:layout>
-	</e:Group>
-	<e:Button id="pkBtn" label="反抗" skinName="Btn1Skin" width="160" right="105" y="157.76"/>
-	<e:Image source="title_bg3_png" y="0" horizontalCenter="0" scale9Grid="83,9,37,61" width="400"/>
-	<e:Label text="你的主人" y="11.06" size="24" horizontalCenter="0"/>
-	<e:Group y="260" horizontalCenter="0">
-		<e:Image source="title_bg3_png" y="0" scale9Grid="83,9,37,61" width="400" x="0"/>
-		<e:Label text="你的奴隶" y="11.06" size="24" horizontalCenter="0"/>
-	</e:Group>
-	<e:Group id="clickArea" width="400" height="100" y="58.34" horizontalCenter="0"/>
+	<e:Group id="clickArea" width="250" height="250" y="0" horizontalCenter="0"/>
 </e:Skin>

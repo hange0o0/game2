@@ -34,11 +34,11 @@ class MyTool {
     }
     public static getHeadUrl(id,isRound?){
         //if(id == 0)
-            return 'head_png'
+        //    return 'head_png'
         //if(isRound)
         //    return MonsterVO.getObject(id).thumbRound
         //return MonsterVO.getObject(id).thumb
-        //return Config.localResRoot + 'user_head/user_head'+id+'.png';
+        return Config.localResRoot + 'head/m_head'+id+'.jpg';
     }
     public static removeMC(mc:any){
         if(mc && mc.parent)

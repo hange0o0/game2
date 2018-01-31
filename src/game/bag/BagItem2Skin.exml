@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="BagItem2Skin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="block2_png" x="0" y="0" scale9Grid="9,9,156,155" width="150" height="210"/>
+	<e:Image width="134" height="134" x="8" y="8" source="bg5_png" scale9Grid="9,9,12,11"/>
+	<e:Image id="mc" width="130" height="130" x="10" y="10" source="bg5_png"/>
+	<e:Label id="nameText" text="Label" y="149" size="22" horizontalCenter="0"/>
+	<e:Label id="numText" text="Label" y="175.66" horizontalCenter="0" size="22"/>
+</e:Skin>

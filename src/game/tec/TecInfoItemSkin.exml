@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="TecInfoItemSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" height="36" width="400">
+	<e:Label id="coinText" text="X25.5K" size="20" stroke="3" verticalAlign="bottom" x="40" strokeColor="0x231507" textColor="0xFCDB79" verticalCenter="0"/>
+	<e:Image id="img" source="icon_coin_png" x="0" width="30" height="30" verticalCenter="0"/>
+</e:Skin>

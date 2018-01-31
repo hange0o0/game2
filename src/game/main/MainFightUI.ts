@@ -8,7 +8,7 @@ class MainFightUI extends MainBase {
         return this._instance;
     }
 
-    private bg: eui.Image;
+
     private scroller: eui.Scroller;
     private mailBtn: eui.Group;
     private rankBtn: eui.Group;
@@ -85,8 +85,12 @@ class MainFightUI extends MainBase {
 
     }
     private onSetting(){
-        MainUI.getInstance().hide();
-        LoginUI.getInstance().show();
+        LoginManager.getInstance().quickPassword = null
+        LoginManager.getInstance().writeDB();
+        MyTool.refresh();
+
+        //MainUI.getInstance().hide();
+        //LoginUI.getInstance().show();
     }
 
     private onDef(){
@@ -137,7 +141,7 @@ class MainFightUI extends MainBase {
         egret.Tween.removeTweens(this.bottomGroup)
         this.bottomGroup.bottom = 25
         this.scroller.viewport.scrollV = 0;
-        this.bg.source = Config.localResRoot  + 'main_bg'+UM.type+'.jpg';
+
         this.renewPosBtn();
         this.renewHang();
     }

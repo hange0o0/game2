@@ -5,8 +5,12 @@ class GameEvent {
         coin_change:'coin_change',
         diamond_change:'diamond_change',
         force_change:'force_change',
+        hourcoin_change:'hourcoin_change',
         mail_change:'mail_change',
         pos_change:'pos_change',
+        tec_change:'tec_change',
+        prop_change:'prop_change',
+        hang_change:'hang_change',
 
 
         pk_begin:'pk_begin',

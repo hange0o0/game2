@@ -14,9 +14,21 @@ class TecInfoItem extends game.BaseItem {
     }
 
     public dataChanged(){
-         this.img.source
-        this.coinText.text = '不知名啊啊 ×' + NumberUtil.addNumSeparator(1233534)
-        this.coinText.textColor = true?0xFCDB79:0xFF0000
+        var isRed = false
+        if(this.data.type == 'coin')
+        {
+            this.coinText.text = '金币  ×'+NumberUtil.addNumSeparator(this.data.num)+''
+            isRed =  this.data.num > UM.getCoin();
+            this.img.source = 'icon_coin_png';
+        }
+        else
+        {
+            var vo = PropVO.getObject(this.data.id);
+            this.img.source = vo.getThumb();
+            this.coinText.text = vo.propname + ' ×' + NumberUtil.addNumSeparator(this.data.num)
+            isRed =  this.data.num > PropManager.getInstance().getNum(this.data.id);
+        }
+        this.coinText.textColor = isRed?0xFF0000:0xFCDB79;
     }
 
 }

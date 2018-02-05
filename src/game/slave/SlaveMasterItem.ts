@@ -53,7 +53,7 @@ class SlaveMasterItem extends game.BaseItem {
     }
 
     public dataChanged(){
-        this.forceText.text = '战力：'  + this.data.tec_force;
+        this.forceText.text = ''  + this.data.tec_force;
         this.nameText.text = '' + this.data.nick;
         this.headMC.setData(this.data.head,this.data.type);
         this.onTimer();

@@ -19,7 +19,9 @@ class BagItem2 extends game.BaseItem {
     }
 
     public dataChanged(){
-
+        this.nameText.text = this.data.propname
+        this.numText.text = PropManager.getInstance().getNum(this.data.id)
+        this.mc.source = this.data.getThumb();
     }
 
 }

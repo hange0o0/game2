@@ -12,7 +12,7 @@
 		</e:Group>
 	</e:Group>
 	<e:Label id="nameText" text="Label" y="30" size="28" textColor="0x230e01" x="170"/>
-	<e:Group horizontalCenter="0" bottom="20">
+	<e:Group id="btnGroup" horizontalCenter="0" bottom="20">
 		<e:Button id="cancelBtn" label="返回" width="130" x="0" y="0" skinName="Btn2Skin"/>
 		<e:Button id="okBtn" label="升级" width="130" skinName="Btn1Skin" x="0" y="0"/>
 		<e:layout>

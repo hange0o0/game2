@@ -50,6 +50,8 @@ class SlaveUI extends MainBase {
 
     public onShow(){
         this.tab.selectedIndex = 0;
+        this.scroller2.visible = false
+        this.scroller.visible = false
         SlaveManager.getInstance().slave_list(()=>{
             this.renew();
         })

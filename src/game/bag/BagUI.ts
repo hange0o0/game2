@@ -42,9 +42,10 @@ class BagUI extends MainBase {
     }
 
     public renew(){
-        var arr = [1,1,1,1,1,1,1,1,1];
+        var arr = PropManager.getInstance().getListByType(this.tab.selectedIndex + 1);
         if(this.tab.selectedIndex == 1)
         {
+            arr.push({coin:true});
             this.list.itemRenderer = BagItem
             this.list.layout['requestedColumnCount'] = 1
             this.list.layout['paddingLeft'] = 15

@@ -1,7 +1,7 @@
 class PropVO {
     public static dataKey = 'prop_base';
     public static key = 'id';
-    public static getObject(id: number): PropVO{
+    public static getObject(id: any): PropVO{
         return CM.table[this.dataKey][id];
     }
     //public static maxLevel = 300;//最大关卡数
@@ -10,6 +10,7 @@ class PropVO {
     public id
     public propdes //arr
     public propname
+    public type
     public constructor(data?: any) {
         if(data)
             this.fill(data);
@@ -18,11 +19,12 @@ class PropVO {
 
     public fill(data){
         this.id = data.id;
-        this.propdes = data.propdes;
-        this.propname = data.propname;
+        this.propdes = data.des;
+        this.propname = data.name;
+        this.type = data.type;
     }
 
-    public get thumb(){
+    public getThumb(){
         return 'prop_thumb_' + this.id + '_jpg';
     }
 

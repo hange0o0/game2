@@ -17,14 +17,14 @@ class TecItem extends game.BaseItem {
     }
 
     private onClick(){
-        TecInfoUI.getInstance().show();
+        TecInfoUI.getInstance().show(this.data);
     }
 
     public dataChanged(){
-         this.levelText.text = 'LV.12'
-         this.nameText.text = 'XXXXX'
-        this.redMC.visible = false;
-        this.mc.source = Config.localResRoot + 'head/m_head'+1+'.jpg';
+         this.levelText.text = 'LV.' + TecManager.getInstance().getLevel(this.data.id)
+         this.nameText.text = this.data.name;
+        this.redMC.visible = TecManager.getInstance().testRed(this.data.id);
+        this.mc.source = this.data.getThumb();
     }
 
 }

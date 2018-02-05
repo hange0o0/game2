@@ -65,6 +65,13 @@ class OtherInfoUI extends game.BaseUI {
         }
         else
         {
+            if(PosManager.getInstance().defList.length == 0)
+            {
+                MyWindow.Alert('请先设置防守阵容',()=>{
+                    BasePosUI.getInstance().show('def',0);
+                });
+                return;
+            }
             PKBeforeUI.getInstance().show({
                 fun:function(id){
                     SlaveManager.getInstance().slave_pk_begin(gameid,master,id)

@@ -29,16 +29,28 @@ class SyncManager{
                     UM.openData = value;
                     UM.onOpenDataChange()
                     break;
-                //case 'sync_prop':
-                //    for(ss in value)
-                //    {
-                //        //UM.prop[ss] = value[ss] || {num:0};
-                //    }
-                //    EM.dispatch(GameEvent.client.prop_change);
-                //    break;
+                case 'sync_prop':
+                    for(ss in value)
+                    {
+                        PropManager.getInstance().props[ss] = value[ss] || 0;
+                    }
+                    EM.dispatch(GameEvent.client.prop_change);
+                    break;
                 case 'sync_tec_force':
                     UM.tec_force = value;
                     EM.dispatch(GameEvent.client.force_change);
+                    break;
+                case 'sync_hourcoin':
+                    UM.hourcoin = value;
+                    EM.dispatch(GameEvent.client.hourcoin_change);
+                    break;
+
+                case 'sync_tec':
+                    for(ss in value)
+                    {
+                        TecManager.getInstance().tecData[ss] = value[ss];
+                    }
+                    EM.dispatch(GameEvent.client.tec_change);
                     break;
 
             }

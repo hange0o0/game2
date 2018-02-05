@@ -1,24 +1,26 @@
 <?xml version='1.0' encoding='utf-8'?>
 <e:Skin class="HangUISkin" width="620" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" height="400">
 	<e:Image x="0" width="100%" top="0" bottom="0" source="bg15_png" scale9Grid="20,20,9,10"/>
-	<e:Group id="con" width="604" x="8" height="384" y="8">
+	<e:Group id="con" width="604" x="8" height="384" y="8" locked="true">
 
 	</e:Group>
 
-	<e:Group x="8" bottom="10" locked="true">
+	<e:Group id="clockGroup" x="8" bottom="10" locked="true">
 		<e:Image source="bg17_png" x="0" y="0" height="60" width="180" scale9Grid="12,0,50,41"/>
 		<e:Label id="timeText" text="00:00:00" x="50" size="24" stroke="2" verticalCenter="0"/>
 		<e:Image source="icon_clock_png" x="13" verticalCenter="0"/>
 	</e:Group>
-	<e:Group horizontalCenter="0" y="15">
+	<e:Group horizontalCenter="0" y="15" locked="true">
 		<e:Image source="title_bg1_png" y="0" scale9Grid="29,5,13,30" width="180" x="0"/>
 		<e:Label id="titleText" text="第5关" size="22" stroke="2" verticalCenter="0" horizontalCenter="0"/>
 	</e:Group>
 	<e:Button id="awardBtn" label="获取收益" width="150" skinName="Btn4Skin" right="10" bottom="10"/>
 	<e:Group id="lockGroup" horizontalCenter="0" bottom="15">
 		<e:Image source="bg9_png" scale9Grid="12,12,4,5" x="0" y="0" width="200" height="50"/>
-		<e:Rect id="lockBar" width="100" height="40" x="5" y="5" fillAlpha="0.3"/>
+		<e:Rect id="lockBar" width="190" height="40" x="5" y="5" fillAlpha="0.3"/>
 		<e:Image source="icon_lock_png" x="15" verticalCenter="0"/>
-		<e:Label id="lockText" text="12:15" verticalCenter="0" size="24" horizontalCenter="0" stroke="2"/>
+		<e:Label id="lockText" text="12:15:15" verticalCenter="0" size="24" horizontalCenter="10" stroke="2"/>
 	</e:Group>
+	<e:Button id="openBtn" label="开始挑战" horizontalCenter="0" skinName="Btn5Skin" bottom="100"/>
+	<e:Image id="awardRed" source="red_mc_png" x="594.15" y="330.09"/>
 </e:Skin>

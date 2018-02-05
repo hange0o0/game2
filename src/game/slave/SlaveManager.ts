@@ -19,9 +19,9 @@ class SlaveManager {
     public missNoUse = [];
     public missUse = [];
 
-    public maxNum = 6;
+    public maxNum = 2+6;
     public getCurrentMax(){
-        return 3
+        return 2
     }
 
 

@@ -13,6 +13,7 @@ class TecInfoUI extends game.BaseWindow {
     private okBtn: eui.Button;
     private desText: eui.Label;
     private list: eui.List;
+    private btnGroup: eui.Group;
 
 
 
@@ -33,7 +34,9 @@ class TecInfoUI extends game.BaseWindow {
     }
 
     private onClick(){
-        this.hide()
+        TecManager.getInstance().tec_up(this.dataIn.id,()=>{
+            this.hide()
+        });
     }
 
     public show(v?){
@@ -51,13 +54,17 @@ class TecInfoUI extends game.BaseWindow {
     }
 
     public renew(){
-        this.nameText.text = ''
-        this.desText.text = ''
-        this.levelText.text = 'LV.1'
 
-        this.mc.source = Config.localResRoot + 'head/m_head'+1+'.jpg';
+        this.levelText.text = 'LV.' + TecManager.getInstance().getLevel(this.dataIn.id)
+        this.nameText.text = this.dataIn.name;
+        this.mc.source = this.dataIn.getThumb();
+        this.desText.text = this.dataIn.des
 
-        var arr = [1,2,3];
+        var arr = TecManager.getInstance().getLevelUpCost(this.dataIn.id);
         this.list.dataProvider = new eui.ArrayCollection(arr)
+        if(TecManager.getInstance().testRed(this.dataIn.id))
+            this.btnGroup.addChild(this.okBtn);
+        else
+            MyTool.removeMC(this.okBtn);
     }
 }

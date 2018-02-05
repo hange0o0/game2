@@ -10,12 +10,13 @@
 		</e:List>
 		</e:Group>
 	</e:Scroller>
-	<e:TabBar id="tab" x="8" y="80" itemRendererSkinName="MyTabItemSkin" width="450">
+	<e:TabBar id="tab" x="8" y="80" itemRendererSkinName="MyTabItemSkin" width="600">
 		<e:ArrayCollection>
 		<e:Array>
 			<e:Object label="通用"/>
-			<e:Object label="战斗"/>
+			<e:Object label="战力"/>
 			<e:Object label="资源"/>
+			<e:Object label="科技"/>
 		</e:Array>
 		</e:ArrayCollection>
 	</e:TabBar>

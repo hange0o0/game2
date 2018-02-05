@@ -6,7 +6,7 @@ class BagItem extends game.BaseItem {
 
     private mc: eui.Image;
     private nameText: eui.Label;
-    private numText: eui.Label;
+    private desText: eui.Label;
 
 
     public childrenCreated() {
@@ -19,6 +19,18 @@ class BagItem extends game.BaseItem {
     }
 
     public dataChanged(){
+        if(this.data.coin)
+        {
+            this.nameText.text = '金币  (×'+NumberUtil.addNumSeparator(UM.getCoin())+')'
+            this.desText.text =  '';
+            this.mc.source = 'icon_coin_png';
+        }
+        else
+        {
+            this.nameText.text = this.data.propname + '  (×'+NumberUtil.addNumSeparator(PropManager.getInstance().getNum(this.data.id))+')'
+            this.desText.text =  this.data.propdes;
+            this.mc.source = this.data.getThumb();
+        }
 
     }
 

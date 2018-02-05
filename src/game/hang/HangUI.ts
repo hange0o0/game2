@@ -8,12 +8,17 @@ class HangUI extends game.BaseItem {
     }
 
     private con: eui.Group;
+    private clockGroup: eui.Group;
     private timeText: eui.Label;
     private titleText: eui.Label;
     private awardBtn: eui.Button;
     private lockGroup: eui.Group;
     private lockBar: eui.Rect;
     private lockText: eui.Label;
+    private openBtn: eui.Button;
+    private awardRed: eui.Image;
+
+
 
 
 
@@ -39,6 +44,8 @@ class HangUI extends game.BaseItem {
     }
 
     public onPK(){
+        if(this.lockGroup.visible)
+            return;
         PKBeforeUI.getInstance().show({
             title:'挂机PK',
             fun:function(id){
@@ -49,6 +56,11 @@ class HangUI extends game.BaseItem {
 
     public onAward(e){
          e.stopImmediatePropagation()
+        HangManager.getInstance().award(()=>{
+            this.awardBtn.visible = false
+            this.awardRed.visible = false
+            this.onTimer();
+        })
     }
 
 
@@ -58,25 +70,76 @@ class HangUI extends game.BaseItem {
     //}
 
     public onTimer(){
-        this.timeText.text = DateUtil.getStringBySecond(356)
+        if(this.openBtn.visible)
+            return;
+
+        var HM = HangManager.getInstance();
+
+
+        if(this.lockGroup.visible)
+        {
+            var cd = HM.getPKLeft();
+            if(cd <= 0)
+            {
+                this.lockGroup.visible = false;
+            }
+            else
+            {
+                var max = HM.getPKCD();
+                this.lockBar.width = 190 * (max - cd)/max;
+                this.lockText.text = DateUtil.getStringBySecond(cd);
+            }
+        }
+
+        var awardCD = TM.now() - HM.awardtime;
+        if(!this.awardBtn.visible && HM.getAwardLeft() < 0)
+            this.awardBtn.visible = true;
+        if(!this.awardRed.visible && awardCD >= 3600*8)
+            this.awardRed.visible = true;
+        this.timeText.text = DateUtil.getStringBySecond(Math.min(3600*8,awardCD))
+
     }
 
     public renew(){
-        this.titleText.text = '第 '+(HangManager.getInstance().level+1)+' 关'
-        this.onTimer();
-        this.addEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
+        var HM = HangManager.getInstance();
+        this.titleText.text = '第 '+(HM.level+1)+' 关'
 
-        this.lockGroup.visible = false;
+
+
 
         var pkvideo = PKVideoCon.getInstance()
         this.con.addChild(pkvideo)
         pkvideo.y = -120;
         pkvideo.x = 0
 
-        this.reset();
+        if(HM.level == 0)
+        {
+             this.openBtn.visible = true;
+             this.clockGroup.visible = false;
+             this.lockGroup.visible = false;
+             this.awardBtn.visible = false;
+             this.awardRed.visible = false;
+            this.reset(true);
+            PKVideoCon.getInstance().x = (604- PKVideoCon.getInstance().width)/2;
+        }
+        else
+        {
+            this.openBtn.visible = false;
+            this.clockGroup.visible = true;
+            this.addEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
+            this.reset();
+
+            this.lockGroup.visible = HM.getPKLeft() > 0;
+            this.awardBtn.visible = HM.getAwardLeft() < 0;
+            this.awardRed.visible = false
+        }
+
+        this.onTimer();
+
+
     }
 
-    public reset(){
+    public reset(stopStart?){
         var data = {
             seed:TM.now(),
             players:[
@@ -94,6 +157,9 @@ class HangUI extends game.BaseItem {
         this.cost1 = 20
         this.cost2 = 20
         this.overCount = 0
+
+        if(stopStart)
+            return;
 
         PD.start();
         this.onStep()

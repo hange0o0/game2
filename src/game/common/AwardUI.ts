@@ -41,6 +41,11 @@ class AwardUI extends game.BaseWindow {
         var arr = [];
         if(this.dataIn.coin)
             arr.push({img:'icon_coin_png',name:'金币','num':'×' + NumberUtil.addNumSeparator(this.dataIn.coin)})
+        for(var s in this.dataIn.props)
+        {
+            var prop =  PropVO.getObject(s);
+            arr.push({img:prop.getThumb(),name:prop.propname,'num':'×' + NumberUtil.addNumSeparator(this.dataIn.props[s])})
+        }
         this.list.dataProvider = new eui.ArrayCollection(arr);
     }
 }

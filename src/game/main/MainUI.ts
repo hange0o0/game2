@@ -74,6 +74,13 @@ class MainUI extends game.BaseUI {
         console.log(index,this.currentIndex)
        if(index != this.currentIndex)
        {
+           if(index == 0 && PosManager.getInstance().defList.length == 0)//奴隶
+           {
+               MyWindow.Alert('请先设置防守阵容',()=>{
+                   BasePosUI.getInstance().show('def',0);
+               });
+               return;
+           }
            var t = egret.getTimer();
            this.bottomItems[this.currentIndex].select(false)
            this.bottomItems[index].select(true)

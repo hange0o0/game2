@@ -7,18 +7,38 @@ class HangManager {
     }
 
     public level;
-    public time;
+    public awardtime;
+    public pktime;
     public init(data){
         this.level = data.level
-        this.time = data.time
+        this.awardtime = data.awardtime
+        this.pktime = data.pktime
+    }
+
+    public getPKCD(){
+        return 10 + this.level*3;
+    }
+
+    public getPKLeft(){
+        return this.pktime + this.getPKCD() - TM.now()
+    }
+
+    public getAwardLeft(){
+        return this.awardtime + 60 - TM.now()
     }
 
     public award(fun?) {
-        var self = this;
         var oo:any = {};
         Net.addUser(oo);
-        Net.send(GameEvent.hang.award_hang, oo, function (data) {
+        Net.send(GameEvent.hang.award_hang, oo, (data)=>{
             var msg = data.msg;
+            if(msg.fail)
+            {
+                MyWindow.Alert('还没到领取时间')
+                return;
+            }
+            this.awardtime = msg.awardtime;
+            AwardUI.getInstance().show(msg.award)
             if (fun)
                 fun();
         });
@@ -71,11 +91,10 @@ class HangManager {
     }
 
     public pkResult(fun?) {
-        var self = this;
         var oo:any = {};
         oo.list = PKData.getInstance().myPlayer.posHistory.join(',');
         Net.addUser(oo);
-        Net.send(GameEvent.hang.pk_hang_result, oo, function (data) {
+        Net.send(GameEvent.hang.pk_hang_result, oo, (data)=> {
             var msg = data.msg;
             if(msg.fail == 1)
             {
@@ -88,6 +107,11 @@ class HangManager {
                 PKingUI.getInstance().hide();
                 return;
             }
+            this.level = msg.level;
+            this.pktime = msg.pktime;
+            if(!this.awardtime)
+                this.awardtime = this.pktime;
+            EM.dispatch(GameEvent.client.hang_change);
             if (fun)
                 fun();
         });

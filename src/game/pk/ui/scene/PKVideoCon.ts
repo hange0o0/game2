@@ -59,7 +59,6 @@ class PKVideoCon extends game.BaseContainer {
             this.door1.source = 'door2_png'
             this.door2.source = 'door1_png'
         }
-
     }
 
     public remove(){

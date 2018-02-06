@@ -38,7 +38,7 @@ class TecUI extends MainBase {
 
     public onShow(){
         this.renew();
-        //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
+        this.addPanelOpenEvent(GameEvent.client.tec_change,this.renew)
     }
 
     public renew(){

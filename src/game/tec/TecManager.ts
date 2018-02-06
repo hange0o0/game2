@@ -69,7 +69,7 @@ class TecManager {
         for(var s in data)
         {
             var vo = data[s];
-            if(vo.type == type && vo.level <= lv)
+            if(vo.type == type && (vo.level <= lv || type == 1))
                 arr.push(vo);
         }
         return arr;
@@ -88,13 +88,26 @@ class TecManager {
         var arr = []
        var lv = this.getLevel(id);
         var vo = TecVO.getObject(id);
-        var coin = this.getCoinNeed(lv + vo.coinlv + vo.step*lv) //需要的钱
-        arr.push({type:'coin',num:coin});
         var idAdd = 0
         if(vo.type == 1)//通用类型需要的道具会变化
         {
             idAdd += lv - 1;
+            if(id != 1)
+            {
+                var nextLevel = lv + vo.level;
+                arr.push({type:'lv',num:nextLevel});
+            }
+            else
+            {
+                arr.push({type:'prop',id:101,num:1});
+            }
+
         }
+
+
+        var coin = this.getCoinNeed(lv + vo.coinlv + vo.step*lv) //需要的钱
+        arr.push({type:'coin',num:coin});
+
         if(vo.prop1)
             arr.push({type:'prop',id:vo.prop1 + idAdd,num:this.getOtherNeed(lv,1)});
         if(vo.prop2)
@@ -112,6 +125,11 @@ class TecManager {
             if(oo.type == 'coin')
             {
                 if(UM.getCoin()< oo.num)
+                    return false
+            }
+            else if(oo.type == 'lv')
+            {
+                if(this.getLevel(1)< oo.num)
                     return false
             }
             else if(oo.type == 'prop')
@@ -134,6 +152,7 @@ class TecManager {
             if(msg.fail)
             {
                 MyWindow.Alert("升级失败");
+                this.tecData[id] = msg.level;
                 TecInfoUI.getInstance().renew();
                 return;
             }

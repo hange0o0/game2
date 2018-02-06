@@ -11,10 +11,15 @@ class SlaveUI extends MainBase {
     private list: eui.List;
     private scroller: eui.Scroller;
     private scrollGroup: eui.Group;
+    private proGroup: eui.Group;
+    private cdGroup: eui.Group;
+    private cdText: eui.Label;
+    private proBtn: eui.Button;
     private masterGroup: eui.Group;
     private masterItem: SlaveMasterItem;
     private slaveList: eui.List;
     private tab: eui.TabBar;
+
 
 
     private dataArray = new eui.ArrayCollection()

@@ -18,7 +18,13 @@ class TecInfoItem extends game.BaseItem {
         if(this.data.type == 'coin')
         {
             this.coinText.text = '金币  ×'+NumberUtil.addNumSeparator(this.data.num)+''
-            isRed =  this.data.num > UM.getCoin();
+            isRed =  this.data.num >= UM.getCoin();
+            this.img.source = 'icon_coin_png';
+        }
+        else if(this.data.type == 'lv')
+        {
+            this.coinText.text = '主城等级  LV.'+this.data.num+''
+            isRed =  this.data.num >= TecManager.getInstance().getLevel(1);
             this.img.source = 'icon_coin_png';
         }
         else
@@ -26,7 +32,7 @@ class TecInfoItem extends game.BaseItem {
             var vo = PropVO.getObject(this.data.id);
             this.img.source = vo.getThumb();
             this.coinText.text = vo.propname + ' ×' + NumberUtil.addNumSeparator(this.data.num)
-            isRed =  this.data.num > PropManager.getInstance().getNum(this.data.id);
+            isRed =  this.data.num >= PropManager.getInstance().getNum(this.data.id);
         }
         this.coinText.textColor = isRed?0xFF0000:0xFCDB79;
     }

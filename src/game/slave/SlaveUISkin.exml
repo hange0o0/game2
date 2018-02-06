@@ -12,6 +12,20 @@
 	</e:Scroller>
 	<e:Scroller id="scroller" width="640" top="143" bottom="0" bounces="false" horizontalCenter="0">
 		<e:Group id="scrollGroup">
+			<e:Group id="proGroup" x="230" y="1140">
+				<e:Group id="cdGroup" x="10" y="18">
+					<e:Label text="剩余保护时间:" size="24" stroke="2" textAlign="center" y="26" x="55"/>
+					<e:Image source="icon_clock_png" x="0" y="0"/>
+					<e:Label id="cdText" text="Label" size="24" stroke="2" textAlign="center" y="16" x="45"/>
+					<e:layout>
+					<e:HorizontalLayout verticalAlign="middle" horizontalAlign="center"/>
+					</e:layout>
+				</e:Group>
+				<e:Button id="proBtn" label="增加保护" skinName="Btn2Skin" width="180" x="0" y="0"/>
+				<e:layout>
+					<e:HorizontalLayout verticalAlign="middle" gap="20"/>
+				</e:layout>
+			</e:Group>
 		<e:Group id="masterGroup" x="0" y="0" height="400">
 			<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="400" x="0" y="0"/>
 			<e:Label text="你的主人" y="9.09" size="24" stroke="2" strokeColor="0x140000" x="152"/>
@@ -45,6 +59,9 @@
 			<e:Object label="关注"/>
 		</e:Array>
 		</e:ArrayCollection>
+				<e:layout>
+        			<e:HorizontalLayout horizontalAlign="justify"/>
+        		</e:layout>
 	</e:TabBar>
 	
 </e:Skin>

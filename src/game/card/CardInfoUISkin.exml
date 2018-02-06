@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="CardInfoUISkin" height="180" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="480">
-	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
-	<e:Label id="nameText" text="苦顶替" x="170" y="25" size="22" stroke="3" verticalAlign="bottom"/>
-	<e:Group y="60" height="90" width="280" x="170">
-		<e:Image source="bg1_png" scale9Grid="8,8,14,14" x="0" y="0" width="100%" height="100%"/>
-		<e:Label id="desText" text="Label" size="22" left="10" right="10" top="10" bottom="10" lineSpacing="5"/>
+<e:Skin class="CardInfoUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<ns1:PKCardInfoUI id="item" x="0" y="0" skinName="PKCardInfoSkin" currentState="window"/>
+	<e:Group id="btnGroup" bottom="30" horizontalCenter="0">
+		<e:Button id="backBtn" label="返回" x="0" y="0" skinName="Btn2Skin" width="150"/>
+		<e:Group id="upGroup" x="180" y="0" width="150">
+			<e:Group x="-6.06" y="-45.46">
+				<e:Image source="border1_png" scale9Grid="28,20,26,2" x="0" y="0" width="160"/>
+				<e:Label id="coinText" text="1012345" x="48" size="24" y="9"/>
+				<e:Image id="icon" x="0" y="-3.5" source="icon_coin_png" width="46" height="46"/>
+			</e:Group>
+			<e:Button id="okBtn" label="开启" x="0" y="0" skinName="Btn1Skin" width="150"/>
+		</e:Group>
+		<e:layout>
+			<e:HorizontalLayout gap="30"/>
+		</e:layout>
 	</e:Group>
-	<e:Image width="134" height="134" x="20" y="20" source="bg5_png" scale9Grid="9,9,12,11"/>
-	<e:Image id="mc" width="130" height="130" x="22" y="22" source="bg5_png"/>
 </e:Skin>

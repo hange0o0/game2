@@ -9,8 +9,14 @@ class CardUI extends MainBase {
 
     private scroller: eui.Scroller;
     private list: eui.List;
+    private valueText: eui.Label;
+    private valueText2: eui.Label;
+    private desText: eui.Label;
+    private skillBtn: eui.Button;
     private tab: eui.TabBar;
     private downList2: DownList;
+
+
 
 
     private monsterType = 0

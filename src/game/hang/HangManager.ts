@@ -107,6 +107,7 @@ class HangManager {
                 PKingUI.getInstance().hide();
                 return;
             }
+            PKManager.getInstance().pkResult = msg;
             this.level = msg.level;
             this.pktime = msg.pktime;
             if(!this.awardtime)

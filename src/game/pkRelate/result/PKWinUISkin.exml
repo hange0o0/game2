@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="PKWinUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="500">
-	<e:Group x="0" y="0">
+<e:Skin class="PKWinUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="640" height="960">
+	<e:Rect id="bg" width="100%" height="100%" x="0" y="0" fillAlpha="0.7"/>
+	<e:Group id="group" y="200" horizontalCenter="0" anchorOffsetY="130">
 		<e:Group x="0" y="0">
 			<e:Group x="0" y="0">
 			<e:Image x="0" y="0" source="pk_win_png"/>
@@ -9,17 +10,11 @@
 				<e:HorizontalLayout gap="0"/>
 			</e:layout>
 			</e:Group>
-			<e:Label text="挑战成功" y="119" stroke="3" x="190"/>
+			<e:Label text="挑战成功" y="118" x="190" textColor="0xfce492" strokeColor="0xffffff"/>
 		</e:Group>
 		<e:List id="list" y="266" itemRendererSkinName="AwardItemSkin" x="0">
-			<e:ArrayCollection>
-			<e:Array>
-				<e:Object label="null"/>
-				<e:Object label="null"/>
-			</e:Array>
-			</e:ArrayCollection>
 		</e:List>
-		<e:Label text="点击任意地方返回" x="114" y="482" size="24" stroke="2" textColor="0x9b9999"/>
+		<e:Label id="closeBtn" text="点击任意地方关闭" x="114" y="482" size="24" stroke="2" textColor="0x9b9999"/>
 		<e:layout>
 			<e:VerticalLayout horizontalAlign="center" gap="20"/>
 		</e:layout>

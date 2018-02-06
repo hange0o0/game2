@@ -9,6 +9,8 @@ class CardManager {
     public skillList = {}
     public monsterList = {}
 
+    public exchangeCost = 30;
+
     public init(msg){
         var data = MonsterVO.data;
         for(var s in data)
@@ -69,6 +71,11 @@ class CardManager {
             //if(data[s].level <= UM.level+1)
             //    this.skillList.push(parseInt(s));
         }
+    }
+
+    public getUpCost(id){
+        var vo = MonsterVO.getObject(id)
+        return Math.floor(Math.pow(vo.level,3.05)*100 - 2000);
     }
 
 

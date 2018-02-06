@@ -19,7 +19,7 @@ class PosManager {
     }
 
     public maxPosNum(){
-        return 20 + UM.level;
+        return 19 + TecManager.getInstance().getLevel(4);
     }
 
     public getListByType(type){
@@ -62,6 +62,11 @@ class PosManager {
             if(msg.fail == 3)
             {
                 MyWindow.Alert('每个卡牌最多只能上阵3个')
+                return;
+            }
+            if(msg.fail == 4)
+            {
+                MyWindow.Alert('手牌上限非法')
                 return;
             }
             self.getListByType(type).push({

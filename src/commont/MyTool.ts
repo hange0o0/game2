@@ -2,6 +2,19 @@ class MyTool {
     public constructor() {
     }
 
+    public static getAwardArr(dataIn){
+        var arr = [];
+        if(dataIn.coin)
+            arr.push({img:'icon_coin_png',name:'金币','num':'×' + NumberUtil.addNumSeparator(dataIn.coin)})
+        for(var s in dataIn.props)
+        {
+            var prop =  PropVO.getObject(s);
+            arr.push({img:prop.getThumb(),name:prop.propname,'num':'×' + NumberUtil.addNumSeparator(dataIn.props[s])})
+        }
+        return arr;
+    }
+
+
     public static getTypeImg(type){
         return 'icon_type' + type + '_png'
     }
@@ -162,8 +175,8 @@ class MyTool {
             GameManager.stage.removeEventListener(egret.TouchEvent.TOUCH_CANCEL,onTouchEnd,thisObj);
             GameManager.stage.once(egret.TouchEvent.TOUCH_END,onTouchEnd,thisObj);
             GameManager.stage.once(egret.TouchEvent.TOUCH_CANCEL,onTouchEnd,thisObj);
-            egret.clearTimeout(timer);
-            timer = egret.setTimeout(function(){
+            clearTimeout(timer);
+            timer = setTimeout(function(){
                 if( Math.abs(GameManager.stageX - stageX) > 20 ||  Math.abs(GameManager.stageY - stageY) > 20)
                 {
                     GameManager.stage.removeEventListener(egret.TouchEvent.TOUCH_END,onTouchEnd,thisObj);
@@ -175,13 +188,13 @@ class MyTool {
                 //    mc.touchEnabled = true;
                 //},this)
                 fun.apply(thisObj);
-            },this,400)
+            },400)
 
         }
         function onTouchEnd(e){
             GameManager.stage.removeEventListener(egret.TouchEvent.TOUCH_END,onTouchEnd,thisObj);
             GameManager.stage.removeEventListener(egret.TouchEvent.TOUCH_CANCEL,onTouchEnd,thisObj);
-            egret.clearTimeout(timer);
+            clearTimeout(timer);
         }
 
     }

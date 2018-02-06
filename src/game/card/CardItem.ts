@@ -7,10 +7,11 @@ class CardItem extends game.BaseItem {
     private bg: eui.Image;
     private img: CardImg;
     private nameText: eui.Label;
+    private redMC: eui.Image;
     private spaceGroup: eui.Group;
     private spaceText: eui.Label;
     private costText: eui.Label;
-    private skillType: eui.Image;
+
 
 
 
@@ -30,7 +31,7 @@ class CardItem extends game.BaseItem {
         this.bg.source = vo.getBG();
 
 
-        this.skillType.visible = false
+        //this.skillType.visible = false
         this.spaceGroup.visible = false
         //if(vo.isMonster)
         //{

@@ -10,6 +10,7 @@ class PKManager {
     }
 
     public pkType;
+    public pkResult;
 
     public getPKBG(id){
         return Config.localResRoot + 'map/map'+(id || 1)+'.jpg';
@@ -29,6 +30,7 @@ class PKManager {
     }
 
     public sendResult(fun){
+        this.pkResult = null;
         switch(this.pkType)
         {
             case PKManager.TYPE_HANG:

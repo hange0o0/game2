@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="TecInfoUISkin" width="460" height="460" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+<e:Skin class="TecInfoUISkin" width="460" height="500" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
 	<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
 	<e:Group x="25" y="25">
 		<e:Group x="0" y="0">
@@ -19,7 +19,7 @@
 		<e:HorizontalLayout gap="30"/>
 		</e:layout>
 	</e:Group>
-	<e:Label id="desText" text="LabelLabelLLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" y="68" size="22" textColor="0x562608" lineSpacing="10" left="170" right="30"/>
+	<e:Label id="desText" text="LabelLabelLLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" y="68" size="22" textColor="0x562608" lineSpacing="10" left="180" right="30"/>
 	<e:List id="list" y="185" left="30" right="30">
 		<e:layout>
 		<e:VerticalLayout paddingLeft="20"/>

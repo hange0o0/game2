@@ -1,32 +1,31 @@
-class AwardUI extends game.BaseWindow {
+class CardDrawResultUI extends game.BaseWindow {
 
-    private static _instance: AwardUI;
-    public static getInstance(): AwardUI {
+    private static _instance: CardDrawResultUI;
+    public static getInstance(): CardDrawResultUI {
         if(!this._instance)
-            this._instance = new AwardUI();
+            this._instance = new CardDrawResultUI();
         return this._instance;
     }
 
-    private okBtn: eui.Button;
-    private list: eui.List;
-    private titleText: eui.Label;
+
     private desText: eui.Label;
+    private cancelBtn: eui.Button;
+    private okBtn: eui.Button;
+    private titleText: eui.Label;
+    private item: CardItem;
 
 
 
-    private dataIn;
     public constructor() {
         super();
-        this.skinName = "AwardUISkin";
+        this.skinName = "CardDrawResultUISkin";
     }
 
     public childrenCreated() {
         super.childrenCreated();
-        this.addBtnEvent(this.okBtn,this.hide)
     }
 
-    public show(v?){
-        this.dataIn = v;
+    public show(){
         super.show()
     }
 
@@ -40,7 +39,6 @@ class AwardUI extends game.BaseWindow {
     }
 
     public renew(){
-        var arr = MyTool.getAwardArr(this.dataIn);
-        this.list.dataProvider = new eui.ArrayCollection(arr);
+
     }
 }

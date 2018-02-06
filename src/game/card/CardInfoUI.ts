@@ -7,6 +7,15 @@ class CardInfoUI extends game.BaseWindow {
         return this._instance;
     }
 
+    private item: PKCardInfoUI;
+    private btnGroup: eui.Group;
+    private backBtn: eui.Button;
+    private upGroup: eui.Group;
+    private coinText: eui.Label;
+    private icon: eui.Image;
+    private okBtn: eui.Button;
+
+
     public constructor() {
         super();
         this.skinName = "CardInfoUISkin";

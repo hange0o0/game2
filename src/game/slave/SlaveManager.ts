@@ -21,7 +21,7 @@ class SlaveManager {
 
     public maxNum = 2+6;
     public getCurrentMax(){
-        return 2
+        return 1 + TecManager.getInstance().getLevel(3)
     }
 
 
@@ -323,6 +323,7 @@ class SlaveManager {
                 PKingUI.getInstance().hide();
                 return;
             }
+            PKManager.getInstance().pkResult = msg;
             self.lastGetSlaveTime = 0;
             self.slave_list(()=>{
                 EM.dispatchEventWith(GameEvent.client.slave_change)

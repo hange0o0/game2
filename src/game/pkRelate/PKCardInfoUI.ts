@@ -39,7 +39,7 @@ class PKCardInfoUI extends game.BaseContainer {
 
 
     public show(v){
-        this.dataIn = v;
+
         GameManager.container.addChild(this);
         GameManager.stage.once(egret.TouchEvent.TOUCH_END,this.hide,this,true);
         GameManager.stage.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.onMove,this);
@@ -57,7 +57,7 @@ class PKCardInfoUI extends game.BaseContainer {
             this.top = undefined
             this.bottom = (GameManager.stage.stageHeight - GameManager.stageY) + 50
         }
-        this.renew();
+        this.renew(v);
     }
 
     private onMove(e){
@@ -72,7 +72,8 @@ class PKCardInfoUI extends game.BaseContainer {
     }
 
 
-    public renew(){
+    public renew(v){
+        this.dataIn = v;
         var vo:any = CM.getCardVO(this.dataIn.mid)
         this.img.data = vo.id;
         this.bg.source = vo.getBG();

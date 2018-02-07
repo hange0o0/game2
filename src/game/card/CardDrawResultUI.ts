@@ -12,10 +12,12 @@ class CardDrawResultUI extends game.BaseWindow {
     private cancelBtn: eui.Button;
     private okBtn: eui.Button;
     private titleText: eui.Label;
+    private btnGroup: eui.Group;
     private item: CardItem;
 
 
 
+    private dataIn
     public constructor() {
         super();
         this.skinName = "CardDrawResultUISkin";
@@ -23,9 +25,16 @@ class CardDrawResultUI extends game.BaseWindow {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.addBtnEvent(this.cancelBtn,this.hide)
+        this.addBtnEvent(this.okBtn,this.onClick)
     }
 
-    public show(){
+    private onClick(){
+         CardManager.getInstance().card_draw()
+    }
+
+    public show(v?){
+        this.dataIn = v;
         super.show()
     }
 
@@ -39,6 +48,15 @@ class CardDrawResultUI extends game.BaseWindow {
     }
 
     public renew(){
-
+        this.desText.text = this.dataIn.addprop?'重复卡牌已被自动分解为碎片+1':'';
+        this.item.data = SkillVO.getObject(this.dataIn.id);
+        if(PropManager.getInstance().getNum(102))
+        {
+            this.btnGroup.addChild(this.okBtn)
+        }
+        else
+        {
+            MyTool.removeMC(this.okBtn)
+        }
     }
 }

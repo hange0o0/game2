@@ -44,6 +44,12 @@ class SlaveUI extends MainBase {
 
         this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
         this.tab.selectedIndex = 0;
+
+        this.addBtnEvent(this.proBtn,this.onPro)
+    }
+
+    private onPro(){
+        SlaveAddProUI.getInstance().show();
     }
 
     private onTab(){
@@ -66,12 +72,32 @@ class SlaveUI extends MainBase {
     }
 
     private onTimer(){
-        for(var i=0;i<this.slaveList.numChildren;i++)
+        if(this.scroller.visible)
         {
-            this.slaveList.getChildAt(i)['onTimer']();
+            for(var i=0;i<this.slaveList.numChildren;i++)
+            {
+                this.slaveList.getChildAt(i)['onTimer']();
+            }
+            if(this.masterItem.stage)
+                this.masterItem.onTimer();
+            if(this.cdGroup.stage)
+            {
+                var SM =  SlaveManager.getInstance()
+                var cd = SM.protime - TM.now();
+                if(cd > 0)
+                {
+                    if(cd < 3600*24)
+                        this.cdText.text = DateUtil.getStringBySecond(cd)
+                    else
+                        this.cdText.text = DateUtil.getStringBySeconds(cd,false,2)
+                }
+                else
+                {
+                    this.renewProGroup();
+                }
+            }
         }
-        if(this.masterItem.stage)
-            this.masterItem.onTimer();
+
     }
 
     public renew(){
@@ -79,6 +105,7 @@ class SlaveUI extends MainBase {
             this.renewTab0();
         else
             this.renewTab1();
+        this.onTimer();
     }
     public renewTab1(){
         this.scroller2.visible = true
@@ -94,12 +121,15 @@ class SlaveUI extends MainBase {
         var len = SM.slaveList.length
         if(SM.master)//有主人
         {
+            MyTool.removeMC(this.proGroup)
             this.scrollGroup.addChildAt(this.masterGroup,0)
             this.masterItem.data = SM.master;
         }
         else
         {
+            this.scrollGroup.addChildAt(this.proGroup,0)
             MyTool.removeMC(this.masterGroup)
+            this.renewProGroup();
         }
         var maxLen = SM.getCurrentMax();
         while(len < maxLen)
@@ -116,5 +146,18 @@ class SlaveUI extends MainBase {
 
         this.dataArray.source = arr
         this.dataArray.refresh()
+    }
+
+    private renewProGroup(){
+        var SM =  SlaveManager.getInstance()
+        var cd = SM.protime - TM.now();
+        if(cd > 0)
+        {
+            this.proGroup.addChildAt(this.cdGroup,0)
+        }
+        else
+        {
+             MyTool.removeMC(this.cdGroup);
+        }
     }
 }

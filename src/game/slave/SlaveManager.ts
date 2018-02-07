@@ -161,6 +161,39 @@ class SlaveManager {
                 fun();
         });
     }
+
+    public slave_addprotect(otherid,hour,fun?) {
+        var self = this;
+        var oo:any = {};
+        oo.otherid = otherid;
+        oo.hour = hour;
+        Net.addUser(oo);
+        Net.send(GameEvent.slave.slave_addprotect, oo, (data) => {
+            var msg = data.msg;
+            if(otherid == UM.gameid)
+            {
+                this.protime = msg.protime;
+            }
+            else
+            {
+                for(var i=0;i<this.slaveList.length;i++)
+                {
+                    var oo = this.slaveList[i];
+                    if(oo.gameid == otherid)
+                    {
+                        oo.protime = msg.protime
+                        break;
+                    }
+                }
+            }
+
+            EM.dispatchEventWith(GameEvent.client.slave_change)
+            EM.dispatchEventWith(GameEvent.client.info_change)
+            if (fun)
+                fun();
+        });
+    }
+
     public slave_list(fun?) {
         if(TM.now() - this.lastGetSlaveTime < 3600)
         {

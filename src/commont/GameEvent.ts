@@ -11,6 +11,7 @@ class GameEvent {
         tec_change:'tec_change',
         prop_change:'prop_change',
         hang_change:'hang_change',
+        card_change:'card_change',
 
 
         pk_begin:'pk_begin',
@@ -45,6 +46,12 @@ class GameEvent {
         get_rank:'rank.get_rank'
     }
 
+    public static card = {
+        card_buy:'card.card_buy',
+        card_draw:'card.card_draw',
+        card_open:'card.card_open'
+    }
+
     public static mail = {
         get_mail:'mail.get_mail'
     }
@@ -77,6 +84,7 @@ class GameEvent {
         slave_list:'slave.slave_list',
         slave_miss:'slave.slave_miss',
         slave_reset_open:'slave.slave_reset_open',
+        slave_addprotect:'slave.slave_addprotect',
         slave_pk_begin:'slave.slave_pk_begin',
         slave_pk_result:'slave.slave_pk_result'
     }

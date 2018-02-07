@@ -39,10 +39,21 @@ class CardUI extends MainBase {
         this.downList2.addEventListener(DownList.SELECT,this.onDownListSelect,this);
 
 
+        this.addBtnEvent(this.skillBtn,this.onSkill)
         //this.selectType = 0;
 
         this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
         this.tab.selectedIndex = 0;
+    }
+
+    private onSkill(){
+        if(PropManager.getInstance().getNum(102) == 0)
+        {
+            MyWindow.Alert('令牌不足')
+            return;
+        }
+        CardManager.getInstance().card_draw(()=>{
+        })
     }
 
     private onTab(){
@@ -63,21 +74,21 @@ class CardUI extends MainBase {
         if(this.tab.selectedIndex == 0)
         {
             var arr = [
-                {label:'全部',label2: 'x' + CardManager.getInstance().getMyMonsterList(0).length,data:0,icon: 'monster_all_icon_png'},
-                {label:PKConfig.TYPENAME[1],label2: 'x' + CardManager.getInstance().getMyMonsterList(1).length,data:1,icon: 'icon_type1_png'},
-                {label:PKConfig.TYPENAME[2],label2: 'x' + CardManager.getInstance().getMyMonsterList(2).length,data:2,icon: 'icon_type2_png'},
-                {label:PKConfig.TYPENAME[3],label2: 'x' + CardManager.getInstance().getMyMonsterList(3).length,data:3,icon: 'icon_type3_png'}];
+                {label:'全部',label2: 'x' + CardManager.getInstance().getTotalMonsterList(0).length,data:0,icon: 'monster_all_icon_png'},
+                {label:PKConfig.TYPENAME[1],label2: 'x' + CardManager.getInstance().getTotalMonsterList(1).length,data:1,icon: 'icon_type1_png'},
+                {label:PKConfig.TYPENAME[2],label2: 'x' + CardManager.getInstance().getTotalMonsterList(2).length,data:2,icon: 'icon_type2_png'},
+                {label:PKConfig.TYPENAME[3],label2: 'x' + CardManager.getInstance().getTotalMonsterList(3).length,data:3,icon: 'icon_type3_png'}];
             this.downList2.setData(arr,this.monsterType);
         }
         else
         {
             var arr = [
-                {label:'全部',label2: 'x' + CardManager.getInstance().getMySkillList(0).length,data:0,icon:'skill_all_icon_png'},
-                {label:PKConfig.SKILLTYPENAME[1],label2: 'x' + CardManager.getInstance().getMySkillList(1).length,data:1,icon: 'skill_type1_png'},
-                {label:PKConfig.SKILLTYPENAME[2],label2: 'x' + CardManager.getInstance().getMySkillList(2).length,data:2,icon: 'skill_type2_png'},
-                {label:PKConfig.SKILLTYPENAME[3],label2: 'x' + CardManager.getInstance().getMySkillList(3).length,data:3,icon: 'skill_type3_png'},
-                {label:PKConfig.SKILLTYPENAME[4],label2: 'x' + CardManager.getInstance().getMySkillList(4).length,data:4,icon: 'skill_type4_png'},
-                {label:PKConfig.SKILLTYPENAME[5],label2: 'x' + CardManager.getInstance().getMySkillList(5).length,data:5,icon: 'skill_type5_png'}];
+                {label:'全部',label2: 'x' + CardManager.getInstance().getTotalSkillList(0).length,data:0,icon:'skill_all_icon_png'},
+                {label:PKConfig.SKILLTYPENAME[1],label2: 'x' + CardManager.getInstance().getTotalSkillList(1).length,data:1,icon: 'skill_type1_png'},
+                {label:PKConfig.SKILLTYPENAME[2],label2: 'x' + CardManager.getInstance().getTotalSkillList(2).length,data:2,icon: 'skill_type2_png'},
+                {label:PKConfig.SKILLTYPENAME[3],label2: 'x' + CardManager.getInstance().getTotalSkillList(3).length,data:3,icon: 'skill_type3_png'},
+                {label:PKConfig.SKILLTYPENAME[4],label2: 'x' + CardManager.getInstance().getTotalSkillList(4).length,data:4,icon: 'skill_type4_png'},
+                {label:PKConfig.SKILLTYPENAME[5],label2: 'x' + CardManager.getInstance().getTotalSkillList(5).length,data:5,icon: 'skill_type5_png'}];
             this.downList2.setData(arr,this.skillType);
         }
     }
@@ -89,7 +100,7 @@ class CardUI extends MainBase {
 
     public onShow(){
         this.renew();
-        //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
+        this.addPanelOpenEvent(GameEvent.client.card_change,this.renewList)
     }
 
     public renew(){
@@ -98,15 +109,24 @@ class CardUI extends MainBase {
     }
 
     private renewList(){
+        var CRM = CardManager.getInstance();
         var type = this.downList2.selectValue;
         var arr;
         if(this.tab.selectedIndex == 0)
         {
-            arr = CardManager.getInstance().getMyMonsterList(type)
+            arr =CRM.getTotalMonsterList(type)
+            this.currentState = 'monster'
         }
         else
         {
-            arr = CardManager.getInstance().getMySkillList(type)
+            arr = CRM.getTotalSkillList(type)
+            var max = CRM.getOpenSkillList(type).length
+            var now = CRM.getMySkillList(type).length
+            this.currentState = 'skill'
+            this.valueText.text = '令牌×' + PropManager.getInstance().getNum(102)
+            this.valueText2.text = '碎片×' + PropManager.getInstance().getNum(103)
+            this.desText.text = '收集：' + now + '/' + max;
+            MyTool.changeGray(this.skillBtn,now>=max,true)
         }
         ArrayUtil.sortByField(arr,['cost','level','id'],[0,0,0]);
         this.dataArray.source = arr;

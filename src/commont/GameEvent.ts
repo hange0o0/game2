@@ -53,7 +53,8 @@ class GameEvent {
     }
 
     public static mail = {
-        get_mail:'mail.get_mail'
+        get_mail:'mail.get_mail',
+        get_mail_award:'mail.get_mail_award'
     }
 
     public static pos = {

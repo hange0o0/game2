@@ -15,7 +15,7 @@ class MailUI extends game.BaseUI {
 
     private typeObj = {
         0:{type:[1,2],name:'奴隶'},
-        1:{type:[0],name:'系统'}
+        1:{type:[101],name:'系统'}
     }
 
     public constructor() {
@@ -54,7 +54,11 @@ class MailUI extends game.BaseUI {
     public onShow(){
         this.topUI.setTitle(this.typeObj[this.tab.selectedIndex].name);
         this.renew();
-        //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
+        this.addPanelOpenEvent(GameEvent.client.mail_change,this.justRenewList)
+    }
+
+    private justRenewList(){
+        MyTool.renewList(this.list);
     }
 
     public renew(){

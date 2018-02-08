@@ -10,13 +10,13 @@
 		</e:List>
 		</e:Group>
 	</e:Scroller>
-	<e:Group y="143" left="10" right="10" includeIn="skill">
+	<e:Group y="143" left="10" right="10" visible.monster="false">
 		<e:Image source="bg8_png" scale9Grid="9,9,9,9" y="0" height="50" x="0" width="100%"/>
 	<e:Group x="13" y="10">
 			<e:Image source="icon_coin_png"  width="30" height="30" x="0" y="0"/>
 			<e:Label id="valueText" text="Label"  size="24" x="37" y="5"/>
 		</e:Group>
-		<e:Group x="200" y="10">
+		<e:Group x="180" y="10">
 			<e:Image source="icon_coin_png" x="0" y="0" width="30" height="30"/>
 			<e:Label id="valueText2" text="Label" x="37" y="5" size="24"/>
 		</e:Group>
@@ -34,6 +34,6 @@
         			<e:HorizontalLayout horizontalAlign="justify"/>
         		</e:layout>
 	</e:TabBar>
-	<e:Image y="82" width="200" height="50" right="10" source="bg5_png" scale9Grid="11,10,8,8"/>
-	<ns1:DownList id="downList2" skinName="DownListSkin" y="82" right="10" width="200" height="600"/>
+	<e:Image y="82" width="200" height="50" right="10" source="bg5_png" scale9Grid="11,10,8,8" y.skill="80"/>
+	<ns1:DownList id="downList2" skinName="DownListSkin" y="82" right="10" width="200" height="600" y.skill="80"/>
 </e:Skin>

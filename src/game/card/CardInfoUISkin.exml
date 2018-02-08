@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="CardInfoUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
-	<ns1:PKCardInfoUI id="item" x="0" y="0" skinName="PKCardInfoSkin" currentState="window"/>
+    <ns1:PKCardInfoUI id="item" x="0" y="0" skinName="PKCardInfoSkin" currentState="window"/>
 	<e:Group id="btnGroup" bottom="30" horizontalCenter="0">
 		<e:Button id="backBtn" label="返回" x="0" y="0" skinName="Btn2Skin" width="150"/>
 		<e:Group id="upGroup" x="180" y="0" width="150">

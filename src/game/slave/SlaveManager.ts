@@ -170,6 +170,22 @@ class SlaveManager {
         Net.addUser(oo);
         Net.send(GameEvent.slave.slave_addprotect, oo, (data) => {
             var msg = data.msg;
+            if(msg.fail == 1)
+            {
+                MyWindow.Alert('钻石不足')
+                return;
+            }
+            if(msg.fail == 2)
+            {
+                MyWindow.Alert('无法增加保护时间')
+                self.lastGetSlaveTime = 0;
+                self.slave_list(()=>{
+                    EM.dispatchEventWith(GameEvent.client.slave_change)
+                    EM.dispatchEventWith(GameEvent.client.info_change)
+                });
+                return;
+            }
+
             if(otherid == UM.gameid)
             {
                 this.protime = msg.protime;

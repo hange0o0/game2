@@ -15,14 +15,14 @@ class CardManager {
         var data = MonsterVO.data;
         for(var s in data)
         {
-            if(data[s].level <= 1)
+            if(data[s].level == 0)
                   this.monsterList[s] = true;
         }
 
         var data = SkillVO.data;
         for(var s in data)
         {
-            if(data[s].level <= 1)
+            if(data[s].level == 0)
                 this.skillList[s] = true;
         }
 
@@ -116,7 +116,7 @@ class CardManager {
 
     public getUpCoin(id){
         var vo = MonsterVO.getObject(id)
-        return Math.floor(Math.pow(vo.level,3.05)*100 - 2000);
+        return Math.floor(Math.pow(vo.level,3.05)*100);
     }
 
 
@@ -131,6 +131,7 @@ class CardManager {
                 MyWindow.Alert('兑换失败，错误代码：' + msg.fail)
                 return;
             }
+            MyWindow.ShowTips('兑换成功！')
             this.skillList[msg.id] = true;
             EM.dispatch(GameEvent.client.card_change);
             if(fun)
@@ -149,7 +150,8 @@ class CardManager {
                 MyWindow.Alert('解锁失败，错误代码：' + msg.fail)
                 return;
             }
-            this.skillList[msg.id] = true;
+            MyWindow.ShowTips('解锁成功！')
+            this.monsterList[msg.id] = true;
             EM.dispatch(GameEvent.client.card_change);
             if(fun)
                 fun();

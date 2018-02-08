@@ -23,7 +23,7 @@
 				</e:Group>
 				<e:Button id="proBtn" label="增加保护" skinName="Btn2Skin" width="180" x="0" y="0"/>
 				<e:layout>
-					<e:HorizontalLayout verticalAlign="middle" gap="20"/>
+					<e:VerticalLayout verticalAlign="middle" horizontalAlign="center" gap="10" paddingBottom="10"/>
 				</e:layout>
 			</e:Group>
 		<e:Group id="masterGroup" x="0" y="0" height="400">

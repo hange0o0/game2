@@ -23,11 +23,21 @@ class MailItem extends game.BaseItem {
 
     public dataChanged(){
          var content = JSON.parse(this.data.content);
-        this.nameText.text = Base64.decode(content.nick)
-        this.headMC.setData(this.data.head,this.data.type);
+        if(this.data.from_gameid == 'sys')
+        {
+            this.nameText.text = '系统邮件'
+            //this.headMC.setData(content.head,content.type);
+        }
+        else
+        {
+            this.nameText.text = Base64.decode(content.nick)
+            this.headMC.setData(content.head,content.type);
+        }
+
         this.timeText.text = DateUtil.formatDate('MM-dd hh:mm:ss',DateUtil.timeToChineseDate(this.data.time))
-        this.redMC.visible = false;
         this.desText.text = MailManager.getInstance().getMailDes(this.data);
+
+        this.redMC.visible = this.data.type > 100 && !this.data.stat;
     }
 
 }

@@ -40,6 +40,12 @@ class SlaveItem extends game.BaseItem {
     private onGet(e){
         if(this.currentState == 'normal')
         {
+            var cd = TM.now() - this.data.awardtime;
+            if(cd < 3600)
+            {
+                MyWindow.Alert('暂无可领取供奉！');
+                return;
+            }
             SlaveManager.getInstance().slave_award([this.data.gameid],()=>{
                  this.onTimer();
             })
@@ -69,9 +75,10 @@ class SlaveItem extends game.BaseItem {
          if(this.currentState == 'normal')
          {
              var cd = Math.min(3600*8,TM.now() - this.data.awardtime)
-             MyTool.changeGray(this.getBtn,cd < 60*60,true)
+             //MyTool.changeGray(this.getBtn,cd < 60*60,true)
              this.redMC.visible = cd == 3600*8;
              this.getBtn.label = '收取 '+Math.floor(cd/3600)+'/8'
+             //this.getBtn.touchEnabled = cd >= 3600
 
              cd = this.data.protime - TM.now()
              if(cd > 0)
@@ -133,7 +140,7 @@ class SlaveItem extends game.BaseItem {
             else
             {
                 this.currentState = 'normal'
-                this.coinText.text = '产出：' + this.data.hourcoin + '/小时';
+                this.coinText.text = '' + NumberUtil.formatStrNum(this.data.hourcoin) + '/小时';
             }
 
             //this.nameText.text = '' + this.data.nick;

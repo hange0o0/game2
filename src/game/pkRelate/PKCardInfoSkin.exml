@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="PKCardInfoSkin" width="480" currentState="window" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="normal,window" >
+<e:Skin class="PKCardInfoSkin" width="480" currentState="normal" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="normal,window" >
 	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
 	<e:Group y="20" x="180">
 		<e:Image id="type" source="icon_type1_png" scaleX="0.6" scaleY="0.6" y="5.6000000000000405" x="0"/>
@@ -17,33 +17,13 @@
 		<e:Label id="desText" text="Label" size="22" left="15" right="15" top="10" bottom="10" lineSpacing="5"/>
 	</e:Group>
 	<e:Group id="group" horizontalCenter="0" top="200" bottom="30" bottom.window="150">
-		<e:List id="list1" x="-3.552713678800501e-15" y="0" itemRendererSkinName="PKCardInfoItemSkin">
-			<e:ArrayCollection>
-			<e:Array>
-				<e:Object/>
-				<e:Object ooo="null"/>
-				<e:Object ooo="null"/>
-				<e:Object ooo="null"/>
-			</e:Array>
-			</e:ArrayCollection>
+		<e:List id="list1" x="-3.552713678800501e-15" y="0">
 			<e:layout>
 			<e:TileLayout requestedColumnCount="2" horizontalGap="6"/>
 			</e:layout>
 		</e:List>
 		<e:Image id="line" source="line2_png" x="67" y="82" width="100%"/>
-		<e:List id="list2" x="9.999999999999943" y="10.000000000000028" itemRendererSkinName="PKCardInfoItemSkin">
-			<e:ArrayCollection>
-			<e:Array>
-				<e:Object/>
-				<e:Object ooo="null"/>
-				<e:Object ooo="null"/>
-				<e:Object ooo="null"/>
-                <e:Object ooo="null"/>
-				<e:Object ooo="null"/>
-                <e:Object ooo="null"/>
-				<e:Object ooo="null"/>
-			</e:Array>
-			</e:ArrayCollection>
+		<e:List id="list2" x="9.999999999999943" y="10.000000000000028">
 			<e:layout>
 			<e:TileLayout requestedColumnCount="2" horizontalGap="6"/>
 			</e:layout>

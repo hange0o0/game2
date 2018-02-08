@@ -100,7 +100,13 @@ class CardUI extends MainBase {
 
     public onShow(){
         this.renew();
-        this.addPanelOpenEvent(GameEvent.client.card_change,this.renewList)
+        this.addPanelOpenEvent(GameEvent.client.card_change,this.justRenewList)
+    }
+
+    public justRenewList(){
+        MyTool.renewList(this.list)
+        if(this.tab.selectedIndex == 1)
+            this.renewSkillInfo();
     }
 
     public renew(){
@@ -119,19 +125,40 @@ class CardUI extends MainBase {
         }
         else
         {
-            arr = CRM.getTotalSkillList(type)
-            var max = CRM.getOpenSkillList(type).length
-            var now = CRM.getMySkillList(type).length
             this.currentState = 'skill'
-            this.valueText.text = '令牌×' + PropManager.getInstance().getNum(102)
-            this.valueText2.text = '碎片×' + PropManager.getInstance().getNum(103)
-            this.desText.text = '收集：' + now + '/' + max;
-            MyTool.changeGray(this.skillBtn,now>=max,true)
+            arr = CRM.getTotalSkillList(type)
+            this.renewSkillInfo();
+            //MyTool.changeGray(this.skillBtn,now>=max,true)
+            //this.once(egret.Event.ENTER_FRAME,function(){
+            //    if(this.skillBtn.stage)
+            //        MyTool.changeGray(this.skillBtn,now>=max,true)
+            //},this)
+
         }
         ArrayUtil.sortByField(arr,['cost','level','id'],[0,0,0]);
         this.dataArray.source = arr;
         this.dataArray.refresh()
         //this.list.dataProvider = new eui.ArrayCollection(arr)
 
+    }
+
+    private renewSkillInfo(){
+        var CRM = CardManager.getInstance();
+        var type = this.downList2.selectValue;
+        var max = CRM.getOpenSkillList(type).length
+        var now = CRM.getMySkillList(type).length
+        this.valueText.text = '令牌×' + PropManager.getInstance().getNum(102)
+        this.valueText2.text = '碎片×' + PropManager.getInstance().getNum(103)
+        this.desText.text = '收集：' + now + '/' + max;
+        if(now>=max)
+        {
+            this.skillBtn.skinName = 'Btn2Skin'
+            this.skillBtn.touchEnabled = false
+        }
+        else
+        {
+            this.skillBtn.skinName = 'Btn1Skin'
+            this.skillBtn.touchEnabled = true
+        }
     }
 }

@@ -12,6 +12,7 @@ class MailInfoUI extends game.BaseWindow {
     private list: eui.List;
     private titleText: eui.Label;
     private desText: eui.Label;
+    private btnGroup: eui.Group;
 
 
     public dataIn
@@ -27,7 +28,9 @@ class MailInfoUI extends game.BaseWindow {
     }
 
     public onClick(){
-
+         MailManager.getInstance().get_mail_award(this.dataIn,()=>{
+              this.renew();
+         })
     }
 
     public show(v?){
@@ -46,9 +49,36 @@ class MailInfoUI extends game.BaseWindow {
 
     public renew(){
         var content = JSON.parse(this.dataIn.content);
-        this.titleText.text = '【'+Base64.decode(content.nick) + '】的邮件'
+        if(this.dataIn.from_gameid == 'sys')
+        {
+            this.titleText.text = '系统邮件'
+        }
+        else
+        {
+            this.titleText.text = '【'+Base64.decode(content.nick) + '】的邮件'
+        }
 
         //this.timeText.text = DateUtil.formatDate('MM-dd hh:mm:ss',DateUtil.timeToChineseDate(this.data.time))
         this.desText.text = MailManager.getInstance().getMailDes(this.dataIn);
+
+        var haveAward = this.dataIn.type > 100
+
+        if(haveAward)
+        {
+            var canAward = haveAward && !this.dataIn.stat;
+            if(canAward)
+            {
+                var arr = MyTool.getAwardArr(content.award);
+                this.list.dataProvider = new eui.ArrayCollection(arr)
+                this.btnGroup.addChild(this.okBtn)
+            }
+            else
+                MyTool.removeMC(this.okBtn);
+        }
+        else
+        {
+            this.list.dataProvider = new eui.ArrayCollection([])
+            MyTool.removeMC(this.okBtn);
+        }
     }
 }

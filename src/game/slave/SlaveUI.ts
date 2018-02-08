@@ -49,7 +49,7 @@ class SlaveUI extends MainBase {
     }
 
     private onPro(){
-        SlaveAddProUI.getInstance().show();
+        SlaveAddProUI.getInstance().show(UM.gameid,SlaveManager.getInstance().protime);
     }
 
     private onTab(){

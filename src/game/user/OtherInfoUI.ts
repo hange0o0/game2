@@ -46,8 +46,18 @@ class OtherInfoUI extends game.BaseUI {
         var gameid = this.gameid
         var master = this.master
         var self = this
+        var proCD = InfoManager.getInstance().otherInfo[this.gameid].protime - TM.now()
+        if(proCD < 3600*24)
+            var proStr  = DateUtil.getStringBySecond(proCD)
+         else
+            var proStr = DateUtil.getStringBySeconds(proCD,false,2)
         if(this.isMyMaster)
         {
+            if(proCD > 0)
+            {
+                MyWindow.Alert('当前保护时间剩余' + proStr + '\n无法反抗你的主人')
+                return;
+            }
             PKBeforeUI.getInstance().show({
                 fun:function(id){
                     SlaveManager.getInstance().slave_pk_begin(UM.gameid,gameid,id)
@@ -56,7 +66,12 @@ class OtherInfoUI extends game.BaseUI {
         }
         else if(this.master == UM.gameid)
         {
-            MyWindow.Confirm('确定要释放该奴隶吗？',(b)=>{
+            var str = '确定要释放该奴隶吗？'
+            if(proCD > 0)
+            {
+                str += '\n当前保护时间还剩余' + proStr;
+            }
+            MyWindow.Confirm(str,(b)=>{
                 if(b==1)
                 {
                     SlaveManager.getInstance().slave_delete(gameid)
@@ -65,6 +80,11 @@ class OtherInfoUI extends game.BaseUI {
         }
         else
         {
+            if(proCD > 0)
+            {
+                MyWindow.Alert('当前保护时间剩余' + proStr + '\n无法收服其作为你的奴隶')
+                return;
+            }
             if(PosManager.getInstance().defList.length == 0)
             {
                 MyWindow.Alert('请先设置防守阵容',()=>{
@@ -111,11 +131,21 @@ class OtherInfoUI extends game.BaseUI {
         var slave = InfoManager.getInstance().otherSlave[this.gameid];
         this.nameText.text = '' + data.nick;
 
-        this.infoList.dataProvider = new eui.ArrayCollection([
+        var infoArr = [
             {title:'召唤战力：',value:data.tec_force},
             {title:'金币产出：',value:data.hourcoin + '/小时'}
+        ];
+        if(data.protime > TM.now())
+        {
+            var cd = data.protime - TM.now();
+                if(cd < 3600*24)
+                    var str  = DateUtil.getStringBySecond(cd)
+                else
+                    var str = DateUtil.getStringBySeconds(cd,false,2)
+            infoArr.push({title:'保护时间：',value:str})
+        }
 
-        ])
+        this.infoList.dataProvider = new eui.ArrayCollection(infoArr)
         //this.coinText.text = '产出：' + data.hourcoin + '/小时';
         //this.forceText.text = '战力：'  + data.tec_force;
         this.headMC.setData(data.head,data.type);
@@ -127,13 +157,13 @@ class OtherInfoUI extends game.BaseUI {
         if(slave.master)
         {
             slaveList.unshift(slave.master)
-            this.master = slave.master;
+            this.master = slave.master.gameid;
         }
         this.list.dataProvider = new eui.ArrayCollection(slaveList)
 
         for(var i=0;i<slaveList.length;i++)
         {
-             if(slaveList[i].gameid == UM.gameid)
+             if(slaveList[i].gameid == UM.gameid && this.master != UM.gameid)
              {
                  this.isMyMaster = true;
                  break;

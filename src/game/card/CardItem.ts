@@ -41,6 +41,10 @@ class CardItem extends game.BaseItem {
         {
             this.currentState = 'add';
             this.img.changeGay(true)
+            if(this.data.isMonster)
+                this.redMC.visible = CardManager.getInstance().getUpCoin(this.data.id) <= UM.getCoin()
+            else
+                this.redMC.visible = CardManager.getInstance().skillCost <= PropManager.getInstance().getNum(103)
         }
         else
         {

@@ -9,6 +9,7 @@ class MailManager {
     //消息type的类型说明：
     //1:成为主人
     //2:抢奴隶
+    //101:系统奖励
 
     public mailData;
     public mailEffectTime = 72*3600//有效时间
@@ -39,6 +40,8 @@ class MailManager {
                 return '从现在起我就是你的主人了，好好为我效力吧'
             case 2:
                 return '你的奴隶【'+Base64.decode(content.slave_nick)+'】看着还不错，我就拿去了'
+            case 101:
+                return '系统给你发奖罗~'
         }
     }
 
@@ -75,6 +78,26 @@ class MailManager {
                     this.mailData.msgtime = this.mailData.list[0].time;
                 this.saveData()
             }
+            if(fun)
+                fun();
+        });
+    }
+
+    public get_mail_award(mailObj,fun?){
+        var oo:any = {};
+        oo.id = mailObj.id
+        Net.addUser(oo);
+        Net.send(GameEvent.mail.get_mail_award,oo,(data) =>{
+            var msg = data.msg;
+            if(msg.fail)
+            {
+                MyWindow.Alert('领取失败，错误代码：' + msg.fail)
+                return;
+            }
+            mailObj.stat = 1;
+            AwardUI.getInstance().show(msg.award)
+            this.saveData();
+            EM.dispatch(GameEvent.client.mail_change);
             if(fun)
                 fun();
         });

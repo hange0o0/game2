@@ -18,6 +18,7 @@ class UserManager {
 
     public hourcoin: number;
     public nick: string;
+    public head: string;
     public type: number;
 
     public diamond: number;
@@ -40,6 +41,7 @@ class UserManager {
         this.gameid = data.gameid;
         this.landid = data.land_key;
         this.nick = data.nick;
+        this.head = data.head;
         this.uid = data.uid;
         this.type = data.type;
         this.hourcoin = data.hourcoin;

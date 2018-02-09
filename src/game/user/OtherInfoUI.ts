@@ -158,6 +158,12 @@ class OtherInfoUI extends game.BaseUI {
         {
             slaveList.unshift(slave.master)
             this.master = slave.master.gameid;
+            if(this.master == UM.gameid) //同步自己信息
+            {
+                slave.master.head = UM.head
+                slave.master.tec_force = UM.tec_force
+                slave.master.hourcoin = UM.hourcoin
+            }
         }
         this.list.dataProvider = new eui.ArrayCollection(slaveList)
 
@@ -166,6 +172,11 @@ class OtherInfoUI extends game.BaseUI {
              if(slaveList[i].gameid == UM.gameid && this.master != UM.gameid)
              {
                  this.isMyMaster = true;
+
+                 // //同步自己信息
+                 slaveList[i].head = UM.head
+                 slaveList[i].tec_force = UM.tec_force
+                 slaveList[i].hourcoin = UM.hourcoin
                  break;
              }
         }

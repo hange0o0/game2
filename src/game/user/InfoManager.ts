@@ -52,27 +52,30 @@ class InfoManager {
             if(msg.master)
                 msg.master.isMaster  = true;
 
-            //for(var i=0;i<slave.length;i++)
-            //{
-            //    if(slave[i].gameid == info.gameid)
-            //    {
-            //        if(slave[i].master == slave[i].gameid)
-            //        {
-            //            info.protime = slave[i].protime
-            //            slave.splice(i,1)
-            //        }
-            //        else
-            //            slave[i].isMaster = true;
-            //        break;
-            //    }
-            //}
-
             slave.slave.sort(function(a:any,b:any){
                 if(a.addtime < b.addtime)
                     return -1
                 return 1
             })
 
+            if (fun)
+                fun();
+        });
+    }
+
+
+    public change_head(headid,fun?,stopAlert?) {
+        var oo:any = {};
+        oo.headid = headid;
+        Net.addUser(oo);
+        Net.send(GameEvent.user.change_head, oo, (data)=> {
+            var msg = data.msg;
+            if(msg.fail)
+            {
+                MyWindow.Alert("改名失败，错误码：" + msg.fail);
+                return;
+            }
+            UM.head = headid
             if (fun)
                 fun();
         });

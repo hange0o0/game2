@@ -82,7 +82,8 @@ class GameEvent {
     }
 
     public static user = {
-        user_info:'user.user_info'
+        user_info:'user.user_info',
+        change_head:'user.change_head'
     }
 
     public static slave = {

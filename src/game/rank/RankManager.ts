@@ -10,6 +10,25 @@ class RankManager {
 
     public getRankList(ranktype){
         var list = this.rankData[ranktype].list;
+        for(var i=0;i<list.length;i++)
+        {
+            if(list[i].gameid == UM.gameid)
+            {
+                list[i].head = UM.head;
+                switch (ranktype)
+                {
+                    case 'force':
+                        list[i].source = UM.tec_force;
+                        break;
+                    case 'hang':
+                        list[i].source = HangManager.getInstance().level;
+                        break;
+                    case 'hourcoin':
+                        list[i].source = UM.hourcoin;
+                        break;
+                }
+            }
+        }
         ArrayUtil.sortByField(list,['score'],[1]);
         for(var i=0;i<list.length;i++)
         {

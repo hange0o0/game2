@@ -151,7 +151,7 @@ class TecManager {
             var msg = data.msg;
             if(msg.fail)
             {
-                MyWindow.Alert("升级失败");
+                MyWindow.Alert("升级失败，错误码：" + msg.fail);
                 this.tecData[id] = msg.level;
                 TecInfoUI.getInstance().renew();
                 return;

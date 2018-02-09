@@ -19,20 +19,37 @@ class DebugManager {
     public MML = 100;  //测试出战怪的等级
     public printDetail = false;  //打印胜出怪物
 
-    public createHang(){
-        var arr = []
-        for(var i=1;i<=18;i++)
+    public createHang(time = 1){
+        while(time--)
         {
-            arr.push(i)
-            arr.push(i)
-            arr.push(i)
+            var arr = []
+            for(var i=1;i<=18;i++)
+            {
+                arr.push(i)
+                arr.push(i)
+                arr.push(i)
+            }
+            for(var i=31;i<=48;i++)
+            {
+                if(i == 37)
+                    continue
+                arr.push(i)
+                arr.push(i)
+                arr.push(i)
+            }
+            for(var i=61;i<=77;i++)
+            {
+                arr.push(i)
+                arr.push(i)
+                arr.push(i)
+            }
+            var newList = [];
+            for(var i=0;i<21;i++)
+            {
+                newList.push(ArrayUtil.randomOne(arr,true))
+            }
+            console.log(newList.join(','))
         }
-        var newList = [];
-        for(var i=0;i<21;i++)
-        {
-            newList.push(ArrayUtil.randomOne(arr,true))
-        }
-        console.log(newList.join(','))
     }
 
     public test(list1,list2,view=false,hp=5){

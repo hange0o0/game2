@@ -57,6 +57,12 @@ class GameEvent {
         get_mail_award:'mail.get_mail_award'
     }
 
+    public static pay = {
+        add_diamond:'pay.add_diamond',
+        buy_shop:'pay.buy_shop',
+        get_shop:'pay.get_shop'
+    }
+
     public static pos = {
         add_pos:'pos.add_pos',
         change_pos:'pos.change_pos',

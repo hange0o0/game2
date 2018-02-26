@@ -25,6 +25,12 @@ class DefPosListItem extends game.BaseItem {
     }
     private onOpen(e){
         e.stopImmediatePropagation();
+        if(!this.data.close && PosManager.getInstance().getOpenDef().length <= 1)
+        {
+            MyWindow.ShowTips('最少要有一个使用中的防御阵')
+            this.openBtn.selected = true;
+            return;
+        }
         PosManager.getInstance().changeClose('def',this.data.id,()=>{
             //this.dataChanged();
             this.bg2.source = this.data.close?'bg5_png':'bg2_png'

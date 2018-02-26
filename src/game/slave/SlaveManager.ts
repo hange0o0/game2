@@ -9,6 +9,9 @@ class SlaveManager {
     public protime = 0//保护到期时间
 
 
+    public viewObj;
+    public maxViewNum = 30;
+
     public slaveList = [];
     public master;
     public selfData;
@@ -379,6 +382,66 @@ class SlaveManager {
                 EM.dispatchEventWith(GameEvent.client.info_change)
             });
 
+            if (fun)
+                fun();
+        });
+    }
+
+    //**************************************************************   view   ********************
+    public getViewList(){
+        var arr = ObjectUtil.objToArray(this.viewObj)
+        ArrayUtil.sortByField(arr,['time'],[1])
+        return arr;
+    }
+
+    public viewList(fun?) {
+        if(this.viewObj)
+        {
+            fun && fun();
+            return;
+        }
+        var self = this;
+        var oo:any = {};
+        Net.addUser(oo);
+        Net.send(GameEvent.slave.slave_view_list, oo, (data)=> {
+            var msg = data.msg;
+            this.viewObj = msg.list
+            for(var s in this.viewObj)
+            {
+                this.viewObj[s].gameid = s;
+            }
+            if (fun)
+                fun();
+        });
+    }
+    public addView(otherid,fun?) {
+        var self = this;
+        var oo:any = {};
+        oo.otherid = otherid;
+        Net.addUser(oo);
+        Net.send(GameEvent.slave.slave_add_view, oo, (data)=> {
+            var msg = data.msg;
+            if(msg.fail == 1)
+            {
+                MyWindow.Alert('添加关注失败')
+                return;
+            }
+            this.viewObj[otherid] = msg.info;
+            this.viewObj[otherid].gameid = otherid;
+            EM.dispatchEventWith(GameEvent.client.view_change)
+            if (fun)
+                fun();
+        });
+    }
+    public deleteView(otherid,fun?) {
+        var self = this;
+        var oo:any = {};
+        oo.otherid = otherid;
+        Net.addUser(oo);
+        Net.send(GameEvent.slave.slave_delete_view, oo, (data)=> {
+            var msg = data.msg;
+            delete this.viewObj[otherid];
+            EM.dispatchEventWith(GameEvent.client.view_change)
             if (fun)
                 fun();
         });

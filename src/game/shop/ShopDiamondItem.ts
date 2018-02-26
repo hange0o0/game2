@@ -1,13 +1,12 @@
-class ShopItem extends game.BaseItem {
+class ShopDiamondItem extends game.BaseItem {
     public constructor() {
         super();
-        this.skinName = "ShopItemSkin";
+        this.skinName = "ShopDiamondItemSkin";
     }
 
+    private diamondText: eui.Label;
+    private costText: eui.Label;
 
-    private bg: eui.Image;
-    private img: eui.Image;
-    private nameText: eui.Label;
 
     public childrenCreated() {
         super.childrenCreated();

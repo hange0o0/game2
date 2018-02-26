@@ -19,6 +19,8 @@ class OtherInfoUI extends game.BaseUI {
     private list: eui.List;
     private bottomUI: BottomUI;
     private okBtn: eui.Button;
+    private viewBtn: eui.Button;
+
 
 
 
@@ -40,6 +42,40 @@ class OtherInfoUI extends game.BaseUI {
         this.cardList.dataProvider = this.dataArray
 
         this.addBtnEvent(this.okBtn,this.onPK)
+        this.addBtnEvent(this.viewBtn,this.onView)
+    }
+
+    private onView(){
+        var SM =  SlaveManager.getInstance()
+        if(SM.viewObj[this.gameid])
+        {
+            var str = '确定取消对该玩家的关注吗？'
+            MyWindow.Confirm(str,(b)=>{
+                if(b==1)
+                {
+                    SlaveManager.getInstance().deleteView(this.gameid,()=>{
+                        this.viewBtn.label = '关注';
+                    })
+                }
+            })
+        }
+        else
+        {
+             var len  = ObjectUtil.objLength(SM.viewObj);
+            if(len >= SM.maxViewNum)
+            {
+                MyWindow.Alert('你的关注列表已达上限\n无法关注该玩家')
+                return;
+            }
+            else
+            {
+                SlaveManager.getInstance().addView(this.gameid,()=>{
+
+                    this.viewBtn.label = '取消\n关注';
+                    MyWindow.ShowTips('关注成功！')
+                })
+            }
+        }
     }
 
     private onPK(){
@@ -104,9 +140,12 @@ class OtherInfoUI extends game.BaseUI {
 
     public show(gameid?){
         this.gameid = gameid;
-        InfoManager.getInstance().getInfo(gameid,()=>{
-            super.show()
+        SlaveManager.getInstance().viewList(()=>{
+            InfoManager.getInstance().getInfo(gameid,()=>{
+                super.show()
+            })
         })
+
     }
 
     public hide() {
@@ -132,6 +171,7 @@ class OtherInfoUI extends game.BaseUI {
         this.nameText.text = '' + data.nick;
 
         var infoArr = [
+            {title:'主城等级：',value:'LV.' + (data.level||1)},
             {title:'召唤战力：',value:data.tec_force},
             {title:'金币产出：',value:data.hourcoin + '/小时'}
         ];
@@ -184,6 +224,8 @@ class OtherInfoUI extends game.BaseUI {
             this.okBtn.label = '反抗';
         else
             this.okBtn.label = this.master == UM.gameid?'释放\n奴隶':'收服\n奴隶'
+
+        this.viewBtn.label = SlaveManager.getInstance().viewObj[this.gameid]?'取消\n关注':'关注';
 
         if(data.last_card)
         {

@@ -7,9 +7,13 @@ class ChangeHeadUI extends game.BaseWindow {
         return this._instance;
     }
 
-    private list: eui.List;
+    private btnGroup: eui.Group;
     private cancelBtn: eui.Button;
     private okBtn: eui.Button;
+    private scroller: eui.Scroller;
+    private list: eui.List;
+    private titleText: eui.Label;
+
 
 
     public constructor() {

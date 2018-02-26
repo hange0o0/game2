@@ -15,7 +15,6 @@ class BasePosUI extends game.BaseUI {
     private deleteBtn: eui.Group;
     private renameBtn: eui.Group;
     private testBtn: eui.Group;
-    private saveBtn: eui.Group;
     private downBtn: eui.Image;
     private upBtn: eui.Image;
     private titleText: eui.Label;
@@ -23,13 +22,12 @@ class BasePosUI extends game.BaseUI {
 
 
     public type = 'atk'
-    public callDelete;
     private index = 0  //第X个阵
     public useCard = {}
     public maxCard = 0;
 
     private posName = ''
-    private posData
+    private posData //进入时的数据
 
 
     private dragTarget = new BasePosItem()
@@ -37,8 +35,6 @@ class BasePosUI extends game.BaseUI {
     private listData:eui.ArrayCollection
     private selectData;
     private selectIndex;
-    //private callDelete = false;
-    //private everDelete = false;
 
     public constructor() {
         super();
@@ -62,7 +58,6 @@ class BasePosUI extends game.BaseUI {
 
         this.addBtnEvent(this.deleteBtn,this.onDelete)
         this.addBtnEvent(this.renameBtn,this.onRename)
-        this.addBtnEvent(this.saveBtn,this.onSave)
         this.addBtnEvent(this.testBtn,this.onTest)
         this.addBtnEvent(this.upBtn,this.onUp)
         this.addBtnEvent(this.downBtn,this.onDown)
@@ -93,30 +88,22 @@ class BasePosUI extends game.BaseUI {
     }
 
     public onClose(){
-        if(this.callDelete && !this.posData && this.listData.length <= 1)
+        var PM = PosManager.getInstance();
+        if(this.listData.length <= 1)
         {
-            PosManager.getInstance().deletePos(this.type,this.callDelete.id,()=>{
-                this.hide()
-            })
-            return;
+            if(this.type == 'def' && this.posData && !this.posData.close && PM.getOpenDef().length <= 1)
+            {
+                MyWindow.Alert('必须上阵最少一张卡牌');
+                return;
+            }
         }
+
         var b = !this.posData && this.listData.length > 1
         if(!b)
             b = this.posData && (Base64.decode(this.posData.name) != this.posName || this.posData.list != this.changeToServerList())
-        if(b)
+        if(b) //有变化
         {
-            MyWindow.Confirm('还没保存，确定退出吗？',(b)=>{
-                if(b==2)
-                {
-                    this.hide();
-                }
-                else if(b==1)
-                {
-                    if(this.onSave())
-                        this.hide();
-                }
-            },['直接退出','保存并退出']).closeBtn.visible = true
-            return;
+            this.onSave()
         }
 
         this.hide();
@@ -127,10 +114,12 @@ class BasePosUI extends game.BaseUI {
         MyWindow.Confirm('确定要删除该阵法吗？',(b)=>{
             if(b==1)
             {
-                this.callDelete = this.posData;
-                var name = this.posName;
-                this.renew(true);
-                this.posName = name;
+                var arr = [{setting:true}];
+                MyTool.removeMC(this.deleteBtn)
+                this.listData.source = arr;
+                this.listData.refresh()
+                this.renewTitle();
+                this.renewBtn();
             }
         })
     }
@@ -153,30 +142,25 @@ class BasePosUI extends game.BaseUI {
     }
 
     private onSave(){
-        if(this.listData.length == 0)
+        if(this.listData.length <= 1 && this.posData)
         {
-            MyWindow.Alert('必须上阵最少一张卡牌')
-            return false
+            PosManager.getInstance().deletePos(this.type,this.posData.id,()=>{
+            })
+            return false;
         }
         var serverList = this.changeToServerList();
-        if(this.callDelete)
-        {
-            this.posData = this.callDelete;
-        }
         if(this.posData)
         {
             PosManager.getInstance().changePos(this.type,this.posData.id,
                 this.posName,serverList,()=>{
-                    MyWindow.ShowTips('保存成功！')
-                    this.callDelete = null
+                    //MyWindow.ShowTips('保存成功！')
                 })
         }
         else
         {
             PosManager.getInstance().addPos(this.type,
                 this.posName,serverList,()=>{
-                    MyWindow.ShowTips('保存成功！')
-                    this.callDelete = null
+                    //MyWindow.ShowTips('保存成功！')
                     this.posData = PosManager.getInstance().getListByType(this.type)[this.index]
                 })
         }
@@ -251,7 +235,6 @@ class BasePosUI extends game.BaseUI {
     public show(type?,index?){
         this.type = type;
         this.index = index;
-        this.callDelete = null;
         super.show()
     }
 
@@ -260,7 +243,6 @@ class BasePosUI extends game.BaseUI {
     }
 
     public onShow(){
-        this.callDelete = false
         this.maxCard = PosManager.getInstance().maxPosNum();
         this.titleText.text = this.type == 'atk'?'【进攻阵容】':'【防御阵容】'
         this.renew();

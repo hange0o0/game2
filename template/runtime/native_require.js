@@ -11,11 +11,11 @@ var game_file_list = [
 	"libs/modules/socket/socket.js",
 	"polyfill/promise.js",
 	"bin-debug/commont/BaseUI.js",
-	"bin-debug/game/main/MainBase.js",
 	"bin-debug/game/pk/data/PKStateListener.js",
 	"bin-debug/game/pk/monsterData/MBase.js",
 	"bin-debug/game/pk/skillData/SBase.js",
 	"bin-debug/game/pos/basePos/BasePosItem.js",
+	"bin-debug/game/main/MainBase.js",
 	"bin-debug/game/pk/skillData/3/S129.js",
 	"bin-debug/commont/skin/BasePanel.js",
 	"bin-debug/commont/skin/BookBG.js",
@@ -176,7 +176,7 @@ var game_file_list = [
 	"bin-debug/game/pk/skillData/3/S126.js",
 	"bin-debug/game/pk/skillData/3/S127.js",
 	"bin-debug/game/pk/skillData/3/S128.js",
-	"bin-debug/commont/MyTool.js",
+	"bin-debug/util/StringUtil.js",
 	"bin-debug/game/pk/skillData/3/S130.js",
 	"bin-debug/game/pk/skillData/4/S131.js",
 	"bin-debug/game/pk/skillData/4/S132.js",
@@ -290,6 +290,7 @@ var game_file_list = [
 	"bin-debug/game/slave/SlaveManager.js",
 	"bin-debug/game/slave/SlaveMasterItem.js",
 	"bin-debug/game/slave/SlaveUI.js",
+	"bin-debug/game/slave/ViewItem.js",
 	"bin-debug/game/tec/TecInfoItem.js",
 	"bin-debug/game/tec/TecInfoUI.js",
 	"bin-debug/game/tec/TecItem.js",
@@ -341,7 +342,7 @@ var game_file_list = [
 	"bin-debug/util/ObjectUtil.js",
 	"bin-debug/util/PopUpManager.js",
 	"bin-debug/util/ShapeObject.js",
-	"bin-debug/util/StringUtil.js",
+	"bin-debug/commont/MyTool.js",
 	//----auto game_file_list end----
 ];
 

@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="SlaveUISkin" width="640" height="1200" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
 	<e:Image source="bg15_png" x="0" top="133" bottom="-10" width="640" scale9Grid="19,18,10,8"/>
-	<e:Scroller id="scroller2" width="640" top="143" bottom="0" bounces="false" horizontalCenter="0" locked="true">
-		<e:Group>
-		<e:List id="list" width="200" height="200" x="142" y="175">
-			<e:layout>
-				<e:VerticalLayout paddingBottom="10" gap="10" paddingTop="10" paddingLeft="30"/>
-			</e:layout>
-		</e:List>
-		</e:Group>
-	</e:Scroller>
 	<e:Scroller id="scroller" width="640" top="143" bottom="0" bounces="false" horizontalCenter="0">
 		<e:Group id="scrollGroup">
 			<e:Group id="proGroup" x="230" y="1140">
@@ -63,5 +54,18 @@
         			<e:HorizontalLayout horizontalAlign="justify"/>
         		</e:layout>
 	</e:TabBar>
+	<e:Group id="group2" x="0" top="143" bottom="0" locked="true">
+		<e:Scroller id="scroller2" width="640" bounces="false" x="0" top="50" bottom="0">
+			<e:Group>
+			<e:List id="list" width="200" height="200" x="142" y="175">
+				<e:layout>
+				<e:VerticalLayout paddingBottom="10" gap="10" paddingTop="10" paddingLeft="20"/>
+				</e:layout>
+			</e:List>
+			</e:Group>
+		</e:Scroller>
+		<e:Rect height="50" y="0" fillAlpha="0.3" left="10" right="10"/>
+		<e:Label id="viewNumText" text="Label" y="11" size="22" right="20"/>
+	</e:Group>
 	
 </e:Skin>

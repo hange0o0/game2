@@ -18,6 +18,7 @@ class GameEvent {
         pk_end:'pk_end',
         info_change:'info_change',
         slave_change:'slave_change',
+        view_change:'view_change',
 
 
 
@@ -87,6 +88,10 @@ class GameEvent {
     }
 
     public static slave = {
+        slave_add_view:'slave.slave_add_view',
+        slave_delete_view:'slave.slave_delete_view',
+        slave_view_list:'slave.slave_view_list',
+
         slave_award:'slave.slave_award',
         slave_delete:'slave.slave_delete',
         slave_list:'slave.slave_list',

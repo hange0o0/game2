@@ -14,10 +14,9 @@ class PosManager {
     public init(data){
           this.defList = data.def_list.list
           this.atkList = data.atk_list.list
-
-
     }
 
+    //最大出战数量
     public maxPosNum(){
         return 19 + TecManager.getInstance().getLevel(4);
     }
@@ -37,6 +36,18 @@ class PosManager {
                 return list[i]
         }
         return null;
+    }
+
+    //取开放的防御阵
+    public getOpenDef(){
+        var list = this.getListByType('def');
+        var arr = []
+        for(var i=0;i<list.length;i++)
+        {
+            if(!list[i].close)
+                arr.push(list[i]);
+        }
+        return arr;
     }
 
 

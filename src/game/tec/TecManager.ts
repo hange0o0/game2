@@ -78,9 +78,11 @@ class TecManager {
     //取对应等级
     //通用的默认都是1级
     public getLevel(id){
+        if(this.tecData[id])
+            return this.tecData[id];
         if(TecVO.getObject(id).type == 1)
-            return this.tecData[id] || 1;
-        return this.tecData[id] || 0;
+            return 1;
+        return 0;
     }
 
     //取升级对应花费

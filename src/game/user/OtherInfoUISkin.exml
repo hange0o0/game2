@@ -60,5 +60,6 @@
 	</e:Scroller>
 	<ns1:BottomUI id="bottomUI" x="0" skinName="BottomUISkin" bottom="0"/>
 	<e:Button id="okBtn" label="收服奴隶" width="90" skinName="Btn1Skin" right="10" bottom="5" height="90"/>
+	<e:Button id="viewBtn" label="收服奴隶" width="90" skinName="Btn1Skin" right="110" bottom="5" height="90"/>
 
 </e:Skin>

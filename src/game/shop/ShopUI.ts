@@ -7,6 +7,15 @@ class ShopUI extends game.BaseUI {
         return this._instance;
     }
 
+    private topUI: TopUI;
+    private scroller: eui.Scroller;
+    private cdGroup: eui.Group;
+    private cdText: eui.Label;
+    private list: eui.List;
+    private diamondList: eui.List;
+    private bottomUI: BottomUI;
+
+
     public constructor() {
         super();
         this.skinName = "ShopUISkin";

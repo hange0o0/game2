@@ -12,6 +12,7 @@ class SlaveChooseUI extends game.BaseWindow {
     private okBtn: eui.Button;
 
 
+    private lastCD = 0
     public constructor() {
         super();
         this.skinName = "SlaveChooseUISkin";
@@ -25,11 +26,23 @@ class SlaveChooseUI extends game.BaseWindow {
     }
 
     private onClick(){
-
+        if(this.lastCD)
+            return;
+        SlaveManager.getInstance().slave_miss(()=>{
+            this.lastCD = TM.now();
+            this.renew();
+        })
     }
 
     public show(){
+        if(this.lastCD)
+        {
+            super.show();
+            return;
+        }
+
         SlaveManager.getInstance().slave_miss(()=>{
+            this.lastCD = TM.now();
             super.show();
         })
     }
@@ -40,12 +53,30 @@ class SlaveChooseUI extends game.BaseWindow {
 
     public onShow(){
         this.renew();
-        //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
+        this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
+    }
+
+    private onTimer(){
+        if(!this.lastCD)
+            return;
+         var cd = this.lastCD + 60 - TM.now()
+        if(cd > 0)
+        {
+            this.okBtn.skinName = 'Btn3Skin'
+            this.okBtn.label = cd + 's'
+        }
+        else
+        {
+            this.lastCD = 0;
+            this.okBtn.skinName = 'Btn1Skin'
+            this.okBtn.label = '重新搜索'
+        }
     }
 
     public renew(){
         var SM =  SlaveManager.getInstance()
         var arr = SM.missList;
         this.list.dataProvider = new eui.ArrayCollection(arr)
+        this.onTimer();
     }
 }

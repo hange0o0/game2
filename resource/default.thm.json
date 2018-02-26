@@ -99,6 +99,7 @@
     "src/game/slave/SlaveItemSkin.exml",
     "src/game/slave/SlaveMasterItemSkin.exml",
     "src/game/slave/SlaveUISkin.exml",
+    "src/game/slave/ViewItemSkin.exml",
     "src/game/tec/TecInfoItemSkin.exml",
     "src/game/tec/TecInfoUISkin.exml",
     "src/game/tec/TecItemSkin.exml",

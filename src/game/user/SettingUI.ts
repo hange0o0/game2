@@ -7,6 +7,19 @@ class SettingUI extends game.BaseWindow {
         return this._instance;
     }
 
+    private headMC: HeadMC;
+    private nameText: eui.Label;
+    private idText: eui.Label;
+    private btnGroup: eui.Group;
+    private cancelBtn: eui.Button;
+    private okBtn: eui.Button;
+    private effectCB: eui.CheckBox;
+    private musicCB: eui.CheckBox;
+    private versionText: eui.Label;
+    private logBtn: eui.Label;
+    private qqText: eui.Label;
+
+
     public constructor() {
         super();
         this.skinName = "SettingUISkin";

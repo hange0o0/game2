@@ -14,6 +14,18 @@ class InfoManager {
 
     }
 
+    public getHeadList(){
+        var arr = [];
+        var data = MonsterVO.data;
+        for(var s in data)
+        {
+            var vo =  data[s];
+            if(vo.level <= UM.level)
+                arr.push(vo);
+        }
+        return arr;
+    }
+
     public getInfo(otherid,fun?,stopAlert?) {
         if(this.otherInfo[otherid] && TM.now() - this.otherInfo[otherid].getTime <  60)
         {

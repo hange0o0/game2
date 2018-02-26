@@ -7,8 +7,6 @@ class SlaveUI extends MainBase {
         return this._instance;
     }
 
-    private scroller2: eui.Scroller;
-    private list: eui.List;
     private scroller: eui.Scroller;
     private scrollGroup: eui.Group;
     private proGroup: eui.Group;
@@ -19,6 +17,12 @@ class SlaveUI extends MainBase {
     private masterItem: SlaveMasterItem;
     private slaveList: eui.List;
     private tab: eui.TabBar;
+    private group2: eui.Group;
+    private scroller2: eui.Scroller;
+    private list: eui.List;
+    private viewNumText: eui.Label;
+
+
 
 
 
@@ -32,6 +36,7 @@ class SlaveUI extends MainBase {
     public childrenCreated() {
         super.childrenCreated();
         this.scroller2.viewport = this.list;
+        this.list.itemRenderer = ViewItem;
 
 
         this.slaveList.itemRenderer = SlaveItem
@@ -61,13 +66,15 @@ class SlaveUI extends MainBase {
 
     public onShow(){
         this.tab.selectedIndex = 0;
-        this.scroller2.visible = false
+        this.group2.visible = false
         this.scroller.visible = false
+        this.viewNumText.text = ''
         SlaveManager.getInstance().slave_list(()=>{
             this.renew();
         })
 
         this.addPanelOpenEvent(GameEvent.client.slave_change,this.renew)
+        this.addPanelOpenEvent(GameEvent.client.view_change,this.renew)
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
     }
 
@@ -102,18 +109,31 @@ class SlaveUI extends MainBase {
 
     public renew(){
         if(this.tab.selectedIndex == 0)
-            this.renewTab0();
+        {
+            SlaveManager.getInstance().slave_list(()=>{
+                this.renewTab0();
+            })
+        }
         else
-            this.renewTab1();
-        this.onTimer();
+        {
+            SlaveManager.getInstance().viewList(()=>{
+                this.renewTab1();
+            })
+        }
+
     }
     public renewTab1(){
-        this.scroller2.visible = true
+        var SM =  SlaveManager.getInstance()
+        this.group2.visible = true
         this.scroller.visible = false
+        var arr = SM.getViewList();
+        this.list.dataProvider = new eui.ArrayCollection(arr)
+        this.viewNumText.text = arr.length + '/' + SM.maxViewNum
+        this.onTimer();
     }
 
     public renewTab0(){
-        this.scroller2.visible = false
+        this.group2.visible = false
         this.scroller.visible = true
         this.scroller.viewport.scrollV = 0;
         var SM =  SlaveManager.getInstance()
@@ -146,6 +166,7 @@ class SlaveUI extends MainBase {
 
         this.dataArray.source = arr
         this.dataArray.refresh()
+        this.onTimer();
     }
 
     private renewProGroup(){

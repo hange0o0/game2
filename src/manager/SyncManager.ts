@@ -50,6 +50,7 @@ class SyncManager{
                     {
                         TecManager.getInstance().tecData[ss] = value[ss];
                     }
+                    UM.level = TecManager.getInstance().getLevel(1);
                     EM.dispatch(GameEvent.client.tec_change);
                     break;
 

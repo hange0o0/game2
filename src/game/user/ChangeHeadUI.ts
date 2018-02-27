@@ -29,13 +29,19 @@ class ChangeHeadUI extends game.BaseWindow {
     }
 
     private onClick(){
-
+        var newHead = this.list.selectedItem
+        if(newHead != UM.head)
+        {
+            this.hide();
+            return;
+        }
+        InfoManager.getInstance().change_head(newHead,()=>{
+            this.hide();
+        })
     }
 
     public show(){
-        SlaveManager.getInstance().slave_miss(()=>{
-            super.show();
-        })
+        super.show();
     }
 
     public hide() {
@@ -48,8 +54,8 @@ class ChangeHeadUI extends game.BaseWindow {
     }
 
     public renew(){
-        var SM =  SlaveManager.getInstance()
-        var arr = SM.missList;
+        var arr = InfoManager.getInstance().getHeadList();
         this.list.dataProvider = new eui.ArrayCollection(arr)
+        this.list.selectedIndex = arr.indexOf(UM.head);
     }
 }

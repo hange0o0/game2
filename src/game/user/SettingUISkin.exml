@@ -1,31 +1,32 @@
 <?xml version='1.0' encoding='utf-8'?>
 <e:Skin class="SettingUISkin" width="560" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" height="680">
 	<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
-	<ns1:HeadMC x="133.34" skinName="HeadMCSkin" id="headMC" y="125"/>
-	<e:Label id="nameText" text="更换头像需花费：" y="135" x="250" size="28"/>
-	<e:Label id="idText" text="更换头像需花费：" y="175" x="250" size="28"/>
+	<ns1:HeadMC x="120" skinName="HeadMCSkin" id="headMC" y="125"/>
+	<e:Label id="nameText" text="更换头像需花费：" y="135" x="240" size="28"/>
+	<e:Label id="idText" text="更换头像需花费：" y="175" x="240" size="28"/>
 	<e:Image source="bg3_png" scale9Grid="16,15,7,7" left="30" right="30" top="250" bottom="120"/>
 
 	<e:Group  id="btnGroup" horizontalCenter="0" bottom="30" locked="true">
 		<e:Button id="cancelBtn" label="关闭" width="150" x="0" y="0" skinName="Btn2Skin"/>
-		<e:Button id="okBtn" label="退出登录" width="150" skinName="Btn1Skin" x="0" y="0"/>
+		<e:Button id="loginBtn" label="退出登录" width="150" skinName="Btn1Skin" x="0" y="0"/>
 		<e:layout>
 			<e:HorizontalLayout gap="50"/>
 		</e:layout>
 	</e:Group>
-	<e:Group horizontalCenter="0" y="20" locked="true">
+	<e:Group horizontalCenter="0" y="30" locked="true">
 		<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="440" x="0" y="0"/>
 		<e:Label text="设置" y="10.18" size="24" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
 	</e:Group>
 	<e:Group y="280" horizontalCenter="0">
 		<e:CheckBox id="effectCB" label="音效" x="10" y="10" skinName="MyCheckBoxSkin" width="200"/>
 		<e:CheckBox id="musicCB" label="背景音乐" x="0" y="0" skinName="MyCheckBoxSkin" width="200"/>
+		<e:CheckBox id="modeCB" label="兼容模式" x="0" y="0" skinName="MyCheckBoxSkin" width="200"/>
 		<e:layout>
 			<e:TileLayout requestedColumnCount="2" horizontalGap="30" verticalGap="10"/>
 		</e:layout>
 	</e:Group>
-	<e:Image source="line2_png" y="344.99" fillMode="repeat" left="40" right="40"/>
-	<e:Group x="63" y="378">
+	<e:Image source="line2_png" y="380" fillMode="repeat" left="40" right="40"/>
+	<e:Group x="63" y="410">
 		<e:Group y="136" x="0">
 			<e:Label y="2" textColor="0xEFE5AD" size="24" text="游戏版本：" x="0"/>
 			<e:Label id="versionText" y="0" textColor="0xEDCB24" text="V1.1" size="24" x="98"/>

@@ -16,6 +16,8 @@ class ShopUI extends game.BaseUI {
     private bottomUI: BottomUI;
 
 
+    private getNextData = false
+    private toBottom = false
     public constructor() {
         super();
         this.skinName = "ShopUISkin";
@@ -23,10 +25,20 @@ class ShopUI extends game.BaseUI {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.topUI.setTitle('商城')
+        this.bottomUI.setHide(this.hide,this);
+        this.list.itemRenderer = ShopItem
+        this.diamondList.itemRenderer = ShopDiamondItem
+
+        this.diamondList.dataProvider = new eui.ArrayCollection(PayManager.getInstance().diamondList)
     }
 
-    public show(){
-        super.show()
+    public show(toBottom?){
+        this.toBottom = toBottom;
+        PayManager.getInstance().get_shop(()=>{
+            super.show()
+        })
+
     }
 
     public hide() {
@@ -34,11 +46,44 @@ class ShopUI extends game.BaseUI {
     }
 
     public onShow(){
+        this.getNextData = false
         this.renew();
-        //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
+        this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
+        this.addPanelOpenEvent(GameEvent.client.diamond_change,this.renewList)
+        if(this.toBottom)
+        {
+            this.once(egret.Event.ENTER_FRAME,()=>{
+                this.scroller.viewport.scrollV = Math.max(0,this.scroller.viewport.contentHeight - this.scroller.height);
+            },this)
+        }
+        else
+            this.scroller.viewport.scrollV = 0;
+    }
+
+    private renewList(){
+        MyTool.renewList(this.list);
+    }
+
+    private onTimer(){
+        var PM = PayManager.getInstance();
+        if(DateUtil.isSameDay(PM.shopTime))
+        {
+            var cd = DateUtil.getNextDateTimeByHours(0) - TM.now()
+            this.cdText.text = DateUtil.getStringBySecond(cd);
+        }
+        else if(!this.getNextData)
+        {
+            this.getNextData = true
+            PayManager.getInstance().get_shop(()=>{
+                this.renew()
+                this.getNextData = false
+            })
+        }
+
     }
 
     public renew(){
-
+        this.list.dataProvider = new eui.ArrayCollection(PayManager.getInstance().shopData)
+        this.onTimer();
     }
 }

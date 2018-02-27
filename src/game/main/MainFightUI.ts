@@ -82,12 +82,10 @@ class MainFightUI extends MainBase {
         RankUI.getInstance().show();
     }
     private onShop(){
-
+         ShopUI.getInstance().show();
     }
     private onSetting(){
-        LoginManager.getInstance().quickPassword = null
-        LoginManager.getInstance().writeDB();
-        MyTool.refresh();
+        SettingUI.getInstance().show()
 
         //MainUI.getInstance().hide();
         //LoginUI.getInstance().show();

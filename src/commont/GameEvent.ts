@@ -12,6 +12,7 @@ class GameEvent {
         prop_change:'prop_change',
         hang_change:'hang_change',
         card_change:'card_change',
+        head_change:'head_change',
 
 
         pk_begin:'pk_begin',

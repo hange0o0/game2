@@ -144,7 +144,7 @@ class UserManager {
             MyWindow.Confirm('钻石不足！\n需要：' +v+'\n当前：'+UM.diamond + '\n是否前往购买钻石？',function(v){
                 if(v == 1)
                 {
-                    //ShopUI.getInstance().show('diamond');
+                    ShopUI.getInstance().show(true);
                 }
             },['取消','购买'])
             return false;

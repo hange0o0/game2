@@ -364,7 +364,7 @@ module game {
 
         public constructor() {
             super(true);
-            //this.canBGClose = true;
+            this.canBGClose = true;
         }
 
         public setTitle(title,h?){

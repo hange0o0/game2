@@ -16,13 +16,15 @@ class InfoManager {
 
     public getHeadList(){
         var arr = [];
-        var data = MonsterVO.data;
-        for(var s in data)
-        {
-            var vo =  data[s];
-            if(vo.level <= UM.level)
-                arr.push(vo);
-        }
+        for(var i=1;i<20;i++)
+            arr.push(i);
+        //var data = MonsterVO.data;
+        //for(var s in data)
+        //{
+        //    var vo =  data[s];
+        //    if(vo.level <= UM.level)
+        //        arr.push(vo);
+        //}
         return arr;
     }
 
@@ -76,7 +78,7 @@ class InfoManager {
     }
 
 
-    public change_head(headid,fun?,stopAlert?) {
+    public change_head(headid,fun?) {
         var oo:any = {};
         oo.headid = headid;
         Net.addUser(oo);
@@ -88,6 +90,7 @@ class InfoManager {
                 return;
             }
             UM.head = headid
+            EM.dispatchEventWith(GameEvent.client.head_change)
             if (fun)
                 fun();
         });

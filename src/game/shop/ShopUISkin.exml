@@ -4,11 +4,11 @@
 	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
 	<e:Scroller id="scroller" width="640" x="0" top="60" bottom="100">
 		<e:Group>
-			<e:Group horizontalCenter="0" y="20" height="80">
+			<e:Group horizontalCenter="0" y="20" height="70">
 				<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="480" x="0" y="0"/>
-				<e:Label text="更换头像 " y="10.18" size="24" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
-				<e:Group id="cdGroup" y="70" horizontalCenter="0">
-					<e:Label text="剩余保护时间:" size="24" stroke="2" textAlign="center" y="26" x="55"/>
+				<e:Label text="每日商店 " y="10.18" size="24" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
+				<e:Group id="cdGroup" y="60" horizontalCenter="0.5">
+					<e:Label text="商品重置时间:" size="24" stroke="2" textAlign="center" y="26" x="55"/>
 					<e:Image source="icon_clock_png" x="0" y="0"/>
 					<e:Label id="cdText" text="Label" size="24" stroke="2" textAlign="center" y="16" x="45"/>
 					<e:layout>
@@ -18,12 +18,12 @@
 			</e:Group>
 			<e:List id="list" x="0" y="0">
 				<e:layout>
-				<e:TileLayout requestedColumnCount="3" horizontalGap="20" verticalGap="20" paddingLeft="0" paddingTop="0" paddingBottom="0"/>
+				<e:TileLayout requestedColumnCount="3" verticalGap="20" paddingLeft="0" paddingTop="0" paddingBottom="0" horizontalGap="50"/>
 				</e:layout>
 			</e:List>
-			<e:Group horizontalCenter="0" y="20">
+			<e:Group horizontalCenter="0" y="20" height="50">
 				<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="480" x="0" y="0"/>
-				<e:Label text="更换头像 " y="10.18" size="24" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
+				<e:Label text="购买钻石 " y="10.18" size="24" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
 			</e:Group>
 			<e:List id="diamondList" x="10" y="10">
 				<e:layout>

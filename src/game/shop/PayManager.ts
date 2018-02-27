@@ -12,9 +12,20 @@ class PayManager {
         '104':{'cost':680,'diamond':6980},
         '105':{'cost':1,'diamond':1}
     }
+    public diamondList
 
     public shopData
     public shopTime
+
+    public constructor() {
+        this.diamondList = [];
+        for(var s in this.diamondBase)
+        {
+            var oo =  this.diamondBase[s];
+            oo.id = s;
+            this.diamondList.push(oo);
+        }
+    }
 
     public get_shop(fun?){
         if(this.shopTime && DateUtil.isSameDay(this.shopTime))
@@ -49,13 +60,17 @@ class PayManager {
             if(msg.fail)
             {
                 MyWindow.Alert("购买失败，错误码：" + msg.fail);
+                this.shopTime = 0;
+                this.get_shop(()=>{
+                    ShopUI.getInstance().renew();
+                })
                 return;
             }
             for(var i=0;i<this.shopData.length;i++)
             {
                 if(this.shopData[i].id == id)
                 {
-                    this.shopData[i].num = 0;
+                    this.shopData[i].isbuy = true;
                     break;
                 }
             }

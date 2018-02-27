@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="ShopItemSkin" width="150" height="200" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
+<e:Skin class="ShopItemSkin" width="150" height="200" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*"  >
 	<e:Image id="bg" source="border_8_png" x="0" y="0" width="100%" height="100%" scale9Grid="12,12,76,76"/>
 	<e:Image id="img" width="130" height="130" y="10" horizontalCenter="0"/>
-	<e:Label id="nameText" text="Label" size="22" horizontalCenter="0" bottom="10" stroke="1"/>
+	<e:Label id="nameText" text="Label" size="20" horizontalCenter="0" bottom="10" stroke="1" lineSpacing="5" textAlign="center"/>
+	<e:Image source="black_bg_png" y="100" height="40" scale9Grid="42,7,8,42" left="10" right="10"/>
+	<e:Group id="diamondGroup" y="106" horizontalCenter="0.5">
+		<e:Image id="diamondIcon" source="icon_diamond_png" x="15" y="0" scaleX="0.5" scaleY="0.5"/>
+		<e:Label id="diamondText" text="Label" size="22" stroke="1" y="4.09" borderColor="0x32d1fc" textColor="0x87e7ff" x="0"/>
+		<e:layout>
+			<e:HorizontalLayout verticalAlign="middle"/>
+		</e:layout>
+	</e:Group>
 </e:Skin>

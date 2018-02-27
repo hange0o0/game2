@@ -19,7 +19,7 @@ class HeadMC extends game.BaseItem {
     }
 
     public dataChanged(){
-
+        this.setData(this.data,0);
     }
 
     public setData(head,type){

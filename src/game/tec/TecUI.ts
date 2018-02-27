@@ -46,4 +46,9 @@ class TecUI extends MainBase {
         this.dataArray.source = arr
         this.dataArray.refresh()
     }
+
+    public setTab(index){
+        this.tab.selectedIndex = index;
+        this.renew();
+    }
 }

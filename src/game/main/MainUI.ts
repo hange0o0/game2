@@ -58,15 +58,16 @@ class MainUI extends game.BaseUI {
     }
 
     private onAddForce(){
-
+        this.onBottomSelect(4);
+        TecUI.getInstance().setTab(1)
     }
 
     private onAddEnergy(){
-
+         ShopUI.getInstance().show();
     }
 
     private onAddDiamond(){
-
+        ShopUI.getInstance().show(true);
     }
 
 

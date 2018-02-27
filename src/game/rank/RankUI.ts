@@ -51,7 +51,7 @@ class RankUI extends game.BaseUI {
     }
 
     public onShow(){
-        this.topUI.setTitle(this.typeObj[this.tab.selectedIndex].name);
+        this.topUI.setTitle(this.typeObj[this.tab.selectedIndex].name + '排行');
         this.getData();
         //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
     }

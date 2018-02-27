@@ -32,6 +32,7 @@ class ShopItem extends game.BaseItem {
             if(b==1)
             {
                 PayManager.getInstance().buy_shop(this.data.id,()=>{
+                    MyWindow.ShowTips('购买成功！')
                     this.dataChanged()
                 })
             }
@@ -43,6 +44,11 @@ class ShopItem extends game.BaseItem {
         if(this.data.id == 'coin')
         {
             name = '金币'  + '\n×' + NumberUtil.formatStrNum(this.data.num);
+            this.img.source = 'icon_coin_png'
+        }
+        else if(this.data.id == 'energy')
+        {
+            name = '体力'  + '\n×' + NumberUtil.formatStrNum(this.data.num);
             this.img.source = 'icon_coin_png'
         }
         else

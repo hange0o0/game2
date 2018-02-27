@@ -44,11 +44,15 @@ class SettingUI extends game.BaseWindow {
             var str = '切换成兼容模式，会对游戏性能有一些影响，是否继续'
         else
             var str = '停用兼容模式后，游戏在部分机型上可能会出现异常，是否继续'
-        MyWindow.Confirm(str,function(value){
+        MyWindow.Confirm(str,(value)=>{
             if(value == 1)
             {
                 SharedObjectManager.getInstance().setValue("renderMode",oldMode=='webgl'?'canvas':'webgl')
                 MyTool.refresh();
+            }
+            else
+            {
+                this.modeCB.selected = !this.modeCB.selected
             }
         },['取消','继续'])
     }
@@ -92,9 +96,9 @@ class SettingUI extends game.BaseWindow {
         this.musicCB.selected = SoundManager.getInstance().bgPlaying
         this.effectCB.selected = SoundManager.getInstance().soundPlaying
         this.modeCB.selected = SharedObjectManager.getInstance().getValue("renderMode") == 'canvas';
-        this.headMC.data = UM.head;
+        this.headMC.setData(UM.head,0);
         this.nameText.text = UM.nick
-        this.idText.text = '游戏ID：'+UM.gameid
+        this.idText.text = '游戏ID：'+UM.uid
         //this.idText.textFlow = <Array<egret.ITextElement>>[
         //    {text: UM.gameid + "", style: {"underline": true}}
         //];

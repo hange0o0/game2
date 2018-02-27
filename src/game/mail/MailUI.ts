@@ -27,6 +27,7 @@ class MailUI extends game.BaseUI {
         super.childrenCreated();
 
         this.bottomUI.setHide(this.hide,this);
+        this.topUI.setTitle('邮箱')
 
         this.scroller.viewport = this.list;
         this.list.itemRenderer = MailItem

@@ -12,7 +12,7 @@
 					<e:Image source="icon_clock_png" x="0" y="0"/>
 					<e:Label id="cdText" text="Label" size="24" stroke="2" textAlign="center" y="16" x="45"/>
 					<e:layout>
-					<e:HorizontalLayout verticalAlign="middle" horizontalAlign="center"/>
+					<e:HorizontalLayout verticalAlign="middle" horizontalAlign="center" gap="10"/>
 					</e:layout>
 				</e:Group>
 			</e:Group>

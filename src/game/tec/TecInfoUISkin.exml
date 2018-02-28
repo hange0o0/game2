@@ -25,5 +25,6 @@
 		<e:VerticalLayout paddingLeft="20"/>
 		</e:layout>
 	</e:List>
+	<e:Image id="helpBtn" source="icon_help_png" y="10" right="10"/>
 
 </e:Skin>

@@ -13,6 +13,7 @@ class SlaveUI extends MainBase {
     private cdGroup: eui.Group;
     private cdText: eui.Label;
     private proBtn: eui.Button;
+    private helpBtn: eui.Button;
     private masterGroup: eui.Group;
     private masterItem: SlaveMasterItem;
     private slaveList: eui.List;
@@ -50,7 +51,14 @@ class SlaveUI extends MainBase {
         this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
         this.tab.selectedIndex = 0;
 
-        this.addBtnEvent(this.proBtn,this.onPro)
+        this.addBtnEvent(this.proBtn,this.onPro);
+
+        this.addBtnEvent(this.helpBtn,()=>{
+            if(this.tab.selectedIndex == 0)
+                HelpManager.getInstance().showHelp('slave')
+            else
+                HelpManager.getInstance().showHelp('view')
+        })
     }
 
     private onPro(){

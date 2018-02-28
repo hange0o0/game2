@@ -27,7 +27,7 @@ class MailUI extends game.BaseUI {
         super.childrenCreated();
 
         this.bottomUI.setHide(this.hide,this);
-        this.topUI.setTitle('邮箱')
+        this.topUI.setTitle('邮箱','mail')
 
         this.scroller.viewport = this.list;
         this.list.itemRenderer = MailItem
@@ -53,7 +53,6 @@ class MailUI extends game.BaseUI {
     }
 
     public onShow(){
-        this.topUI.setTitle(this.typeObj[this.tab.selectedIndex].name);
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.mail_change,this.justRenewList)
     }

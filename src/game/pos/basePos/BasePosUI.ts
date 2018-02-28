@@ -44,7 +44,6 @@ class BasePosUI extends game.BaseUI {
     public childrenCreated() {
         super.childrenCreated();
         this.bottomUI.setHide(this.onClose,this);
-        this.topUI.setTitle('调整卡组顺序');
 
         this.dragTarget.alpha = 0.3;
         this.list.itemRenderer =  BasePosChangeItem;
@@ -138,7 +137,7 @@ class BasePosUI extends game.BaseUI {
         var length = this.listData.length
         if(this.listData.getItemAt(this.listData.length-1).setting)
             length --;
-        this.topUI.setTitle(this.posName + ' ('+length+'/'+this.maxCard+')')
+        this.topUI.setTitle(this.posName + ' ('+length+'/'+this.maxCard+')','pos')
     }
 
     private onSave(){

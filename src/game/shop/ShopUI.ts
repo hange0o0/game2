@@ -25,7 +25,7 @@ class ShopUI extends game.BaseUI {
 
     public childrenCreated() {
         super.childrenCreated();
-        this.topUI.setTitle('商城')
+        this.topUI.setTitle('商城','shop')
         this.bottomUI.setHide(this.hide,this);
         this.list.itemRenderer = ShopItem
         this.diamondList.itemRenderer = ShopDiamondItem

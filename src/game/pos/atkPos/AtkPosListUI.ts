@@ -44,7 +44,7 @@ class AtkPosListUI extends game.BaseUI {
 
     public renew(){
         var PM = PosManager.getInstance();
-        this.topUI.setTitle('进攻阵容 （'+PM.atkList.length+'/5）')
+        this.topUI.setTitle('进攻阵容 （'+PM.atkList.length+'/5）','atkPos')
         var arr = PM.atkList.concat();
         if(arr.length < PM.maxNum)
             arr.push({empty:true})

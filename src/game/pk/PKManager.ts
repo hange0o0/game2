@@ -50,7 +50,6 @@ class PKManager {
         var PD = PKData.getInstance();
         PD.init(data);
         PKingUI.getInstance().show();
-        PKBeforeUI.getInstance().hide();
     }
 
     public test(atk,def){

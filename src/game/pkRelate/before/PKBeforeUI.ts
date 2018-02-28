@@ -111,7 +111,6 @@ class PKBeforeUI extends game.BaseWindow {
     }
 
     public onShow(){
-
         this.renew();
         this.once(egret.Event.ENTER_FRAME,this.onScroll,this)
         this.addPanelOpenEvent(GameEvent.client.pos_change,this.renew)

@@ -155,10 +155,14 @@ class PKTopUI extends game.BaseContainer {
             item.data = null;
         }
 
-        this.hpGroup1.visible = false
-        this.hpGroup2.visible = false
-        this.defGroup1.visible = false
-        this.defGroup2.visible = false
+        egret.Tween.removeTweens(this.hpGroup1)
+        egret.Tween.removeTweens(this.hpGroup2)
+        egret.Tween.removeTweens(this.defGroup1)
+        egret.Tween.removeTweens(this.defGroup2)
+        this.hpGroup1.scaleX = this.hpGroup1.scaleY = 0
+        this.hpGroup2.scaleX = this.hpGroup2.scaleY = 0
+        this.defGroup1.scaleX = this.defGroup1.scaleY = 0
+        this.defGroup2.scaleX = this.defGroup2.scaleY = 0
 
 
         this.defBG1.visible = true
@@ -177,18 +181,10 @@ class PKTopUI extends game.BaseContainer {
     }
 
     public appearMV(){
-        egret.Tween.removeTweens(this.hpGroup1)
-        egret.Tween.removeTweens(this.hpGroup2)
-        egret.Tween.removeTweens(this.defGroup1)
-        egret.Tween.removeTweens(this.defGroup2)
-        egret.Tween.get(this.hpGroup1).set({scaleX:0,scaleY:0}).to({scaleX:1.2,scaleY:1.2},300).to({scaleX:1,scaleY:1},300)
-        egret.Tween.get(this.hpGroup2).set({scaleX:0,scaleY:0}).to({scaleX:1.2,scaleY:1.2},300).to({scaleX:1,scaleY:1},300)
-        egret.Tween.get(this.defGroup1).set({scaleX:0,scaleY:0}).wait(200).to({scaleX:1.2,scaleY:1.2},300).to({scaleX:1,scaleY:1},300)
-        egret.Tween.get(this.defGroup2).set({scaleX:0,scaleY:0}).wait(200).to({scaleX:1.2,scaleY:1.2},300).to({scaleX:1,scaleY:1},300)
-        this.hpGroup1.visible = true
-        this.hpGroup2.visible = true
-        this.defGroup1.visible = true
-        this.defGroup2.visible = true
+        egret.Tween.get(this.hpGroup1).to({scaleX:1.2,scaleY:1.2},300).to({scaleX:1,scaleY:1},300)
+        egret.Tween.get(this.hpGroup2).to({scaleX:1.2,scaleY:1.2},300).to({scaleX:1,scaleY:1},300)
+        egret.Tween.get(this.defGroup1).wait(200).to({scaleX:1.2,scaleY:1.2},300).to({scaleX:1,scaleY:1},300)
+        egret.Tween.get(this.defGroup2).wait(200).to({scaleX:1.2,scaleY:1.2},300).to({scaleX:1,scaleY:1},300)
     }
 
     public renewHp(){

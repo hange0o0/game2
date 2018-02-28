@@ -45,7 +45,7 @@ class DefPosListUI extends game.BaseUI {
 
     public renew(){
         var PM = PosManager.getInstance();
-        this.topUI.setTitle('防守阵容 （'+PM.defList.length+'/5）')
+        this.topUI.setTitle('防守阵容 （'+PM.defList.length+'/5）','defPos')
         var arr = PM.defList.concat();
         if(arr.length < PM.maxNum)
             arr.push({empty:true})

@@ -16,6 +16,7 @@ class HangUI extends game.BaseItem {
     private lockBar: eui.Rect;
     private lockText: eui.Label;
     private openBtn: eui.Button;
+    private helpBtn: eui.Button;
     private awardRed: eui.Image;
 
 
@@ -38,6 +39,11 @@ class HangUI extends game.BaseItem {
         super.childrenCreated();
         this.addBtnEvent(this,this.onPK)
         this.addBtnEvent(this.awardBtn,this.onAward)
+
+        this.addBtnEvent(this.helpBtn,(e)=>{
+            e.stopImmediatePropagation()
+            HelpManager.getInstance().showHelp('card')
+        })
 
         this.con.mask = new egret.Rectangle(0,0,this.con.width,this.con.height)
 

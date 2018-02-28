@@ -14,6 +14,7 @@ class CardInfoUI extends game.BaseWindow {
     private coinText: eui.Label;
     private icon: eui.Image;
     private okBtn: eui.Button;
+    private helpBtn: eui.Image;
 
 
     public data;
@@ -27,6 +28,10 @@ class CardInfoUI extends game.BaseWindow {
         super.childrenCreated();
         this.addBtnEvent(this.backBtn,this.hide)
         this.addBtnEvent(this.okBtn,this.onClick)
+
+        this.addBtnEvent(this.helpBtn,()=>{
+            HelpManager.getInstance().showHelp('card')
+        })
     }
 
     private onClick(){

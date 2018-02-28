@@ -14,7 +14,7 @@ class TecInfoUI extends game.BaseWindow {
     private desText: eui.Label;
     private list: eui.List;
     private btnGroup: eui.Group;
-
+    private helpBtn: eui.Image;
 
 
 
@@ -30,6 +30,10 @@ class TecInfoUI extends game.BaseWindow {
         this.addBtnEvent(this.okBtn,this.onClick)
 
         this.list.itemRenderer = TecInfoItem
+
+        this.addBtnEvent(this.helpBtn,()=>{
+            HelpManager.getInstance().showHelp('tec')
+        })
 
     }
 

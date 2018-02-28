@@ -89,14 +89,14 @@ class PKingUI extends game.BaseUI {
     }
     public showMV(){
         var tw = egret.Tween.get(this.pkTop)
-        tw.set({y:this.pkTop.y-200}).to({y:this.pkTop.y},500).wait(2000).call(()=>{
+        tw.set({y:this.pkTop.y-200}).to({y:this.pkTop.y},500).wait(200).call(()=>{
             this.pkTop.appearMV()
         },this)
         var tw = egret.Tween.get(this.pkCtrlCon)
         tw.set({bottom:-500}).to({bottom:0},500)
 
         var tw = egret.Tween.get(this.scroller)
-        tw.set({alpha:0}).wait(100).to({alpha:1},400).wait(500).call(this.startPlay,this);
+        tw.set({alpha:0}).wait(100).to({alpha:1},600).wait(300).call(this.startPlay,this);
     }
 
     public onShow(){
@@ -131,19 +131,12 @@ class PKingUI extends game.BaseUI {
         this.addChild(this.roundText);
         this.roundText.scaleX =  this.roundText.scaleY = 0;
         egret.Tween.removeTweens(this.roundText)
-
-
-
-
         this.showMV();
     }
 
     public startPlay(){
         this.hideBehind = true;
-        PopUpManager.testVisible()
-
-
-
+        PKBeforeUI.getInstance().hide();
 
         var tw = this.tw = egret.Tween.get(this.roundText)
         tw.to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '4'})

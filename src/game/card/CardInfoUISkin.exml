@@ -15,4 +15,5 @@
 			<e:HorizontalLayout gap="30"/>
 		</e:layout>
 	</e:Group>
+	<e:Image id="helpBtn" source="icon_help_png" y="10" right="10"/>
 </e:Skin>

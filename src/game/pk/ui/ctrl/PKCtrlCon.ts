@@ -6,7 +6,7 @@ class PKCtrlCon extends game.BaseContainer {
         this.skinName = "PKCtrlConSkin";
     }
 
-    private overMC: eui.Image;
+    private overMC: eui.Group;
     private cardGroup: eui.Group;
     private placeGroup: eui.Group;
     private info2: PKInfoBtn;
@@ -18,6 +18,8 @@ class PKCtrlCon extends game.BaseContainer {
     private cardText: eui.Label;
     private costMC: eui.Image;
     private costText: eui.Label;
+    private helpBtn: eui.Image;
+
 
 
 
@@ -76,6 +78,9 @@ class PKCtrlCon extends game.BaseContainer {
 
         this.addBtnEvent(this.placeGroup,this.onPosClick)
             this.addBtnEvent(this.settingBtn,this.onSetting)
+        this.addBtnEvent(this.helpBtn,()=>{
+            HelpManager.getInstance().showHelp('pk')
+        })
 
         PKData.getInstance().addEventListener('video',this.onVideoEvent,this);
     }

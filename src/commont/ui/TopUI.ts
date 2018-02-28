@@ -9,17 +9,20 @@ class TopUI extends game.BaseContainer {
 
 
 
+    private helpKey
     public childrenCreated() {
         this.addBtnEvent(this.helpBtn,this.onHelp);
         this.helpBtn.visible = false;
     }
 
     public onHelp(){
-
+         HelpManager.getInstance().showHelp(this.helpKey)
     }
 
-    public setTitle(name:string):void{
+    public setTitle(name:string,helpKey?):void{
         this.titleText.text = name;
+        this.helpKey = helpKey
+        this.helpBtn.visible = helpKey;
     }
     //private backBtnClick(event:egret.TouchEvent):void {
     //    this.dispatchEventWith("hide");

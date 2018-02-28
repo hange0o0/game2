@@ -169,7 +169,7 @@ class Net extends egret.EventDispatcher{
             return;
         }
         TM.init(data.server_time);
-        SyncManager.getInstance().snyc(data.msg);
+        SyncDataManager.getInstance().snyc(data.msg);
         var oo:any = {};
         oo.sendData = msg;
         oo.msg = data.msg;

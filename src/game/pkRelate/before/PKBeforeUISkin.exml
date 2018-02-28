@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="PKBeforeUISkin" width="600" height="750" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Image source="bg10_png" scale9Grid="26,25,6,7" x="0" width="100%" top="40" height="625"/>
+	<e:Image source="bg10_png" scale9Grid="26,25,6,7" x="0" width="100%" top="70" bottom="85"/>
 
-	<e:Group id="scrollerBG" y="55" width="640" scaleX="0.9" scaleY="0.9" horizontalCenter="0" locked="true">
+	<e:Group id="scrollerBG" y="80" width="640" scaleX="0.9" scaleY="0.9" horizontalCenter="0">
 		<e:Rect width="100%" height="130" x="20" y="20" fillColor="0xE2A75D"/>
 		<e:Rect width="100%" height="130" x="10" y="10" fillColor="0xF2C379" strokeColor="0x000000"/>
 		<e:Rect width="100%" height="130" x="30" y="30" fillColor="0xE2A75D"/>
@@ -14,7 +14,7 @@
 		<e:VerticalLayout gap="0"/>
 		</e:layout>
 	</e:Group>
-	<e:Scroller id="scroller" width="640" anchorOffsetY="0" scaleX="0.9" scaleY="0.9" horizontalCenter="0" top="55" height="580">
+	<e:Scroller id="scroller" width="640" anchorOffsetY="0" scaleX="0.9" scaleY="0.9" horizontalCenter="0" top="80" bottom="173">
 		<e:Group>
 		<e:List id="list" width="200" height="200" x="142" y="175">
 			<e:layout>
@@ -27,8 +27,8 @@
     		<e:Image source="icon_add1_png"  y="0" horizontalCenter="0" scaleX="1.5" scaleY="1.5"/>
     		<e:Label text="增加新的进攻阵容"  y="80" stroke="2" size="24" strokeColor="0x331401" x="0"/>
     	</e:Group>
-	<e:Image y="0" scale9Grid="70,9,62,61" left="-20" right="-20" scaleX="1.2" scaleY="1.2" source="title_bg6_png"/>
-	<e:Label id="titleText" text="进攻阵容1" y="15" horizontalCenter="0" stroke="2" size="24"/>
+	<e:Image y="20" scale9Grid="70,9,62,61" scaleX="1.2" scaleY="1.2" source="title_bg6_png" width="440" horizontalCenter="0" touchEnabled="false"/>
+	<e:Label id="titleText" text="进攻阵容1" y="36.21" horizontalCenter="0.5" stroke="2" size="24"/>
 	<e:Rect height="80" y="572" ellipseWidth="30" ellipseHeight="30" width="576" horizontalCenter="0" fillColor="0xc96916"/>
 	<e:Rect height="40" y="572" width="576" horizontalCenter="0" fillColor="0xd87117"/>
 	<e:Image id="rightBtn" source="arrow1_png" right="150" y="585"/>

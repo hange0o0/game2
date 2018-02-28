@@ -52,6 +52,7 @@ class PKingUI extends game.BaseUI {
     }
 
     public show(){
+        this.hideBehind = false;
         var self = this;
         self.superShow();
     }
@@ -80,6 +81,22 @@ class PKingUI extends game.BaseUI {
         PKVideoCon.getInstance().remove();
         this.pkCtrlCon.remove();
         this.pkTop.remove();
+
+        egret.Tween.removeTweens(this.pkTop)
+        egret.Tween.removeTweens(this.pkCtrlCon)
+        egret.Tween.removeTweens(this.smallMap)
+        egret.Tween.removeTweens(this.scroller)
+    }
+    public showMV(){
+        var tw = egret.Tween.get(this.pkTop)
+        tw.set({y:this.pkTop.y-200}).to({y:this.pkTop.y},500).wait(2000).call(()=>{
+            this.pkTop.appearMV()
+        },this)
+        var tw = egret.Tween.get(this.pkCtrlCon)
+        tw.set({bottom:-500}).to({bottom:0},500)
+
+        var tw = egret.Tween.get(this.scroller)
+        tw.set({alpha:0}).wait(100).to({alpha:1},400).wait(500).call(this.startPlay,this);
     }
 
     public onShow(){
@@ -89,11 +106,11 @@ class PKingUI extends game.BaseUI {
         PKVideoCon.getInstance().init();
         this.pkCtrlCon.init();
         this.pkTop.init('PK对战');
+        this.smallMap.visible = false;
 
         this.con.addChild(PKVideoCon.getInstance())
         PKVideoCon.getInstance().x = 0;
         PKVideoCon.getInstance().y = 0;
-
 
         PD.diamondData = PD.addMonster({
             force:0,
@@ -114,6 +131,20 @@ class PKingUI extends game.BaseUI {
         this.addChild(this.roundText);
         this.roundText.scaleX =  this.roundText.scaleY = 0;
         egret.Tween.removeTweens(this.roundText)
+
+
+
+
+        this.showMV();
+    }
+
+    public startPlay(){
+        this.hideBehind = true;
+        PopUpManager.testVisible()
+
+
+
+
         var tw = this.tw = egret.Tween.get(this.roundText)
         tw.to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '4'})
             .to({scaleX:0,scaleY:0}).to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '3'})
@@ -138,7 +169,9 @@ class PKingUI extends game.BaseUI {
         PD.start();
         this.counting = false;
         this.scroller.touchEnabled = this.scroller.touchChildren = true;
-
+        this.smallMap.visible = true;
+        var tw = egret.Tween.get(this.smallMap);
+        tw.set({alpha:0}).to({alpha:1},500);
     }
 
     public onE(){

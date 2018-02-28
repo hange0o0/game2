@@ -161,6 +161,9 @@ class MainUI extends game.BaseUI {
         this.addPanelOpenEvent(GameEvent.client.force_change,this.renewTop)
         this.addPanelOpenEvent(GameEvent.client.diamond_change,this.renewTop)
         this.addPanelOpenEvent(GameEvent.client.energy_change,this.renewEnergy)
+
+        if(!LoginManager.getInstance().logText.cb && LoginManager.getInstance().logText.text)
+            LogUI.getInstance().show();
     }
 
     private onTimer(){

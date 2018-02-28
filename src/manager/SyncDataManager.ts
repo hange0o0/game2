@@ -1,8 +1,8 @@
-class SyncManager{
-    private static _instance:SyncManager;
-    public static getInstance():SyncManager {
+class SyncDataManager{
+    private static _instance:SyncDataManager;
+    public static getInstance():SyncDataManager {
         if (!this._instance)
-            this._instance = new SyncManager();
+            this._instance = new SyncDataManager();
         return this._instance;
     }
 

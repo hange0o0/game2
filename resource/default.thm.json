@@ -107,11 +107,12 @@
     "src/game/tec/TecUISkin.exml",
     "src/game/user/ChangeHeadItemSkin.exml",
     "src/game/user/ChangeHeadUISkin.exml",
+    "src/game/user/HelpItemSkin.exml",
+    "src/game/user/HelpUISkin.exml",
     "src/game/user/InfoItem2Skin.exml",
     "src/game/user/InfoItemSkin.exml",
     "src/game/user/OtherInfoUISkin.exml",
     "src/game/user/SettingUISkin.exml",
-    "src/game/user/UserInfoUISkin.exml",
     "src/login/LoginUISkin.exml",
     "src/login/RegisterServerUISkin.exml",
     "src/login/RegisterUISkin.exml"

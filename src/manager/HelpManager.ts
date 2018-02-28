@@ -51,9 +51,10 @@ class HelpManager {
         return text.replace(/\[/g,'<font color="#E0A44A">').replace(/\]/g,'<\/font>')
     }
 
-    //public mainHelp(){
-    //    HelpUI.getInstance().show(this.helpObj['main']);
-    //}
+    public showHelp(key){
+        HelpUI.getInstance().show(this.helpObj[key]);
+    }
+
 
 
 }

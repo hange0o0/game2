@@ -27,14 +27,6 @@
 	</e:Group>
 	<e:Image source="line2_png" y="360" fillMode="repeat" left="40" right="40"/>
 	<e:Group x="63" y="400">
-		<e:Group y="136" x="0">
-			<e:Label y="2" textColor="0xEFE5AD" size="24" text="游戏版本：" x="0"/>
-			<e:Label id="versionText" y="0" textColor="0xEDCB24" text="V1.1" size="24" x="98"/>
-			<e:Label id="logBtn" y="10" text="[更新日志]" size="24" x="108" textColor="0xEFE5AD" width="130" textAlign="right"/>
-			<e:layout>
-			<e:HorizontalLayout/>
-			</e:layout>
-		</e:Group>
 		<e:Group x="0" y="0">
 			<e:Label y="4" textColor="0xEFE5AD" size="24" text="游戏官方QQ群：" x="0"/>
 			<e:Label id="qqText" y="0" textColor="0xEDCB24" size="24" text="1624431545" x="192"/>
@@ -42,6 +34,14 @@
 			<e:HorizontalLayout/>
 			</e:layout>
 		</e:Group>
+		<e:Group y="136" x="0">
+        			<e:Label y="2" textColor="0xEFE5AD" size="24" text="游戏版本：" x="0"/>
+        			<e:Label id="versionText" y="0" textColor="0xEDCB24" text="V1.1" size="24" x="98"/>
+        			<e:Label id="logBtn" y="10" text="[更新日志]" size="24" x="108" textColor="0xEFE5AD" width="130" textAlign="right"/>
+        			<e:layout>
+        			<e:HorizontalLayout/>
+        			</e:layout>
+        		</e:Group>
 		<e:layout>
 			<e:VerticalLayout gap="20"/>
 		</e:layout>

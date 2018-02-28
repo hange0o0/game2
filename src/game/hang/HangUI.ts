@@ -166,10 +166,14 @@ class HangUI extends game.BaseItem {
     }
 
     public clean(){
-        egret.Tween.removeTweens(PKVideoCon.getInstance())
-        this.removeEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
-        PKBulletManager.getInstance().freeAll()
-        PKVideoCon.getInstance().remove();
+        var pkvideo = PKVideoCon.getInstance()
+        if(pkvideo.parent == this.con)
+        {
+            egret.Tween.removeTweens(pkvideo)
+            this.removeEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
+            PKBulletManager.getInstance().freeAll()
+            pkvideo.remove();
+        }
     }
 
 

@@ -58,7 +58,7 @@ class SettingUI extends game.BaseWindow {
     }
 
     private onLog(){
-        //GameLogUI.getInstance().show();
+        LogUI.getInstance().show();
     }
 
     private onLoginOut(){

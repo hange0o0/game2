@@ -3,7 +3,8 @@ class PKTopUI extends game.BaseContainer {
     public static getInstance() {
         return this._instance;
     }
-
+    private hpGroup1: eui.Group;
+    private hpGroup2: eui.Group;
     private hpText1: eui.Label;
     private defGroup1: eui.Group;
     private defText1: eui.Label;
@@ -154,8 +155,12 @@ class PKTopUI extends game.BaseContainer {
             item.data = null;
         }
 
-        this.defGroup1.visible = true
-        this.defGroup2.visible = true
+        this.hpGroup1.visible = false
+        this.hpGroup2.visible = false
+        this.defGroup1.visible = false
+        this.defGroup2.visible = false
+
+
         this.defBG1.visible = true
         this.defBG2.visible = true
         this.defBG1.height = 0
@@ -169,8 +174,21 @@ class PKTopUI extends game.BaseContainer {
         var PD = PKData.getInstance();
         this.defText1.text = '+'+PD.getTeamByRota(PKConfig.ROTA_LEFT).getTeamDef()+'%'
         this.defText2.text = '+'+PD.getTeamByRota(PKConfig.ROTA_RIGHT).getTeamDef()+'%'
+    }
 
-
+    public appearMV(){
+        egret.Tween.removeTweens(this.hpGroup1)
+        egret.Tween.removeTweens(this.hpGroup2)
+        egret.Tween.removeTweens(this.defGroup1)
+        egret.Tween.removeTweens(this.defGroup2)
+        egret.Tween.get(this.hpGroup1).set({scaleX:0,scaleY:0}).to({scaleX:1.2,scaleY:1.2},300).to({scaleX:1,scaleY:1},300)
+        egret.Tween.get(this.hpGroup2).set({scaleX:0,scaleY:0}).to({scaleX:1.2,scaleY:1.2},300).to({scaleX:1,scaleY:1},300)
+        egret.Tween.get(this.defGroup1).set({scaleX:0,scaleY:0}).wait(200).to({scaleX:1.2,scaleY:1.2},300).to({scaleX:1,scaleY:1},300)
+        egret.Tween.get(this.defGroup2).set({scaleX:0,scaleY:0}).wait(200).to({scaleX:1.2,scaleY:1.2},300).to({scaleX:1,scaleY:1},300)
+        this.hpGroup1.visible = true
+        this.hpGroup2.visible = true
+        this.defGroup1.visible = true
+        this.defGroup2.visible = true
     }
 
     public renewHp(){

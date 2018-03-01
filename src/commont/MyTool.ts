@@ -46,8 +46,8 @@ class MyTool {
         return  s;
     }
     public static getHeadUrl(id,isRound?){
-        //if(id == 0)
-        //    return 'head_png'
+        if(id == 'sys')
+            return 'icon_setting_png';
         //if(isRound)
         //    return MonsterVO.getObject(id).thumbRound
         //return MonsterVO.getObject(id).thumb

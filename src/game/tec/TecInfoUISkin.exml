@@ -6,7 +6,7 @@
 			<e:Image width="130" height="130" x="0" y="0" source="bg5_png" scale9Grid="9,9,12,11"/>
 			<e:Image id="mc" width="120" height="120" x="5" y="5" source="bg5_png"/>
 		</e:Group>
-		<e:Group right="5" bottom="5">
+		<e:Group left="5" top="5">
 			<e:Rect width="100%" height="100%" x="0" y="0"/>
 			<e:Label id="levelText" text="LV.20" size="22" textColor="0xFFFFFF" left="5" right="5" top="2" bottom="2"/>
 		</e:Group>

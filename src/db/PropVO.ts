@@ -25,7 +25,7 @@ class PropVO {
     }
 
     public getThumb(){
-        return 'prop_thumb_' + this.id + '_jpg';
+        return Config.localResRoot + 'prop/prop_'+this.id+'.png';
     }
 
 

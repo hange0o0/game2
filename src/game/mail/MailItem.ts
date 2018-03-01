@@ -26,7 +26,7 @@ class MailItem extends game.BaseItem {
         if(this.data.from_gameid == 'sys')
         {
             this.nameText.text = '系统邮件'
-            //this.headMC.setData(content.head,content.type);
+            this.headMC.setData('sys');
         }
         else
         {

@@ -38,6 +38,7 @@ class PKConfig {
     public static maxPosCard = 4; //上阵牌上限
     public static typeAdd = 10; //类型加成百分比
     public static drawTime = 1000*60*5; //超时
+    public static autoDef = 10; //防守方队伍加成
 
 
     public static VIDEO_MONSTER_DOUBLE = 1;//爆击

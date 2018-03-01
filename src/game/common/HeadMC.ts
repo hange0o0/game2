@@ -22,7 +22,7 @@ class HeadMC extends game.BaseItem {
         this.setData(this.data,0);
     }
 
-    public setData(head,type){
+    public setData(head,type?){
 
         this.mc.source = MyTool.getHeadUrl(head || 1)
         if(type)

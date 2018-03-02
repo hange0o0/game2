@@ -19,13 +19,13 @@ class TecInfoItem extends game.BaseItem {
         {
             this.coinText.text = '金币  ×'+NumberUtil.addNumSeparator(this.data.num)+''
             isRed =  this.data.num >= UM.getCoin();
-            this.img.source = 'icon_coin_png';
+            this.img.source = MyTool.getPropCoin();
         }
         else if(this.data.type == 'lv')
         {
             this.coinText.text = '主城等级  LV.'+this.data.num+''
             isRed =  this.data.num >= TecManager.getInstance().getLevel(1);
-            this.img.source = 'icon_coin_png';
+            this.img.source = MyTool.getPropLevel();
         }
         else
         {

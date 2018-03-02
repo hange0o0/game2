@@ -150,11 +150,12 @@ class PKCardInfoUI extends game.BaseContainer {
                 //{index:1,icon:'icon_atk_png',iconScale:1,title:'攻击',value:atk,valueAdd:ark2-atk},
                 {index:2,icon:'icon_love_png',iconScale:0.6,title:'血量',value:hp,valueAdd:hp2 - hp},
                 {index:3,icon:'icon_def1_png',iconScale:0.4,title:'防御',value:def,valueAdd:def2 - def},
-                {index:4,icon:'icon_speed_png',iconScale:1,title:'移动速度',value:vo.speed,valueAdd:0}
+                {index:4,icon:'icon_speed_png',iconScale:1,title:'移动速度',value:vo.speed,valueAdd:0},
+                {index:4,icon:'icon_atk_png',iconScale:1,title:'伤害',value:vo.atk2,valueAdd:0}
             ]
             if(atk)
             {
-                arr2.unshift({index:1,icon:'icon_atk_png',iconScale:1,title:'攻击',value:atk,valueAdd:ark2-atk})
+                arr2.unshift({index:1,icon:'icon_atk_png',iconScale:1,title:'攻击力',value:atk,valueAdd:ark2-atk})
                 arr2.push({index:5,icon:'icon_atkcd_png',iconScale:1,title:'攻击间隔',value:MyTool.toFixed(vo.atkcd/1000,1)+'秒',valueAdd:0})
                 arr2.push({index:6,icon:'icon_rage_png',iconScale:1,title:'攻击距离',value:vo.atkrage>PKConfig.nearRage?vo.atkrage:'近战',valueAdd:0})
             }

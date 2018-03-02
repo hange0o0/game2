@@ -23,7 +23,7 @@ class BagItem extends game.BaseItem {
         {
             this.nameText.text = '金币  (×'+NumberUtil.addNumSeparator(UM.getCoin())+')'
             this.desText.text =  '';
-            this.mc.source = 'icon_coin_png';
+            this.mc.source = MyTool.getPropCoin();
         }
         else
         {

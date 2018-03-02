@@ -44,12 +44,12 @@ class ShopItem extends game.BaseItem {
         if(this.data.id == 'coin')
         {
             name = '金币'  + '\n×' + NumberUtil.formatStrNum(this.data.num);
-            this.img.source = 'icon_coin_png'
+            this.img.source = MyTool.getPropCoin()
         }
         else if(this.data.id == 'energy')
         {
             name = '体力'  + '\n×' + NumberUtil.formatStrNum(this.data.num);
-            this.img.source = 'icon_coin_png'
+            this.img.source = MyTool.getPropEnergy()
         }
         else
         {

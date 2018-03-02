@@ -54,10 +54,10 @@ class SlaveUI extends MainBase {
         this.addBtnEvent(this.proBtn,this.onPro);
 
         this.addBtnEvent(this.helpBtn,()=>{
-            if(this.tab.selectedIndex == 0)
+            //if(this.tab.selectedIndex == 0)
                 HelpManager.getInstance().showHelp('slave')
-            else
-                HelpManager.getInstance().showHelp('view')
+            //else
+            //    HelpManager.getInstance().showHelp('view')
         })
     }
 
@@ -116,6 +116,7 @@ class SlaveUI extends MainBase {
     }
 
     public renew(){
+        this.helpBtn.visible = this.tab.selectedIndex == 0
         if(this.tab.selectedIndex == 0)
         {
             SlaveManager.getInstance().slave_list(()=>{

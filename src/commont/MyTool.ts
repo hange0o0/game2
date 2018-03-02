@@ -1,11 +1,25 @@
 class MyTool {
     public constructor() {
+        /*
+
+
+         */
+    }
+
+    public static getPropCoin(){
+        return Config.localResRoot + 'prop/prop_coin.png'
+    }
+    public static getPropEnergy(){
+        return Config.localResRoot + 'prop/prop_energy.png'
+    }
+    public static getPropLevel(){
+        return Config.localResRoot + 'prop/prop_level.png'
     }
 
     public static getAwardArr(dataIn){
         var arr = [];
         if(dataIn.coin)
-            arr.push({img:'icon_coin_png',name:'金币','num':'×' + NumberUtil.addNumSeparator(dataIn.coin)})
+            arr.push({img:MyTool.getPropCoin(),name:'金币','num':'×' + NumberUtil.addNumSeparator(dataIn.coin)})
         for(var s in dataIn.props)
         {
             var prop =  PropVO.getObject(s);

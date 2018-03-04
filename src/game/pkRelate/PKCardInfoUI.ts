@@ -151,7 +151,7 @@ class PKCardInfoUI extends game.BaseContainer {
                 {index:2,icon:'icon_love_png',iconScale:0.6,title:'血量',value:hp,valueAdd:hp2 - hp},
                 {index:3,icon:'icon_def1_png',iconScale:0.4,title:'防御',value:def,valueAdd:def2 - def},
                 {index:4,icon:'icon_speed_png',iconScale:1,title:'移动速度',value:vo.speed,valueAdd:0},
-                {index:4,icon:'icon_atk_png',iconScale:1,title:'伤害',value:vo.atk2,valueAdd:0}
+                {index:4,icon:'icon_atkhp_png',iconScale:1,title:'伤害',value:vo.atk2,valueAdd:0}
             ]
             if(atk)
             {

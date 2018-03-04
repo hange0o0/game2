@@ -24,5 +24,6 @@
         			<e:HorizontalLayout horizontalAlign="justify"/>
         		</e:layout>
 	</e:TabBar>
+	<e:Label text="只保留最近3天的邮件" stroke="2" strokeColor="0x260f00" right="50" bottom="35"/>
 
 </e:Skin>

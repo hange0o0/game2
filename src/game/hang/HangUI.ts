@@ -205,6 +205,7 @@ class HangUI extends game.BaseItem {
             PC.actionFinish();
         }
         videoCon.action();
+        videoCon.randomTalk()
         if(PD.isGameOver || PD.monsterList.length == 0 || PD.actionTime > 180000)
         {
             this.overCount ++;

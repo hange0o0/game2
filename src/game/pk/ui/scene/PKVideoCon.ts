@@ -362,4 +362,20 @@ class PKVideoCon extends game.BaseContainer {
         },this)
     }
 
+    //随机一人发言
+    private lastTalk = 0
+    public randomTalk(){
+        if(egret.getTimer() - this.lastTalk < 1000)
+            return;
+        if(Math.random() > 0.05)
+            return;
+        var item = this.itemArr[Math.floor(this.itemArr.length*Math.random())];
+        if(item && !item.talkItm)
+        {
+            item.talk();
+            this.lastTalk = egret.getTimer();
+        }
+
+    }
+
 }

@@ -24,7 +24,7 @@ class PKMonsterItem extends game.BaseItem {
     private teamMC: eui.Image;
 
 
-
+   public talkItm:PKTalkItem;
 
     private monsterMV:MonsterMV
     public needRemove = false
@@ -236,5 +236,18 @@ class PKMonsterItem extends game.BaseItem {
         MyTool.removeMC(this);
         this.monsterMV.stop();
         this.addStateMV.remove();
+        if(this.talkItm)
+        {
+            PKTalkItem.freeItem(this.talkItm)
+            this.talkItm = null;
+        }
+    }
+
+    public talk(){
+        if(this.data.mid == 99)
+            return;
+        this.talkItm = PKTalkItem.createItem();
+        this.talkItm.setData(this);
+        this.addChildAt(this.talkItm,0);
     }
 }

@@ -16,7 +16,8 @@ class InfoManager {
 
     public getHeadList(){
         var arr = [];
-        for(var i=1;i<20;i++)
+        var len = 10 + UM.level*2
+        for(var i=1;i<len;i++)
             arr.push(i);
         //var data = MonsterVO.data;
         //for(var s in data)

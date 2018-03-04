@@ -69,6 +69,7 @@
     "src/game/pk/ui/scene/PKAddStateSkin.exml",
     "src/game/pk/ui/scene/PKMonsterItemSkin.exml",
     "src/game/pk/ui/scene/PKSkillItemSkin.exml",
+    "src/game/pk/ui/scene/PKTalkItemSkin.exml",
     "src/game/pk/ui/scene/PKTotemSkin.exml",
     "src/game/pk/ui/scene/PKVideoConSkin.exml",
     "src/game/pkRelate/PKCardInfoItemSkin.exml",

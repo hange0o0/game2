@@ -13,11 +13,11 @@
 	<e:Group y="143" left="10" right="10" visible.monster="false">
 		<e:Image source="bg8_png" scale9Grid="9,9,9,9" y="0" height="50" x="0" width="100%"/>
 	<e:Group x="13" y="10">
-			<e:Image source="icon_coin_png"  width="30" height="30" x="0" y="0"/>
+			<e:Image id="prop102" source="icon_coin_png"  width="30" height="30" x="0" y="0"/>
 			<e:Label id="valueText" text="Label"  size="24" x="37" y="5"/>
 		</e:Group>
 		<e:Group x="180" y="10">
-			<e:Image source="icon_coin_png" x="0" y="0" width="30" height="30"/>
+			<e:Image id="prop103" source="icon_coin_png" x="0" y="0" width="30" height="30"/>
 			<e:Label id="valueText2" text="Label" x="37" y="5" size="24"/>
 		</e:Group>
 		<e:Label id="desText" text="Label" y="15" size="24" right="160"/>

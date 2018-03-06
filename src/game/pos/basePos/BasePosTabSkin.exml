@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="BasePosTabSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="normal,choose,empty,lock" >
+	<e:Image source="btn1_png" scale9Grid="16,15,18,18" x="0" y="0" source.choose="btn2_png" source.empty="btn8_png" source.lock="btn3_png"/>
+	<e:Label id="text" text="5" horizontalCenter="0" verticalCenter="0" stroke="2"/>
+</e:Skin>

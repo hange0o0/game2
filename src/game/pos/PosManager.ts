@@ -30,33 +30,33 @@ class PosManager {
 
     public getDataByID(type,id){
         var list = this.getListByType(type);
-        for(var i=0;i<list.length;i++)
-        {
-            if(list[i].id == id)
-                return list[i]
-        }
-        return null;
+        //for(var i=0;i<list.length;i++)
+        //{
+        //    if(list[i].id == id)
+        //        return list[i]
+        //}
+        return list[id];
     }
 
     //取开放的防御阵
     public getOpenDef(){
         var list = this.getListByType('def');
         var arr = []
-        for(var i=0;i<list.length;i++)
+        for(var s in list)
         {
-            if(!list[i].close)
-                arr.push(list[i]);
+            if(!list[s].close)
+                arr.push(list[s]);
         }
         return arr;
     }
 
 
-    public addPos(type,name,list,fun?){
+    public addPos(type,id,list,fun?){
         var self = this;
         var oo:any = {};
         oo.type = type;
-        oo.name = name;
         oo.list = list;
+        oo.id = id;
         Net.addUser(oo);
         Net.send(GameEvent.pos.add_pos,oo,function(data){
             var msg = data.msg;
@@ -80,9 +80,8 @@ class PosManager {
                 MyWindow.Alert('手牌上限非法')
                 return;
             }
-            self.getListByType(type).push({
-                id:msg.id,
-                name:Base64.encode(name),
+            self.getListByType(type)[id] = ({
+                id:id,
                 list:list
             })
             EM.dispatch(GameEvent.client.pos_change)
@@ -91,17 +90,15 @@ class PosManager {
         });
     }
 
-    public changePos(type,id,name,list,fun?){
+    public changePos(type,id,list,fun?){
         var self = this;
         var oo:any = {};
         var posData = self.getDataByID(type,id);
         oo.type = type;
         oo.id = id;
-        if(name && posData.name != Base64.encode(name))
-            oo.name = name;
         if(list && posData.list != list)
             oo.list = list;
-        if(!oo.name && !oo.list)
+        if(!oo.list)
         {
             fun && fun();
             return;
@@ -124,8 +121,6 @@ class PosManager {
                 MyWindow.Alert('每个卡牌最多只能上阵3个')
                 return;
             }
-            if(name)
-                posData.name = Base64.encode(name)
             if(list)
                 posData.list = list
 
@@ -169,14 +164,7 @@ class PosManager {
                 return;
             }
             var list = self.getListByType(type);
-            for(var i=0;i<list.length;i++)
-            {
-                if(list[i].id == id)
-                {
-                    list.splice(i,1);
-                    break;
-                }
-            }
+            delete list[id];
             EM.dispatchEventWith(GameEvent.client.pos_change)
             if(fun)
                 fun();

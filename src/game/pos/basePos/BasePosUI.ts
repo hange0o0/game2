@@ -13,20 +13,22 @@ class BasePosUI extends game.BaseUI {
     private bottomUI: BottomUI;
     private btnGroup: eui.Group;
     private deleteBtn: eui.Group;
-    private renameBtn: eui.Group;
     private testBtn: eui.Group;
+    private pkBtn: eui.Group;
     private downBtn: eui.Image;
     private upBtn: eui.Image;
     private titleText: eui.Label;
+    private tabList: eui.List;
+    private openBtn: eui.CheckBox;
+
 
 
 
     public type = 'atk'
-    private index = 0  //第X个阵
+    public index = 0  //第X个阵
     public useCard = {}
     public maxCard = 0;
 
-    private posName = ''
     private posData //进入时的数据
 
 
@@ -35,6 +37,7 @@ class BasePosUI extends game.BaseUI {
     private listData:eui.ArrayCollection
     private selectData;
     private selectIndex;
+    private pkData;
 
     public constructor() {
         super();
@@ -55,11 +58,40 @@ class BasePosUI extends game.BaseUI {
 
         this.list.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onUnSelect,this);
 
+        this.tabList.itemRenderer = BasePosTabItem
+        this.tabList.dataProvider = new eui.ArrayCollection([0,1,2,3,4])
+
         this.addBtnEvent(this.deleteBtn,this.onDelete)
-        this.addBtnEvent(this.renameBtn,this.onRename)
+        this.addBtnEvent(this.pkBtn,this.onPK)
         this.addBtnEvent(this.testBtn,this.onTest)
         this.addBtnEvent(this.upBtn,this.onUp)
         this.addBtnEvent(this.downBtn,this.onDown)
+        this.addBtnEvent(this.openBtn,this.onOpen)
+    }
+
+    private onOpen(e){
+        e.stopImmediatePropagation();
+        if(!this.posData.close && PosManager.getInstance().getOpenDef().length <= 1)
+        {
+            MyWindow.ShowTips('最少要有一个使用中的防御阵')
+            this.openBtn.selected = true;
+            return;
+        }
+        PosManager.getInstance().changeClose('def',this.index,()=>{
+            //this.dataChanged();
+            //this.bg2.source = this.data.close?'bg5_png':'bg2_png'
+        })
+    }
+
+    private onPK(){
+        if(this.listData.length <= 1)
+        {
+            MyWindow.Alert('还没设置出战卡组')
+            return
+        }
+        this.testSave(()=>{
+            this.pkData.fun(this.index)
+        })
     }
     
     private onUp(){
@@ -72,7 +104,7 @@ class BasePosUI extends game.BaseUI {
     private onTest(){
         PosTestUI.getInstance().show(this.type,{
             list:this.changeToServerList(),
-            name:Base64.encode(this.posName),
+            name:(this.type == 'atk'?'进攻':'防御') + this.index,
         })
     }
 
@@ -87,25 +119,33 @@ class BasePosUI extends game.BaseUI {
     }
 
     public onClose(){
+        if(this.testSave())
+            this.hide();
+    }
+
+    private testSave(fun?){
         var PM = PosManager.getInstance();
         if(this.listData.length <= 1)
         {
             if(this.type == 'def' && this.posData && !this.posData.close && PM.getOpenDef().length <= 1)
             {
                 MyWindow.Alert('必须上阵最少一张卡牌');
-                return;
+                return false;
             }
         }
 
         var b = !this.posData && this.listData.length > 1
         if(!b)
-            b = this.posData && (Base64.decode(this.posData.name) != this.posName || this.posData.list != this.changeToServerList())
+            b = this.posData && this.posData.list != this.changeToServerList()
         if(b) //有变化
         {
-            this.onSave()
+            this.onSave(fun)
         }
-
-        this.hide();
+        else
+        {
+            fun && fun();
+        }
+        return true;
     }
 
 
@@ -123,44 +163,36 @@ class BasePosUI extends game.BaseUI {
         })
     }
 
-    private onRename(){
-        PosNameUI.getInstance().show(this.posName)
-        PosNameUI.getInstance().once('nameChange',this.onNameChange,this)
-    }
-
-    private onNameChange(e){
-        this.posName = e.data
-        this.renewTitle();
-    }
-
     private renewTitle(){
         var length = this.listData.length
         if(this.listData.getItemAt(this.listData.length-1).setting)
             length --;
-        this.topUI.setTitle(this.posName + ' ('+length+'/'+this.maxCard+')','pos')
+        this.titleText.text = '上阵:'+length+'/'+this.maxCard
     }
 
-    private onSave(){
+    private onSave(fun?){
+        var index = this.index;
         if(this.listData.length <= 1 && this.posData)
         {
             PosManager.getInstance().deletePos(this.type,this.posData.id,()=>{
+                fun && fun();
             })
             return false;
         }
         var serverList = this.changeToServerList();
         if(this.posData)
         {
-            PosManager.getInstance().changePos(this.type,this.posData.id,
-                this.posName,serverList,()=>{
+            PosManager.getInstance().changePos(this.type,this.index,serverList,()=>{
+                    fun && fun();
                     //MyWindow.ShowTips('保存成功！')
                 })
         }
         else
         {
-            PosManager.getInstance().addPos(this.type,
-                this.posName,serverList,()=>{
+            PosManager.getInstance().addPos(this.type,this.index,serverList,()=>{
+                    fun && fun();
                     //MyWindow.ShowTips('保存成功！')
-                    this.posData = PosManager.getInstance().getListByType(this.type)[this.index]
+                    //this.posData = PosManager.getInstance().getListByType(this.type)[index]
                 })
         }
         return true
@@ -231,9 +263,10 @@ class BasePosUI extends game.BaseUI {
         }
     }
 
-    public show(type?,index?){
+    public show(type?,pkData?){
         this.type = type;
-        this.index = index;
+        this.pkData = pkData;
+        this.index = pkData?(SharedObjectManager.getInstance().getMyValue('pk_choose') || 0):0;
         super.show()
     }
 
@@ -242,9 +275,43 @@ class BasePosUI extends game.BaseUI {
     }
 
     public onShow(){
+        this.openBtn.visible =  this.type == 'def';
         this.maxCard = PosManager.getInstance().maxPosNum();
-        this.titleText.text = this.type == 'atk'?'【进攻阵容】':'【防御阵容】'
+        if(this.pkData)
+            this.topUI.setTitle('战斗准备','atkPos')
+        else if(this.type == 'atk')
+            this.topUI.setTitle('进攻阵容','atkPos')
+        else
+            this.topUI.setTitle('防守阵容','defPos')
+
+        if(this.pkData)
+        {
+            this.btnGroup.addChild(this.pkBtn)
+            MyTool.removeMC(this.testBtn)
+        }
+        else
+        {
+            this.btnGroup.addChild(this.testBtn)
+            MyTool.removeMC(this.pkBtn)
+        }
+
         this.renew();
+        this.renewTabList();
+    }
+
+    private renewTabList(){
+        MyTool.renewList(this.tabList)
+    }
+
+    public setTabSelect(index){
+        if(this.index == index)
+            return;
+
+        this.testSave(()=>{
+            this.index = index;
+            this.renew();
+            this.renewTabList();
+        });
     }
 
     public resetData(){
@@ -278,15 +345,13 @@ class BasePosUI extends game.BaseUI {
         }
     }
 
-    public renew(noPosData?){
+    public renew(){
         var PM = PosManager.getInstance();
-        var data = this.posData = noPosData?null:PM.getListByType(this.type)[this.index]
+        var data = this.posData = PM.getListByType(this.type)[this.index]
         this.useCard = {};
         var arr = [];
         if(data)
         {
-            this.posName = Base64.decode(data.name) || '未命名';
-
             var list = data.list.split(',')
             for(var i=0;i<list.length;i++)
             {
@@ -296,11 +361,20 @@ class BasePosUI extends game.BaseUI {
             }
 
             this.btnGroup.addChildAt(this.deleteBtn,0)
+            if(this.type == 'def')
+            {
+                this.openBtn.visible = true;
+                this.openBtn.selected = !data.close
+            }
+            else
+            {
+                this.openBtn.visible = false;
+            }
         }
         else
         {
-            this.posName = '新建阵容' + this.index;
             MyTool.removeMC(this.deleteBtn)
+            this.openBtn.visible = false;
         }
         if(arr.length < this.maxCard)
             arr.push({setting:true})

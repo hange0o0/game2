@@ -12,6 +12,7 @@ class HelpUI extends game.BaseWindow {
     private list: eui.List;
 
     private dataIn;
+    private fun;
 
     public constructor() {
         super();
@@ -24,13 +25,15 @@ class HelpUI extends game.BaseWindow {
         this.list.useVirtualLayout = false;
     }
 
-    public show(v?){
+    public show(v?,fun?){
         this.dataIn = v;
+        this.fun = fun;
         super.show()
     }
 
     public hide() {
         super.hide();
+        this.fun && this.fun()
     }
 
     public onShow(){

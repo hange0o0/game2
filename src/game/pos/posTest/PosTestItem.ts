@@ -31,7 +31,7 @@ class PosTestItem extends game.BaseItem {
         this.dataArray.source = list;
         this.dataArray.refresh()
 
-        this.desText.text = Base64.decode(data.name) + '  ('+list.length+'/'+PosManager.getInstance().maxPosNum()+')';
+        this.desText.text = this.data.name + '  ('+list.length+'/'+PosManager.getInstance().maxPosNum()+')';
     }
 
 }

@@ -14,6 +14,7 @@ class PKSettingUI extends game.BaseWindow {
     public constructor() {
         super();
         this.skinName = "PKSettingUISkin";
+        this.canBGClose = false;
     }
 
     public childrenCreated() {

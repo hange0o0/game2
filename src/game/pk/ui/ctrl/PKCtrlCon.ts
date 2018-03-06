@@ -78,13 +78,17 @@ class PKCtrlCon extends game.BaseContainer {
 
         this.addBtnEvent(this.placeGroup,this.onPosClick)
             this.addBtnEvent(this.settingBtn,this.onSetting)
-        this.addBtnEvent(this.helpBtn,()=>{
-            HelpManager.getInstance().showHelp('pk')
-        })
+        this.addBtnEvent(this.helpBtn,this.onHelp)
 
         PKData.getInstance().addEventListener('video',this.onVideoEvent,this);
     }
 
+    private onHelp(){
+        PKingUI.getInstance().setStop(true)
+        HelpManager.getInstance().showHelp('pk',()=>{
+            PKingUI.getInstance().setStop(false)
+        })
+    }
     private onSetting(){
         PKingUI.getInstance().setStop(true)
         PKSettingUI.getInstance().show();
@@ -255,6 +259,7 @@ class PKCtrlCon extends game.BaseContainer {
         {
             PKPosItem.freeItem(this.placeArr.pop())
         }
+
     }
 
 
@@ -268,6 +273,9 @@ class PKCtrlCon extends game.BaseContainer {
 
         this.remove();
         this.renewCard();
+        this.costMC.mask = new egret.Rectangle(0,32-0,27,0);
+        this.costText.text = 'x' + PKConfig.mpInit
+        this.timeText.text = '' + DateUtil.getStringBySecond(0).substr(-5)
 
 
         for(var i=1;i<=4;i++)

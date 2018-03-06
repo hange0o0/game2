@@ -363,17 +363,18 @@ class PKVideoCon extends game.BaseContainer {
     }
 
     //随机一人发言
-    private lastTalk = 0
+    private lastTalk = {1:0,'-1':0}
     public randomTalk(){
-        if(egret.getTimer() - this.lastTalk < 1000)
-            return;
+
         if(Math.random() > 0.05)
             return;
         var item = this.itemArr[Math.floor(this.itemArr.length*Math.random())];
         if(item && !item.talkItm)
         {
+            if(egret.getTimer() - this.lastTalk[item.data.atkRota] < 2000)
+                return;
             item.talk();
-            this.lastTalk = egret.getTimer();
+            this.lastTalk[item.data.atkRota] = egret.getTimer();
         }
 
     }

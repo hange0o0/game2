@@ -110,7 +110,7 @@ class PKMonsterInfoUI extends game.BaseContainer {
 
     private renewNum(){
         var PD = PKData.getInstance();
-        this.spaceText.text = '占位：' + PD.getMonsterSpaceByPlayer(this.playerData.id) + '/' + PKConfig.maxMonsterSpace
+        this.spaceText.text = '总体积：' + PD.getMonsterSpaceByPlayer(this.playerData.id) + '/' + PKConfig.maxMonsterSpace
     }
 
     public renewList(){

@@ -55,28 +55,29 @@ class PosTestUI extends game.BaseUI {
 
     public renew(){
         var PM = PosManager.getInstance();
+        var arr = []
         if(this.testType == 'atk')
         {
             this.topUI.setTitle('请选择防守阵容')
-            var arr = PM.defList.concat();
-            for(var i=0;i<arr.length;i++)
+            for(var s in PM.defList)
             {
-                arr[i] = {
-                    data:arr[i],
+                arr.push({
+                    data:PM.defList[s],
+                    name:'防守阵容【' + (parseInt(s)+1)+ '】',
                     type:'def'
-                };
+                });
             }
         }
         else
         {
             this.topUI.setTitle('请选择进攻阵容')
-            var arr = PM.atkList.concat();
-            for(var i=0;i<arr.length;i++)
+            for(var s in PM.atkList)
             {
-                arr[i] = {
-                    data:arr[i],
+                arr.push({
+                    data:PM.atkList[s],
+                    name:'进攻阵容【' + (parseInt(s)+1)+ '】',
                     type:'atk'
-                };
+                });
             }
         }
 

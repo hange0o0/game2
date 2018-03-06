@@ -92,11 +92,11 @@ class MainFightUI extends MainBase {
     }
 
     private onDef(){
-        DefPosListUI.getInstance().show();
+        BasePosUI.getInstance().show('def');
     }
 
     private onAtk(){
-        AtkPosListUI.getInstance().show();
+        BasePosUI.getInstance().show('atk');
     }
 
 
@@ -126,8 +126,8 @@ class MainFightUI extends MainBase {
 
     private renewPosBtn(){
         var PM = PosManager.getInstance();
-        this.defBtn.label = '防守阵容 ' + PM.defList.length + '/' + PM.maxNum
-        this.atkBtn.label = '进攻阵容 ' + PM.atkList.length + '/' + PM.maxNum
+        this.defBtn.label = '防守阵容 ' + ObjectUtil.objLength(PM.defList) + '/' + PM.maxNum
+        this.atkBtn.label = '进攻阵容 ' + ObjectUtil.objLength(PM.atkList) + '/' + PM.maxNum
     }
 
     private onTimer(){

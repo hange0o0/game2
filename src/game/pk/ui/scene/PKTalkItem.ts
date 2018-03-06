@@ -54,7 +54,7 @@ class PKTalkItem extends game.BaseContainer {
             this.bg.scaleX = 1
             this.anchorOffsetX = 0.6*this.w;
         }
-        this.y = data.barGroup.y;
+        this.y = data.barGroup.y+10;
 
 
         egret.Tween.removeTweens(this);

@@ -246,6 +246,8 @@ class PKMonsterItem extends game.BaseItem {
     public talk(){
         if(this.data.mid == 99)
             return;
+        if(this.data.hp < 10)
+            return;
         this.talkItm = PKTalkItem.createItem();
         this.talkItm.setData(this);
         this.addChildAt(this.talkItm,0);

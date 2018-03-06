@@ -29,7 +29,7 @@ class PKConfig {
     public static maxMonsterSpace = 30; //同时存活怪的占位
     public static floorWidth = 800//1300; //战场宽度
     public static appearPos = 100//出现的位置
-    public static diamondPos = 200//出现的位置
+    //public static diamondPos = 200//出现的位置
     public static remainCD = 3000//能出兵后没出兵保持的时间
     //public static maxMP = 20; //MP上限
     public static mpInit = 15; //初始的MP值

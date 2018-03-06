@@ -14,6 +14,8 @@ class CardUI extends MainBase {
     private desText: eui.Label;
     private skillBtn: eui.Button;
     private tab: eui.TabBar;
+    private  prop102: eui.Image;
+    private  prop103: eui.Image;
     private downList2: DownList;
 
 
@@ -42,6 +44,8 @@ class CardUI extends MainBase {
         this.addBtnEvent(this.skillBtn,this.onSkill)
         //this.selectType = 0;
 
+        this.prop102.source = PropVO.getObject(102).getThumb()
+        this.prop103.source = PropVO.getObject(103).getThumb()
         this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
         this.tab.selectedIndex = 0;
     }
@@ -49,7 +53,7 @@ class CardUI extends MainBase {
     private onSkill(){
         if(PropManager.getInstance().getNum(102) == 0)
         {
-            MyWindow.Alert('令牌不足')
+            MyWindow.Alert(PropVO.getObject(102).propname + '不足')
             return;
         }
         CardManager.getInstance().card_draw(()=>{

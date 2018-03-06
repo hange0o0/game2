@@ -42,7 +42,7 @@ class HangUI extends game.BaseItem {
 
         this.addBtnEvent(this.helpBtn,(e)=>{
             e.stopImmediatePropagation()
-            HelpManager.getInstance().showHelp('card')
+            HelpManager.getInstance().showHelp('hang')
         })
 
         this.con.mask = new egret.Rectangle(0,0,this.con.width,this.con.height)

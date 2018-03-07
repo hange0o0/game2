@@ -101,7 +101,7 @@ class PKingUI extends game.BaseUI {
 
     public onShow(){
         EM.dispatchEventWith(GameEvent.client.pk_begin)
-        var PD = PKData.getInstance();
+
         this.scrollTime = 0;
         PKVideoCon.getInstance().init();
         this.pkCtrlCon.init();
@@ -112,15 +112,7 @@ class PKingUI extends game.BaseUI {
         PKVideoCon.getInstance().x = 0;
         PKVideoCon.getInstance().y = 0;
 
-        PD.diamondData = PD.addMonster({
-            force:0,
-            mid:99,
-            owner:'sys',
-            atkRota:1,
-            x:PKConfig.floorWidth/2 + PKConfig.appearPos,
-            y:0,
-            actionTime:0
-        });
+
 
         this.scroller.viewport.scrollH = (PKConfig.floorWidth + PKConfig.appearPos*2-640)/2
         this.scroller.touchEnabled = this.scroller.touchChildren = false;
@@ -137,6 +129,17 @@ class PKingUI extends game.BaseUI {
     public startPlay(){
         this.hideBehind = true;
         PKBeforeUI.getInstance().hide();
+
+        var PD = PKData.getInstance();
+        PD.diamondData = PD.addMonster({
+            force:0,
+            mid:99,
+            owner:'sys',
+            atkRota:1,
+            x:PKConfig.floorWidth/2 + PKConfig.appearPos,
+            y:0,
+            actionTime:0
+        });
 
         var tw = this.tw = egret.Tween.get(this.roundText)
         tw.to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '4'})

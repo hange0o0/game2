@@ -45,7 +45,7 @@ class PKCardInfoUI extends game.BaseContainer {
         GameManager.stage.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.onMove,this);
         this.stageX = GameManager.stageX
         this.stageY = GameManager.stageY
-        var w = 480
+        var w = 540
         this.x = Math.min(Math.max(GameManager.stageX - w/2,0),640-w)
         if(GameManager.stageY < 480)
         {

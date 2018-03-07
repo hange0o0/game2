@@ -4,8 +4,12 @@ class TecInfoItem extends game.BaseItem {
         this.skinName = "TecInfoItemSkin";
     }
 
-    private coinText: eui.Label;
+    private redMC: eui.Rect;
+    private nameText: eui.Label;
+    private numText: eui.Label;
     private img: eui.Image;
+
+
 
 
 
@@ -14,27 +18,41 @@ class TecInfoItem extends game.BaseItem {
     }
 
     public dataChanged(){
-        var isRed = false
+        var isRed = 1
         if(this.data.type == 'coin')
         {
-            this.coinText.text = '金币  ×'+NumberUtil.addNumSeparator(this.data.num)+''
-            isRed =  this.data.num >= UM.getCoin();
+            this.nameText.text = '金币'
+            this.numText.text = '×'+NumberUtil.addNumSeparator(this.data.num)
+            isRed =  UM.getCoin()/this.data.num;
             this.img.source = MyTool.getPropCoin();
         }
         else if(this.data.type == 'lv')
         {
-            this.coinText.text = '主城等级  LV.'+this.data.num+''
-            isRed =  this.data.num >= TecManager.getInstance().getLevel(1);
+            this.nameText.text = '主城等级  '
+            this.numText.text = 'LV.' + this.data.num+''
+            isRed =   TecManager.getInstance().getLevel(1)/this.data.num;
             this.img.source = MyTool.getPropLevel();
         }
         else
         {
             var vo = PropVO.getObject(this.data.id);
             this.img.source = vo.getThumb();
-            this.coinText.text = vo.propname + ' ×' + NumberUtil.addNumSeparator(this.data.num)
-            isRed =  this.data.num >= PropManager.getInstance().getNum(this.data.id);
+            this.nameText.text = vo.propname
+            this.numText.text =  ' ×' + NumberUtil.addNumSeparator(this.data.num)
+            isRed =   PropManager.getInstance().getNum(this.data.id)/this.data.num;
         }
-        this.coinText.textColor = isRed?0xFF0000:0xFCDB79;
+        this.numText.textColor = isRed<1?0xFF0000:0xFCDB79;
+        if(isRed<1)
+        {
+            this.redMC.width = isRed*this.width
+            this.redMC.fillColor = 0xFF0000
+        }
+        else
+        {
+            this.redMC.width = 1/isRed*this.width
+            this.redMC.fillColor = 0x00FF00
+        }
+
     }
 
 }

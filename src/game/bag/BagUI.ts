@@ -23,9 +23,15 @@ class BagUI extends MainBase {
         this.scroller.viewport = this.list;
 
         this.list.dataProvider = this.dataArray
+        this.list.itemRenderer = BagItem
 
         this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
         this.tab.selectedIndex = 0;
+
+        //this.list.layout['requestedColumnCount'] = 1
+        //this.list.layout['paddingLeft'] = 15
+        //this.list.layout['verticalGap'] = 10
+        //this.list.layout['paddingTop'] = 10
     }
 
     private onTab(){
@@ -45,19 +51,16 @@ class BagUI extends MainBase {
         var arr = PropManager.getInstance().getListByType(this.tab.selectedIndex + 1);
         if(this.tab.selectedIndex == 1)
         {
-            arr.push({coin:true});
-            this.list.itemRenderer = BagItem
-            this.list.layout['requestedColumnCount'] = 1
-            this.list.layout['paddingLeft'] = 15
-            this.list.layout['verticalGap'] = 10
+            arr.unshift({coin:true});
         }
-        else
-        {
-            this.list.itemRenderer = BagItem2
-            this.list.layout['requestedColumnCount'] = 3
-            this.list.layout['paddingLeft'] = 50
-            this.list.layout['verticalGap'] = 20
-        }
+        //else
+        //{
+        //    this.list.itemRenderer = BagItem2
+        //    this.list.layout['requestedColumnCount'] = 3
+        //    this.list.layout['paddingLeft'] = 50
+        //    this.list.layout['verticalGap'] = 20
+        //    this.list.layout['paddingTop'] = 20
+        //}
         this.dataArray.source = arr
         this.dataArray.refresh()
     }

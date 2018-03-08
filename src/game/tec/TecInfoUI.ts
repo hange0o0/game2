@@ -6,15 +6,21 @@ class TecInfoUI extends game.BaseWindow {
             this._instance = new TecInfoUI();
         return this._instance;
     }
-    private mc: eui.Image;
     private levelText: eui.Label;
+    private mc: eui.Image;
+    private desText: eui.Label;
+    private upGroup: eui.Group;
+    private icon1: eui.Image;
+    private text1: eui.Label;
+    private icon2: eui.Image;
+    private text2: eui.Label;
+    private list: eui.List;
     private nameText: eui.Label;
+    private helpBtn: eui.Image;
+    private btnGroup: eui.Group;
     private cancelBtn: eui.Button;
     private okBtn: eui.Button;
-    private desText: eui.Label;
-    private list: eui.List;
-    private btnGroup: eui.Group;
-    private helpBtn: eui.Image;
+
 
 
 
@@ -59,14 +65,43 @@ class TecInfoUI extends game.BaseWindow {
 
     public renew(){
 
-        this.levelText.text = 'LV.' + TecManager.getInstance().getLevel(this.dataIn.id)
+        var TCM = TecManager.getInstance();
+        var lv = TCM.getLevel(this.dataIn.id);
+        this.levelText.text = 'LV.' + lv;
         this.nameText.text = this.dataIn.name;
         this.mc.source = this.dataIn.getThumb();
         this.desText.text = this.dataIn.des
+        switch(this.dataIn.type)
+        {
+            case 2:
+                this.upGroup.visible = true
+                this.icon1.source = 'icon_force_png'
+                this.icon2.source = 'icon_force_png'
+                this.text1.text = '+' + TCM.getForceAdd(this.dataIn.id,lv)
+                this.text2.text = '+' + TCM.getForceAdd(this.dataIn.id,lv + 1)
+                break;
+            case 3:
+                this.upGroup.visible = true
+                this.icon1.source = 'icon_coin_png'
+                this.icon2.source = 'icon_coin_png'
+                this.text1.text = '+' + TCM.getCoinAdd(this.dataIn.id,lv)
+                this.text2.text = '+' + TCM.getCoinAdd(this.dataIn.id,lv + 1)
+                break;
+            case 4:
+                this.upGroup.visible = true
+                this.icon1.source = PropVO.getObject(this.dataIn.id-300).getThumb()
+                this.icon2.source = PropVO.getObject(this.dataIn.id-300).getThumb()
+                this.text1.text = '+' + lv*5 + '%'
+                this.text2.text = '+' +(lv+1)*5 + '%'
+                break;
+            default:
+                this.upGroup.visible = false
+                break;
+        }
 
-        var arr = TecManager.getInstance().getLevelUpCost(this.dataIn.id);
+        var arr = TCM.getLevelUpCost(this.dataIn.id);
         this.list.dataProvider = new eui.ArrayCollection(arr)
-        if(TecManager.getInstance().testRed(this.dataIn.id))
+        if(TCM.testRed(this.dataIn.id))
             this.btnGroup.addChild(this.okBtn);
         else
             MyTool.removeMC(this.okBtn);

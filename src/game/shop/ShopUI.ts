@@ -9,7 +9,6 @@ class ShopUI extends game.BaseUI {
 
     private topUI: TopUI;
     private scroller: eui.Scroller;
-    private cdGroup: eui.Group;
     private cdText: eui.Label;
     private list: eui.List;
     private diamondList: eui.List;

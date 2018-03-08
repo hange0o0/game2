@@ -4,11 +4,13 @@ class RankItem extends game.BaseItem {
         this.skinName = "RankItemSkin";
     }
 
+    private des: eui.Label;
     private nameText: eui.Label;
     private rankText: eui.Label;
     private headMC: HeadMC;
     private scoreText: eui.Label;
     private indexMC: eui.Image;
+
 
 
 
@@ -23,10 +25,17 @@ class RankItem extends game.BaseItem {
     }
 
     public dataChanged(){
+        if(this.data.text)
+        {
+            this.des.text = this.data.text
+            this.currentState = 'text'
+            return;
+        }
 
         this.nameText.text = this.data.nick
         this.headMC.setData(this.data.head,this.data.type);
         this.scoreText.text = this.data.score;
+        this.currentState = this.data.gameid == UM.gameid?'self':'normal'
 
         if(this.data.index <=3)
         {

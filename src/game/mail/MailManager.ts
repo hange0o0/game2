@@ -12,7 +12,7 @@ class MailManager {
     //101:系统奖励
 
     public mailData;
-    public mailEffectTime = 72*3600//有效时间
+    public mailEffectTime = 3*24*3600//有效时间
 
     public constructor() {
         this.mailData = SharedObjectManager.getInstance().getMyValue('mailData') || {list:[],time:0};
@@ -20,7 +20,7 @@ class MailManager {
         for(var i=0;i<this.mailData.list.length;i++)
         {
             var oo = this.mailData.list[i];
-            if(oo.time + this.mailEffectTime < t)
+            if(parseInt(oo.time) + this.mailEffectTime < t)
             {
                 this.mailData.list.splice(i,1);
                 i--;

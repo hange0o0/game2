@@ -49,7 +49,7 @@ class CardDrawResultUI extends game.BaseWindow {
     }
 
     public renew(){
-        this.desText.text = this.dataIn.addprop?'重复卡牌已被自动分解为碎片+1':'获得新的卡片';
+        this.desText.text = this.dataIn.addprop?'已拥有卡牌已被自动分解\n'+PropVO.getObject(103).propname+':+1':'获得新的卡片';
         this.item.data = SkillVO.getObject(this.dataIn.id);
         if(PropManager.getInstance().getNum(102))
         {

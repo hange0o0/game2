@@ -88,6 +88,8 @@ class PKCardItem extends game.BaseItem {
 
         this.skillType.visible = false
         this.spaceGroup.visible = false
+        this.img2.visible = false;
+        this.cdText.visible = false;
         //if(vo.isMonster)
         //{
         //    this.skillType.visible = false

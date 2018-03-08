@@ -63,6 +63,25 @@ class RankUI extends game.BaseUI {
     }
 
     public renew(){
-        this.list.dataProvider = new eui.ArrayCollection(RankManager.getInstance().getRankList(this.typeObj[this.tab.selectedIndex].key))
+        var arr = RankManager.getInstance().getRankList(this.typeObj[this.tab.selectedIndex].key).concat();
+        if(arr.length > 0)
+        {
+            var rank = 0;
+            for(var i=0;i<arr.length;i++)
+            {
+                var oo = arr[i];
+                if(oo.gameid == UM.gameid)
+                {
+                    rank = oo.index;
+                    break;
+                }
+            }
+            if(rank)
+                arr.unshift({text:'你的排名：第 '+rank+' 名'})
+            else
+                arr.unshift({text:'你还没上榜'})
+
+        }
+        this.list.dataProvider = new eui.ArrayCollection(arr)
     }
 }

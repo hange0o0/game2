@@ -9,10 +9,12 @@ class HangManager {
     public level;
     public awardtime;
     public pktime;
+    public lastlist;
     public init(data){
         this.level = data.level
         this.awardtime = data.awardtime
         this.pktime = data.pktime
+        this.lastlist = (data.lastlist || '').split(',')
     }
 
     public getPKCD(){
@@ -110,6 +112,7 @@ class HangManager {
             PKManager.getInstance().pkResult = msg;
             this.level = msg.level;
             this.pktime = msg.pktime;
+            this.lastlist = (msg.lastlist || '').split(',')
             if(!this.awardtime)
                 this.awardtime = this.pktime;
             EM.dispatch(GameEvent.client.hang_change);

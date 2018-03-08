@@ -100,9 +100,9 @@ class HangUI extends game.BaseItem {
         var awardCD = TM.now() - HM.awardtime;
         if(!this.awardBtn.visible && HM.getAwardLeft() < 0)
             this.awardBtn.visible = true;
-        if(!this.awardRed.visible && awardCD >= 3600*8)
+        if(!this.awardRed.visible && awardCD >= 3600*10)
             this.awardRed.visible = true;
-        this.timeText.text = DateUtil.getStringBySecond(Math.min(3600*8,awardCD))
+        this.timeText.text = DateUtil.getStringBySecond(Math.min(3600*10,awardCD))
 
     }
 
@@ -243,16 +243,24 @@ class HangUI extends game.BaseItem {
     private testAddMonster(){
         if(this.cost1 > 0)
         {
-            var id = 1 + Math.floor(Math.random()*18);
+            var id = <number>ArrayUtil.randomOne(CardManager.getInstance().getMyMonsterList(0)).id;
             var vo = MonsterVO.getObject(id)
+            vo.preLoad();
             this.cost1 -= vo.cost
             this.addMonster(id,1)
         }
 
         if(this.cost2 > 0)
         {
-            var id = 1 + Math.floor(Math.random()*18);;
+            while(true)
+            {
+                var id = parseInt(ArrayUtil.randomOne(HangManager.getInstance().lastlist));
+                if(id < 100)
+                    break;
+            }
+
             var vo = MonsterVO.getObject(id)
+            vo.preLoad();
             this.cost2 -= vo.cost
             this.addMonster(id,2)
         }

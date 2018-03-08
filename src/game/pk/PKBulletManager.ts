@@ -366,7 +366,7 @@ class BulletAniMC extends egret.DisplayObjectContainer{
 
         var AM = AniManager.getInstance();
         if(this.mc)
-            AniManager.getInstance().removeMV(this.mc);
+            AM.removeMV(this.mc);
         this.mc = AM.getAni(id);
         this.mc.scaleX = this.mc.scaleY = 0.3   //@ani scale
         this.mc.x = 0

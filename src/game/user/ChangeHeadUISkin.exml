@@ -11,7 +11,7 @@
 	</e:Group>
 	<e:Scroller id="scroller" top="120" bottom="150" bounces="false" left="30" right="30">
 		<e:Group>
-			<e:List id="list" minHeight="200" itemRendererSkinName="AwardItemSkin" x="0">
+			<e:List id="list" minHeight="200" x="0">
 				<e:layout>
 					<e:TileLayout requestedColumnCount="5" horizontalGap="10" verticalGap="10"/>
 				</e:layout>

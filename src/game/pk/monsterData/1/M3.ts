@@ -12,6 +12,9 @@ class M3 extends MBase{
         //第二次伤害
         var endTime = actionTime + this.getAtkArriveCD(user,target)+50;
         this.sendAtkAction(user,target,actionTime,endTime) //攻击起作用
+        //第3次伤害
+        var endTime = endTime+50;
+        this.sendAtkAction(user,target,actionTime,endTime) //攻击起作用
     }
 
     //伤害飞行时间

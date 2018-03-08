@@ -74,10 +74,10 @@ class SlaveItem extends game.BaseItem {
     public onTimer(){
          if(this.currentState == 'normal')
          {
-             var cd = Math.min(3600*8,TM.now() - this.data.awardtime)
+             var cd = Math.min(3600*10,TM.now() - this.data.awardtime)
              //MyTool.changeGray(this.getBtn,cd < 60*60,true)
-             this.redMC.visible = cd == 3600*8;
-             this.getBtn.label = '收取 '+Math.floor(cd/3600)+'/8'
+             this.redMC.visible = cd == 3600*10;
+             this.getBtn.label = '收取 '+Math.floor(cd/3600)+'/10'
              //this.getBtn.touchEnabled = cd >= 3600
 
              cd = this.data.protime - TM.now()

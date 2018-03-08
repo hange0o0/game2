@@ -6,4 +6,5 @@
 	<e:Label id="timeText" text="2011/12/1" size="24" stroke="1" verticalAlign="bottom" strokeColor="0x231507" y="14" right="10" textColor="0xdbd3c7"/>
 	<e:Label id="desText" text="100" textAlign="left" stroke="2" y="57.4" size="24" left="120" right="25" lineSpacing="5" textColor="0xfcd6a4" anchorOffsetY="0" verticalAlign="middle" anchorOffsetX="0" height="24"/>
 	<e:Image id="redMC" source="red_mc_png" right="-12" top="-4"/>
+	<e:Image id="awardMC" source="get_award_png" right="10" bottom="3" scaleX="0.8" scaleY="0.8"/>
 </e:Skin>

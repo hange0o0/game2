@@ -12,7 +12,7 @@
 			</e:Group>
 			<e:Label text="挑战失败" y="119" stroke="3" x="190"/>
 		</e:Group>
-		<e:List id="list" y="266" itemRendererSkinName="AwardItemSkin" x="0">
+		<e:List id="list" y="266" itemRendererSkinName="PKAwardItemSkin" x="0">
 		</e:List>
 		<e:Label id="closeBtn" text="点击任意地方关闭" x="114" y="482" size="24" stroke="2" textColor="0x9B9999"/>
 		<e:layout>

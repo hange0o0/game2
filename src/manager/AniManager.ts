@@ -216,7 +216,11 @@ class AniManager {
             var data:any = RES.getRes(name + "_json"); //qid
             var texture:egret.Texture = RES.getRes(name + "_png");
             if(data == null)
-                throw new Error('111');
+            {
+                if(Config.isDebug)
+                    throw new Error('111');
+                return this.mcPool.pop() || new egret.MovieClip();
+            }
             mcFactory = new egret.MovieClipDataFactory(data, texture);
             //mcFactory.enableCache = true;
             this.mcFactorys[name] = mcFactory
@@ -224,7 +228,11 @@ class AniManager {
         var mc:any = this.mcPool.pop() || new egret.MovieClip();
         mc.movieClipData = mcFactory.generateMovieClipData(name);
         if(mc.movieClipData == null)
-            throw new Error('222');
+        {
+            if(Config.isDebug)
+                throw new Error('222');
+            return mc
+        }
         mc.frameRate = 12//技能动画变慢
         mc.scaleX = mc.scaleY = 2;
         mc.rotation = 0;

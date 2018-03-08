@@ -24,14 +24,25 @@ class TecManager {
         //2个科技，资源组合不同
     }
 
-    //取这个等级每小时能得到的金币   openCoin:解锁金币
-    public getCoinAdd(lv,openCoin){
-        var base = openCoin;
+    //取这个等级每小时能得到的金币
+    public getCoinAdd(id,lv){
+        var vo = TecVO.getObject(id);
+        return this.getTecValue(lv,vo.value1,3);
+    }
+
+    public getForceAdd(id,lv){
+        var vo = TecVO.getObject(id);
+        return this.getTecValue(lv,vo.value1,0.3);
+    }
+
+    private getTecValue(lv,begin,step){
+        if(lv == 0)
+            return 0;
+        var base = begin;
         for(var i=1;i<lv;i++)
         {
-            base += 3*i
+            base += Math.max(1,Math.floor(step*i))
         }
-        //last + 3*lv
         return base;
     }
 

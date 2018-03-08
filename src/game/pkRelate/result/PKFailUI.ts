@@ -23,6 +23,7 @@ class PKFailUI extends game.BaseUI {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.list.itemRenderer = PKAwardItem
         this.addBtnEvent(this, this.onOK)
         //this.addBtnEvent(this.retryBtn, this.onRetry)
     }
@@ -39,17 +40,34 @@ class PKFailUI extends game.BaseUI {
 
         this.list.visible = this.closeBtn.visible = false
         this.group.scaleX = this.group.scaleY = 0;
+
+        var arr = []
+        if(PKM.pkResult && PKM.pkResult.award)
+            arr = MyTool.getAwardArr(PKM.pkResult.award)
+        var arrayCollection = this.list.dataProvider = new eui.ArrayCollection([]);
+
+
         var tw = egret.Tween.get(this.group)
-        tw.to({scaleX:1.1,scaleY:1.1},300).to({scaleX:1,scaleY:1},300).call(function(){
-            var arr = []
-            if(PKM.pkResult && PKM.pkResult.award)
-                arr = MyTool.getAwardArr(PKM.pkResult.award)
-            this.list.dataProvider = new eui.ArrayCollection(arr);
+        tw.to({scaleX:1.1,scaleY:1.1},200).to({scaleX:1,scaleY:1},200).wait(300).call(function(){
             this.bg.visible = true;
-            this.list.visible = this.closeBtn.visible = true
+            this.list.visible = true
+        },this)
+        while(arr.length > 0)
+        {
+            this.addItem(tw,arrayCollection,arr.shift())
+        }
+
+        tw.wait(300).call(function(){
+            this.closeBtn.visible = true;
         },this)
 
 
+    }
+
+    private addItem(tw,arrayCollection,data){
+        tw.wait(150).call(function(){
+            arrayCollection.addItem(data)
+        },this)
     }
 
     private onOK(){

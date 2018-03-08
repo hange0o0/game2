@@ -9,6 +9,8 @@ class MailItem extends game.BaseItem {
     private timeText: eui.Label;
     private desText: eui.Label;
     private redMC: eui.Image;
+    private awardMC: eui.Image;
+
 
 
 
@@ -38,6 +40,7 @@ class MailItem extends game.BaseItem {
         this.desText.text = MailManager.getInstance().getMailDes(this.data);
 
         this.redMC.visible = this.data.type > 100 && !this.data.stat;
+        this.awardMC.visible = this.data.type > 100 && this.data.stat
     }
 
 }

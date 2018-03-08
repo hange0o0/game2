@@ -65,7 +65,7 @@
 			</e:Group>
 		</e:Scroller>
 		<e:Rect height="50" y="0" fillAlpha="0.3" left="10" right="10"/>
-		<e:Label id="viewNumText" text="Label" y="11" size="22" x="20"/>
+		<e:Label id="viewNumText" text="Label" y="11" size="22" right="20"/>
 	</e:Group>
 	<e:Image id="helpBtn" source="icon_help_png" y="82" right="10"/>
 	

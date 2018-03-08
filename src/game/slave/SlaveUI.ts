@@ -137,7 +137,7 @@ class SlaveUI extends MainBase {
         this.scroller.visible = false
         var arr = SM.getViewList();
         this.list.dataProvider = new eui.ArrayCollection(arr)
-        this.viewNumText.text = arr.length + '/' + SM.maxViewNum
+        this.viewNumText.text = '关注数量：' + arr.length + '/' + SM.maxViewNum
         this.onTimer();
     }
 

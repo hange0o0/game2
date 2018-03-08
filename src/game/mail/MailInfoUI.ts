@@ -66,10 +66,10 @@ class MailInfoUI extends game.BaseWindow {
         if(haveAward)
         {
             var canAward = haveAward && !this.dataIn.stat;
+            var arr = MyTool.getAwardArr(content.award);
+            this.list.dataProvider = new eui.ArrayCollection(arr)
             if(canAward)
             {
-                var arr = MyTool.getAwardArr(content.award);
-                this.list.dataProvider = new eui.ArrayCollection(arr)
                 this.btnGroup.addChild(this.okBtn)
             }
             else

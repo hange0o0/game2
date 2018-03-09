@@ -17,29 +17,58 @@ class M32 extends MBase {
         PKBulletManager.getInstance().createBullet(userItem,targetItem,actionTime,endTime,7)
     }
 
-    public atk(user:PKMonsterData,target:PKMonsterData){
-        var b = super.atk(user,target)
-        if(b && target.beSkillAble())
-        {
-            var skillValue = user.getSkillValue(1);
-            var buff = new PKBuffData()
-            buff.id = 32;
-            buff.value = skillValue;
-            buff.addValue('atk',-Math.floor(target.baseAtk * skillValue/100));
-            buff.user = user;
-            buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(2);
-            target.addBuff(buff)
+    public onCreate(user:PKMonsterData){
+        var listener = new M32StateListener();
+        listener.owner = user;
+        user.getOwner().teamData.addStateLister(listener)
+    }
 
-            if(buff.ing)
+    public onDie(user:PKMonsterData){
+        //var PD = PKData.getInstance();
+        //var arr = PD.getMonsterByTeam(user.getOwner().teamData);
+        //for(var i=0;i<arr.length;i++)
+        //{
+        //    var target:PKMonsterData = arr[i];
+        //    target.cleanBuff(0,user);
+        //}
+        user.getOwner().teamData.removeStateListerByOwner(user)
+    }
+}
+
+class M32StateListener extends PKStateListener {
+    public type = PKConfig.LISTENER_TIMER
+    public actionTime
+    //public x
+    constructor() {
+        super();
+        this.actionTime = PKData.getInstance().actionTime;
+    }
+
+    // 起作用时会调用的方法
+    public actionFun(target?:PKMonsterData){
+
+        if(PKData.getInstance().actionTime - this.actionTime < 1000)
+            return;
+
+        this.actionTime = PKData.getInstance().actionTime;
+
+        var user:PKMonsterData = <PKMonsterData>this.owner;
+        var PD = PKData.getInstance();
+        var arr = PD.getMonsterByTeam(user.getOwner().teamData);
+        var atkrage = user.getSkillValue(1);
+        var list = [];
+
+        for(var i=0;i<arr.length;i++)
+        {
+            var targetEnemy = arr[i];
+            if(!targetEnemy.beSkillAble())
+                continue;
+            var des = Math.abs(user.x - targetEnemy.x);
+            if(des<=atkrage)
             {
-                PKData.getInstance().addVideo({
-                    type:PKConfig.VIDEO_MONSTER_ADD_STATE,
-                    user:target,
-                    key:'atk',
-                    stateType:2
-                })
+                targetEnemy.addHp(user.getSkillValue(2,true))
             }
         }
-        return b;
+        return list;
     }
 }

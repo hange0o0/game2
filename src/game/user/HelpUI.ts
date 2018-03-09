@@ -7,9 +7,11 @@ class HelpUI extends game.BaseWindow {
         return this._instance;
     }
 
-    private titleText: eui.Label;
     private scroller: eui.Scroller;
     private list: eui.List;
+    private titleText: eui.Label;
+    private closeBtn: eui.Group;
+
 
     private dataIn;
     private fun;
@@ -23,6 +25,7 @@ class HelpUI extends game.BaseWindow {
         super.childrenCreated();
         this.scroller.viewport = this.list
         this.list.useVirtualLayout = false;
+        this.addBtnEvent(this.closeBtn,this.hide)
     }
 
     public show(v?,fun?){

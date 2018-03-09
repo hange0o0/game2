@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="SlaveMasterItemSkin" width="400" height="320" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
+<e:Skin class="SlaveMasterItemSkin" width="400" height="310" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
 	<e:Image source="bg11_png" scale9Grid="11,8,9,13" left="-15" right="-15" top="-10" bottom="-10" visible="false"/>
-	<ns1:HeadMC width="180" height="180" skinName="HeadMCSkin" id="headMC" y="0" horizontalCenter="0"/>
-	<e:Label id="nameText" text="苦顶替" size="26" stroke="3" verticalAlign="bottom" textColor="0xFFFFFF" strokeColor="0x231507" y="224" horizontalCenter="0"/>
-	<e:Button id="getBtn" label="反抗" skinName="Btn2Skin" width="180" bottom="0" horizontalCenter="0"/>
-	<e:Group id="cdGroup" width="160" bottom="18" horizontalCenter="0">
+	<ns1:HeadMC width="150" height="150" skinName="HeadMCSkin" id="headMC" y="0" horizontalCenter="0"/>
+	<e:Label id="nameText" text="苦顶替" size="30" stroke="3" verticalAlign="bottom" strokeColor="0x231507" y="210" horizontalCenter="0" textColor="0xfce4a4"/>
+	<e:Button id="getBtn" label="反抗" width="180" bottom="0" horizontalCenter="0" skinName="Btn1Skin"/>
+	<e:Group id="cdGroup" width="160" bottom="20" horizontalCenter="0">
 		<e:Image source="icon_clock_png" x="0" y="0"/>
 		<e:Label id="cdText" text="Label" size="24" stroke="2" textAlign="center" y="16" x="45"/>
 		<e:layout>
 		<e:HorizontalLayout verticalAlign="middle" horizontalAlign="center"/>
 		</e:layout>
 	</e:Group>
-	<e:Group y="166" horizontalCenter="0">
-		<e:Image source="border1_png" scale9Grid="28,20,26,2" x="0" y="0" width="190"/>
-		<e:Label id="forceText" text="12345" x="50" size="24" y="9"/>
+	<e:Group y="146.01" horizontalCenter="0">
+		<e:Image source="border1_png" scale9Grid="28,20,26,2" x="0" y="0" width="160" scaleX="1.2" scaleY="1.2"/>
+		<e:Label id="forceText" text="12345" size="26" y="11.66" left="50" right="30" textAlign="center"/>
 		<e:Image source="icon_force_png" x="10" y="-19.5"/>
 	</e:Group>
 	<e:Group id="clickArea" width="250" height="250" y="0" horizontalCenter="0"/>

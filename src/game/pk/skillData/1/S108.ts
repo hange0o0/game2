@@ -20,7 +20,7 @@ class S108 extends SBase {
         listener.owner = user;
         listener.mvID = this.mvID;
         listener.endTime = PKData.getInstance().actionTime + user.getSkillValue(4) *1000;
-        listener.x = PKData.getInstance().getFirstX(teamData.id) + teamData.atkRota*(Math.random()*30 + 20);
+        listener.x = PKData.getInstance().getFirstX(teamData.id) + teamData.atkRota*(PKData.getInstance().random()*30 + 20);
         teamData.addStateLister(listener);
 
         //加入动画图腾

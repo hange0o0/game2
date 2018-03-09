@@ -54,7 +54,6 @@ class BasePosChooseUI extends game.BaseUI {
         this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
         this.tab.selectedIndex = 0;
 
-        this.posCard.touchChildren = this.posCard.touchEnabled = false
         this.posCard.stopGay = true
     }
     //
@@ -126,6 +125,7 @@ class BasePosChooseUI extends game.BaseUI {
         this.posCard.data = mc.data;
         egret.Tween.removeTweens(this.posCard)
         this.posCard.alpha = 1;
+        this.posCard.touchChildren = this.posCard.touchEnabled = false
         var tw = egret.Tween.get(this.posCard)
         tw.to({alpha:0,y:p.y-100},200).call(function(){
              MyTool.removeMC(this.posCard)

@@ -16,7 +16,7 @@ class M69 extends MBase {
             {
                 var skillValue = user.getSkillValue(2);
                 var buff = new PKBuffData()
-                buff.id = 32;
+                buff.id = 69;
                 buff.value = skillValue;
                 buff.addValue('atk',Math.floor(target.baseAtk * skillValue/100));
                 buff.user = user;

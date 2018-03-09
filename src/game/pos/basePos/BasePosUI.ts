@@ -90,6 +90,7 @@ class BasePosUI extends game.BaseUI {
             return
         }
         this.testSave(()=>{
+            SharedObjectManager.getInstance().setMyValue('pk_choose',this.index)
             this.pkData.fun(this.index)
         })
     }
@@ -102,10 +103,16 @@ class BasePosUI extends game.BaseUI {
     }
 
     private onTest(){
-        PosTestUI.getInstance().show(this.type,{
-            list:this.changeToServerList(),
-            name:(this.type == 'atk'?'进攻':'防御') + this.index,
-        })
+        if(this.testSave())
+        {
+            if(this.type == 'atk')
+                SharedObjectManager.getInstance().setMyValue('pk_choose',this.index)
+            PosTestUI.getInstance().show(this.type,{
+                list:this.changeToServerList(),
+                name:(this.type == 'atk'?'进攻':'防御') + this.index,
+            })
+        }
+
     }
 
 
@@ -266,7 +273,7 @@ class BasePosUI extends game.BaseUI {
     public show(type?,pkData?){
         this.type = type;
         this.pkData = pkData;
-        this.index = pkData?(SharedObjectManager.getInstance().getMyValue('pk_choose') || 0):0;
+        this.index = type == 'atk'?(SharedObjectManager.getInstance().getMyValue('pk_choose') || 0):0;
         super.show()
     }
 

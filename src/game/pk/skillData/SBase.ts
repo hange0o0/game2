@@ -23,6 +23,10 @@ class SBase {
 
     }
 
+    public onIll(buff:PKBuffData){
+
+    }
+
     //预加载
     public preload() {
 

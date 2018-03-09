@@ -20,7 +20,7 @@
 		<e:Group id="masterGroup" x="0" y="0" height="400">
 			<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="400" x="0" y="0"/>
 			<e:Label text="你的主人" y="9.09" size="24" stroke="2" strokeColor="0x140000" x="152"/>
-			<ns1:SlaveMasterItem id="masterItem" y="60" skinName="SlaveMasterItemSkin" x="0" scaleX="1" scaleY="1"/>
+			<ns1:SlaveMasterItem id="masterItem" y="80" skinName="SlaveMasterItemSkin" x="0" scaleX="1" scaleY="1"/>
 		</e:Group>
 		<e:Group x="0" y="0" height="60">
 			<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="630" x="0" y="0"/>
@@ -65,8 +65,8 @@
 			</e:Group>
 		</e:Scroller>
 		<e:Rect height="50" y="0" fillAlpha="0.3" left="10" right="10"/>
-		<e:Label id="viewNumText" text="Label" y="11" size="22" right="20"/>
+		<e:Label id="viewNumText" text="Label" y="11" size="22" horizontalCenter="0"/>
 	</e:Group>
-	<e:Image id="helpBtn" source="icon_help_png" y="82" right="10"/>
+	<e:Image id="helpBtn" source="icon_help_png" y="145" right="10"/>
 	
 </e:Skin>

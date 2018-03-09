@@ -20,7 +20,6 @@ class M65 extends MBase {
             x:user.x,
             y:-25 + Math.random()*50,
             lastSkill:Number.MAX_VALUE,
-            dieTime:PD.actionTime + user.getSkillValue(1)*1000,
             actionTime:PD.actionTime
         }
         PD.addMonster(mData);

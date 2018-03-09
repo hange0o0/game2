@@ -67,8 +67,8 @@ class PKManager {
         var PD = PKData.getInstance()
 
         //攻击列表乱序
-        var tempList = atk.list.concat();
-        var atkList = [];
+        var tempList = atk.list.split(',');
+        var atkList:any = [];
         var b = true
         while(tempList.length > 0)
         {
@@ -90,6 +90,7 @@ class PKManager {
                 atkList = atkList.concat(temp)
             }
         }
+        atkList = atkList.join(',')
 
         var pkData = {
             seed:TM.now(),

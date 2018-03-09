@@ -12,7 +12,7 @@ class M42 extends MBase {
             {
                 var skillValue = user.getSkillValue(1,true)
                 var buff = new PKBuffData()
-                buff.id = 35;
+                buff.id = 42;
                 buff.value = skillValue
                 buff.addValue('hpChange',-skillValue);
                 buff.user = user;

@@ -3,7 +3,7 @@
 	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
 	<e:Group y="20" x="180">
 		<e:Image id="type" source="icon_type1_png" scaleX="0.6" scaleY="0.6" y="5.6000000000000405" x="0"/>
-		<e:Label id="nameText" text="苦顶替" x="45" y="8.980000000000018" size="22" stroke="3" verticalAlign="bottom"/>
+		<e:Label id="nameText" text="苦顶替" x="45" y="8.980000000000018" size="22" stroke="3" verticalAlign="bottom" size.window="28" textColor.window="0xfce6ba" stroke.window="2" strokeColor.window="0x230b00"/>
 		<e:layout>
 		<e:HorizontalLayout verticalAlign="middle"/>
 		</e:layout>
@@ -16,7 +16,7 @@
 		<e:Image source="bg1_png" scale9Grid="8,8,14,14" x="0" y="0" width="100%" height="100%"/>
 		<e:Label id="desText" text="Label" size="22" left="15" right="15" top="10" bottom="10" lineSpacing="5"/>
 	</e:Group>
-	<e:Group id="group" horizontalCenter="0" top="200" bottom="30" bottom.window="150">
+	<e:Group id="group" horizontalCenter="0" top="200" bottom="30" bottom.window="240">
 		<e:List id="list1" x="-3.552713678800501e-15" y="0">
 			<e:layout>
 			<e:TileLayout requestedColumnCount="2" horizontalGap="6"/>

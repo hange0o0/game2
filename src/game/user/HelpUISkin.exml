@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="HelpUISkin" width="520" height="680" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Image source="bg10_png" scale9Grid="26,25,6,7" x="0" width="100%" top="35" bottom="0"/>
-	<e:Scroller id="scroller" left="10" right="10" top="40" bottom="10">
+	<e:Scroller id="scroller" left="10" right="10" top="40" bottom="10" bounces="false">
     		<e:Group>
     			<e:List id="list" width="200" height="200" x="35" y="32" itemRendererSkinName="HelpItemSkin">
     				<e:layout>
@@ -13,5 +13,8 @@
 	<e:Image y="0" scale9Grid="70,9,62,61" scaleX="1.2" scaleY="1.2" width="360" horizontalCenter="0" touchEnabled="false" source="title_bg3_png"/>
 	<e:Label id="titleText" text="进攻阵容1" y="15" horizontalCenter="1" stroke="2" size="24"/>
 
-	<e:Label text="点击空白处关闭" size="18" horizontalCenter="0" bottom="-20" touchEnabled="false" textColor="0xa5a5a5"/>
+	<e:Group id="closeBtn" bottom="-32" width="180" height="30" horizontalCenter="0" touchChildren="false" touchEnabled="false">
+		<e:Rect width="100%" height="100%" y="0" x="0" fillAlpha="0.6" ellipseWidth="30"/>
+		<e:Label text="点击空白处关闭" size="20" touchEnabled="false" textColor="0xa5a5a5" verticalCenter="0" horizontalCenter="0"/>
+	</e:Group>
 </e:Skin>

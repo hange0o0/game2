@@ -27,7 +27,7 @@ class M76 extends MBase {
                 {
                     var skillValue = user.getSkillValue(1,true)
                     var buff = new PKBuffData()
-                    buff.id = 35;
+                    buff.id = 76;
                     buff.value = skillValue
                     buff.addValue('hpChange',-skillValue);
                     buff.user = user;

@@ -78,7 +78,7 @@ class SlaveItem extends game.BaseItem {
              //MyTool.changeGray(this.getBtn,cd < 60*60,true)
              this.redMC.visible = cd == 3600*10;
              this.getBtn.label = '收取 '+Math.floor(cd/3600)+'/10'
-             //this.getBtn.touchEnabled = cd >= 3600
+             this.getBtn.skinName = cd >= 3600?'Btn1Skin':'Btn2Skin'
 
              cd = this.data.protime - TM.now()
              if(cd > 0)

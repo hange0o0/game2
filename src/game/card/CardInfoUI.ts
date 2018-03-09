@@ -15,6 +15,16 @@ class CardInfoUI extends game.BaseWindow {
     private icon: eui.Image;
     private okBtn: eui.Button;
     private helpBtn: eui.Image;
+    private likeBtn: eui.Group;
+    private likeIcon: eui.Image;
+    private likeText: eui.Label;
+    private unlikeBtn: eui.Group;
+    private unlikeIcon: eui.Image;
+    private unlikeText: eui.Label;
+    private cb: eui.CheckBox;
+
+
+
 
 
     public data;
@@ -28,10 +38,16 @@ class CardInfoUI extends game.BaseWindow {
         super.childrenCreated();
         this.addBtnEvent(this.backBtn,this.hide)
         this.addBtnEvent(this.okBtn,this.onClick)
+        this.addBtnEvent(this.cb,this.onCB)
 
         this.addBtnEvent(this.helpBtn,()=>{
             HelpManager.getInstance().showHelp('card')
         })
+    }
+
+    private onCB(){
+        SharedObjectManager.getInstance().setMyValue('show_card_base',this.cb.selected);
+        this.renew();
     }
 
     private onClick(){
@@ -61,6 +77,7 @@ class CardInfoUI extends game.BaseWindow {
     }
 
     public onShow(){
+        this.cb.selected = SharedObjectManager.getInstance().getMyValue('show_card_base');
         this.renew();
         //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
     }
@@ -69,11 +86,23 @@ class CardInfoUI extends game.BaseWindow {
         var CM = CardManager.getInstance()
         var homeLevel = TecManager.getInstance().getLevel(1)
         this.upAble = true
-        this.item.renew({
-            mid:this.data.id,
-            force:UM.tec_force,
-            type:UM.type
-        });
+        if(this.cb.selected)
+        {
+            this.item.renew({
+                mid:this.data.id,
+                force:0,
+                type:0
+            });
+        }
+        else
+        {
+            this.item.renew({
+                mid:this.data.id,
+                force:UM.tec_force,
+                type:UM.type
+            });
+        }
+
 
         if(this.data.isMonster)
         {
@@ -89,6 +118,7 @@ class CardInfoUI extends game.BaseWindow {
                 this.upAble = coin <= UM.getCoin()
                 this.okBtn.label = '解锁'
                 this.okBtn.skinName = 'Btn1Skin'
+                this.icon.source = MyTool.getPropCoin();
             }
         }
         else
@@ -104,8 +134,10 @@ class CardInfoUI extends game.BaseWindow {
                 this.upAble =  CM.skillCost <= PropManager.getInstance().getNum(103)
                 this.okBtn.label = '兑换'
                 this.okBtn.skinName = 'Btn8Skin'
+                this.icon.source = PropVO.getObject(103).getThumb();
             }
         }
+        this.cb.x = this.upGroup.stage?30:176
         this.coinText.textColor = this.upAble?0xFFFFFF:0xFF0000;
     }
 }

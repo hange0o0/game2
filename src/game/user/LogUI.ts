@@ -10,6 +10,7 @@ class LogUI extends game.BaseWindow {
     private titleText: eui.Label;
     private scroller: eui.Scroller;
     private list: eui.List;
+    private closeBtn: eui.Group;
 
 
     public constructor() {
@@ -23,6 +24,8 @@ class LogUI extends game.BaseWindow {
         this.list.useVirtualLayout = false;
         this.titleText.text = '更新日志';
         this.height = 560
+        this.addBtnEvent(this.closeBtn,this.hide)
+
     }
 
     public show(){

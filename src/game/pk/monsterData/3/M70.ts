@@ -27,7 +27,7 @@ class M70 extends MBase {
                 {
                     var skillValue = user.getSkillValue(2);
                     var buff = new PKBuffData()
-                    buff.id = 34;
+                    buff.id = 70;
                     buff.value = skillValue;
                     buff.addValue('addSpeed',-skillValue);
                     buff.user = user;

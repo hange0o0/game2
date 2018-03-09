@@ -159,7 +159,11 @@ class PKVideoCon extends game.BaseContainer {
                 this.con.addChildAt(item,this.getIndexByY(item.y));
                 item.data =data;
                 this.itemArr.push(item);
-
+                if(data.mid == 99)
+                {
+                    item.stand();
+                    item.run(-100)
+                }
                 break;
             case PKConfig.VIDEO_MONSTER_MOVE:
                 item = this.getItemByID(data.id);
@@ -366,15 +370,15 @@ class PKVideoCon extends game.BaseContainer {
     private lastTalk = {1:0,'-1':0}
     public randomTalk(){
 
-        if(Math.random() > 0.05)
+        if(Math.random() > 0.02)
             return;
         var item = this.itemArr[Math.floor(this.itemArr.length*Math.random())];
         if(item && !item.talkItm)
         {
-            if(egret.getTimer() - this.lastTalk[item.data.atkRota] < 2000)
+            if(egret.getTimer() < this.lastTalk[item.data.atkRota])
                 return;
             item.talk();
-            this.lastTalk[item.data.atkRota] = egret.getTimer();
+            this.lastTalk[item.data.atkRota] = egret.getTimer() + 3000 + Math.floor(Math.random()*2000);
         }
 
     }

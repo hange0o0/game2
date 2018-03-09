@@ -19,27 +19,17 @@ class M33 extends MBase {
     }
 
     public atk(user:PKMonsterData,target:PKMonsterData){
+        var hp = Math.floor((1-target.getHpRate())*target.maxHp*0.1)
         var b = super.atk(user,target)
-        if(b && target.beSkillAble())
+        if(b && target.mid != 99 && hp > 0)
         {
-            var skillValue = user.getSkillValue(1);
-            var buff = new PKBuffData()
-            buff.id = 33;
-            buff.value = skillValue;
-            buff.addValue('def',-skillValue);
-            buff.user = user;
-            buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(2);
-            target.addBuff(buff)
-
-            if(buff.ing)
-            {
-                PKData.getInstance().addVideo({
-                    type:PKConfig.VIDEO_MONSTER_ADD_STATE,
-                    user:target,
-                    key:'def',
-                    stateType:2
-                })
-            }
+            hp = Math.min(hp,user.getSkillValue(1,true));
+            target.beAtkAction({hp:hp})
+            PKData.getInstance().addVideo({
+                type:PKConfig.VIDEO_MONSTER_DOUBLE,
+                user:user,
+                value:hp,
+            })
         }
         return b;
     }

@@ -25,27 +25,35 @@ class M63 extends MBase {
 
                 if(targetX.beSkillAble())
                 {
-                    var skillValue = user.getSkillValue(2);
                     var buff = new PKBuffData()
-                    buff.id = 33;
-                    buff.value = skillValue;
-                    buff.addValue('def',-skillValue);
+                    buff.id = 63;
                     buff.user = user;
+                    buff.addState(PKConfig.STATE_ILL);
                     buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(3);
+                    buff.value = user.getSkillValue(2,true)
                     targetX.addBuff(buff)
-
-                    if(buff.ing)
-                    {
-                        PKData.getInstance().addVideo({
-                            type:PKConfig.VIDEO_MONSTER_ADD_STATE,
-                            user:targetX,
-                            key:'atk',
-                            stateType:2
-                        })
-                    }
                 }
             }
         }
         return true;
+    }
+
+    public onIll(buff:PKBuffData){
+
+        var PD = PKData.getInstance();
+        var user = buff.user
+        var target = buff.owner
+        var arr = PD.getMonsterByTeam(target.getOwner().teamData);
+        var atkrage = user.getSkillValue(1);
+        for(var i=0;i<arr.length;i++)
+        {
+            var targetX = arr[i];
+            var des = Math.abs(target.x - targetX.x);
+
+            if(des<=atkrage + targetX.getVO().width/2)
+            {
+                targetX.beAtkAction({hp:buff.value})
+            }
+        }
     }
 }

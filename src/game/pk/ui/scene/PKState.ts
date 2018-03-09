@@ -20,6 +20,11 @@ class PKState extends game.BaseItem {
             this.initAtkMV();
             this.atkMV.load('effect2_png',0,154,39,2)
         }
+        else if(this.data == PKConfig.STATE_ILL)
+        {
+            this.initAtkMV();
+            this.atkMV.load('effect2_png',0,154,39,2)
+        }
         else if(this.data == PKConfig.STATE_MOMIAN)
         {
             this.initImg();
@@ -71,6 +76,11 @@ class PKState extends game.BaseItem {
         clearTimeout(this.timer);
         switch (parseInt(this.data)){
             case PKConfig.STATE_YUN:
+                this.atkMV.play()
+                this.x = 50 -  154/4
+                this.y = 300 - mD.getVO().height - 35
+                break;
+            case PKConfig.STATE_ILL:
                 this.atkMV.play()
                 this.x = 50 -  154/4
                 this.y = 300 - mD.getVO().height - 35

@@ -94,6 +94,7 @@
     "src/game/pos/posTest/PosTestUISkin.exml",
     "src/game/rank/RankItemSkin.exml",
     "src/game/rank/RankUISkin.exml",
+    "src/game/shop/ShopBuyUISkin.exml",
     "src/game/shop/ShopDiamondItemSkin.exml",
     "src/game/shop/ShopItemSkin.exml",
     "src/game/shop/ShopUISkin.exml",

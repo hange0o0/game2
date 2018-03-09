@@ -456,7 +456,23 @@ class PKMonsterData {
 
     public onDie(){
         if(!this.passEnd)
+        {
             MBase.getData(this.mid).onDie(this);
+            if(this.isInState(PKConfig.STATE_ILL))
+            {
+                for(var i=0;i<this.buff.length;i++)
+                {
+                    var oo:PKBuffData =  this.buff[i];
+                    if(oo.ing && oo.haveState && oo.state[PKConfig.STATE_ILL])
+                    {
+                        if(oo.id < 100)
+                            MBase.getData(oo.id).onIll(oo);
+                        else
+                            SBase.getData(oo.id).onIll(oo);
+                    }
+                }
+            }
+        }
         this.getOwner().teamData.testState(PKConfig.LISTENER_DIE,this);
     }
 

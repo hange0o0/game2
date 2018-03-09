@@ -27,7 +27,7 @@ class M62 extends MBase {
                 {
                     var skillValue = user.getSkillValue(2);
                     var buff = new PKBuffData()
-                    buff.id = 32;
+                    buff.id = 62;
                     buff.value = skillValue;
                     buff.addValue('atk',-Math.floor(targetX.baseAtk * skillValue/100));
                     buff.user = user;

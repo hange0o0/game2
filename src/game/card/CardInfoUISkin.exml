@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="CardInfoUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
-    <ns1:PKCardInfoUI id="item" x="0" y="0" skinName="PKCardInfoSkin" currentState="window"/>
+    <ns1:PKCardInfoUI id="item" x="0" y="0" skinName="PKCardInfoSkin" currentState="window" minHeight="600"/>
 	<e:Group id="btnGroup" bottom="30" horizontalCenter="0">
 		<e:Button id="backBtn" label="返回" x="0" y="0" skinName="Btn2Skin" width="150"/>
 		<e:Group id="upGroup" x="180" y="0" width="150">
-			<e:Group x="-6.06" y="-45.46">
+			<e:Group x="-6.06" y="-55">
 				<e:Image source="border1_png" scale9Grid="28,20,26,2" x="0" y="0" width="160"/>
 				<e:Label id="coinText" text="1012345" x="48" size="24" y="9"/>
 				<e:Image id="icon" x="0" y="-3.5" source="icon_coin_png" width="46" height="46"/>
@@ -15,5 +15,28 @@
 			<e:HorizontalLayout gap="30"/>
 		</e:layout>
 	</e:Group>
-	<e:Image id="helpBtn" source="icon_help_png" y="10" right="10"/>
+	<e:Image id="helpBtn" source="icon_help_png" y="10" right="10" scaleX="0.9" scaleY="0.9"/>
+	<e:Group left="10" right="10" height="60" bottom="160">
+		<e:Rect height="100%" y="4" fillAlpha="0.5" x="0" width="100%"/>
+		<e:Group verticalCenter="0" horizontalCenter="0">
+			<e:Group id="likeBtn" x="0" y="0">
+			<e:Image id="likeIcon" source="icon_like_png" x="0" y="7"/>
+			<e:Label id="likeText" text="要求加强(1.234K)" x="15" y="0" size="24" width="200"/>
+			<e:layout>
+				<e:HorizontalLayout verticalAlign="bottom"/>
+			</e:layout>
+			</e:Group>
+			<e:Group id="unlikeBtn" x="25" y="6">
+			<e:Image id="unlikeIcon" source="icon_unlike_png" x="40" y="0"/>
+			<e:Label id="unlikeText" text="要求加强(1.234K)" x="0" y="4" size="24" width="200"/>
+			<e:layout>
+				<e:HorizontalLayout verticalAlign="bottom"/>
+			</e:layout>
+			</e:Group>
+			<e:layout>
+			<e:HorizontalLayout gap="10"/>
+			</e:layout>
+		</e:Group>
+	</e:Group>
+	<e:CheckBox id="cb" label="显示基础属性" skinName="MyCheckBoxSkin" bottom="105" x="30"/>
 </e:Skin>

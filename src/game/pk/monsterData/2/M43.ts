@@ -42,7 +42,16 @@ class M43 extends MBase {
         var buff = new PKBuffData()
         buff.user = user;
         buff.addState(PKConfig.STATE_MOMIAN);
-        buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(2);
+        buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(1);
+        target.addBuff(buff)
+
+        var buff = new PKBuffData()
+        var skillValue = Math.floor(user.getSkillValue(2,true)/2);
+        buff.id = 43;
+        buff.value = skillValue;
+        buff.user = user;
+        buff.addValue('hpChange',skillValue);
+        buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(1);
         target.addBuff(buff)
 
         PKData.getInstance().addVideo({

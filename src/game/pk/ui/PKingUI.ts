@@ -119,7 +119,7 @@ class PKingUI extends game.BaseUI {
         this.counting = true;
         this.roundText.text = '5'
         this.roundText.alpha = 1;
-        this.roundText.y = GameManager.stage.stageHeight - 720;
+        this.roundText.y = GameManager.stage.stageHeight - 680;
         this.addChild(this.roundText);
         this.roundText.scaleX =  this.roundText.scaleY = 0;
         egret.Tween.removeTweens(this.roundText)
@@ -129,17 +129,6 @@ class PKingUI extends game.BaseUI {
     public startPlay(){
         this.hideBehind = true;
         PKBeforeUI.getInstance().hide();
-
-        var PD = PKData.getInstance();
-        PD.diamondData = PD.addMonster({
-            force:0,
-            mid:99,
-            owner:'sys',
-            atkRota:1,
-            x:PKConfig.floorWidth/2 + PKConfig.appearPos,
-            y:0,
-            actionTime:0
-        });
 
         var tw = this.tw = egret.Tween.get(this.roundText)
         tw.to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '4'})
@@ -163,6 +152,15 @@ class PKingUI extends game.BaseUI {
     public startGame(){
         var PD = PKData.getInstance();
         PD.start();
+        PD.diamondData = PD.addMonster({
+            force:0,
+            mid:99,
+            owner:'sys',
+            atkRota:1,
+            x:PKConfig.floorWidth/2 + PKConfig.appearPos,
+            y:0,
+            actionTime:0
+        });
         this.counting = false;
         this.scroller.touchEnabled = this.scroller.touchChildren = true;
         this.smallMap.visible = true;
@@ -210,7 +208,12 @@ class PKingUI extends game.BaseUI {
     private autoMoveScreen(){
         var PD = PKData.getInstance();
         var area = 100
-        if(PD.diamondData.hp > 0)
+        if(this.counting)
+        {
+            var item:any = {x:PKConfig.floorWidth/2 + PKConfig.appearPos};
+            area = 5;
+        }
+        else if(PD.diamondData.hp > 0)
         {
             var item = PKVideoCon.getInstance().getItemByID(PD.diamondData.id);
             area = 5;

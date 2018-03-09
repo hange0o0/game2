@@ -12,7 +12,7 @@ class M41 extends MBase {
             {
                 var skillValue = user.getSkillValue(1);
                 var buff = new PKBuffData()
-                buff.id = 40;
+                buff.id = 41;
                 buff.value = skillValue;
                 buff.addValue('addSpeed',-skillValue);
                 buff.user = user;

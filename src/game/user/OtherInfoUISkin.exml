@@ -5,13 +5,13 @@
 		<e:Group>
 			<e:Group x="10" y="15" width="640">
 				<e:Image source="bg15_png" height="100%" x="0" y="0" width="100%" scale9Grid="20,14,11,15"/>
-				<e:Group y="50" horizontalCenter="0" minWidth="300">
+				<e:Group y="50" horizontalCenter="0" minWidth="320">
 					<e:Image source="bg16_png" x="0" y="0" scaleX="1" scaleY="1" width="100%" height="100%" scale9Grid="18,22,13,6"/>
-					<e:Group left="15" right="15" top="8" bottom="8">
+					<e:Group left="15" right="15" top="15" bottom="15">
 						<ns1:HeadMC width="90" height="90" x="10" skinName="HeadMCSkin" id="headMC" verticalCenter="0"/>
 						<e:Label id="nameText" text="苦顶替苦" size="30" stroke="3" verticalAlign="top" x="60" textColor="0xFFFFFF" strokeColor="0x231507" y="15" height="70"/>
 						<e:layout>
-						<e:HorizontalLayout verticalAlign="middle" horizontalAlign="left"/>
+						<e:HorizontalLayout verticalAlign="middle" horizontalAlign="left" gap="15"/>
 						</e:layout>
 					</e:Group>
 				</e:Group>
@@ -54,7 +54,7 @@
 			</e:layout>
 		</e:List>
 			<e:layout>
-				<e:VerticalLayout paddingBottom="10" paddingTop="0"/>
+				<e:VerticalLayout paddingBottom="10" paddingTop="0" gap="10"/>
 			</e:layout>
 		</e:Group>
 	</e:Scroller>

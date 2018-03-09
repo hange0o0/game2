@@ -59,7 +59,7 @@ class ShopUI extends game.BaseUI {
             this.scroller.viewport.scrollV = 0;
     }
 
-    private renewList(){
+    public renewList(){
         MyTool.renewList(this.list);
     }
 

@@ -91,9 +91,10 @@ class PKCardInfoUI extends game.BaseContainer {
         }
 
 
-        var baseForce = CM.getCardVO(this.dataIn.mid).getAdd(this.dataIn.force)
-        var force = CM.getCardVO(this.dataIn.mid).getAdd(this.dataIn.force,this.dataIn.type)
-        this.desText.text = vo.getDes(force);
+        var baseForceAdd = CM.getCardVO(this.dataIn.mid).getAdd(this.dataIn.force)
+        var forceAdd = CM.getCardVO(this.dataIn.mid).getAdd(this.dataIn.force,this.dataIn.type)
+        this.desText.text = vo.getDes(forceAdd);
+        console.log(forceAdd)
         var str = vo.isMonster? '传送':'施法'
 
         var arr1 = [
@@ -111,7 +112,7 @@ class PKCardInfoUI extends game.BaseContainer {
             if(vo.num == 0)
                 arr1.push({index:2,icon:'icon_clock2_png',iconScale:1,title:'持续时间',value:MyTool.toFixed(vo.cd/1000,1)+'秒',valueAdd:0})
             else if(vo.num == 1)
-                arr1.push({index:2,icon:'icon_clock_png',iconScale:1,title:'单次技能',value:'',valueAdd:0})
+                arr1.push({index:2,icon:'icon_clock_png',iconScale:1,title:'技能次数',value:'单次',valueAdd:0})
             else if(vo.num > 1)
             {
                 arr1.push({index:2,icon:'icon_clock_png',iconScale:1,title:'持续时间',value:MyTool.toFixed((vo.num-1) * vo.cd/1000,1)+'秒',valueAdd:0})
@@ -133,12 +134,12 @@ class PKCardInfoUI extends game.BaseContainer {
             //arr1.push({index:4,icon:'',iconScale:1,title:'间隔',value:vo.cost,valueAdd:0})
             this.group.addChild(this.line)
             this.group.addChild(this.list2)
-            var atk = Math.floor(vo.atk * baseForce);
-            var hp = Math.floor(vo.hp * baseForce);
+            var atk = Math.floor(vo.atk * baseForceAdd);
+            var hp = Math.floor(vo.hp * baseForceAdd);
             var def = vo.def;
 
-            var ark2 = Math.floor(vo.atk * force);
-            var hp2 = Math.floor(vo.hp * force);
+            var ark2 = Math.floor(vo.atk * forceAdd);
+            var hp2 = Math.floor(vo.hp * forceAdd);
             var def2 = def + (this.dataIn.teamDef || 0);
             //if(this.dataIn.pos == 1)
             //    ark2 = Math.floor(ark2*1.1);

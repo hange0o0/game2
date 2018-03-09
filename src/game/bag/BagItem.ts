@@ -22,7 +22,7 @@ class BagItem extends game.BaseItem {
         if(this.data.coin)
         {
             this.nameText.text = '金币  (×'+NumberUtil.addNumSeparator(UM.getCoin())+')'
-            this.desText.text =  '';
+            this.desText.text =  '金币用途很广，所有的科技升级都要用到。';
             this.mc.source = MyTool.getPropCoin();
         }
         else

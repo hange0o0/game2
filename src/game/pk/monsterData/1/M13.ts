@@ -14,13 +14,13 @@ class M13 extends MBase {
     }
 
     public onDie(user:PKMonsterData){
-        var PD = PKData.getInstance();
-        var arr = PD.getMonsterByTeam(user.getOwner().teamData);
-        for(var i=0;i<arr.length;i++)
-        {
-            var target:PKMonsterData = arr[i];
-            target.cleanBuff(0,user);
-        }
+        //var PD = PKData.getInstance();
+        //var arr = PD.getMonsterByTeam(user.getOwner().teamData);
+        //for(var i=0;i<arr.length;i++)
+        //{
+        //    var target:PKMonsterData = arr[i];
+        //    target.cleanBuff(0,user);
+        //}
         user.getOwner().teamData.removeStateListerByOwner(user)
     }
 }
@@ -56,7 +56,7 @@ class M13StateListener extends PKStateListener {
             var des = Math.abs(user.x - targetEnemy.x);
             if(des<=atkrage)
             {
-                targetEnemy.addHp(-Math.ceil(user.getSkillValue(2)*user.getAtkRate(targetEnemy)))
+                targetEnemy.addHp(-Math.ceil(user.getSkillValue(2,true)*user.getAtkRate(targetEnemy)))
             }
         }
         return list;

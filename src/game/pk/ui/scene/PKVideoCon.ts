@@ -162,7 +162,7 @@ class PKVideoCon extends game.BaseContainer {
                 if(data.mid == 99)
                 {
                     item.stand();
-                    item.run(-100)
+                    item.run(50)
                 }
                 break;
             case PKConfig.VIDEO_MONSTER_MOVE:

@@ -30,7 +30,7 @@ class UserManager {
 
     public energy: any;
     public openData: any;
-    public coin: any;
+    private coin: any;
 
 
     public maxEnergy = 60;

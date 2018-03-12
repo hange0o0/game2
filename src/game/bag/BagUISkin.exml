@@ -21,4 +21,8 @@
         			<e:HorizontalLayout horizontalAlign="justify"/>
         		</e:layout>
 	</e:TabBar>
+	<e:Group y="300" id="emptyGroup" horizontalCenter="0">
+		<e:Image source="icon_empty_png" y="0" scaleX="1.3" scaleY="1.3" horizontalCenter="-0.5"/>
+		<e:Label text="暂无相关道具" y="90" horizontalCenter="0" size="22"/>
+	</e:Group>
 </e:Skin>

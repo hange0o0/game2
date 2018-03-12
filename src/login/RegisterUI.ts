@@ -8,6 +8,7 @@ class RegisterUI extends game.BaseWindow {
     public constructor() {
         super();
         this.skinName = "RegisterUISkin";
+        this.canBGClose = false;
     }
 
     private nameText: eui.TextInput;

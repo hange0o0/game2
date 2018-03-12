@@ -23,6 +23,8 @@ class PKMonsterInfoUI extends game.BaseContainer {
     public playerData:PKPlayerData
     public renewFlag = false
 
+    private xy
+
     public childrenCreated() {
         super.childrenCreated();
         this.hide();
@@ -63,7 +65,8 @@ class PKMonsterInfoUI extends game.BaseContainer {
         this.stage.removeEventListener(egret.TouchEvent.TOUCH_CANCEL,this.hide,this)
     }
 
-    public show(playerData){
+    public show(playerData,xy?){
+        this.xy = xy;
         this.stage.once(egret.TouchEvent.TOUCH_END,this.hide,this)
         this.stage.once(egret.TouchEvent.TOUCH_CANCEL,this.hide,this)
 
@@ -75,9 +78,9 @@ class PKMonsterInfoUI extends game.BaseContainer {
         this.selfIcon.visible = playerData == PKData.getInstance().myPlayer;
 
         if(this.playerData.teamData.atkRota == PKConfig.ROTA_LEFT)
-            this.x = 10;
+            this.x = 10
         else
-            this.x = 160;
+            this.x = 160
 
         this.resetList();
         this.renewFlag = false;
@@ -95,17 +98,26 @@ class PKMonsterInfoUI extends game.BaseContainer {
         }
         this.list.dataProvider = new eui.ArrayCollection(arr);
         this.renewNum();
+        this.renewBottom();
     }
 
     private addItem(data){
         var arr = <eui.ArrayCollection>(this.list.dataProvider);
         arr.addItem(data);
+        this.renewNum();
+        this.renewBottom();
     }
 
     private removeItem(data){
         var arr = <eui.ArrayCollection>(this.list.dataProvider);
         var index = arr.getItemIndex(data);
         arr.removeItemAt(index);
+        this.renewNum();
+        this.renewBottom();
+    }
+
+    private renewBottom(){
+        this.bottom = GameManager.stage.stageHeight - Math.max(this.xy.y-10,this.height)
     }
 
     private renewNum(){

@@ -13,7 +13,6 @@ class SlaveUI extends MainBase {
     private cdGroup: eui.Group;
     private cdText: eui.Label;
     private proBtn: eui.Button;
-    private helpBtn: eui.Button;
     private masterGroup: eui.Group;
     private masterItem: SlaveMasterItem;
     private slaveList: eui.List;
@@ -22,6 +21,9 @@ class SlaveUI extends MainBase {
     private scroller2: eui.Scroller;
     private list: eui.List;
     private viewNumText: eui.Label;
+    private emptyGroup: eui.Group;
+    private helpBtn: eui.Image;
+
 
 
 
@@ -136,6 +138,7 @@ class SlaveUI extends MainBase {
         this.group2.visible = true
         this.scroller.visible = false
         var arr = SM.getViewList();
+        this.emptyGroup.visible = arr.length == 0;
         this.list.dataProvider = new eui.ArrayCollection(arr)
         this.viewNumText.text = '关注数量：' + arr.length + '/' + SM.maxViewNum
         this.onTimer();

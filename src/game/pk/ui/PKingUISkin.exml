@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="PKingUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
-	<e:Scroller id="scroller" width="640" height="512" x="0" bottom="475" bounces="false" locked="true">
+	<e:Scroller id="scroller" width="640" height="512" x="0" bottom="470" bounces="false" locked="true">
 		<e:Group id="con">
 		</e:Group>
 	</e:Scroller>
@@ -8,5 +8,5 @@
 	<ns1:PKCtrlCon id="pkCtrlCon" x="0" skinName="PKCtrlConSkin" bottom="0"/>
 	<ns1:PKTopUI id="pkTop" x="0" skinName="PKTopSkin"/>
 	<e:Label id="roundText" text="START" size="60" horizontalCenter="0" stroke="3" strokeColor="0x000000" anchorOffsetY="40" width="200" textAlign="center" anchorOffsetX="100" textColor="0xffff00" y="400"/>
-	<ns1:PKMonsterInfoUI id="pkInfo" skinName="PKMonsterInfoSkin" bottom="580" x="160" visible="false"/>
+	<ns1:PKMonsterInfoUI id="pkInfo" skinName="PKMonsterInfoSkin" bottom="580" x="160"/>
 </e:Skin>

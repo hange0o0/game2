@@ -10,6 +10,8 @@ class BagUI extends MainBase {
     private scroller: eui.Scroller;
     private list: eui.List;
     private tab: eui.TabBar;
+    private emptyGroup: eui.Group;
+
 
     private dataArray = new eui.ArrayCollection()
 
@@ -51,7 +53,9 @@ class BagUI extends MainBase {
         var arr = PropManager.getInstance().getListByType(this.tab.selectedIndex + 1);
         if(this.tab.selectedIndex == 1)
         {
-            arr.unshift({coin:true});
+            var coin = UM.getCoin();
+            if(coin)
+                arr.unshift({coin:coin});
         }
         //else
         //{
@@ -62,6 +66,7 @@ class BagUI extends MainBase {
         //    this.list.layout['paddingTop'] = 20
         //}
         this.dataArray.source = arr
+        this.emptyGroup.visible = arr.length == 0;
         this.dataArray.refresh()
     }
 }

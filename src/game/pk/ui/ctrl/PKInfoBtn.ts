@@ -16,7 +16,8 @@ class PKInfoBtn extends game.BaseItem {
     }
 
     private onClick(){
-        PKMonsterInfoUI.getInstance().show(this.data)
+        var p = this.localToGlobal(0,0)
+        PKMonsterInfoUI.getInstance().show(this.data,p)
     }
 
     public dataChanged(){

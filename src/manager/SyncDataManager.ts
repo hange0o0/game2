@@ -18,7 +18,7 @@ class SyncDataManager{
                     EM.dispatch(GameEvent.client.energy_change);
                     break;
                 case 'sync_coin':
-                    UM.coin = value;
+                    UM['coin'] = value;
                     EM.dispatch(GameEvent.client.coin_change);
                     break;
                 case 'sync_diamond':

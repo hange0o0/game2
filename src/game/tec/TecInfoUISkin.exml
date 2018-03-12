@@ -30,13 +30,13 @@
 		<e:VerticalLayout paddingLeft="0"/>
 		</e:layout>
 	</e:List>
-	<e:Group horizontalCenter="0" y="20" locked="true">
+	<e:Group horizontalCenter="0" y="20">
 		<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="360" x="0" y="0"/>
 		<e:Label id="nameText" text="设置" y="10.18" size="24" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
 	</e:Group>
 	<e:Image id="helpBtn" source="icon_help_png" y="10" right="10" scaleX="0.8" scaleY="0.8"/>
 	<e:Image y="255" left="30" right="30" source="line2_png" fillMode="repeat"/>
-	<e:Group id="btnGroup" horizontalCenter="0" bottom="20">
+	<e:Group id="btnGroup" horizontalCenter="0" bottom="30">
 		<e:Button id="cancelBtn" label="返回" width="130" x="0" y="0" skinName="Btn2Skin"/>
 		<e:Button id="okBtn" label="升级" width="130" skinName="Btn1Skin" x="0" y="0"/>
 		<e:layout>

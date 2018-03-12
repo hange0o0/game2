@@ -8,7 +8,22 @@ class ActiveManager {
 
     public level;
     public time;
-    public init(data){
 
+    public like_time
+    public like_obj
+    public init(data){
+         this.like_time = data.like_time || 0
+         this.like_obj = data.like_obj || {}
+    }
+
+    public resetLike(){
+        if(!DateUtil.isSameDay(this.like_time))
+        {
+            this.like_obj = {};
+        }
+    }
+    public getLikeChoose(id){
+        this.resetLike();
+        return this.like_obj[id];
     }
 }

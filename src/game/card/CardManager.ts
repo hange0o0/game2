@@ -8,6 +8,7 @@ class CardManager {
 
     public skillList = {}
     public monsterList = {}
+    public cardLike = {}
 
     public skillCost = 30;
 
@@ -173,6 +174,47 @@ class CardManager {
             CardDrawResultUI.getInstance().show(msg);
             if(fun)
                 fun();
+        });
+    }
+
+    public getCardLike(id,fun?){
+        if(this.cardLike[id] && TM.now() - this.cardLike[id].time < 60)
+        {
+            fun && fun();
+            return;
+        }
+        var oo:any = {};
+        oo.id = id;
+        Net.send(GameEvent.card.card_like,oo,(data) =>{
+            var msg = data.msg;
+            this.cardLike[id] = msg.data;
+            msg.data.like_num = parseInt(msg.data.like_num)
+            msg.data.unlike_num = parseInt(msg.data.unlike_num)
+            this.cardLike[id].time = TM.now();
+            if(fun)
+                fun();
+        });
+    }
+
+    public setCardLike(id,like,fun?){
+        var oo:any = {};
+        oo.id = id;
+        oo.like = like;
+        Net.addUser(oo);
+        Net.send(GameEvent.card.card_like_set,oo,(data) =>{
+            var msg = data.msg;
+            if(msg.fail)
+            {
+                MyWindow.Alert('投票失败失败，错误代码：' + msg.fail)
+                return;
+            }
+            ActiveManager.getInstance().like_obj = msg.like_obj
+            ActiveManager.getInstance().like_time = msg.like_time
+            if(oo.like==1)
+                this.cardLike[id].like_num ++;
+            else
+                this.cardLike[id].unlike_num ++;
+            this.getCardLike(id,fun)
         });
     }
 

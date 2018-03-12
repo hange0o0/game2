@@ -89,9 +89,10 @@ class PKingUI extends game.BaseUI {
     }
     public showMV(){
         var tw = egret.Tween.get(this.pkTop)
-        tw.set({y:this.pkTop.y-200}).to({y:this.pkTop.y},500).wait(200).call(()=>{
-            this.pkTop.appearMV()
-        },this)
+        tw.set({y:this.pkTop.y-200}).to({y:this.pkTop.y},500)
+        //    .wait(200).call(()=>{
+        //    this.pkTop.appearMV()
+        //},this)
         var tw = egret.Tween.get(this.pkCtrlCon)
         tw.set({bottom:-500}).to({bottom:0},500)
 
@@ -131,13 +132,17 @@ class PKingUI extends game.BaseUI {
         PKBeforeUI.getInstance().hide();
 
         var tw = this.tw = egret.Tween.get(this.roundText)
-        tw.to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '4'})
-            .to({scaleX:0,scaleY:0}).to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '3'})
-            .to({scaleX:0,scaleY:0}).to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '2'})
-            .to({scaleX:0,scaleY:0}).to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '1'})
-            .to({scaleX:0,scaleY:0}).to({scaleX:1.3,scaleY:1.3},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = 'START';this.startGame();this.tw = null}).to({
-                alpha:0,scaleX:2,scaleY:2
-            },500).call(()=>{MyTool.removeMC(this.roundText)})
+        tw.to({scaleX:1.5,scaleY:1.5},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '4'})
+            .to({scaleX:0,scaleY:0}).to({scaleX:1.5,scaleY:1.5},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '3'})
+            .to({scaleX:0,scaleY:0}).to({scaleX:1.5,scaleY:1.5},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '2'})
+            .to({scaleX:0,scaleY:0}).to({scaleX:1.5,scaleY:1.5},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '1'})
+            .to({scaleX:0,scaleY:0}).to({scaleX:1.5,scaleY:1.5},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = 'START';this.startGame();this.tw = null}).to({
+                alpha:0,scaleX:2.5,scaleY:2.5
+            },500).call(()=>{
+                MyTool.removeMC(this.roundText);
+                this.pkTop.appearMV();
+                this.pkCtrlCon.initInfo();
+            })
 
         this.onE();
         this.addEventListener(egret.Event.ENTER_FRAME,this.onE,this)

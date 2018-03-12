@@ -12,6 +12,8 @@ class RankUI extends game.BaseUI {
     private scroller: eui.Scroller;
     private list: eui.List;
     private tab: eui.TabBar;
+    private emptyGroup: eui.Group;
+
 
 
     private typeObj = {
@@ -57,6 +59,8 @@ class RankUI extends game.BaseUI {
     }
 
     public getData(){
+        this.emptyGroup.visible = false
+        this.list.visible = false
        RankManager.getInstance().getServerRank(this.typeObj[this.tab.selectedIndex].key,()=>{
           this.renew();
        })
@@ -82,6 +86,8 @@ class RankUI extends game.BaseUI {
                 arr.unshift({text:'你还没上榜'})
 
         }
+        this.emptyGroup.visible = arr.length == 0;
         this.list.dataProvider = new eui.ArrayCollection(arr)
+        this.list.visible = true;
     }
 }

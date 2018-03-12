@@ -30,14 +30,14 @@
 		</e:layout>
 	</e:Group>
 	<e:Group x="10" y="-50">
-		<ns1:PKInfoBtn id="info2" x="18" y="13" skinName="PKInfoBtnSkin"/>
+		<ns1:PKInfoBtn id="info2" x="18" y="13" skinName="PKInfoBtnSkin" width="120"/>
 		<ns1:PKInfoBtn id="info1" x="8" y="3" skinName="PKInfoBtnSkin" width="120"/>
 		<e:layout>
 			<e:VerticalLayout gap="10"/>
 		</e:layout>
 	</e:Group>
 	<e:Group y="-50" right="10">
-		<ns1:PKInfoBtn id="info4" x="8" y="3" skinName="PKInfoBtnSkin" width="120"/>
+		<ns1:PKInfoBtn id="info4" x="8" y="3" skinName="PKInfoBtnSkin"/>
 		<ns1:PKInfoBtn x="18" y="13" skinName="PKInfoBtnSkin" id="info3"/>
 		<e:layout>
 			<e:VerticalLayout horizontalAlign="right" gap="10"/>

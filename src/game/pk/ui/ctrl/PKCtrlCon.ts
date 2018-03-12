@@ -277,7 +277,16 @@ class PKCtrlCon extends game.BaseContainer {
         this.costText.text = 'x' + PKConfig.mpInit
         this.timeText.text = '' + DateUtil.getStringBySecond(0).substr(-5)
 
+        for(var i=1;i<=4;i++)
+        {
+            var mc = this['info' + i];
+            mc.visible = false;
+        }
 
+
+    }
+
+    public initInfo(){
         for(var i=1;i<=4;i++)
         {
             var player = this.getInfoPlayer(i);
@@ -292,7 +301,6 @@ class PKCtrlCon extends game.BaseContainer {
                 mc.visible = false;
             }
         }
-
     }
 
     public onTimer(){

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="CardInfoUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
-    <ns1:PKCardInfoUI id="item" x="0" y="0" skinName="PKCardInfoSkin" currentState="window" minHeight="600"/>
+    <ns1:PKCardInfoUI id="item" x="0" y="0" skinName="PKCardInfoSkin" currentState="window" minHeight="640"/>
 	<e:Group id="btnGroup" bottom="30" horizontalCenter="0">
 		<e:Button id="backBtn" label="返回" x="0" y="0" skinName="Btn2Skin" width="150"/>
 		<e:Group id="upGroup" x="180" y="0" width="150">
@@ -16,25 +16,47 @@
 		</e:layout>
 	</e:Group>
 	<e:Image id="helpBtn" source="icon_help_png" y="10" right="10" scaleX="0.9" scaleY="0.9"/>
-	<e:Group left="10" right="10" height="60" bottom="160">
-		<e:Rect height="100%" y="4" fillAlpha="0.5" x="0" width="100%"/>
+	<e:Group left="10" right="10" height="110" bottom="150">
+		<e:Rect height="100%" y="0" fillAlpha="0.5" x="0" width="100%"/>
+		<e:Rect id="bar1" width="200" height="5" x="0" y="-5" fillColor="0x3add35"/>
+		<e:Rect id="bar2" width="200" height="5" y="-5" right="0" fillColor="0xff0505"/>
 		<e:Group verticalCenter="0" horizontalCenter="0">
 			<e:Group id="likeBtn" x="0" y="0">
-			<e:Image id="likeIcon" source="icon_like_png" x="0" y="7"/>
-			<e:Label id="likeText" text="要求加强(1.234K)" x="15" y="0" size="24" width="200"/>
-			<e:layout>
-				<e:HorizontalLayout verticalAlign="bottom"/>
-			</e:layout>
+				<e:Image source="bg16_png" y="0" width="270" x="0" scale9Grid="18,17,15,18" height="100"/>
+				<e:Group horizontalCenter="0" verticalCenter="0">
+					<e:Group x="0" y="0">
+						<e:Image id="likeIcon" source="icon_like_png" x="0" y="0"/>
+						<e:Label id="likeText" text="(1.234K)" x="-206" y="6" size="24" textColor="0xffc76b"/>
+						<e:layout>
+						<e:HorizontalLayout verticalAlign="middle" gap="15"/>
+						</e:layout>
+					</e:Group>
+					<e:Label text="要求加强" x="5" y="40" size="30" stroke="2" textColor="0x3add35"/>
+					<e:layout>
+						<e:VerticalLayout gap="10" horizontalAlign="center"/>
+					</e:layout>
+				</e:Group>
+				<e:Image id="likeChooseMC" source="border2_png" width="100%" height="100%" x="0" y="0" scale9Grid="12,11,5,6" locked="true"/>
 			</e:Group>
-			<e:Group id="unlikeBtn" x="25" y="6">
-			<e:Image id="unlikeIcon" source="icon_unlike_png" x="40" y="0"/>
-			<e:Label id="unlikeText" text="要求加强(1.234K)" x="0" y="4" size="24" width="200"/>
-			<e:layout>
-				<e:HorizontalLayout verticalAlign="bottom"/>
-			</e:layout>
+			<e:Group id="unlikeBtn" x="10" y="10">
+				<e:Image source="bg16_png" y="0" width="270" x="0" scale9Grid="18,17,15,18" height="100"/>
+				<e:Group horizontalCenter="0" verticalCenter="0">
+				<e:Group x="0" y="0">
+					<e:Image id="unlikeIcon" source="icon_unlike_png" x="0" y="0"/>
+					<e:Label id="unlikeText" text="(1.234K)" x="-206" y="6" size="24" textColor="0xffc76b"/>
+					<e:layout>
+					<e:HorizontalLayout verticalAlign="middle" gap="15"/>
+					</e:layout>
+				</e:Group>
+				<e:Label text="必须削弱" x="5" y="40" size="30" stroke="2" textColor="0xff3d3d"/>
+				<e:layout>
+					<e:VerticalLayout gap="10" horizontalAlign="center"/>
+				</e:layout>
+				</e:Group>
+				<e:Image id="unlikeChooseMC" source="border2_png" x="0" y="0" width="100%" height="100%" scale9Grid="12,11,7,7"/>
 			</e:Group>
 			<e:layout>
-			<e:HorizontalLayout gap="10"/>
+			<e:HorizontalLayout gap="0"/>
 			</e:layout>
 		</e:Group>
 	</e:Group>

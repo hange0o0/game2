@@ -12,6 +12,8 @@ class MailUI extends game.BaseUI {
     private scroller: eui.Scroller;
     private list: eui.List;
     private tab: eui.TabBar;
+    private emptyGroup: eui.Group;
+
 
     private typeObj = {
         0:{type:[1,2],name:'奴隶'},
@@ -64,5 +66,6 @@ class MailUI extends game.BaseUI {
     public renew(){
         var list = MailManager.getInstance().getListByTpyes(this.typeObj[this.tab.selectedIndex].type)
         this.list.dataProvider = new eui.ArrayCollection(list);
+        this.emptyGroup.visible = list.length == 0;
     }
 }

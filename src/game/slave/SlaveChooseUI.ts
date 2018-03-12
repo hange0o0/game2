@@ -10,6 +10,9 @@ class SlaveChooseUI extends game.BaseWindow {
     private list: eui.List;
     private cancelBtn: eui.Button;
     private okBtn: eui.Button;
+    private emptyGroup: eui.Group;
+    private emptyText: eui.Label;
+
 
 
     private lastCD = 0
@@ -77,6 +80,7 @@ class SlaveChooseUI extends game.BaseWindow {
         var SM =  SlaveManager.getInstance()
         var arr = SM.missList;
         this.list.dataProvider = new eui.ArrayCollection(arr)
+        this.emptyGroup.visible = arr.length == 0.
         this.onTimer();
     }
 }

@@ -24,6 +24,7 @@ class RegisterServerUI extends game.BaseWindow {
     public constructor() {
         super();
         this.skinName = "RegisterServerUISkin";
+        this.canBGClose = false;
     }
 
 

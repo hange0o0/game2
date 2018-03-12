@@ -17,6 +17,7 @@ class LoginUI extends game.BaseWindow {
     public constructor() {
         super();
         this.skinName = "LoginUISkin";
+        this.canBGClose = false;
     }
 
 

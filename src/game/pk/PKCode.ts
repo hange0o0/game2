@@ -179,7 +179,7 @@ class PKCode {
             {
                 mvo.move();
             }
-            else if(mvo.stopTime < PD.actionTime)
+            else if(mvo.stopTime < PD.actionTime && mvo.mid != 99)
                 mvo.stand();
         }
     }

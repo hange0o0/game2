@@ -5,8 +5,16 @@ class M61 extends MBase {
 
     public atkBefore(user:PKMonsterData,actionTime){
         var endTime = actionTime + this.getAtkMVCD(user)//这个时间后发出攻击时件(前摇)
-        var targets = this.getAtkTargets(user);
         this.sendAtkBefore(user,user,actionTime,endTime)
+    }
+
+    protected getAtkArriveCD(user:PKMonsterData,target:PKMonsterData){
+        return 300;
+    }
+
+    public atkMV(user,target,actionTime,endTime){
+        var userItem = PKVideoCon.getInstance().getItemByID(user.id);
+        egret.Tween.get(userItem).to({x:userItem.x + user.atkRota*50},300)
     }
 
     public atk(user:PKMonsterData,target:PKMonsterData){

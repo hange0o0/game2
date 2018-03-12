@@ -5,12 +5,14 @@ class SlaveMasterItem extends game.BaseItem {
     }
 
     private headMC: HeadMC;
+    private forceText: eui.Label;
+    private clickArea: eui.Group;
     private nameText: eui.Label;
     private getBtn: eui.Button;
     private cdGroup: eui.Group;
     private cdText: eui.Label;
-    private forceText: eui.Label;
-    private clickArea: eui.Group;
+    private coinText: eui.Label;
+
 
 
 
@@ -43,18 +45,19 @@ class SlaveMasterItem extends game.BaseItem {
         {
             this.cdText.text = DateUtil.getStringBySecond(cd);
             this.cdGroup.visible = true;
-            this.getBtn.visible = false;
+            this.getBtn.skinName = 'Btn2Skin';
         }
         else
         {
             this.cdGroup.visible = false;
-            this.getBtn.visible = true;
+            this.getBtn.skinName = 'Btn1Skin';
         }
     }
 
     public dataChanged(){
         this.forceText.text = ''  + this.data.tec_force;
         this.nameText.text = '' + this.data.nick;
+        this.coinText.text = '' + NumberUtil.formatStrNum(Math.ceil(UM.hourcoin*0.2)) + ' 金币'
         this.headMC.setData(this.data.head,this.data.type);
         this.onTimer();
     }

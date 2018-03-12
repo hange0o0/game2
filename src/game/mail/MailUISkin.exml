@@ -25,5 +25,9 @@
         		</e:layout>
 	</e:TabBar>
 	<e:Label text="只保留最近3天的邮件" stroke="2" strokeColor="0x260f00" right="50" bottom="35"/>
+	<e:Group y="400" id="emptyGroup" horizontalCenter="0">
+		<e:Image source="icon_empty_png" y="0" scaleX="1.3" scaleY="1.3" horizontalCenter="-0.5"/>
+		<e:Label text="暂无相关邮件" y="90" horizontalCenter="0" size="22"/>
+	</e:Group>
 
 </e:Skin>

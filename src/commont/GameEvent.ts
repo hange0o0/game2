@@ -51,6 +51,8 @@ class GameEvent {
     public static card = {
         card_buy:'card.card_buy',
         card_draw:'card.card_draw',
+        card_like:'card.card_like',
+        card_like_set:'card.card_like_set',
         card_open:'card.card_open'
     }
 

@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="SlaveMasterItemSkin" width="400" height="310" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
+<e:Skin class="SlaveMasterItemSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*"  width="450">
 	<e:Image source="bg11_png" scale9Grid="11,8,9,13" left="-15" right="-15" top="-10" bottom="-10" visible="false"/>
-	<ns1:HeadMC width="150" height="150" skinName="HeadMCSkin" id="headMC" y="0" horizontalCenter="0"/>
-	<e:Label id="nameText" text="苦顶替" size="30" stroke="3" verticalAlign="bottom" strokeColor="0x231507" y="210" horizontalCenter="0" textColor="0xfce4a4"/>
-	<e:Button id="getBtn" label="反抗" width="180" bottom="0" horizontalCenter="0" skinName="Btn1Skin"/>
-	<e:Group id="cdGroup" width="160" bottom="20" horizontalCenter="0">
-		<e:Image source="icon_clock_png" x="0" y="0"/>
-		<e:Label id="cdText" text="Label" size="24" stroke="2" textAlign="center" y="16" x="45"/>
-		<e:layout>
-		<e:HorizontalLayout verticalAlign="middle" horizontalAlign="center"/>
-		</e:layout>
-	</e:Group>
-	<e:Group y="146.01" horizontalCenter="0">
+	<ns1:HeadMC width="150" height="150" skinName="HeadMCSkin" id="headMC" y="0" x="18.18"/>
+	<e:Group y="142" x="-4.82">
 		<e:Image source="border1_png" scale9Grid="28,20,26,2" x="0" y="0" width="160" scaleX="1.2" scaleY="1.2"/>
 		<e:Label id="forceText" text="12345" size="26" y="11.66" left="50" right="30" textAlign="center"/>
 		<e:Image source="icon_force_png" x="10" y="-19.5"/>
 	</e:Group>
-	<e:Group id="clickArea" width="250" height="250" y="0" horizontalCenter="0"/>
+	<e:Group id="clickArea" width="144" height="100%" y="0" x="18.18" anchorOffsetX="0"/>
+	<e:Image source="black_bg_png" y="-55" height="40" scale9Grid="39,17,11,18" width="300" horizontalCenter="0"/>
+	<e:Label id="nameText" text="苦顶替" size="30" stroke="3" verticalAlign="bottom" strokeColor="0x231507" y="-50" textColor="0xfce4a4" anchorOffsetX="0" textAlign="center" horizontalCenter="0"/>
+	<e:Group right="0" left="180" top="0" bottom="0">
+		<e:Button id="getBtn" label="反抗" width="180" skinName="Btn1Skin" bottom="10" horizontalCenter="0"/>
+		<e:Group id="cdGroup" width="160" horizontalCenter="0" bottom="72">
+			<e:Image source="icon_clock_png" x="0" y="0"/>
+			<e:Label id="cdText" text="Label" size="24" stroke="2" textAlign="center" y="16" x="45"/>
+			<e:layout>
+			<e:HorizontalLayout verticalAlign="middle" horizontalAlign="center"/>
+			</e:layout>
+		</e:Group>
+		<e:Label id="coinText" text="产出 -20%" y="52.42" stroke="2" size="40" textColor="0xF4B213" bold="true" horizontalCenter="0"/>
+		<e:Group y="5" horizontalCenter="0.5">
+			<e:Image source="icon_coin_png" x="0" y="3.27" scaleX="0.7" scaleY="0.7"/>
+			<e:Label text="每小时供奉" y="0" stroke="2" x="4" size="26" bold="true" textColor="0xe89a40"/>
+			<e:layout>
+			<e:HorizontalLayout verticalAlign="middle" gap="6"/>
+			</e:layout>
+		</e:Group>
+	</e:Group>
 </e:Skin>

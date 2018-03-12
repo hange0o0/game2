@@ -15,13 +15,18 @@ class CardInfoUI extends game.BaseWindow {
     private icon: eui.Image;
     private okBtn: eui.Button;
     private helpBtn: eui.Image;
+    private bar1: eui.Rect;
+    private bar2: eui.Rect;
     private likeBtn: eui.Group;
     private likeIcon: eui.Image;
     private likeText: eui.Label;
+    private likeChooseMC: eui.Image;
     private unlikeBtn: eui.Group;
     private unlikeIcon: eui.Image;
     private unlikeText: eui.Label;
+    private unlikeChooseMC: eui.Image;
     private cb: eui.CheckBox;
+
 
 
 
@@ -39,9 +44,40 @@ class CardInfoUI extends game.BaseWindow {
         this.addBtnEvent(this.backBtn,this.hide)
         this.addBtnEvent(this.okBtn,this.onClick)
         this.addBtnEvent(this.cb,this.onCB)
+        this.addBtnEvent(this.likeBtn,this.onLike)
+        this.addBtnEvent(this.unlikeBtn,this.onUnlike)
 
         this.addBtnEvent(this.helpBtn,()=>{
             HelpManager.getInstance().showHelp('card')
+        })
+    }
+
+    private onLike(){
+        this.testSendLike(1)
+    }
+    private onUnlike(){
+        this.testSendLike(2)
+    }
+
+    private testSendLike(like){
+        if(this.upGroup.stage)
+        {
+            MyWindow.Alert('你还没拥有该卡牌，无法投票')
+            return false
+        }
+        var myChoose = ActiveManager.getInstance().getLikeChoose(this.data.id)
+        if(myChoose)
+        {
+            MyWindow.Alert('今天你已对该卡牌投过票了')
+            return false
+        }
+        if(ObjectUtil.objLength(ActiveManager.getInstance().like_obj) >= 10)
+        {
+            MyWindow.Alert('今天你投票次数已达10次，无法继续')
+            return false
+        }
+        CardManager.getInstance().setCardLike(this.data.id,like,()=>{
+            this.renewCardLike();
         })
     }
 
@@ -69,7 +105,10 @@ class CardInfoUI extends game.BaseWindow {
 
     public show(v?){
         this.data = v;
-        super.show()
+        CardManager.getInstance().getCardLike(this.data.id,()=>{
+            super.show()
+        })
+
     }
 
     public hide() {
@@ -139,5 +178,21 @@ class CardInfoUI extends game.BaseWindow {
         }
         this.cb.x = this.upGroup.stage?30:176
         this.coinText.textColor = this.upAble?0xFFFFFF:0xFF0000;
+        this.renewCardLike();
+    }
+
+    private renewCardLike(){
+        var w = 540
+        var likeObj = CardManager.getInstance().cardLike[this.data.id];
+        this.likeText.text = NumberUtil.formatStrNum(likeObj.like_num)
+        this.unlikeText.text = NumberUtil.formatStrNum(likeObj.unlike_num)
+        var total = (likeObj.like_num + likeObj.unlike_num) || 1;
+        this.bar1.width = w * likeObj.like_num/total
+        this.bar2.width = w * likeObj.unlike_num/total
+
+        var myChoose = ActiveManager.getInstance().getLikeChoose(this.data.id)
+        this.likeChooseMC.visible = myChoose == 1
+        this.unlikeChooseMC.visible = myChoose == 2
+
     }
 }

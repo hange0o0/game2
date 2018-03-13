@@ -30,12 +30,16 @@ class CardDrawResultUI extends game.BaseWindow {
     }
 
     private onClick(){
-        this.hide();
+        if(!this.desText.visible)
+            return;
+        this.desText.text = ''
+        this.item.scaleX = this.item.scaleY = 0;
         CardManager.getInstance().card_draw()
     }
 
     public show(v?){
         this.dataIn = v;
+        this.noMV = this.stage && this.visible;
         super.show()
     }
 
@@ -58,6 +62,19 @@ class CardDrawResultUI extends game.BaseWindow {
         else
         {
             MyTool.removeMC(this.okBtn)
+        }
+        if(this.noMV)
+        {
+            this.desText.visible = false;
+            this.item.scaleX = this.item.scaleY = 0;
+            egret.Tween.get(this.item).to({scaleX:1.2,scaleY:1.2},150).to({scaleX:1,scaleY:1},200).call(()=>{
+                this.desText.visible = true;
+            },this)
+        }
+        else
+        {
+            this.desText.visible = true;
+            this.item.scaleX = this.item.scaleY = 1;
         }
     }
 }

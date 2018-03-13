@@ -94,56 +94,6 @@ class PKCode {
         }
     }
 
-    ////上怪,
-    //public addMonster(){
-    //    var PD = PKData.getInstance();
-    //    for(var i=1;i<=PD.playerNum;i++) //暂时4个玩家
-    //    {
-    //        var player = PD.playerObj[i];
-    //        if(!player)
-    //            continue
-    //        var arr = player.getAddMonster(PD.actionTime)
-    //        if(arr.length > 0)
-    //        {
-    //            var needSpace = PKConfig.maxMonsterSpace - PD.getMonsterSpaceByPlayer(player.id);
-    //            while(needSpace > 0 && arr.length > 0)
-    //            {
-    //                var data = arr.shift();
-    //                //if(data.getVO().space > needSpace)
-    //                //{
-    //                //     break;
-    //                //}
-    //                needSpace -= data.getVO().space;
-    //                PD.addMonster(data.getMonster(PD.actionTime));
-    //                data.setHaveAdd(PD.actionTime);
-    //            }
-    //        }
-    //    }
-    //}
-    //
-    ////技能效果作用
-    //public actionSkill(){
-    //    var PD = PKData.getInstance();
-    //    //PD.resetMonsterData();//重置技能数据，方便技能统计
-    //    for(var i=1;i<=PD.playerNum;i++) //暂时4个玩家
-    //    {
-    //        var player = PD.playerObj[i];
-    //        if(!player)
-    //            continue
-    //        var arr = player.getAddSkill(PD.actionTime)
-    //
-    //        if(arr.length > 0)
-    //        {
-    //            for(var i=0;i<arr.length;i++)
-    //            {
-    //                var data = arr[i];
-    //                data.actionSkill();
-    //                data.setHaveAdd(PD.actionTime);
-    //            }
-    //        }
-    //    }
-    //}
-
     //怪出手
     public monsterAction(){
         var PD = PKData.getInstance();
@@ -152,7 +102,6 @@ class PKCode {
             PD.resetMonsterData();//重置技能数据，方便技能统计
             var mvo:PKMonsterData = PD.monsterList[i];
             var skillTargets = mvo.canSkill(PD.actionTime);
-
 
             if(skillTargets && skillTargets.length > 0)   //用技能
             {

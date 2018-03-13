@@ -75,8 +75,8 @@ class TecInfoUI extends game.BaseWindow {
         {
             case 2:
                 this.upGroup.visible = true
-                this.icon1.source = 'icon_force_png'
-                this.icon2.source = 'icon_force_png'
+                this.icon1.source = 'icon_force2_png'
+                this.icon2.source = 'icon_force2_png'
                 this.text1.text = '+' + TCM.getForceAdd(this.dataIn.id,lv)
                 this.text2.text = '+' + TCM.getForceAdd(this.dataIn.id,lv + 1)
                 break;

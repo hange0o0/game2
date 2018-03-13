@@ -61,9 +61,7 @@ class M36 extends MBase {
         var monster = PD.addMonster(mData);
         monster.skillTemp[36] = true;
 
-
-        if(!PKData.getInstance().quick)
-            PKVideoCon.getInstance().playAniOn(monster.id,this.mvID)
+        PKVideoCon.getInstance().playAniOn(monster.id,this.mvID)
     }
 
 

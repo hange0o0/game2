@@ -133,6 +133,7 @@ class PKCtrlCon extends game.BaseContainer {
         this.placeGroup.addChild(item);
         item.data = data;
         this.placeArr.push(item);
+        this.needRenewCard = true;
     }
 
     private removePosItem(data){
@@ -377,7 +378,7 @@ class PKCtrlCon extends game.BaseContainer {
                     item.appear();
                 }
             }
-            this.cardText.text = 'x' + (ObjectUtil.objLength(PD.myPlayer.getHandCard(),true) + PD.myPlayer.hideCard.length)
+            this.cardText.text = 'x' + (ObjectUtil.objLength(PD.myPlayer.getHandCard(),true) + PD.myPlayer.hideCard.length + PD.myPlayer.autoList.length)
         }
 
     }

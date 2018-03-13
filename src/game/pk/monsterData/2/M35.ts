@@ -22,7 +22,6 @@ class M35 extends MBase {
         PKBulletManager.getInstance().createBullet(userItem,targetItem,actionTime,endTime,2)
     }
     public skill(user:PKMonsterData,target:PKMonsterData){
-        console.log('skill')
         var listener = new M35StateListener()
         var teamData = user.getOwner().teamData;
         listener.owner = user;

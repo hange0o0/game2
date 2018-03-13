@@ -62,18 +62,18 @@ class CardInfoUI extends game.BaseWindow {
     private testSendLike(like){
         if(this.upGroup.stage)
         {
-            MyWindow.Alert('你还没拥有该卡牌，无法投票')
+            MyWindow.ShowTips('你还没拥有该卡牌，无法投票')
             return false
         }
         var myChoose = ActiveManager.getInstance().getLikeChoose(this.data.id)
         if(myChoose)
         {
-            MyWindow.Alert('今天你已对该卡牌投过票了')
+            MyWindow.ShowTips('今天你已对该卡牌投过票了')
             return false
         }
         if(ObjectUtil.objLength(ActiveManager.getInstance().like_obj) >= 10)
         {
-            MyWindow.Alert('今天你投票次数已达10次，无法继续')
+            MyWindow.ShowTips('今天你投票次数已达10次，无法继续')
             return false
         }
         CardManager.getInstance().setCardLike(this.data.id,like,()=>{
@@ -184,15 +184,15 @@ class CardInfoUI extends game.BaseWindow {
     private renewCardLike(){
         var w = 540
         var likeObj = CardManager.getInstance().cardLike[this.data.id];
-        this.likeText.text = NumberUtil.formatStrNum(likeObj.like_num)
-        this.unlikeText.text = NumberUtil.formatStrNum(likeObj.unlike_num)
+        this.likeText.text = '票数：' + NumberUtil.formatStrNum(likeObj.like_num)
+        this.unlikeText.text = '票数：' + NumberUtil.formatStrNum(likeObj.unlike_num)
         var total = (likeObj.like_num + likeObj.unlike_num) || 1;
         this.bar1.width = w * likeObj.like_num/total
         this.bar2.width = w * likeObj.unlike_num/total
 
         var myChoose = ActiveManager.getInstance().getLikeChoose(this.data.id)
-        this.likeChooseMC.visible = myChoose == 1
-        this.unlikeChooseMC.visible = myChoose == 2
+        this.likeChooseMC.visible = myChoose != 2
+        this.unlikeChooseMC.visible = myChoose != 1
 
     }
 }

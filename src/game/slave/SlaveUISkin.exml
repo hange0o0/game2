@@ -54,7 +54,7 @@
         			<e:HorizontalLayout horizontalAlign="justify"/>
         		</e:layout>
 	</e:TabBar>
-	<e:Group id="group2" x="0" top="143" bottom="0" visible="false">
+	<e:Group id="group2" x="0" top="143" bottom="0">
 		<e:Scroller id="scroller2" width="640" bounces="false" x="0" top="50" bottom="0">
 			<e:Group>
 			<e:List id="list" width="200" height="200" x="142" y="175">
@@ -64,8 +64,8 @@
 			</e:List>
 			</e:Group>
 		</e:Scroller>
-		<e:Rect height="50" y="0" fillAlpha="0.3" left="10" right="10"/>
-		<e:Label id="viewNumText" text="Label" y="11" size="22" horizontalCenter="0"/>
+		<e:Image source="black_bg_png" y="0" left="10" right="10" scale9Grid="43,7,7,42" height="50"/>
+		<e:Label id="viewNumText" text="Label" y="13" size="22" horizontalCenter="0"/>
 		<e:Group y="300" id="emptyGroup" horizontalCenter="0">
 			<e:Image source="icon_empty_png" y="0" scaleX="1.3" scaleY="1.3" horizontalCenter="-0.5"/>
 			<e:Label text="你还没关注任何人" y="90" horizontalCenter="0" size="22"/>

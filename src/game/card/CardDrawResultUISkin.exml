@@ -17,5 +17,5 @@
 		<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="360" x="0" y="0"/>
 		<e:Label id="titleText" text="恭喜获得" y="10.18" size="24" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
 	</e:Group>
-	<ns1:CardItem id="item" y="110" skinName="CardItemSkin" horizontalCenter="0"/>
+	<ns1:CardItem id="item" skinName="CardItemSkin" horizontalCenter="0" verticalCenter="-70"/>
 </e:Skin>

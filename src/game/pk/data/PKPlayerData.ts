@@ -14,7 +14,8 @@ class PKPlayerData {
     private posIndex = 1;
     //public prePosCard = {};//准备上阵的手牌 1-4,如果是自动的，不受此限制
 
-    public posHistory = [];
+    public posHistory = []; //要发给服务器的出卡记录
+    public useCardList = []//使用过的卡
 
     private mp = 0//当前的魔法
     public userMP = 0//已使用的魔法
@@ -149,6 +150,7 @@ class PKPlayerData {
 
         var step = Math.floor(PKData.getInstance().actionTime/PKConfig.stepCD)
         this.posHistory.push(step + '#' + cardData.mid);
+        this.useCardList.push(cardData.mid)
     }
 
     ////上阵卡
@@ -192,6 +194,7 @@ class PKPlayerData {
                         user:this.posCard[data.id],
                     })
                 }
+                this.useCardList.push(data.mid)
             }
             else
                 break;

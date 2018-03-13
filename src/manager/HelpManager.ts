@@ -94,8 +94,9 @@ class HelpManager {
                 '所有卡牌都需要能量才能上阵，不同卡牌需要的能量值会不一样',
                 '随着主城等级的提升，会出现更多未解锁卡牌',
                 '解锁[单位]卡牌，需要投入指定的数量的金币进行购买',
-                '解锁[法术]卡牌的方法有两种，其一是使用'+PropVO.getObject(102).propname + '进行抽取，其二是使用'+PropVO.getObject(103).propname + '进行兑换。',
+                '解锁[法术]卡牌的方法有两种，其一是使用'+PropVO.getObject(102).propname + '进行抽取，其二是使用'+PropVO.getObject(103).propname + '进行兑换',
                 '抽取[法术]卡牌时，系统会从所有满足等级的卡牌中抽取一张。如果该卡牌未解锁，则为玩家进行解锁。如果已解锁，则返还一张'+PropVO.getObject(103).propname,
+                '玩家可对自己所拥有的卡牌进行投票（加强/削弱），最终投票结果会作为该卡牌的强度调整的依据。每个玩家每天最多可对10张卡牌进行投票',
                 '【费用】：上阵该卡牌需要的能量',
                 '【传送次数】：[单位]卡牌在战斗中的出兵次数，达到数量后卡牌失效并移出',
                 '【传送间隔】：[单位]卡牌的出兵间隔',
@@ -159,7 +160,7 @@ class HelpManager {
         for(var i=0;i<this.helpObj['card'].list.length;i++)
         {
             var str = this.helpObj['card'].list[i];
-            if(str.indexOf('解锁') == -1)
+            if(str.indexOf('解锁') == -1 && str.indexOf('投票') == -1)
             {
                 this.helpObj['pk'].list.push(str)
             }

@@ -298,6 +298,8 @@ class PKVideoCon extends game.BaseContainer {
 
     //在A上播放动画
     public playAniOn(a,mvID){
+        if(PKData.getInstance().quick)
+            return null;
         var atker = this.getItemByID(a)
         if(!atker)
         {
@@ -309,6 +311,8 @@ class PKVideoCon extends game.BaseContainer {
     }
     //在A里播放动画
     public playAniIn(a,mvID){
+        if(PKData.getInstance().quick)
+            return null;
         var atker = this.getItemByID(a)
         if(!atker)
         {
@@ -321,6 +325,8 @@ class PKVideoCon extends game.BaseContainer {
 
     //掉在头上
     public dropOn(a,mvID){
+        if(PKData.getInstance().quick)
+            return null;
         var atker = this.getItemByID(a)
         if(!atker)
         {

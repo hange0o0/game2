@@ -19,40 +19,47 @@ class DebugManager {
     public MML = 100;  //测试出战怪的等级
     public printDetail = false;  //打印胜出怪物
 
+    public winMonster = {}
+
     public createHang(time = 1){
         while(time--)
         {
-            var arr = []
-            for(var i=1;i<=18;i++)
-            {
-                arr.push(i)
-                arr.push(i)
-                arr.push(i)
-            }
-            for(var i=31;i<=48;i++)
-            {
-                if(i == 37)
-                    continue
-                arr.push(i)
-                arr.push(i)
-                arr.push(i)
-            }
-            for(var i=61;i<=77;i++)
-            {
-                arr.push(i)
-                arr.push(i)
-                arr.push(i)
-            }
-            var newList = [];
-            for(var i=0;i<21;i++)
-            {
-                newList.push(ArrayUtil.randomOne(arr,true))
-            }
+            var newList = this.randomList();;
             console.log(newList.join(','))
         }
     }
 
-    public test(list1,list2,view=false,hp=5){
+    public randomList(){
+        var arr = []
+        for(var i=1;i<=18;i++)
+        {
+            arr.push(i)
+            arr.push(i)
+            arr.push(i)
+        }
+        for(var i=31;i<=48;i++)
+        {
+            if(i == 37)
+                continue
+            arr.push(i)
+            arr.push(i)
+            arr.push(i)
+        }
+        for(var i=61;i<=77;i++)
+        {
+            arr.push(i)
+            arr.push(i)
+            arr.push(i)
+        }
+        var newList = [];
+        for(var i=0;i<21;i++)
+        {
+            newList.push(ArrayUtil.randomOne(arr,true))
+        }
+        return newList;
+    }
+
+    public testCard(list1,list2,view=false,hp=5){
         var PD = PKData.getInstance()
         var data = {
             seed:TM.now(),
@@ -83,12 +90,101 @@ class DebugManager {
                 console.log('fail')
             console.log('actionTime:' + DateUtil.getStringBySecond(Math.floor(PD.actionTime/1000)).substr(-5))
         }
+    }
 
+
+    private testNum = 0;
+    public test(){
+        this.testNum = 0;
+        this.stop = 0;
+        this.winMonster = {};
+        setTimeout(()=>{
+            this.testRound();
+        },1);
 
     }
 
+    private printResult(){
+        var arr = [];
+        for(var s in MonsterVO.data)
+        {
+            arr.push({id:s,num:this.winMonster[s] || 0})
+        }
+        ArrayUtil.sortByField(arr,['num'],[1]);
+        for(var i=0;i<arr.length;i++)
+        {
+            var id = arr[i].id;
+            console.log('id:' +id +  '\t\tnum:' +  arr[i].num + '\t\tname:' +  MonsterVO.getObject(id).name)
+        }
+    }
+
+    //N选1;
+    private testRound(){
+        var t = egret.getTimer()
+        this.testNum ++;
+        var arr = []
+        var n = 16;
+        for(var i=0;i<n;i++)
+        {
+             arr.push(this.randomList().join(','))
+        }
+        var num = 0;
+        while(arr.length >2)
+        {
+             arr = arr.concat(this.testOne(arr.shift(),arr.shift()))
+            num ++;
+            if(num> n+2)
+                break;
+        }
+        arr = this.testOne(arr.shift(),arr.shift())
+        for(var i=0;i<arr.length;i++)
+        {
+            var temp = arr[i].split(',');
+            for(var j=0;j<temp.length;j++)
+            {
+                 var id = temp[j];
+                if(this.winMonster[id])
+                    this.winMonster[id] ++;
+                else
+                    this.winMonster[id] = 1;
+            }
+        }
+        console.log(this.testNum + ':' + (egret.getTimer()-t))
+        if(this.stop)
+        {
+            this.printResult();
+            return;
+        }
+
+        egret.callLater(this.testRound,this)
+    }
+
+    private testOne(list1,list2){
+        var PD = PKData.getInstance()
+        var data = {
+            seed:TM.now(),
+            players:[
+                {id:1,gameid:'test1',team:1,autolist:list1,force:0,type:0,hp:5},
+                {id:2,gameid:'test2',team:2,autolist:list2,force:0,type:0,hp:5}
+            ]
+        };
+        var t = egret.getTimer();
+        PKManager.getInstance().pkType = PKManager.TYPE_TEST
+        PD.init(data);
+        PD.quick = true;
+        PD.start();
+        PKCode.getInstance().onStep()
+        var winlist;
+        if(PD.isWin())
+            return [list1];
+        else if(PD.isDraw())
+            return [list1,list2];
+        else
+            return [list2];
+    }
+
 }
-//DM.test('1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16','1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16')
+//DM.testCard('1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16','1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16')
 //DM.testMV('mv2',10,[30,31])
 //javascript:DM.showAllMV();
 //Net.send('clean_server')

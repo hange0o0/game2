@@ -19,6 +19,7 @@ class BasePosItem extends game.BaseItem {
     public stopMove = true;
     public childrenCreated() {
         super.childrenCreated();
+        MyTool.addLongTouch(this,this.onLongTouch,this)
         //this.addBtnEvent(this,this.onClick)
     }
 

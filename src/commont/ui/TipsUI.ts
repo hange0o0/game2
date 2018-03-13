@@ -22,7 +22,7 @@ class TipsUI extends game.BaseContainer{
 		for(var i=0;i<TipsUI.showTips.length;i++)
 		{
 			var item =  TipsUI.showTips[i];
-			item.toY -= 95
+			item.toY -= 70
 			egret.Tween.removeTweens(item);
 			var tw = egret.Tween.get(item);
 			tw.to({y:item.toY},Math.abs(item.toY - item.y)*2);

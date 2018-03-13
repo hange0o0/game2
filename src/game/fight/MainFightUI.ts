@@ -15,10 +15,12 @@ class MainFightUI extends MainBase {
     private shopBtn: eui.Group;
     private settingBtn: eui.Group;
     private mapBtn: HangUI;
-    private testBtn: eui.Rect;
+    private pvpBtn: PVPUI;
+    private fightBtn: FightUI;
     private bottomGroup: eui.Group;
     private defBtn: eui.Button;
     private atkBtn: eui.Button;
+
 
 
 
@@ -37,8 +39,8 @@ class MainFightUI extends MainBase {
         this.addBtnEvent(this.defBtn, this.onDef)
         this.addBtnEvent(this.atkBtn, this.onAtk)
 
-        //this.addBtnEvent(this.mapBtn, this.onMap)
-        this.addBtnEvent(this.testBtn, this.onTest)
+        this.addBtnEvent(this.pvpBtn, this.onPvp)
+        this.addBtnEvent(this.fightBtn, this.onFight)
         this.addBtnEvent(this.mailBtn, this.onMail)
         this.addBtnEvent(this.rankBtn, this.onRank)
         this.addBtnEvent(this.shopBtn, this.onShop)
@@ -48,27 +50,34 @@ class MainFightUI extends MainBase {
 
     }
 
-    public setTopPos(scrollV){
-        if(this.hideTopState)
-        {
-            if(scrollV >= 30)
-                return;
-        }
-        else if(scrollV <= 50)
-            return;
-
-        this.hideTopState = !this.hideTopState
-        egret.Tween.removeTweens(this.bottomGroup)
-        var tw = egret.Tween.get(this.bottomGroup)
-        if(this.hideTopState)
-            tw.to({bottom:-130},Math.abs(this.bottomGroup.bottom - (-130))*2)
-        else
-            tw.to({bottom:25},Math.abs(this.bottomGroup.bottom - (25))*2)
+    private onPvp(){
+         MyWindow.ShowTips('即将开放，敬请期待')
     }
+    private onFight(){
+        MyWindow.ShowTips('即将开放，敬请期待')
+    }
+
+    //public setTopPos(scrollV){
+    //    if(this.hideTopState)
+    //    {
+    //        if(scrollV >= 30)
+    //            return;
+    //    }
+    //    else if(scrollV <= 50)
+    //        return;
+    //
+    //    this.hideTopState = !this.hideTopState
+    //    egret.Tween.removeTweens(this.bottomGroup)
+    //    var tw = egret.Tween.get(this.bottomGroup)
+    //    if(this.hideTopState)
+    //        tw.to({bottom:-130},Math.abs(this.bottomGroup.bottom - (-130))*2)
+    //    else
+    //        tw.to({bottom:25},Math.abs(this.bottomGroup.bottom - (25))*2)
+    //}
 
     private onScroll(){
         MainUI.getInstance().setTopPos(this.scroller.viewport.scrollV)
-        this.setTopPos(this.scroller.viewport.scrollV)
+        //this.setTopPos(this.scroller.viewport.scrollV)
     }
 
     private onTest(){
@@ -137,8 +146,8 @@ class MainFightUI extends MainBase {
 
 
     public renew(){
-        egret.Tween.removeTweens(this.bottomGroup)
-        this.bottomGroup.bottom = 25
+        //egret.Tween.removeTweens(this.bottomGroup)
+        //this.bottomGroup.bottom = 25
         this.scroller.viewport.scrollV = 0;
 
         this.renewPosBtn();

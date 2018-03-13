@@ -378,7 +378,7 @@ class PKCtrlCon extends game.BaseContainer {
                     item.appear();
                 }
             }
-            this.cardText.text = 'x' + (ObjectUtil.objLength(PD.myPlayer.getHandCard(),true) + PD.myPlayer.hideCard.length + PD.myPlayer.autoList.length)
+            this.cardText.text = 'x' + PD.myPlayer.getCardNum();
         }
 
     }

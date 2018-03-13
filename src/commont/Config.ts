@@ -69,7 +69,7 @@ class Config {
             AniManager.getInstance().aniList.push('skill' + aniList[i]);
         }
 
-        for(var i=1;i<=9;i++)
+        for(var i=1;i<=10;i++)
         {
             arr.push(this.createImg('bullet' + i + '.png','ani/'));
         }

@@ -207,6 +207,7 @@ class BulletMC extends egret.DisplayObjectContainer{
         7:{w:25,h:120,rota:90},
         8:{w:20,h:57,rota:90},
         9:{w:18,h:18},
+        10:{w:18,h:18},
     }
     constructor() {
         super();

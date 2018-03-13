@@ -198,6 +198,22 @@ class PKCode {
         }
         PKData.getInstance().team1.onStateTimer();
         PKData.getInstance().team2.onStateTimer();
+
+        if(PD.monsterList.length == 0 && PD.actionTime > 60000 && !PD.isGameOver)//如果1min后有一方没牌了也结束
+        {
+            var b = true;
+            for(var s in PKData.getInstance().playerObj)
+            {
+                var player = PKData.getInstance().playerObj[s];
+                if(player.getPosNum() || player.getCardNum())
+                {
+                    b = false;
+                    break
+                }
+            }
+            if(b)
+                PD.isGameOver = true;
+        }
     }
 
 

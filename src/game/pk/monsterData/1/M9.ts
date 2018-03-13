@@ -13,7 +13,7 @@ class M9 extends MBase {
             var buff = new PKBuffData()
             buff.id = 9;
             buff.user = user;
-            buff.addValue('atk',Math.min(1,Math.floor(target.baseAtk*rate)));
+            buff.addValue('atk',Math.max(1,Math.floor(target.baseAtk*rate)));
             target.addBuff(buff)
 
 
@@ -60,7 +60,7 @@ class M9StateListener extends PKStateListener {
         var buff = new PKBuffData()
         buff.id = 9;
         buff.user = this.owner;
-        buff.addValue('atk',Math.min(1,Math.floor(target.baseAtk*rate)));
+        buff.addValue('atk',Math.max(1,Math.floor(target.baseAtk*rate)));
         target.addBuff(buff)
 
         if(buff.ing)

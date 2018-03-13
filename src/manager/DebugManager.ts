@@ -31,28 +31,23 @@ class DebugManager {
 
     public randomList(){
         var arr = []
-        for(var i=1;i<=18;i++)
+        var level = 100;
+        var len = 10;
+        for(var s in MonsterVO.data)
         {
-            arr.push(i)
-            arr.push(i)
-            arr.push(i)
+            var mvo = MonsterVO.data[s]
+            if(mvo.level <= level)
+                arr.push(mvo.id)
         }
-        for(var i=31;i<=48;i++)
+        for(var s in SkillVO.data)
         {
-            if(i == 37)
-                continue
-            arr.push(i)
-            arr.push(i)
-            arr.push(i)
+            var svo = SkillVO.data[s]
+            if(svo.level <= level)
+                arr.push(svo.id)
         }
-        for(var i=61;i<=77;i++)
-        {
-            arr.push(i)
-            arr.push(i)
-            arr.push(i)
-        }
+
         var newList = [];
-        for(var i=0;i<21;i++)
+        for(var i=0;i<len;i++)
         {
             newList.push(ArrayUtil.randomOne(arr,true))
         }
@@ -110,11 +105,15 @@ class DebugManager {
         {
             arr.push({id:s,num:this.winMonster[s] || 0})
         }
+        for(var s in SkillVO.data)
+        {
+            arr.push({id:s,num:this.winMonster[s] || 0})
+        }
         ArrayUtil.sortByField(arr,['num'],[1]);
         for(var i=0;i<arr.length;i++)
         {
             var id = arr[i].id;
-            console.log('id:' +id +  '\t\tnum:' +  arr[i].num + '\t\tname:' +  MonsterVO.getObject(id).name)
+            console.log('id:' +id +  '\t\tnum:' +  arr[i].num + '\t\tname:' +  CM.getCardVO(id).name)
         }
     }
 
@@ -176,11 +175,18 @@ class DebugManager {
         PKCode.getInstance().onStep()
         var winlist;
         if(PD.isWin())
+        {
+
             return [list1];
+        }
         else if(PD.isDraw())
+        {
             return [list1,list2];
+        }
         else
+        {
             return [list2];
+        }
     }
 
 }

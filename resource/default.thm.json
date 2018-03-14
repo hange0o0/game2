@@ -119,6 +119,7 @@
     "src/game/user/InfoItemSkin.exml",
     "src/game/user/OtherInfoUISkin.exml",
     "src/game/user/SettingUISkin.exml",
+    "src/guide/GuideSkin.exml",
     "src/login/LoginUISkin.exml",
     "src/login/RegisterServerUISkin.exml",
     "src/login/RegisterUISkin.exml"

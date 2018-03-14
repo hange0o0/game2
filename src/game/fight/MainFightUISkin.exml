@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="MainFightUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
 
-	<e:Scroller id="scroller" width="620" horizontalCenter="0" top="0" bottom="120" bounces="false" locked="true">
+	<e:Scroller id="scroller" width="640" horizontalCenter="0" top="0" bottom="120" bounces="false">
 		<e:Group>
 			<e:Group y="65" horizontalCenter="0" width="100%">
-				<e:Group id="mailBtn" x="10" y="0">
-				<e:Image scale9Grid="33,31,4,6" y="0" width="80" height="80" x="0" source="bg7_png" visible="false"/>
+				<e:Group id="mailBtn" x="10" y="0" width="80" height="80">
 				<e:Image source="main_mail_png" verticalCenter="0" horizontalCenter="0"/>
 				<e:Label text="邮件" size="22" horizontalCenter="0" stroke="2" bottom="10"/>
+					<e:Image id="mailRed" source="red_mc_png" right="0" top="12"/>
 				</e:Group>
-				<e:Group id="rankBtn" x="100" y="0">
-				<e:Image source="bg7_png" scale9Grid="33,31,4,6" y="0" width="80" height="80" x="0" visible="false"/>
+				<e:Group id="rankBtn" x="100" y="0" height="80" width="80">
 				<e:Image source="main_rank_png" horizontalCenter="0" verticalCenter="0"/>
 				<e:Label text="排行" size="22" horizontalCenter="0" stroke="2" bottom="10"/>
 				</e:Group>
-				<e:Group id="shopBtn" x="100" y="0">
-				<e:Image source="bg7_png" scale9Grid="33,31,4,6" y="0" width="80" height="80" x="0" visible="false"/>
+				<e:Group id="shopBtn" x="100" y="0" height="80" width="80">
 				<e:Image source="main_shop_png" verticalCenter="0" horizontalCenter="0"/>
 				<e:Label text="商店" size="22" horizontalCenter="0" stroke="2" bottom="10"/>
 				</e:Group>
-				<e:Group id="settingBtn" x="100" y="0">
-				<e:Image source="bg7_png" scale9Grid="33,31,4,6" y="0" width="80" height="80" x="0" visible="false"/>
+				<e:Group id="settingBtn" x="100" y="0" width="80" height="80">
 				<e:Image source="icon_setting_png" horizontalCenter="0" verticalCenter="0"/>
 				<e:Label text="设置" size="22" horizontalCenter="0" stroke="2" bottom="10"/>
 				</e:Group>

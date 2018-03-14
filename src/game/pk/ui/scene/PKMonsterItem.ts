@@ -101,6 +101,8 @@ class PKMonsterItem extends game.BaseItem {
 
     private initStateMV(s){
         var mD:PKMonsterData = this.data
+        if(parseInt(s) == PKConfig.STATE_MOMIAN)
+            return;
         if(!this.stateMV[s])
         {
             var img = new PKState();

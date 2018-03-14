@@ -16,12 +16,14 @@ class PKPosItem extends game.BaseItem {
         this.pool.push(item);
     }
 
+    private group: eui.Group;
     private bg: eui.Image;
     private img: CardImg;
     private barGroup: eui.Group;
     private barMC: eui.Image;
     private numGroup: eui.Group;
     private numText: eui.Label;
+
 
 
 
@@ -80,77 +82,12 @@ class PKPosItem extends game.BaseItem {
     public dataChanged(){
         this.renewImg(this.data.mid);
         this.onTimer();
-        //this.indexText.text = this.index + ''
-        //switch(this.index)
-        //{
-        //    case 1:
-        //        this.addIcon.source = 'icon_atk_png'
-        //        this.addIcon.scaleX = this.addIcon.scaleY = 1.2
-        //        //this.addText.text = '攻击 +10%'
-        //        break;
-        //    case 2:
-        //        this.addIcon.source = 'icon_love_png'
-        //        this.addIcon.scaleX = this.addIcon.scaleY = 0.5
-        //        //this.addText.text = '血量 +10%'
-        //        break;
-        //    case 3:
-        //        this.addIcon.source = 'icon_def1_png'
-        //        this.addIcon.scaleX = this.addIcon.scaleY = 0.4
-        //        //this.addText.text = '间隔 +10%'
-        //        break;
-        //    case 4:
-        //        this.addIcon.visible = false
-        //        //this.addText.text = ''
-        //        break;
-        //}
-        //var data:PKPosCardData = PKData.getInstance().myPlayer.posCard[this.index]
-        //if(data)
-        //{
-        //    this.desText.text = 'id:' + data.mid + '\nnum:' +  data.num
-        //}
-        //else
-        //{
-        //    this.desText.text = ''
-        //}
-
-
     }
 
-    //可以上阵
-    //public canPos(){
-    //    var data:PKPosCardData = PKData.getInstance().myPlayer.prePosCard[this.index];
-    //    if(!data)
-    //        return true;
-    //    if(data.num > 0 || data.actionResult)
-    //        return true;
-    //    return false;
-    //}
-
-    //public showFail(){
-    //    this.failMC.visible = true
-    //    this.failMC.alpha = 0
-    //    var tw = egret.Tween.get(this.failMC);
-    //    tw.to({alpha:0.3},100).to({alpha:0},100).to({alpha:0.3},100).to({alpha:0},100).call(function(){
-    //        this.failMC.visible = false
-    //    },this)
-    //}
-
-    //public setOver(b)
-    //{
-    //    this.con.y = b?this.defaultY-30:this.defaultY
-    //    if(b)
-    //        this.parent.addChild(this);
-    //}
 
     public remove(){
+        egret.Tween.removeTweens(this.group);
         MyTool.removeMC(this);
-        //egret.Tween.removeTweens(this.barGroup1)
-        //egret.Tween.removeTweens(this.failMC)
-        //this.barGroup1.alpha = 1;
-        //this.twRemain = null;
-        //this.failMC.visible = false
-        //this.lightBG.visible = false
-        //this.tw.setPaused(true);
     }
 
 
@@ -186,41 +123,23 @@ class PKPosItem extends game.BaseItem {
 
 
     }
-
-    //private testTween(cd=99999){
-    //
-    //    if(cd>5000)
-    //    {
-    //        this.tw.setPaused(true)
-    //        this.lightBG.visible = false;
-    //    }
-    //    else
-    //    {
-    //        this.tw.setPaused(false)
-    //        this.lightBG.visible = true;
-    //        //if(cd<=0)
-    //        //    this.lightBG.source = 'card_back_bg_light1_png'
-    //        //else
-    //        this.lightBG.source = 'card_back_bg_light2_png'
-    //    }
-    //}
-
     private renewImg(mid){
         var vo:any = CM.getCardVO(mid)
         this.img.data = vo.id;
         this.bg.source = vo.getBG();
-        //this.cardGroup.visible = true;
-        //
-        //this.spaceGroup.visible = false
-        //if(vo.isMonster)
-        //{
-        //    this.spaceGroup.visible = true
-        //    this.spaceText.text = vo.space + '';
-        //}
-        //else
-        //{
-        //    this.spaceGroup.visible = false
-        //}
+    }
 
+    public mvAdd(){
+        egret.Tween.removeTweens(this.group);
+        this.group.scaleX = this.group.scaleY = 0
+         var tw = egret.Tween.get(this.group);
+        tw.to({scaleX:1.2,scaleY:1.2},200).to({scaleX:1,scaleY:1},200)
+    }
+
+    public mvRemove(fun){
+        egret.Tween.removeTweens(this.group);
+        this.group.scaleX = this.group.scaleY = 1
+        var tw = egret.Tween.get(this.group);
+        tw.to({scaleX:1.2,scaleY:1.2},200).wait(100).to({scaleX:0,scaleY:0},200).call(fun)
     }
 }

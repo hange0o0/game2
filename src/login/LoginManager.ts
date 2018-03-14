@@ -311,6 +311,7 @@ class LoginManager{
                 FromManager.getInstance().newRole()
                 UM.nick = nick;
             }
+            GuideManager.getInstance().isGuiding = true;
             self.loginServer()
             if(fun)
                 fun();

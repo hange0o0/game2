@@ -41,7 +41,7 @@ class MailManager {
             case 2:
                 return '你的奴隶【'+Base64.decode(content.slave_nick)+'】看着还不错，我就拿去了'
             case 101:
-                return '系统给你发奖罗~'
+                return Base64.decode(content.des);
         }
     }
 

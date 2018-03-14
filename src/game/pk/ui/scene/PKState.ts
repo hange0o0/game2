@@ -22,14 +22,16 @@ class PKState extends game.BaseItem {
         }
         else if(this.data == PKConfig.STATE_ILL)
         {
-            this.initAtkMV();
-            this.atkMV.load('effect2_png',0,154,39,2)
-        }
-        else if(this.data == PKConfig.STATE_MOMIAN)
-        {
             this.initImg();
-            this.stateMC.source = 'icon_def2_png'
+            this.stateMC.source = 'effect5_png'
+            this.stateMC.anchorOffsetX = 30/2
         }
+        //else if(this.data == PKConfig.STATE_MOMIAN)
+        //{
+        //    this.initImg();
+        //    this.stateMC.source = 'icon_def2_png'
+        //    this.stateMC.anchorOffsetX = 52/2
+        //}
         else if(this.data == PKConfig.STATE_MODUN)
         {
              this.initAtkMV();
@@ -81,9 +83,8 @@ class PKState extends game.BaseItem {
                 this.y = 300 - mD.getVO().height - 35
                 break;
             case PKConfig.STATE_ILL:
-                this.atkMV.play()
-                this.x = 50 -  154/4
-                this.y = 300 - mD.getVO().height - 35
+                this.x = 50
+                this.y = 300 - mD.getVO().height -50
                 break;
             case PKConfig.STATE_MODUN:
                 this.atkMV.play()

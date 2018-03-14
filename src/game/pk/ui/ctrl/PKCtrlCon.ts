@@ -122,7 +122,7 @@ class PKCtrlCon extends game.BaseContainer {
             case PKConfig.VIDEO_POS_REMOVE:
                 if(videoData.user.getOwner() == PKData.getInstance().myPlayer)
                 {
-                    this.removePosItem(videoData.user)
+                    this.mvRemoveItem(videoData.user)
                 }
                 break;
         }
@@ -132,19 +132,35 @@ class PKCtrlCon extends game.BaseContainer {
         var item = PKPosItem.createItem()
         this.placeGroup.addChild(item);
         item.data = data;
+        item.mvAdd();
         this.placeArr.push(item);
         this.needRenewCard = true;
+    }
+
+    private mvRemoveItem(data){
+        for(var i=0;i<this.placeArr.length;i++)
+        {
+            var item = this.placeArr[i];
+            if(item.data == data)
+            {
+                item.mvRemove(()=>{
+                    this.removePosItem(data)
+                });
+                break;
+            }
+        }
     }
 
     private removePosItem(data){
         for(var i=0;i<this.placeArr.length;i++)
         {
             var item = this.placeArr[i];
-              if(item.data == data)
-              {
-                  this.placeArr.splice(i,1);
-                  PKPosItem.freeItem(item)
-              }
+            if(item.data == data)
+            {
+                this.placeArr.splice(i,1);
+                PKPosItem.freeItem(item)
+                break;
+            }
         }
     }
 

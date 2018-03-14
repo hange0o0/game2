@@ -11,6 +11,7 @@ class MainFightUI extends MainBase {
 
     private scroller: eui.Scroller;
     private mailBtn: eui.Group;
+    private mailRed: eui.Image;
     private rankBtn: eui.Group;
     private shopBtn: eui.Group;
     private settingBtn: eui.Group;
@@ -20,6 +21,7 @@ class MainFightUI extends MainBase {
     private bottomGroup: eui.Group;
     private defBtn: eui.Button;
     private atkBtn: eui.Button;
+
 
 
 
@@ -115,7 +117,7 @@ class MainFightUI extends MainBase {
     //}
 
     public onShow(){
-
+        GuideManager.getInstance().enableScrollV(this.scroller);
         this.renew();
 
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)

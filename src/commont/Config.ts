@@ -56,7 +56,7 @@ class Config {
         }
         arr.push(this.createImg('pk_arrow.png','monster/'));
         arr.push(this.createImg('pk_arrow_1.png','monster/'));
-        for(var i=1;i<=4;i++)
+        for(var i=1;i<=5;i++)
         {
             arr.push(this.createImg("effect" + i + ".png",'monster/'));
         }

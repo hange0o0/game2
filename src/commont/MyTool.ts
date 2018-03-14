@@ -15,11 +15,16 @@ class MyTool {
     public static getPropLevel(){
         return Config.localResRoot + 'prop/prop_level.png'
     }
+    public static getPropDiamond(){
+        return Config.localResRoot + 'prop/prop_diamond.png'
+    }
 
     public static getAwardArr(dataIn){
         var arr = [];
         if(dataIn.coin)
             arr.push({img:MyTool.getPropCoin(),name:'金币','num':'×' + NumberUtil.addNumSeparator(dataIn.coin)})
+        if(dataIn.diamond)
+            arr.push({img:MyTool.getPropDiamond(),name:'钻石','num':'×' + NumberUtil.addNumSeparator(dataIn.diamond)})
         for(var s in dataIn.props)
         {
             var prop =  PropVO.getObject(s);

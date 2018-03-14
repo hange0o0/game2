@@ -16,8 +16,9 @@ class HangUI extends game.BaseItem {
     private lockBar: eui.Rect;
     private lockText: eui.Label;
     private openBtn: eui.Button;
-    private helpBtn: eui.Button;
     private awardRed: eui.Image;
+    private helpBtn: eui.Image;
+
 
 
 
@@ -126,7 +127,7 @@ class HangUI extends game.BaseItem {
              this.awardBtn.visible = false;
              this.awardRed.visible = false;
             this.reset(true);
-            PKVideoCon.getInstance().x = (604- PKVideoCon.getInstance().width)/2;
+            PKVideoCon.getInstance().x = (628- PKVideoCon.getInstance().width)/2;
         }
         else
         {
@@ -220,7 +221,7 @@ class HangUI extends game.BaseItem {
             item = PKData.getInstance().getFirstItem(PKData.getInstance().myPlayer.teamData.enemy.id);
         if(item)
         {
-            var w = 604
+            var w = 628
             var scrollH = -(item.x - w/2);
             if(scrollH > 0)
                 scrollH = 0;

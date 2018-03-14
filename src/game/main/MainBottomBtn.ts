@@ -6,6 +6,8 @@ class MainBottomBtn extends game.BaseItem {
 
     private text: eui.Label;
     private mc: eui.Image;
+    private redMC: eui.Image;
+
 
 
     public childrenCreated() {

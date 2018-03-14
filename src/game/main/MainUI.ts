@@ -147,6 +147,8 @@ class MainUI extends game.BaseUI {
         CardUI.getInstance()
         TecUI.getInstance()
 
+        //GuideManager.getInstance().isGuiding = true;
+
         super.show()
     }
 
@@ -162,7 +164,13 @@ class MainUI extends game.BaseUI {
         this.addPanelOpenEvent(GameEvent.client.diamond_change,this.renewTop)
         this.addPanelOpenEvent(GameEvent.client.energy_change,this.renewEnergy)
 
-        if(!LoginManager.getInstance().logText.cb && LoginManager.getInstance().logText.text)
+        if(GuideManager.getInstance().isGuiding)
+        {
+            GuideManager.getInstance().guideStep = 0;
+            GuideManager.getInstance().reInit();
+            GuideManager.getInstance().showGuide()
+        }
+        else if(!LoginManager.getInstance().logText.cb && LoginManager.getInstance().logText.text)
             LogUI.getInstance().show();
     }
 

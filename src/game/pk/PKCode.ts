@@ -196,15 +196,17 @@ class PKCode {
                 }
             }
         }
-        PKData.getInstance().team1.onStateTimer();
-        PKData.getInstance().team2.onStateTimer();
+        PD.team1.onStateTimer();
+        PD.team2.onStateTimer();
 
-        if(PD.monsterList.length == 0 && PD.actionTime > 60000 && !PD.isGameOver)//如果1min后有一方没牌了也结束
+        if(PD.actionTime > 60000 && (PD.monsterList.length == 0 || PD.currentState == 'def') && !PD.isGameOver)//如果1min后有一方没牌了也结束
         {
             var b = true;
             for(var s in PKData.getInstance().playerObj)
             {
                 var player = PKData.getInstance().playerObj[s];
+                if(player.id = 'sys')
+                    continue;
                 if(player.getPosNum() || player.getCardNum())
                 {
                     b = false;

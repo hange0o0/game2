@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<e:Skin class="HangUISkin" width="620" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" height="400">
+<e:Skin class="HangUISkin" width="640" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" height="400">
 	<e:Image x="0" width="100%" top="0" bottom="0" source="bg15_png" scale9Grid="20,20,9,10"/>
-	<e:Group id="con" width="604" x="8" height="384" y="8" locked="true">
+	<e:Group id="con" width="628" x="6" height="384" y="8">
 
 	</e:Group>
 
@@ -22,6 +22,6 @@
 		<e:Label id="lockText" text="12:15:15" verticalCenter="0" size="24" horizontalCenter="10" stroke="2"/>
 	</e:Group>
 	<e:Button id="openBtn" label="开始挑战" horizontalCenter="0" skinName="Btn5Skin" bottom="50"/>
-	<e:Image id="awardRed" source="red_mc_png" x="594.15" y="330.09"/>
+	<e:Image id="awardRed" source="red_mc_png" y="330.09" right="2"/>
 	<e:Image id="helpBtn" source="icon_help_png" y="10" right="10"/>
 </e:Skin>

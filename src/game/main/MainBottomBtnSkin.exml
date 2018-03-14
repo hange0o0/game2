@@ -2,4 +2,5 @@
 <e:Skin class="MainBottomBtnSkin" width="120" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" height="120">
 	<e:Label id="text" text="Label" horizontalCenter="0" bottom="15" size="26" stroke="3" strokeColor="0x1e1300" textColor="0xfcf2c9"/>
 	<e:Image id="mc" horizontalCenter="0" source="main_bag_png" bottom="50"/>
+	<e:Image id="redMC" source="red_mc_png" right="-5" y="15" visible="false"/>
 </e:Skin>

@@ -3,14 +3,6 @@ class S104 extends SBase {
         super();
     }
 
-    public mvID = 123;
-
-    //预加载
-    public preload() {
-        AniManager.getInstance().preLoadMV(this.mvID)
-    }
-
-
     //生效时的逻辑
     public onSkill(user:PKPosCardData){
         var PD = PKData.getInstance();

@@ -31,6 +31,8 @@ class PKData extends egret.EventDispatcher{
 
     public history = {};
 
+    //public actionRecord = []
+
         //public stateObj = [] //所有要触发动画的集合
     //public topVideoList = [] //影响关部的动画的集合
     //private topKey = ['monster_win','monster_add'];
@@ -64,6 +66,7 @@ class PKData extends egret.EventDispatcher{
 
     //初始化游戏
     public init(data){
+        //this.actionRecord = [];
         this.quick = false
         this.history = {};
         this.monsterList.length = 0;
@@ -149,6 +152,18 @@ class PKData extends egret.EventDispatcher{
     public start(){
         this.startTime = TM.nowMS()
         this.stopTime = 0;
+    }
+
+    public addDiamondMonster(){
+        this.diamondData = this.addMonster({
+            force:0,
+            mid:99,
+            owner:'sys',
+            atkRota:1,
+            x:PKConfig.floorWidth/2 + PKConfig.appearPos,
+            y:0,
+            actionTime:0
+        });
     }
 
 
@@ -313,6 +328,7 @@ class PKData extends egret.EventDispatcher{
             actionTime:this.actionTime
         })
         monster['xxx'] = this.actionTime + '|' + monster.id
+        //this.actionRecord.push('create|' + this.actionTime + '|' + monster.id + '|' + monster.mid)
         return monster;
     }
 

@@ -5,12 +5,16 @@ class SBase {
         if (!this.baseData[id]) {
             var myClass = eval("S" + id);
             this.baseData[id] = new myClass();
+            this.baseData[id].id = id
         }
         return this.baseData[id];
     }
-
+    public mvID1
+    public mvID2
+    public mvID3
 
     public type = 'skill'
+    public id
 
     constructor() {
     }
@@ -27,14 +31,18 @@ class SBase {
 
     }
 
-    //预加载
-    public preload() {
-
+    public preload(){
+        if(this.mvID1)
+            AtkMVCtrl.getInstance().preLoadMV(this.mvID1)
+        if(this.mvID2)
+            AtkMVCtrl.getInstance().preLoadMV(this.mvID2)
+        if(this.mvID3)
+            AtkMVCtrl.getInstance().preLoadMV(this.mvID3)
     }
 
     //技能动画
     public skillMV(target:PKMonsterData){
-
+        AtkMVCtrl.getInstance().sSkillMV(this.id,target)
     }
 
     //生效时的逻辑
@@ -71,7 +79,15 @@ class SBase {
         //}
     }
 
-
+    /*
+    *  对最前方的#1范围内的敌人造成$1点伤害
+    * 在最前方建立一个治疗图腾，对#1范围内的友军每秒回复$2血量
+    * 加快所有单位#1%速度，持续#2秒
+    * 消灭地图上所有的单位
+    *
+    *
+    *
+    * */
 
 
 }

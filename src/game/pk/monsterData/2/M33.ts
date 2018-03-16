@@ -12,11 +12,6 @@ class M33 extends MBase {
         return Math.abs(user.x - target.x) + 100;
     }
 
-    public atkMV(user,target,actionTime,endTime){
-        var userItem = PKVideoCon.getInstance().getItemByID(user.id);
-        var targetItem = PKVideoCon.getInstance().getItemByID(target.id);
-        PKBulletManager.getInstance().createBullet(userItem,targetItem,actionTime,endTime,1)
-    }
 
     public atk(user:PKMonsterData,target:PKMonsterData){
         var hp = Math.floor((1-target.getHpRate())*target.maxHp*0.1)

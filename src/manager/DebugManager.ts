@@ -32,7 +32,7 @@ class DebugManager {
     public randomList(){
         var arr = []
         var level = 100;
-        var len = 10;
+        var len = 12;
         for(var s in MonsterVO.data)
         {
             var mvo = MonsterVO.data[s]
@@ -57,7 +57,7 @@ class DebugManager {
     public testCard(list1,list2,view=false,hp=5){
         var PD = PKData.getInstance()
         var data = {
-            seed:TM.now(),
+            seed:1521192425,//TM.now(),
             players:[
                 {id:1,gameid:'test1',team:1,autolist:list1,force:0,type:0,hp:hp},
                 {id:2,gameid:'test2',team:2,autolist:list2,force:0,type:0,hp:hp}
@@ -74,6 +74,7 @@ class DebugManager {
         {
             PD.quick = true;
             PD.start();
+            PD.addDiamondMonster();
             PKCode.getInstance().onStep()
 
             console.log(egret.getTimer() - t)
@@ -84,6 +85,7 @@ class DebugManager {
             else
                 console.log('fail')
             console.log('actionTime:' + DateUtil.getStringBySecond(Math.floor(PD.actionTime/1000)).substr(-5))
+            console.log(PD.actionTime)
         }
     }
 
@@ -113,7 +115,7 @@ class DebugManager {
         for(var i=0;i<arr.length;i++)
         {
             var id = arr[i].id;
-            console.log('id:' +id +  '\t\tnum:' +  arr[i].num + '\t\tname:' +  CM.getCardVO(id).name)
+            console.log('id:' +id +  '\t\tnum:' +  arr[i].num + '\t\tcost:' +  CM.getCardVO(id).cost + '\t\tname:' +  CM.getCardVO(id).name)
         }
     }
 

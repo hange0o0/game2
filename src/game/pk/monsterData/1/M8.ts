@@ -24,17 +24,6 @@ class M8 extends MBase {
     //    return atk;
     //}
 
-    //技能动画
-    public skillMV(user,target,actionTime,endTime){
-        //this.atkMV(user,target,actionTime,endTime)
-        PKData.getInstance().addVideo({
-            type:PKConfig.VIDEO_MONSTER_ADD_STATE,
-            user:target,
-            key:'change',
-            stateType:0
-        })
-    }
-
 
     public skill(user:PKMonsterData,target:PKMonsterData){
         target.owner = user.owner

@@ -5,13 +5,16 @@ class MBase {
         {
             var myClass = eval("M" + id);
             this.baseData[id] = new myClass();
+            this.baseData[id].id = id;
         }
         return this.baseData[id];
     }
 
+    public mvID1
+    public mvID2
+    public mvID3
 
-
-    public vo:MonsterVO
+    public id
     public type = 'monster'
     constructor() {
     }
@@ -39,7 +42,12 @@ class MBase {
 
     //预加载
     public preload(){
-
+        if(this.mvID1)
+            AtkMVCtrl.getInstance().preLoadMV(this.mvID1)
+        if(this.mvID2)
+            AtkMVCtrl.getInstance().preLoadMV(this.mvID2)
+        if(this.mvID3)
+            AtkMVCtrl.getInstance().preLoadMV(this.mvID3)
     }
     //初始化怪物隐藏属性
     public initMonster(user:PKMonsterData){
@@ -59,7 +67,7 @@ class MBase {
 
     //技能动画
     public skillMV(user,target,actionTime,endTime){
-
+        AtkMVCtrl.getInstance().mSkillMV(this.id,user,target,actionTime,endTime)
     }
 
     //实现技能
@@ -80,7 +88,7 @@ class MBase {
 
     //攻击发出时的附加动画，如箭，魔发效果
     public atkMV(user,target,actionTime,endTime){
-
+        AtkMVCtrl.getInstance().mAtkMV(this.id,user,target,actionTime,endTime)
     }
 
 

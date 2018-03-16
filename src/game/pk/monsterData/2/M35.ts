@@ -2,11 +2,7 @@ class M35 extends MBase {
     constructor() {
         super();
     }
-    public mvID = 103;
-    public preload(){
-        AniManager.getInstance().preLoadMV(this.mvID)
-    }
-
+    public mvID1 = 103;
     public initMonster(user:PKMonsterData){
         user.atkY = -30
     }
@@ -16,16 +12,12 @@ class M35 extends MBase {
         return Math.abs(user.x - target.x) + 100;
     }
 
-    public atkMV(user,target,actionTime,endTime){
-        var userItem = PKVideoCon.getInstance().getItemByID(user.id);
-        var targetItem = PKVideoCon.getInstance().getItemByID(target.id);
-        PKBulletManager.getInstance().createBullet(userItem,targetItem,actionTime,endTime,2)
-    }
+
     public skill(user:PKMonsterData,target:PKMonsterData){
         var listener = new M35StateListener()
         var teamData = user.getOwner().teamData;
         listener.owner = user;
-        listener.mvID = this.mvID;
+        listener.mvID = this.mvID1;
         listener.endTime = PKData.getInstance().actionTime + user.getSkillValue(2) *1000;
         listener.x = user.x + teamData.atkRota*(PKData.getInstance().random()*30 + 20);
         teamData.addStateLister(listener);
@@ -83,7 +75,7 @@ class M35StateListener extends PKStateListener {
         if(selectTarget)
         {
             this.actionTime = PKData.getInstance().actionTime;
-            PKVideoCon.getInstance().playAniOn(selectTarget.id,this.mvID)
+            AtkMVCtrl.getInstance().playAniOn(selectTarget.id,this.mvID)
             selectTarget.addHp(-user.getSkillValue(1,true))
         }
     }

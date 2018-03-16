@@ -3,25 +3,17 @@ class M1 extends MBase{
         super();
     }
 
-    private mvID = 103;
-    public preload(){
-        //MonsterVO.getObject(1).preLoad();
-        AniManager.getInstance().preLoadMV(this.mvID)
-    }
+    public mvID1 = 103;
+
 
     //伤害飞行时间
     protected getAtkArriveCD(user:PKMonsterData,target:PKMonsterData){
         return Math.abs(user.x - target.x) + 200;
     }
 
-    public atkMV(user,target,actionTime,endTime){
-        PKVideoCon.getInstance().playAniOn(target.id,this.mvID)
-    }
 
     //技能动画
-    public skillMV(user,target,actionTime,endTime){
-        this.atkMV(user,target,actionTime,endTime)
-    }
+
 
 
     public skill(user:PKMonsterData,target){

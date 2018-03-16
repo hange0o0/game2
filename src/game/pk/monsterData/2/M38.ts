@@ -13,18 +13,7 @@ class M38 extends MBase {
         return Math.abs(user.x - target.x)*2 + 100;
     }
 
-    public atkMV(user,target,actionTime,endTime){
-        var userItem = PKVideoCon.getInstance().getItemByID(user.id);
-        var targetItem = PKVideoCon.getInstance().getItemByID(target.id);
-        PKBulletManager.getInstance().createBullet(userItem,targetItem,actionTime,endTime,9)
-    }
 
-    //技能动画
-    public skillMV(user,target,actionTime,endTime){
-        var userItem = PKVideoCon.getInstance().getItemByID(user.id);
-        var targetItem = PKVideoCon.getInstance().getItemByID(target.id);
-        PKBulletManager.getInstance().createBullet(userItem,targetItem,actionTime,endTime,10)
-    }
 
     protected getSkillArriveCD(user:PKMonsterData,target:PKMonsterData){
         return Math.abs(user.x - target.x)*2 + 100;

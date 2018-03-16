@@ -3,27 +3,13 @@ class M10 extends MBase {
         super();
     }
 
-    private mvID = 30;
-    public preload(){
-        //MonsterVO.getObject(1).preLoad();
-        AniManager.getInstance().preLoadMV(this.mvID)
-    }
+    public mvID1 = 30;
 
     public initMonster(user:PKMonsterData){
         user.atkAble =  false;
     }
 
-    //技能动画
-    public skillMV(user,target,actionTime,endTime){
-        var mv = PKVideoCon.getInstance().playAniOn(target.id,this.mvID)
-        if(mv)
-        {
-            mv.scaleX = mv.scaleY = 0.5;
-            mv.x -= 10
-            mv.y -= 30
-        }
 
-    }
 
     public skill(user:PKMonsterData,target:PKMonsterData){
         target.addHp(user.getSkillValue(1,true))

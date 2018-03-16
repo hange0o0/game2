@@ -12,10 +12,7 @@ class M63 extends MBase {
         return 300;
     }
 
-    public atkMV(user,target,actionTime,endTime){
-        var userItem = PKVideoCon.getInstance().getItemByID(user.id);
-        egret.Tween.get(userItem).to({x:userItem.x + user.atkRota*50},300)
-    }
+
 
     public atk(user:PKMonsterData,target:PKMonsterData){
         user.addHp(-999999)

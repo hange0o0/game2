@@ -3,23 +3,7 @@ class M47 extends MBase {
         super();
     }
 
-    private mvID = 103;
-    public preload(){
-        //MonsterVO.getObject(1).preLoad();
-        AniManager.getInstance().preLoadMV(this.mvID)
-    }
-
-    public atkMV(user,target,actionTime,endTime){
-        var mc = PKVideoCon.getInstance().dropOn(target.id,Config.localResRoot + 'monster/enemy47_attack.png')
-        mc.anchorOffsetX = 52
-        mc.anchorOffsetY = 110
-    }
-
-
-    //技能动画
-    public skillMV(user,target,actionTime,endTime){
-        PKVideoCon.getInstance().playAniOn(target.id,this.mvID)
-    }
+    public mvID1 = 103;
 
     public skill(user:PKMonsterData,target:PKMonsterData){
         var skillValue = user.getSkillValue(1);

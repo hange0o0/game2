@@ -3,11 +3,7 @@ class M36 extends MBase {
         super();
     }
 
-    private mvID = 128;
-    public preload(){
-        //MonsterVO.getObject(1).preLoad();
-        AniManager.getInstance().preLoadMV(this.mvID)
-    }
+    public mvID1 = 128;
 
     public onDie(user:PKMonsterData){
         if(user.skillTemp[36])
@@ -36,10 +32,7 @@ class M36 extends MBase {
     }
 
 
-    ////技能动画
-    //public skillMV(user,target,actionTime,endTime){
-    //    PKVideoCon.getInstance().playAniOn(target.id,this.mvID)
-    //}
+
 
 
     public skill(user:PKMonsterData,targets){
@@ -61,7 +54,7 @@ class M36 extends MBase {
         var monster = PD.addMonster(mData);
         monster.skillTemp[36] = true;
 
-        PKVideoCon.getInstance().playAniOn(monster.id,this.mvID)
+        AtkMVCtrl.getInstance().playAniOn(monster.id,this.mvID1)
     }
 
 

@@ -392,12 +392,14 @@ class PKMonsterData {
     }
 
     public beAtkAction(data){
+
         this.addHp(-data.hp)
         MBase.getData(this.mid).beAtkAction(this,data);
         if(this.die && data.atker)
         {
             MBase.getData(data.atker.mid).onKill(data.atker,this);
         }
+        //PKData.getInstance().actionRecord.push('atk|' + this.actionTime + '|' + this.id + '|' + this.hp)
     }
 
     public addHp(hp){

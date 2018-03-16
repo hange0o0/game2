@@ -3,11 +3,8 @@ class S108 extends SBase {
         super();
     }
 
-    public mvID = 103;
+    public mvID1 = 103;
 
-    public preload(){
-        AniManager.getInstance().preLoadMV(this.mvID)
-    }
 
     public initSkill(user:PKPosCardData){
         user.needRemoveListener = false
@@ -18,7 +15,7 @@ class S108 extends SBase {
         var listener = new S108StateListener()
         var teamData = user.getOwner().teamData;
         listener.owner = user;
-        listener.mvID = this.mvID;
+        listener.mvID = this.mvID1;
         listener.endTime = PKData.getInstance().actionTime + user.getSkillValue(4) *1000;
         listener.x = PKData.getInstance().getFirstX(teamData.id) + teamData.atkRota*(PKData.getInstance().random()*30 + 20);
         teamData.addStateLister(listener);
@@ -70,7 +67,7 @@ class S108StateListener extends PKStateListener {
         if(selectTarget)
         {
             this.actionTime = PKData.getInstance().actionTime;
-            PKVideoCon.getInstance().playAniOn(selectTarget.id,this.mvID)
+            AtkMVCtrl.getInstance().playAniOn(selectTarget.id,this.mvID)
             selectTarget.addHp(-user.getSkillValue(3,true))
         }
     }

@@ -14,14 +14,7 @@ class M75 extends MBase {
         return 1000;
     }
 
-    public atkMV(user,target,actionTime,endTime){
-        var userItem = PKVideoCon.getInstance().getItemByID(user.id);
-        var targetItem = {
-            x: user.x + user.atkRota * user.getSkillValue(1),
-            y:user.y
-        }
-        PKBulletManager.getInstance().createBulletLine(userItem,targetItem,actionTime,endTime,'pk_arrow_1_png')
-    }
+
 
     public atk(user:PKMonsterData,target:PKMonsterData){
         return false;

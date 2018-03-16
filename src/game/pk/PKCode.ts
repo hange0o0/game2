@@ -205,7 +205,7 @@ class PKCode {
             for(var s in PKData.getInstance().playerObj)
             {
                 var player = PKData.getInstance().playerObj[s];
-                if(player.id = 'sys')
+                if(player.id == 'sys')
                     continue;
                 if(player.getPosNum() || player.getCardNum())
                 {

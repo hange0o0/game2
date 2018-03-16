@@ -3,12 +3,8 @@ class S103 extends SBase{
         super();
     }
 
-    public mvID = 103;
+    public mvID1 = 103;
 
-    //预加载
-    public preload() {
-        AniManager.getInstance().preLoadMV(this.mvID)
-    }
 
     //
     ////能否生效
@@ -19,9 +15,7 @@ class S103 extends SBase{
     //}
     //
     //技能动画
-    public skillMV(target:PKMonsterData){
-        PKVideoCon.getInstance().playAniOn(target.id,this.mvID)
-    }
+
     //
     //生效时的逻辑
     public onSkill(user:PKPosCardData){

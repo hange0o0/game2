@@ -11,11 +11,7 @@ class M32 extends MBase {
         return Math.abs(user.x - target.x) + 100;
     }
 
-    public atkMV(user,target,actionTime,endTime){
-        var userItem = PKVideoCon.getInstance().getItemByID(user.id);
-        var targetItem = PKVideoCon.getInstance().getItemByID(target.id);
-        PKBulletManager.getInstance().createBullet(userItem,targetItem,actionTime,endTime,7)
-    }
+
 
     public onCreate(user:PKMonsterData){
         var listener = new M32StateListener();

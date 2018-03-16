@@ -157,15 +157,8 @@ class PKingUI extends game.BaseUI {
     public startGame(){
         var PD = PKData.getInstance();
         PD.start();
-        PD.diamondData = PD.addMonster({
-            force:0,
-            mid:99,
-            owner:'sys',
-            atkRota:1,
-            x:PKConfig.floorWidth/2 + PKConfig.appearPos,
-            y:0,
-            actionTime:0
-        });
+        PD.addDiamondMonster();
+
         this.counting = false;
         this.scroller.touchEnabled = this.scroller.touchChildren = true;
         this.smallMap.visible = true;

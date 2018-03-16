@@ -9,7 +9,7 @@ class M74 extends MBase {
     }
 
     public preload(){
-        RES.getResByUrl(Config.localResRoot + 'monster/enemy72_attack.png',function(){},this)
+        AtkMVCtrl.getInstance().preLoadPNG('monster/enemy72_attack.png')
     }
 
     //伤害飞行时间
@@ -17,20 +17,7 @@ class M74 extends MBase {
         return Math.abs(user.x - target.x)*1.5 + 200;
     }
 
-    public atkMV(user,target,actionTime,endTime){
-        var userItem = PKVideoCon.getInstance().getItemByID(user.id);
-        var targetItem = PKVideoCon.getInstance().getItemByID(target.id);
-        var mc:BulletAniMC2 = <BulletAniMC2>(PKBulletManager.getInstance().createBulletAni2(userItem,targetItem,actionTime,endTime))
-        mc.mc.anchorOffsetX = 560/4/2
-        mc.mc.anchorOffsetY = 90
-        mc.targetOffsetY = target.getVO().height/2
-        if(userItem.x > targetItem.x)
-            mc.mc.scaleX = 1
-        else
-            mc.mc.scaleX = -1
-        mc.mc.load(Config.localResRoot + 'monster/enemy72_attack.png',0,560,90)
-        mc.mc.play()
-    }
+
 
     public getSkillTarget(user:PKMonsterData){
         return [null];

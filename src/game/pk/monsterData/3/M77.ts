@@ -5,7 +5,7 @@ class M77 extends MBase {
 
     //预加载
     public preload(){
-        RES.getResAsync('"enemy78_png',function(){},this)
+        AtkMVCtrl.getInstance().preLoadPNGLocal('enemy78_png')
     }
 
     public initMonster(user:PKMonsterData){

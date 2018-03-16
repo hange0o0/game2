@@ -175,26 +175,5 @@ class MonsterMV extends eui.Group {
         }
     }
 
-    //private showAtkMV(){
-    //      this.initAtkMV();
-    //    switch(this.vo.id)
-    //    {
-    //        case 37:
-    //            this.atkMV.visible = true;
-    //            this.atkMV.load(this.vo.id,1,300,240)
-    //            this.atkMV.x = -180
-    //            this.atkMV.y = 55
-    //            this.atkMV.play();
-    //            break;
-    //        //case 77:
-    //        //case 78:
-    //        //    this.atkMV.visible = true;
-    //        //    this.atkMV.load(77,1,300,240)
-    //        //    this.atkMV.x = -180
-    //        //    this.atkMV.y = 40
-    //        //    this.atkMV.play();
-    //        //    break;
-    //    }
-    //}
 
 }

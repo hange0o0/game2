@@ -55,6 +55,7 @@
     "src/game/hang/HangItemSkin.exml",
     "src/game/mail/MailInfoUISkin.exml",
     "src/game/mail/MailItemSkin.exml",
+    "src/game/mail/MailPKItemSkin.exml",
     "src/game/mail/MailUISkin.exml",
     "src/game/main/MainBottomBtnSkin.exml",
     "src/game/main/MainUISkin.exml",

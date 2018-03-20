@@ -68,8 +68,33 @@ class PKTopUI extends game.BaseContainer {
             case PKConfig.VIDEO_TEAM_DEF2:
                 this.def2();
                 break;
+            case PKConfig.VIDEO_MYPLAYER_CHANGE:
+                this.onMyPlayerChange();
+                break;
         }
     }
+
+    public onMyPlayerChange(){
+        var posList = PKData.getInstance().myPlayer.teamData.enemy.posList
+        while(this.itemArr.length)
+        {
+            this.freeItem(this.itemArr.pop())
+        }
+
+        this.index = posList.length + 1;
+        for(var i=0;i<7;i++)
+        {
+            var data = posList[i];
+            var item = this.createItem();
+            this.itemArr.push(item)
+            item.x = this.getX(i);
+            this.addChild(item);
+            if(data)
+                data.topIndex = this.index - 1 - i;
+            item.data = data;
+        }
+    }
+
     private createSkillItem():PKSkillItem{
         var item:PKSkillItem = this.skillItemPool.pop();
         if(!item)

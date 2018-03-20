@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="MailPKItemSkin" width="620" height="350" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
+	<e:Image source="bg2_png" scale9Grid="9,9,11,10" x="0" y="0" width="100%" height="100%"/>
+	<e:Group x="8" y="102">
+		<e:Image source="border_15_png" scale9Grid="12,12,4,5" x="0" y="0" width="300" height="174"/>
+		<e:List id="list1" width="280" height="154" horizontalCenter="0" verticalCenter="0">
+			<e:layout>
+			<e:TileLayout horizontalGap="8" verticalGap="6"/>
+			</e:layout>
+		</e:List>
+	</e:Group>
+	<e:Group x="312" y="102">
+		<e:Image source="border_15_png" scale9Grid="12,12,4,5" y="0" width="300" height="174" x="0"/>
+		<e:List id="list2" width="280" height="154" horizontalCenter="0" verticalCenter="0">
+			<e:layout>
+			<e:TileLayout horizontalGap="8" verticalGap="6"/>
+			</e:layout>
+		</e:List>
+	</e:Group>
+	<e:Label id="typeText" text="苦顶替顶替" size="26" stroke="3" verticalAlign="bottom" strokeColor="0x231507" y="60" horizontalCenter="0" textColor="0xffb19e"/>
+	<e:Label id="nameText1" text="苦顶替顶替" size="26" stroke="3" verticalAlign="bottom" x="100" textColor="0xFFFFFF" strokeColor="0x231507" y="15"/>
+	<e:Label id="forceText1" text="12345" size="26" stroke="3" verticalAlign="bottom" x="135" strokeColor="0x231507" y="60" textColor="0xfcdf5f"/>
+	<e:Label id="forceText2" text="12345" size="26" stroke="3" verticalAlign="bottom" textColor="0xFCDF5F" strokeColor="0x231507" y="60" right="135"/>
+	<e:Label id="nameText2" text="苦顶替苦顶替" size="26" stroke="3" verticalAlign="bottom" textColor="0xFFFFFF" strokeColor="0x231507" y="15" right="100"/>
+	<ns1:HeadMC id="headMC1" width="80" height="80" x="10" skinName="HeadMCSkin" y="12"/>
+	<ns1:HeadMC id="headMC2" width="80" height="80" skinName="HeadMCSkin" y="12" right="10"/>
+	<e:Button id="viewBtn" label="观看" skinName="Btn1Skin" height="55" width="120" x="490" y="285"/>
+	<e:Group y="10" horizontalCenter="0">
+		<e:Image id="scoreBG" source="title_bg1_png" scale9Grid="29,5,13,30" y="0" width="100" x="0"/>
+		<e:Label id="scoreText" text="3:0" size="22" horizontalCenter="0" verticalCenter="0"/>
+	</e:Group>
+	<e:Image source="icon_force2_png" x="90" y="46"/>
+	<e:Image source="icon_force2_png" y="46" right="90" scaleX="-1"/>
+	<e:Group x="15" y="301">
+		<e:Image source="icon_clock_png" x="15" y="0"/>
+		<e:Label id="timeText" text="2011/12/1" size="24" stroke="1" verticalAlign="bottom" strokeColor="0x231507" textColor="0xdbd3c7" x="0" y="7"/>
+		<e:layout>
+			<e:HorizontalLayout/>
+		</e:layout>
+	</e:Group>
+</e:Skin>

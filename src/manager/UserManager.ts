@@ -134,6 +134,12 @@ class UserManager {
                 })
             }
         }
+        if(mailTime > MailManager.getInstance().mailData.msgtime)
+        {
+            MailManager.getInstance().mailData.time = 0
+            PKManager.getInstance().getRecordTime = 0
+
+        }
     }
 
 

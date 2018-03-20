@@ -3,6 +3,7 @@ class PKPlayerData {
     public id;//唯一ID
     public gameid;
     public nick;
+    public head;
     public hp; //城堡的血量
     public type//类型
     public force;//怪的基础属性
@@ -44,6 +45,8 @@ class PKPlayerData {
         this.autoList = [];
         if(obj['autolist'])
             this.autoList = PKTool.decodeAutoList(obj['autolist'].split(','))
+        if(obj['actionlist'])
+            this.autoList = PKTool.decodeActionList(obj['actionlist'].split(','))
         if(obj['card'])
         {
             var card = obj['card'].split(',');
@@ -202,6 +205,8 @@ class PKPlayerData {
                         user:this.posCard[data.id],
                     })
                 }
+                var step = Math.floor(PKData.getInstance().actionTime/PKConfig.stepCD)
+                this.posHistory.push(step + '#' + data.mid);
                 this.useCardList.push(data.mid)
             }
             else

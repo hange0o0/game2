@@ -118,9 +118,11 @@ class BasePosUI extends game.BaseUI {
 
     public changeToServerList(){
         var arr = [];
-        for(var i=0;i<this.listData.length-1;i++)
+        for(var i=0;i<this.listData.length;i++)
         {
-            arr.push(this.listData.getItemAt(i).id)
+            var item = this.listData.getItemAt(i);
+            if(!item.setting)
+                arr.push(item.id)
         }
         return arr.join(',');
     }
@@ -174,7 +176,7 @@ class BasePosUI extends game.BaseUI {
         var length = this.listData.length
         if(this.listData.getItemAt(this.listData.length-1).setting)
             length --;
-        this.titleText.text = '上阵:'+length+'/'+this.maxCard
+        this.titleText.text = ''+length+' / '+this.maxCard
     }
 
     private onSave(fun?){

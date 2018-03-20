@@ -18,9 +18,9 @@ class MainFightUI extends MainBase {
     private mapBtn: HangUI;
     private pvpBtn: PVPUI;
     private fightBtn: FightUI;
-    private bottomGroup: eui.Group;
-    private defBtn: eui.Button;
-    private atkBtn: eui.Button;
+    private defBtn: eui.Group;
+    private atkBtn: eui.Group;
+
 
 
 
@@ -121,7 +121,6 @@ class MainFightUI extends MainBase {
         this.renew();
 
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
-        this.addPanelOpenEvent(GameEvent.client.pos_change,this.renewPosBtn)
 
         this.addPanelOpenEvent(GameEvent.client.pk_begin,this.onPKBegin)
         this.addPanelOpenEvent(GameEvent.client.pk_end,this.onPKEnd)
@@ -135,11 +134,6 @@ class MainFightUI extends MainBase {
         this.mapBtn.renew()
     }
 
-    private renewPosBtn(){
-        var PM = PosManager.getInstance();
-        this.defBtn.label = '防守阵容 ' + ObjectUtil.objLength(PM.defList) + '/' + PM.maxNum
-        this.atkBtn.label = '进攻阵容 ' + ObjectUtil.objLength(PM.atkList) + '/' + PM.maxNum
-    }
 
     private onTimer(){
         this.mapBtn.onTimer()
@@ -151,8 +145,6 @@ class MainFightUI extends MainBase {
         //egret.Tween.removeTweens(this.bottomGroup)
         //this.bottomGroup.bottom = 25
         this.scroller.viewport.scrollV = 0;
-
-        this.renewPosBtn();
         this.renewHang();
     }
 

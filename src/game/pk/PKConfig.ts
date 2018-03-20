@@ -68,6 +68,8 @@ class PKConfig {
 
     public static VIDEO_MONSTER_CHANGE_SKIN = 23 //改变皮肤
 
+    public static VIDEO_MYPLAYER_CHANGE = 24 //观察者变化
+
 
 
     public static STATE_YUN = 1

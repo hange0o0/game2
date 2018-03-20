@@ -27,6 +27,22 @@ class PKTool {
         }
         return returnArr;
     }
+    //对玩家出战队列进行解析
+    public static decodeActionList(arr) {
+        var returnArr = [];
+        var index = 1;
+        for(var i=0;i<arr.length;i++)
+        {
+            var group = arr[i].split('#')
+            returnArr.push({
+                mid:group[1],
+                time:PKConfig.stepCD*group[0],
+                id:index
+            })
+            index ++;
+        }
+        return returnArr;
+    }
 
     public static getGroupMp(group){
         var mp = 0;

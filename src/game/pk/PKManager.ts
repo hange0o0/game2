@@ -1,16 +1,41 @@
 class PKManager {
     public static TYPE_HANG = 1;
+    public static TYPE_SLAVE = 2;
+
+
     public static TYPE_TEST = 101;
     public static TYPE_MAIN_HANG = 102; //挂机动画用
-    public static TYPE_SLAVE = 103;
+
     private static instance:PKManager;
     public static getInstance() {
         if (!this.instance) this.instance = new PKManager();
         return this.instance;
     }
 
+
+
     public pkType;
     public pkResult;
+    public recordList;
+    public getRecordTime;
+    public recordTime;
+
+
+    constructor(){
+        this.recordList = SharedObjectManager.getInstance().getMyValue('pk_replay') || []
+        this.recordTime = SharedObjectManager.getInstance().getMyValue('pk_record_time') || 0
+
+        for(var i=0;i<this.recordList.length;i++)//去除录像版本不对的
+        {
+             if(this.recordList[i].version != Config.pk_version)
+             {
+                 this.recordList.splice(i,1);
+                 i--;
+             }
+        }
+        if(this.recordList.length > 30)
+            this.recordList.length = 30;
+    }
 
     public pkWord = ['投降，或者死亡','来战个痛快','小心你的背后','这招看你怎么躲','我要认真了','你就只会这几招吗','我要出大招了','我会赐予你死亡','你究竟想怎样...','我的魔法会撕碎你','我已饥渴难耐','你会记住我的名字的',
         '品尝我的愤怒吧','你死期将至！','我要粉碎你！','你是我的猎物','尝尝我的厉害吧', '你会后悔对上我的' ,'希望你能多坚持一会吧','不要输得太难看哦','对面上来的是什么啊','我允许你认输','唯有一战了','胜利属于我们的',
@@ -22,6 +47,8 @@ class PKManager {
         '这就是王者之气啊','刚才你们说什么来着','看到我们有多强了吧','等会去哪庆功好呢','留几个给我杀啊','放轻点，别把对面吓跑了','蠢材！','让我来干掉你....',
         '我要打呵欠了','让我好好抱抱你！','我准备好了','我已经等不及了','→_→','@_@','( ¯ □ ¯ )','（╯＾╰）','>_<','(╯▔▽▔)╯','(╬▔皿▔)凸', '到此为止了','别烦我!','还没有结束的～', '有点本事啊', '我绝不认输',
         '我只是变的更坚强了','我和你没完','不胜利毋宁死','死亡，没什么好怕的']
+
+
 
     public getPKBG(id){
         return Config.localResRoot + 'map/map'+(id || 1)+'.jpg';
@@ -41,6 +68,11 @@ class PKManager {
     }
 
     public sendResult(fun){
+        if(PKData.getInstance().isReplay)
+        {
+            fun && fun();
+            return;
+        }
         this.pkResult = null;
         switch(this.pkType)
         {
@@ -115,5 +147,97 @@ class PKManager {
         };
         PD.init(data);
         PKingUI.getInstance().show();
+    }
+
+    public playReplay(data){
+        var PD = PKData.getInstance()
+        PD.init(data);
+        PD.isReplay = true
+        this.pkType = data.type;
+        PKingUI.getInstance().show();
+    }
+
+    //把录像保存到本地
+    public savePKResult(){
+        if(this.pkType > 100)
+            return;
+        var PD = PKData.getInstance()
+        if(PD.isReplay)
+            return;
+        var data = ObjectUtil.clone(PD.baseData)
+        data.version = Config.pk_version
+        data.type = this.pkType;
+        data.pktime = TM.now();
+        data.result = PD.getPKResult();
+        data.score = Math.max(0,PD.team1.hp) + ':' + Math.max(0,PD.team2.hp);
+        for(var i=0;i<data.players.length;i++)
+        {
+            var players = data.players[i];
+            delete players.autolist;
+            delete players.card;
+            players.actionlist = PD.getPlayer(players.id).posHistory.join(',');
+        }
+        this.recordList.unshift(data)
+        SharedObjectManager.getInstance().setMyValue('pk_replay',this.recordList)
+
+        if(data.result == 1 && data.type == PKManager.TYPE_SLAVE)
+        {
+            var gameid = PD.myPlayer.teamData.enemy.members[0].gameid;
+            setTimeout(()=>{
+                this.sendPKRecord(gameid,data);
+            },1000)
+
+        }
+    }
+
+    private sendPKRecord(gameid,data)
+    {
+        var oo:any = {};
+        oo.otherid = gameid;
+        oo.pkdata = data;
+        Net.addUser(oo);
+        Net.send(GameEvent.pk.save_record, oo, (data)=> {
+
+        });
+    }
+
+    public getPKRecord(fun?)
+    {
+        if(TM.now() - this.getRecordTime < 60*30)
+        {
+            fun && fun();
+            return;
+        }
+        var oo:any = {};
+        oo.time = this.recordTime
+        Net.addUser(oo);
+        Net.send(GameEvent.pk.get_record, oo, (data)=> {
+            var msg = data.msg;
+            var list = msg.list || [];
+            if(list.length > 0)
+            {
+                var b = false
+                for(var i=0;i<list.length;i++)
+                {
+                    var oo = list[i];
+                    oo.pkdata = JSON.parse(oo.pkdata);
+                    if(oo.pkdata.version == Config.pk_version)
+                    {
+                        oo.pkdata.result = 2;//对方赢就是我输
+                        this.recordList.push(oo.pkdata)
+                        b = true
+                    }
+                    this.recordTime = Math.max(this.recordTime,oo.time);
+                }
+                if(b)
+                {
+                    ArrayUtil.sortByField(this.recordList,['pktime'],[1]);
+                    SharedObjectManager.getInstance().setMyValue('pk_replay',this.recordList)
+                }
+                SharedObjectManager.getInstance().setMyValue('pk_record_time',this.recordTime)
+            }
+            this.getRecordTime = TM.now();
+            fun && fun();
+        });
     }
 }

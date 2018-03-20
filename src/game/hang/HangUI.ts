@@ -155,6 +155,7 @@ class HangUI extends game.BaseItem {
             ]
         };
         PKManager.getInstance().pkType = PKManager.TYPE_MAIN_HANG
+        PKBulletManager.getInstance().freeAll()
         var PD = PKData.getInstance();
         PD.init(data);
         PD.currentState = 'pk'

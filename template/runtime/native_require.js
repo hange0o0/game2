@@ -72,6 +72,7 @@ var game_file_list = [
 	"bin-debug/game/mail/MailInfoUI.js",
 	"bin-debug/game/mail/MailItem.js",
 	"bin-debug/game/mail/MailManager.js",
+	"bin-debug/game/mail/MailPKItem.js",
 	"bin-debug/game/mail/MailUI.js",
 	"bin-debug/Main.js",
 	"bin-debug/game/main/MainBottomBtn.js",
@@ -181,7 +182,7 @@ var game_file_list = [
 	"bin-debug/game/pk/skillData/3/S125.js",
 	"bin-debug/game/pk/skillData/3/S126.js",
 	"bin-debug/game/pk/skillData/3/S127.js",
-	"bin-debug/util/StringUtil.js",
+	"bin-debug/LoadingUI.js",
 	"bin-debug/game/pk/skillData/3/S129.js",
 	"bin-debug/game/pk/skillData/3/S130.js",
 	"bin-debug/game/pk/skillData/4/S131.js",
@@ -353,7 +354,7 @@ var game_file_list = [
 	"bin-debug/util/ObjectUtil.js",
 	"bin-debug/util/PopUpManager.js",
 	"bin-debug/util/ShapeObject.js",
-	"bin-debug/LoadingUI.js",
+	"bin-debug/util/StringUtil.js",
 	//----auto game_file_list end----
 ];
 

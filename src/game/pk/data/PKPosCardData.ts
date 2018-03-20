@@ -172,6 +172,7 @@ class PKPosCardData {
 
         if(this.num == 1)
         {
+            this.getOwner().teamData.posList.unshift(this)
             PKData.getInstance().addVideo({
                 type:PKConfig.VIDEO_POS_SHOW,
                 user:this

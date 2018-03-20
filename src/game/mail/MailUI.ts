@@ -17,7 +17,8 @@ class MailUI extends game.BaseUI {
 
     private typeObj = {
         0:{type:[1,2],name:'奴隶'},
-        1:{type:[101],name:'系统'}
+        1:{type:[101],name:'系统'},
+        2:{type:['pk'],name:'对战',isPK:true}
     }
 
     public constructor() {
@@ -29,10 +30,14 @@ class MailUI extends game.BaseUI {
         super.childrenCreated();
 
         this.bottomUI.setHide(this.hide,this);
-        this.topUI.setTitle('邮箱')
+        this.topUI.setTitle('消息')
 
         this.scroller.viewport = this.list;
-        this.list.itemRenderer = MailItem
+        this.list.itemRendererFunction = function(item:any){
+            if(item.pktime)
+                return MailPKItem
+            return MailItem
+        }
 
         this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
         this.tab.selectedIndex = 0;
@@ -64,7 +69,23 @@ class MailUI extends game.BaseUI {
     }
 
     public renew(){
-        var list = MailManager.getInstance().getListByTpyes(this.typeObj[this.tab.selectedIndex].type)
+        if(this.typeObj[this.tab.selectedIndex].isPK)
+        {
+           PKManager.getInstance().getPKRecord(()=>{
+               this.renewPK();
+           });
+        }
+        else
+        {
+            var list = MailManager.getInstance().getListByTpyes(this.typeObj[this.tab.selectedIndex].type)
+            this.list.dataProvider = new eui.ArrayCollection(list);
+            this.emptyGroup.visible = list.length == 0;
+        }
+
+    }
+
+    private renewPK(){
+        var list = PKManager.getInstance().recordList;
         this.list.dataProvider = new eui.ArrayCollection(list);
         this.emptyGroup.visible = list.length == 0;
     }

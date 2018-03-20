@@ -77,13 +77,8 @@ class DebugManager {
             PD.addDiamondMonster();
             PKCode.getInstance().onStep()
 
+            console.log('result:' + PD.getPKResult())
             console.log(egret.getTimer() - t)
-            if(PD.isWin())
-                console.log('win')
-            else if(PD.isDraw())
-                console.log('draw')
-            else
-                console.log('fail')
             console.log('actionTime:' + DateUtil.getStringBySecond(Math.floor(PD.actionTime/1000)).substr(-5))
             console.log(PD.actionTime)
         }

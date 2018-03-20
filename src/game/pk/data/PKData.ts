@@ -8,6 +8,8 @@ class PKData extends egret.EventDispatcher{
     public currentState = 'def'
 
     public quick = false//快速算出结果
+    public baseData//原始PK数据
+    public isReplay;
 
     public jumpMV = false;
     public isGameOver = false //游戏结束
@@ -66,6 +68,8 @@ class PKData extends egret.EventDispatcher{
 
     //初始化游戏
     public init(data){
+        this.isReplay = false;
+        this.baseData = data;
         //this.actionRecord = [];
         this.quick = false
         this.history = {};
@@ -202,6 +206,14 @@ class PKData extends egret.EventDispatcher{
         var team1 =  this.myPlayer.teamData
         var team2 =  this.myPlayer.teamData.enemy
         return (team1.hp > 0 &&  team2.hp > 0) || (team1.hp <= 0 &&  team2.hp <= 0);
+    }
+    //赢输平
+    public getPKResult(){
+        if(this.isWin())
+            return 1;
+        if(this.isDraw())
+            return 3;
+        return 2;
     }
 
     //找玩家对应的怪
@@ -341,6 +353,17 @@ class PKData extends egret.EventDispatcher{
         {
 
         }
+    }
+
+    public changeMyPlayer(id){
+        var player = this.getPlayer(id);
+        if(player == this.myPlayer)
+            return;
+        this.myPlayer = player;
+        this.addVideo({
+            type:PKConfig.VIDEO_MYPLAYER_CHANGE,
+            user:this.myPlayer
+        })
     }
 
     //移除场上怪物

@@ -8,6 +8,9 @@ class PKCtrlCon extends game.BaseContainer {
 
     private overMC: eui.Group;
     private cardGroup: eui.Group;
+    private replayGroup: eui.Group;
+    private vPlayer1: eui.Button;
+    private vPlayer2: eui.Button;
     private placeGroup: eui.Group;
     private info2: PKInfoBtn;
     private info1: PKInfoBtn;
@@ -19,6 +22,7 @@ class PKCtrlCon extends game.BaseContainer {
     private costMC: eui.Image;
     private costText: eui.Label;
     private helpBtn: eui.Image;
+
 
 
 
@@ -79,8 +83,17 @@ class PKCtrlCon extends game.BaseContainer {
         this.addBtnEvent(this.placeGroup,this.onPosClick)
             this.addBtnEvent(this.settingBtn,this.onSetting)
         this.addBtnEvent(this.helpBtn,this.onHelp)
+        this.addBtnEvent(this.vPlayer1,this.onPlayer1)
+        this.addBtnEvent(this.vPlayer2,this.onPlayer2)
 
         PKData.getInstance().addEventListener('video',this.onVideoEvent,this);
+    }
+
+    private onPlayer1(){
+        PKData.getInstance().changeMyPlayer(1)
+    }
+    private onPlayer2(){
+        PKData.getInstance().changeMyPlayer(2)
     }
 
     private onHelp(){
@@ -124,6 +137,9 @@ class PKCtrlCon extends game.BaseContainer {
                 {
                     this.mvRemoveItem(videoData.user)
                 }
+                break;
+            case PKConfig.VIDEO_MYPLAYER_CHANGE:
+                this.onMyPlayerChange();
                 break;
         }
     }
@@ -300,7 +316,56 @@ class PKCtrlCon extends game.BaseContainer {
             mc.visible = false;
         }
 
+        if(PD.isReplay)
+        {
+             this.cardGroup.visible = false
+             this.replayGroup.visible = true
+            this.vPlayer1.label = PD.getPlayer(1).nick
+            this.vPlayer2.label = PD.getPlayer(2).nick
+            this.renewReplay();
+        }
+        else
+        {
+             this.cardGroup.visible = true
+             this.replayGroup.visible = false
+        }
+    }
 
+    public onMyPlayerChange(){
+        var myPlayer = PKData.getInstance().myPlayer
+        while(this.placeArr.length)
+        {
+            PKPosItem.freeItem(this.placeArr.pop())
+        }
+
+        for(var s in myPlayer.posCard)
+        {
+            var data = myPlayer.posCard[s];
+            if(!data)
+                continue;
+            var item = PKPosItem.createItem()
+            this.placeGroup.addChild(item);
+            item.data = data;
+            this.placeArr.push(item);
+        }
+
+        this.needRenewInfo = true
+        this.renewInfo();
+        this.renewReplay();
+    }
+
+    public renewReplay(){
+        var PD = PKData.getInstance();
+        if(PD.myPlayer.id == 1)
+        {
+            this.vPlayer1.skinName = 'Btn1Skin'
+            this.vPlayer2.skinName = 'Btn2Skin'
+        }
+        else
+        {
+            this.vPlayer1.skinName = 'Btn2Skin'
+            this.vPlayer2.skinName = 'Btn1Skin'
+        }
     }
 
     public initInfo(){

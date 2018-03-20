@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="MainFightUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
 
-	<e:Scroller id="scroller" width="640" horizontalCenter="0" top="0" bottom="120" bounces="false">
+	<e:Scroller id="scroller" width="640" horizontalCenter="0" top="0" bottom="0" bounces="false" locked="true">
 		<e:Group>
 			<e:Group y="65" horizontalCenter="0" width="100%">
 				<e:Group id="mailBtn" x="10" y="0" width="80" height="80">
 				<e:Image source="main_mail_png" verticalCenter="0" horizontalCenter="0"/>
-				<e:Label text="邮件" size="22" horizontalCenter="0" stroke="2" bottom="10"/>
+				<e:Label text="消息" size="22" horizontalCenter="0" stroke="2" bottom="10"/>
 					<e:Image id="mailRed" source="red_mc_png" right="0" top="12"/>
 				</e:Group>
 				<e:Group id="rankBtn" x="100" y="0" height="80" width="80">
@@ -59,12 +59,12 @@
 			</e:layout>
 		</e:Group>
 	</e:Scroller>
-	<e:Image x="0" width="100%" height="150" bottom="-30" source="bg7_png" scale9Grid="33,30,4,9"/>
-	<e:Group id="bottomGroup" horizontalCenter="0" bottom="15">
-		<e:Button id="defBtn" label="防守阵容 1/5" x="0" y="0" width="240" skinName="Btn7Skin" height="83"/>
-		<e:Button id="atkBtn" label="进攻阵容 1/5" x="0" y="0" width="240" height="83" skinName="Btn5Skin"/>
-		<e:layout>
-		<e:HorizontalLayout gap="50"/>
-		</e:layout>
+	<e:Group id="defBtn" bottom="0" width="110" scaleX="0.8" scaleY="0.8" scrollEnabled="true" x="0">
+		<e:Image source="btn7_png" y="0" right="0"/>
+		<e:Image source="icon_def1_png" verticalCenter="-5" horizontalCenter="-10"/>
+	</e:Group>
+	<e:Group id="atkBtn" bottom="0" width="110" right="0" scaleX="0.8" scaleY="0.8" scrollEnabled="true">
+		<e:Image source="btn5_png" x="0" y="0" scaleX="1.53" scaleY="1.53"/>
+		<e:Image source="icon_atk3_png" verticalCenter="0" horizontalCenter="10"/>
 	</e:Group>
 </e:Skin>

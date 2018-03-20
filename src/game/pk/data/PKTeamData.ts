@@ -13,6 +13,7 @@ class PKTeamData {
     public autoDef  = 0//10 //防守方增加防御
 
     public members = [];
+    public posList = []; //全队上阵的顺序
     public stateObj = {};  //监听队伍中的状态，触发
     constructor(obj?){
         if(obj)

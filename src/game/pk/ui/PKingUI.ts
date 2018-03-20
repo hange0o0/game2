@@ -14,17 +14,6 @@ class PKingUI extends game.BaseUI {
     private smallMap: PKSmallMap;
 
 
-
-
-
-
-
-
-
-
-
-
-
     public scrollTime = 0;
     public counting = false;
     public tw:egret.Tween;
@@ -185,6 +174,7 @@ class PKingUI extends game.BaseUI {
 
         if(isOver)
         {
+            PKManager.getInstance().savePKResult();
             this.removeEventListener(egret.Event.ENTER_FRAME,this.onE,this);
             if(PD.isWin())
             {

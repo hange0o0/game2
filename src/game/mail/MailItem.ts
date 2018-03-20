@@ -27,7 +27,7 @@ class MailItem extends game.BaseItem {
          var content = JSON.parse(this.data.content);
         if(this.data.from_gameid == 'sys')
         {
-            this.nameText.text = '系统邮件'
+            this.nameText.text = '系统消息'
             this.headMC.setData('sys');
         }
         else

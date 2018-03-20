@@ -81,6 +81,11 @@ class GameEvent {
         pk_hang_result:'hang.pk_hang_result'
     }
 
+    public static pk = {
+        save_record:'pk.save_record',
+        get_record:'pk.get_record',
+    }
+
     public static tec = {
         tec_up:'tec.tec_up'
     }

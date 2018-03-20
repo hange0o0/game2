@@ -51,11 +51,11 @@ class MailInfoUI extends game.BaseWindow {
         var content = JSON.parse(this.dataIn.content);
         if(this.dataIn.from_gameid == 'sys')
         {
-            this.titleText.text = '系统邮件'
+            this.titleText.text = '系统消息'
         }
         else
         {
-            this.titleText.text = '【'+Base64.decode(content.nick) + '】的邮件'
+            this.titleText.text = '【'+Base64.decode(content.nick) + '】的消息'
         }
 
         //this.timeText.text = DateUtil.formatDate('MM-dd hh:mm:ss',DateUtil.timeToChineseDate(this.data.time))

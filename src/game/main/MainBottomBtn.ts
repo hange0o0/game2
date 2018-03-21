@@ -21,6 +21,22 @@ class MainBottomBtn extends game.BaseItem {
    public dataChanged(){
         this.text.text = this.data.text
         this.mc.source = this.data.source
+       this.renewRed();
+    }
+
+    public renewRed(){
+        this.redMC.visible = false;
+        switch(this.data.type)
+        {
+            case 'slave':
+                break;
+            case 'main':
+                break;
+            case 'card':
+                break;
+            case 'card':
+                break;
+        }
     }
 
     public select(b,mv=true){

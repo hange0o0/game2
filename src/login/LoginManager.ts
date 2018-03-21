@@ -163,6 +163,9 @@ class LoginManager{
         {
             oo = FromManager.getInstance().getLoginBase();
         }
+        UM.gameid = Config.platformGameidAdd + Config.serverID + '_' + this.gameid
+        if(!MailManager.getInstance().getNotAwardNum())
+            oo.mailtime = MailManager.getInstance().mailData.msgtime || 1
         //oo.serverid = serverid;
         oo.id = this.gameid;
         oo.cdkey = this.openKey;
@@ -181,6 +184,8 @@ class LoginManager{
                 RegisterServerUI.getInstance().show();
                 return;
             }
+
+            MailManager.getInstance().serverAward = msg.mailnum || 0;
 
             UM.fill(msg.data);
 

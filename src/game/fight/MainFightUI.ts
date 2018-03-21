@@ -52,6 +52,10 @@ class MainFightUI extends MainBase {
 
     }
 
+    private renewRed(){
+        this.mailRed.visible = MailManager.getInstance().getNotAwardNum() > 0;
+    }
+
     private onPvp(){
          MyWindow.ShowTips('即将开放，敬请期待')
     }
@@ -119,11 +123,13 @@ class MainFightUI extends MainBase {
     public onShow(){
         GuideManager.getInstance().enableScrollV(this.scroller);
         this.renew();
+        this.renewRed();
 
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
 
         this.addPanelOpenEvent(GameEvent.client.pk_begin,this.onPKBegin)
         this.addPanelOpenEvent(GameEvent.client.pk_end,this.onPKEnd)
+        this.addPanelOpenEvent(GameEvent.client.red_change,this.renewRed)
         //this.addPanelOpenEvent(GameEvent.client.hang_change,this.onPKEnd)
     }
 

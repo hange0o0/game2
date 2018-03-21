@@ -45,11 +45,11 @@ class MainUI extends game.BaseUI {
         this.addBtnEvent(this.addEnergyBtn, this.onAddEnergy)
         this.addBtnEvent(this.addDiamondBtn, this.onAddDiamond)
 
-        this.b0.data = {text:'奴隶',index:0,source:'main_slave_png'}
-        this.b1.data = {text:'背包',index:1,source:'main_bag_png'}
-        this.b2.data = {text:'战斗',index:2,source:'main_pk_png'}
-        this.b3.data = {text:'卡牌',index:3,source:'main_card_png'}
-        this.b4.data = {text:'科技',index:4,source:'main_tec_png'}
+        this.b0.data = {text:'奴隶',index:0,source:'main_slave_png',type:'slave'}
+        this.b1.data = {text:'背包',index:1,source:'main_bag_png',type:'bag'}
+        this.b2.data = {text:'战斗',index:2,source:'main_pk_png',type:'main'}
+        this.b3.data = {text:'卡牌',index:3,source:'main_card_png',type:'card'}
+        this.b4.data = {text:'科技',index:4,source:'main_tec_png',type:'tec'}
         this.bottomItems.push(this.b0)
         this.bottomItems.push(this.b1)
         this.bottomItems.push(this.b2)
@@ -247,5 +247,12 @@ class MainUI extends game.BaseUI {
 
     private getBottomX(){
         return this.currentIndex*110
+    }
+
+    public renewRed(){
+        for(var i=0;i<this.bottomItems.length;i++)
+        {
+            this.bottomItems[i].renewRed();
+        }
     }
 }

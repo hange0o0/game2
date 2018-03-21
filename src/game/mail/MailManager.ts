@@ -13,6 +13,7 @@ class MailManager {
 
     public mailData;
     public mailEffectTime = 3*24*3600//有效时间
+    public serverAward = 0;
 
     public constructor() {
         this.mailData = SharedObjectManager.getInstance().getMyValue('mailData') || {list:[],time:0};
@@ -26,6 +27,19 @@ class MailManager {
                 i--;
             }
         }
+    }
+
+    public getNotAwardNum(){
+        var arr = this.getListByTpyes([101])
+        for(var i=0;i<arr.length;i++)
+        {
+            if(parseInt(arr[i].stat))
+            {
+                arr.splice(i,1);
+                i--;
+            }
+        }
+        return arr.length + this.serverAward;
     }
 
     public saveData(){
@@ -70,6 +84,7 @@ class MailManager {
         Net.addUser(oo);
         Net.send(GameEvent.mail.get_mail,oo,(data) =>{
             var msg = data.msg;
+            this.serverAward = 0;
             if(msg.list)
             {
                 this.mailData.list = this.mailData.list.concat(msg.list)
@@ -78,6 +93,7 @@ class MailManager {
                     this.mailData.msgtime = this.mailData.list[0].time;
                 this.saveData()
             }
+            EM.dispatchEventWith(GameEvent.client.red_change)
             if(fun)
                 fun();
         });
@@ -98,6 +114,7 @@ class MailManager {
             AwardUI.getInstance().show(msg.award)
             this.saveData();
             EM.dispatch(GameEvent.client.mail_change);
+            EM.dispatchEventWith(GameEvent.client.red_change)
             if(fun)
                 fun();
         });

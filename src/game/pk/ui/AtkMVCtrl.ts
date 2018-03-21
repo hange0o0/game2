@@ -140,9 +140,8 @@ class AtkMVCtrl {
     }
 
     private atkMV47(user,target,actionTime,endTime){
-        var mc = PKVideoCon.getInstance().dropOn(target.id,Config.localResRoot + 'monster/enemy47_attack.png')
-        mc.anchorOffsetX = 52
-        mc.anchorOffsetY = 110
+        var mBase = MBase.getData(47)
+        this.playAniOn(target.id,mBase.mvID1)
     }
 
     private atkMV48(user,target,actionTime,endTime){
@@ -290,11 +289,6 @@ class AtkMVCtrl {
 
 
 
-    //技能动画
-    private skillMV47(user,target,actionTime,endTime){
-        var mBase = MBase.getData(47)
-        PKVideoCon.getInstance().playAniOn(target.id,mBase.mvID1)
-    }
 
 
 

@@ -50,6 +50,10 @@ class MailUI extends game.BaseUI {
 
     public show(){
         MailManager.getInstance().getMail(()=>{
+            if(MailManager.getInstance().getNotAwardNum())
+            {
+                 this.tab.selectedIndex = 1;
+            }
             this.renew();
         })
         super.show()

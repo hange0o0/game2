@@ -34,6 +34,7 @@ class Config {
 
 
     public static platform = '';
+    public static platformGameidAdd = '';
     public static equalValue = 1000;
 
 

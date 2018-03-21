@@ -34,7 +34,6 @@
     "src/debug/ScrollTestSkin.exml",
     "src/game/MonsterTestUISkin.exml",
     "src/game/bag/BagInfoUISkin.exml",
-    "src/game/bag/BagItem2Skin.exml",
     "src/game/bag/BagItemSkin.exml",
     "src/game/bag/BagUISkin.exml",
     "src/game/card/CardItemSkin.exml",

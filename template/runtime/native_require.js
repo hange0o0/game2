@@ -48,7 +48,6 @@ var game_file_list = [
 	"bin-debug/game/active/ActiveManager.js",
 	"bin-debug/game/bag/BagInfoUI.js",
 	"bin-debug/game/bag/BagItem.js",
-	"bin-debug/game/bag/BagItem2.js",
 	"bin-debug/game/bag/BagUI.js",
 	"bin-debug/game/bag/PropManager.js",
 	"bin-debug/game/card/CardDrawResultUI.js",

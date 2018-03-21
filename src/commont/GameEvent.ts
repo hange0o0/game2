@@ -27,6 +27,7 @@ class GameEvent {
         //card_change:'card_change',
         //pk_end:'pk_end',
 
+        red_change:'red_change',
         pass_day:'pass_day',
         timer:'timer'
     };

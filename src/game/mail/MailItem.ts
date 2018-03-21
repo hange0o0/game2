@@ -39,8 +39,8 @@ class MailItem extends game.BaseItem {
         this.timeText.text = DateUtil.formatDate('MM-dd hh:mm:ss',DateUtil.timeToChineseDate(this.data.time))
         this.desText.text = MailManager.getInstance().getMailDes(this.data);
 
-        this.redMC.visible = this.data.type > 100 && !this.data.stat;
-        this.awardMC.visible = this.data.type > 100 && this.data.stat
+        this.redMC.visible = this.data.type > 100 && !parseInt(this.data.stat);
+        this.awardMC.visible = this.data.type > 100 && <boolean>parseInt(this.data.stat)
     }
 
 }

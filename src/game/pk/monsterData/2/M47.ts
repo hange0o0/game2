@@ -3,8 +3,7 @@ class M47 extends MBase {
         super();
     }
 
-    public mvID1 = 103;
-
+    public mvID1 = 104;
     public skill(user:PKMonsterData,target:PKMonsterData){
         var skillValue = user.getSkillValue(1);
         target.manaHp += skillValue

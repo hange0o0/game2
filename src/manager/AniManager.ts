@@ -17,7 +17,7 @@ class AniManager {
 
     //frameRate:默认是12，要变快就加大，慢变就减小
     public mvConfig = {
-        '14':{frameRate:24,scale:1.5},
+        '14':{frameRate:24,scale:1},
         '30':{scale:1.5},
         '39':{scale:1.5},
         '116':{frameRate:24}

@@ -39,6 +39,7 @@ class PKConfig {
     public static typeAdd = 10; //类型加成百分比
     public static drawTime = 1000*60*5; //超时
     public static autoDef = 10; //防守方队伍加成
+    public static skillBeginID = 200; //大于这个的是技能
 
 
     public static VIDEO_MONSTER_DOUBLE = 1;//爆击

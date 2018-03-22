@@ -24,6 +24,7 @@
 	</e:Group>
 	<e:Group y="120" left="30" right="30">
 		<e:Image source="bg3_png" scale9Grid="16,15,7,7" height="160" y="0" x="0" width="100%"/>
-		<e:Label id="desText" text="Label" y="15" size="24" stroke="2" verticalAlign="top" lineSpacing="10" textAlign="left" left="15" right="15"/>
+		<e:Label id="desText" text="Label" size="24" stroke="2" verticalAlign="middle" lineSpacing="10" textAlign="left" left="15" right="15" top="15" bottom="45"/>
+		<e:Label id="timeText" text="2011/12/1" size="24" stroke="1" verticalAlign="bottom" strokeColor="0x231507" right="10" textColor="0xDBD3C7" bottom="10"/>
 	</e:Group>
 </e:Skin>

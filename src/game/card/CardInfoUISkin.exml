@@ -17,12 +17,12 @@
 	</e:Group>
 	<e:Image id="helpBtn" source="icon_help_png" y="10" right="10" scaleX="0.9" scaleY="0.9"/>
 	<e:Group left="10" right="10" height="110" bottom="150">
-		<e:Rect height="100%" y="0" fillAlpha="0.5" x="0" width="100%"/>
-		<e:Rect id="bar1" width="200" height="5" x="0" y="-5" fillColor="0x3add35"/>
-		<e:Rect id="bar2" width="200" height="5" y="-5" right="0" fillColor="0xff0505"/>
-		<e:Group verticalCenter="0" horizontalCenter="0">
+		<e:Rect height="100%" y="0" x="0" width="100%"/>
+		<e:Rect id="bar1" width="200" height="100%" x="0" y="0" fillColor="0x001900"/>
+		<e:Rect id="bar2" width="200" height="100%" y="0" right="0" fillColor="0x260000"/>
+		<e:Group horizontalCenter="0" verticalCenter="0">
 			<e:Group id="likeBtn" x="0" y="0">
-				<e:Image id="likeChooseMC" source="bg16_png" y="0" width="270" x="0" scale9Grid="18,17,15,18" height="100"/>
+				<e:Image id="likeChooseMC" y="0" width="260" x="0" height="100" source="border2_png" scale9Grid="12,11,6,6"/>
 				<e:Group horizontalCenter="0" verticalCenter="0">
 					<e:Label id="likeText" text="(1.234K)" x="0" y="0" size="24" textColor="0xffc76b" scaleX="1" scaleY="1"/>
 					<e:Group x="0" y="0">
@@ -38,7 +38,7 @@
 				</e:Group>
 			</e:Group>
 			<e:Group id="unlikeBtn" x="10" y="10">
-				<e:Image id="unlikeChooseMC" source="bg16_png" y="0" width="270" x="0" height="100" scale9Grid="18,17,15,18"/>
+				<e:Image id="unlikeChooseMC" y="0" width="260" x="0" height="100" source="border2_png" scale9Grid="10,10,9,7"/>
 				<e:Group horizontalCenter="0" verticalCenter="0">
 					<e:Label id="unlikeText" text="(1.234K)" x="-206" y="6" size="24" textColor="0xffc76b"/>
 				<e:Group x="0" y="0">
@@ -54,7 +54,7 @@
 				</e:Group>
 			</e:Group>
 			<e:layout>
-			<e:HorizontalLayout gap="0"/>
+			<e:HorizontalLayout gap="10"/>
 			</e:layout>
 		</e:Group>
 	</e:Group>

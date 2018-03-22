@@ -16,6 +16,10 @@ class PKInfoBtn extends game.BaseItem {
     }
 
     private onClick(){
+        if(GuideManager.getInstance().isGuiding && GuideManager.getInstance().guideKey != "pk")
+        {
+            return;
+        }
         var p = this.localToGlobal(0,0)
         PKMonsterInfoUI.getInstance().show(this.data,p)
     }

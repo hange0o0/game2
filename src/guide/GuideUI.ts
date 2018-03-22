@@ -209,7 +209,7 @@ class GuideUI extends game.BaseContainer{
                 //console.log(p1,p2)
                 this.setBG(p1.x,p1.y,p2.x-p1.x,p2.y-p1.y,fun == null);
                 if(toBottom)
-                    this.tipsGroup.y = GameManager.stage.stageHeight - this.tipsGroup.height;
+                    this.tipsGroup.y = GameManager.stage.stageHeight - this.tipsGroup.height - toBottom;
                 //if(fun == null)
                 //    mc.once(egret.TouchEvent.TOUCH_TAP,this.hide, this);
 

@@ -26,7 +26,7 @@ class PKMonsterItem extends game.BaseItem {
 
    public talkItm:PKTalkItem;
 
-    private monsterMV:MonsterMV
+    public monsterMV:MonsterMV
     public needRemove = false
     public stateMV = {};
     public addStateMV = new PKAddState();

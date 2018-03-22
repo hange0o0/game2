@@ -15,7 +15,7 @@ class HangUI extends game.BaseItem {
     private lockGroup: eui.Group;
     private lockBar: eui.Rect;
     private lockText: eui.Label;
-    private openBtn: eui.Button;
+    public openBtn: eui.Button;
     private awardRed: eui.Image;
     private helpBtn: eui.Image;
 
@@ -257,7 +257,7 @@ class HangUI extends game.BaseItem {
             while(true)
             {
                 var id = parseInt(ArrayUtil.randomOne(HangManager.getInstance().lastlist));
-                if(id < 100)
+                if(id < PKConfig.skillBeginID)
                     break;
             }
 

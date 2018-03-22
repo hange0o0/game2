@@ -48,15 +48,45 @@ class MailManager {
 
     public getMailDes(data){
         var content = JSON.parse(data.content);
+        var index = content.rd || 0;//用于文本随机
         switch(parseInt(data.type))
         {
             case 1:
-                return '从现在起我就是你的主人了，好好为我效力吧'
+                return this.getDesByArr([
+                    '从现在起我就是你的主人了，好好为我效力吧',
+                    '打狗还看主人脸，跟了我就没人敢欺负你了',
+                    '如果你表现得好，我可以考虑还你自由身',
+                    '在我这里好好干，等以后我发财了绝少不了你的好处',
+                    '能臣服于我是你的荣耀'],index);
             case 2:
-                return '你的奴隶【'+Base64.decode(content.slave_nick)+'】看着还不错，我就拿去了'
+                return this.getDesByArr([
+                    '你的奴隶【'+Base64.decode(content.slave_nick)+'】看着还不错，我就拿去了',
+                    '大胆【'+UM.nick+'】，你敢跟我抢【'+Base64.decode(content.slave_nick)+'】',
+                    '我不能看着【'+Base64.decode(content.slave_nick)+'】在你手下受半点委屈',
+                    '【'+Base64.decode(content.slave_nick)+'】跟了你是屈才了，他/她应该拥有更广阔的舞台',
+                    '【'+Base64.decode(content.slave_nick)+'】是个好奴隶，但你不配拥有'],index);
+            case 3:
+                return this.getDesByArr([
+                    '你的表现太令我失望了，我们的主仆情份就到此为止了吧',
+                    '如果你能再努力点，我们何至于会走到这一步',
+                    '你是个好人，但我们不适合做主仆',
+                    '没有比较就没有伤害，但你的表现也实在太糟糕了',
+                    '好好努力升级，以后我们还能做主仆'],index);
+            case 4:
+                return this.getDesByArr([
+                    '我就不在你这里干了，爱咋咋滴',
+                    '我叫你一声主人，你好意思答应么',
+                    '就你这实力，要做我的奴隶我还不愿意呢',
+                    '主人，你的实力还太弱了，要干巴爹哟~',
+                    '想做我的主人，看来你还得再锻炼锻炼才行'],index);
             case 101:
                 return Base64.decode(content.des);
         }
+    }
+
+    private getDesByArr(arr,index){
+        index = index%arr.length;
+       return arr[index];
     }
 
     //取type为XXXX的数据

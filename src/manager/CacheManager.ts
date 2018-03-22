@@ -55,7 +55,7 @@ class CacheManager{
     }
 
     public getCardVO(id):MonsterVO|SkillVO{
-        if(id<100)
+        if(id<PKConfig.skillBeginID)
             return MonsterVO.getObject(id);
         return SkillVO.getObject(id);
     }

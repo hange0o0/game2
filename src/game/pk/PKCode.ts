@@ -75,7 +75,7 @@ class PKCode {
                 PD.resetMonsterData();//重置技能数据，方便技能统计
 
                 var data = arr.shift();
-                if(data.mid < 100) //上怪
+                if(data.mid < PKConfig.skillBeginID) //上怪
                 {
                     if(needSpace > 0)
                     {

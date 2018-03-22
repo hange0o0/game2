@@ -16,7 +16,7 @@ class MailUI extends game.BaseUI {
 
 
     private typeObj = {
-        0:{type:[1,2],name:'奴隶'},
+        0:{type:[1,2,3],name:'奴隶'},
         1:{type:[101],name:'系统'},
         2:{type:['pk'],name:'对战',isPK:true}
     }

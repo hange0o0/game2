@@ -467,7 +467,7 @@ class PKMonsterData {
                     var oo:PKBuffData =  this.buff[i];
                     if(oo.ing && oo.haveState && oo.state[PKConfig.STATE_ILL])
                     {
-                        if(oo.id < 100)
+                        if(oo.id < PKConfig.skillBeginID)
                             MBase.getData(oo.id).onIll(oo);
                         else
                             SBase.getData(oo.id).onIll(oo);

@@ -151,9 +151,9 @@ class CardUI extends MainBase {
         var type = this.downList2.selectValue;
         var max = CRM.getOpenSkillList(type).length
         var now = CRM.getMySkillList(type).length
-        this.valueText.text = PropVO.getObject(102).propname + ' ×' + PropManager.getInstance().getNum(102)
-        this.valueText2.text = PropVO.getObject(103).propname.replace('技能','') + ' ×' + PropManager.getInstance().getNum(103)
-        this.desText.text = '待解锁：' +  (max - now);
+        this.valueText.text = '×' + PropManager.getInstance().getNum(102)
+        this.valueText2.text = '×' + PropManager.getInstance().getNum(103)
+        this.desText.text = '收集度：' +  now + '/' + max;
         if(now>=max)
         {
             this.skillBtn.skinName = 'Btn2Skin'

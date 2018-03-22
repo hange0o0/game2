@@ -15,7 +15,7 @@ class MainFightUI extends MainBase {
     private rankBtn: eui.Group;
     private shopBtn: eui.Group;
     private settingBtn: eui.Group;
-    private mapBtn: HangUI;
+    public mapBtn: HangUI;
     private pvpBtn: PVPUI;
     private fightBtn: FightUI;
     private defBtn: eui.Group;

@@ -6,12 +6,13 @@ class PKCtrlCon extends game.BaseContainer {
         this.skinName = "PKCtrlConSkin";
     }
 
-    private overMC: eui.Group;
-    private cardGroup: eui.Group;
+    public overMC: eui.Group;
+    public cardGroup: eui.Group;
     private replayGroup: eui.Group;
     private vPlayer1: eui.Button;
     private vPlayer2: eui.Button;
     private placeGroup: eui.Group;
+    public costGroup: eui.Group;
     private info2: PKInfoBtn;
     private info1: PKInfoBtn;
     private info4: PKInfoBtn;
@@ -97,12 +98,22 @@ class PKCtrlCon extends game.BaseContainer {
     }
 
     private onHelp(){
+        if(GuideManager.getInstance().isGuiding && GuideManager.getInstance().guideKey != "pk")
+        {
+            MyWindow.ShowTips('新手引导期间不能点击')
+            return;
+        }
         PKingUI.getInstance().setStop(true)
         HelpManager.getInstance().showHelp('pk',()=>{
             PKingUI.getInstance().setStop(false)
         })
     }
     private onSetting(){
+        if(GuideManager.getInstance().isGuiding)
+        {
+            MyWindow.ShowTips('新手引导期间不能点击')
+            return;
+        }
         PKingUI.getInstance().setStop(true)
         PKSettingUI.getInstance().show();
     }
@@ -194,7 +205,10 @@ class PKCtrlCon extends game.BaseContainer {
         {
              if(this.posCard())
              {
-
+                 if(GuideManager.getInstance().isGuiding && GuideManager.getInstance().guideKey == "addCard")
+                 {
+                     GuideManager.getInstance().showGuide()
+                 }
              }
         }
         else //显示上阵卡牌信息
@@ -205,10 +219,7 @@ class PKCtrlCon extends game.BaseContainer {
 
     private posCard(){
         var PD = PKData.getInstance();
-        if(this.chooseCard.data.mid < 100)
-            var mp = MonsterVO.getObject(this.chooseCard.data.mid).cost
-        else
-            var mp = SkillVO.getObject(this.chooseCard.data.mid).cost
+        var mp = CM.getCardVO(this.chooseCard.data.mid).cost
         if(PD.myPlayer.getMP() < mp)
             return false;
 

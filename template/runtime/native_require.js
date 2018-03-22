@@ -181,7 +181,7 @@ var game_file_list = [
 	"bin-debug/game/pk/skillData/3/S125.js",
 	"bin-debug/game/pk/skillData/3/S126.js",
 	"bin-debug/game/pk/skillData/3/S127.js",
-	"bin-debug/LoadingUI.js",
+	"bin-debug/util/StringUtil.js",
 	"bin-debug/game/pk/skillData/3/S129.js",
 	"bin-debug/game/pk/skillData/3/S130.js",
 	"bin-debug/game/pk/skillData/4/S131.js",
@@ -353,7 +353,7 @@ var game_file_list = [
 	"bin-debug/util/ObjectUtil.js",
 	"bin-debug/util/PopUpManager.js",
 	"bin-debug/util/ShapeObject.js",
-	"bin-debug/util/StringUtil.js",
+	"bin-debug/LoadingUI.js",
 	//----auto game_file_list end----
 ];
 

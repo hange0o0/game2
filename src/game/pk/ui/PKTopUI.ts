@@ -3,13 +3,14 @@ class PKTopUI extends game.BaseContainer {
     public static getInstance() {
         return this._instance;
     }
-    private hpGroup1: eui.Group;
+    public hpGroup1: eui.Group;
     private hpGroup2: eui.Group;
     private hpText1: eui.Label;
     private defGroup1: eui.Group;
     private defText1: eui.Label;
     private defBG1: eui.Rect;
     private defBGMask1: eui.Image;
+    public hpGroupIcon: eui.Image;
     private defGroup2: eui.Group;
     private defText2: eui.Label;
     private defBG2: eui.Rect;
@@ -56,7 +57,7 @@ class PKTopUI extends game.BaseContainer {
                 var teamData = data.getOwner().teamData
                 if(teamData.id != 'sys' && teamData != PKData.getInstance().myPlayer.teamData)
                     this.addSkillItem(data);
-                if(data.mid > 100)
+                if(data.mid > PKConfig.skillBeginID)
                     this.addSkill(data)
                 break;
             case PKConfig.VIDEO_MONSTER_WIN:

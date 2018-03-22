@@ -60,7 +60,7 @@
 		<e:Image y="1" horizontalCenter="0.5" source="icon_edit_png" scaleX="0.55" scaleY="0.55"/>
 		</e:Group>
 		<e:Group id="pkBtn" x="10" y="10" width="100" height="80">
-		<e:Label text="战斗" horizontalCenter="0" bottom="0" stroke="2" size="22"/>
+		<e:Label text="战斗" horizontalCenter="0" bottom="0" stroke="2" size="22" textAlign="center" width="100%"/>
 		<e:Image y="0" horizontalCenter="0.5" source="icon_atk2_png" scaleX="0.75" scaleY="0.75"/>
 		</e:Group>
 		<e:layout>

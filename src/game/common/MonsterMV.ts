@@ -175,5 +175,10 @@ class MonsterMV extends eui.Group {
         }
     }
 
+    public getRect(){
+        var p = this.localToGlobal(this.anchorOffsetX,this.anchorOffsetY);
+        return new egret.Rectangle(p.x-this.mw/2,p.y-this.mh + this.vo.heightoff,this.mw,this.mh)
+    }
+
 
 }

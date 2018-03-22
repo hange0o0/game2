@@ -63,7 +63,7 @@
 			<e:Image x="0" scaleX="0.5" scaleY="0.5" source="icon_card_png" y="3"/>
 			<e:Label id="cardText" text="Label" x="42" y="11.000000000000007" size="24" stroke="2"/>
 		</e:Group>
-		<e:Group x="0" y="0" width="120">
+		<e:Group id="costGroup" x="0" y="0" width="120">
 			<e:Image source="icon_cost_bg_png" x="0" y="0" scaleX="0.4" scaleY="0.4"/>
 			<e:Image id="costMC" source="icon_cost_png" x="4.0100000000000104" y="4.999999999999996"/>
 			<e:Label id="costText" text="Label" x="42.010000000000026" y="11.000000000000007" size="24" stroke="2"/>

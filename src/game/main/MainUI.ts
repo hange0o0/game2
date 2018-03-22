@@ -164,6 +164,7 @@ class MainUI extends game.BaseUI {
         this.addPanelOpenEvent(GameEvent.client.diamond_change,this.renewTop)
         this.addPanelOpenEvent(GameEvent.client.energy_change,this.renewEnergy)
 
+        GuideManager.getInstance().isGuiding = true;
         if(GuideManager.getInstance().isGuiding)
         {
             GuideManager.getInstance().guideStep = 0;

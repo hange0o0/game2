@@ -14,7 +14,7 @@ class BasePosUI extends game.BaseUI {
     private btnGroup: eui.Group;
     private deleteBtn: eui.Group;
     private testBtn: eui.Group;
-    private pkBtn: eui.Group;
+    public pkBtn: eui.Group;
     private downBtn: eui.Image;
     private upBtn: eui.Image;
     private titleText: eui.Label;
@@ -306,6 +306,10 @@ class BasePosUI extends game.BaseUI {
 
         this.renew();
         this.renewTabList();
+        if(GuideManager.getInstance().isGuiding)
+        {
+            GuideManager.getInstance().showGuide()
+        }
     }
 
     private renewTabList(){
@@ -358,6 +362,12 @@ class BasePosUI extends game.BaseUI {
         var PM = PosManager.getInstance();
         var data = this.posData = PM.getListByType(this.type)[this.index]
         this.useCard = {};
+        if(GuideManager.getInstance().isGuiding)
+        {
+            data = {
+                list:'1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6'
+            }
+        }
         var arr = [];
         if(data)
         {
@@ -391,5 +401,7 @@ class BasePosUI extends game.BaseUI {
         this.listData.refresh()
         this.renewTitle();
         this.renewBtn();
+
+
     }
 }

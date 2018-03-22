@@ -33,7 +33,7 @@ class GuideManager {
         scroller.scrollPolicyV = this.isGuiding? eui.ScrollPolicy.OFF:eui.ScrollPolicy.AUTO
     }
 
-    public showGuide(key?){
+    public showGuide(){
         if(!this.isGuiding)
             return;
         this.guideKey = ''
@@ -44,7 +44,7 @@ class GuideManager {
     public reInit(){
         this.guideRandom = 0;
         this.guidePK = 0;
-        this.guideArr[0].text = '亲爱的['+UM.nick+']，欢迎来到卡士世界！'
+        this.guideArr[0].text = '['+UM.nick+']您好，欢迎来到召唤争霸！'
     }
 
     private init(){
@@ -54,208 +54,152 @@ class GuideManager {
             fun:function(){
                 self.showGuide()
             },
-            text:'亲爱的['+UM.nick+']，欢迎来到卡士世界！',
-        })
-
-        //this.addGuideObj({
-        //    fun:function(){
-        //        self.showGuide()
-        //    },
-        //    text:'你想成为世界上最强大的卡士吗？卡卡现在将带领你踏上这成为[至强王者]之路！',
-        //})
-        //
-        //this.addGuideObj({
-        //    fun:function(){
-        //        self.showGuide()
-        //    },
-        //    text:'但在这之前，我们必需得弄清一个问题：[什么是卡士?]',
-        //})
-        //this.addGuideObj({
-        //    fun:function(){
-        //        self.showGuide()
-        //    },
-        //    text:'在卡卡看来，所谓的卡士，可以比作是卡兵中的[司令]。',
-        //})
-        //
-        //this.addGuideObj({
-        //    fun:function(){
-        //        self.showGuide()
-        //    },
-        //    text:'他利用手中有限的卡兵进行[排兵布阵]，制定出战顺序后，就让队伍按照他的计划作战，最终为他取得胜利',
-        //})
-        //
-        //this.addGuideObj({
-        //    fun:function(){
-        //        self.showGuide()
-        //    },
-        //    text:'他[不需要参与]到具体的战斗，但却影响了整个的战斗流程，最考验其[运筹帷幄]的能力了',
-        //})
-        //
-        //this.addGuideObj({
-        //    fun:function(){
-        //        self.showGuide()
-        //    },
-        //    text:'不是每个人都有能力做好这件事情，到底你适不适合这样的工作，卡卡要对你进行一下[考查]',
-        //})
-
-
-        this.addGuideObj({
-            mc:"MainPageUI.getInstance()['mainGame']['startBtn']",
-            text:'[卡士公会]是卡士世界最权威的认证机构，让我们先在这里作个职业认证吧！',
+            text:'',
         })
 
         this.addGuideObj({
-            ui:"MainGameUI.getInstance()",
-            mc:"this.getMainGameRect()",
-            text:'在上方区域呈现的是我们[对手的卡兵]，了解对方的兵阵能方便我们制定合适的战术',
-            fun:function(){
-                //self.showGuide(MainGameUI.getInstance())
-            }
+            mc:function(){return MainFightUI.getInstance().mapBtn.openBtn},
+            text:'来不及多解释了，赶快开战吧！',
         })
 
-
-        //this.addGuideObj({
-        //    ui:"MainPageUI.getInstance()",
-        //    mc:"MainPageUI.getInstance().videoBtn",
-        //    text:'哎呀，刚才太兴奋忘了看战报数据了！但不用担心，我们还可以在[PK记录]找到刚才的对战记录的。',
-        //    hideHand:true,
-        //    fun:function(){
-        //        self.showGuide(MainPageUI.getInstance())
-        //    }
-        //})
-
-
-
-        //this.addGuideObj({
-        //    ui:"CollectUI.getInstance()",
-        //    mc:"CollectUI.getInstance()['topUI']['closeBtn']",
-        //    text:'我们可是要回到世界首页哦',
-        //})
-
-        //this.addGuideObj({
-        //    ui:"MainPageUI.getInstance()",
-        //    mc:"this.getMainRect()",
-        //    text:'参与[究极研究院]的活动，会获得[永久的战力]奖励。',
-        //    hideHand:true,
-        //    toBottom:true,
-        //    fun:function(){
-        //        self.showGuide(MainPageUI.getInstance())
-        //        MainPageUI.getInstance()['currentPage'] = 2;
-        //        MainPageUI.getInstance().scrollToCurrentPage();
-        //        MainPageUI.getInstance().renewPage();
-        //    },
-        //})
-
-        //this.addGuideObj({
-        //    fun:function(){
-        //        self.showGuide()
-        //    },
-        //    mc:"this.getMainRect()",
-        //    hideHand:true,
-        //    toBottom:true,
-        //    text:'因为经常参与他们的活动，会获得[永久的战力]奖励。所以卡卡建议你[每天]都来冲刺一下自己的极限！',
-        //})
-        //
-        //this.addGuideObj({
-        //    fun:function(){
-        //        self.showGuide(MainPageUI.getInstance())
-        //        MainPageUI.getInstance()['currentPage'] = 2;
-        //        MainPageUI.getInstance().scrollToCurrentPage();
-        //        MainPageUI.getInstance().renewPage();
-        //    },
-        //    mc:"this.getMainRect()",
-        //    hideHand:true,
-        //    toBottom:true,
-        //    text:'如果实在打不过，也可以与[其它卡士]交流一下，因为你们的题目是[一样的]！',
-        //})
-
-        //this.addGuideObj({
-        //    ui:"MainPageUI.getInstance()",
-        //    mc:"this.getMainRect()",
-        //    text:'你的士兵们会不停地清剿[野外势力]，为你赢取功勋！',
-        //    hideHand:true,
-        //    toBottom:true,
-        //    fun:function(){
-        //        self.showGuide(MainPageUI.getInstance())
-        //        MainPageUI.getInstance()['currentPage'] = 3;
-        //        MainPageUI.getInstance().scrollToCurrentPage();
-        //        MainPageUI.getInstance().renewPage();
-        //    }
-        //})
-
-        //this.addGuideObj({
-        //    fun:function(){
-        //        self.showGuide(MainPageUI.getInstance())
-        //        MainPageUI.getInstance()['currentPage'] = 3;
-        //        MainPageUI.getInstance().scrollToCurrentPage();
-        //        MainPageUI.getInstance().renewPage();
-        //    },
-        //    ui:"MainPageUI.getInstance()",
-        //    mc:"this.getMainRect()",
-        //    hideHand:true,
-        //    toBottom:true,
-        //    text:'但这种体力活并[不需要]你来[亲自出手]，交给你的卡兵吧，只要他们足够[强大]，清剿起来速度还是会[很快]的',
-        //})
-
-        //this.addGuideObj({
-        //    ui:"MainPageUI.getInstance()",
-        //    mc:"this.getMainRect()",
-        //    text:'在[天梯竞技场]中，系统会为你匹配实力相当[真实玩家]作为对手！你的选择是战力碾压还是智慧征服？卡卡是比较喜欢碾压带来的快感的..',
-        //    hideHand:true,
-        //    toBottom:true,
-        //    fun:function(){
-        //        self.showGuide(MainPageUI.getInstance())
-        //        MainPageUI.getInstance()['currentPage'] = 4;
-        //        MainPageUI.getInstance().scrollToCurrentPage();
-        //        MainPageUI.getInstance().renewPage();
-        //    }
-        //})
-        //
-        //this.addGuideObj({
-        //    ui:"MainPageUI.getInstance()",
-        //    mc:"this.getMainRect()",
-        //    text:'[虚空修正场]要挑选出最有天赋的卡士，在里面的PK将[不会受到]卡士真实战力的影响，只要有能力，卡士一样能打败卡皇！',
-        //    hideHand:true,
-        //    toBottom:true,
-        //    fun:function(){
-        //        self.showGuide(MainPageUI.getInstance())
-        //    }
-        //})
-
-        //this.addGuideObj({
-        //    fun:function(){
-        //        self.showGuide()
-        //    },
-        //    text:'哦，对了，还有一个重要的事情得提醒你一下：[不要]专注于升级某几个卡兵，[全面发展]才是卡士世界的主题！',
-        //})
-        //this.addGuideObj({
-        //    fun:function(){
-        //        self.showGuide()
-        //    },
-        //    text:'这可是很多新手卡士都会犯的错误哦，卡卡希望你能[避开]。',
-        //})
         this.addGuideObj({
+            toBottom:100,
+            mc:function(){return BasePosUI.getInstance().pkBtn},
+            text:'出战卡牌我都给你配好了，赶快开始吧！',
+        })
+
+        this.addGuideObj({
+            mc:function(){return PKingUI.getInstance().pkTop},
+            text:'这是对方出牌的记录区，顺序记录了敌人所有出过的卡牌。',
+            guideKey:'pkTop',
             fun:function(){
                 self.showGuide()
-            },
-            text:'卡士世界的介绍到这里就暂告一段落了，当然还有很多未知的[区域]和[技巧]需要玩家你来好好探索',
-        })
-
-        this.addGuideObj({
-            text:'卡卡希望你能在这里找到属于你的快乐，我会想念你的，88~',
-            fun:function(){
-                self.isGuiding = false;
-                GuideUI.getInstance().hide();
-                //MainPageUI.getInstance()['currentPage'] = 0;
-                //MainPageUI.getInstance()['mainTask'].visible = true;
-                //MainPageUI.getInstance()['helpGroup'].visible = true;
-                ////MainPageUI.getInstance().scrollToCurrentPage();
-                ////MainPageUI.getInstance().renewPage();
-                //GuideUI.getInstance().showHand(MainPageUI.getInstance()['mainTask'])
-                //MyCardTaskUI.getInstance().testShow();
             }
         })
 
+        this.addGuideObj({
+            mc:function(){return PKingUI.getInstance().scroller},
+            text:'这是战场，对战双方会在这里短兵相接，你来我往，争取胜机。',
+            guideKey:'scroller',
+            fun:function(){
+                self.showGuide()
+            }
+        })
+
+        this.addGuideObj({
+            mc:function(){return PKingUI.getInstance().pkCtrlCon.overMC},
+            text:'这是出战区，放在出战区的卡牌会按其效果在战场上起到相应作用。',
+            guideKey:'overMC',
+            fun:function(){
+                self.showGuide()
+            }
+        })
+
+        this.addGuideObj({
+            mc:function(){return PKingUI.getInstance().pkCtrlCon.cardGroup},
+            text:'这是手牌区,里面是玩家可选择出战的卡牌。',
+            guideKey:'cardGroup',
+            fun:function(){
+                self.showGuide()
+            }
+        })
+
+
+        this.addGuideObj({
+            mc:function(){return PKingUI.getInstance().pkCtrlCon.costGroup},
+            text:'这是手牌能量,上阵卡牌需耗费不同的能量。',
+            guideKey:'cost',
+            fun:function(){
+                self.showGuide()
+            }
+        })
+
+        this.addGuideObj({
+            mc:function(){return PKingUI.getInstance().pkCtrlCon.cardObj[1]},
+            text:'请选择一张需要上阵的卡牌。',
+            guideKey:'card',
+        })
+
+        this.addGuideObj({
+            mc:function(){return PKingUI.getInstance().pkCtrlCon.overMC},
+            text:'点击出战区，可把所选卡牌上阵。玩家也可以通过拖放动作实现此操作',
+            guideKey:'addCard',
+        })
+
+        this.addGuideObj({
+            text:'当战斗卡牌被放入[出战区]时，都会有3秒的准备时间，准备时间过后，卡牌才会生效。',
+            fun:function(){
+                self.showGuide()
+            }
+        })
+
+        this.addGuideObj({
+            text:'由此可见，对战时的预判能力是非常重要的。现在你可以继续放入你的手牌。',
+            fun:function(){
+                PKingUI.getInstance().showCountDown()
+                GuideUI.getInstance().hide();
+            }
+        })
+
+        this.addGuideObj({
+            mc:function(){return PKVideoCon.getInstance().getItemByID(1).monsterMV.getRect()},
+            text:'这是防御石,所有攻击其的单位，都会为已方队伍赚取防御积分，增加队伍的防御属性',
+            guideKey:'diamondMonster',
+            fun:function(){
+                self.showGuide()
+            }
+        })
+
+        this.addGuideObj({
+            mc:function(){return PKingUI.getInstance().pkTop.hpGroupIcon},
+            text:'这是队伍生命,当敌方单位冲破敌方出生点后会造成伤害，当生命值为降为0时就会失败。',
+            guideKey:'hp',
+            fun:function(){
+                self.showGuide()
+            }
+        })
+
+        this.addGuideObj({
+            text:'好了,现在就开始你的表演吧',
+            guideKey:'pk',
+            fun:function(){
+                PKingUI.getInstance().setStop(false);
+                GuideUI.getInstance().hide();
+            }
+        })
+
+        this.addGuideObj({
+            text:'基于召唤的对战玩法介绍，到这里就结束了。',
+            fun:function(){
+                self.showGuide()
+            }
+        })
+
+        this.addGuideObj({
+            text:'但游戏内还有其它好玩功能，需要玩家您慢慢探索。如有需要，可点击界面内的帮助按钮查看相关说明。',
+            fun:function(){
+                self.showGuide()
+            }
+        })
+
+        this.addGuideObj({
+            text:'我觉得以您的智慧，应该也不再需要我的手把手教学了吧？',
+            fun:function(){
+                self.showGuide()
+            }
+        })
+
+        this.addGuideObj({
+            text:'那我就此别过，以后有机会一起驰骋疆场吧！',
+            fun:function(){
+                self.endGuide()
+            }
+        })
+    }
+
+    private endGuide(){
+        this.isGuiding = false;
+        GuideUI.getInstance().hide();
     }
 
     private addGuideObj(obj){
@@ -267,8 +211,10 @@ class GuideManager {
         var data = this.guideArr[this.guideStep];
         var guideData:any = {};
         guideData.mc = data.mc;
-        if(guideData.mc && typeof guideData.mc == 'string')
-            guideData.mc = eval(guideData.mc);
+        //if(guideData.mc && typeof guideData.mc == 'string')
+        //    guideData.mc = eval(guideData.mc);
+        if(guideData.mc && typeof guideData.mc == 'function')
+            guideData.mc = guideData.mc();
         guideData.fun = data.fun;
         guideData.text = data.text;
         guideData.toBottom = data.toBottom;

@@ -7,12 +7,14 @@ class MailInfoUI extends game.BaseWindow {
         return this._instance;
     }
 
+    private btnGroup: eui.Group;
     private cancelBtn: eui.Button;
     private okBtn: eui.Button;
     private list: eui.List;
     private titleText: eui.Label;
     private desText: eui.Label;
-    private btnGroup: eui.Group;
+    private timeText: eui.Label;
+
 
 
     public dataIn
@@ -58,8 +60,9 @@ class MailInfoUI extends game.BaseWindow {
             this.titleText.text = '【'+Base64.decode(content.nick) + '】的消息'
         }
 
-        //this.timeText.text = DateUtil.formatDate('MM-dd hh:mm:ss',DateUtil.timeToChineseDate(this.data.time))
-        this.desText.text = MailManager.getInstance().getMailDes(this.dataIn);
+        this.timeText.text = DateUtil.formatDate('MM-dd hh:mm',DateUtil.timeToChineseDate(this.dataIn.time))
+        this.desText.text = '　　' + MailManager.getInstance().getMailDes(this.dataIn);
+        //this.timeText.text = DateUtil.getStringBySeconds(Math.max(TM.now() - this.dataIn.time,1),false,2) + '前'
 
         var haveAward = this.dataIn.type > 100
 

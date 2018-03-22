@@ -154,10 +154,7 @@ class PKPlayerData {
             }
         }
 
-        if(cardData.mid < 100)
-            this.addMP(-MonsterVO.getObject(cardData.mid).cost)
-        else
-            this.addMP(-SkillVO.getObject(cardData.mid).cost)
+        this.addMP(-CM.getCardVO(cardData.mid).cost)
 
         var step = Math.floor(PKData.getInstance().actionTime/PKConfig.stepCD)
         this.posHistory.push(step + '#' + cardData.mid);
@@ -225,7 +222,7 @@ class PKPlayerData {
 
             if(oo.testAdd(t))
             {
-                if(oo.mid < 100)
+                if(oo.mid < PKConfig.skillBeginID)
                 {
                     if(leftSpace == 0)
                         continue;

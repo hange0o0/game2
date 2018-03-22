@@ -58,7 +58,11 @@ class PKCardItem extends game.BaseItem {
         if(game.BaseUI.isStopEevent)
             return;
         if(this.data)
+        {
             this.con.setChooseCard(this);
+            if(GuideManager.getInstance().isGuiding  && GuideManager.getInstance().guideKey == "card")
+                GuideManager.getInstance().showGuide();
+        }
     }
 
 
@@ -119,10 +123,7 @@ class PKCardItem extends game.BaseItem {
         if(!this.data)
             return;
 
-        if(this.data.mid < 100)
-            var mp = MonsterVO.getObject(this.data.mid).cost
-        else
-            var mp = SkillVO.getObject(this.data.mid).cost
+        var mp = CM.getCardVO(this.data.mid).cost
 
         var barW = 80
         var barH = 92

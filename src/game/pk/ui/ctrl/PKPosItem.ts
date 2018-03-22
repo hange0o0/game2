@@ -98,13 +98,13 @@ class PKPosItem extends game.BaseItem {
         var cd = data.getNextCD();
         var maxCD = data.getMaxCD();
 
-        if(data.num && data.mid > 100)
+        if(data.num && data.mid > PKConfig.skillBeginID)
         {
             cd = data.getRemainCD();
             maxCD = maxCD * Math.max(0,data.getMaxNum()-1);
         }
 
-        if(data.mid < 100)
+        if(data.mid < PKConfig.skillBeginID)
         {
             this.numGroup.visible = true;
             this.numText.text = (data.getMaxNum() - data.num) + '';

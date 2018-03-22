@@ -3,7 +3,7 @@
 	<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
 	<e:Group y="339.09" left="80" right="80">
 		<e:Image source="bg11_png" y="0" height="80" scale9Grid="15,14,7,10" x="0" width="100%"/>
-		<e:Label id="desText" text="Label" size="22" lineSpacing="8" textAlign="center" verticalAlign="middle" stroke="1" verticalCenter="0" horizontalCenter="0" textColor="0xfff1d1"/>
+		<e:Label id="desText" text="Label" size="22" lineSpacing="8" textAlign="center" verticalAlign="middle" stroke="1" verticalCenter="0" horizontalCenter="0" textColor="0xff9393"/>
 	</e:Group>
 
 	<e:Group id="btnGroup" horizontalCenter="0" bottom="30">

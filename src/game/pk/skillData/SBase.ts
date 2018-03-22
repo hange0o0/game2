@@ -1,9 +1,10 @@
 class SBase {
     private static baseData = {};
 
+    //ID是由200开始，所以要
     public static getData(id):SBase {
         if (!this.baseData[id]) {
-            var myClass = eval("S" + id);
+            var myClass = eval("S" + (id -PKConfig.skillBeginID + 100));
             this.baseData[id] = new myClass();
             this.baseData[id].id = id
         }

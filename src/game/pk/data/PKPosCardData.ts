@@ -24,14 +24,12 @@ class PKPosCardData {
 
         if(!PKData.getInstance().quick)
             this.getVO().preLoad();
-        if(this.mid > 100)
+        if(this.mid > PKConfig.skillBeginID)
             SBase.getData(this.mid).initSkill(this);
     }
 
     public getVO(){
-        if(this.mid < 100)
-            return MonsterVO.getObject(this.mid)
-        return SkillVO.getObject(this.mid)
+        return CM.getCardVO(this.mid)
     }
 
     public getOwner(){
@@ -39,7 +37,7 @@ class PKPosCardData {
     }
 
     public useEnable(){
-        if(this.mid < 100)
+        if(this.mid < PKConfig.skillBeginID)
         {
             var mvo = MonsterVO.getObject(this.mid)
             //if(this.isAuto)
@@ -54,7 +52,7 @@ class PKPosCardData {
     }
 
     public getMaxNum(){
-        if(this.mid < 100)
+        if(this.mid < PKConfig.skillBeginID)
         {
             var mvo = MonsterVO.getObject(this.mid)
             //if(this.isAuto)
@@ -184,7 +182,7 @@ class PKPosCardData {
     public die(){
         if(this.needRemoveListener)
             this.getOwner().teamData.removeStateListerByOwner(this)
-        if(this.mid > 100)
+        if(this.mid > PKConfig.skillBeginID)
             SBase.getData(this.mid).onDie(this);
     }
 }

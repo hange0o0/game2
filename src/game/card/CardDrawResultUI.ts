@@ -18,6 +18,8 @@ class CardDrawResultUI extends game.BaseWindow {
 
 
     private dataIn
+    private successMVID = 128
+    private failMVID = 28
     public constructor() {
         super();
         this.skinName = "CardDrawResultUISkin";
@@ -27,6 +29,8 @@ class CardDrawResultUI extends game.BaseWindow {
         super.childrenCreated();
         this.addBtnEvent(this.cancelBtn,this.hide)
         this.addBtnEvent(this.okBtn,this.onClick)
+        AniManager.getInstance().preLoadMV(this.successMVID)
+        AniManager.getInstance().preLoadMV(this.failMVID)
     }
 
     private onClick(){
@@ -75,6 +79,18 @@ class CardDrawResultUI extends game.BaseWindow {
         {
             this.desText.visible = true;
             this.item.scaleX = this.item.scaleY = 1;
+        }
+        var xy={x:240,y:210}
+        var AM = AniManager.getInstance();
+        if(this.dataIn.addprop)
+        {
+            var mv =  AM.playOnItem(this.failMVID,this.item,xy);
+            this.desText.textColor = 0xFF9393
+        }
+        else
+        {
+            var mv =  AM.playOnItem(this.successMVID,this.item,xy);
+            this.desText.textColor = 0x93FF93
         }
     }
 }

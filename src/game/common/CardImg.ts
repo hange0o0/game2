@@ -25,7 +25,7 @@ class CardImg extends game.BaseItem{
             this.img.source = source
             this.lastSource = source;
         }
-        if(this.data > 100)
+        if(this.data > PKConfig.skillBeginID)
             this.txt.text = CM.getCardVO(this.data).name + '\n' + this.data;
         else
             this.txt.text = ''

@@ -5,9 +5,9 @@ class PKingUI extends game.BaseUI {
         return this.instance;
     }
 
-    private scroller: eui.Scroller;
-    private pkCtrlCon: PKCtrlCon;
-    private pkTop: PKTopUI;
+    public scroller: eui.Scroller;
+    public pkCtrlCon: PKCtrlCon;
+    public pkTop: PKTopUI;
     private roundText: eui.Label;
     private con: eui.Group;
     private pkInfo: PKMonsterInfoUI;
@@ -38,6 +38,11 @@ class PKingUI extends game.BaseUI {
         this.removeAll();
         this.removeEventListener(egret.Event.ENTER_FRAME,this.onE,this)
         EM.dispatchEventWith(GameEvent.client.pk_end)
+
+        if(GuideManager.getInstance().isGuiding)
+        {
+            GuideManager.getInstance().showGuide()
+        }
     }
 
     public show(){
@@ -114,12 +119,28 @@ class PKingUI extends game.BaseUI {
         this.roundText.scaleX =  this.roundText.scaleY = 0;
         egret.Tween.removeTweens(this.roundText)
         this.showMV();
+
+        if(GuideManager.getInstance().isGuiding)
+            GuideUI.getInstance().hide();
     }
 
     public startPlay(){
         this.hideBehind = true;
         PKBeforeUI.getInstance().hide();
 
+        if(GuideManager.getInstance().isGuiding)
+        {
+            GuideManager.getInstance().showGuide()
+        }
+        else
+        {
+            this.showCountDown();
+        }
+        this.onE();
+        this.addEventListener(egret.Event.ENTER_FRAME,this.onE,this)
+    }
+
+    public showCountDown(){
         var tw = this.tw = egret.Tween.get(this.roundText)
         tw.to({scaleX:1.5,scaleY:1.5},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '4'})
             .to({scaleX:0,scaleY:0}).to({scaleX:1.5,scaleY:1.5},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '3'})
@@ -131,10 +152,12 @@ class PKingUI extends game.BaseUI {
                 MyTool.removeMC(this.roundText);
                 this.pkTop.appearMV();
                 this.pkCtrlCon.initInfo();
+                if(GuideManager.getInstance().isGuiding)
+                {
+                    this.setStop(true);
+                    GuideManager.getInstance().showGuide()
+                }
             })
-
-        this.onE();
-        this.addEventListener(egret.Event.ENTER_FRAME,this.onE,this)
     }
 
     public callFail(){

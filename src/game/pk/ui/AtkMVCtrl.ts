@@ -301,13 +301,18 @@ class AtkMVCtrl {
 
     public skillMV210(target:PKMonsterData){
         var sBase = SBase.getData(210)
-        var mv = PKVideoCon.getInstance().playAniIn(target.id,sBase.mvID2)
+        var mv = PKVideoCon.getInstance().playAniOn(target.id,sBase.mvID2)
         if(mv)
         {
             mv.scaleX = mv.scaleY = 0.5;
             mv.x -= 10
             mv.y -= 30
         }
+    }
+
+    public skillMV211(target:PKMonsterData){
+        var sBase = SBase.getData(211)
+        PKVideoCon.getInstance().playAniOn(target.id,sBase.mvID1)
     }
 
 

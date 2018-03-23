@@ -70,6 +70,9 @@ class PKCode {
                 continue
             var needSpace = PKConfig.maxMonsterSpace - PD.getMonsterSpaceByPlayer(player.id);
             var arr = player.getEnablePos(PD.actionTime,needSpace)
+            var toFront = player.teamData.toFront
+            if(toFront)
+                var frontItem:any = PD.getFirstItem(player.teamData.id);
             while(arr.length > 0)
             {
                 PD.resetMonsterData();//重置技能数据，方便技能统计
@@ -80,7 +83,12 @@ class PKCode {
                     if(needSpace > 0)
                     {
                         needSpace -= data.getVO().space;
-                        PD.addMonster(data.getMonster(PD.actionTime));
+                        var mData = data.getMonster(PD.actionTime);
+                        if(toFront && frontItem)
+                        {
+                            mData.x = frontItem.x;
+                        }
+                        PD.addMonster(mData);
                         data.setHaveAdd(PD.actionTime);
                     }
                 }

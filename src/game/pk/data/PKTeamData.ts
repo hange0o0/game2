@@ -12,6 +12,8 @@ class PKTeamData {
     public def  = 0
     public autoDef  = 0//10 //防守方增加防御
 
+    public toFront = 0;//前线出兵
+
     public members = [];
     public posList = []; //全队上阵的顺序
     public stateObj = {};  //监听队伍中的状态，触发

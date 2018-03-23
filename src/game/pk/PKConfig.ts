@@ -80,6 +80,7 @@ class PKConfig {
     public static STATE_ILL = 5
 
 
+    public static LISTENER_NONE = 0
     public static LISTENER_CREATE = 1
     public static LISTENER_DIE = 2
     public static LISTENER_TIMER = 3

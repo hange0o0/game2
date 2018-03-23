@@ -127,6 +127,10 @@ class PKPosCardData {
         var cd = this.getMaxCD();
         if(t - this.actionTime >= cd)
         {
+            if(this.mid > PKConfig.skillBeginID && this.num >= 1 && this.getVO().num == 0)
+            {
+                 return false;
+            }
             this.actionTime = t;
             this.actionResult = 1;
             return true;

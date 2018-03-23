@@ -28,6 +28,19 @@ class S210 extends SBase {
     public onIll(buff:PKBuffData){
         var PD = PKData.getInstance();
         var target:PKMonsterData = buff.user;
+        PKMonsterAction.getInstance().addAtkList({   //到actionTime后根据条件产生攻击事件
+            type:'delay_run',
+            fun:()=>{
+                this.delayFun(target)
+            },
+            stopTestDie:true,
+            actionTime:PD.actionTime,
+            endTime:PD.actionTime + 1000
+        })
+    }
+
+    public delayFun(target?:PKMonsterData){
+        var PD = PKData.getInstance();
         var mid = target.mid;
         var owner = PD.getPlayer(target.owner);
         var atkRota = owner.teamData.atkRota;

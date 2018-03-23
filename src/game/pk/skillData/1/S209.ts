@@ -7,7 +7,7 @@ class S209 extends SBase {
 
 
     public onSkill(user:PKPosCardData) {
-        var listener = new S109StateListener()
+        var listener = new S209StateListener()
         var teamData = user.getOwner().teamData;
         listener.owner = user;
         listener.mvID = this.mvID1;
@@ -21,7 +21,7 @@ class S209 extends SBase {
 }
 
 
-class S109StateListener extends PKStateListener {
+class S209StateListener extends PKStateListener {
     public type = PKConfig.LISTENER_DIE
     public hpRate
     public actionTime

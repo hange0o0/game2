@@ -36,9 +36,11 @@ class PKMonsterAction {
                 //判断攻击是否生效
                 if(target && target.die && !data.stopTestDie)
                     continue;
-
-
-                if(data.type == 'atk_before')   //攻击产生
+                if(data.type == 'delay_run')   //延迟执行
+                {
+                    data.fun && data.fun();
+                }
+                else if(data.type == 'atk_before')   //攻击产生
                 {
                     if(!user.canAction())
                         continue;

@@ -4,7 +4,6 @@ class M36 extends MBase {
     }
 
     public mvID1 = 128;
-
     public onDie(user:PKMonsterData){
         if(user.skillTemp[36])
             return;

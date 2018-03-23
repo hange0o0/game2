@@ -294,9 +294,20 @@ class AtkMVCtrl {
 
 
     ////////////////////////////////////////////////////////////////
-    public skillMV103(target:PKMonsterData){
-        var sBase = SBase.getData(103)
+    public skillMV203(target:PKMonsterData){
+        var sBase = SBase.getData(203)
         PKVideoCon.getInstance().playAniOn(target.id,sBase.mvID1)
+    }
+
+    public skillMV210(target:PKMonsterData){
+        var sBase = SBase.getData(210)
+        var mv = PKVideoCon.getInstance().playAniIn(target.id,sBase.mvID2)
+        if(mv)
+        {
+            mv.scaleX = mv.scaleY = 0.5;
+            mv.x -= 10
+            mv.y -= 30
+        }
     }
 
 

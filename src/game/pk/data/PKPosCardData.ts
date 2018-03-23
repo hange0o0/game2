@@ -37,17 +37,21 @@ class PKPosCardData {
     }
 
     public useEnable(){
+
         if(this.mid < PKConfig.skillBeginID)
         {
             var mvo = MonsterVO.getObject(this.mid)
-            //if(this.isAuto)
                 return this.num < mvo.num;
-            //return true;
         }
 
         var svo = SkillVO.getObject(this.mid)
+
         if(svo.num == 0)
+        {
+            if(this.num > 1)
+                return false;
             return this.actionTime + svo.cd >= PKData.getInstance().actionTime;
+        }
         return this.num < svo.num;
     }
 
@@ -61,7 +65,7 @@ class PKPosCardData {
         }
 
         var svo = SkillVO.getObject(this.mid)
-        return svo.num;
+        return svo.num || 1;
     }
 
     public getRemainNum(){
@@ -79,7 +83,12 @@ class PKPosCardData {
     public getRemainCD(){
         var maxCD = this.getMaxCD();
         if(maxCD)
-            return (this.getNextCD() + maxCD*(this.getRemainNum() - 1))
+        {
+            if(this.getVO().num == 0)
+                return (this.getNextCD() + maxCD*(this.getRemainNum()))
+            else
+                return (this.getNextCD() + maxCD*(this.getRemainNum() - 1))
+        }
         return 0;
     }
 

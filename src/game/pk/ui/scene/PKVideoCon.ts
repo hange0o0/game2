@@ -320,7 +320,7 @@ class PKVideoCon extends game.BaseContainer {
             return;
         }
         var AM = AniManager.getInstance();
-        AM.playInItem(mvID,atker);
+        return AM.playInItem(mvID,atker);
     }
 
     //掉在头上

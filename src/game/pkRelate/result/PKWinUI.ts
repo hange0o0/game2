@@ -15,6 +15,7 @@ class PKWinUI extends game.BaseUI {
 
 
 
+    private timerArr = []
     public constructor() {
         super();
          this.hideBehind = false
@@ -28,6 +29,7 @@ class PKWinUI extends game.BaseUI {
     }
 
     public onShow(){
+        AniManager.getInstance().preLoadMV(1001)
         var PKM = PKManager.getInstance();
 
         this.bg.visible = false;
@@ -49,6 +51,7 @@ class PKWinUI extends game.BaseUI {
         tw.to({scaleX:1.1,scaleY:1.1},200).to({scaleX:1,scaleY:1},200).call(function(){
             this.bg.visible = true;
             this.list.visible = true
+            this.playMV();
         },this)
         while(arr.length > 0)
         {
@@ -60,6 +63,30 @@ class PKWinUI extends game.BaseUI {
         },this)
 
 
+
+    }
+
+    private playMV(){
+        for(var i=0;i<5;i++)
+        {
+            this.timerArr.push(setTimeout(()=>{
+                var x = Math.random()*440 + 100
+                var mc = AniManager.getInstance().playOnItem(1001,this.group,{x:x,y:this.group.y - Math.random()*150})
+                if(mc)
+                {
+                    mc.scaleX = mc.scaleY = 1 + Math.random()
+                    mc.rotation =  -(320-x)/3.5
+                }
+
+            },i*500 + 500*Math.random()))
+        }
+    }
+
+    private stopAllTimer(){
+         while(this.timerArr.length)
+         {
+             clearTimeout(this.timerArr.pop())
+         }
     }
 
     private addItem(tw,arrayCollection,data){
@@ -71,6 +98,7 @@ class PKWinUI extends game.BaseUI {
     private onOK(){
         if(!this.closeBtn.visible)
             return;
+        this.stopAllTimer();
         this.hide();
         PKingUI.getInstance().hide();
     }

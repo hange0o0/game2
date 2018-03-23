@@ -65,7 +65,9 @@ class PKMonsterData {
         }
         var mvo = MonsterVO.getObject(this.mid);
         var add = mvo.getAdd(obj.force,this.getOwner().type);
-        this.hp = Math.floor(mvo.hp * add);
+        var maxAdd = obj.maxHpAdd || 1;
+
+        this.hp = Math.floor(mvo.hp * add * maxAdd);
         this.atk = Math.floor(mvo.atk * add);
         this.speed = mvo.speed;
         this.def = mvo.def;
@@ -75,6 +77,12 @@ class PKMonsterData {
         this.baseHp = this.hp;
         this.baseAtk = this.atk;
         this.baseSpeed = this.speed;
+
+
+        if(obj.hpRate)
+        {
+            this.hp  = Math.floor(this.hp*obj.hpRate) || 1
+        }
 
 
 
@@ -476,6 +484,14 @@ class PKMonsterData {
             }
         }
         this.getOwner().teamData.testState(PKConfig.LISTENER_DIE,this);
+
+        if(this.skillTemp[210] == 1)
+        {
+            var oo:PKBuffData = new PKBuffData()
+            oo.user = this;
+            oo.id = 210;
+            SBase.getData(oo.id).onIll(oo);
+        }
     }
 
     public getSkillValue(index,needForce=false){

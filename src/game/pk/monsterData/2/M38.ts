@@ -27,6 +27,7 @@ class M38 extends MBase {
         var skillValue = user.getSkillValue(1);
         var buff = new PKBuffData()
         buff.id = 38;
+        buff.isDebuff = true;
         buff.value = skillValue;
         buff.addValue('def',-skillValue);
         buff.addValue('speed',-skillValue);

@@ -28,7 +28,7 @@ class MBase {
     public onDie(user:PKMonsterData){
 
     }
-    public onIll(buff:PKBuffData){
+    public onBuff(buff:PKBuffData){
 
     }
     //被攻击时的处理

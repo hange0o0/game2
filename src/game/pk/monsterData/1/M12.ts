@@ -10,6 +10,7 @@ class M12 extends MBase {
             var skillValue = user.getSkillValue(1);
             var buff = new PKBuffData()
             buff.id = 12;
+            buff.isDebuff = true;
             buff.value = skillValue;
             buff.addValue('atk',-Math.floor(target.baseAtk * skillValue/100));
             buff.addValue('def',-skillValue);

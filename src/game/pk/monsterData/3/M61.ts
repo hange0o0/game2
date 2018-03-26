@@ -15,7 +15,7 @@ class M61 extends MBase {
 
 
     public atk(user:PKMonsterData,target:PKMonsterData){
-        user.addHp(-999999)
+        user.setDie();
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByNoTeam(user.getOwner().teamData);
         var atkrage = user.getSkillValue(1);
@@ -30,6 +30,7 @@ class M61 extends MBase {
 
                 var buff = new PKBuffData()
                 buff.user = user;
+                buff.isDebuff = true;
                 buff.addState(PKConfig.STATE_YUN);
                 buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(2);
                 targetX.addBuff(buff)

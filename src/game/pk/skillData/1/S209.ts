@@ -32,9 +32,21 @@ class S209StateListener extends PKStateListener {
 
     // 起作用时会调用的方法
     public actionFun(target?:PKMonsterData){
+        if(target.getOwner().teamData != this.owner.getOwner().teamData)
+            return;
         if(target.skillTemp[209])
             return;
+        if(target.reborning)
+            return;
+        target.reborning = true;
+
+
         var PD = PKData.getInstance();
+        if(PD.disableKey['209_' + target.id])
+            return;
+        PD.disableKey['209_' + target.id] = true;
+
+
         PKMonsterAction.getInstance().addAtkList({   //到actionTime后根据条件产生攻击事件
             type:'delay_run',
             fun:()=>{

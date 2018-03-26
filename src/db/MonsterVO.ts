@@ -40,6 +40,7 @@ class MonsterVO {
     public sv1: number;
     public sv2: number;
     public sv3: number;
+    public sv4: number;  //no use
 
 
     public constructor(data?: any) {

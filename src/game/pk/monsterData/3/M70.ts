@@ -15,7 +15,7 @@ class M70 extends MBase {
 
 
     public atk(user:PKMonsterData,target:PKMonsterData){
-        user.addHp(-999999)
+        user.setDie();
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByNoTeam(user.getOwner().teamData);
         var atkrage = user.getSkillValue(1);
@@ -32,6 +32,7 @@ class M70 extends MBase {
                 {
                     var skillValue = user.getSkillValue(2);
                     var buff = new PKBuffData()
+                    buff.isDebuff = true;
                     buff.id = 70;
                     buff.value = skillValue;
                     buff.addValue('addSpeed',-skillValue);

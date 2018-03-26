@@ -32,6 +32,7 @@ class PKData extends egret.EventDispatcher{
     public diamondData;
 
     public history = {};
+    public disableKey = {}; //同一时间不能起效的KEY
 
     //public actionRecord = []
 
@@ -133,6 +134,10 @@ class PKData extends egret.EventDispatcher{
         var rd = seed / ( 233280.0 );
         this.randomSeed = rd * 100000000;
         return rd;
+    }
+
+    public rand(min,max){
+        return min + Math.floor(this.random()*(max-min + 1))
     }
 
     //数据乱序
@@ -331,6 +336,8 @@ class PKData extends egret.EventDispatcher{
         MBase.getData(monster.mid).onCreate(monster);
 
         monster.getOwner().teamData.testState(PKConfig.LISTENER_CREATE,monster);
+        if(data.fromPos)
+            monster.getOwner().teamData.testState(PKConfig.LISTENER_CREATE_POS,monster);
         this.monsterChange = true;
 
         this.history[monster.id] = ({

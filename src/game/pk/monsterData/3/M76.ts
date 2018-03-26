@@ -15,7 +15,7 @@ class M76 extends MBase {
 
 
     public atk(user:PKMonsterData,target:PKMonsterData){
-        user.addHp(-999999)
+        user.setDie();
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByNoTeam(user.getOwner().teamData);
         var atkrage = user.getSkillValue(1);

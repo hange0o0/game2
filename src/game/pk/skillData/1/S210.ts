@@ -14,24 +14,36 @@ class S210 extends SBase {
         if(arr.length > num)
         {
             PD.upsetArr(arr)
-            arr.length = num;
+            //arr.length = num;
         }
-        for(var i=0;i<arr.length;i++)
+        for(var i=0;i<arr.length && num > 0;i++)
         {
             var target = arr[i];
-            target.skillTemp[210] = 1;
-            target.skillTemp['210V'] = user.getSkillValue(2)/100;
+            if(target.haveBuff(210))
+                return;
+            var skillValue = user.getSkillValue(2)/100;
+            var buff = new PKBuffData()
+            buff.user = user;
+            buff.id = 210;
+            buff.value = skillValue;
+            buff.endTime = Number.MAX_VALUE
+            buff.addState(PKConfig.STATE_DIE)
+            target.addBuff(buff)
+            num--;
         }
         return arr;
     }
 
-    public onIll(buff:PKBuffData){
+    public onBuff(buff:PKBuffData){
         var PD = PKData.getInstance();
-        var target:PKMonsterData = buff.user;
+        var target:PKMonsterData = buff.owner;
+        if(target.reborning)
+            return;
+        target.reborning = true;
         PKMonsterAction.getInstance().addAtkList({   //到actionTime后根据条件产生攻击事件
             type:'delay_run',
             fun:()=>{
-                this.delayFun(target)
+                this.delayFun(target,buff)
             },
             stopTestDie:true,
             actionTime:PD.actionTime,
@@ -39,7 +51,7 @@ class S210 extends SBase {
         })
     }
 
-    public delayFun(target?:PKMonsterData){
+    public delayFun(target:PKMonsterData,buff:PKBuffData){
         var PD = PKData.getInstance();
         var mid = target.mid;
         var owner = PD.getPlayer(target.owner);
@@ -51,13 +63,11 @@ class S210 extends SBase {
             atkRota:atkRota,
             x:target.x,
             y:target.y,
-            hpRate:target.skillTemp['210V'],
+            hpRate:buff.value,
             actionTime:PD.actionTime
         }
 
         var monster = PD.addMonster(mData);
-        monster.skillTemp[210] = 2;
-
         AtkMVCtrl.getInstance().playAniOn(monster.id,this.mvID1)
     }
 }

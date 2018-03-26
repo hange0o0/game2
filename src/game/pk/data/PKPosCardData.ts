@@ -5,6 +5,10 @@ class PKPosCardData {
     public owner//主人ID
     public isAuto = false//是否自动出怪上阵的
 
+    public enableNum = 0;
+    public enableMaxNum = 0;
+
+
     public actionTime = 0//上次行动的时间
     public actionResult = 0//是否有等待出手的怪
 
@@ -37,6 +41,8 @@ class PKPosCardData {
     }
 
     public useEnable(){
+        if(this.enableMaxNum)
+            return this.enableNum < this.enableMaxNum
 
         if(this.mid < PKConfig.skillBeginID)
         {
@@ -48,14 +54,14 @@ class PKPosCardData {
 
         if(svo.num == 0)
         {
-            if(this.num > 1)
-                return false;
             return this.actionTime + svo.cd >= PKData.getInstance().actionTime;
         }
-        return this.num < svo.num;
+        return this.num < Math.abs(svo.num);
     }
 
     public getMaxNum(){
+        if(this.enableMaxNum)
+            return this.enableMaxNum;
         if(this.mid < PKConfig.skillBeginID)
         {
             var mvo = MonsterVO.getObject(this.mid)
@@ -80,6 +86,7 @@ class PKPosCardData {
         return Math.max(0,nextTime - PD.actionTime);
     }
 
+    //法术专用的整体时间计算
     public getRemainCD(){
         var maxCD = this.getMaxCD();
         if(maxCD)
@@ -99,12 +106,16 @@ class PKPosCardData {
             return PKConfig.beforeCD;
         else
         {
+            if(this.enableMaxNum)
+                return Number.MAX_VALUE;
             return this.getVO().cd;
         }
     }
 
-    //是否可马上起作用
+    //是否可马上加入出战队列判断
     public testAdd(t){
+        //if(this.enableNum)//这个不通过出战队列起作用
+        //    return false
         if(this.actionResult)
         {
             //if(t - this.actionTime > PKConfig.remainCD) //超时
@@ -127,7 +138,7 @@ class PKPosCardData {
         var cd = this.getMaxCD();
         if(t - this.actionTime >= cd)
         {
-            if(this.mid > PKConfig.skillBeginID && this.num >= 1 && this.getVO().num == 0)
+            if(this.mid > PKConfig.skillBeginID && this.num >= 1 && this.getVO().num == 0)//一次性，但存在界面中的技能失效
             {
                  return false;
             }
@@ -149,6 +160,7 @@ class PKPosCardData {
             mid:this.mid,
             owner:this.owner,
             atkRota:atkRota,
+            fromPos:true,
             x:x,
             y:-25 + Math.random()*50,
             actionTime:actionTime

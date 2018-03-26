@@ -98,7 +98,12 @@ class PKPosItem extends game.BaseItem {
         var cd = data.getNextCD();
         var maxCD = data.getMaxCD();
 
-        if(data.num && data.mid > PKConfig.skillBeginID)
+        if(data.enableMaxNum)
+        {
+            maxCD = data.enableMaxNum
+            cd = Math.max(0,maxCD - data.enableNum)
+        }
+        else if(data.num && data.mid > PKConfig.skillBeginID)
         {
             cd = data.getRemainCD();
             maxCD = maxCD * Math.max(1,data.getMaxNum()-1);

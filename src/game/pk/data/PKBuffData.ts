@@ -1,6 +1,7 @@
 class PKBuffData {
     public user;
     public owner;
+    public isDebuff = false;
 
     public endTime = 0;//到期时间  为0则为图腾类效果
     public add = {};  //改变的值

@@ -15,7 +15,7 @@ class M62 extends MBase {
 
 
     public atk(user:PKMonsterData,target:PKMonsterData){
-        user.addHp(-999999)
+        user.setDie();
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByNoTeam(user.getOwner().teamData);
         var atkrage = user.getSkillValue(1);
@@ -33,6 +33,7 @@ class M62 extends MBase {
                     var skillValue = user.getSkillValue(2);
                     var buff = new PKBuffData()
                     buff.id = 62;
+                    buff.isDebuff = true;
                     buff.value = skillValue;
                     buff.addValue('atk',-Math.floor(targetX.baseAtk * skillValue/100));
                     buff.user = user;

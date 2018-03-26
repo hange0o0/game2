@@ -77,13 +77,15 @@ class PKConfig {
     public static STATE_MOMIAN = 2
     public static STATE_MODUN = 3
     public static STATE_MIANSHANG = 4
-    public static STATE_ILL = 5
+    //public static STATE_ILL = 5
+    public static STATE_DIE = 5 //死亡时触发的BUFF，
 
 
     public static LISTENER_NONE = 0
-    public static LISTENER_CREATE = 1
+    public static LISTENER_CREATE = 1 //新单位生成
     public static LISTENER_DIE = 2
     public static LISTENER_TIMER = 3
+    public static LISTENER_CREATE_POS = 4 //通过出战区生成
 
 
 

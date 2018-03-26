@@ -28,6 +28,7 @@ class M16 extends MBase {
             var skillValue = user.getSkillValue(1,true)
             var buff = new PKBuffData()
             buff.id = 16;
+            buff.isDebuff = true;
             buff.value = skillValue
             buff.addValue('hpChange',-skillValue);
             buff.user = user;

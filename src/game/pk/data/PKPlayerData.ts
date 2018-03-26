@@ -19,7 +19,7 @@ class PKPlayerData {
     public useCardList = []//使用过的卡
 
     private mp = 0//当前的魔法
-    public userMP = 0//已使用的魔法
+    public useMP = 0//已使用的魔法
     private lastTime = 0//上一次魔法处理时间
 
 
@@ -82,7 +82,7 @@ class PKPlayerData {
     public addMP(v){
         this.resetMp();
         this.mp += v;
-        this.userMP -= v;
+        this.useMP -= v;
     }
     public getMP(){
         this.resetMp();
@@ -190,6 +190,7 @@ class PKPlayerData {
             if(data.time <= t)
             {
                 data.owner = this.id;
+                data.actionTime = PKData.getInstance().actionTime;
                 data.isAuto = true;
                 this.posCard[data.id] = new PKPosCardData(data);
                 this.autoList.shift();

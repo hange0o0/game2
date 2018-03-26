@@ -20,7 +20,7 @@ class PKState extends game.BaseItem {
             this.initAtkMV();
             this.atkMV.load('effect2_png',0,154,39,2)
         }
-        else if(this.data == PKConfig.STATE_ILL)
+        else if(this.data == PKConfig.STATE_DIE)
         {
             this.initImg();
             this.stateMC.source = 'effect5_png'
@@ -82,7 +82,7 @@ class PKState extends game.BaseItem {
                 this.x = 50 -  154/4
                 this.y = 300 - mD.getVO().height - 35
                 break;
-            case PKConfig.STATE_ILL:
+            case PKConfig.STATE_DIE:
                 this.x = 50
                 this.y = 300 - mD.getVO().height -50
                 break;

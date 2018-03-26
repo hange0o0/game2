@@ -50,8 +50,7 @@ class S211 extends SBase {
             PD.addMonster(mData);
         }
 
-        item.nohitTimes = 0;
-        item.addHp(-999999);
+        item.setDie();
 
         return [item];
 

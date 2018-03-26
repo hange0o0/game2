@@ -51,6 +51,7 @@ class PKMonsterData {
 
     public currentState = {};//当前的特殊状态
     public stateChange = false
+    public reborning = false//有复活效果起作用了
 
 
     constructor(obj?){
@@ -163,7 +164,7 @@ class PKMonsterData {
     }
 
     //清除状态
-    public cleanBuff(t,user?){
+    public cleanBuff(t,user?,buffType=0){
         var needTestStat = false
         var needTestId = null
         for(var i=0;i<this.buff.length;i++)
@@ -171,6 +172,10 @@ class PKMonsterData {
             var oo:PKBuffData =  this.buff[i];
             var needClean = oo.endTime && t && oo.endTime <= t
             if(user && user == oo.user)
+                needClean = true;
+            if(buffType == -1 && oo.isDebuff)
+                needClean = true;
+            if(buffType == 1 && !oo.isDebuff)
                 needClean = true;
             if(needClean)
             {
@@ -410,6 +415,12 @@ class PKMonsterData {
         //PKData.getInstance().actionRecord.push('atk|' + this.actionTime + '|' + this.id + '|' + this.hp)
     }
 
+    //直接死亡
+    public setDie(){
+        this.hp = 0;
+        this.die = true;
+    }
+
     public addHp(hp){
         if(hp<0)
         {
@@ -467,31 +478,28 @@ class PKMonsterData {
     public onDie(){
         if(!this.passEnd)
         {
-            MBase.getData(this.mid).onDie(this);
-            if(this.isInState(PKConfig.STATE_ILL))
+            for(var i=0;i<this.buff.length;i++)
             {
-                for(var i=0;i<this.buff.length;i++)
+                var oo:PKBuffData =  this.buff[i];
+                if(oo.ing && oo.haveState && oo.state[PKConfig.STATE_DIE])
                 {
-                    var oo:PKBuffData =  this.buff[i];
-                    if(oo.ing && oo.haveState && oo.state[PKConfig.STATE_ILL])
-                    {
-                        if(oo.id < PKConfig.skillBeginID)
-                            MBase.getData(oo.id).onIll(oo);
-                        else
-                            SBase.getData(oo.id).onIll(oo);
-                    }
+                    if(oo.id < PKConfig.skillBeginID)
+                        MBase.getData(oo.id).onBuff(oo);
+                    else
+                        SBase.getData(oo.id).onBuff(oo);
                 }
             }
+            MBase.getData(this.mid).onDie(this);
         }
         this.getOwner().teamData.testState(PKConfig.LISTENER_DIE,this);
 
-        if(this.skillTemp[210] == 1)
-        {
-            var oo:PKBuffData = new PKBuffData()
-            oo.user = this;
-            oo.id = 210;
-            SBase.getData(oo.id).onIll(oo);
-        }
+        //if(this.skillTemp[210] == 1)
+        //{
+        //    var oo:PKBuffData = new PKBuffData()
+        //    oo.user = this;
+        //    oo.id = 210;
+        //    SBase.getData(oo.id).onIll(oo);
+        //}
     }
 
     public getSkillValue(index,needForce=false){

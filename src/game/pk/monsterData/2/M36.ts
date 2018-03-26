@@ -7,6 +7,9 @@ class M36 extends MBase {
     public onDie(user:PKMonsterData){
         if(user.skillTemp[36])
             return;
+        if(user.reborning)
+            return;
+        user.reborning = true;
         var PD = PKData.getInstance();
         PKMonsterAction.getInstance().addAtkList({   //到actionTime后根据条件产生攻击事件
             type:'skill_before',

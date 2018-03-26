@@ -315,5 +315,15 @@ class AtkMVCtrl {
         PKVideoCon.getInstance().playAniOn(target.id,sBase.mvID1)
     }
 
+    public skillMV214(target:PKMonsterData){
+        var sBase = SBase.getData(214)
+        PKVideoCon.getInstance().playAniOn(target.id,sBase.mvID1)
+    }
+
+    public skillMV215(target:PKMonsterData){
+        var sBase = SBase.getData(215)
+        PKVideoCon.getInstance().playAniOn(target.id,sBase.mvID1)
+    }
+
 
 }

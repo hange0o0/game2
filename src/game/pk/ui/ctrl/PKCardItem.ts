@@ -137,7 +137,7 @@ class PKCardItem extends game.BaseItem {
             this.img2.mask = new egret.Rectangle(0,barH - h,barW,h)
 
             var PD = PKData.getInstance();
-            var cd = ((PKTool.getMPTime(mp + PD.myPlayer.userMP) - PD.actionTime)/1000).toFixed(1);
+            var cd = ((PKTool.getMPTime(mp + PD.myPlayer.useMP) - PD.actionTime)/1000).toFixed(1);
             this.cdText.text = cd + 's';
         }
         else

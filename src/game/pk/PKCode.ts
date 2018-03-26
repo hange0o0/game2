@@ -24,6 +24,7 @@ class PKCode {
         while(PD.quick || cd > PKConfig.stepCD)
         {
             PD.actionTime += PKConfig.stepCD;
+            PD.disableKey = {};
             cd -= PKConfig.stepCD;
             this.autoAction();
             this.actionPosCard();

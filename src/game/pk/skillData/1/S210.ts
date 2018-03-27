@@ -9,6 +9,7 @@ class S210 extends SBase {
 
     public onSkill(user:PKPosCardData) {
         var num = user.getSkillValue(1);
+        var skillValue = user.getSkillValue(2)/100;
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData);
         if(arr.length > num)
@@ -21,7 +22,7 @@ class S210 extends SBase {
             var target = arr[i];
             if(target.haveBuff(210))
                 return;
-            var skillValue = user.getSkillValue(2)/100;
+
             var buff = new PKBuffData()
             buff.user = user;
             buff.id = 210;

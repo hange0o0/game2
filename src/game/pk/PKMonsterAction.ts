@@ -48,6 +48,8 @@ class PKMonsterAction {
                 }
                 else if(data.type == 'atk')  //攻击生效
                 {
+                    if(target.isInState(PKConfig.STATE_NOBEATK))
+                        return;
                     MBase.getData(user.mid).atk(user,target)
                 }
                 else if(data.type == 'skill_before')   //技能产生

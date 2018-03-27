@@ -101,18 +101,21 @@ class PKMonsterItem extends game.BaseItem {
 
     private initStateMV(s){
         var mD:PKMonsterData = this.data
-        if(parseInt(s) == PKConfig.STATE_MOMIAN)
+        var id = parseInt(s)
+        if(id == PKConfig.STATE_MOMIAN)
             return;
-        if(!this.stateMV[s])
+        if(id == PKConfig.STATE_NOBEATK)
+            return;
+        if(!this.stateMV[id])
         {
             var img = new PKState();
-            this.stateMV[s] = img;
-            img.data = s;
+            this.stateMV[id] = img;
+            img.data = id;
         }
-        if(!this.stateMV[s].parent)
+        if(!this.stateMV[id].parent)
         {
-            this.addChild(this.stateMV[s]);
-            this.stateMV[s].show(this);
+            this.addChild(this.stateMV[id]);
+            this.stateMV[id].show(this);
         }
     }
 

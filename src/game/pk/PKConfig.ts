@@ -77,7 +77,7 @@ class PKConfig {
     public static STATE_MOMIAN = 2
     public static STATE_MODUN = 3
     public static STATE_MIANSHANG = 4
-    //public static STATE_ILL = 5
+    public static STATE_NOBEATK = 6
     public static STATE_DIE = 5 //死亡时触发的BUFF，
 
 
@@ -86,6 +86,8 @@ class PKConfig {
     public static LISTENER_DIE = 2
     public static LISTENER_TIMER = 3
     public static LISTENER_CREATE_POS = 4 //通过出战区生成
+    public static LISTENER_ATK = 5 //
+    public static LISTENER_BEATK = 6 //
 
 
 

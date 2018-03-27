@@ -31,7 +31,7 @@ class SlaveItem extends game.BaseItem {
         }
         else if(this.data.lock)
         {
-
+            TecInfoUI.getInstance().show(TecVO.getObject(3));
         }
     }
     private onInfo(){
@@ -119,7 +119,7 @@ class SlaveItem extends game.BaseItem {
         else if(this.data.lock)
         {
             this.currentState = 'lock'
-            this.lockText.text = '10级开启'
+            this.lockText.text = '点击开启'
         }
         else if(this.data.btn)
         {

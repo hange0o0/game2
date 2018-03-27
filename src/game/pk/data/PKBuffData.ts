@@ -2,6 +2,7 @@ class PKBuffData {
     public user;
     public owner;
     public isDebuff = false;
+    public removeAble = true;
 
     public endTime = 0;//到期时间  为0则为图腾类效果
     public add = {};  //改变的值
@@ -16,6 +17,7 @@ class PKBuffData {
     public value;//技能等级数值,用于比较相同ID下哪个BUFF强
 
 
+    public endFun
 
     constructor(obj?) {
         //if (obj)
@@ -53,6 +55,10 @@ class PKBuffData {
         this.ing = false;
         for(var s in this.add)
             this.owner[s] -= this.add[s];
+    }
 
+    public remove(){
+        this.disable();
+        this.endFun && this.endFun(this);
     }
 }

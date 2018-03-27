@@ -22,11 +22,11 @@ class M43 extends MBase {
 
 
     public skill(user:PKMonsterData,target:PKMonsterData){
-        var buff = new PKBuffData()
-        buff.user = user;
-        buff.addState(PKConfig.STATE_MOMIAN);
-        buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(1);
-        target.addBuff(buff)
+        //var buff = new PKBuffData()
+        //buff.user = user;
+        //buff.addState(PKConfig.STATE_MOMIAN);
+        //buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(1);
+        //target.addBuff(buff)
 
         var buff = new PKBuffData()
         var skillValue = Math.floor(user.getSkillValue(2,true)/2);
@@ -34,6 +34,7 @@ class M43 extends MBase {
         buff.value = skillValue;
         buff.user = user;
         buff.addValue('hpChange',skillValue);
+        buff.addState(PKConfig.STATE_MOMIAN);
         buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(1);
         target.addBuff(buff)
 
@@ -53,7 +54,7 @@ class M43 extends MBase {
         for(var i=0;i<arr.length;i++)
         {
             var target = arr[i];
-            if(target.isInState(PKConfig.STATE_MOMIAN))
+            if(target.haveBuff(43))
                 continue;
 
             var des = Math.abs(user.x - target.x);

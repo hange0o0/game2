@@ -90,6 +90,7 @@ class PKManager {
 
     public startPK(pkType,data){
         this.pkType = pkType;
+        this.pkResult = null;
         var PD = PKData.getInstance();
         PD.init(data);
         PKingUI.getInstance().show();

@@ -72,7 +72,6 @@ class MainUI extends game.BaseUI {
 
 
     public onBottomSelect(index){
-        console.log(index,this.currentIndex)
        if(index != this.currentIndex)
        {
            if(index == 0 && PosManager.getInstance().defList.length == 0)//奴隶
@@ -114,12 +113,12 @@ class MainUI extends game.BaseUI {
                }
            },this)
            this.setTopPos(0);
-           console.log(egret.getTimer() - t)
        }
     }
 
 
     public setTopPos(scrollV){
+        this.bg.y = - scrollV*0.2
         if(this.hideTopState)
         {
             if(scrollV >= 30)

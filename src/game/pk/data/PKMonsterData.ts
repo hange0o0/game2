@@ -52,6 +52,7 @@ class PKMonsterData {
     public currentState = {};//当前的特殊状态
     public stateChange = false
     public reborning = false//有复活效果起作用了
+    public listenerData//保存用于listener的数据
 
 
     constructor(obj?){
@@ -173,10 +174,13 @@ class PKMonsterData {
             var needClean = oo.endTime && t && oo.endTime <= t
             if(user && user == oo.user)
                 needClean = true;
-            if(buffType == -1 && oo.isDebuff)
-                needClean = true;
-            if(buffType == 1 && !oo.isDebuff)
-                needClean = true;
+            if(oo.removeAble)
+            {
+                if(buffType == -1 && oo.isDebuff)
+                    needClean = true;
+                if(buffType == 1 && !oo.isDebuff)
+                    needClean = true;
+            }
             if(needClean)
             {
                 this.buff.splice(i,1);
@@ -193,7 +197,7 @@ class PKMonsterData {
                             needTestId[oo.id] = true;
                     }
                 }
-                oo.disable();
+                oo.remove();
             }
         }
         if(needTestId)
@@ -314,7 +318,7 @@ class PKMonsterData {
 
     public canBeAtk(user){
         return !this.die &&
-            user.getOwner().teamData != this.getOwner().teamData;
+            user.getOwner().teamData != this.getOwner().teamData && !this.isInState(PKConfig.STATE_NOBEATK)
     }
 
 //可以用技能
@@ -401,13 +405,16 @@ class PKMonsterData {
     }
 
     public atkAction(data){
-
+        this.listenerData = data;
+        this.getOwner().teamData.testState(PKConfig.LISTENER_ATK,this);
     }
 
     public beAtkAction(data){
 
         this.addHp(-data.hp)
         MBase.getData(this.mid).beAtkAction(this,data);
+        this.listenerData = data;
+        this.getOwner().teamData.testState(PKConfig.LISTENER_BEATK,this);
         if(this.die && data.atker)
         {
             MBase.getData(data.atker.mid).onKill(data.atker,this);

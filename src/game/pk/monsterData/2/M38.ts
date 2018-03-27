@@ -30,7 +30,7 @@ class M38 extends MBase {
         buff.isDebuff = true;
         buff.value = skillValue;
         buff.addValue('def',-skillValue);
-        buff.addValue('speed',-skillValue);
+        buff.addValue('addSpeed',-skillValue);
         buff.addValue('atk',-skillValue);
         buff.user = user;
         buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(2);

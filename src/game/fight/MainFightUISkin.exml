@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="MainFightUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
 
-	<e:Scroller id="scroller" width="640" horizontalCenter="0" top="0" bottom="0" bounces="false" locked="true">
+	<e:Scroller id="scroller" width="640" horizontalCenter="0" top="0" bottom="0" bounces="false">
 		<e:Group>
 			<e:Group y="65" horizontalCenter="0" width="100%">
 				<e:Group id="mailBtn" x="10" y="0" width="80" height="80">
@@ -26,36 +26,36 @@
 				</e:layout>
 			</e:Group>
 			<ns1:HangUI id="mapBtn" x="89" y="62" skinName="HangUISkin"/>
-			<e:Group x="0" y="550">
+			<e:Group x="0" y="550" width="100%">
 				<ns1:PVPUI id="pvpBtn" x="75" y="88" skinName="PVPUISkin"/>
 				<ns1:FightUI id="fightBtn" x="245" y="99" skinName="FightUISkin"/>
 				<e:layout>
-					<e:HorizontalLayout gap="0"/>
+					<e:HorizontalLayout gap="40" horizontalAlign="center"/>
 				</e:layout>
 			</e:Group>
-			<e:Group x="10" y="560">
+			<e:Group x="10" y="560" width="100%">
 				<ns1:UnknowUI x="42" y="33" skinName="UnknowUISkin"/>
 				<ns1:UnknowUI x="52" y="43" skinName="UnknowUISkin"/>
 				<e:layout>
-				<e:HorizontalLayout gap="0"/>
+				<e:HorizontalLayout gap="40" horizontalAlign="center"/>
 				</e:layout>
 			</e:Group>
-			<e:Group x="20" y="570">
+			<e:Group x="10" y="560" width="100%">
 				<ns1:UnknowUI x="42" y="33" skinName="UnknowUISkin"/>
 				<ns1:UnknowUI x="52" y="43" skinName="UnknowUISkin"/>
 				<e:layout>
-				<e:HorizontalLayout gap="0"/>
+				<e:HorizontalLayout gap="40" horizontalAlign="center"/>
 				</e:layout>
 			</e:Group>
-			<e:Group x="30" y="580">
+			<e:Group x="20" y="570" width="100%">
 				<ns1:UnknowUI x="42" y="33" skinName="UnknowUISkin"/>
 				<ns1:UnknowUI x="52" y="43" skinName="UnknowUISkin"/>
 				<e:layout>
-				<e:HorizontalLayout gap="0"/>
+				<e:HorizontalLayout gap="40" horizontalAlign="center"/>
 				</e:layout>
 			</e:Group>
 			<e:layout>
-				<e:VerticalLayout gap="0" paddingTop="70" paddingBottom="0"/>
+				<e:VerticalLayout gap="20" paddingTop="70" paddingBottom="10" horizontalAlign="center"/>
 			</e:layout>
 		</e:Group>
 	</e:Scroller>

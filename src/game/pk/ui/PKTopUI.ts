@@ -43,6 +43,9 @@ class PKTopUI extends game.BaseContainer {
         PKData.getInstance().addEventListener('video',this.onVideoEvent,this);
         this.defBG1.mask = this.defBGMask1
         this.defBG2.mask = this.defBGMask2
+
+        MyTool.removeMC(this.defGroup1)
+        MyTool.removeMC(this.defGroup2)
     }
 
     public onVideoEvent(e){
@@ -61,6 +64,7 @@ class PKTopUI extends game.BaseContainer {
                     this.addSkill(data)
                 break;
             case PKConfig.VIDEO_MONSTER_WIN:
+            case PKConfig.VIDEO_TEAM_HP_CHANGE:
                 this.renewHp();
                 break;
             case PKConfig.VIDEO_TEAM_DEF:
@@ -187,8 +191,8 @@ class PKTopUI extends game.BaseContainer {
         egret.Tween.removeTweens(this.defGroup2)
         this.hpGroup1.scaleX = this.hpGroup1.scaleY = 0
         this.hpGroup2.scaleX = this.hpGroup2.scaleY = 0
-        this.defGroup1.scaleX = this.defGroup1.scaleY = 0
-        this.defGroup2.scaleX = this.defGroup2.scaleY = 0
+        //this.defGroup1.scaleX = this.defGroup1.scaleY = 0
+        //this.defGroup2.scaleX = this.defGroup2.scaleY = 0
 
 
         this.defBG1.visible = true
@@ -209,16 +213,16 @@ class PKTopUI extends game.BaseContainer {
     public appearMV(){
         egret.Tween.get(this.hpGroup1).to({scaleX:1.2,scaleY:1.2},300).to({scaleX:1,scaleY:1},300)
         egret.Tween.get(this.hpGroup2).to({scaleX:1.2,scaleY:1.2},300).to({scaleX:1,scaleY:1},300)
-        egret.Tween.get(this.defGroup1).wait(200).to({scaleX:1.2,scaleY:1.2},300).to({scaleX:1,scaleY:1},300)
-        egret.Tween.get(this.defGroup2).wait(200).to({scaleX:1.2,scaleY:1.2},300).to({scaleX:1,scaleY:1},300)
+        //egret.Tween.get(this.defGroup1).wait(200).to({scaleX:1.2,scaleY:1.2},300).to({scaleX:1,scaleY:1},300)
+        //egret.Tween.get(this.defGroup2).wait(200).to({scaleX:1.2,scaleY:1.2},300).to({scaleX:1,scaleY:1},300)
     }
 
     public renewHp(){
         var PD = PKData.getInstance();
         var team1 = PD.getTeamByRota(PKConfig.ROTA_LEFT);
         var team2 = PD.getTeamByRota(PKConfig.ROTA_RIGHT);
-        this.hpText1.text = team1.hp + ''// + team1.maxhp + ' 增加防御:' + team1.def
-        this.hpText2.text = team2.hp + ''// + team2.maxhp   //  ' 增加防御:' + team2.def + ' '+
+        this.hpText1.text = Math.max(0,team1.hp) + ''// + team1.maxhp + ' 增加防御:' + team1.def
+        this.hpText2.text = Math.max(0,team2.hp) + ''// + team2.maxhp   //  ' 增加防御:' + team2.def + ' '+
     }
 
     public def1(user){

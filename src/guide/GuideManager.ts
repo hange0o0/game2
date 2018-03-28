@@ -141,14 +141,14 @@ class GuideManager {
             }
         })
 
-        this.addGuideObj({
-            mc:function(){return PKVideoCon.getInstance().getItemByID(1).monsterMV.getRect()},
-            text:'这是防御石,所有攻击其的单位，都会为已方队伍赚取防御积分，增加队伍的防御属性',
-            guideKey:'diamondMonster',
-            fun:function(){
-                self.showGuide()
-            }
-        })
+        //this.addGuideObj({
+        //    mc:function(){return PKVideoCon.getInstance().getItemByID(1).monsterMV.getRect()},
+        //    text:'这是防御石,所有攻击其的单位，都会为已方队伍赚取防御积分，增加队伍的防御属性',
+        //    guideKey:'diamondMonster',
+        //    fun:function(){
+        //        self.showGuide()
+        //    }
+        //})
 
         this.addGuideObj({
             mc:function(){return PKingUI.getInstance().pkTop.hpGroupIcon},

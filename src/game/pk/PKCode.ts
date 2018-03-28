@@ -208,23 +208,34 @@ class PKCode {
         PD.team1.onStateTimer();
         PD.team2.onStateTimer();
 
-        if(PD.actionTime > 60000 && (PD.monsterList.length == 0 || PD.currentState == 'def') && !PD.isGameOver)//如果1min后有一方没牌了也结束
+
+        if(!PD.isReplay)
         {
-            var b = true;
-            for(var s in PKData.getInstance().playerObj)
+            var player = PD.myPlayer
+            if(player.getPosNum() == 0)
             {
-                var player = PKData.getInstance().playerObj[s];
-                if(player.id == 'sys')
-                    continue;
-                if(player.getPosNum() || player.getCardNum())
-                {
-                    b = false;
-                    break
-                }
+                PD.onPosEmpty(player);
             }
-            if(b)
-                PD.isGameOver = true;
         }
+
+
+        //if(PD.actionTime > 60000 && (PD.monsterList.length == 0 || PD.currentState == 'def') && !PD.isGameOver)//如果1min后有一方没牌了也结束
+        //{
+        //    var b = true;
+        //    for(var s in PKData.getInstance().playerObj)
+        //    {
+        //        var player = PKData.getInstance().playerObj[s];
+        //        if(player.id == 'sys')
+        //            continue;
+        //        if(player.getPosNum() || player.getCardNum())
+        //        {
+        //            b = false;
+        //            break
+        //        }
+        //    }
+        //    if(b)
+        //        PD.isGameOver = true;
+        //}
     }
 
 

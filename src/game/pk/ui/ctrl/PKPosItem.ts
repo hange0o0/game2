@@ -105,8 +105,11 @@ class PKPosItem extends game.BaseItem {
         }
         else if(data.num && data.mid > PKConfig.skillBeginID)
         {
-            cd = data.getRemainCD();
-            maxCD = maxCD * Math.max(1,data.getMaxNum()-1);
+            if(data.getVO().num < 100)
+            {
+                cd = data.getRemainCD();
+                maxCD = maxCD * Math.max(1,data.getMaxNum()-1);
+            }
         }
 
         if(data.mid < PKConfig.skillBeginID)

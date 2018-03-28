@@ -82,7 +82,7 @@ class PKData extends egret.EventDispatcher{
         this.monsterID = 1;
         this.isGameOver = false;
         this.monsterChange = false;
-        this.currentState = 'def';
+        this.currentState = 'pk';
         PKMonsterAction.getInstance().init()
 
 
@@ -173,6 +173,16 @@ class PKData extends egret.EventDispatcher{
             y:0,
             actionTime:0
         });
+    }
+
+    public onPosEmpty(player:PKPlayerData){
+        if(player.getCardNum())
+        {
+            if(player.getMP() >= 18)
+                player.addPosCard({mid:501})
+        }
+        else
+            player.addPosCard({mid:502})
     }
 
 

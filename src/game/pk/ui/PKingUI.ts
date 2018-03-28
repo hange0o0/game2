@@ -169,7 +169,7 @@ class PKingUI extends game.BaseUI {
     public startGame(){
         var PD = PKData.getInstance();
         PD.start();
-        PD.addDiamondMonster();
+        //PD.addDiamondMonster();
 
         this.counting = false;
         this.scroller.touchEnabled = this.scroller.touchChildren = true;
@@ -224,11 +224,11 @@ class PKingUI extends game.BaseUI {
             var item:any = {x:PKConfig.floorWidth/2 + PKConfig.appearPos};
             area = 5;
         }
-        else if(PD.diamondData.hp > 0)
-        {
-            var item = PKVideoCon.getInstance().getItemByID(PD.diamondData.id);
-            area = 5;
-        }
+        //else if(PD.diamondData.hp > 0)
+        //{
+        //    var item = PKVideoCon.getInstance().getItemByID(PD.diamondData.id);
+        //    area = 5;
+        //}
         else
             var item = PKData.getInstance().getFirstItem(PKData.getInstance().myPlayer.teamData.id);
         if(item)

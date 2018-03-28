@@ -74,7 +74,7 @@ class DebugManager {
         {
             PD.quick = true;
             PD.start();
-            PD.addDiamondMonster();
+            //PD.addDiamondMonster();
             PKCode.getInstance().onStep()
 
             console.log('result:' + PD.getPKResult())

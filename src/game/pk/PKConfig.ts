@@ -70,6 +70,8 @@ class PKConfig {
     public static VIDEO_MONSTER_CHANGE_SKIN = 23 //改变皮肤
 
     public static VIDEO_MYPLAYER_CHANGE = 24 //观察者变化
+    public static VIDEO_AUOT_ADD_CARD = 25 //自动上卡
+    public static VIDEO_TEAM_HP_CHANGE = 26 //
 
 
 

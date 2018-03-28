@@ -152,6 +152,9 @@ class PKCtrlCon extends game.BaseContainer {
             case PKConfig.VIDEO_MYPLAYER_CHANGE:
                 this.onMyPlayerChange();
                 break;
+            case PKConfig.VIDEO_AUOT_ADD_CARD:
+                this.onAddPosCard(videoData.user);
+                break;
         }
     }
 
@@ -225,13 +228,18 @@ class PKCtrlCon extends game.BaseContainer {
 
 
             PD.myPlayer.addPosCard(this.chooseCard.data);
-            this.cardObj[this.chooseCard.data.cardPos].data = null;
-            this.chooseCard = null
-            this.needRenewCard = true
-            this.renewCard()
+            this.onAddPosCard(this.chooseCard.data)
             return true;
 
         return false;
+    }
+
+    private onAddPosCard(data){
+        if(this.chooseCard && this.chooseCard.data == data)
+            this.chooseCard = null
+        this.cardObj[data.cardPos].data = null;
+        this.needRenewCard = true
+        this.renewCard()
     }
 
     private onDragStart(e){

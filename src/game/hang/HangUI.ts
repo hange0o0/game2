@@ -158,7 +158,7 @@ class HangUI extends game.BaseItem {
         PKBulletManager.getInstance().freeAll()
         var PD = PKData.getInstance();
         PD.init(data);
-        PD.currentState = 'pk'
+        PD.isReplay = true
         var pkvideo = PKVideoCon.getInstance()
         this.con.addChild(pkvideo)
         pkvideo.init();

@@ -22,11 +22,11 @@ class S501 extends SBase {
             }
 
             var cardData = PD.randomOne(arr)
-            player.addPosCard(cardData)
             PD.addVideo({
                 type:PKConfig.VIDEO_AUOT_ADD_CARD,
                 user:cardData
             })
+            player.addPosCard(cardData)
         }
         return [];
     }

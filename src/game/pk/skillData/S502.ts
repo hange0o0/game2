@@ -6,6 +6,11 @@ class S502 extends SBase {
     public onSkill(user:PKPosCardData) {
         var PD = PKData.getInstance();
         var player = user.getOwner()
+        if(!player.skillValue[502])
+        {
+            player.skillValue[502] = true;
+            return
+        }
         player.teamData.hp -= 1
         PD.addVideo({
             type:PKConfig.VIDEO_TEAM_HP_CHANGE

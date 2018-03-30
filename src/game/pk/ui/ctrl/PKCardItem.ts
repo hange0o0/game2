@@ -1,5 +1,6 @@
 class PKCardItem extends game.BaseItem {
 
+    private loading: eui.Image;
     private bg: eui.Image;
     private img: CardImg;
     private img2: CardImg;
@@ -19,6 +20,7 @@ class PKCardItem extends game.BaseItem {
 
 
 
+
     public con:PKCtrlCon;
 
 
@@ -26,6 +28,8 @@ class PKCardItem extends game.BaseItem {
     public isDragMC = false;
     public stopDrag;
     public stopMove = true;
+    public tw:egret.Tween
+    public loadingTimer
     public constructor() {
         super();
 
@@ -37,6 +41,9 @@ class PKCardItem extends game.BaseItem {
 
         this.addBtnEvent(this,this.onClick)
         MyTool.addLongTouch(this,this.onLongTouch,this)
+        this.tw = egret.Tween.get(this.loading,{loop:true})
+        this.tw.to({rotation:360},3000)
+        this.tw.setPaused(true);
     }
 
     private onLongTouch(){
@@ -57,7 +64,7 @@ class PKCardItem extends game.BaseItem {
     private onClick(){
         if(game.BaseUI.isStopEevent)
             return;
-        if(this.data)
+        if(this.data && !this.data.waiting)
         {
             this.con.setChooseCard(this);
             if(GuideManager.getInstance().isGuiding  && GuideManager.getInstance().guideKey == "card")
@@ -67,11 +74,26 @@ class PKCardItem extends game.BaseItem {
 
 
     public dataChanged(){
+        if(this.tw)
+            this.tw.setPaused(true);
         if(!this.data)
         {
             this.stopDrag = true
             this.y = this.defaultY;
             this.currentState = 'empty'
+            return;
+        }
+        if(this.data.waiting && !this.isDragMC)
+        {
+            this.stopDrag = true
+            this.y = this.defaultY;
+            this.currentState = 'waiting'
+            this.tw.setPaused(false);
+            clearTimeout(this.loadingTimer)
+            this.loadingTimer = setTimeout(()=>{
+                this.loading.visible = true
+            },500)
+            this.loading.visible = false
             return;
         }
         this.stopDrag = false

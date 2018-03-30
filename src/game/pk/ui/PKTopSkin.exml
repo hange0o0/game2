@@ -24,7 +24,7 @@
 	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
 	<e:Group id="skillGroup" y="175" horizontalCenter="5.5">
 		<e:layout>
-			<e:VerticalLayout/>
+			<e:VerticalLayout horizontalAlign="center"/>
 		</e:layout>
 	</e:Group>
 </e:Skin>

@@ -71,7 +71,8 @@ class PKConfig {
 
     public static VIDEO_MYPLAYER_CHANGE = 24 //观察者变化
     public static VIDEO_AUOT_ADD_CARD = 25 //自动上卡
-    public static VIDEO_TEAM_HP_CHANGE = 26 //
+    public static VIDEO_TEAM_HP_CHANGE = 26 //队伍血量发生变化
+    public static VIDEO_CARD_WAITING_CHANGE = 27 //位置生效
 
 
 

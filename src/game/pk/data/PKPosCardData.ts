@@ -3,12 +3,14 @@ class PKPosCardData {
     public id;//唯一ID 1-4
     public mid //对应的怪
     public owner//主人ID
+    public cardData//关联的手牌
     public isAuto = false//是否自动出怪上阵的
 
     public enableNum = 0;
     public enableMaxNum = 0;
 
 
+    public addTime = 0//加入的时间
     public actionTime = 0//上次行动的时间
     public actionResult = 0//是否有等待出手的怪
 
@@ -30,6 +32,8 @@ class PKPosCardData {
             this.getVO().preLoad();
         if(this.mid > PKConfig.skillBeginID)
             SBase.getData(this.mid).initSkill(this);
+
+        this.addTime = this.actionTime;
     }
 
     public getVO(){
@@ -135,10 +139,15 @@ class PKPosCardData {
         {
             return false;
         }
+
         var cd = this.getMaxCD();
         if(t - this.actionTime >= cd)
         {
             if(this.mid > PKConfig.skillBeginID && this.num >= 1 && this.getVO().num == 0)//一次性，但存在界面中的技能失效
+            {
+                 return false;
+            }
+            if(this.cardData && this.cardData.waiting)//超时没返回，要向服务器请求数据进行同步
             {
                  return false;
             }
@@ -209,5 +218,16 @@ class PKPosCardData {
             this.getOwner().teamData.removeStateListerByOwner(this)
         if(this.mid > PKConfig.skillBeginID)
             SBase.getData(this.mid).onDie(this);
+    }
+
+    public enableWaiting(){
+        this.cardData.waiting = false;
+        this.cardData.remove = true;
+        this.getOwner().onPosCardEnable(this);
+
+        PKData.getInstance().addVideo({
+            type:PKConfig.VIDEO_CARD_WAITING_CHANGE,
+            user:this.cardData
+        })
     }
 }

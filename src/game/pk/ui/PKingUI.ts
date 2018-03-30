@@ -13,6 +13,19 @@ class PKingUI extends game.BaseUI {
     private pkInfo: PKMonsterInfoUI;
     private smallMap: PKSmallMap;
 
+    private vsGroup: eui.Group;
+    private vsMC: eui.Image;
+    private playerGroup1: eui.Group;
+    private headMC1: HeadMC;
+    private forceText1: eui.Label;
+    private nameText1: eui.Label;
+    private playerGroup2: eui.Group;
+    private headMC2: HeadMC;
+    private forceText2: eui.Label;
+    private nameText2: eui.Label;
+
+
+
 
     public scrollTime = 0;
     public counting = false;
@@ -97,6 +110,8 @@ class PKingUI extends game.BaseUI {
     public onShow(){
         EM.dispatchEventWith(GameEvent.client.pk_begin)
 
+        var PD = PKData.getInstance();
+
         this.scrollTime = 0;
         PKVideoCon.getInstance().init();
         this.pkCtrlCon.init();
@@ -107,17 +122,33 @@ class PKingUI extends game.BaseUI {
         PKVideoCon.getInstance().x = 0;
         PKVideoCon.getInstance().y = 0;
 
-
+        var vY = this.pkTop.y + 200;
+        var vH = GameManager.stage.stageHeight - 480-170 - this.pkTop.y
 
         this.scroller.viewport.scrollH = (PKConfig.floorWidth + PKConfig.appearPos*2-640)/2
         this.scroller.touchEnabled = this.scroller.touchChildren = false;
         this.counting = true;
-        this.roundText.text = '5'
+        this.roundText.text = '3'
         this.roundText.alpha = 1;
-        this.roundText.y = GameManager.stage.stageHeight - 680;
+        this.roundText.y = vY + vH/5*1
         this.addChild(this.roundText);
         this.roundText.scaleX =  this.roundText.scaleY = 0;
         egret.Tween.removeTweens(this.roundText)
+
+        this.vsGroup.visible = false
+        this.vsGroup.y =  vY + vH/2
+        egret.Tween.removeTweens(this.vsMC)
+        egret.Tween.removeTweens(this.playerGroup1)
+        egret.Tween.removeTweens(this.playerGroup2)
+        var player = PD.getTeamByRota(PKConfig.ROTA_LEFT).members[0]
+        this.nameText1.text = player.nick
+        this.forceText1.text = player.force
+        this.headMC1.setData(player.head,player.type)
+        player = PD.getTeamByRota(PKConfig.ROTA_RIGHT).members[0]
+        this.nameText2.text = player.nick
+        this.forceText2.text = player.force
+        this.headMC2.setData(player.head,player.type)
+
         this.showMV();
 
         if(GuideManager.getInstance().isGuiding)
@@ -141,15 +172,30 @@ class PKingUI extends game.BaseUI {
     }
 
     public showCountDown(){
+        this.vsGroup.visible = true
+        this.vsMC.scaleX = this.vsMC.scaleY = 2
+        this.vsMC.alpha = 0
+        this.playerGroup1.x = -280
+        this.playerGroup2.right = -280
+
+        egret.Tween.get(this.vsMC).to({scaleX:0.4,scaleY:0.4,alpha:1},200).to({scaleX:0.5,scaleY:0.5},200)
+        egret.Tween.get(this.playerGroup1).to({x:20},200).to({x:0},200)
+        egret.Tween.get(this.playerGroup2).to({right:20},200).to({right:0},200)
+
         var tw = this.tw = egret.Tween.get(this.roundText)
-        tw.to({scaleX:1.5,scaleY:1.5},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '4'})
-            .to({scaleX:0,scaleY:0}).to({scaleX:1.5,scaleY:1.5},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '3'})
-            .to({scaleX:0,scaleY:0}).to({scaleX:1.5,scaleY:1.5},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '2'})
-            .to({scaleX:0,scaleY:0}).to({scaleX:1.5,scaleY:1.5},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '1'})
-            .to({scaleX:0,scaleY:0}).to({scaleX:1.5,scaleY:1.5},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = 'START';this.startGame();this.tw = null}).to({
-                alpha:0,scaleX:2.5,scaleY:2.5
+        tw.wait(800).to({scaleX:1.8,scaleY:1.8},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '2'})
+            .to({scaleX:0,scaleY:0}).to({scaleX:1.8,scaleY:1.8},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '1'})
+            .to({scaleX:0,scaleY:0}).to({scaleX:1.8,scaleY:1.8},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{
+                this.roundText.text = 'START';
+                egret.Tween.get(this.vsMC).to({scaleX:0.6,scaleY:0.6},200).to({scaleX:0,scaleY:0},200)
+                egret.Tween.get(this.playerGroup1).to({x:20},200).to({x:-280},200)
+                egret.Tween.get(this.playerGroup2).to({right:20},200).to({right:-280},200)
+                this.startGame();
+                this.tw = null}).to({
+                alpha:0,scaleX:10,scaleY:10
             },500).call(()=>{
                 MyTool.removeMC(this.roundText);
+                this.vsGroup.visible = false
                 this.pkTop.appearMV();
                 this.pkCtrlCon.initInfo();
                 if(GuideManager.getInstance().isGuiding)

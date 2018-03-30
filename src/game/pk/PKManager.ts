@@ -241,4 +241,16 @@ class PKManager {
             fun && fun();
         });
     }
+
+    public sendPosToServer(posCard:PKPosCardData,fun?)
+    {
+        var oo:any = {};
+        oo.posCard = posCard
+        Net.addUser(oo);
+        Net.send(GameEvent.pk.get_record, oo, (data)=> {
+            var msg = data.msg;
+            posCard.enableWaiting();
+            fun && fun();
+        });
+    }
 }

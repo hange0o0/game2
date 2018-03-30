@@ -155,6 +155,9 @@ class PKCtrlCon extends game.BaseContainer {
             case PKConfig.VIDEO_AUOT_ADD_CARD:
                 this.onAddPosCard(videoData.user);
                 break;
+            case PKConfig.VIDEO_CARD_WAITING_CHANGE:
+                this.needRenewCard = true;
+                break;
         }
     }
 
@@ -227,17 +230,30 @@ class PKCtrlCon extends game.BaseContainer {
             return false;
 
 
-            PD.myPlayer.addPosCard(this.chooseCard.data);
-            this.onAddPosCard(this.chooseCard.data)
-            return true;
-
-        return false;
+        var cardData = this.chooseCard.data
+        this.onAddPosCard(cardData)
+        PD.myPlayer.addPosCard(cardData);
+        return true;
     }
 
     private onAddPosCard(data){
+        if(this.dragTarget && this.dragTarget.data == data)
+        {
+            MyTool.removeMC(this.dragTarget)
+            this.overMC.visible = false
+            this.dragTarget.data = null;
+            this.overMC.visible = false
+        }
         if(this.chooseCard && this.chooseCard.data == data)
             this.chooseCard = null
-        this.cardObj[data.cardPos].data = null;
+        this.cardObj[data.cardPos].data.waiting = true;
+        this.cardObj[data.cardPos].dataChanged();
+        //this.needRenewCard = true
+        //this.renewCard()
+    }
+
+    //服务器返回加入卡成功
+    private onAddCardOK(){
         this.needRenewCard = true
         this.renewCard()
     }
@@ -297,7 +313,8 @@ class PKCtrlCon extends game.BaseContainer {
         //}
         if(this.overTarget != -1)
         {
-            this.posCard()
+            if(this.dragTarget.data)
+                this.posCard()
         }
         this.overMC.visible = false
     }
@@ -472,10 +489,18 @@ class PKCtrlCon extends game.BaseContainer {
             for(var s in this.cardObj)
             {
                 var item = this.cardObj[s];
-                if(!item.data && handCard[s])
+                if((!item.data || item.data.remove))
                 {
-                    item.data = handCard[s]
-                    item.appear();
+                    if( handCard[s])
+                    {
+                        item.data = handCard[s]
+                        item.appear();
+                    }
+                    else
+                    {
+                        item.data = null;
+                    }
+
                 }
             }
             this.cardText.text = 'x' + PD.myPlayer.getCardNum();

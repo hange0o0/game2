@@ -24,6 +24,8 @@ class PKPlayerData {
 
 
     public autoList;
+    public skillValue = {};
+
 
     constructor(obj?){
         if(obj)
@@ -127,9 +129,10 @@ class PKPlayerData {
     }
 
     public addPosCard(cardData){
-        this.posCard[this.posIndex] =  new PKPosCardData({
+        var posCard = this.posCard[this.posIndex] =  new PKPosCardData({
             id:this.posIndex,
             mid:cardData.mid,
+            cardData:cardData,
             owner:this.id,
             actionTime:PKData.getInstance().actionTime,
         })
@@ -139,10 +142,15 @@ class PKPlayerData {
         })
 
         this.posIndex ++
+        this.addMP(-CM.getCardVO(cardData.mid).cost)
 
+        this.sendToServer(posCard)
+    }
+
+    public onPosCardEnable(posCard:PKPosCardData){
         for(var i=1;i<=PKConfig.maxHandCard;i++)
         {
-            if(this.handCard[i] == cardData)
+            if(this.handCard[i] == posCard.cardData)
             {
                 var newCard:any = this.hideCard.shift();
                 if(newCard)
@@ -154,11 +162,22 @@ class PKPlayerData {
             }
         }
 
-        this.addMP(-CM.getCardVO(cardData.mid).cost)
+        var step = Math.floor(posCard.addTime/PKConfig.stepCD)
+        this.posHistory.push(step + '#' + posCard.cardData.mid);
+        this.useCardList.push(posCard.cardData.mid)
+    }
 
-        var step = Math.floor(PKData.getInstance().actionTime/PKConfig.stepCD)
-        this.posHistory.push(step + '#' + cardData.mid);
-        this.useCardList.push(cardData.mid)
+    private sendToServer(posCard:PKPosCardData){
+        var PD = PKData.getInstance();
+        if(this == PD.myPlayer && !PD.isReplay && PD.sendCard) //需要通知服务器，等服务器返回成功才应答
+        {
+            PKManager.getInstance().sendPosToServer(posCard)
+        }
+        else
+        {
+            posCard.enableWaiting();
+        }
+
     }
 
     ////上阵卡

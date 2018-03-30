@@ -4,9 +4,34 @@
 		<e:Group id="con">
 		</e:Group>
 	</e:Scroller>
-	<ns1:PKSmallMap id="smallMap" skinName="PKSmallMapSkin" bottom="472" horizontalCenter="0"/>
+	<ns1:PKSmallMap id="smallMap" skinName="PKSmallMapSkin" bottom="472" horizontalCenter="0" locked="true"/>
 	<ns1:PKCtrlCon id="pkCtrlCon" x="0" skinName="PKCtrlConSkin" bottom="0"/>
 	<ns1:PKTopUI id="pkTop" x="0" skinName="PKTopSkin"/>
-	<e:Label id="roundText" text="START" size="60" horizontalCenter="0" stroke="3" strokeColor="0x000000" anchorOffsetY="40" width="200" textAlign="center" anchorOffsetX="100" textColor="0xffff00" y="400"/>
-	<ns1:PKMonsterInfoUI id="pkInfo" skinName="PKMonsterInfoSkin" bottom="580" x="160"/>
+	<e:Label id="roundText" text="START" size="60" horizontalCenter="0" stroke="3" strokeColor="0x000000" anchorOffsetY="40" width="200" textAlign="center" anchorOffsetX="100" textColor="0xffff00" y="400" locked="true"/>
+	<ns1:PKMonsterInfoUI id="pkInfo" skinName="PKMonsterInfoSkin" bottom="580" x="160" visible="false"/>
+	<e:Group id="vsGroup" x="0" y="264" width="640" height="80">
+		<e:Image id="vsMC" source="icon_vs_png" scaleX="0.5" scaleY="0.5" horizontalCenter="0" verticalCenter="0"/>
+		<e:Group id="playerGroup1" y="0" width="260" x="0">
+			<ns1:HeadMC id="headMC1" width="80" height="80" skinName="HeadMCSkin" scaleX="1" scaleY="1" verticalCenter="0" right="0"/>
+			<e:Group y="36" right="85">
+				<e:Label id="forceText1" text="Label" x="48" y="0" size="24" textColor="0xfce29c" stroke="1"/>
+			<e:Image source="icon_force2_png" x="0" y="12"/>
+			<e:layout>
+				<e:HorizontalLayout verticalAlign="middle"/>
+			</e:layout>
+			</e:Group>
+			<e:Label id="nameText1" text="Label" y="0" stroke="2" right="90"/>
+		</e:Group>
+		<e:Group id="playerGroup2" y="0" width="260" right="0">
+			<ns1:HeadMC id="headMC2" width="80" height="80" skinName="HeadMCSkin" scaleX="1" scaleY="1" verticalCenter="0" x="0"/>
+			<e:Group y="36" x="85">
+			<e:Image source="icon_force2_png" x="0" y="12"/>
+			<e:Label id="forceText2" text="Label" x="48" y="0" size="24" textColor="0xFCE29C" stroke="1"/>
+			<e:layout>
+				<e:HorizontalLayout verticalAlign="middle"/>
+			</e:layout>
+			</e:Group>
+			<e:Label id="nameText2" text="Label" y="0" stroke="2" x="90"/>
+		</e:Group>
+	</e:Group>
 </e:Skin>

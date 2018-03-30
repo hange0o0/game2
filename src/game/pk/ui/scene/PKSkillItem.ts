@@ -17,7 +17,10 @@ class PKSkillItem extends game.BaseItem {
 
     public dataChanged(){
         var skillVO = SkillVO.getObject(this.data.mid);
-        this.setHtml(this.userText, this.createHtml(this.data.getOwner().nick,0xffff00) + '使用');
+        if(this.data.mid < 500)
+            this.setHtml(this.userText, this.createHtml(this.data.getOwner().nick,0xffff00) + '使用');
+        else
+            this.setHtml(this.userText, this.createHtml(this.data.getOwner().nick,0xffff00) + '触发');
 
         this.icon.source = skillVO.getTypeIcon()
         this.nameText.text = skillVO.name

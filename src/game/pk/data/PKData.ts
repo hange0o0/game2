@@ -10,6 +10,7 @@ class PKData extends egret.EventDispatcher{
     public quick = false//快速算出结果
     public baseData//原始PK数据
     public isReplay;
+    public sendCard = false;//需要向服务器发消息
 
     public jumpMV = false;
     public isGameOver = false //游戏结束
@@ -382,6 +383,32 @@ class PKData extends egret.EventDispatcher{
             user:this.myPlayer
         })
     }
+
+    //把数据发往服务器
+    //private sendCardList = []
+    //private sendCardListing = []
+    //public sendCardToServer(posCard:PKPosCardData){
+    //     this.sendCardList.push(posCard);
+    //    this.testSendCard();
+    //}
+    //
+    //private testSendCard(){
+    //    if(this.sendCardListing.length == 0 && this.sendCardList.length > 0)
+    //    {
+    //        this.sendCardListing = this.sendCardList;
+    //        this.sendCardList = [];
+    //        PKManager.getInstance().sendPosToServer(this.sendCardListing,()=>{
+    //            this.sendCardFinish();
+    //        })
+    //    }
+    //}
+    //private sendCardFinish(){
+    //    if(this.sendCardListing.length == 0 && this.sendCardList.length > 0)
+    //    {
+    //        this.sendCardListing = this.sendCardList;
+    //        this.sendCardList = [];
+    //    }
+    //}
 
     //移除场上怪物
     //public removeMonster(id){

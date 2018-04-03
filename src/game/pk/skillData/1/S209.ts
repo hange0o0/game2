@@ -32,12 +32,15 @@ class S209StateListener extends PKStateListener {
 
     // 起作用时会调用的方法
     public actionFun(target?:PKMonsterData){
-        if(target.getOwner().teamData != this.owner.getOwner().teamData)
-            return;
         if(target.skillTemp[209])
             return;
         if(target.reborning)
             return;
+        if(target.dieTime)
+            return;
+        if(target.getOwner().teamData != this.owner.getOwner().teamData)
+            return;
+
         target.reborning = true;
 
 

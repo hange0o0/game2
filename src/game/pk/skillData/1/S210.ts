@@ -20,8 +20,10 @@ class S210 extends SBase {
         for(var i=0;i<arr.length && num > 0;i++)
         {
             var target = arr[i];
+            if(target.dieTime)
+                continue;
             if(target.haveBuff(210))
-                return;
+                continue;
 
             var buff = new PKBuffData()
             buff.user = user;

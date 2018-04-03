@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="TecUISkin" width="640" height="800" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing" states="normal,coin" >
-	<e:Image source="bg15_png" x="0" top="133" bottom="-10" width="640" scale9Grid="19,18,10,8"/>
-	<e:Scroller id="scroller" width="640" top="143" bottom="0" bounces="false" top.coin="193">
+	<e:Image source="bg15_png" x="0" top="140" bottom="-10" width="640" scale9Grid="19,18,10,8"/>
+	<e:Scroller id="scroller" width="640" top="143" bottom="0" bounces="false" top.coin="200">
 		<e:Group>
 		<e:List id="list" width="200" height="200" x="142" y="175">
 			<e:layout>
-				<e:TileLayout requestedColumnCount="4" horizontalGap="12" verticalGap="12" paddingLeft="22" paddingTop="10"/>
+				<e:TileLayout requestedColumnCount="4" horizontalGap="15" verticalGap="15" paddingLeft="17" paddingTop="15"/>
 			</e:layout>
 		</e:List>
 		</e:Group>
 	</e:Scroller>
-	<e:TabBar id="tab" x="8" y="80" itemRendererSkinName="MyTabItemSkin" width="600">
+	<e:TabBar id="tab" x="8" y="87" itemRendererSkinName="MyTabItemSkin" width="600">
 		<e:ArrayCollection>
 		<e:Array>
 			<e:Object label="通用"/>
@@ -23,7 +23,7 @@
 			<e:HorizontalLayout horizontalAlign="justify"/>
 		</e:layout>
 	</e:TabBar>
-	<e:Group top="143" left="0" right="0" height="50" visible.normal="false">
+	<e:Group top="150" left="0" right="0" height="50" visible.normal="false">
 		<e:Rect height="50" y="0" fillAlpha="0.3" left="10" right="10"/>
 		<e:Group horizontalCenter="0" verticalCenter="0">
 			<e:Label text="金币收益：" y="10" size="22" x="10"/>

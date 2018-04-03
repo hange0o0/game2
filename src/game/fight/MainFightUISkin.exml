@@ -3,7 +3,7 @@
 
 	<e:Scroller id="scroller" width="640" horizontalCenter="0" top="0" bottom="0" bounces="false">
 		<e:Group>
-			<e:Group y="65" horizontalCenter="0" width="100%">
+			<e:Group y="65" horizontalCenter="0" width="100%" height="75">
 				<e:Group id="mailBtn" x="10" y="0" width="80" height="80">
 				<e:Image source="main_mail_png" verticalCenter="0" horizontalCenter="0"/>
 				<e:Label text="消息" size="22" horizontalCenter="0" stroke="2" bottom="10"/>
@@ -30,32 +30,32 @@
 				<ns1:PVPUI id="pvpBtn" x="75" y="88" skinName="PVPUISkin"/>
 				<ns1:FightUI id="fightBtn" x="245" y="99" skinName="FightUISkin"/>
 				<e:layout>
-					<e:HorizontalLayout gap="40" horizontalAlign="center"/>
+					<e:HorizontalLayout horizontalAlign="center" gap="0"/>
 				</e:layout>
 			</e:Group>
 			<e:Group x="10" y="560" width="100%">
 				<ns1:UnknowUI x="42" y="33" skinName="UnknowUISkin"/>
 				<ns1:UnknowUI x="52" y="43" skinName="UnknowUISkin"/>
 				<e:layout>
-				<e:HorizontalLayout gap="40" horizontalAlign="center"/>
+				<e:HorizontalLayout gap="0" horizontalAlign="center"/>
 				</e:layout>
 			</e:Group>
 			<e:Group x="10" y="560" width="100%">
 				<ns1:UnknowUI x="42" y="33" skinName="UnknowUISkin"/>
 				<ns1:UnknowUI x="52" y="43" skinName="UnknowUISkin"/>
 				<e:layout>
-				<e:HorizontalLayout gap="40" horizontalAlign="center"/>
+				<e:HorizontalLayout gap="0" horizontalAlign="center"/>
 				</e:layout>
 			</e:Group>
 			<e:Group x="20" y="570" width="100%">
 				<ns1:UnknowUI x="42" y="33" skinName="UnknowUISkin"/>
 				<ns1:UnknowUI x="52" y="43" skinName="UnknowUISkin"/>
 				<e:layout>
-				<e:HorizontalLayout gap="40" horizontalAlign="center"/>
+				<e:HorizontalLayout gap="0" horizontalAlign="center"/>
 				</e:layout>
 			</e:Group>
 			<e:layout>
-				<e:VerticalLayout gap="20" paddingTop="70" paddingBottom="10" horizontalAlign="center"/>
+				<e:VerticalLayout gap="0" paddingTop="65" horizontalAlign="center" paddingBottom="0"/>
 			</e:layout>
 		</e:Group>
 	</e:Scroller>

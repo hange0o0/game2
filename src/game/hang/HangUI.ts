@@ -116,7 +116,7 @@ class HangUI extends game.BaseItem {
 
         var pkvideo = PKVideoCon.getInstance()
         this.con.addChild(pkvideo)
-        pkvideo.y = -120;
+        pkvideo.y = -20;
         pkvideo.x = 0
 
         if(HM.level == 0)
@@ -127,7 +127,7 @@ class HangUI extends game.BaseItem {
              this.awardBtn.visible = false;
              this.awardRed.visible = false;
             this.reset(true);
-            PKVideoCon.getInstance().x = (618- PKVideoCon.getInstance().width)/2;
+            PKVideoCon.getInstance().x = (640- PKVideoCon.getInstance().width)/2;
         }
         else
         {
@@ -222,7 +222,7 @@ class HangUI extends game.BaseItem {
             item = PKData.getInstance().getFirstItem(PKData.getInstance().myPlayer.teamData.enemy.id);
         if(item)
         {
-            var w = 618
+            var w = 640
             var scrollH = -(item.x - w/2);
             if(scrollH > 0)
                 scrollH = 0;

@@ -31,7 +31,7 @@ class S205 extends SBase {
                 PKData.getInstance().addVideo({
                     type:PKConfig.VIDEO_MONSTER_ADD_STATE,
                     user:target,
-                    key:1,
+                    key:'def',
                     stateType:1
                 })
             }

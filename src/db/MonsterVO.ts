@@ -135,5 +135,9 @@ class MonsterVO {
         return this.width/2 + this.atkrage
     }
 
+    public isNearAtk(){
+        return this.atkrage <= PKConfig.nearRage
+    }
+
 
 }

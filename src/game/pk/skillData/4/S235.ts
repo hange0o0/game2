@@ -34,5 +34,12 @@ class S235StateListener extends PKStateListener {
 
         target.maxHp += this.addValue
         target.addHp(this.addValue)
+
+        PKData.getInstance().addVideo({
+            type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+            user:target,
+            key:'hp',
+            stateType:1
+        })
     }
 }

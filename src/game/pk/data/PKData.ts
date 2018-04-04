@@ -142,7 +142,7 @@ class PKData extends egret.EventDispatcher{
     }
 
     //数据乱序
-    public upsetArr(arr){
+    public randSort(arr){
         var self = this;
         arr.sort(rdFun);
         function rdFun(){
@@ -321,6 +321,36 @@ class PKData extends egret.EventDispatcher{
                 chooseItem = item;
             else if(atkRota == PKConfig.ROTA_RIGHT && chooseItem.x>item.x)
                 chooseItem = item;
+        }
+        return chooseItem
+    }
+
+    //取队伍的后排的怪
+    public getBackItem(taamID){
+        var atkRota = PKData.getInstance().getTeamByID(taamID).atkRota;
+        var chooseItem
+        for(var i=0;i<this.monsterList.length;i++)
+        {
+            var item:PKMonsterData = this.monsterList[i];
+            if(item.atkRota != atkRota)
+                continue
+            if(item.owner == 'sys')
+                continue
+            if(!chooseItem)
+            {
+                if(!item.getVO().isNearAtk())
+                    chooseItem = item;
+            }
+            else if(atkRota == PKConfig.ROTA_LEFT && chooseItem.x<item.x)
+            {
+                if(!item.getVO().isNearAtk())
+                    chooseItem = item;
+            }
+            else if(atkRota == PKConfig.ROTA_RIGHT && chooseItem.x>item.x)
+            {
+                if(!item.getVO().isNearAtk())
+                    chooseItem = item;
+            }
         }
         return chooseItem
     }

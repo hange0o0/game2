@@ -177,6 +177,20 @@ class PKPosCardData {
     }
 
     public getSkillValue(index,needForce=false){
+        if(DEBUG)
+        {
+            if(needForce)
+            {
+                if(CM.getCardVO(this.mid).des.indexOf('$' + index) == -1)
+                    throw new Error(this.mid + ' $index:' + index)
+            }
+            else
+            {
+                if(CM.getCardVO(this.mid).des.indexOf('#' + index) == -1)
+                    throw new Error(this.mid + ' #index:' + index)
+            }
+        }
+
         var PD = PKData.getInstance();
         return CM.getCardVO(this.mid).getSkillValue(index,needForce?PD.getPlayer(this.owner).force:0)
     }

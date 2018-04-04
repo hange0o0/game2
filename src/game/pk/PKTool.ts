@@ -139,4 +139,22 @@ class PKTool {
         return mp/step3 * 60*1000 + 60*1000*2;
 
     }
+
+    //取攻击属性的相克
+    public static getAtkRate(atkType,defType){
+        if(defType == 0 || atkType == 0)
+            return 1;
+        var des = Math.abs(atkType - defType)
+        if(des == 0)
+            return 1;
+        if(des == 1)
+        {
+            if(atkType< defType)
+                return 1.5;
+            return 0.5
+        }
+        if(atkType > defType)
+            return 1.5;
+        return 0.5
+    }
 }

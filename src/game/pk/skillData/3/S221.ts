@@ -22,7 +22,7 @@ class S221StateListener extends PKStateListener {
 
     // 起作用时会调用的方法
     public actionFun(target?:PKMonsterData){
-        if(target.getVO().atkrage <= PKConfig.nearRage)
+        if(target.getVO().isNearAtk())
         {
             var hp = target.listenerData.hp;
             target.addHp(Math.ceil(hp*this.hpRate));

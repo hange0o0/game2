@@ -44,7 +44,7 @@ class PKPlayerData {
         }
         this.handCard = {};
         this.hideCard = [];
-        this.autoList = [];
+        this.autoList = null;
         if(obj['autolist'])
             this.autoList = PKTool.decodeAutoList(obj['autolist'].split(','))
         if(obj['actionlist'])
@@ -75,7 +75,7 @@ class PKPlayerData {
     }
 
     public getCardNum(){
-        return (ObjectUtil.objLength(this.getHandCard(),true) + this.hideCard.length + this.autoList.length)
+        return (ObjectUtil.objLength(this.getHandCard(),true) + this.hideCard.length + (this.autoList?this.autoList.length:0))
     }
     public getPosNum(){
         return ObjectUtil.objLength(this.posCard,true)
@@ -203,7 +203,7 @@ class PKPlayerData {
 
     //自动上阵相关
     public autoAction(t){
-        while(this.autoList[0])
+        while(this.autoList && this.autoList[0])
         {
             var data = this.autoList[0];
             if(data.time <= t)

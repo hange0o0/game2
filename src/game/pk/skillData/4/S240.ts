@@ -7,7 +7,7 @@ class S240 extends SBase {
         var teamData = user.getOwner().teamData;
         listener.owner = user;
         listener.mvID = this.mvID1;
-        listener.addValue = user.getSkillValue(1,true);
+        listener.addValue = user.getSkillValue(1);
         listener.endTime = PKData.getInstance().actionTime + user.getSkillValue(2) *1000;
         teamData.addStateLister(listener);
         return [];

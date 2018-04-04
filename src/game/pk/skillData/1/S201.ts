@@ -7,7 +7,7 @@ class S201 extends SBase{
 
     public onSkill(user:PKPosCardData) {
         var PD = PKData.getInstance();
-        var arr = PD.monsterList;
+        var arr = PD.monsterList.concat();
         var targets = [];
         for(var i=0;i<arr.length;i++)
         {

@@ -212,7 +212,7 @@ class PKCode {
         if(!PD.isReplay)
         {
             var player = PD.myPlayer
-            if(player.getPosNum() == 0)
+            if(!player.autoList && player.getPosNum() == 0)
             {
                 PD.onPosEmpty(player);
             }

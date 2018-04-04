@@ -56,6 +56,46 @@ class SBase {
 
     //////////////////////////////////////////////////上面的为要设的内容
 
+    //通用的召唤方法
+    public addMonsterSkill(user,mid,type=0,noSkill?){
+        var PD = PKData.getInstance();
+        var owner = PD.getPlayer(user.owner);
+        var atkRota = owner.teamData.atkRota;
+        var item = null;
+        if(type == 1)//我方前线
+            item = PKData.getInstance().getFirstItem(owner.teamData.id);
+        else if(type == 2)//敌人后方
+            item = PKData.getInstance().getBackItem(owner.teamData.enemy.id);
+        var x:any;
+        if(item)
+        {
+            x = item.x + PD.rand(-10,10);
+        }
+        else
+        {
+            x = atkRota == PKConfig.ROTA_LEFT ? PKConfig.appearPos:PKConfig.floorWidth + PKConfig.appearPos;
+        }
+        var num = user.getSkillValue(1);
+        var cd = user.getSkillValue(2)*1000;
+        for(var i=0;i<num;i++)
+        {
+            var mData:any = {
+                force:owner.force,
+                mid:mid,
+                owner:user.owner,
+                atkRota:atkRota,
+                x:x,
+                y:-25 + Math.random()*50,
+                actionTime:PD.actionTime,
+                dieTime:PD.actionTime + cd
+            }
+            if(noSkill)
+                mData.lastSkill = Number.MAX_VALUE
+            PD.addMonster(mData);
+        }
+        return [];
+    }
+
     //实现技能
     public skill(user:PKPosCardData){
         //var svo = SkillVO.getObject(user.mid);

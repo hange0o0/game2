@@ -33,6 +33,7 @@ class S211 extends SBase {
         var atkRota = owner.teamData.atkRota;
 
         var num = user.getSkillValue(1);
+        var cd = user.getSkillValue(2)*1000;
         for(var i=0;i<num;i++)
         {
             var x = item.x + PD.random()*100 - 50;
@@ -45,7 +46,7 @@ class S211 extends SBase {
                 y:-25 + Math.random()*50,
                 lastSkill:Number.MAX_VALUE,
                 actionTime:PD.actionTime,
-                dieTime:PD.actionTime + user.getSkillValue(2)*1000
+                dieTime:PD.actionTime + cd
             }
             PD.addMonster(mData);
         }

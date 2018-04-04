@@ -26,7 +26,6 @@ class S207 extends SBase {
                 atkRota:atkRota,
                 x:x,
                 y:-25 + Math.random()*50,
-                lastSkill:Number.MAX_VALUE,
                 actionTime:PD.actionTime,
                 dieTime:PD.actionTime + user.getSkillValue(1)*1000
             }

@@ -95,22 +95,9 @@ class PKMonsterData {
     //根据属性相克，取攻击比例
     public getAtkRate(defender:PKMonsterData){
         return 1//先不考滤相克
-        //var atkType = this.getVO().type
-        //var defType = defender.getVO().type
-        //if(defType == 0 || atkType == 0)
-        //    return 1;
-        //var des = Math.abs(atkType - defType)
-        //if(des == 0)
-        //    return 1;
-        //if(des == 1)
-        //{
-        //    if(atkType< defType)
-        //        return 1.5;
-        //    return 0.5
-        //}
-        //if(atkType > defType)
-        //    return 1.5;
-        //return 0.5
+        var atkType = this.getVO().type
+        var defType = defender.getVO().type
+        return PKTool.getAtkRate(atkType,defType)
     }
 
     //public changeValue(key,value){

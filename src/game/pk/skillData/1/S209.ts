@@ -9,10 +9,11 @@ class S209 extends SBase {
     public onSkill(user:PKPosCardData) {
         var listener = new S209StateListener()
         var teamData = user.getOwner().teamData;
+        var cd = user.getVO().cd * 1000
         listener.owner = user;
         listener.mvID = this.mvID1;
         listener.hpRate = user.getSkillValue(1)/100;
-        listener.endTime = PKData.getInstance().actionTime + user.getSkillValue(2) *1000;
+        listener.endTime = PKData.getInstance().actionTime + cd;
         teamData.addStateLister(listener);
         return [];
     }

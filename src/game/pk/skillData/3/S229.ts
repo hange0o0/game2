@@ -5,7 +5,7 @@ class S229 extends SBase {
 
     public onSkill(user:PKPosCardData) {
         var PD = PKData.getInstance();
-        var arr = PD.monsterList;
+        var arr = PD.monsterList.concat();
         var targets = [];
         var skillValue = user.getSkillValue(1);
         var cd = user.getSkillValue(2)*1000;
@@ -26,6 +26,13 @@ class S229 extends SBase {
             buff.isDebuff = true;
             targetEnemy.addBuff(buff)
             targets.push(targetEnemy);
+
+            PKData.getInstance().addVideo({
+                type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+                user:targetEnemy,
+                key:'atk',
+                stateType:2
+            })
         }
         return targets;
     }

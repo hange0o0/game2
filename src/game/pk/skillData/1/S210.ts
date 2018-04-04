@@ -14,7 +14,7 @@ class S210 extends SBase {
         var arr = PD.getMonsterByTeam(user.getOwner().teamData);
         if(arr.length > num)
         {
-            PD.upsetArr(arr)
+            PD.randSort(arr)
             //arr.length = num;
         }
         for(var i=0;i<arr.length && num > 0;i++)

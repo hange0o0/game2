@@ -40,20 +40,6 @@
 				<e:HorizontalLayout gap="0" horizontalAlign="center"/>
 				</e:layout>
 			</e:Group>
-			<e:Group x="10" y="560" width="100%">
-				<ns1:UnknowUI x="42" y="33" skinName="UnknowUISkin"/>
-				<ns1:UnknowUI x="52" y="43" skinName="UnknowUISkin"/>
-				<e:layout>
-				<e:HorizontalLayout gap="0" horizontalAlign="center"/>
-				</e:layout>
-			</e:Group>
-			<e:Group x="20" y="570" width="100%">
-				<ns1:UnknowUI x="42" y="33" skinName="UnknowUISkin"/>
-				<ns1:UnknowUI x="52" y="43" skinName="UnknowUISkin"/>
-				<e:layout>
-				<e:HorizontalLayout gap="0" horizontalAlign="center"/>
-				</e:layout>
-			</e:Group>
 			<e:layout>
 				<e:VerticalLayout gap="0" paddingTop="65" horizontalAlign="center" paddingBottom="0"/>
 			</e:layout>

@@ -163,6 +163,7 @@ class BasePosUI extends game.BaseUI {
             if(b==1)
             {
                 var arr = [{setting:true}];
+                this.useCard = {};
                 MyTool.removeMC(this.deleteBtn)
                 this.listData.source = arr;
                 this.listData.refresh()

@@ -24,7 +24,7 @@ class PKCardItem extends game.BaseItem {
     public con:PKCtrlCon;
 
 
-    public defaultY = 30
+    public defaultY = 30 +55
     public isDragMC = false;
     public stopDrag;
     public stopMove = true;
@@ -38,12 +38,15 @@ class PKCardItem extends game.BaseItem {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.anchorOffsetX = 90/2
+        this.anchorOffsetY = 110/2
 
         this.addBtnEvent(this,this.onClick)
         MyTool.addLongTouch(this,this.onLongTouch,this)
         this.tw = egret.Tween.get(this.loading,{loop:true})
         this.tw.to({rotation:360},3000)
         this.tw.setPaused(true);
+        this.loading.visible = false
     }
 
     private onLongTouch(){
@@ -136,8 +139,18 @@ class PKCardItem extends game.BaseItem {
     //前5张出现时的动画
     public appear(){
         var tw = egret.Tween.get(this);
-        this.alpha = 0;
-        tw.to({alpha:1},200)
+        var cd = 0;
+        this.currentState = 'waiting'
+        clearTimeout(this.loadingTimer)
+        this.loading.visible = false
+
+        if(!this.data)
+            cd = 500;
+        else if(this.data.showTime && PKData.getInstance().actionTime<this.data.showTime)
+            cd = this.data.showTime - PKData.getInstance().actionTime
+        tw.wait(cd).to({scaleX:0},100).call(()=>{
+            this.dataChanged();
+        },this).to({scaleX:1},100)
     }
 
 
@@ -173,7 +186,7 @@ class PKCardItem extends game.BaseItem {
     public renewChoose(){
         if(this.isDragMC)
             return;
-        this.y = this == this.con.chooseCard?10:this.defaultY;
+        this.y = this == this.con.chooseCard?this.defaultY-20:this.defaultY;
     }
 }
 

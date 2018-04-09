@@ -165,6 +165,10 @@ class PKPlayerData {
         var step = Math.floor(posCard.addTime/PKConfig.stepCD)
         this.posHistory.push(step + '#' + posCard.cardData.mid);
         this.useCardList.push(posCard.cardData.mid)
+        if(newCard)
+        {
+            newCard.showTime = posCard.addTime + 500;
+        }
     }
 
     private sendToServer(posCard:PKPosCardData){

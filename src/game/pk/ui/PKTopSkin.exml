@@ -22,9 +22,4 @@
 		<e:Label id="hpText2" text="15" size="22" stroke="2" verticalCenter="0" horizontalCenter="0"/>
 	</e:Group>
 	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
-	<e:Group id="skillGroup" y="175" horizontalCenter="5.5">
-		<e:layout>
-			<e:VerticalLayout horizontalAlign="center"/>
-		</e:layout>
-	</e:Group>
 </e:Skin>

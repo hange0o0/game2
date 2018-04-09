@@ -1,9 +1,11 @@
 class PKSkillItem extends game.BaseItem {
 
-    private userText: eui.Label;
-    private icon: eui.Image;
+    private img: CardImg;
     private nameText: eui.Label;
 
+
+
+    public index;
     public constructor() {
         super();
 
@@ -12,25 +14,36 @@ class PKSkillItem extends game.BaseItem {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.touchChildren = this.touchEnabled = false;
     }
 
 
     public dataChanged(){
         var skillVO = SkillVO.getObject(this.data.mid);
-        if(this.data.mid < 500)
-            this.setHtml(this.userText, this.createHtml(this.data.getOwner().nick,0xffff00) + '使用');
-        else
-            this.setHtml(this.userText, this.createHtml(this.data.getOwner().nick,0xffff00) + '触发');
-
-        this.icon.source = skillVO.getTypeIcon()
+        //if(this.data.mid < 500)
+        //    this.setHtml(this.userText, this.createHtml(this.data.getOwner().nick,0xffff00) + '使用');
+        //else
+        //    this.setHtml(this.userText, this.createHtml(this.data.getOwner().nick,0xffff00) + '触发');
+        this.img.data = this.data.mid
+        //this.icon.source = skillVO.getTypeIcon()
         this.nameText.text = skillVO.name
         this.nameText.textColor = skillVO.getTypeColor()
 
         egret.Tween.removeTweens(this);
-        this.alpha = 0
-        this.height = 40
         var tw = egret.Tween.get(this);
-        tw.to({alpha:1},300).wait(1500).to({alpha:0},200).to({height:0},100).call(function(){
+        var w = 200;
+        this.y = 180 + this.index * 55
+        if(this.currentState == 'left')
+        {
+            this.x = -w
+            tw.to({x:20},150).to({x:0},150).wait(1000).to({x:20},150).to({x:-w},150)
+        }
+        else
+        {
+            this.x = 640
+            tw.to({x:640-w-20},150).to({x:640-w},150).wait(1000).to({x:640-w-20},150).to({x:640},150)
+        }
+        tw.call(function(){
             PKTopUI.getInstance().removeSkillItem(this)
         },this);
     }

@@ -3,21 +3,21 @@ class PKTopUI extends game.BaseContainer {
     public static getInstance() {
         return this._instance;
     }
-    public hpGroup1: eui.Group;
-    private hpGroup2: eui.Group;
+    private hpGroup1: eui.Group;
+    public hpGroupIcon: eui.Image;
     private hpText1: eui.Label;
     private defGroup1: eui.Group;
-    private defText1: eui.Label;
     private defBG1: eui.Rect;
     private defBGMask1: eui.Image;
-    public hpGroupIcon: eui.Image;
+    private defText1: eui.Label;
     private defGroup2: eui.Group;
-    private defText2: eui.Label;
     private defBG2: eui.Rect;
     private defBGMask2: eui.Image;
+    private defText2: eui.Label;
+    private hpGroup2: eui.Group;
     private hpText2: eui.Label;
     private topUI: TopUI;
-    private skillGroup: eui.Group;
+
 
 
 
@@ -46,6 +46,7 @@ class PKTopUI extends game.BaseContainer {
 
         MyTool.removeMC(this.defGroup1)
         MyTool.removeMC(this.defGroup2)
+        this.touchEnabled = false;
     }
 
     public onVideoEvent(e){
@@ -105,7 +106,6 @@ class PKTopUI extends game.BaseContainer {
         if(!item)
         {
             item = new PKSkillItem();
-            item.y = 66;
         }
         return item;
     }
@@ -124,15 +124,49 @@ class PKTopUI extends game.BaseContainer {
             return;
         item.remove();
         this.skillItemPool.push(item);
-
     }
 
 
     public addSkill(data){
-         var item = this.createSkillItem();
-        this.skillGroup.addChild(item);
-        item.data = data;
+        if(data.mid > 500)
+            return;
+
+        var teamData = data.getOwner().teamData
+        var item = this.createSkillItem();
+        this.addChild(item)
+
+        if(teamData.atkRota == PKConfig.ROTA_LEFT)
+        {
+            item.currentState = 'left'
+            item.index = this.getIndex('left')
+            item.data = data;
+        }
+        else
+        {
+            item.currentState = 'right'
+            item.index = this.getIndex('right')
+            item.data = data;
+        }
         this.skillItemArr.push(item)
+    }
+
+    private getIndex(type){
+        var indexObj = {};
+        for(var i=0;i<this.skillItemArr.length;i++)
+        {
+            var item = this.skillItemArr[i];
+            if(item.currentState == type)
+            {
+                indexObj[item.index] = true;
+            }
+        }
+        var index = 1;
+        while(true)
+        {
+            if(!indexObj[index])
+                return index;
+            index++;
+        }
     }
 
 
@@ -159,6 +193,10 @@ class PKTopUI extends game.BaseContainer {
         {
             this.freeItem(this.itemArr.pop())
         }
+        //while(this.skillItem2Arr.length)
+        //{
+        //    this.freeSkillItem2(this.skillItem2Arr.pop())
+        //}
         while(this.skillItemArr.length)
         {
             this.freeSkillItem(this.skillItemArr.pop())

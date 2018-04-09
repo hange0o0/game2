@@ -68,7 +68,7 @@ class PKCtrlCon extends game.BaseContainer {
             this.cardGroup.addChild(item);
             this.cardObj[i+1] = item;
             item.y = item.defaultY;
-            item.x = i*102 + 20
+            item.x = i*102 + 20 + 90/2
             item.con = this;
 
             DragManager.getInstance().setDrag(item,true);
@@ -80,6 +80,8 @@ class PKCtrlCon extends game.BaseContainer {
         this.dragTarget = new PKCardItem();
         this.dragTarget.isDragMC = true;
         this.dragTarget.alpha = 0.6
+        //this.dragTarget.anchorOffsetX = 0
+        //this.dragTarget.anchorOffsetY = 0
 
         this.addBtnEvent(this.placeGroup,this.onPosClick)
             this.addBtnEvent(this.settingBtn,this.onSetting)
@@ -270,8 +272,8 @@ class PKCtrlCon extends game.BaseContainer {
     }
     private onDragMove(e){
         //e.stopImmediatePropagation();
-        this.dragTarget.x = e.data.x - this.dragTarget.width/2;
-        this.dragTarget.y = e.data.y - this.dragTarget.height/2;
+        this.dragTarget.x = e.data.x// - this.dragTarget.width/2;
+        this.dragTarget.y = e.data.y// - this.dragTarget.height/2;
         this.overTarget = -1;
         this.overMC.visible = false
 
@@ -404,6 +406,18 @@ class PKCtrlCon extends game.BaseContainer {
         }
     }
 
+    //public getInfoBtn(id){
+    //    for(var i=1;i<=4;i++)
+    //    {
+    //        var mc = this['info' + i];
+    //        if(mc.visible && mc.data.id == id)
+    //        {
+    //            return mc;
+    //        }
+    //    }
+    //    return null;
+    //}
+
     public initInfo(){
         for(var i=1;i<=4;i++)
         {
@@ -491,16 +505,16 @@ class PKCtrlCon extends game.BaseContainer {
                 var item = this.cardObj[s];
                 if((!item.data || item.data.remove))
                 {
-                    if( handCard[s])
+                    if(handCard[s])
                     {
                         item.data = handCard[s]
                         item.appear();
                     }
-                    else
+                    else if(item.data)
                     {
                         item.data = null;
+                        item.appear();
                     }
-
                 }
             }
             this.cardText.text = 'x' + PD.myPlayer.getCardNum();

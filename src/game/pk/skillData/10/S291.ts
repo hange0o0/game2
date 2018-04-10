@@ -45,7 +45,7 @@ class S291StateListener extends PKStateListener {
         if(PKData.getInstance().actionTime - this.actionTime < 500)
             return;
         var PD = PKData.getInstance();
-        var arr = PD.getMonsterByTeam(user.getOwner().teamData);
+        var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
         var atkrage = user.getSkillValue(1);
         var value = Math.floor(user.getSkillValue(2,true)/2);
         for(var i=0;i<arr.length;i++)

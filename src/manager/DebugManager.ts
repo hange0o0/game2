@@ -32,7 +32,7 @@ class DebugManager {
     public randomList(){
         var arr = []
         var level = 100;
-        var len = 12;
+        var len = 15;
         for(var s in MonsterVO.data)
         {
             var mvo = MonsterVO.data[s]
@@ -119,7 +119,7 @@ class DebugManager {
         var t = egret.getTimer()
         this.testNum ++;
         var arr = []
-        var n = 16;
+        var n = 512;
         for(var i=0;i<n;i++)
         {
              arr.push(this.randomList().join(','))

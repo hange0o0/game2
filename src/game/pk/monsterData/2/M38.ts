@@ -31,7 +31,7 @@ class M38 extends MBase {
         buff.value = skillValue;
         buff.addValue('def',-skillValue);
         buff.addValue('addSpeed',-skillValue);
-        buff.addValue('atk',-skillValue);
+        buff.addValue('atk',-Math.floor(skillValue/100*target.baseAtk));
         buff.user = user;
         buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(2);
         target.addBuff(buff)

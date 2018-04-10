@@ -29,7 +29,7 @@ class M43 extends MBase {
         //target.addBuff(buff)
 
         var buff = new PKBuffData()
-        var skillValue = Math.floor(user.getSkillValue(2,true)/2);
+        var skillValue = user.getSkillValue(2,true);
         buff.id = 43;
         buff.value = skillValue;
         buff.user = user;

@@ -19,6 +19,8 @@ class M76 extends MBase {
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByNoTeam(user.getOwner().teamData);
         var atkrage = user.getSkillValue(1);
+        var skillValue = user.getSkillValue(1,true)
+        var cd = 1000*user.getSkillValue(2);
         for(var i=0;i<arr.length;i++)
         {
             var targetX = arr[i];
@@ -30,13 +32,13 @@ class M76 extends MBase {
 
                 if(targetX.beSkillAble())
                 {
-                    var skillValue = user.getSkillValue(1,true)
+
                     var buff = new PKBuffData()
                     buff.id = 76;
                     buff.value = skillValue
                     buff.addValue('hpChange',-skillValue);
                     buff.user = user;
-                    buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(2);
+                    buff.endTime = PKData.getInstance().actionTime + cd;
                     targetX.addBuff(buff)
 
                     if(buff.ing)

@@ -6,7 +6,7 @@ class S259 extends SBase {
     public onSkill(user:PKPosCardData) {
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
-        var value = Math.floor(user.getSkillValue(1,true)/2);
+        var value = user.getSkillValue(1,true);
         var cd = user.getSkillValue(2)*1000
         for(var i=0;i<arr.length;i++)
         {
@@ -18,6 +18,7 @@ class S259 extends SBase {
             buff.id = 259;
             buff.value = value;
             buff.user = user;
+            buff.isDebuff = true;
             buff.addValue('hpChange',-value);
             buff.endTime = PKData.getInstance().actionTime + cd;
             target.addBuff(buff)

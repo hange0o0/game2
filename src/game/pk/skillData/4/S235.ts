@@ -28,8 +28,8 @@ class S235StateListener extends PKStateListener {
     public actionFun(target?:PKMonsterData){
         if(target.skillTemp[235])
             return;
-        if(target.getOwner().teamData != this.owner.getOwner().teamData)
-            return;
+        //if(target.getOwner().teamData != this.owner.getOwner().teamData)
+        //    return;
         target.skillTemp[235] = true;
 
         target.maxHp += this.addValue

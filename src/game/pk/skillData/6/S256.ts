@@ -6,7 +6,7 @@ class S256 extends SBase {
     public onSkill(user:PKPosCardData) {
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData);
-        var value = Math.floor(user.getSkillValue(1,true)/2);
+        var value = user.getSkillValue(1,true);
         var cd = user.getSkillValue(2)*1000
         for(var i=0;i<arr.length;i++)
         {

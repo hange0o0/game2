@@ -18,10 +18,10 @@ class S216 extends SBase {
 
             var buff = new PKBuffData()
             buff.user = user;
-            buff.id =  user.mid;
+            buff.id =  216;
             buff.value = skillValue;
             buff.endTime = PKData.getInstance().actionTime + cd;
-            buff.addValue('atk',skillValue)
+            buff.addValue('atk',Math.ceil(skillValue/100*target.baseAtk))
             target.addBuff(buff)
             target.addHp(addValue)
 

@@ -2,9 +2,12 @@ class S241 extends SBase {
     constructor() {
         super();
     }
+
+
+
     public onSkill(user:PKPosCardData) {
         var listener = new S241StateListener()
-        var teamData = user.getOwner().teamData;
+        var teamData = user.getOwner().teamData.enemy;
         listener.owner = user;
         listener.mvID = this.mvID1;
         listener.addValue = user.getSkillValue(1,true);
@@ -26,8 +29,9 @@ class S241StateListener extends PKStateListener {
 
     // 起作用时会调用的方法
     public actionFun(target?:PKMonsterData){
-        if(target.getOwner().teamData.enemy != this.owner.getOwner().teamData)
-            return;
+        //console.log(target.getOwner().teamData.enemy.id,this.owner.getOwner().teamData.id)
+        //if(target.getOwner().teamData.enemy != this.owner.getOwner().teamData)
+        //    return;
 
         target.addHp(-this.addValue)
     }

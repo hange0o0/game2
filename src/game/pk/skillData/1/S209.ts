@@ -39,8 +39,8 @@ class S209StateListener extends PKStateListener {
             return;
         if(target.dieTime)
             return;
-        if(target.getOwner().teamData != this.owner.getOwner().teamData)
-            return;
+        //if(target.getOwner().teamData != this.owner.getOwner().teamData)
+        //    return;
 
         target.reborning = true;
 

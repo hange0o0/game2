@@ -28,8 +28,8 @@ class S240StateListener extends PKStateListener {
     public actionFun(target?:PKMonsterData){
         if(target.skillTemp[240])
             return;
-        if(target.getOwner().teamData != this.owner.getOwner().teamData)
-            return;
+        //if(target.getOwner().teamData != this.owner.getOwner().teamData)
+        //    return;
         target.skillTemp[240] = true;
 
         target.def += this.addValue

@@ -70,7 +70,8 @@ class SkillVO {
 
     public getDes(forceRate){
         return this.des.replace('#1',this.sv1 + '').replace('#2',this.sv2 + '').replace('#3',this.sv3 + '')
-            .replace('$1',this.changeValue(this.sv1,forceRate) + '').replace('$2',this.changeValue(this.sv2,forceRate) + '').replace('$3',this.changeValue(this.sv3,forceRate) + '')
+            .replace('$1',this.changeValue(this.sv1,forceRate) + '').replace('$2',this.changeValue(this.sv2,forceRate) + '')
+            .replace('$3',this.changeValue(this.sv3,forceRate) + '').replace('#CD',MyTool.toFixed(this.cd/1000,1) + '')
     }
     private changeValue(v,forceRate){
         if(!v)

@@ -9,16 +9,15 @@ class BasePosChooseUI extends game.BaseUI {
 
     private topUI: TopUI;
     private bottomUI: BottomUI;
-    private tab: eui.TabBar;
-    private downList2: DownList;
     private scroller: eui.Scroller;
     private list: eui.List;
+    private tab: eui.TabBar;
 
 
 
     //public selectType
-    private monsterType = 0
-    private skillType = 0
+    //private monsterType = 0
+    //private skillType = 0
 
     private arrayData:eui.ArrayCollection
     private fromUI:BasePosUI
@@ -46,7 +45,7 @@ class BasePosChooseUI extends game.BaseUI {
         //var arr = CM.m_shows.getLevelList();
         //this.downList.setData(arr,0);
         //this.downList.addEventListener(DownList.SELECT,this.onTab,this);
-        this.downList2.addEventListener(DownList.SELECT,this.onDownListSelect,this);
+        //this.downList2.addEventListener(DownList.SELECT,this.onDownListSelect,this);
 
 
         //this.selectType = 0;
@@ -62,16 +61,16 @@ class BasePosChooseUI extends game.BaseUI {
     //    return this.arrayData.source;
     //}
 
-    private onDownListSelect(){
-        if(this.tab.selectedIndex == 0)
-              this.monsterType = this.downList2.selectValue;
-        else
-              this.skillType = this.downList2.selectValue;
-        this.renewList();
-    }
+    //private onDownListSelect(){
+    //    if(this.tab.selectedIndex == 0)
+    //          this.monsterType = this.downList2.selectValue;
+    //    else
+    //          this.skillType = this.downList2.selectValue;
+    //    this.renewList();
+    //}
 
     private onTab(){
-        this.renewDownList();
+        //this.renewDownList();
         this.renewList();
     }
 
@@ -134,29 +133,29 @@ class BasePosChooseUI extends game.BaseUI {
 
 
 
-    private renewDownList(){
-        //this.downList.height = GameManager.stage.stageHeight - 100 - this.downList.y - 10;
-        if(this.tab.selectedIndex == 0)
-        {
-            var arr = [
-                {label:'全部',label2: 'x' + CardManager.getInstance().getMyMonsterList(0).length,data:0,icon: 'monster_all_icon_png'},
-                {label:PKConfig.TYPENAME[1],label2: 'x' + CardManager.getInstance().getMyMonsterList(1).length,data:1,icon: 'icon_type1_png'},
-                {label:PKConfig.TYPENAME[2],label2: 'x' + CardManager.getInstance().getMyMonsterList(2).length,data:2,icon: 'icon_type2_png'},
-                {label:PKConfig.TYPENAME[3],label2: 'x' + CardManager.getInstance().getMyMonsterList(3).length,data:3,icon: 'icon_type3_png'}];
-            this.downList2.setData(arr,this.monsterType);
-        }
-        else
-        {
-            var arr = [
-                {label:'全部',label2: 'x' + CardManager.getInstance().getMySkillList(0).length,data:0,icon:'skill_all_icon_png'},
-                {label:PKConfig.SKILLTYPENAME[1],label2: 'x' + CardManager.getInstance().getMySkillList(1).length,data:1,icon: 'skill_type1_png'},
-                {label:PKConfig.SKILLTYPENAME[2],label2: 'x' + CardManager.getInstance().getMySkillList(2).length,data:2,icon: 'skill_type2_png'},
-                {label:PKConfig.SKILLTYPENAME[3],label2: 'x' + CardManager.getInstance().getMySkillList(3).length,data:3,icon: 'skill_type3_png'},
-                {label:PKConfig.SKILLTYPENAME[4],label2: 'x' + CardManager.getInstance().getMySkillList(4).length,data:4,icon: 'skill_type4_png'},
-                {label:PKConfig.SKILLTYPENAME[5],label2: 'x' + CardManager.getInstance().getMySkillList(5).length,data:5,icon: 'skill_type5_png'}];
-            this.downList2.setData(arr,this.skillType);
-        }
-    }
+    //private renewDownList(){
+    //    //this.downList.height = GameManager.stage.stageHeight - 100 - this.downList.y - 10;
+    //    if(this.tab.selectedIndex == 0)
+    //    {
+    //        var arr = [
+    //            {label:'全部',label2: 'x' + CardManager.getInstance().getMyMonsterList(0).length,data:0,icon: 'monster_all_icon_png'},
+    //            {label:PKConfig.TYPENAME[1],label2: 'x' + CardManager.getInstance().getMyMonsterList(1).length,data:1,icon: 'icon_type1_png'},
+    //            {label:PKConfig.TYPENAME[2],label2: 'x' + CardManager.getInstance().getMyMonsterList(2).length,data:2,icon: 'icon_type2_png'},
+    //            {label:PKConfig.TYPENAME[3],label2: 'x' + CardManager.getInstance().getMyMonsterList(3).length,data:3,icon: 'icon_type3_png'}];
+    //        this.downList2.setData(arr,this.monsterType);
+    //    }
+    //    else
+    //    {
+    //        var arr = [
+    //            {label:'全部',label2: 'x' + CardManager.getInstance().getMySkillList(0).length,data:0,icon:'skill_all_icon_png'},
+    //            {label:PKConfig.SKILLTYPENAME[1],label2: 'x' + CardManager.getInstance().getMySkillList(1).length,data:1,icon: 'skill_type1_png'},
+    //            {label:PKConfig.SKILLTYPENAME[2],label2: 'x' + CardManager.getInstance().getMySkillList(2).length,data:2,icon: 'skill_type2_png'},
+    //            {label:PKConfig.SKILLTYPENAME[3],label2: 'x' + CardManager.getInstance().getMySkillList(3).length,data:3,icon: 'skill_type3_png'},
+    //            {label:PKConfig.SKILLTYPENAME[4],label2: 'x' + CardManager.getInstance().getMySkillList(4).length,data:4,icon: 'skill_type4_png'},
+    //            {label:PKConfig.SKILLTYPENAME[5],label2: 'x' + CardManager.getInstance().getMySkillList(5).length,data:5,icon: 'skill_type5_png'}];
+    //        this.downList2.setData(arr,this.skillType);
+    //    }
+    //}
 
 
     public show(list?,fromUI?){
@@ -187,7 +186,7 @@ class BasePosChooseUI extends game.BaseUI {
     public renew(){
         //var PM = PosManager.getInstance();
         this.renewList();
-        this.renewDownList();
+        //this.renewDownList();
     }
 
     public justRenewList2(){
@@ -198,16 +197,16 @@ class BasePosChooseUI extends game.BaseUI {
     }
 
     private renewList(){
-        var type = this.downList2.selectValue;
+        var type = this.tab.selectedIndex + 1;
         var arr;
-        if(this.tab.selectedIndex == 0)
-        {
+        //if(this.tab.selectedIndex == 0)
+        //{
             arr = CardManager.getInstance().getMyMonsterList(type)
-        }
-        else
-        {
-            arr = CardManager.getInstance().getMySkillList(type)
-        }
+        //}
+        //else
+        //{
+        //    arr = CardManager.getInstance().getMySkillList(type)
+        //}
         ArrayUtil.sortByField(arr,['cost','level','id'],[0,0,0]);
         for(var i=0;i<arr.length;i++)
         {

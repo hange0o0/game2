@@ -13,15 +13,14 @@
 		</e:List>
 		</e:Group>
 	</e:Scroller>
-	<e:TabBar id="tab" x="8" y="67" itemRendererSkinName="MyTabItemSkin" width="300">
+	<e:TabBar id="tab" y="67" itemRendererSkinName="MyTabItemSkin" width="480" horizontalCenter="0">
 		<e:ArrayCollection>
 		<e:Array>
-			<e:Object label="单位"/>
-			<e:Object label="法术"/>
+			<e:Object label="堡垒"/>
+				<e:Object label="自然"/>
+				<e:Object label="幽暗"/>
 		</e:Array>
 		</e:ArrayCollection>
 	</e:TabBar>
-	<e:Image y="69" width="200" height="50" right="10" source="bg5_png" scale9Grid="11,10,8,8"/>
-	<ns1:DownList id="downList2" skinName="DownListSkin" y="68" right="10" width="200" height="600"/>
 
 </e:Skin>

@@ -71,10 +71,12 @@ class PKWinUI extends game.BaseUI {
         {
             this.timerArr.push(setTimeout(()=>{
                 var x = Math.random()*440 + 100
-                var mc = AniManager.getInstance().playOnItem(1001,this.group,{x:x,y:this.group.y - Math.random()*150})
+                var mc = AniManager.getInstance().playOnItem(1001,this.group,{x:x,y:this.group.y - 100*(1-Math.abs(320 - x)/320)})
+                //var mc = AniManager.getInstance().playOnItem(1001,this.group,{x:x,y:this.group.y - Math.random()*180})
                 if(mc)
                 {
-                    mc.scaleX = mc.scaleY = 1 + Math.random()
+                    mc.parent.addChildAt(mc,1);
+                    mc.scaleX = mc.scaleY = 1.2 + Math.random()
                     mc.rotation =  -(320-x)/3.5
                 }
 

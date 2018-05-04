@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="CardUISkin" width="640" height="800" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing" states="monster,skill" >
+<e:Skin class="CardUISkin" width="640" height="800" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing" >
 	<e:Image source="bg15_png" x="0" top="140" bottom="-10" width="640" scale9Grid="19,18,10,8"/>
-	<e:Scroller id="scroller" width="640" x="0" top="150" bottom="0" bounces="false" top.skill="200">
+	<e:Scroller id="scroller" width="640" x="0" top="150" bottom="0" bounces="false">
 		<e:Group>
 		<e:List id="list" width="200" height="200" x="142" y="175">
 			<e:layout>
@@ -10,30 +10,16 @@
 		</e:List>
 		</e:Group>
 	</e:Scroller>
-	<e:Group y="150" left="10" right="10" visible.monster="false">
-		<e:Image source="bg8_png" scale9Grid="9,9,9,9" y="0" height="50" x="0" width="100%"/>
-	<e:Group x="13" y="10">
-			<e:Image id="prop102" source="icon_coin_png"  width="30" height="30" x="0" y="0"/>
-			<e:Label id="valueText" text="Label"  size="22" x="35" y="5"/>
-		</e:Group>
-		<e:Group x="150" y="10">
-			<e:Image id="prop103" source="icon_coin_png" x="0" y="0" width="30" height="30"/>
-			<e:Label id="valueText2" text="Label" x="35" y="5" size="22"/>
-		</e:Group>
-		<e:Label id="desText" text="Label" y="15" size="22" right="160"/>
-		<e:Button id="skillBtn" label="获取技能" y="2" skinName="Btn1Skin" height="60" scaleX="0.8" scaleY="0.8" width="180" x="471"/>
-	</e:Group>
-	<e:TabBar id="tab" x="8" y="87" itemRendererSkinName="MyTabItemSkin" width="300">
+	<e:TabBar id="tab" y="87" itemRendererSkinName="MyTabItemSkin" width="480" horizontalCenter="0">
 		<e:ArrayCollection>
-		<e:Array>
-			<e:Object label="单位"/>
-			<e:Object label="法术"/>
-		</e:Array>
+			<e:Array>
+				<e:Object label="堡垒"/>
+				<e:Object label="自然"/>
+				<e:Object label="幽暗"/>
+			</e:Array>
 		</e:ArrayCollection>
 				<e:layout>
         			<e:HorizontalLayout horizontalAlign="justify"/>
         		</e:layout>
 	</e:TabBar>
-	<e:Image y="90" width="200" height="50" right="10" source="bg5_png" scale9Grid="11,10,8,8"/>
-	<ns1:DownList id="downList2" skinName="DownListSkin" y="90" right="10" width="200" height="600"/>
 </e:Skin>

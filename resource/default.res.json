@@ -842,6 +842,56 @@
 			"name":"icon_atk3_png",
 			"type":"image",
 			"url":"game_assets/icon_atk3.png"
+		},
+		{
+			"name":"border_mv1_png",
+			"type":"image",
+			"url":"game_assets/mv/border_mv1.png"
+		},
+		{
+			"name":"border_mv2_png",
+			"type":"image",
+			"url":"game_assets/mv/border_mv2.png"
+		},
+		{
+			"name":"border_mv3_png",
+			"type":"image",
+			"url":"game_assets/mv/border_mv3.png"
+		},
+		{
+			"name":"border_mv4_png",
+			"type":"image",
+			"url":"game_assets/mv/border_mv4.png"
+		},
+		{
+			"name":"border_mv5_png",
+			"type":"image",
+			"url":"game_assets/mv/border_mv5.png"
+		},
+		{
+			"name":"border_mv6_png",
+			"type":"image",
+			"url":"game_assets/mv/border_mv6.png"
+		},
+		{
+			"name":"border_mv7_png",
+			"type":"image",
+			"url":"game_assets/mv/border_mv7.png"
+		},
+		{
+			"name":"border_mv8_png",
+			"type":"image",
+			"url":"game_assets/mv/border_mv8.png"
+		},
+		{
+			"name":"border_mv9_png",
+			"type":"image",
+			"url":"game_assets/mv/border_mv9.png"
+		},
+		{
+			"name":"border_mv10_png",
+			"type":"image",
+			"url":"game_assets/mv/border_mv10.png"
 		}
 	]
 }

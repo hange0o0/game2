@@ -49,10 +49,10 @@ class SkillVO {
     }
 
     public getImage(gay){
-        if(gay)
-            return Config.localResRoot + 'card_gay/card_'+101+'.jpg';
-        return Config.localResRoot + 'card/card_'+101+'.jpg';
-        //return Config.localResRoot + 'card/card_'+this.id+'.jpg';
+        //if(gay)
+        //    return Config.localResRoot + 'card_gay/card_'+101+'.jpg';
+        //return Config.localResRoot + 'card/card_'+101+'.jpg';
+        return Config.localResRoot + 'card/card_'+this.id+'.jpg';
     }
     public getBG(){
         return 'border_14_png';

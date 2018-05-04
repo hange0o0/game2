@@ -116,21 +116,34 @@ class DebugManager {
 
     //N选1;
     private testRound(){
-        var t = egret.getTimer()
         this.testNum ++;
         var arr = []
-        var n = 512;
+        var n = 1024;
         for(var i=0;i<n;i++)
         {
              arr.push(this.randomList().join(','))
         }
-        var num = 0;
-        while(arr.length >2)
+        this.testArr(arr,0,n,egret.getTimer())
+    }
+
+    private testArr(arr,num,total,t){
+        if(arr.length >2)
         {
-             arr = arr.concat(this.testOne(arr.shift(),arr.shift()))
+            arr = arr.concat(this.testOne(arr.shift(),arr.shift()))
             num ++;
-            if(num> n+2)
-                break;
+            if(num< total+2)
+            {
+                if(num %50 == 0)
+                {
+                    egret.callLater(()=>{
+                        console.log('runing')
+                        this.testArr(arr,num,total,t)
+                    },this)
+                }
+                else
+                    this.testArr(arr,num,total,t)
+                return
+            }
         }
         arr = this.testOne(arr.shift(),arr.shift())
         for(var i=0;i<arr.length;i++)
@@ -138,7 +151,7 @@ class DebugManager {
             var temp = arr[i].split(',');
             for(var j=0;j<temp.length;j++)
             {
-                 var id = temp[j];
+                var id = temp[j];
                 if(this.winMonster[id])
                     this.winMonster[id] ++;
                 else

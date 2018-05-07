@@ -184,8 +184,8 @@ class CardInfoUI extends game.BaseWindow {
     private renewCardLike(){
         var w = 540
         var likeObj = CardManager.getInstance().cardLike[this.data.id];
-        this.likeText.text = '票数：' + NumberUtil.formatStrNum(likeObj.like_num)
-        this.unlikeText.text = '票数：' + NumberUtil.formatStrNum(likeObj.unlike_num)
+        this.likeText.text = '要加强 (' + NumberUtil.formatStrNum(likeObj.like_num) + ')'
+        this.unlikeText.text = '要削弱 (' + NumberUtil.formatStrNum(likeObj.unlike_num)  +')'
         var total = (likeObj.like_num + likeObj.unlike_num) || 1;
         this.bar1.width = w * likeObj.like_num/total
         this.bar2.width = w * likeObj.unlike_num/total

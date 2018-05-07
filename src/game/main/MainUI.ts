@@ -55,6 +55,10 @@ class MainUI extends game.BaseUI {
         this.bottomItems.push(this.b2)
         this.bottomItems.push(this.b3)
         this.bottomItems.push(this.b4)
+
+        var blurFliter = new egret.BlurFilter( 10 , 10);
+        this.bg.filters = [blurFliter];
+        this.bg.cacheAsBitmap  = true;
     }
 
     private onAddForce(){
@@ -70,6 +74,22 @@ class MainUI extends game.BaseUI {
         ShopUI.getInstance().show(true);
     }
 
+
+    private renewBGX(mv?){
+       var toX = -this.currentIndex * 70 - 20;
+        egret.Tween.removeTweens(this.bg)
+        if(mv)
+        {
+            var tw = egret.Tween.get(this.bg)
+            tw.to({x:toX},200)
+        }
+        else
+        {
+            this.bg.x = toX;
+        }
+
+
+    }
 
     public onBottomSelect(index){
        if(index != this.currentIndex)
@@ -90,6 +110,8 @@ class MainUI extends game.BaseUI {
            var tw = egret.Tween.get(this.bottomSelectMC)
            var bottomX = this.getBottomX()
            tw.to({x:bottomX},200)
+
+           this.renewBGX(true);
 
            if(this.lastUI)
                this.lastUI.hide();
@@ -118,7 +140,7 @@ class MainUI extends game.BaseUI {
 
 
     public setTopPos(scrollV){
-        this.bg.y = - scrollV*0.2
+        this.bg.y = - scrollV
         if(this.hideTopState)
         {
             if(scrollV >= 30)
@@ -155,13 +177,19 @@ class MainUI extends game.BaseUI {
         super.hide();
     }
 
+    private onHangChange(){
+        this.bg.source = PKManager.getInstance().getBG(HangManager.getInstance().getHangBGID());
+    }
+
     public onShow(){
-        this.bg.source = Config.localResRoot  + 'main_bg'+UM.type+'.jpg';
+        this.onHangChange();
+        //this.bg.source = Config.localResRoot  + 'main_bg'+UM.type+'.jpg';
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
         this.addPanelOpenEvent(GameEvent.client.force_change,this.renewTop)
         this.addPanelOpenEvent(GameEvent.client.diamond_change,this.renewTop)
         this.addPanelOpenEvent(GameEvent.client.energy_change,this.renewEnergy)
+        this.addPanelOpenEvent(GameEvent.client.hang_change,this.onHangChange)
 
         //GuideManager.getInstance().isGuiding = true;
         if(GuideManager.getInstance().isGuiding)
@@ -210,6 +238,7 @@ class MainUI extends game.BaseUI {
             this.bottomItems[i].select(this.currentIndex == i,false)
         }
         this.bottomSelectMC.x = this.getBottomX()
+        this.renewBGX(false);
 
         if(this.lastUI)
             this.lastUI.hide();

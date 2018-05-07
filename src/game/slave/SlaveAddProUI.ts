@@ -34,6 +34,7 @@ class SlaveAddProUI extends game.BaseWindow {
         this.addBtnEvent(this.addDiamondBtn1,this.onDiamond)
 
         this.numInput.addEventListener(CommonNumInput.RENEW,this.renewCoin,this);
+        this.numInput.addStr = ' 小时'
     }
 
     private onDiamond(){
@@ -90,13 +91,13 @@ class SlaveAddProUI extends game.BaseWindow {
         if(cd > 0)
         {
             if(cd < 3600*24)
-                this.desText.text = '当前保护剩余时间：' + DateUtil.getStringBySecond(cd) + '\n请选择你需要增加的保护小时数:'
+                this.desText.text = '' + DateUtil.getStringBySecond(cd)// + '\n请选择你需要增加的保护小时数:'
             else
-                this.desText.text = '当前保护剩余时间：' + DateUtil.getStringBySeconds(cd,false,2)  + '\n请选择你需要增加的保护小时数:'
+                this.desText.text = '' + DateUtil.getStringBySeconds(cd,false,2)//  + '\n请选择你需要增加的保护小时数:'
         }
         else
         {
-            this.desText.text = '请选择你需要增加的保护小时数:'
+            this.desText.text = '无保护'
         }
 
     }

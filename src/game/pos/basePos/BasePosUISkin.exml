@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="BasePosUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
-	<e:Group id="scrollerBG" x="0" y="130" width="100%">
-		<e:Rect width="100%" height="130" x="20" y="20" fillColor="0xE2A75D"/>
-		<e:Rect width="100%" height="130" x="10" y="10" fillColor="0xF2C379" strokeColor="0x000000"/>
-		<e:Rect width="100%" height="130" x="30" y="30" fillColor="0xE2A75D"/>
-		<e:Rect width="100%" height="130" x="40" y="40" fillColor="0xF2C379"/>
-		<e:Rect width="100%" height="130" x="40" y="40" fillColor="0xE2A75D"/>
-		<e:Rect width="100%" height="130" x="50" y="50" fillColor="0xF2C379"/>
-		<e:Rect width="100%" height="130" x="50" y="50" fillColor="0xE2A75D"/>
-		<e:Rect width="100%" height="130" x="60" y="60" fillColor="0xF2C379"/>
-		<e:Rect width="100%" height="130" x="60" y="60" fillColor="0xE2A75D"/>
-		<e:layout>
-		<e:VerticalLayout gap="0"/>
-		</e:layout>
-	</e:Group>
-	<e:Rect width="100%" height="130" x="0" y="0" fillColor="0x827048"/>
+	<e:Image source="bg3_png" scale9Grid="16,15,7,7" x="0" y="0" width="100%" height="100%"/>
 	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
-	<e:List id="list" width="640" x="0" y="130">
-		<e:layout>
-			<e:TileLayout requestedColumnCount="6" horizontalGap="8" verticalGap="20" paddingLeft="12" paddingTop="10" paddingBottom="10"/>
-		</e:layout>
-	</e:List>
 	<e:Image id="downBtn" source="arrow1_png" rotation="90" scaleX="0.8" scaleY="0.8" right="10" width="54" bottom="120"/>
 	<e:Image id="upBtn" source="arrow1_png" rotation="270" scaleX="0.8" scaleY="0.8" right="10" bottom="120"/>
-	<e:Image source="line2_png" x="0" y="130" fillMode="repeat" width="100%"/>
-	<e:List id="tabList" y="72" itemRendererSkinName="BasePosTabSkin" horizontalCenter="0">
+	<e:Group x="0" top="120" bottom="100" scrollEnabled="true">
+		<e:Group id="scrollerBG" x="0" y="0" width="100%">
+			<e:Rect width="100%" height="130" x="20" y="20" fillColor="0xE2A75D"/>
+			<e:Rect width="100%" height="130" x="10" y="10" fillColor="0xF2C379" strokeColor="0x000000"/>
+			<e:Rect width="100%" height="130" x="30" y="30" fillColor="0xE2A75D"/>
+			<e:Rect width="100%" height="130" x="40" y="40" fillColor="0xF2C379"/>
+			<e:Rect width="100%" height="130" x="40" y="40" fillColor="0xE2A75D"/>
+			<e:Rect width="100%" height="130" x="50" y="50" fillColor="0xF2C379"/>
+			<e:Rect width="100%" height="130" x="50" y="50" fillColor="0xE2A75D"/>
+			<e:Rect width="100%" height="130" x="60" y="60" fillColor="0xF2C379"/>
+			<e:Rect width="100%" height="130" x="60" y="60" fillColor="0xE2A75D"/>
+			<e:layout>
+			<e:VerticalLayout gap="0"/>
+			</e:layout>
+		</e:Group>
+		<e:List id="list" width="640" x="0" y="0">
+			<e:layout>
+			<e:TileLayout requestedColumnCount="6" horizontalGap="8" verticalGap="20" paddingLeft="12" paddingTop="10" paddingBottom="10"/>
+			</e:layout>
+		</e:List>
+	</e:Group>
+	<e:List id="tabList" y="65" itemRendererSkinName="BasePosTabSkin" horizontalCenter="0">
 		<e:ArrayCollection>
 			<e:Array>
 				<e:Object null=""/>
@@ -38,7 +39,8 @@
 			<e:HorizontalLayout gap="10"/>
 		</e:layout>
 	</e:List>
-	<e:CheckBox id="openBtn" label="启用" y="75" skinName="DefCheckBoxSkin" right="10"/>
+	<e:Image source="line2_png" x="0" y="119" fillMode="repeat" width="100%"/>
+	<e:CheckBox id="openBtn" label="启用" y="68.92" skinName="DefCheckBoxSkin" right="10"/>
 	<e:Group x="245" bottom="100" touchChildren="false" touchEnabled="false">
 		<e:Group x="0" y="0">
 			<e:Image source="bg17_png" x="0" y="0" scaleX="-1" scale9Grid="4,5,61,31" width="75"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="ViewItemSkin" width="600" height="100" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
 	<e:Image x="0" y="0" width="100%" height="100%" source="bg2_png" scale9Grid="11,8,9,13"/>
-	<e:Rect right="2" left="2" height="50%" bottom="0" fillColor="0x000000" fillAlpha="0.15"/>
+	<e:Rect right="2" left="100" height="1" fillColor="0x603b10" y="52"/>
 	<e:Label id="nameText" text="苦顶替" size="26" stroke="3" verticalAlign="bottom" x="100" textColor="0xFFFFFF" strokeColor="0x231507" y="15.03"/>
 	<e:Group x="320" height="32" bottom="10">
     		<e:Image source="icon_coin_png" x="0" y="2" scaleX="0.6" scaleY="0.6"/>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="HelpUISkin" width="520" height="680" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Image source="bg10_png" scale9Grid="26,25,6,7" x="0" width="100%" top="35" bottom="0"/>
+	<e:Image scale9Grid="26,25,6,7" x="0" width="100%" top="35" bottom="0" source="bg14_png"/>
 	<e:Scroller id="scroller" left="10" right="10" top="40" bottom="10" bounces="false">
     		<e:Group>
     			<e:List id="list" width="200" height="200" x="35" y="32" itemRendererSkinName="HelpItemSkin">
     				<e:layout>
-    					<e:VerticalLayout gap="15" paddingTop="50"/>
+    					<e:VerticalLayout paddingTop="50" gap="6"/>
     				</e:layout>
     			</e:List>
     		</e:Group>

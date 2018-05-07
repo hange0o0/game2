@@ -16,20 +16,20 @@
 		</e:layout>
 	</e:Group>
 	<e:Image id="helpBtn" source="icon_help_png" y="10" right="10" scaleX="0.9" scaleY="0.9"/>
-	<e:Group left="10" right="10" height="110" bottom="150">
-		<e:Rect height="100%" y="0" x="0" width="100%"/>
-		<e:Rect id="bar1" width="200" height="100%" x="0" y="0" fillColor="0x001900"/>
-		<e:Rect id="bar2" width="200" height="100%" y="0" right="0" fillColor="0x260000"/>
+	<e:Group left="10" right="10" height="80" bottom="150">
+		<e:Rect height="100%" y="0" x="0" width="100%" fillColor="0x3a1f02"/>
+		<e:Rect id="bar1" width="200" height="100%" x="0" y="0" fillColor="0x12562b"/>
+		<e:Rect id="bar2" width="200" height="100%" y="0" right="0" fillColor="0x5b1212"/>
 		<e:Group horizontalCenter="0" verticalCenter="0">
-			<e:Group id="likeBtn" x="0" y="0">
-				<e:Image id="likeChooseMC" y="0" width="260" x="0" height="100" source="border2_png" scale9Grid="12,11,6,6"/>
+			<e:Group id="likeBtn" x="0" y="1.52" width="260" height="60">
+				<e:Image source="border_6_png" scale9Grid="12,12,76,76" left="0" right="0" top="0" bottom="0"/>
+				<e:Image id="likeChooseMC" y="0" width="100%" x="0" height="100%" source="border2_png" scale9Grid="12,11,6,6"/>
 				<e:Group horizontalCenter="0" verticalCenter="0">
-					<e:Label id="likeText" text="(1.234K)" x="0" y="0" size="24" textColor="0xffc76b" scaleX="1" scaleY="1"/>
 					<e:Group x="0" y="0">
 						<e:Image id="likeIcon" source="icon_like_png" x="0" y="0"/>
-						<e:Label text="要求加强" x="5" y="40" size="30" stroke="2" textColor="0x3add35"/>
+						<e:Label id="likeText" text="要加强 (10000)" x="5" y="40" size="26" textColor="0x09eb0d" strokeColor="0x022602" bold="true" stroke="1"/>
 						<e:layout>
-						<e:HorizontalLayout verticalAlign="middle" gap="6"/>
+						<e:HorizontalLayout verticalAlign="bottom" gap="6"/>
 						</e:layout>
 					</e:Group>
 					<e:layout>
@@ -37,15 +37,15 @@
 					</e:layout>
 				</e:Group>
 			</e:Group>
-			<e:Group id="unlikeBtn" x="10" y="10">
-				<e:Image id="unlikeChooseMC" y="0" width="260" x="0" height="100" source="border2_png" scale9Grid="10,10,9,7"/>
+			<e:Group id="unlikeBtn" x="10" y="10" width="260" height="60">
+				<e:Image source="border_8_png" scale9Grid="12,12,76,76" left="0" right="0" top="0" bottom="0"/>
+				<e:Image id="unlikeChooseMC" y="0" width="100%" x="0" height="100%" source="border2_png" scale9Grid="12,12,7,5"/>
 				<e:Group horizontalCenter="0" verticalCenter="0">
-					<e:Label id="unlikeText" text="(1.234K)" x="-206" y="6" size="24" textColor="0xffc76b"/>
 				<e:Group x="0" y="0">
 					<e:Image id="unlikeIcon" source="icon_unlike_png" x="0" y="0"/>
-					<e:Label text="必须削弱" x="10" y="39.99999999999994" size="30" stroke="2" textColor="0xff3d3d" scaleX="1" scaleY="1"/>
+					<e:Label id="unlikeText" text="必须削弱" x="10" y="39.99999999999994" size="26" scaleX="1" scaleY="1" bold="true" textColor="0xff0202" strokeColor="0x300101" stroke="1"/>
 					<e:layout>
-					<e:HorizontalLayout verticalAlign="middle" gap="6"/>
+					<e:HorizontalLayout verticalAlign="bottom" gap="6"/>
 					</e:layout>
 				</e:Group>
 				<e:layout>
@@ -54,9 +54,10 @@
 				</e:Group>
 			</e:Group>
 			<e:layout>
-			<e:HorizontalLayout gap="10"/>
+			<e:HorizontalLayout gap="6"/>
 			</e:layout>
 		</e:Group>
 	</e:Group>
 	<e:CheckBox id="cb" label="显示基础属性" skinName="MyCheckBoxSkin" bottom="105" x="30"/>
+	<e:Image source="close_btn2_png" bottom="-45" horizontalCenter="0" touchEnabled="false"/>
 </e:Skin>

@@ -8,6 +8,7 @@ class HangUI extends game.BaseItem {
     }
 
     private con: eui.Group;
+    //private bg: eui.Image;
     private clockGroup: eui.Group;
     private timeText: eui.Label;
     private titleText: eui.Label;
@@ -18,6 +19,7 @@ class HangUI extends game.BaseItem {
     public openBtn: eui.Button;
     private awardRed: eui.Image;
     private helpBtn: eui.Image;
+
 
 
 
@@ -48,6 +50,10 @@ class HangUI extends game.BaseItem {
 
         this.con.mask = new egret.Rectangle(0,0,this.con.width,this.con.height)
 
+
+        //var blurFliter = new egret.BlurFilter( 10 , 10);
+        //this.bg.filters = [blurFliter];
+        //this.bg.cacheAsBitmap  = true;
     }
 
     public onPK(){
@@ -111,12 +117,14 @@ class HangUI extends game.BaseItem {
         var HM = HangManager.getInstance();
         this.titleText.text = '第 '+(HM.level+1)+' 关'
 
+        //this.bg.source = PKManager.getInstance().getBG(HangManager.getInstance().getHangBGID());
+
 
 
 
         var pkvideo = PKVideoCon.getInstance()
         this.con.addChild(pkvideo)
-        pkvideo.y = -20;
+        pkvideo.y = -10;
         pkvideo.x = 0
 
         if(HM.level == 0)

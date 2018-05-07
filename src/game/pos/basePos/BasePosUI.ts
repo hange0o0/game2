@@ -340,20 +340,20 @@ class BasePosUI extends game.BaseUI {
     public renewBtn(toBottom?){
         this.upBtn.visible = false
         this.downBtn.visible = false
-        var listHeight = Math.ceil(this.listData.length/4)*130
-        var scrollHeight = GameManager.stage.stageHeight-60-100
+        var listHeight = Math.ceil(this.listData.length/6)*130
+        var scrollHeight = GameManager.stage.stageHeight-120-100
         if( listHeight > scrollHeight)
         {
             if(toBottom)
             {
                 this.upBtn.visible = true
-                this.list.y = 60 + scrollHeight - listHeight
+                this.list.y = scrollHeight - listHeight
 
             }
             else
             {
                 this.downBtn.visible = true
-                this.list.y = 60
+                this.list.y = 0
             }
             this.scrollerBG.y = this.list.y
         }

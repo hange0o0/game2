@@ -49,8 +49,11 @@ class PKManager {
         '我只是变的更坚强了','我和你没完','不胜利毋宁死','死亡，没什么好怕的']
 
 
+    public getPKBG(){
+        return this.getBG(HangManager.getInstance().getHangBGID())
+    }
 
-    public getPKBG(id){
+    public getBG(id){
         return Config.localResRoot + 'map/map'+(id || 1)+'.jpg';
     }
 

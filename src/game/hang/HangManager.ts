@@ -17,6 +17,10 @@ class HangManager {
         this.lastlist = (data.lastlist || '').split(',')
     }
 
+    public getHangBGID(){
+        return Math.ceil((this.level+1)/3)%10 || 10
+    }
+
     public getPKCD(){
         return 10 + this.level*3;
     }

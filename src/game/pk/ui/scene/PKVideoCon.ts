@@ -47,7 +47,7 @@ class PKVideoCon extends game.BaseContainer {
     }
 
     public init(){
-        this.bg.source = PKManager.getInstance().getPKBG(_get['map']);
+        this.bg.source = PKManager.getInstance().getPKBG();
         this.remove();
         if(PKData.getInstance().myPlayer.teamData.atkRota == PKConfig.ROTA_LEFT)
         {

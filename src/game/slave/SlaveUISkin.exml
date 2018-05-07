@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="SlaveUISkin" width="640" height="1200" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
-	<e:Image source="bg15_png" x="0" top="140" bottom="-10" width="640" scale9Grid="19,18,10,8"/>
+	<e:Image source="bg14_png" x="0" top="140" bottom="-30" width="640" scale9Grid="32,29,8,10"/>
 	<e:Scroller id="scroller" width="640" top="150" bottom="0" bounces="false" horizontalCenter="0">
 		<e:Group id="scrollGroup">
 			<e:Group id="proGroup" x="230" y="1140">
@@ -17,10 +17,10 @@
 				<e:VerticalLayout verticalAlign="middle" horizontalAlign="center" gap="10" paddingBottom="10"/>
 				</e:layout>
 			</e:Group>
-		<e:Group id="masterGroup" x="0" y="0" height="320">
-			<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="400" y="0" horizontalCenter="0"/>
+		<e:Group id="masterGroup" x="0" y="0" height="330">
+			<ns1:SlaveMasterItem id="masterItem" y="100" skinName="SlaveMasterItemSkin" scaleX="1" scaleY="1" horizontalCenter="0"/>
+			<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="520" y="0" horizontalCenter="0"/>
 			<e:Label text="你的主人" y="9.09" size="24" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
-			<ns1:SlaveMasterItem id="masterItem" y="120" skinName="SlaveMasterItemSkin" x="0" scaleX="1" scaleY="1"/>
 		</e:Group>
 		<e:Group x="0" y="0" height="60">
 			<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="630" x="0" y="0"/>
@@ -43,7 +43,7 @@
 		</e:layout>
 		</e:Group>
 	</e:Scroller>
-	<e:TabBar id="tab" x="8" y="87" itemRendererSkinName="MyTabItemSkin" width="300">
+	<e:TabBar id="tab" y="87" itemRendererSkinName="MyTabItemSkin" width="360" horizontalCenter="0">
 		<e:ArrayCollection>
 		<e:Array>
 			<e:Object label="奴隶"/>

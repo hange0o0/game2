@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<e:Skin class="SlaveAddProUISkin" width="480" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*"  height="450">
+<e:Skin class="SlaveAddProUISkin" width="480" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*"  height="500">
 	<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
 
 	<e:Group horizontalCenter="0" bottom="30">
@@ -9,34 +9,32 @@
 			<e:HorizontalLayout gap="30"/>
 		</e:layout>
 	</e:Group>
-	<e:Group y="-40" horizontalCenter="0">
-		<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="560" x="0" y="0"/>
-		<e:Label id="titleText" text="请先择增加的保护时间" y="10.18" size="24" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
+	<e:Group y="15" horizontalCenter="0">
+		<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="400" x="0" y="0"/>
+		<e:Label id="titleText" text="增加保护" y="10.18" size="24" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
 	</e:Group>
-	<e:Group x="140" y="122">
-		<ns1:CommonNumInput id="numInput" x="190" y="80" skinName="CommonNumInputSkin"/>
+	<e:Group y="188" horizontalCenter="0">
+		<ns1:CommonNumInput id="numInput" x="190" y="80" skinName="CommonNumInputSkin" width="300"/>
 		<e:Group x="0" y="0">
-			<e:Image source="border1_png" scale9Grid="28,20,26,2" x="0" y="0" width="250"/>
-			<e:Label id="costDiamondText" text="12345" x="55" size="24" y="9"/>
-			<e:Image x="-10" y="-1.5" source="icon_diamond_png"/>
+		<e:Image source="border1_png" scale9Grid="28,20,26,2" x="80" y="0" width="220"/>
+		<e:Label id="costDiamondText" text="12345" size="24" y="9" left="135" right="40" textAlign="center"/>
+		<e:Image x="70" y="-1.5" source="icon_diamond_png"/>
+		<e:Label text="消耗：" x="0" size="26" textColor="0xffe28c" y="8"/>
 		</e:Group>
 		<e:Group x="0" y="0">
-			<e:Image source="border1_png" scale9Grid="28,20,26,2" x="0" y="0" width="250"/>
-			<e:Label id="ownDiamondText" text="12345" x="55" size="24" y="9"/>
-			<e:Image id="addDiamondBtn1" source="icon_add2_png" y="0" right="0"/>
-			<e:Image x="-10" y="-1.5" source="icon_diamond_png"/>
+		<e:Image source="border1_png" scale9Grid="28,20,26,2" x="80" y="0" width="220"/>
+		<e:Label id="ownDiamondText" text="12345" size="24" y="9" left="135" right="40" textAlign="center"/>
+		<e:Image id="addDiamondBtn1" source="icon_add2_png" y="0" right="0"/>
+		<e:Image x="70" y="-1.5" source="icon_diamond_png"/>
+		<e:Label text="拥有：" x="0" size="26" textColor="0xffe28c" verticalCenter="0"/>
 		</e:Group>
 		<e:layout>
-			<e:VerticalLayout gap="20"/>
+		<e:VerticalLayout gap="20"/>
 		</e:layout>
 	</e:Group>
-	<e:Group x="42" y="132">
-		<e:Label text="时间：" x="0" y="-2" size="26"/>
-		<e:Label text="消耗：" x="10" y="10" size="26"/>
-		<e:Label text="拥有：" x="20" y="20" size="26"/>
-		<e:layout>
-			<e:VerticalLayout gap="45"/>
-		</e:layout>
+	<e:Group y="75" horizontalCenter="0">
+		<e:Image source="bg9_png" scale9Grid="12,12,4,5" y="0" width="250" height="90" x="0"/>
+		<e:Label text="当前保护剩余时间" y="11" size="23" verticalAlign="middle" lineSpacing="5" textAlign="center" stroke="1" strokeColor="0x51310F" horizontalCenter="0"/>
+		<e:Label id="desText" text="Label" y="46" size="35" verticalAlign="middle" lineSpacing="5" textAlign="center" stroke="1" strokeColor="0x51310f" textColor="0xffe28c" horizontalCenter="0"/>
 	</e:Group>
-	<e:Label id="desText" text="Label" y="25" size="24" height="60" verticalAlign="middle" lineSpacing="5" horizontalCenter="0" textAlign="center"/>
 </e:Skin>

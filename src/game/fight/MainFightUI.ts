@@ -130,7 +130,7 @@ class MainFightUI extends MainBase {
         this.addPanelOpenEvent(GameEvent.client.pk_begin,this.onPKBegin)
         this.addPanelOpenEvent(GameEvent.client.pk_end,this.onPKEnd)
         this.addPanelOpenEvent(GameEvent.client.red_change,this.renewRed)
-        //this.addPanelOpenEvent(GameEvent.client.hang_change,this.onPKEnd)
+
     }
 
     public onPKBegin(){

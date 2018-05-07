@@ -13,7 +13,7 @@
 		</e:List>
 		</e:Group>
 	</e:Scroller>
-	<e:TabBar id="tab" x="8" y="67" itemRendererSkinName="MyTabItemSkin" width="450">
+	<e:TabBar id="tab" y="67" itemRendererSkinName="MyTabItemSkin" width="480" horizontalCenter="0">
 		<e:ArrayCollection>
 		<e:Array>
 			<e:Object label="奴隶"/>
@@ -25,10 +25,13 @@
         			<e:HorizontalLayout horizontalAlign="justify"/>
         		</e:layout>
 	</e:TabBar>
-	<e:Label text="只保留最近3天的消息" stroke="2" strokeColor="0x260f00" right="50" bottom="35"/>
 	<e:Group id="emptyGroup" horizontalCenter="0" verticalCenter="0">
 		<e:Image source="icon_empty_png" y="0" scaleX="1.3" scaleY="1.3" horizontalCenter="-0.5"/>
 		<e:Label text="暂无相关消息" y="90" horizontalCenter="0" size="22"/>
+	</e:Group>
+	<e:Group bottom="28" right="20">
+		<e:Image source="bg3_png" scale9Grid="16,15,7,7" left="0" right="0" top="0" bottom="0"/>
+		<e:Label text="只保留最近3天的消息" stroke="2" strokeColor="0x301200" size="24" left="15" right="15" top="10" bottom="10"/>
 	</e:Group>
 
 </e:Skin>

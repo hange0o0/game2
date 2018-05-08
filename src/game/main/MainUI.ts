@@ -101,6 +101,8 @@ class MainUI extends game.BaseUI {
                });
                return;
            }
+
+           SoundManager.getInstance().playEffect(SoundConfig.effect_button);
            var t = egret.getTimer();
            this.bottomItems[this.currentIndex].select(false)
            this.bottomItems[index].select(true)
@@ -200,6 +202,12 @@ class MainUI extends game.BaseUI {
         }
         else if(!LoginManager.getInstance().logText.cb && LoginManager.getInstance().logText.text)
             LogUI.getInstance().show();
+
+        SoundManager.getInstance().playSound(SoundConfig.bg);
+
+        setTimeout(function(){
+            SoundManager.getInstance().loadEffectSound();
+        },1000)
     }
 
     private onTimer(){

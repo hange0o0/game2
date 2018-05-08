@@ -31,7 +31,7 @@ class PKFailUI extends game.BaseUI {
 
     public onShow(){
         var PKM = PKManager.getInstance();
-
+        SoundManager.getInstance().playEffect(SoundConfig.pk_loss);
         this.bg.visible = false;
         if(GameManager.stage.stageHeight > 1050)
             this.group.y = 230 + 130

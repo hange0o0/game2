@@ -74,6 +74,7 @@ class PayManager {
                     break;
                 }
             }
+            SoundManager.getInstance().playEffect(SoundConfig.effect_buy);
             if(fun)
                 fun();
         });
@@ -85,6 +86,7 @@ class PayManager {
         Net.addUser(oo);
         Net.send(GameEvent.pay.add_diamond,oo,(data) =>{
             var msg = data.msg;
+            SoundManager.getInstance().playEffect(SoundConfig.effect_buy);
             if(fun)
                 fun();
         });

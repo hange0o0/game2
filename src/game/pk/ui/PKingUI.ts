@@ -48,6 +48,7 @@ class PKingUI extends game.BaseUI {
 
     public hide(){
         super.hide();
+        SoundManager.getInstance().playSound(SoundConfig.bg);
         this.removeAll();
         this.removeEventListener(egret.Event.ENTER_FRAME,this.onE,this)
         EM.dispatchEventWith(GameEvent.client.pk_end)
@@ -108,6 +109,7 @@ class PKingUI extends game.BaseUI {
     }
 
     public onShow(){
+        SoundManager.getInstance().playSound(SoundConfig.bg_pk);
         EM.dispatchEventWith(GameEvent.client.pk_begin)
 
         var PD = PKData.getInstance();
@@ -156,6 +158,7 @@ class PKingUI extends game.BaseUI {
     }
 
     public startPlay(){
+        SoundManager.getInstance().loadPKSound();
         this.hideBehind = true;
         PKBeforeUI.getInstance().hide();
 
@@ -243,6 +246,7 @@ class PKingUI extends game.BaseUI {
 
         if(isOver)
         {
+            SoundManager.getInstance().playSound(SoundConfig.bg_pk_view);
             PKManager.getInstance().savePKResult();
             this.removeEventListener(egret.Event.ENTER_FRAME,this.onE,this);
             if(PD.isWin())

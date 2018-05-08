@@ -116,23 +116,16 @@ class CardUI extends MainBase {
         var CRM = CardManager.getInstance();
         var type = this.tab.selectedIndex + 1;
         var arr;
-        //if(this.tab.selectedIndex == 0)
-        //{
+        if(type <= 3)
+        {
             arr =CRM.getTotalMonsterList(type)
-        //    this.currentState = 'monster'
-        //}
-        //else
-        //{
-        //    this.currentState = 'skill'
-        //    arr = CRM.getTotalSkillList(type)
-            //this.renewSkillInfo();
-            //MyTool.changeGray(this.skillBtn,now>=max,true)
-            //this.once(egret.Event.ENTER_FRAME,function(){
-            //    if(this.skillBtn.stage)
-            //        MyTool.changeGray(this.skillBtn,now>=max,true)
-            //},this)
-
-        //}
+            this.currentState = 'monster'
+        }
+        else
+        {
+            this.currentState = 'skill'
+            arr = CRM.getTotalSkillList(0)
+        }
         ArrayUtil.sortByField(arr,['cost','level','id'],[0,0,0]);
         this.dataArray.source = arr;
         this.dataArray.refresh()

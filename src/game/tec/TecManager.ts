@@ -169,6 +169,7 @@ class TecManager {
                 TecInfoUI.getInstance().renew();
                 return;
             }
+            SoundManager.getInstance().playEffect(SoundConfig.effect_u_up);
             if (fun)
                 fun();
         });

@@ -29,6 +29,7 @@ class PKWinUI extends game.BaseUI {
     }
 
     public onShow(){
+        SoundManager.getInstance().playEffect(SoundConfig.pk_win);
         AniManager.getInstance().preLoadMV(1001)
         var PKM = PKManager.getInstance();
 

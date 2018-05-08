@@ -199,14 +199,14 @@ class BasePosChooseUI extends game.BaseUI {
     private renewList(){
         var type = this.tab.selectedIndex + 1;
         var arr;
-        //if(this.tab.selectedIndex == 0)
-        //{
+        if(this.tab.selectedIndex == 3)
+        {
+            arr = CardManager.getInstance().getMySkillList(0)
+        }
+        else
+        {
             arr = CardManager.getInstance().getMyMonsterList(type)
-        //}
-        //else
-        //{
-        //    arr = CardManager.getInstance().getMySkillList(type)
-        //}
+        }
         ArrayUtil.sortByField(arr,['cost','level','id'],[0,0,0]);
         for(var i=0;i<arr.length;i++)
         {

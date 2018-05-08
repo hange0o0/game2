@@ -191,6 +191,7 @@ class Main extends eui.UILayer {
         GameManager.getInstance().init();
         if(_get['hide'])
             return;
+        SoundManager.getInstance().preLoad();
         var LM = LoginManager.getInstance();
         if(LM.quickPassword)
         {

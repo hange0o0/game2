@@ -51,6 +51,12 @@ class MyTool {
             list.getChildAt(i)['dataChanged']();
         }
     }
+    public static runListFun(list,funName){
+        for(var i=0;i<list.numChildren;i++)
+        {
+            list.getChildAt(i)[funName]();
+        }
+    }
 
     public static maxUserHead = 82;
 

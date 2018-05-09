@@ -32,6 +32,7 @@ class HangUI extends game.BaseItem {
     private cost2 = 0
     private overCount = 10
 
+    private pkMV;
 
     public constructor() {
         super();
@@ -50,6 +51,16 @@ class HangUI extends game.BaseItem {
 
         this.con.mask = new egret.Rectangle(0,0,this.con.width,this.con.height)
 
+        var name = 'pk_mv'
+        var data:any = RES.getRes(name + "_json"); //qid
+        var texture:egret.Texture = RES.getRes(name + "_png");
+        var mcFactory = new egret.MovieClipDataFactory(data, texture);
+        this.pkMV =  new egret.MovieClip();
+        this.pkMV.movieClipData = mcFactory.generateMovieClipData('mv');
+        this.addChild(this.pkMV);
+        this.pkMV.x = 320;
+        this.pkMV.scaleX = this.pkMV.scaleY = 1.5
+        //this.pkMV.gotoAndPlay(1,0)
 
         //var blurFliter = new egret.BlurFilter( 10 , 10);
         //this.bg.filters = [blurFliter];
@@ -95,6 +106,8 @@ class HangUI extends game.BaseItem {
             if(cd <= 0)
             {
                 this.lockGroup.visible = false;
+                this.pkMV.visible = true
+                this.pkMV.play(-1);
             }
             else
             {
@@ -134,6 +147,9 @@ class HangUI extends game.BaseItem {
              this.lockGroup.visible = false;
              this.awardBtn.visible = false;
              this.awardRed.visible = false;
+            this.pkMV.visible = true
+            this.pkMV.play(-1);
+            this.pkMV.y = 280;
             this.reset(true);
             PKVideoCon.getInstance().x = (640- PKVideoCon.getInstance().width)/2;
         }
@@ -147,6 +163,13 @@ class HangUI extends game.BaseItem {
             this.lockGroup.visible = HM.getPKLeft() > 0;
             this.awardBtn.visible = HM.getAwardLeft() < 0;
             this.awardRed.visible = false
+
+            this.pkMV.visible = !this.lockGroup.visible
+            this.pkMV.y = 460;
+            if(this.pkMV.visible)
+                this.pkMV.play(-1);
+            else
+                this.pkMV.stop();
         }
 
         this.onTimer();
@@ -189,6 +212,7 @@ class HangUI extends game.BaseItem {
             this.removeEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
             PKBulletManager.getInstance().freeAll()
             pkvideo.remove();
+            this.pkMV.stop();
         }
     }
 

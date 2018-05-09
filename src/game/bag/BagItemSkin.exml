@@ -10,5 +10,5 @@
 		<e:Image source="border1_png" scale9Grid="28,20,26,2" left="0" right="0" top="0" bottom="0"/>
 		<e:Label id="numText" text="*1234" size="22" stroke="2" textColor="0xffe2a3" left="20" right="20" verticalCenter="-3" textAlign="right"/>
 	</e:Group>
-	<e:Label id="desText" text="Label" y="49.56" size="22" x="90" strokeColor="0x1c0c00" stroke="1" textColor="0xa0f4ff"/>
+	<e:Label id="desText" text="Label" y="50" size="22" x="90" strokeColor="0x1c0c00" stroke="1" textColor="0xFFE496"/>
 </e:Skin>

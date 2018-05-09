@@ -28,7 +28,7 @@ class BagUI extends MainBase {
         this.list.itemRenderer = BagItem
 
         this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
-        this.tab.selectedIndex = 0;
+        this.tab.selectedIndex = 1;
 
         //this.list.layout['requestedColumnCount'] = 1
         //this.list.layout['paddingLeft'] = 15
@@ -46,16 +46,20 @@ class BagUI extends MainBase {
 
     public onShow(){
         this.renew();
-        //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
+        this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
+    }
+
+    private onTimer(){
+        MyTool.runListFun(this.list,'onTimer')
     }
 
     public renew(){
         var arr = PropManager.getInstance().getListByType(this.tab.selectedIndex + 1);
         if(this.tab.selectedIndex == 1)
         {
-            var coin = UM.getCoin();
-            if(coin)
-                arr.unshift({coin:coin});
+            //var coin = UM.getCoin();
+            //if(coin)
+                arr.unshift({coin:true});
         }
         //else
         //{

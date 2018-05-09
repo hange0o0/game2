@@ -133,7 +133,7 @@ var game_file_list = [
 	"bin-debug/game/pk/monsterData/3/M64.js",
 	"bin-debug/game/pk/monsterData/3/M65.js",
 	"bin-debug/game/pk/monsterData/3/M66.js",
-	"bin-debug/LoadingUI.js",
+	"bin-debug/util/StringUtil.js",
 	"bin-debug/game/pk/monsterData/3/M68.js",
 	"bin-debug/game/pk/monsterData/3/M69.js",
 	"bin-debug/game/pk/monsterData/3/M70.js",
@@ -257,7 +257,7 @@ var game_file_list = [
 	"bin-debug/util/ObjectUtil.js",
 	"bin-debug/util/PopUpManager.js",
 	"bin-debug/util/ShapeObject.js",
-	"bin-debug/util/StringUtil.js",
+	"bin-debug/LoadingUI.js",
 	//----auto game_file_list end----
 ];
 

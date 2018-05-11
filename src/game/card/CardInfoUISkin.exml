@@ -1,63 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="CardInfoUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
-    <ns1:PKCardInfoUI id="item" x="0" y="0" skinName="PKCardInfoSkin" currentState="window" minHeight="640"/>
-	<e:Group id="btnGroup" bottom="30" horizontalCenter="0">
-		<e:Button id="backBtn" label="返回" x="0" y="0" skinName="Btn2Skin" width="150"/>
-		<e:Group id="upGroup" x="180" y="0" width="150">
-			<e:Group x="-6.06" y="-55">
-				<e:Image source="border1_png" scale9Grid="28,20,26,2" x="0" y="0" width="160"/>
-				<e:Label id="coinText" text="1012345" x="48" size="24" y="9"/>
-				<e:Image id="icon" x="0" y="-3.5" source="icon_coin_png" width="46" height="46"/>
-			</e:Group>
-			<e:Button id="okBtn" label="开启" x="0" y="0" skinName="Btn1Skin" width="150"/>
-		</e:Group>
-		<e:layout>
-			<e:HorizontalLayout gap="30"/>
-		</e:layout>
-	</e:Group>
-	<e:Image id="helpBtn" source="icon_help_png" y="10" right="10" scaleX="0.9" scaleY="0.9"/>
-	<e:Group left="10" right="10" height="80" bottom="150">
-		<e:Rect height="100%" y="0" x="0" width="100%" fillColor="0x3a1f02"/>
-		<e:Rect id="bar1" width="200" height="100%" x="0" y="0" fillColor="0x12562b"/>
-		<e:Rect id="bar2" width="200" height="100%" y="0" right="0" fillColor="0x5b1212"/>
-		<e:Group horizontalCenter="0" verticalCenter="0">
-			<e:Group id="likeBtn" x="0" y="1.52" width="260" height="60">
-				<e:Image source="border_6_png" scale9Grid="12,12,76,76" left="0" right="0" top="0" bottom="0"/>
-				<e:Image id="likeChooseMC" y="0" width="100%" x="0" height="100%" source="border2_png" scale9Grid="12,11,6,6"/>
-				<e:Group horizontalCenter="0" verticalCenter="0">
-					<e:Group x="0" y="0">
-						<e:Image id="likeIcon" source="icon_like_png" x="0" y="0"/>
-						<e:Label id="likeText" text="要加强 (10000)" x="5" y="40" size="26" textColor="0x09eb0d" strokeColor="0x022602" bold="true" stroke="1"/>
-						<e:layout>
-						<e:HorizontalLayout verticalAlign="bottom" gap="6"/>
-						</e:layout>
-					</e:Group>
-					<e:layout>
-						<e:VerticalLayout gap="10" horizontalAlign="center"/>
-					</e:layout>
-				</e:Group>
-			</e:Group>
-			<e:Group id="unlikeBtn" x="10" y="10" width="260" height="60">
-				<e:Image source="border_8_png" scale9Grid="12,12,76,76" left="0" right="0" top="0" bottom="0"/>
-				<e:Image id="unlikeChooseMC" y="0" width="100%" x="0" height="100%" source="border2_png" scale9Grid="12,12,7,5"/>
-				<e:Group horizontalCenter="0" verticalCenter="0">
-				<e:Group x="0" y="0">
-					<e:Image id="unlikeIcon" source="icon_unlike_png" x="0" y="0"/>
-					<e:Label id="unlikeText" text="必须削弱" x="10" y="39.99999999999994" size="26" scaleX="1" scaleY="1" bold="true" textColor="0xff0202" strokeColor="0x300101" stroke="1"/>
-					<e:layout>
-					<e:HorizontalLayout verticalAlign="bottom" gap="6"/>
-					</e:layout>
-				</e:Group>
+<e:Skin class="CardInfoUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" states="normal,buy" >
+	<e:Group x="0" top="0" bottom="0" bottom.buy="95">
+		<ns1:PKCardInfoUI id="item" x="0" skinName="PKCardInfoSkin" currentState="window" minHeight="640" y="0"/>
+		<e:Image id="helpBtn" source="icon_help_png" y="10" scaleX="0.9" scaleY="0.9" x="501"/>
+		<e:Group bottom="80" height="100" width="510" horizontalCenter="0">
+			<e:Image scaleX="1" scaleY="1" left="0" right="0" top="0" bottom="0" source="bg11_png" scale9Grid="9,9,11,10"/>
+			<e:Group x="15" y="10">
+			<e:Image source="icon_like_png" x="0" verticalCenter="0"/>
+			<e:CheckBox id="likeCB" label="要求加强" skinName="MyCheckBoxSkin" x="40" y="0"/>
+			<e:Group x="200" verticalCenter="0">
+				<e:Rect id="likeBar" width="200" height="20" x="195" fillColor="0x12562b" y="3"/>
+				<e:Label id="likeText" text="10000" x="0" size="26" textColor="0x09eb0d" strokeColor="0x022602" bold="true" stroke="1" y="0"/>
 				<e:layout>
-					<e:VerticalLayout gap="10" horizontalAlign="center"/>
+				<e:HorizontalLayout verticalAlign="middle"/>
 				</e:layout>
-				</e:Group>
 			</e:Group>
+			</e:Group>
+			<e:Group x="15" y="55">
+			<e:Image x="0" verticalCenter="0" source="icon_unlike_png"/>
+			<e:CheckBox id="unlikeCB" label="必须削弱" skinName="MyCheckBoxSkin" x="40" y="0"/>
+			<e:Group x="200">
+				<e:Rect id="unlikeBar" width="200" height="20" x="195" y="3" fillColor="0x5b1212"/>
+				<e:Label id="unlikeText" text="10000" x="0" size="26" strokeColor="0x022602" bold="true" stroke="1" y="0" textColor="0xff0202"/>
+				<e:layout>
+				<e:HorizontalLayout verticalAlign="middle"/>
+				</e:layout>
+			</e:Group>
+			</e:Group>
+		</e:Group>
+		<e:Group bottom="30" horizontalCenter="0">
+			<e:RadioButton id="r0" label="显示基础属性" x="0" y="0" skinName="MyRadioButtonSkin" width="200"/>
+			<e:RadioButton id="r1" label="显示战斗属性" x="10" y="10" skinName="MyRadioButtonSkin" width="200"/>
 			<e:layout>
-			<e:HorizontalLayout gap="6"/>
+			<e:HorizontalLayout/>
 			</e:layout>
 		</e:Group>
 	</e:Group>
-	<e:CheckBox id="cb" label="显示基础属性" skinName="MyCheckBoxSkin" bottom="105" x="30"/>
 	<e:Image source="close_btn2_png" bottom="-45" horizontalCenter="0" touchEnabled="false"/>
+	<e:Group x="0" width="100%" height="90" bottom="0" includeIn="buy">
+		<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
+		<e:Group x="100" verticalCenter="0">
+			<e:Image source="border1_png" scale9Grid="28,20,26,2" x="0" y="0" width="180"/>
+			<e:Label id="coinText" text="1012345" x="48" size="24" y="9"/>
+			<e:Image id="icon" x="0" y="-3.5" source="icon_coin_png" width="46" height="46"/>
+		</e:Group>
+		<e:Button id="okBtn" label="开启" x="300" skinName="Btn1Skin" width="150" verticalCenter="0"/>
+	</e:Group>
 </e:Skin>

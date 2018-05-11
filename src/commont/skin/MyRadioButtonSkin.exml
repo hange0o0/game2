@@ -9,7 +9,7 @@
                 
                 
                  source="radio_btn2_png" source.upAndSelected="radio_btn1_png" source.downAndSelected="radio_btn1_png" source.disabledAndSelected="radio_btn1_png"/>
-        <e:Label id="labelDisplay" size="20"
+        <e:Label id="labelDisplay" size="24"
                  textAlign="center" verticalAlign="middle"
                  fontFamily="Tahoma" text="123" textColor="0xCCB48E"/>
     </e:Group>

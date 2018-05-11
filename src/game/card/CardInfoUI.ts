@@ -8,24 +8,20 @@ class CardInfoUI extends game.BaseWindow {
     }
 
     private item: PKCardInfoUI;
-    private btnGroup: eui.Group;
-    private backBtn: eui.Button;
-    private upGroup: eui.Group;
+    private helpBtn: eui.Image;
+    private likeCB: eui.CheckBox;
+    private likeBar: eui.Rect;
+    private likeText: eui.Label;
+    private unlikeCB: eui.CheckBox;
+    private unlikeBar: eui.Rect;
+    private unlikeText: eui.Label;
+    private r0: eui.RadioButton;
+    private r1: eui.RadioButton;
     private coinText: eui.Label;
     private icon: eui.Image;
     private okBtn: eui.Button;
-    private helpBtn: eui.Image;
-    private bar1: eui.Rect;
-    private bar2: eui.Rect;
-    private likeBtn: eui.Group;
-    private likeIcon: eui.Image;
-    private likeText: eui.Label;
-    private likeChooseMC: eui.Image;
-    private unlikeBtn: eui.Group;
-    private unlikeIcon: eui.Image;
-    private unlikeText: eui.Label;
-    private unlikeChooseMC: eui.Image;
-    private cb: eui.CheckBox;
+
+
 
 
 
@@ -41,26 +37,34 @@ class CardInfoUI extends game.BaseWindow {
 
     public childrenCreated() {
         super.childrenCreated();
-        this.addBtnEvent(this.backBtn,this.hide)
         this.addBtnEvent(this.okBtn,this.onClick)
-        this.addBtnEvent(this.cb,this.onCB)
-        this.addBtnEvent(this.likeBtn,this.onLike)
-        this.addBtnEvent(this.unlikeBtn,this.onUnlike)
+        this.addBtnEvent(this.r0,this.onCB)
+        this.addBtnEvent(this.r1,this.onCB)
+        //this.r0.selected = true;
+
+        this.addBtnEvent(this.likeCB,this.onLike)
+        this.addBtnEvent(this.unlikeCB,this.onUnlike)
 
         this.addBtnEvent(this.helpBtn,()=>{
             HelpManager.getInstance().showHelp('card')
         })
+
+        this.touchEnabled = false;
     }
 
     private onLike(){
-        this.testSendLike(1)
+        var b = this.testSendLike(1)
+        if(!b)
+            this.renewCardLike();
     }
     private onUnlike(){
-        this.testSendLike(2)
+        var b = this.testSendLike(2)
+        if(!b)
+            this.renewCardLike();
     }
 
     private testSendLike(like){
-        if(this.upGroup.stage)
+        if(this.currentState == 'buy')
         {
             MyWindow.ShowTips('你还没拥有该卡牌，无法投票')
             return false
@@ -79,10 +83,11 @@ class CardInfoUI extends game.BaseWindow {
         CardManager.getInstance().setCardLike(this.data.id,like,()=>{
             this.renewCardLike();
         })
+        return true;
     }
 
     private onCB(){
-        SharedObjectManager.getInstance().setMyValue('show_card_base',this.cb.selected);
+        SharedObjectManager.getInstance().setMyValue('show_card_base',this.r0.selected);
         this.renew();
     }
 
@@ -92,13 +97,13 @@ class CardInfoUI extends game.BaseWindow {
         if(this.data.isMonster)
         {
             CardManager.getInstance().card_open(this.data.id,()=>{
-                this.hide();
+                this.renew();
             })
         }
         else
         {
              CardManager.getInstance().card_buy(this.data.id,()=>{
-                 this.hide();
+                 this.renew();
              })
         }
     }
@@ -116,7 +121,8 @@ class CardInfoUI extends game.BaseWindow {
     }
 
     public onShow(){
-        this.cb.selected = SharedObjectManager.getInstance().getMyValue('show_card_base');
+        this.r0.selected = SharedObjectManager.getInstance().getMyValue('show_card_base') || false;
+        this.r1.selected = !this.r0.selected
         this.renew();
         //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
     }
@@ -125,7 +131,7 @@ class CardInfoUI extends game.BaseWindow {
         var CM = CardManager.getInstance()
         var homeLevel = TecManager.getInstance().getLevel(1)
         this.upAble = true
-        if(this.cb.selected)
+        if(this.r0.selected)
         {
             this.item.renew({
                 mid:this.data.id,
@@ -147,11 +153,11 @@ class CardInfoUI extends game.BaseWindow {
         {
             if(CM.monsterList[this.data.id] || this.data.level > homeLevel)
             {
-                MyTool.removeMC(this.upGroup);
+                this.currentState = 'normal'
             }
             else
             {
-                this.btnGroup.addChild(this.upGroup)
+                this.currentState = 'buy'
                 var coin = CM.getUpCoin(this.data.id);
                 this.coinText.text = coin + ''
                 this.upAble = coin <= UM.getCoin()
@@ -160,39 +166,68 @@ class CardInfoUI extends game.BaseWindow {
                 this.icon.source = MyTool.getPropCoin();
             }
         }
-        else
-        {
-            if(CM.skillList[this.data.id] || this.data.level > homeLevel)
-            {
-                MyTool.removeMC(this.upGroup);
-            }
-            else
-            {
-                this.btnGroup.addChild(this.upGroup)
-                this.coinText.text = CM.skillCost + ''
-                this.upAble =  CM.skillCost <= PropManager.getInstance().getNum(103)
-                this.okBtn.label = '兑换'
-                this.okBtn.skinName = 'Btn8Skin'
-                this.icon.source = PropVO.getObject(103).getThumb();
-            }
-        }
-        this.cb.x = this.upGroup.stage?30:176
+        //else
+        //{
+        //    if(CM.skillList[this.data.id] || this.data.level > homeLevel)
+        //    {
+        //        MyTool.removeMC(this.upGroup);
+        //    }
+        //    else
+        //    {
+        //        this.btnGroup.addChild(this.upGroup)
+        //        this.coinText.text = CM.skillCost + ''
+        //        this.upAble =  CM.skillCost <= PropManager.getInstance().getNum(103)
+        //        this.okBtn.label = '兑换'
+        //        this.okBtn.skinName = 'Btn8Skin'
+        //        this.icon.source = PropVO.getObject(103).getThumb();
+        //    }
+        //}
         this.coinText.textColor = this.upAble?0xFFFFFF:0xFF0000;
         this.renewCardLike();
     }
 
     private renewCardLike(){
-        var w = 540
+        var w = 180
         var likeObj = CardManager.getInstance().cardLike[this.data.id];
-        this.likeText.text = '要加强 (' + NumberUtil.formatStrNum(likeObj.like_num) + ')'
-        this.unlikeText.text = '要削弱 (' + NumberUtil.formatStrNum(likeObj.unlike_num)  +')'
-        var total = (likeObj.like_num + likeObj.unlike_num) || 1;
-        this.bar1.width = w * likeObj.like_num/total
-        this.bar2.width = w * likeObj.unlike_num/total
+        this.likeText.text = NumberUtil.formatStrNum(likeObj.like_num) ||  '暂无票数'
+        this.unlikeText.text = NumberUtil.formatStrNum(likeObj.unlike_num) ||  '暂无票数'
+        var total = (likeObj.like_num + likeObj.unlike_num);
+        if(total)
+        {
+            if(likeObj.like_num > likeObj.unlike_num)
+            {
+                this.likeBar.width = 10+w
+                this.unlikeBar.width = 10+w * likeObj.unlike_num/likeObj.like_num
+            }
+            else if(likeObj.like_num < likeObj.unlike_num)
+            {
+                this.likeBar.width = 10+w * likeObj.like_num/likeObj.unlike_num
+                this.unlikeBar.width = 10+w
+            }
+            else
+            {
+                this.likeBar.width = 10+w
+                this.unlikeBar.width = 10+w
+            }
+
+        }
+        else
+        {
+            this.likeBar.width = w
+            this.unlikeBar.width = w
+        }
+
 
         var myChoose = ActiveManager.getInstance().getLikeChoose(this.data.id)
-        this.likeChooseMC.visible = myChoose != 2
-        this.unlikeChooseMC.visible = myChoose != 1
-
+        if(myChoose)
+        {
+            this.likeCB.selected = myChoose == 1
+            this.unlikeCB.selected = myChoose == 2
+        }
+        else
+        {
+            this.likeCB.selected = false
+            this.unlikeCB.selected = false
+        }
     }
 }

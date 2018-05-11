@@ -7,7 +7,7 @@ class M71 extends MBase {
     public getAtkHp(user:PKMonsterData,target:PKMonsterData){
         if(target.mid == 99)
             return 1
-        return Math.ceil(target.maxHp/100*user.getSkillValue(1));
+        return super.getAtkHp(user,target) + Math.ceil(target.maxHp/100*user.getSkillValue(1));
     }
 
     public atk(user:PKMonsterData,target:PKMonsterData){

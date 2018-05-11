@@ -52,6 +52,7 @@ class PKMonsterData {
     public currentState = {};//当前的特殊状态
     public stateChange = false
     public reborning = false//有复活效果起作用了
+    public stopReborn = false//禁止目标复活
     public listenerData//保存用于listener的数据
 
 

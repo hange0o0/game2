@@ -9,6 +9,7 @@ class M66 extends MBase {
         var owner = PD.getPlayer(user.owner);
         var atkRota = owner.teamData.atkRota;
         var num = user.getSkillValue(1)
+        target.stopReborn = true;
         for(var i=0;i<num;i++)
         {
             var mData = {

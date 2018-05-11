@@ -16,7 +16,7 @@
 		<e:Image source="bg1_png" scale9Grid="8,8,14,14" x="0" y="0" width="100%" height="100%"/>
 		<e:Label id="desText" text="Label" size="22" left="15" right="15" top="10" bottom="10" lineSpacing="5"/>
 	</e:Group>
-	<e:Group id="group" horizontalCenter="0" top="200" bottom="30" bottom.window="240">
+	<e:Group id="group" horizontalCenter="0" top="200" bottom="30" bottom.window="200">
 		<e:List id="list1" x="-3.552713678800501e-15" y="0">
 			<e:layout>
 			<e:TileLayout requestedColumnCount="2" horizontalGap="6"/>

@@ -4,8 +4,10 @@ class PKCardInfoItem extends game.BaseItem {
         this.skinName = "PKCardInfoItemSkin";
     }
 
+    private rect: eui.Rect;
     private icon: eui.Image;
     private text: eui.Label;
+
 
 
 
@@ -31,11 +33,15 @@ class PKCardInfoItem extends game.BaseItem {
         this.icon.scaleX = this.icon.scaleY = this.data.iconScale
         if(this.data.title)
         {
-            this.setHtml(this.text, this.createHtml(this.data.title,0xffff00) + '：' +  this.data.value
-                + (this.data.valueAdd ? this.createHtml(' +'+this.data.valueAdd,0x00ff00) : ''))
+            this.rect.visible = true
+            this.setHtml(this.text, this.createHtml(this.data.title,0xFFB17C) + '：' +  this.data.value
+                + (this.data.valueAdd ? this.createHtml(' +'+this.data.valueAdd,0xFFB17C) : ''))
         }
         else
+        {
+            this.rect.visible = false
             this.text.text = ''
+        }
 
     }
 

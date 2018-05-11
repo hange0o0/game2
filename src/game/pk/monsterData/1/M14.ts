@@ -7,6 +7,10 @@ class M14 extends MBase {
     public beAtkAction(user,data){
         //{hp:hp,atker:user}
         if(data.atker && data.atker.getVO().isNearAtk())
-            data.atker.addHp(-Math.ceil(data.hp*user.getSkillValue(1)/100*user.getAtkRate(data.atker)));
+        {
+            var hp = Math.ceil(data.hp*user.getSkillValue(1)/100)
+            data.atker.addHp(-hp);
+            user.addHp(hp)
+        }
     }
 }

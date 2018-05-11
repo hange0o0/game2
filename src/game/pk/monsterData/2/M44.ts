@@ -24,6 +24,7 @@ class M44 extends MBase {
         var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
         var atkRage = user.getSkillValue(1);
         var hurt = user.getSkillValue(2,true);
+        target.stopReborn = true;
         for(var i=0;i<arr.length;i++)
         {
             var newTarget = arr[i];

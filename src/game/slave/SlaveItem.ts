@@ -140,7 +140,7 @@ class SlaveItem extends game.BaseItem {
             else
             {
                 this.currentState = 'normal'
-                this.coinText.text = '' + NumberUtil.formatStrNum(this.data.hourcoin) + '/小时';
+                this.coinText.text = '时产：' + NumberUtil.formatStrNum(this.data.hourcoin) + '';
             }
 
             //this.nameText.text = '' + this.data.nick;

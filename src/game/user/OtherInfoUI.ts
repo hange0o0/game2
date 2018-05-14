@@ -148,6 +148,26 @@ class OtherInfoUI extends game.BaseUI {
 
     }
 
+    public showNick(nick?){
+        SlaveManager.getInstance().viewList(()=>{
+            InfoManager.getInstance().getInfoByNick(nick,()=>{
+                this.gameid = InfoManager.getInstance().getIDByNick(nick);
+                super.show()
+            })
+        })
+
+    }
+
+    public showUID(uid?){
+        SlaveManager.getInstance().viewList(()=>{
+            InfoManager.getInstance().getInfoByUID(uid,()=>{
+                this.gameid = InfoManager.getInstance().getIDByUID(uid);
+                super.show()
+            })
+        })
+
+    }
+
     public hide() {
         super.hide();
     }
@@ -199,6 +219,7 @@ class OtherInfoUI extends game.BaseUI {
         {
             slaveList.unshift(slave.master)
             this.master = slave.master.gameid;
+            slave.master.isMaster = true;
             if(this.master == UM.gameid) //同步自己信息
             {
                 slave.master.head = UM.head
@@ -207,6 +228,7 @@ class OtherInfoUI extends game.BaseUI {
             }
         }
         this.list.dataProvider = new eui.ArrayCollection(slaveList)
+        console.log(slaveList)
 
         for(var i=0;i<slaveList.length;i++)
         {

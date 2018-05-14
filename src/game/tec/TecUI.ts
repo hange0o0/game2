@@ -47,7 +47,7 @@ class TecUI extends MainBase {
         if(this.tab.selectedIndex == 2)
         {
             this.currentState = 'coin'
-            this.coinText.text = NumberUtil.addNumSeparator(UM.hourcoin) + '/小时'
+            this.coinText.text = '时产：' + NumberUtil.addNumSeparator(UM.hourcoin) + ''
         }
         else
             this.currentState = 'normal'

@@ -13,6 +13,7 @@ class SlaveUI extends MainBase {
     private cdGroup: eui.Group;
     private cdText: eui.Label;
     private proBtn: eui.Button;
+    private addViewBtn: eui.Button;
     private masterGroup: eui.Group;
     private masterItem: SlaveMasterItem;
     private slaveList: eui.List;
@@ -54,6 +55,7 @@ class SlaveUI extends MainBase {
         this.tab.selectedIndex = 0;
 
         this.addBtnEvent(this.proBtn,this.onPro);
+        this.addBtnEvent(this.addViewBtn,this.onAddView);
 
         this.addBtnEvent(this.helpBtn,()=>{
             //if(this.tab.selectedIndex == 0)
@@ -61,6 +63,10 @@ class SlaveUI extends MainBase {
             //else
             //    HelpManager.getInstance().showHelp('view')
         })
+    }
+
+    private onAddView(){
+        FriendSearchUI.getInstance().show();
     }
 
     private onPro(){

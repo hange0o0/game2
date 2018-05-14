@@ -50,7 +50,7 @@
 			</e:Group>
 		<e:List id="list" width="640" x="142" y="175">
 			<e:layout>
-			<e:VerticalLayout gap="10" paddingLeft="10" paddingTop="0"/>
+				<e:TileLayout horizontalGap="10" paddingLeft="15" requestedColumnCount="2"/>
 			</e:layout>
 		</e:List>
 			<e:layout>

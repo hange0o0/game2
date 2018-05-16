@@ -19,6 +19,6 @@
 	</e:Group>
 	<e:Group id="emptyGroup" y="250" horizontalCenter="0">
 		<e:Image source="icon_empty_png" y="0" scaleX="1.3" scaleY="1.3" horizontalCenter="-0.5"/>
-		<e:Label id="emptyText" text="没有找到合适的推荐对象" y="90" horizontalCenter="0" size="22"/>
+		<e:Label id="emptyText" text="没有找到合适的推荐对象" y="100" horizontalCenter="0" size="24"/>
 	</e:Group>
 </e:Skin>

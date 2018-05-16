@@ -12,6 +12,7 @@ class BasePosChooseUI extends game.BaseUI {
     private scroller: eui.Scroller;
     private list: eui.List;
     private tab: eui.TabBar;
+    private emptyGroup: eui.Group;
 
 
 
@@ -213,6 +214,8 @@ class BasePosChooseUI extends game.BaseUI {
             arr[i].temp = this.fromUI.useCard;
         }
         this.list.dataProvider = new eui.ArrayCollection(arr)
+
+        this.emptyGroup.visible = arr.length == 0
 
     }
 }

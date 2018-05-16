@@ -9,6 +9,7 @@ class PKPlayerData {
     public force;//怪的基础属性
     public teamData:PKTeamData   //对应队伍
 
+    public card//原始的手牌
     private handCard = {};//当前的手牌  [{index,mid},]  上限5
     public hideCard = [];//隐藏的手牌  [{index,mid},]
     public posCard = {};//已上阵的手牌 1-4,如果是自动的，不受此限制

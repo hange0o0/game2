@@ -58,7 +58,7 @@ class InfoManager {
         var oo:any = {};
         oo.otherid = otherid;
         Net.addUser(oo);
-        Net.send(GameEvent.user.user_info, oo, function (data) {
+        Net.send(GameEvent.user.user_info, oo, (data)=>{
             var msg = data.msg;
             if(msg.fail == 1)
             {

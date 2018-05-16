@@ -353,15 +353,9 @@ class SlaveManager {
         var self = this;
         var oo:any = {};
         oo.list = PKData.getInstance().myPlayer.posHistory.join(',');
-        Net.addUser(oo);
+        PKManager.getInstance().addPKKey(oo)
         Net.send(GameEvent.slave.slave_pk_result, oo, function (data) {
             var msg = data.msg;
-            if(msg.fail == 1)
-            {
-                MyWindow.Alert('找不到对战记录')
-                PKingUI.getInstance().hide();
-                return;
-            }
             if(msg.fail == 2)
             {
                 MyWindow.Alert('对方的主人已改变')
@@ -370,8 +364,9 @@ class SlaveManager {
                 return;
             }
 
-            if(msg.fail && PKManager.getInstance().testFail(msg.fail))
+            if(msg.fail)
             {
+                PKManager.getInstance().testFail(msg.fail)
                 PKingUI.getInstance().hide();
                 return;
             }

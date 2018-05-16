@@ -9,6 +9,7 @@ class PKSettingUI extends game.BaseWindow {
 
     private cancelBtn: eui.Button;
     private okBtn: eui.Button;
+    private des: eui.Label;
 
 
     public constructor() {
@@ -54,6 +55,18 @@ class PKSettingUI extends game.BaseWindow {
     }
 
     public renew(){
-
+        var PD = PKData.getInstance();
+        if(PD.isReplay)
+        {
+            this.des.text = '确定要退出观看吗？'
+            this.okBtn.label = '退出'
+            this.cancelBtn.label = '继续'
+        }
+        else
+        {
+            this.des.text = '确定要认输退出吗？'
+            this.okBtn.label = '认输'
+            this.cancelBtn.label = '继续'
+        }
     }
 }

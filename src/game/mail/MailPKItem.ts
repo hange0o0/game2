@@ -104,6 +104,8 @@ class MailPKItem extends game.BaseItem {
         var arr = [];
         var obj = {};
         var autoList = data.actionlist.split(',');
+        if(!autoList[0])
+            autoList = [];
         for(var i=0;i<autoList.length;i++)
         {
             var temp = autoList[i].split('#');

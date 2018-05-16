@@ -14,12 +14,17 @@ class OtherInfoUI extends game.BaseUI {
     private scroller: eui.Scroller;
     private headMC: HeadMC;
     private nameText: eui.Label;
-    private infoList: eui.List;
+    private coinText: eui.Label;
+    private forceText: eui.Label;
     private cardList: eui.List;
+    private cdGroup: eui.Group;
+    private cdText: eui.Label;
     private list: eui.List;
     private bottomUI: BottomUI;
     private okBtn: eui.Button;
     private viewBtn: eui.Button;
+
+
 
 
 
@@ -55,6 +60,7 @@ class OtherInfoUI extends game.BaseUI {
                 {
                     SlaveManager.getInstance().deleteView(this.gameid,()=>{
                         this.viewBtn.label = '关注';
+                        this.viewBtn.skinName = 'Btn1Skin'
                     })
                 }
             })
@@ -72,6 +78,7 @@ class OtherInfoUI extends game.BaseUI {
                 SlaveManager.getInstance().addView(this.gameid,()=>{
 
                     this.viewBtn.label = '取消\n关注';
+                    this.viewBtn.skinName = 'Btn2Skin'
                     MyWindow.ShowTips('关注成功！')
                 })
             }
@@ -176,6 +183,25 @@ class OtherInfoUI extends game.BaseUI {
         this.scroller.viewport.scrollV = 0;
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.info_change,this.regetInfo)
+        this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
+    }
+
+    private onTimer(){
+        var data = InfoManager.getInstance().otherInfo[this.gameid]
+        if(data.protime > TM.now())
+        {
+            var cd = data.protime - TM.now();
+            if(cd < 3600*24)
+                var str  = DateUtil.getStringBySecond(cd)
+            else
+                var str = DateUtil.getStringBySeconds(cd,false,2)
+            this.cdText.text = str
+            this.cdGroup.visible = true
+        }
+        else
+        {
+            this.cdGroup.visible = false
+        }
     }
 
     private regetInfo(){
@@ -189,24 +215,18 @@ class OtherInfoUI extends game.BaseUI {
         this.isMyMaster = false
         var data = InfoManager.getInstance().otherInfo[this.gameid]
         var slave = InfoManager.getInstance().otherSlave[this.gameid];
-        this.nameText.text = '' + data.nick;
+        this.nameText.text = '' + data.nick + '  LV.' + (data.level||1);
+        this.coinText.text = '时产：' + data.hourcoin
+        this.coinText.text = '战力：' + data.tec_force
 
-        var infoArr = [
-            {title:'主城等级：',value:'LV.' + (data.level||1)},
-            {title:'召唤战力：',value:data.tec_force},
-            {title:'金币产出：',value:data.hourcoin + '/小时'}
-        ];
-        if(data.protime > TM.now())
-        {
-            var cd = data.protime - TM.now();
-                if(cd < 3600*24)
-                    var str  = DateUtil.getStringBySecond(cd)
-                else
-                    var str = DateUtil.getStringBySeconds(cd,false,2)
-            infoArr.push({title:'保护时间：',value:str})
-        }
+        //var infoArr = [
+        //    {title:'主城等级：',value:'LV.' + (data.level||1)},
+        //    {title:'召唤战力：',value:data.tec_force},
+        //    {title:'金币产出：',value:data.hourcoin + '/小时'}
+        //];
 
-        this.infoList.dataProvider = new eui.ArrayCollection(infoArr)
+
+        //this.infoList.dataProvider = new eui.ArrayCollection(infoArr)
         //this.coinText.text = '产出：' + data.hourcoin + '/小时';
         //this.forceText.text = '战力：'  + data.tec_force;
         this.headMC.setData(data.head,data.type);
@@ -243,12 +263,20 @@ class OtherInfoUI extends game.BaseUI {
                  break;
              }
         }
+
         if(this.isMyMaster)
+        {
             this.okBtn.label = '反抗';
+            this.okBtn.skinName = 'Btn1Skin'
+        }
         else
+        {
             this.okBtn.label = this.master == UM.gameid?'释放\n奴隶':'收服\n奴隶'
+            this.okBtn.skinName = this.master == UM.gameid?'Btn2Skin':'Btn1Skin'
+        }
 
         this.viewBtn.label = SlaveManager.getInstance().viewObj[this.gameid]?'取消\n关注':'关注';
+        this.viewBtn.skinName = SlaveManager.getInstance().viewObj[this.gameid]?'Btn2Skin':'Btn1Skin'
 
         if(data.last_card)
         {

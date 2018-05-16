@@ -132,6 +132,7 @@ class PKingUI extends game.BaseUI {
         this.counting = true;
         this.roundText.text = '3'
         this.roundText.alpha = 1;
+        this.roundText.skewX = 0;
         this.roundText.y = vY + vH/5*1
         this.addChild(this.roundText);
         this.roundText.scaleX =  this.roundText.scaleY = 0;
@@ -195,8 +196,10 @@ class PKingUI extends game.BaseUI {
                 egret.Tween.get(this.playerGroup2).to({right:20},200).to({right:-280},200)
                 this.startGame();
                 this.tw = null}).to({
-                alpha:0,scaleX:10,scaleY:10
-            },500).call(()=>{
+                scaleX:3,scaleY:3
+            },500).to({
+                alpha:0,scaleX:0,scaleY:0
+            },200).call(()=>{
                 MyTool.removeMC(this.roundText);
                 this.vsGroup.visible = false
                 this.pkTop.appearMV();

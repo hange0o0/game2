@@ -99,17 +99,18 @@ class HangManager {
     public pkResult(fun?) {
         var oo:any = {};
         oo.list = PKData.getInstance().myPlayer.posHistory.join(',');
-        Net.addUser(oo);
+        PKManager.getInstance().addPKKey(oo)
         Net.send(GameEvent.hang.pk_hang_result, oo, (data)=> {
             var msg = data.msg;
-            if(msg.fail == 1)
+            //if(msg.fail == 1)
+            //{
+            //    MyWindow.Alert('找不到对战记录')
+            //    PKingUI.getInstance().hide();
+            //    return;
+            //}
+            if(msg.fail)
             {
-                MyWindow.Alert('找不到对战记录')
-                PKingUI.getInstance().hide();
-                return;
-            }
-            if(msg.fail && PKManager.getInstance().testFail(msg.fail))
-            {
+                PKManager.getInstance().testFail(msg.fail)
                 PKingUI.getInstance().hide();
                 return;
             }

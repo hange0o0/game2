@@ -58,16 +58,21 @@ class PKManager {
     }
 
     public testFail(failID){
-        switch(failID)
-        {
-            case 101:
-                MyWindow.Alert('PK异常！MP数值不对！');
-                return true;
-            case 102:
-                MyWindow.Alert('PK异常！使用了无效的卡牌！');
-                return true;
-        }
-        return false;
+        MyWindow.Alert('PK异常！错误码：' + failID);
+        return true;
+        //switch(failID)
+        //{
+        //    case 101:
+        //
+        //        return true;
+        //    case 102:
+        //        MyWindow.Alert('PK异常！使用了无效的卡牌！');
+        //        return true;
+        //    case 103:
+        //        MyWindow.Alert('PK异常！使用了无效的卡牌！');
+        //        return true;
+        //}
+        //return false;
     }
 
     public sendResult(fun){
@@ -159,6 +164,17 @@ class PKManager {
         PD.isReplay = true
         this.pkType = data.type;
         PKingUI.getInstance().show();
+    }
+
+    //PK的校验码
+    public addPKKey(oo){
+        var PD = PKData.getInstance()
+        var card = PD.myPlayer.card;
+        var cd = PD.actionTime
+
+        oo.cd = PD.actionTime
+        oo.key = md5.incode(cd + card).substr(-8)
+        Net.addUser(oo)
     }
 
     //把录像保存到本地

@@ -10,7 +10,7 @@ class CardUI extends MainBase {
     private scroller: eui.Scroller;
     private list: eui.List;
     private tab: eui.TabBar;
-
+    private emptyGroup: eui.Group;
 
 
 
@@ -129,6 +129,7 @@ class CardUI extends MainBase {
         ArrayUtil.sortByField(arr,['cost','level','id'],[0,0,0]);
         this.dataArray.source = arr;
         this.dataArray.refresh()
+        this.emptyGroup.visible = arr.length == 0
         //this.list.dataProvider = new eui.ArrayCollection(arr)
 
     }

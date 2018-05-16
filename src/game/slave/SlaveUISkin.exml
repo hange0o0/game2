@@ -59,7 +59,7 @@
 			<e:Group>
 			<e:List id="list" width="200" height="200" x="142" y="175">
 				<e:layout>
-					<e:TileLayout requestedColumnCount="2" horizontalGap="10" verticalGap="10" paddingLeft="15"/>
+					<e:TileLayout requestedColumnCount="2" horizontalGap="10" verticalGap="10" paddingLeft="15" paddingTop="10"/>
 				</e:layout>
 			</e:List>
 			</e:Group>
@@ -69,7 +69,7 @@
 		<e:Button id="addViewBtn" label="添加" y="1" right="20" scaleX="0.8" scaleY="0.8" width="120" skinName="Btn1Skin"/>
 		<e:Group id="emptyGroup" horizontalCenter="0" verticalCenter="0">
 			<e:Image source="icon_empty_png" y="0" scaleX="1.3" scaleY="1.3" horizontalCenter="-0.5"/>
-			<e:Label text="你还没关注任何人" y="90" horizontalCenter="0" size="22"/>
+			<e:Label text="你还没关注任何人" y="100" horizontalCenter="0" size="24"/>
 		</e:Group>
 	</e:Group>
 	<e:Image id="helpBtn" source="icon_help_png" y="150" right="10"/>

@@ -87,6 +87,16 @@ class GameEvent {
         get_record:'pk.get_record',
     }
 
+    public static fight = {
+        buy_shop:'fight.buy_shop',
+        fight_award:'fight.fight_award',
+        get_fight:'fight.get_fight',
+        init_fight:'fight.init_fight',
+        pk_fight:'fight.pk_fight',
+        pk_fight_result:'fight.pk_fight_result',
+        change_pos:'fight.change_pos',
+    }
+
     public static tec = {
         tec_up:'tec.tec_up'
     }

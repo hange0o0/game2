@@ -90,6 +90,11 @@ class BasePosUI extends game.BaseUI {
             return
         }
         this.testSave(()=>{
+            if(this.pkData && this.pkData.list)
+            {
+                this.pkData.fun(this.changeToServerList())
+                return;
+            }
             SharedObjectManager.getInstance().setMyValue('pk_choose',this.index)
             this.pkData.fun(this.index)
         })
@@ -128,6 +133,11 @@ class BasePosUI extends game.BaseUI {
     }
 
     public onClose(){
+        if(this.pkData && this.pkData.list)
+        {
+            this.hide();
+            return;
+        }
         if(this.testSave())
             this.hide();
     }
@@ -181,6 +191,12 @@ class BasePosUI extends game.BaseUI {
     }
 
     private onSave(fun?){
+        if(this.pkData && this.pkData.list)
+        {
+            fun && fun();
+            return true
+        }
+
         var index = this.index;
         if(this.listData.length <= 1 && this.posData)
         {
@@ -221,7 +237,11 @@ class BasePosUI extends game.BaseUI {
             this.useCard[item.id] --;
             this.listData.removeItemAt(index)
             if(!this.listData.getItemAt(this.listData.length-1).setting)
-                this.listData.addItem({setting:true})
+            {
+                var stopDelete = this.pkData && this.pkData.stopAdd
+                if(!stopDelete)
+                    this.listData.addItem({setting:true})
+            }
 
             if(this.listData.length <= 1)
                 MyTool.removeMC(this.deleteBtn)
@@ -273,6 +293,16 @@ class BasePosUI extends game.BaseUI {
         }
     }
 
+    /*
+    *  {
+    *   list
+    *   noTab
+    *   fun
+    *   title
+    *   helpKey
+    *   stopAdd
+    *  }
+    * */
     public show(type?,pkData?){
         this.type = type;
         this.pkData = pkData;
@@ -288,16 +318,19 @@ class BasePosUI extends game.BaseUI {
         this.openBtn.visible =  this.type == 'def';
         this.maxCard = PosManager.getInstance().maxPosNum();
         if(this.pkData)
-            this.topUI.setTitle('战斗准备','atkPos')
+            this.topUI.setTitle(this.pkData.title || '战斗准备',this.pkData.helpKey || 'atkPos')
         else if(this.type == 'atk')
             this.topUI.setTitle('进攻阵容','atkPos')
         else
             this.topUI.setTitle('防守阵容','defPos')
 
+        this.currentState = 'normal'
         if(this.pkData)
         {
             this.btnGroup.addChild(this.pkBtn)
             MyTool.removeMC(this.testBtn)
+            if(this.pkData.noTab)
+                this.currentState = 'pk'
         }
         else
         {
@@ -329,11 +362,13 @@ class BasePosUI extends game.BaseUI {
     }
 
     public resetData(){
-        if(this.listData.length < this.maxCard)
+        var stopDelete = this.pkData && this.pkData.stopAdd
+        if(this.listData.length < this.maxCard && !stopDelete)
             this.listData.addItem({setting:true})
         this.renewBtn(true);
         this.renewTitle();
-        if(this.listData.length > 1)
+
+        if(this.listData.length > 1 && !stopDelete)
             this.btnGroup.addChildAt(this.deleteBtn,0)
     }
 
@@ -341,7 +376,10 @@ class BasePosUI extends game.BaseUI {
         this.upBtn.visible = false
         this.downBtn.visible = false
         var listHeight = Math.ceil(this.listData.length/6)*130
-        var scrollHeight = GameManager.stage.stageHeight-120-100
+        if(this.pkData && this.pkData.noTab)
+            var scrollHeight = GameManager.stage.stageHeight-60-100
+        else
+            var scrollHeight = GameManager.stage.stageHeight-120-100
         if( listHeight > scrollHeight)
         {
             if(toBottom)
@@ -366,7 +404,13 @@ class BasePosUI extends game.BaseUI {
         if(GuideManager.getInstance().isGuiding)
         {
             data = {
-                list:'1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6'
+                list:PKManager.getInstance().defaultCardList
+            }
+        }
+        else if(this.pkData.list)
+        {
+            data = {
+                list:this.pkData.list
             }
         }
         var arr = [];
@@ -396,7 +440,11 @@ class BasePosUI extends game.BaseUI {
             MyTool.removeMC(this.deleteBtn)
             this.openBtn.visible = false;
         }
-        if(arr.length < this.maxCard)
+
+        var stopDelete = this.pkData && this.pkData.stopAdd
+        if(stopDelete)
+            MyTool.removeMC(this.deleteBtn)
+        else if(arr.length < this.maxCard)
             arr.push({setting:true})
         this.listData.source = arr;
         this.listData.refresh()

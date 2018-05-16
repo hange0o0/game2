@@ -60,7 +60,8 @@ class MainFightUI extends MainBase {
          MyWindow.ShowTips('即将开放，敬请期待')
     }
     private onFight(){
-        MyWindow.ShowTips('即将开放，敬请期待')
+        //MyWindow.ShowTips('即将开放，敬请期待')
+        FightInfoUI.getInstance().show();
     }
 
     //public setTopPos(scrollV){

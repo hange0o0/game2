@@ -1,6 +1,7 @@
 class PKManager {
     public static TYPE_HANG = 1;
     public static TYPE_SLAVE = 2;
+    public static TYPE_FIGHT = 3;
 
 
     public static TYPE_TEST = 101;
@@ -49,6 +50,8 @@ class PKManager {
         '我只是变的更坚强了','我和你没完','不胜利毋宁死','死亡，没什么好怕的']
 
 
+    public defaultCardList = '1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6';
+
     public getPKBG(){
         return this.getBG(HangManager.getInstance().getHangBGID())
     }
@@ -73,6 +76,14 @@ class PKManager {
         //        return true;
         //}
         //return false;
+    }
+
+    public getDefaultPKList(){
+        var index = SharedObjectManager.getInstance().getMyValue('pk_choose')
+        var data = PosManager.getInstance().getListByType('atk')[index];
+        if(data && data.list)
+            return data.list;
+        return this.defaultCardList;
     }
 
     public sendResult(fun){

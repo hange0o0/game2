@@ -15,10 +15,11 @@ class FightInfoUI extends game.BaseWindow {
     }
 
     private list: eui.List;
-    private btnGroup: eui.Group;
-    private cancelBtn: eui.Button;
     private okBtn: eui.Button;
-    private titleText: eui.Label;
+    private cancelBtn: eui.Button;
+    private cdText: eui.Label;
+    private valueText: eui.Label;
+
 
 
     public childrenCreated() {

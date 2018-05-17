@@ -110,7 +110,7 @@ class DebugManager {
         for(var i=0;i<arr.length;i++)
         {
             var id = arr[i].id;
-            console.log('id:' +id +  '\t\tnum:' +  arr[i].num + '\t\tcost:' +  CM.getCardVO(id).cost + '\t\tname:' +  CM.getCardVO(id).name)
+            console.log('id:' +id +  '\t\tnum:' +  arr[i].num + '\t\tcost:' +  CM.getCardVO(id).cost + '\t\tname:' +  CM.getCardVO(id).name + '\t\tlevel:' +  CM.getCardVO(id).level + '\t\ttype:' +  CM.getCardVO(id).type)
         }
     }
 

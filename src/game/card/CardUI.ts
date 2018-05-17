@@ -118,15 +118,17 @@ class CardUI extends MainBase {
         var arr;
         if(type <= 3)
         {
-            arr =CRM.getTotalMonsterList(type)
+            arr =CRM.getOpenMonsterList(type)
             this.currentState = 'monster'
+            ArrayUtil.sortByField(arr,['isLock','cost','level','id'],[0,0,0,0]);
         }
         else
         {
             this.currentState = 'skill'
             arr = CRM.getTotalSkillList(0)
+            ArrayUtil.sortByField(arr,['cost','level','id'],[0,0,0]);
         }
-        ArrayUtil.sortByField(arr,['cost','level','id'],[0,0,0]);
+
         this.dataArray.source = arr;
         this.dataArray.refresh()
         this.emptyGroup.visible = arr.length == 0

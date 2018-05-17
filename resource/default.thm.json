@@ -57,6 +57,7 @@
     "src/game/mainFight/fight/FightUISkin.exml",
     "src/game/mainFight/UnknowUISkin.exml",
     "src/game/mainFight/MainFightUISkin.exml",
+    "src/game/mainFight/fight/FightAwardItemSkin.exml",
     "src/game/mainFight/fight/FightAwardUISkin.exml",
     "src/game/mainFight/fight/FightInfoUISkin.exml",
     "src/game/mainFight/fight/FightShopItemSkin.exml",

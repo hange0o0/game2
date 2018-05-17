@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="FightAwardItemSkin" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing" width="150" height="200">
+	<ns1:CardItem id="cardMC" x="0" y="0" skinName="CardItemSkin"/>
+	<e:CheckBox id="cb" label="" x="5" y="5" skinName="MyCheckBoxSkin"/>
+</e:Skin>

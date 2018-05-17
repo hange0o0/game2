@@ -407,7 +407,7 @@ class BasePosUI extends game.BaseUI {
                 list:PKManager.getInstance().defaultCardList
             }
         }
-        else if(this.pkData.list)
+        else if(this.pkData && this.pkData.list)
         {
             data = {
                 list:this.pkData.list

@@ -20,10 +20,14 @@ class FightAwardUI extends game.BaseWindow {
     private titleText: eui.Label;
 
 
+
+
     public childrenCreated() {
         super.childrenCreated();
         this.addBtnEvent(this.okBtn,this.onClick)
         this.addBtnEvent(this.cancelBtn,this.hide)
+
+        this.list.itemRenderer = FightAwardItem
 
     }
 
@@ -32,9 +36,9 @@ class FightAwardUI extends game.BaseWindow {
     }
 
     public show(){
-        PayManager.getInstance().get_shop(()=>{
+        //PayManager.getInstance().get_shop(()=>{
             super.show()
-        })
+        //})
 
     }
 
@@ -43,7 +47,7 @@ class FightAwardUI extends game.BaseWindow {
     }
 
     private renew(){
-        this.list.dataProvider = new eui.ArrayCollection(PayManager.getInstance().shopData)
+        this.list.dataProvider = new eui.ArrayCollection([1,2,3,4,5,6,7,8,9])
     }
 
 }

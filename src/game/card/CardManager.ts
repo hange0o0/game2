@@ -83,6 +83,23 @@ class CardManager {
         }
         return arr;
     }
+
+    public getOpenMonsterList(type){
+        var arr = [];
+        var data = MonsterVO.data;
+        var level = TecManager.getInstance().getLevel(1);
+        for(var s in data)
+        {
+            if(type && type != data[s].type)
+                continue;
+            if(data[s].level <= level)
+            {
+                data[s].isLock = this.monsterList[s]?0:1
+                arr.push(data[s]);
+            }
+        }
+        return arr;
+    }
     public getOpenSkillList(type){
         var arr = [];
         var data = SkillVO.data;

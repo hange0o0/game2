@@ -104,6 +104,9 @@ class PKManager {
             case PKManager.TYPE_SLAVE:
                 SlaveManager.getInstance().slave_pk_result(fun);
                 break;
+            case PKManager.TYPE_FIGHT:
+                FightManager.getInstance().pkResult(fun);
+                break;
         }
     }
 

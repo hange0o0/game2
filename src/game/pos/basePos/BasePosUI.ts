@@ -136,6 +136,7 @@ class BasePosUI extends game.BaseUI {
         if(this.pkData && this.pkData.list)
         {
             this.hide();
+            this.pkData.hideFun && this.pkData.hideFun(this.changeToServerList());
             return;
         }
         if(this.testSave())
@@ -298,6 +299,7 @@ class BasePosUI extends game.BaseUI {
     *   list
     *   noTab
     *   fun
+    *   hideFun
     *   title
     *   helpKey
     *   stopAdd

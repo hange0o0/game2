@@ -3,32 +3,20 @@ class M42 extends MBase {
         super();
     }
 
-    //被攻击时的处理
-    public beAtkAction(user,data){
-        var target = data.atker
-        if(target && target.getVO().isNearAtk())
+    public onDie(user:PKMonsterData){
+        var PD = PKData.getInstance();
+        var arr = PD.getMonsterByNoTeam(user.getOwner().teamData);
+        var atkrage = user.getSkillValue(1);
+        var hp = user.getSkillValue(2,true);
+        for(var i=0;i<arr.length;i++)
         {
-            if(target.beSkillAble())
+            var targetX = arr[i];
+            if(!targetX.beSkillAble())
+                continue;
+            var des = Math.abs(user.x - targetX.x);
+            if(des<=atkrage + targetX.getVO().width/2)
             {
-                var skillValue = user.getSkillValue(1,true)
-                var buff = new PKBuffData()
-                buff.id = 42;
-                buff.isDebuff = true;
-                buff.value = skillValue
-                buff.addValue('hpChange',-skillValue);
-                buff.user = user;
-                buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(2);
-                target.addBuff(buff)
-
-                if(buff.ing)
-                {
-                    PKData.getInstance().addVideo({
-                        type:PKConfig.VIDEO_MONSTER_ADD_STATE,
-                        user:target,
-                        key:'hp',
-                        stateType:2
-                    })
-                }
+                targetX.beAtkAction({hp:hp})
             }
         }
     }

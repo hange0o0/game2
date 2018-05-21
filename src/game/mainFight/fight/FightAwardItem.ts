@@ -9,10 +9,21 @@ class FightAwardItem extends game.BaseItem {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.touchChildren = false
+        MyTool.addLongTouch(this,this.onLongTouch,this)
+        //this.addBtnEvent(this,this.onClick)
+    }
+
+    private onLongTouch(){
+        PKCardInfoUI.getInstance().show({
+            mid:this.data,
+            force:UM.tec_force,
+            type:UM.type
+        })
+
     }
 
     public dataChanged(){
-         this.cardMC.data = MonsterVO.getObject(this.data);
-        console.log(999)
+         this.cardMC.data = CM.getCardVO(this.data);
     }
 }

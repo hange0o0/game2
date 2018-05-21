@@ -18,6 +18,9 @@ class MyTool {
     public static getPropDiamond(){
         return Config.localResRoot + 'prop/prop_diamond.png'
     }
+    public static getPropFight(){
+        return Config.localResRoot + 'prop/prop_diamond.png'
+    }
 
     public static getAwardArr(dataIn){
         var arr = [];
@@ -25,6 +28,8 @@ class MyTool {
             arr.push({img:MyTool.getPropCoin(),name:'金币','num':'×' + NumberUtil.addNumSeparator(dataIn.coin)})
         if(dataIn.diamond)
             arr.push({img:MyTool.getPropDiamond(),name:'钻石','num':'×' + NumberUtil.addNumSeparator(dataIn.diamond)})
+        if(dataIn.fightvalue)
+            arr.push({img:MyTool.getPropFight(),name:'远征积分','num':'×' + NumberUtil.addNumSeparator(dataIn.fightvalue)})
         for(var s in dataIn.props)
         {
             var prop =  PropVO.getObject(s);

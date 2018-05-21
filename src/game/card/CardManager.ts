@@ -21,17 +21,17 @@ class CardManager {
         }
 
         var data = SkillVO.data;
-        for(var s in data)
-        {
-            if(data[s].level == 0)
-                this.skillList[s] = true;
-        }
+        //for(var s in data)
+        //{
+        //    if(data[s].level == 0)
+        //        this.skillList[s] = true;
+        //}
 
         for(var s in msg.monster)
             this.monsterList[msg.monster[s]] = true;
 
         for(var s in msg.skill)
-            this.skillList[msg.skill[s]] = true;
+            this.skillList[msg.skill[s]] = msg.skill[s];
     }
 
     public getTotalMonsterList(type){
@@ -78,6 +78,8 @@ class CardManager {
         for(var s in this.skillList)
         {
             var vo =  SkillVO.getObject(s);
+            if(this.skillList[s] <= 0)
+                continue;
             if(!type || type == vo.type)
                 arr.push(vo);
         }

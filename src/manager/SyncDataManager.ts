@@ -53,6 +53,12 @@ class SyncDataManager{
                     UM.level = TecManager.getInstance().getLevel(1);
                     EM.dispatch(GameEvent.client.tec_change);
                     break;
+                case 'sync_skill':
+                    for(ss in value)
+                    {
+                        CardManager.getInstance().skillList[ss] = value[ss];
+                    }
+                    break;
 
             }
         }

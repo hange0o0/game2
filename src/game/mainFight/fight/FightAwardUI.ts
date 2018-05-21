@@ -27,12 +27,32 @@ class FightAwardUI extends game.BaseWindow {
         this.addBtnEvent(this.okBtn,this.onClick)
         this.addBtnEvent(this.cancelBtn,this.hide)
 
+        this.list.allowMultipleSelection = true
         this.list.itemRenderer = FightAwardItem
+        this.list.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onSelected,this)
 
     }
 
+    private onSelected(){
+        var items = this.list.selectedItems
+        this.titleText.text = '选择增加手牌（'+items.length+'/5）'
+    }
     private onClick(){
-
+        var items = this.list.selectedItems
+        if(items.length < 5)
+        {
+            MyWindow.ShowTips('需选择5张卡牌加入你的手牌')
+            return
+        }
+        if(items.length > 5)
+        {
+            MyWindow.ShowTips('不能选择多于5张卡牌')
+            return
+        }
+        FightManager.getInstance().getAward(items,()=>{
+            this.hide();
+            FightInfoUI.getInstance().changeCard();
+        })
     }
 
     public show(){
@@ -47,7 +67,9 @@ class FightAwardUI extends game.BaseWindow {
     }
 
     private renew(){
-        this.list.dataProvider = new eui.ArrayCollection([1,2,3,4,5,6,7,8,9])
+        var award = FightManager.getInstance().award.split(',');
+        this.list.dataProvider = new eui.ArrayCollection(award)
+        this.list.selectedItems = null;
     }
 
 }

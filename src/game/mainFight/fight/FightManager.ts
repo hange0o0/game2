@@ -35,13 +35,21 @@ class FightManager {
     }
 
     //加入新队伍
-    private getAward(list,fun)
+    public getAward(list,fun?)
     {
         var oo:any = {};
         oo.list = list;
         Net.addUser(oo);
         Net.send(GameEvent.fight.fight_award, oo, (data)=> {
             var msg = data.msg;
+            if(msg.fail)
+            {
+                MyWindow.Alert('选取卡牌失败，错误码：' + msg.fail)
+                return;
+            }
+            this.card = this.card.concat(list);
+            this.award = '';
+            EM.dispatchEventWith(GameEvent.client.fight_change)
              fun && fun();
         });
     }
@@ -60,7 +68,13 @@ class FightManager {
         Net.addUser(oo);
         Net.send(GameEvent.fight.init_fight, oo, (data)=> {
             var msg = data.msg;
+            if(msg.fail)
+            {
+                MyWindow.Alert('初始队伍失败，错误码：' + msg.fail)
+                return;
+            }
             this.card = list;
+            EM.dispatchEventWith(GameEvent.client.fight_change)
             SharedObjectManager.getInstance().removeMyValue('fightDefault');
             this.pk();
             fun && fun();
@@ -122,12 +136,30 @@ class FightManager {
     }
 
     public pk(fun?) {
+        if(!UM.testEnergy(1))
+            return;
         var self = this;
         var oo:any = {};
         Net.addUser(oo);
         Net.send(GameEvent.fight.pk_fight, oo, function (data) {
             var msg = data.msg;
             PKManager.getInstance().startPK(PKManager.TYPE_FIGHT,msg.pkdata)
+            if (fun)
+                fun();
+        });
+    }
+
+    public pkFail(fun?) {
+        var oo:any = {};
+        oo.list = PKData.getInstance().myPlayer.posHistory.join(',');
+        Net.addUser(oo);
+        Net.send(GameEvent.fight.pk_fail, oo, (data)=> {
+            var msg = data.msg;
+            if(msg.card)
+                this.card = msg.card.split(',')
+            else
+                this.card = []
+            EM.dispatchEventWith(GameEvent.client.fight_change)
             if (fun)
                 fun();
         });
@@ -147,6 +179,13 @@ class FightManager {
                 return;
             }
             PKManager.getInstance().pkResult = msg;
+            if(msg.card)
+                this.card = msg.card.split(',')
+            else
+                this.card = []
+            this.award = msg.cardaward;
+            this.step ++;
+            EM.dispatchEventWith(GameEvent.client.fight_change)
             if (fun)
                 fun();
         });

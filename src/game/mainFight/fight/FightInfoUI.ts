@@ -39,22 +39,9 @@ class FightInfoUI extends game.BaseWindow {
         {
             FightAwardUI.getInstance().show();
         }
-        else if(FM.card)
+        else if(FM.card.length)
         {
-            PKBeforeUI.getInstance().show({
-                stopAdd:true,
-                title:'调整阵容',
-                noTab:true,
-                list:FM.card.join(','),
-                fun:function(data){
-                    FM.changePos(data,()=>{
-                        FM.pk()
-                        })
-                },
-                hideFun:function(data){
-                    FM.changePos(data)
-                }
-            })
+              this.changeCard();
         }
         else
         {
@@ -69,10 +56,25 @@ class FightInfoUI extends game.BaseWindow {
                     }
                 })
             }
-
-
-
         }
+    }
+
+    public changeCard(){
+        var FM = FightManager.getInstance();
+        PKBeforeUI.getInstance().show({
+            stopAdd:true,
+            title:'调整阵容',
+            noTab:true,
+            list:FM.card.join(','),
+            fun:function(data){
+                FM.changePos(data,()=>{
+                    FM.pk()
+                })
+            },
+            hideFun:function(data){
+                FM.changePos(data)
+            }
+        })
     }
 
     public startInit(diamond?){
@@ -113,6 +115,7 @@ class FightInfoUI extends game.BaseWindow {
         this.getNextData = false
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
+        this.addPanelOpenEvent(GameEvent.client.fight_change,this.renewInfo)
     }
 
     private onTimer(){
@@ -120,7 +123,7 @@ class FightInfoUI extends game.BaseWindow {
         if(DateUtil.isSameDay(FM.shopTime))
         {
             var cd = DateUtil.getNextDateTimeByHours(0) - TM.now()
-            this.cdText.text = DateUtil.getStringBySecond(cd);
+            this.cdText.text = DateUtil.getStringBySecond(cd) + '后刷新';
         }
         else if(!this.getNextData)
         {
@@ -136,9 +139,10 @@ class FightInfoUI extends game.BaseWindow {
     private renewInfo(){
         var FM = FightManager.getInstance();
         this.valueText.text = '' + FM.value;
-        if(FM.level == 0 && !FM.card)
+        if(FM.level == 0)
         {
             this.currentState = 'first'
+            this.okBtn.label = '开始挑战'
         }
         else
         {
@@ -177,6 +181,7 @@ class FightInfoUI extends game.BaseWindow {
     }
 
     private renew(){
+        this.renewInfo();
         this.onTimer();
         this.list.dataProvider = new eui.ArrayCollection(FightManager.getInstance().shopData)
     }

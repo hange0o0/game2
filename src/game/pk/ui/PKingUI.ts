@@ -259,7 +259,12 @@ class PKingUI extends game.BaseUI {
                 });
             }
             else
-                PKFailUI.getInstance().show();
+            {
+
+                PKManager.getInstance().sendFail(()=>{
+                    PKFailUI.getInstance().show();
+                })
+            }
             PKSettingUI.getInstance().hide();
         }
         else if(TM.now() - this.scrollTime > 10)

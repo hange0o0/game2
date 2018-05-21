@@ -125,7 +125,7 @@ class CardUI extends MainBase {
         else
         {
             this.currentState = 'skill'
-            arr = CRM.getTotalSkillList(0)
+            arr = CRM.getMySkillList(0)
             ArrayUtil.sortByField(arr,['cost','level','id'],[0,0,0]);
         }
 

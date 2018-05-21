@@ -50,7 +50,7 @@ class PKManager {
         '我只是变的更坚强了','我和你没完','不胜利毋宁死','死亡，没什么好怕的']
 
 
-    public defaultCardList = '1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6';
+    public defaultCardList = '1,2,3,3,3,2,2,6,6,6,31,31,31,41,41,41,65,65,65,64';
 
     public getPKBG(){
         return this.getBG(HangManager.getInstance().getHangBGID())
@@ -106,6 +106,20 @@ class PKManager {
                 break;
             case PKManager.TYPE_FIGHT:
                 FightManager.getInstance().pkResult(fun);
+                break;
+        }
+    }
+    public sendFail(fun){
+        if(PKData.getInstance().isReplay)
+        {
+            fun && fun();
+            return;
+        }
+        this.pkResult = null;
+        switch(this.pkType)
+        {
+            case PKManager.TYPE_FIGHT:
+                FightManager.getInstance().pkFail(fun);
                 break;
         }
     }

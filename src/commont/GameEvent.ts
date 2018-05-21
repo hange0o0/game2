@@ -14,6 +14,8 @@ class GameEvent {
         card_change:'card_change',
         head_change:'head_change',
 
+        fight_change:'fight_change',
+
 
         pk_begin:'pk_begin',
         pk_end:'pk_end',
@@ -94,6 +96,7 @@ class GameEvent {
         init_fight:'fight.init_fight',
         pk_fight:'fight.pk_fight',
         pk_fight_result:'fight.pk_fight_result',
+        pk_fail:'fight.pk_fail',
         change_pos:'fight.change_pos',
     }
 

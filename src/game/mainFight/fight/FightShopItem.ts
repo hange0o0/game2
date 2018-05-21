@@ -53,6 +53,12 @@ class FightShopItem extends game.BaseItem {
             name = this.createHtml('体力',0xFFD27F)  + '\n×' + NumberUtil.formatStrNum(this.data.num);
             this.img.source = MyTool.getPropEnergy()
         }
+        else if((this.data.id + '').substr(0,5) == 'skill')
+        {
+            var svo = SkillVO.getObject(this.data.id.substr(5));
+            name = this.createHtml(svo.name,0xFFD27F) + '\n×' + this.data.num;
+            this.img.source = svo.getImage()
+        }
         else
         {
             var vo = PropVO.getObject(this.data.id);

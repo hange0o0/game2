@@ -184,8 +184,26 @@ class PKCardInfoUI extends game.BaseContainer {
         }
         else
         {
-            MyTool.removeMC(this.line)
-            MyTool.removeMC(this.list2)
+
+            if(this.dataIn.sp)
+            {
+                this.group.addChild(this.line)
+                this.group.addChild(this.list2)
+                var arr3 = [
+                    {index:1,icon:'icon_atk_png',iconScale:1,title:'当前拥有',value:CardManager.getInstance().skillList[vo.id] || 0}
+                ]
+                if(this.dataIn.sp.num)
+                {
+                    arr3.push({index:2,icon:'icon_love_png',iconScale:0.6,title:'可兑换数量',value:this.dataIn.sp.num})
+                }
+                this.list2.dataProvider = new eui.ArrayCollection(arr3)
+            }
+            else
+            {
+                MyTool.removeMC(this.line)
+                MyTool.removeMC(this.list2)
+            }
+
             this.type.scaleX = this.type.scaleY = 1
         }
 

@@ -31,7 +31,7 @@ class CardManager {
             this.monsterList[msg.monster[s]] = true;
 
         for(var s in msg.skill)
-            this.skillList[msg.skill[s]] = msg.skill[s];
+            this.skillList[s] = msg.skill[s];
     }
 
     public getTotalMonsterList(type){

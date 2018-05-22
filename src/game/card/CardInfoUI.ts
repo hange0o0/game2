@@ -29,6 +29,7 @@ class CardInfoUI extends game.BaseWindow {
 
 
     public data;
+    public sp;
     public upAble = false;
     public constructor() {
         super();
@@ -102,14 +103,16 @@ class CardInfoUI extends game.BaseWindow {
         }
         else
         {
-             CardManager.getInstance().card_buy(this.data.id,()=>{
+             FightManager.getInstance().buy_shop(this.sp.id,()=>{
+                 this.sp = {};
                  this.renew();
              })
         }
     }
 
-    public show(v?){
+    public show(v?,sp?){
         this.data = v;
+        this.sp = sp || {};
         CardManager.getInstance().getCardLike(this.data.id,()=>{
             super.show()
         })
@@ -135,6 +138,7 @@ class CardInfoUI extends game.BaseWindow {
         {
             this.item.renew({
                 mid:this.data.id,
+                sp:this.sp,
                 force:0,
                 type:0
             });
@@ -144,6 +148,7 @@ class CardInfoUI extends game.BaseWindow {
             this.item.renew({
                 mid:this.data.id,
                 force:UM.tec_force,
+                sp:this.sp,
                 type:UM.type
             });
         }
@@ -166,22 +171,23 @@ class CardInfoUI extends game.BaseWindow {
                 this.icon.source = MyTool.getPropCoin();
             }
         }
-        //else
-        //{
-        //    if(CM.skillList[this.data.id] || this.data.level > homeLevel)
-        //    {
-        //        MyTool.removeMC(this.upGroup);
-        //    }
-        //    else
-        //    {
-        //        this.btnGroup.addChild(this.upGroup)
-        //        this.coinText.text = CM.skillCost + ''
-        //        this.upAble =  CM.skillCost <= PropManager.getInstance().getNum(103)
-        //        this.okBtn.label = '兑换'
-        //        this.okBtn.skinName = 'Btn8Skin'
-        //        this.icon.source = PropVO.getObject(103).getThumb();
-        //    }
-        //}
+        else
+        {
+
+            if(!this.sp.num)
+            {
+                this.currentState = 'normal'
+            }
+            else
+            {
+                this.currentState = 'buy'
+                this.coinText.text = this.sp.diamond + ''
+                this.upAble = this.sp.diamond <= FightManager.getInstance().value
+                this.okBtn.label = '兑换'
+                this.okBtn.skinName = 'Btn1Skin'
+                this.icon.source = MyTool.getPropFight();
+            }
+        }
         this.coinText.textColor = this.upAble?0xFFFFFF:0xFF0000;
         this.renewCardLike();
     }

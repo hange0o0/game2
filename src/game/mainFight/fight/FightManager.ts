@@ -165,6 +165,20 @@ class FightManager {
         });
     }
 
+    public fightCancel(fun?) {
+        var oo:any = {};
+        Net.addUser(oo);
+        Net.send(GameEvent.fight.fight_cancel, oo, (data)=> {
+            var msg = data.msg;
+            this.award = '';
+            this.card.length = 0
+            this.step = 0
+            EM.dispatchEventWith(GameEvent.client.fight_change)
+            if (fun)
+                fun();
+        });
+    }
+
 
     public pkResult(fun?) {
         var oo:any = {};

@@ -11,6 +11,8 @@ class ShopItem extends game.BaseItem {
     private diamondGroup: eui.Group;
     private diamondIcon: eui.Image;
     private diamondText: eui.Label;
+    private sellFinish: eui.Label;
+
 
 
     public childrenCreated() {
@@ -63,15 +65,15 @@ class ShopItem extends game.BaseItem {
         this.setHtml(this.nameText, name)
         if(this.data.isbuy)
         {
-            this.diamondText.text =  '已售磬'
-            this.diamondText.textColor = 0x87E7FF;
+            this.sellFinish.visible = true
+            this.diamondGroup.visible =  false
             MyTool.changeGray(this.img,true)
-            MyTool.removeMC(this.diamondIcon);
         }
         else
         {
             MyTool.changeGray(this.img,false)
-            this.diamondGroup.addChildAt(this.diamondIcon,0)
+            this.sellFinish.visible = false
+            this.diamondGroup.visible =  true
             this.diamondText.text = this.data.diamond
             this.diamondText.textColor = (UM.diamond < this.data.diamond)?0xFF0000:0xFFFFFF;
         }

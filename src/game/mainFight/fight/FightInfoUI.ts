@@ -28,9 +28,40 @@ class FightInfoUI extends game.BaseWindow {
     public childrenCreated() {
         super.childrenCreated();
         this.addBtnEvent(this.okBtn,this.onClick)
-        this.addBtnEvent(this.cancelBtn,this.hide)
+        this.addBtnEvent(this.cancelBtn,this.onCancel)
+
+        this.touchEnabled = false;
 
         this.list.itemRenderer = FightShopItem
+    }
+
+    private onCancel(){
+        var FM = FightManager.getInstance();
+        if(FM.award)
+        {
+            MyWindow.Confirm('你目前可以领取5张卡牌加入你的卡组，是否仍继续结束本次远征？',(b)=>{
+                if(b==1)
+                {
+                    this.sendCancel();
+                }
+            })
+        }
+        else if(FM.card.length )
+        {
+            MyWindow.Confirm('你目前还有'+FM.card.length+'张手牌，是否仍继续结束本次远征？',(b)=>{
+                if(b==1)
+                {
+                    this.sendCancel();
+                }
+            })
+        }
+        else
+            this.sendCancel();
+
+    }
+
+    private sendCancel(){
+        FightManager.getInstance().fightCancel()
     }
 
     private onClick(){
@@ -151,7 +182,7 @@ class FightInfoUI extends game.BaseWindow {
 
             this.stepText.text = '当前胜场：' + FM.step
             this.cardText.text = '剩余卡牌数量：' + FM.card.length
-            this.numText.text = '今日挑战次数：' + (1-FM.num) + '/1'
+            this.numText.text = '今日挑战次数：' + (FM.num) + '/1'
 
             this.cancelBtn.visible = false;
             this.okBtn.visible = true;

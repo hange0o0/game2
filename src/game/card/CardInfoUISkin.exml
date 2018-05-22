@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="CardInfoUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" states="normal,buy" >
 	<e:Group x="0" top="0" bottom="0" bottom.buy="95">
-		<ns1:PKCardInfoUI id="item" x="0" skinName="PKCardInfoSkin" currentState="window" minHeight="640" y="0"/>
+		<ns1:PKCardInfoUI id="item" x="0" skinName="PKCardInfoSkin" currentState="window" minHeight="560" y="0"/>
 		<e:Image id="helpBtn" source="icon_help_png" y="10" scaleX="0.9" scaleY="0.9" x="501"/>
 		<e:Group bottom="80" height="100" width="510" horizontalCenter="0">
 			<e:Image scaleX="1" scaleY="1" left="0" right="0" top="0" bottom="0" source="bg11_png" scale9Grid="9,9,11,10"/>

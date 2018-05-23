@@ -5,8 +5,10 @@ class PKCardInfoItem extends game.BaseItem {
     }
 
     private rect: eui.Rect;
+    private barMC: eui.Rect;
     private icon: eui.Image;
     private text: eui.Label;
+
 
 
 
@@ -23,6 +25,7 @@ class PKCardInfoItem extends game.BaseItem {
     }
 
     public dataChanged(){
+        this.barMC.visible = false
         var arr = [1,4,5,8]
         if(arr.indexOf(this.data.index) != -1)
             this.currentState = 'stat1'
@@ -41,6 +44,12 @@ class PKCardInfoItem extends game.BaseItem {
         {
             this.rect.visible = false
             this.text.text = ''
+        }
+
+        if(this.data.rate)
+        {
+            this.barMC.visible = true;
+            this.barMC.width = this.data.rate * 250;
         }
 
     }

@@ -20,7 +20,9 @@ class MyWindow {
         return panel
     }
 
-    public static ShowTips(msg, cd = 1000) {
+    public static ShowTips(msg, cd = 0) {
+        if(!cd)
+            cd = Math.max(1000,msg.length * 150)
         TipsUI.getInstance().show(msg, cd);
     }
 

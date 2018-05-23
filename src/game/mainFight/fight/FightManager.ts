@@ -198,6 +198,7 @@ class FightManager {
             else
                 this.card = []
             this.award = msg.cardaward;
+            this.value += this.award.fightvalue
             this.step ++;
             EM.dispatchEventWith(GameEvent.client.fight_change)
             if (fun)

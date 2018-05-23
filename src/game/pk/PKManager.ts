@@ -121,6 +121,9 @@ class PKManager {
             case PKManager.TYPE_FIGHT:
                 FightManager.getInstance().pkFail(fun);
                 break;
+            default:
+                fun && fun();
+                break;
         }
     }
 

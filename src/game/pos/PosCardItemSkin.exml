@@ -7,7 +7,12 @@
 	<e:Image source="icon_cost_png" y="130" x="118.56"/>
 	<e:Label id="costText" text="20" size="24" stroke="3" x="116.2" y="138" width="30" textAlign="center"/>
 	<e:Group y="10" x="10">
-		<e:Image source="bg8_png" scale9Grid="9,9,9,9" x="0" y="0" width="50"/>
-		<e:Label id="numText" text="3/3" size="22" horizontalCenter="0" verticalCenter="0"/>
+		<e:Image source="bg8_png" scale9Grid="9,9,9,9" x="0" y="0" width="100%"/>
+		<e:Label id="numText" text="3/3" size="22" y="4" left="5" right="5" textAlign="center"/>
+	</e:Group>
+	<e:Group id="skillGroup" y="10" right="10">
+		<e:Image source="bg8_png" scale9Grid="9,9,9,9" x="0" y="0" width="100%"/>
+		<e:Label id="skillNumText" text="123" size="22" y="4" left="5" right="5" textAlign="center"/>
+		<e:Image source="border2_png" scale9Grid="12,12,3,3" left="-3" right="-3" top="-3" bottom="-3"/>
 	</e:Group>
 </e:Skin>

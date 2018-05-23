@@ -78,6 +78,7 @@ class PKCardInfoUI extends game.BaseContainer {
 
 
     public renew(v){
+        var CRM = CardManager.getInstance();
         this.dataIn = v;
         var vo:any = CM.getCardVO(this.dataIn.mid)
         this.img.data = vo.id;
@@ -189,9 +190,12 @@ class PKCardInfoUI extends game.BaseContainer {
             {
                 this.group.addChild(this.line)
                 this.group.addChild(this.list2)
-                var arr3 = [
-                    {index:1,icon:'icon_atk_png',iconScale:1,title:'当前拥有',value:CardManager.getInstance().skillList[vo.id] || 0}
-                ]
+                var skillNum = CRM.getSkillNum(vo.id);
+                var arr3:any = []
+                if(skillNum >= CRM.maxSkill)
+                    arr3.push({index:1,icon:'icon_atk_png',iconScale:1,title:'永久使用',rate:1})
+                else
+                    arr3.push({index:1,icon:'icon_atk_png',iconScale:1,title:'当前拥有',value:skillNum + ' /' + CRM.maxSkill,rate:skillNum/CRM.maxSkill})
                 if(this.dataIn.sp.num)
                 {
                     arr3.push({index:2,icon:'icon_love_png',iconScale:0.6,title:'可兑换数量',value:this.dataIn.sp.num})

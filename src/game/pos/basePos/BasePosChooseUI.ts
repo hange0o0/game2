@@ -86,7 +86,12 @@ class BasePosChooseUI extends game.BaseUI {
             MyWindow.ShowTips('上阵卡牌已达上限')
             return;
         }
+        //达单次上阵数量上限
         if(this.fromUI.useCard[item.id] && this.fromUI.useCard[item.id] >= PosManager.getInstance().oneCardNum)
+            return;
+
+        //没可用技能了
+        if(item.id > PKConfig.skillBeginID && this.fromUI.useCard[item.id] && this.fromUI.useCard[item.id] >= CardManager.getInstance().getSkillNum(item.id))
             return;
 
         this.fromUI.useCard[item.id] = (this.fromUI.useCard[item.id] || 0) + 1
@@ -173,6 +178,21 @@ class BasePosChooseUI extends game.BaseUI {
     }
 
     public onShow(){
+        var list = [
+            {label:PKConfig.TYPENAME[1]},
+            {label:PKConfig.TYPENAME[2]},
+            {label:PKConfig.TYPENAME[3]},
+            {label:'法术'},
+        ]
+        if(this.fromUI.type == 'def')
+        {
+            list.pop();
+            this.tab.width = 450
+        }
+        else
+            this.tab.width = 600
+
+        this.tab.dataProvider = new eui.ArrayCollection(list);
         this.isFull = false;
         this.renew();
         this.renewTitle();

@@ -11,6 +11,7 @@ class CardManager {
     public cardLike = {}
 
     public skillCost = 30;
+    public maxSkill = 999;
 
     public init(msg){
         var data = MonsterVO.data;
@@ -32,6 +33,10 @@ class CardManager {
 
         for(var s in msg.skill)
             this.skillList[s] = msg.skill[s];
+    }
+
+    public getSkillNum(id){
+         return this.skillList[id] || 0
     }
 
     public getTotalMonsterList(type){

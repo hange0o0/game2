@@ -9,6 +9,8 @@ class CardItem extends game.BaseItem {
     private nameText: eui.Label;
     private redMC: eui.Image;
     private costText: eui.Label;
+    private numText: eui.Label;
+
 
 
 
@@ -35,7 +37,17 @@ class CardItem extends game.BaseItem {
         this.img.data = vo.id;
         if(isOwn)
         {
-            this.currentState = 'normal';
+            if(vo.isMonster)
+                this.currentState = 'normal';
+            else
+            {
+                this.currentState = 'skill';
+                var num = CardManager.getInstance().getSkillNum(vo.id)
+                if(num < CardManager.getInstance().maxSkill)
+                    this.numText.text = num + ''
+                else
+                    this.numText.text = '∞'
+            }
         }
         else if(isOpen)
         {

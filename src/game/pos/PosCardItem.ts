@@ -9,6 +9,9 @@ class PosCardItem extends game.BaseItem {
     private nameText: eui.Label;
     private costText: eui.Label;
     private numText: eui.Label;
+    private skillGroup: eui.Group;
+    private skillNumText: eui.Label;
+
 
 
 
@@ -67,5 +70,28 @@ class PosCardItem extends game.BaseItem {
 
         if(!this.stopGay)
             this.img.changeGay((maxNum-useNum) == 0 || BasePosChooseUI.getInstance().isFull)
+
+        if(vo.isMonster)
+        {
+            this.skillGroup.visible = false
+        }
+        else
+        {
+            var num = CardManager.getInstance().getSkillNum(vo.id)
+            if(num < CardManager.getInstance().maxSkill)
+            {
+
+                this.skillGroup.visible = true
+                num -= useNum;
+                this.skillNumText.text = num + ''
+                if(num <= 0 && !this.stopGay)
+                    this.img.changeGay(true)
+            }
+            else
+            {
+                this.skillGroup.visible = false
+            }
+
+        }
     }
 }

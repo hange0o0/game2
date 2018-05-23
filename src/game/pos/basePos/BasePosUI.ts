@@ -400,8 +400,10 @@ class BasePosUI extends game.BaseUI {
     }
 
     public renew(){
+        var removeSkill = []
         var PM = PosManager.getInstance();
         var data = this.posData = PM.getListByType(this.type)[this.index]
+        var stopDelete = this.pkData && this.pkData.stopAdd
         this.useCard = {};
         if(GuideManager.getInstance().isGuiding)
         {
@@ -422,6 +424,16 @@ class BasePosUI extends game.BaseUI {
             for(var i=0;i<list.length;i++)
             {
                 var id = list[i];
+                if(!stopDelete && id>PKConfig.skillBeginID)
+                {
+                    var num =CardManager.getInstance().getSkillNum(id);
+                    var useNum = this.useCard[id] || 0
+                    if(num<=useNum)
+                    {
+                        removeSkill.push('【'+CM.getCardVO(id).name + '】');
+                        continue;
+                    }
+                }
                 this.useCard[id] = (this.useCard[id] || 0) + 1;
                 arr.push({id:id})
             }
@@ -443,7 +455,7 @@ class BasePosUI extends game.BaseUI {
             this.openBtn.visible = false;
         }
 
-        var stopDelete = this.pkData && this.pkData.stopAdd
+
         if(stopDelete)
             MyTool.removeMC(this.deleteBtn)
         else if(arr.length < this.maxCard)
@@ -452,6 +464,9 @@ class BasePosUI extends game.BaseUI {
         this.listData.refresh()
         this.renewTitle();
         this.renewBtn();
+
+        if(removeSkill.length > 0)
+            MyWindow.ShowTips('移除了 ' + removeSkill.length + ' 张无效法术牌')
 
 
     }

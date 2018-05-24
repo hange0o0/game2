@@ -39,12 +39,12 @@ class DebugManager {
             if(mvo.level <= level)
                 arr.push(mvo.id)
         }
-        for(var s in SkillVO.data)
-        {
-            var svo = SkillVO.data[s]
-            if(svo.level <= level)
-                arr.push(svo.id)
-        }
+        //for(var s in SkillVO.data)
+        //{
+        //    var svo = SkillVO.data[s]
+        //    if(svo.level <= level)
+        //        arr.push(svo.id)
+        //}
 
         var newList = [];
         for(var i=0;i<len;i++)
@@ -102,10 +102,10 @@ class DebugManager {
         {
             arr.push({id:s,num:this.winMonster[s] || 0})
         }
-        for(var s in SkillVO.data)
-        {
-            arr.push({id:s,num:this.winMonster[s] || 0})
-        }
+        //for(var s in SkillVO.data)
+        //{
+        //    arr.push({id:s,num:this.winMonster[s] || 0})
+        //}
         ArrayUtil.sortByField(arr,['num'],[1]);
         for(var i=0;i<arr.length;i++)
         {

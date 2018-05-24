@@ -1,17 +1,17 @@
-class ShopBuyUI extends game.BaseWindow {
-    private static _instance: ShopBuyUI;
-    public static getInstance(): ShopBuyUI {
+class FightShopBuyUI extends game.BaseWindow {
+    private static _instance: FightShopBuyUI;
+    public static getInstance(): FightShopBuyUI {
         if(!this._instance)
-            this._instance = new ShopBuyUI();
+            this._instance = new FightShopBuyUI();
         return this._instance;
     }
 
     public constructor() {
         super();
-        this.skinName = "ShopBuyUISkin";
+        this.skinName = "FightShopBuyUISkin";
     }
 
-    private shopItem: ShopItem;
+    private shopItem: FightShopItem;
     private cancelBtn: eui.Button;
     private okBtn: eui.Button;
 
@@ -30,16 +30,15 @@ class ShopBuyUI extends game.BaseWindow {
     }
 
     public onShow(){
-        this.shopItem.data = this.dataIn;
+       this.shopItem.data = this.dataIn;
     }
 
     private onClick(){
-        if(UM.diamond < this.dataIn.diamond)
+        if(FightManager.getInstance().value < this.dataIn.diamond)
         {
-            MyWindow.ShowTips('钻石不足！')
+            MyWindow.ShowTips('远征点不足！')
             return;
         }
-
         PayManager.getInstance().buy_shop(this.dataIn.id,()=>{
             MyWindow.ShowTips('购买成功！')
             ShopUI.getInstance().renewList()

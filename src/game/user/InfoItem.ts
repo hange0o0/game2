@@ -22,6 +22,11 @@ class InfoItem extends game.BaseItem {
     }
 
     public dataChanged(){
+        if(!this.data)
+        {
+            this.currentState = 'empty'
+            return;
+        }
         //{"gameid":"1_10001","nick":"1","type":"1","hourcoin":"0","tec_force":"0","level":"1","master":"","addtime":null,"protime":null,"gettime":null}
         this.nameText.text = '' + this.data.nick// + "  (LV."+(this.data.level || 1)+")";
         this.coinText.text = '时产：' + this.data.hourcoin;

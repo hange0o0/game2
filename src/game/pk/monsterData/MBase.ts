@@ -146,7 +146,7 @@ class MBase {
 
     //a对B攻击到达时的逻辑（攻击正式生效）
     public atk(user:PKMonsterData,target:PKMonsterData){
-        if(!user.doubleAction && target.missRate && PKData.getInstance().random() < target.doubleRate)  //暴击不可闪
+        if(!user.doubleAction && target.missRate && PKData.getInstance().random() < target.missRate)  //暴击不可闪
         {
             PKData.getInstance().addVideo({
                 type:PKConfig.VIDEO_MONSTER_MISS,

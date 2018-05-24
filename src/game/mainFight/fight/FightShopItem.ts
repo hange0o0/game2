@@ -50,12 +50,12 @@ class FightShopItem extends game.BaseItem {
         if(this.data.isbuy)
             return;
 
-        if(UM.diamond < this.data.diamond)
-        {
-            MyWindow.ShowTips('钻石不足！')
-            return;
-        }
-        ShopBuyUI.getInstance().show(this.data)
+        //if(UM.diamond < this.data.diamond)
+        //{
+        //    MyWindow.ShowTips('钻石不足！')
+        //    return;
+        //}
+        FightShopBuyUI.getInstance().show(this.data)
         //
         //var str = '确定费'+this.data.diamond+'钻石购买以下道具？\n\n'+this.nameText.text.replace('\n',' ')+''
         //MyWindow.Confirm(str,(b)=>{
@@ -111,7 +111,7 @@ class FightShopItem extends game.BaseItem {
             this.sellFinish.visible = false
             this.diamondGroup.visible =  true
             this.diamondText.text = this.data.diamond
-            this.diamondText.textColor = (UM.diamond < this.data.diamond)?0xFF0000:0xFFFFFF;
+            this.diamondText.textColor = (FightManager.getInstance().value < this.data.diamond)?0xFF0000:0xFFFFFF;
         }
     }
 

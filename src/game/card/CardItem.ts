@@ -13,7 +13,7 @@ class CardItem extends game.BaseItem {
 
 
 
-
+    public justInfo = false;
 
 
     public childrenCreated() {
@@ -35,7 +35,11 @@ class CardItem extends game.BaseItem {
         this.costText.text = vo.cost;
         this.nameText.text = vo.name;
         this.img.data = vo.id;
-        if(isOwn)
+        if(this.justInfo)
+        {
+            this.currentState = 'normal';
+        }
+        else if(isOwn)
         {
             if(vo.isMonster)
                 this.currentState = 'normal';

@@ -7,9 +7,10 @@
 	<e:Image id="redMC" source="red_mc_png" includeIn="add" y="-1" x="132"/>
 	<e:Image source="icon_cost_png" y="129.08" x="118.56" includeIn="normal,skill"/>
 	<e:Label id="costText" text="5" size="24" stroke="3" x="116.2" y="137" width="30" textAlign="center" includeIn="normal,skill"/>
-	<e:Group y="10" includeIn="skill" x="10">
-		<e:Image source="bg8_png" scale9Grid="9,9,9,9" left="0" right="0" height="26" y="0"/>
-		<e:Label id="numText" text="12" size="20" left="5" right="5" verticalCenter="0"/>
-	</e:Group>
 	<e:Image source="icon_lock_png" includeIn="lock" y="70" horizontalCenter="0" scaleX="1.2" scaleY="1.2"/>
+	<e:Group id="skillGroup" y="10" includeIn="skill" x="10">
+		<e:Image source="bg8_png" scale9Grid="9,9,9,9" x="0" y="0" width="100%"/>
+		<e:Label id="numText" text="123" size="22" y="4" left="5" right="5" textAlign="center"/>
+		<e:Image source="border2_png" scale9Grid="12,12,3,3" left="-3" right="-3" top="-3" bottom="-3"/>
+	</e:Group>
 </e:Skin>

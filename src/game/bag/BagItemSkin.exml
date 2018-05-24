@@ -2,8 +2,9 @@
 <e:Skin class="BagItemSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="620">
 	<e:Image y="0" height="90" left="0" right="10" source="bg2_png" scale9Grid="10,10,10,7"/>
 	<e:Group x="10" verticalCenter="0">
-		<e:Image width="70" height="70" x="0" y="0" scale9Grid="9,9,12,11" source="bg3_png"/>
+		<e:Image y="0" width="70" height="70" horizontalCenter="0" source="prop_bg_jpg"/>
 		<e:Image id="mc" width="55" height="55" source="bg5_png" horizontalCenter="0" verticalCenter="0"/>
+		<e:Image source="border2_png" scale9Grid="12,12,3,3" left="-3" right="-3" top="-3" bottom="-3"/>
 	</e:Group>
 	<e:Label id="nameText" text="Label" y="15" size="28" x="90" stroke="2" strokeColor="0x3f2309" textColor="0xffffff"/>
 	<e:Group right="-3" top="-4">

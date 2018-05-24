@@ -10,6 +10,7 @@ class FightAwardItem extends game.BaseItem {
     public childrenCreated() {
         super.childrenCreated();
         this.touchChildren = false
+        this.cardMC.justInfo = true
         MyTool.addLongTouch(this,this.onLongTouch,this)
         //this.addBtnEvent(this,this.onClick)
     }

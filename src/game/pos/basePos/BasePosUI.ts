@@ -8,6 +8,7 @@ class BasePosUI extends game.BaseUI {
     }
 
     private scrollerBG: eui.Group;
+    private titleGroup: eui.Group;
     private topUI: TopUI;
     private list: eui.List;
     private bottomUI: BottomUI;
@@ -189,6 +190,8 @@ class BasePosUI extends game.BaseUI {
         if(this.listData.getItemAt(this.listData.length-1).setting)
             length --;
         this.titleText.text = ''+length+' / '+this.maxCard
+
+        this.titleGroup.visible = !(this.pkData && this.pkData.stopAdd)
     }
 
     private onSave(fun?){

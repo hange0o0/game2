@@ -9,8 +9,6 @@ class FightManager {
     public shopTime
     public shopData
     public num
-    public level
-    public maxlevel
     public step
     public card
     public enemy
@@ -21,8 +19,6 @@ class FightManager {
 
     private renewInfo(info){
         this.num = info.num
-        this.level = info.level
-        this.maxlevel = info.maxlevel
         this.step = info.step
         if(info.card)
             this.card = info.card.split(',')
@@ -198,7 +194,7 @@ class FightManager {
             else
                 this.card = []
             this.award = msg.cardaward;
-            this.value += this.award.fightvalue
+            this.value += msg.award.fightvalue
             this.step ++;
             EM.dispatchEventWith(GameEvent.client.fight_change)
             if (fun)

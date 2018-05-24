@@ -24,11 +24,7 @@ class ShopItem extends game.BaseItem {
         if(this.data.isbuy)
             return;
 
-        if(UM.diamond < this.data.diamond)
-        {
-            MyWindow.ShowTips('钻石不足！')
-            return;
-        }
+
         ShopBuyUI.getInstance().show(this.data)
         //
         //var str = '确定费'+this.data.diamond+'钻石购买以下道具？\n\n'+this.nameText.text.replace('\n',' ')+''

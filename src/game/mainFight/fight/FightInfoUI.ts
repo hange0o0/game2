@@ -170,7 +170,7 @@ class FightInfoUI extends game.BaseWindow {
     private renewInfo(){
         var FM = FightManager.getInstance();
         this.valueText.text = '' + FM.value;
-        if(FM.level == 0)
+        if(FM.step == -1)
         {
             this.currentState = 'first'
             this.okBtn.label = '开始挑战'

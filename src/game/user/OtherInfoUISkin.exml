@@ -28,9 +28,8 @@
 					</e:Group>
 				</e:Group>
 			</e:Group>
-			<e:Rect width="100%" height="2" x="-264" y="297" fillColor="0x633a0d"/>
-			<e:Group x="20" y="540">
-				<e:Image source="bg2_png" scale9Grid="9,9,11,10" width="640" x="0" top="35" bottom="0" visible="false"/>
+			<e:Group x="20" y="540" width="100%">
+				<e:Image source="bg1_png" scale9Grid="8,8,14,14" left="20" right="20" top="30" bottom="0"/>
 				<e:List id="cardList" width="572" top="90" bottom="20" horizontalCenter="0">
 				<e:layout>
 					<e:TileLayout horizontalGap="8" verticalGap="8"/>
@@ -39,9 +38,8 @@
 				<e:Image y="0" source="title_bg3_png" scale9Grid="101,9,7,61" width="400" horizontalCenter="0"/>
 				<e:Label text="出战卡组" y="10" size="24" stroke="2" horizontalCenter="0"/>
 			</e:Group>
-			<e:Rect width="100%" height="2" x="-254" y="307" fillColor="0x633A0D"/>
-			<e:Group x="20" y="240">
-				<e:Image source="bg2_png" scale9Grid="9,9,11,10" width="640" x="0" top="35" bottom="0" visible="false"/>
+			<e:Group x="20" y="240" width="100%">
+				<e:Image source="bg1_png" scale9Grid="8,8,14,14" left="20" right="20" top="30" bottom="0"/>
 				<e:Image y="0" source="title_bg3_png" scale9Grid="101,9,7,61" width="400" horizontalCenter="0"/>
 				<e:Label text="社会关系" y="10" size="24" stroke="2" horizontalCenter="0"/>
 				<e:Group id="cdGroup" x="199" y="60">
@@ -52,14 +50,14 @@
 					<e:HorizontalLayout verticalAlign="middle" horizontalAlign="center"/>
 					</e:layout>
 				</e:Group>
-				<e:List id="list" width="640" x="0" top="95" bottom="20">
+				<e:List id="list" top="95" bottom="20" horizontalCenter="0">
 					<e:layout>
-					<e:TileLayout horizontalGap="10" paddingLeft="15" requestedColumnCount="2"/>
+					<e:TileLayout horizontalGap="10" requestedColumnCount="3" paddingLeft="0"/>
 					</e:layout>
 				</e:List>
 			</e:Group>
 			<e:layout>
-				<e:VerticalLayout paddingBottom="10" paddingTop="0" gap="30" horizontalAlign="center"/>
+				<e:VerticalLayout paddingBottom="10" paddingTop="0" gap="60" horizontalAlign="center"/>
 			</e:layout>
 		</e:Group>
 	</e:Scroller>

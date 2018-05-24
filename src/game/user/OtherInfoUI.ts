@@ -247,8 +247,11 @@ class OtherInfoUI extends game.BaseUI {
                 slave.master.hourcoin = UM.hourcoin
             }
         }
+        while(slaveList.length %3 != 0)
+            slaveList.push(null)
         this.list.dataProvider = new eui.ArrayCollection(slaveList)
-        console.log(slaveList)
+
+        //console.log(slaveList)
 
         for(var i=0;i<slaveList.length;i++)
         {

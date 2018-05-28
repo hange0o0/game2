@@ -69,9 +69,12 @@ class FightManager {
                 MyWindow.Alert('初始队伍失败，错误码：' + msg.fail)
                 return;
             }
+
+
             this.card = list;
+            this.step = 0;
             EM.dispatchEventWith(GameEvent.client.fight_change)
-            SharedObjectManager.getInstance().removeMyValue('fightDefault');
+            //SharedObjectManager.getInstance().removeMyValue('fightDefault');
             this.pk();
             fun && fun();
         });

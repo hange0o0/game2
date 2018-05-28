@@ -32,7 +32,12 @@ class HangUI extends game.BaseItem {
     private cost2 = 0
     private overCount = 10
 
+    private initTime
+    private openTimer
+    private lastRota = 0
+
     private pkMV;
+    private callStop = true;
 
     public constructor() {
         super();
@@ -65,6 +70,8 @@ class HangUI extends game.BaseItem {
         //var blurFliter = new egret.BlurFilter( 10 , 10);
         //this.bg.filters = [blurFliter];
         //this.bg.cacheAsBitmap  = true;
+
+        this.initTime = egret.getTimer();
     }
 
     public onPK(){
@@ -132,13 +139,11 @@ class HangUI extends game.BaseItem {
 
         //this.bg.source = PKManager.getInstance().getBG(HangManager.getInstance().getHangBGID());
 
+        console.log('renew')
 
 
 
-        var pkvideo = PKVideoCon.getInstance()
-        this.con.addChild(pkvideo)
-        pkvideo.y = -10;
-        pkvideo.x = 0
+        this.callStop = false
 
         if(HM.level == 0)
         {
@@ -157,8 +162,6 @@ class HangUI extends game.BaseItem {
         {
             this.openBtn.visible = false;
             this.clockGroup.visible = true;
-            this.addEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
-            this.reset();
 
             this.lockGroup.visible = HM.getPKLeft() > 0;
             this.awardBtn.visible = HM.getAwardLeft() < 0;
@@ -170,6 +173,29 @@ class HangUI extends game.BaseItem {
                 this.pkMV.play(-1);
             else
                 this.pkMV.stop();
+
+            var cd =  1000 -  (egret.getTimer() - this.initTime)
+            clearTimeout(this.openTimer);
+            if(cd > 0)
+            {
+                this.reset(true);
+                this.openTimer = setTimeout(()=>{
+                    if(this.stage)
+                        this.renew();
+                },cd)
+                return;
+            }
+
+            var pkvideo = PKVideoCon.getInstance()
+            if(pkvideo.parent != this.con)
+                this.reset();
+            else
+                console.log(pkvideo.parent)
+
+            this.addEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
+            console.log('addListener')
+
+
         }
 
         this.onTimer();
@@ -177,7 +203,20 @@ class HangUI extends game.BaseItem {
 
     }
 
+    //public addVideoCon(){
+    //    var pkvideo = PKVideoCon.getInstance()
+    //    this.con.addChild(pkvideo)
+    //    pkvideo.y = -10;
+    //    pkvideo.x = 0
+    //}
+
+    public stop(){
+        this.callStop = true
+    }
+
     public reset(stopStart?){
+        console.log('reset')
+
         var data = {
             seed:TM.now(),
             players:[
@@ -208,11 +247,14 @@ class HangUI extends game.BaseItem {
         var pkvideo = PKVideoCon.getInstance()
         if(pkvideo.parent == this.con)
         {
+            console.log('clean')
             egret.Tween.removeTweens(pkvideo)
             this.removeEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
+            console.log('removeListener')
             PKBulletManager.getInstance().freeAll()
             pkvideo.remove();
             this.pkMV.stop();
+            MyTool.removeMC(pkvideo);
         }
     }
 
@@ -222,7 +264,7 @@ class HangUI extends game.BaseItem {
         var PC = PKCode.getInstance();
         var videoCon = PKVideoCon.getInstance();
         var cd = PD.getPassTime() - PD.actionTime
-        if(cd > 1000*3)
+        if(cd > 1000*5)
         {
             this.reset();
             return;
@@ -231,7 +273,8 @@ class HangUI extends game.BaseItem {
         {
             PD.actionTime += PKConfig.stepCD;
             cd -= PKConfig.stepCD;
-            this.testAddMonster();
+            if(Math.floor(PD.actionTime/PKConfig.stepCD)%10 == 0)
+                this.testAddMonster();
 
             PC.monsterAction();
             PC.monsterMove();
@@ -244,7 +287,14 @@ class HangUI extends game.BaseItem {
         {
             this.overCount ++;
             if(this.overCount == 50)
+            {
+                if(this.callStop)
+                {
+                    this.clean();
+                    return;
+                }
                 this.reset();
+            }
             if(PD.isGameOver)
                 return;
         }
@@ -261,16 +311,22 @@ class HangUI extends game.BaseItem {
             else if(scrollH < w - videoCon.width)
                 scrollH = w - videoCon.width;
             var dec = Math.abs(videoCon.x - scrollH)
-            egret.Tween.removeTweens(videoCon)
-            if(dec > 10)
+            var rote =  videoCon.x > scrollH ?1:-1
+            if(dec > 80 || this.lastRota == rote)
             {
-                var tw = egret.Tween.get(videoCon)
-                tw.to({x:scrollH},Math.min(300,dec*10))
+                egret.Tween.removeTweens(videoCon)
+                if(dec > 10)
+                {
+                    var tw = egret.Tween.get(videoCon)
+                    tw.to({x:scrollH},Math.min(300,dec*10))
+                }
+                else
+                {
+                    videoCon.x = scrollH;
+                }
+                this.lastRota = rote
             }
-            else
-            {
-                videoCon.x = scrollH;
-            }
+
         }
     }
 

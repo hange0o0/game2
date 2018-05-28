@@ -5,7 +5,7 @@
 		<e:Group>
 			<e:Group y="50" horizontalCenter="0" minWidth="320" x="160" width="640">
 				<e:Group y="50" width="480" horizontalCenter="0">
-					<e:Image source="bg2_png" scale9Grid="11,13,5,5" top="0" bottom="0" left="0" right="0"/>
+					<e:Image scale9Grid="11,13,5,5" top="0" bottom="0" left="0" right="0" source="bg1_png"/>
 					<e:Group left="20" right="20" top="20" bottom="20">
 						<ns1:HeadMC width="130" height="130" x="10" skinName="HeadMCSkin" id="headMC" verticalCenter="0"/>
 						<e:Group y="10" x="120">

@@ -26,7 +26,6 @@ class M38 extends MBase {
 
         var skillValue = user.getSkillValue(1);
         var buff = new PKBuffData()
-        buff.id = 38;
         buff.isDebuff = true;
         buff.value = skillValue;
         buff.addValue('def',-skillValue);
@@ -51,8 +50,12 @@ class M38 extends MBase {
 
     //对最多3个单位进行一次攻击
     public getSkillTarget(user:PKMonsterData){
-        if(user.target && user.target.beSkillAble())
-            return [user.target];
+        user.getAtkTarget();
+        var target = user.target
+        if(target && target.beSkillAble())
+        {
+            return [target];
+        }
         return [];
     }
 

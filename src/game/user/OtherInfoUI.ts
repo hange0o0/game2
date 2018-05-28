@@ -255,7 +255,7 @@ class OtherInfoUI extends game.BaseUI {
 
         for(var i=0;i<slaveList.length;i++)
         {
-             if(slaveList[i].gameid == UM.gameid && this.master != UM.gameid)
+             if(slaveList[i] && slaveList[i].gameid == UM.gameid && this.master != UM.gameid)
              {
                  this.isMyMaster = true;
 

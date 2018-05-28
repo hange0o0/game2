@@ -45,7 +45,7 @@ class TecInfoUI extends game.BaseWindow {
 
     private onClick(){
         TecManager.getInstance().tec_up(this.dataIn.id,()=>{
-            this.hide()
+            this.renew()
         });
     }
 

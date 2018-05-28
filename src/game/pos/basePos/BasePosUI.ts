@@ -306,6 +306,7 @@ class BasePosUI extends game.BaseUI {
     *   title
     *   helpKey
     *   stopAdd
+    *   stopRemoveTips
     *  }
     * */
     public show(type?,pkData?){
@@ -468,7 +469,8 @@ class BasePosUI extends game.BaseUI {
         this.renewTitle();
         this.renewBtn();
 
-        if(removeSkill.length > 0)
+        var stopRemoveTips = this.pkData && this.pkData.stopRemoveTips
+        if(removeSkill.length > 0 && !stopRemoveTips)
             MyWindow.ShowTips('移除了 ' + removeSkill.length + ' 张无效法术牌')
 
 

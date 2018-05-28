@@ -230,10 +230,7 @@ class MainUI extends game.BaseUI {
     public onVisibleChange(){
          if(this.currentIndex == 2)
          {
-             if(this.visible)
-                 MainFightUI.getInstance().onPKEnd()
-             else
-                 MainFightUI.getInstance().onPKBegin()
+             MainFightUI.getInstance().onVisibleChange(this.visible)
          }
     }
 

@@ -101,8 +101,15 @@ class PKWinUI extends game.BaseUI {
     private onOK(){
         if(!this.closeBtn.visible)
             return;
+        if(PKManager.getInstance().pkType == PKManager.TYPE_FIGHT)
+        {
+            FightAwardUI.getInstance().show();
+        }
+
         this.stopAllTimer();
         this.hide();
         PKingUI.getInstance().hide();
+
+
     }
 }

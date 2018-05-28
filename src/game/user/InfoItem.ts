@@ -18,7 +18,8 @@ class InfoItem extends game.BaseItem {
     }
 
     private onClick(){
-        OtherInfoUI.getInstance().show(this.data.gameid);
+        if(this.data)
+            OtherInfoUI.getInstance().show(this.data.gameid);
     }
 
     public dataChanged(){

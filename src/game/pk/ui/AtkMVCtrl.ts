@@ -16,6 +16,8 @@ class AtkMVCtrl {
         RES.getResAsync(url,function(){},this)
     }
     public playAniOn(id,mvid){
+        if(!PKVideoCon.getInstance().stage)
+            return;
         return PKVideoCon.getInstance().playAniOn(id,mvid)
     }
 
@@ -148,7 +150,7 @@ class AtkMVCtrl {
         var mBase = MBase.getData(48)
         var userItem = PKVideoCon.getInstance().getItemByID(user.id);
         var targetItem = PKVideoCon.getInstance().getItemByID(target.id);
-        var mc = PKVideoCon.getInstance().playAniOn(user.id,mBase.mvID1)
+        var mc = this.playAniOn(user.id,mBase.mvID1)
         if(mc)
         {
             mc.scaleY = 1;
@@ -271,7 +273,7 @@ class AtkMVCtrl {
     //技能动画
     public skillMV10(user,target,actionTime,endTime){
         var mBase = MBase.getData(10)
-        var mv = AtkMVCtrl.getInstance().playAniOn(target.id,mBase.mvID1)
+        var mv = this.playAniOn(target.id,mBase.mvID1)
         if(mv)
         {
             mv.scaleX = mv.scaleY = 0.5;
@@ -296,12 +298,12 @@ class AtkMVCtrl {
     ////////////////////////////////////////////////////////////////
     public skillMV203(target:PKMonsterData){
         var sBase = SBase.getData(203)
-        PKVideoCon.getInstance().playAniOn(target.id,sBase.mvID1)
+        this.playAniOn(target.id,sBase.mvID1)
     }
 
     public skillMV210(target:PKMonsterData){
         var sBase = SBase.getData(210)
-        var mv = PKVideoCon.getInstance().playAniOn(target.id,sBase.mvID2)
+        var mv = this.playAniOn(target.id,sBase.mvID2)
         if(mv)
         {
             mv.scaleX = mv.scaleY = 0.5;
@@ -312,17 +314,17 @@ class AtkMVCtrl {
 
     public skillMV211(target:PKMonsterData){
         var sBase = SBase.getData(211)
-        PKVideoCon.getInstance().playAniOn(target.id,sBase.mvID1)
+        this.playAniOn(target.id,sBase.mvID1)
     }
 
     public skillMV214(target:PKMonsterData){
         var sBase = SBase.getData(214)
-        PKVideoCon.getInstance().playAniOn(target.id,sBase.mvID1)
+        this.playAniOn(target.id,sBase.mvID1)
     }
 
     public skillMV215(target:PKMonsterData){
         var sBase = SBase.getData(215)
-        PKVideoCon.getInstance().playAniOn(target.id,sBase.mvID1)
+        this.playAniOn(target.id,sBase.mvID1)
     }
 
 

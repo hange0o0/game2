@@ -46,7 +46,7 @@ class FightInfoUI extends game.BaseWindow {
                 }
             })
         }
-        else if(FM.card.length )
+        else if(FM.card.length)
         {
             MyWindow.Confirm('你目前还有'+FM.card.length+'张手牌，是否仍继续结束本次远征？',(b)=>{
                 if(b==1)
@@ -113,6 +113,7 @@ class FightInfoUI extends game.BaseWindow {
         PKBeforeUI.getInstance().show({
             title:'初始阵容',
             noTab:true,
+            stopRemoveTips:true,
             list:SharedObjectManager.getInstance().getMyValue('fightDefault') || PKManager.getInstance().getDefaultPKList(),
             fun:function(data){
                 var arr = data.split(',')
@@ -126,6 +127,7 @@ class FightInfoUI extends game.BaseWindow {
                     })
                     return;
                 }
+                SharedObjectManager.getInstance().setMyValue('fightDefault',data)
                 FM.initFight(data,diamond)
             },
             hideFun:function(data){

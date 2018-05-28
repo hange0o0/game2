@@ -50,6 +50,9 @@ class MainFightUI extends MainBase {
 
         this.scroller.addEventListener(egret.Event.CHANGE,this.onScroll,this)
 
+        EM.addEvent(GameEvent.client.pk_begin,this.onPKBegin,this)
+        EM.addEvent(GameEvent.client.pk_end,this.onPKEnd,this)
+
     }
 
     private renewRed(){
@@ -127,9 +130,6 @@ class MainFightUI extends MainBase {
         this.renewRed();
 
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
-
-        this.addPanelOpenEvent(GameEvent.client.pk_begin,this.onPKBegin)
-        this.addPanelOpenEvent(GameEvent.client.pk_end,this.onPKEnd)
         this.addPanelOpenEvent(GameEvent.client.red_change,this.renewRed)
 
     }
@@ -138,12 +138,24 @@ class MainFightUI extends MainBase {
         this.mapBtn.clean()
     }
     public onPKEnd(){
-        this.mapBtn.renew()
+        if(this.stage && MainUI.getInstance().visible)
+            this.mapBtn.renew()
     }
 
 
     private onTimer(){
         this.mapBtn.onTimer()
+    }
+
+    public onVisibleChange(b){
+        if(b)
+        {
+            this.renewHang();
+        }
+        else
+        {
+            this.mapBtn.stop()
+        }
     }
 
 
@@ -160,6 +172,6 @@ class MainFightUI extends MainBase {
     }
     public hide(){
         super.hide()
-        this.mapBtn.clean()
+        this.mapBtn.stop()
     }
 }

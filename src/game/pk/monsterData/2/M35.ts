@@ -35,6 +35,7 @@ class M35 extends MBase {
     }
 
     public getSkillTarget(user:PKMonsterData){
+        user.getAtkTarget();
         if(user.target)
             return [null];
         return [];

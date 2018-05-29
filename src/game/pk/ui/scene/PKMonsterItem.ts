@@ -26,25 +26,25 @@ class PKMonsterItem extends game.BaseItem {
 
    public talkItm:PKTalkItem;
 
-    public monsterMV:MonsterMV
+    public monsterMV:MonsterMV = new MonsterMV();
     public needRemove = false
     public stateMV = {};
     public addStateMV = new PKAddState();
     public constructor() {
         super();
         this.skinName = "PKMonsterItemSkin";
+        this.monsterMV.addEventListener('mv_die',this.onDieFinish,this)
     }
 
     public childrenCreated() {
         super.childrenCreated();
 
-        this.monsterMV = new MonsterMV();
         this.addChildAt(this.monsterMV,0)
         this.monsterMV.x = 50;
         this.monsterMV.y = 300;
         this.anchorOffsetX = 50;
         this.anchorOffsetY = 300;
-        this.monsterMV.addEventListener('mv_die',this.onDieFinish,this)
+
 
 
 

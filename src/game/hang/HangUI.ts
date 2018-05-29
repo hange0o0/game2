@@ -283,7 +283,7 @@ class HangUI extends game.BaseItem {
         }
         videoCon.action();
         videoCon.randomTalk()
-        if(PD.isGameOver || PD.monsterList.length == 0 || PD.actionTime > 180000)
+        if(PD.isGameOver ||  PD.actionTime > 180000 || (PD.actionTime > 3000 && PD.monsterList.length == 0))
         {
             this.overCount ++;
             if(this.overCount == 50)
@@ -357,6 +357,8 @@ class HangUI extends game.BaseItem {
     }
 
     private addMonster(id,ownerid){
+        //if(!this.stage)
+        //    return;
         var PD = PKData.getInstance();
         var owner = PD.getPlayer(ownerid);
         var atkRota = owner.teamData.atkRota;

@@ -29,8 +29,19 @@ class FightAwardUI extends game.BaseWindow {
 
         this.list.allowMultipleSelection = true
         this.list.itemRenderer = FightAwardItem
-        this.list.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onSelected,this)
 
+        this.list.addEventListener(egret.Event.CHANGE,this.onSelected,this)
+        this.list.addEventListener(egret.Event.CHANGING,this.onTapChanging,this)
+
+    }
+
+    private onTapChanging(e){
+        if(this.list.selectedIndices.length > 5)
+        {
+            e.preventDefault();
+            MyWindow.ShowTips('不能选择多于5张卡牌')
+        }
+        //console.log(this.scrolllist.list.selectedIndices)
     }
 
     private onSelected(){

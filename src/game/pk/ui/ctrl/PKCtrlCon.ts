@@ -9,10 +9,9 @@ class PKCtrlCon extends game.BaseContainer {
     public overMC: eui.Group;
     public cardGroup: eui.Group;
     private replayGroup: eui.Group;
-    private vPlayer1: eui.Button;
-    private vPlayer2: eui.Button;
+    private playerText: eui.Label;
+    private vPlayer: eui.Button;
     private placeGroup: eui.Group;
-    public costGroup: eui.Group;
     private info2: PKInfoBtn;
     private info1: PKInfoBtn;
     private info4: PKInfoBtn;
@@ -20,9 +19,12 @@ class PKCtrlCon extends game.BaseContainer {
     private settingBtn: eui.Image;
     private timeText: eui.Label;
     private cardText: eui.Label;
+    public costGroup: eui.Group;
     private costMC: eui.Image;
     private costText: eui.Label;
     private helpBtn: eui.Image;
+
+
 
 
 
@@ -49,7 +51,9 @@ class PKCtrlCon extends game.BaseContainer {
 
 
 
+    private touchBeginXY
 
+    private currentPlayer = 1;
     public childrenCreated() {
         super.childrenCreated();
         //for(var i=0;i< PKConfig.maxPosCard;i++)
@@ -86,17 +90,46 @@ class PKCtrlCon extends game.BaseContainer {
         this.addBtnEvent(this.placeGroup,this.onPosClick)
             this.addBtnEvent(this.settingBtn,this.onSetting)
         this.addBtnEvent(this.helpBtn,this.onHelp)
-        this.addBtnEvent(this.vPlayer1,this.onPlayer1)
-        this.addBtnEvent(this.vPlayer2,this.onPlayer2)
+        this.addBtnEvent(this.vPlayer,this.onPlayer)
 
         PKData.getInstance().addEventListener('video',this.onVideoEvent,this);
+
+        this.placeGroup.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.onTouchBegin,this)
+        this.placeGroup.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.onTouchMove,this)
+        this.addEventListener(egret.TouchEvent.TOUCH_END,this.onTouchEnd,this)
     }
 
-    private onPlayer1(){
-        PKData.getInstance().changeMyPlayer(1)
+    private onTouchBegin(e){
+        if(GuideManager.getInstance().isGuiding)
+            return;
+        if(this.touchBeginXY)
+            return;
+        this.touchBeginXY = {
+            x:e.stageX,
+            y:e.stageY,
+        }
     }
-    private onPlayer2(){
-        PKData.getInstance().changeMyPlayer(2)
+    private onTouchMove(e){
+        if(!this.touchBeginXY)
+            return;
+        var addX = this.touchBeginXY.x - e.stageX;
+        PKingUI.getInstance().addScroll(addX);
+        this.touchBeginXY = {
+            x:e.stageX,
+            y:e.stageY,
+        }
+    }
+
+    private onTouchEnd(e?,mv?){
+        this.touchBeginXY = null
+    }
+
+    private onPlayer(){
+        this.currentPlayer ++;
+        if(this.currentPlayer > PKData.getInstance().playerNum)
+            this.currentPlayer = 1;
+        this.playerText.text = PKData.getInstance().getPlayer(this.currentPlayer).nick
+        PKData.getInstance().changeMyPlayer(this.currentPlayer)
     }
 
     private onHelp(){
@@ -356,25 +389,18 @@ class PKCtrlCon extends game.BaseContainer {
 
         if(PD.isReplay)
         {
-             this.cardGroup.visible = false
-             this.replayGroup.visible = true
-            this.vPlayer1.label = PD.getPlayer(1).nick
-            this.vPlayer2.label = PD.getPlayer(2).nick
+            this.replayGroup.visible = true
             this.renewReplay();
         }
         else
         {
-             this.cardGroup.visible = true
-             this.replayGroup.visible = false
+            this.replayGroup.visible = false
         }
     }
 
     public onMyPlayerChange(){
         var myPlayer = PKData.getInstance().myPlayer
-        while(this.placeArr.length)
-        {
-            PKPosItem.freeItem(this.placeArr.pop())
-        }
+        this.remove();
 
         for(var s in myPlayer.posCard)
         {
@@ -387,23 +413,28 @@ class PKCtrlCon extends game.BaseContainer {
             this.placeArr.push(item);
         }
 
+        this.needRenewCard = true;
+        this.renewCard();
+
         this.needRenewInfo = true
         this.renewInfo();
-        this.renewReplay();
+        //this.renewReplay();
     }
 
     public renewReplay(){
         var PD = PKData.getInstance();
-        if(PD.myPlayer.id == 1)
-        {
-            this.vPlayer1.skinName = 'Btn1Skin'
-            this.vPlayer2.skinName = 'Btn2Skin'
-        }
-        else
-        {
-            this.vPlayer1.skinName = 'Btn2Skin'
-            this.vPlayer2.skinName = 'Btn1Skin'
-        }
+        this.currentPlayer = PD.myPlayer.id
+        this.playerText.text = PKData.getInstance().getPlayer(this.currentPlayer).nick
+        //if(PD.myPlayer.id == 1)
+        //{
+        //    this.vPlayer1.skinName = 'Btn1Skin'
+        //    this.vPlayer2.skinName = 'Btn2Skin'
+        //}
+        //else
+        //{
+        //    this.vPlayer1.skinName = 'Btn2Skin'
+        //    this.vPlayer2.skinName = 'Btn1Skin'
+        //}
     }
 
     //public getInfoBtn(id){
@@ -499,6 +530,7 @@ class PKCtrlCon extends game.BaseContainer {
             this.needRenewCard = false;
             var PD = PKData.getInstance();
             var handCard = PKData.getInstance().myPlayer.getHandCard();
+            console.log(handCard)
 
             for(var s in this.cardObj)
             {

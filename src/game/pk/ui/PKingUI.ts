@@ -46,6 +46,17 @@ class PKingUI extends game.BaseUI {
        this.scrollTime = TM.now();
     }
 
+    public addScroll(v){
+        if(!this.scroller.touchEnabled)
+            return;
+        this.scroller.viewport.scrollH += v;
+        if(this.scroller.viewport.scrollH < 0)
+            this.scroller.viewport.scrollH = 0;
+        else if(this.scroller.viewport.scrollH + this.scroller.viewport.width > this.scroller.viewport.contentWidth)
+            this.scroller.viewport.scrollH  =  this.scroller.viewport.contentWidth - this.scroller.viewport.width
+         this.onScroll();
+    }
+
     public hide(){
         super.hide();
         SoundManager.getInstance().playSound(SoundConfig.bg);

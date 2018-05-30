@@ -34,8 +34,8 @@ class PKManager {
                  i--;
              }
         }
-        if(this.recordList.length > 30)
-            this.recordList.length = 30;
+        if(this.recordList.length > 20)
+            this.recordList.length = 20;
     }
 
     public pkWord = ['投降，或者死亡','来战个痛快','小心你的背后','这招看你怎么躲','我要认真了','你就只会这几招吗','我要出大招了','我会赐予你死亡','你究竟想怎样...','我的魔法会撕碎你','我已饥渴难耐','你会记住我的名字的',
@@ -224,11 +224,14 @@ class PKManager {
         for(var i=0;i<data.players.length;i++)
         {
             var players = data.players[i];
-            delete players.autolist;
-            delete players.card;
+            //delete players.autolist;
+            //delete players.card;
+            if(players.autolist && !players.card)
+                players.card = players.autolist
             players.actionlist = PD.getPlayer(players.id).posHistory.join(',');
         }
         this.recordList.unshift(data)
+
         SharedObjectManager.getInstance().setMyValue('pk_replay',this.recordList)
 
         if(data.result == 1 && data.type == PKManager.TYPE_SLAVE)

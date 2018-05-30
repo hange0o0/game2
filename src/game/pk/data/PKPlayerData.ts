@@ -220,6 +220,7 @@ class PKPlayerData {
                 this.autoList.shift();
 
                 this.addMP(-CM.getCardVO(data.mid).cost)
+                this.removeAutoCard(this.posCard[data.id]);
                 if(this == PKData.getInstance().myPlayer)
                 {
                     PKData.getInstance().addVideo({
@@ -234,6 +235,29 @@ class PKPlayerData {
             else
                 break;
         }
+    }
+
+    private removeAutoCard(data:PKPosCardData){
+        var PD = PKData.getInstance()
+        if(!PD.isReplay)
+            return;
+        var list = []
+        for(var s in this.handCard)
+        {
+              if(this.handCard[s].mid == data.mid && !this.handCard[s].remove)
+              {
+                  list.push({index:s,autoIndex:this.handCard[s].index})
+              }
+        }
+        if(list.length == 0)
+            return;
+        if(list.length > 1)
+        {
+            ArrayUtil.sortByField(list,['autoIndex'],[0])
+        }
+        data.cardData = this.handCard[list[0].index]
+        this.handCard[list[0].index].remove = true
+        this.sendToServer(data)
     }
 
     public getEnablePos(t,leftSpace){

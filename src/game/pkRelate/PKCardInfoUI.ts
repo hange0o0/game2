@@ -153,21 +153,21 @@ class PKCardInfoUI extends game.BaseContainer {
             //    hp2 = Math.floor(hp2*1.1);
             //else if(this.dataIn.pos == 3)
             //    def2 += 5;
-            var arr2 = [
-                //{index:1,icon:'icon_atk_png',iconScale:1,title:'攻击',value:atk,valueAdd:ark2-atk},
-                {index:2,icon:'icon_love_png',iconScale:0.6,title:'血量',value:hp,valueAdd:hp2 - hp},
-                {index:3,icon:'icon_def1_png',iconScale:0.4,title:'防御',value:def,valueAdd:def2 - def},
-                {index:4,icon:'icon_speed_png',iconScale:1,title:'移动速度',value:vo.speed,valueAdd:0},
-                {index:4,icon:'icon_atkhp_png',iconScale:1,title:'伤害',value:vo.atk2,valueAdd:0}
+            var arr2:any = [
+                {index:1,icon:'icon_love_png',iconScale:0.6,title:'血量',value:hp,valueAdd:hp2 - hp}
             ]
             if(atk)
             {
-                arr2.unshift({index:1,icon:'icon_atk_png',iconScale:1,title:'攻击力',value:atk,valueAdd:ark2-atk})
+                arr2.push({index:2,icon:'icon_atk_png',iconScale:1,title:'攻击力',value:atk,valueAdd:ark2-atk})
                 arr2.push({index:5,icon:'icon_atkcd_png',iconScale:1,title:'攻击间隔',value:MyTool.toFixed(vo.atkcd/1000,1)+'秒',valueAdd:0})
                 arr2.push({index:6,icon:'icon_rage_png',iconScale:1,title:'攻击距离',value:vo.isNearAtk()?'近战':vo.atkrage,valueAdd:0})
             }
 
-            arr2.push( {index:7,icon:'icon_pos_png',iconScale:1,title:'生物体积',value:vo.space,valueAdd:0})
+            arr2.push({index:3,icon:'icon_def1_png',iconScale:0.4,title:'防御',value:def,valueAdd:def2 - def})
+            arr2.push({index:4,icon:'icon_speed_png',iconScale:1,title:'移动速度',value:vo.speed,valueAdd:0})
+            arr2.push({index:4,icon:'icon_atkhp_png',iconScale:1,title:'队伍伤害',value:vo.atk2,valueAdd:0})
+            arr2.push({index:7,icon:'icon_pos_png',iconScale:1,title:'生物体积',value:vo.space,valueAdd:0})
+
             if(vo.skillcd > 0)
                 arr2.push({index:0,icon:'icon_clock_png',iconScale:1,title:'技能间隔',value:MyTool.toFixed(vo.skillcd/1000,1)+'秒',valueAdd:0});
             if(arr2.length%2 ==1)
@@ -185,7 +185,6 @@ class PKCardInfoUI extends game.BaseContainer {
         }
         else
         {
-
             if(this.dataIn.sp)
             {
                 this.group.addChild(this.line)

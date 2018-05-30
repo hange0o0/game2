@@ -86,6 +86,7 @@ class PKCardItem extends game.BaseItem {
             this.currentState = 'empty'
             return;
         }
+
         if(this.data.waiting && !this.isDragMC)
         {
             this.stopDrag = true
@@ -134,6 +135,9 @@ class PKCardItem extends game.BaseItem {
 
         this.costText.text = vo.cost;
         this.renewChoose();
+
+        if(PKData.getInstance().isReplay)
+            this.stopDrag = true
     }
 
     //前5张出现时的动画

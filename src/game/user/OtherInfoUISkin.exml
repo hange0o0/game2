@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="OtherInfoUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
-	<e:Image source="bg14_png" x="0" top="0" bottom="0" width="640" scale9Grid="32,29,8,10"/>
+	<e:Image source="bg14_png" x="0" top="-30" bottom="0" width="640" scale9Grid="32,29,8,10"/>
 	<e:Scroller id="scroller" width="640" x="0" top="0" bottom="100" bounces="false">
 		<e:Group>
-			<e:Group y="50" horizontalCenter="0" minWidth="320" x="160" width="640">
+			<e:Group y="50" horizontalCenter="0" minWidth="320" x="160" width="640" height="280">
+				<e:Image source="info_bg_png" y="0" scaleX="1" scaleY="1" horizontalCenter="0"/>
 				<e:Group y="50" width="480" horizontalCenter="0">
-					<e:Image scale9Grid="11,13,5,5" top="0" bottom="0" left="0" right="0" source="bg1_png"/>
+					<e:Image scale9Grid="11,13,5,5" top="0" bottom="0" left="0" right="0" source="bg1_png" visible="false"/>
 					<e:Group left="20" right="20" top="20" bottom="20">
 						<ns1:HeadMC width="130" height="130" x="10" skinName="HeadMCSkin" id="headMC" verticalCenter="0"/>
 						<e:Group y="10" x="120">
@@ -57,7 +58,7 @@
 				</e:List>
 			</e:Group>
 			<e:layout>
-				<e:VerticalLayout paddingBottom="10" paddingTop="0" gap="60" horizontalAlign="center"/>
+				<e:VerticalLayout paddingBottom="10" paddingTop="0" gap="30" horizontalAlign="center"/>
 			</e:layout>
 		</e:Group>
 	</e:Scroller>

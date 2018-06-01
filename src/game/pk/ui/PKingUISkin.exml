@@ -4,6 +4,8 @@
 		<e:Group id="con">
 		</e:Group>
 	</e:Scroller>
+	<e:Image id="hurt1" source="pk_hurt_png" x="0" y="166"/>
+	<e:Image id="hurt2" source="pk_hurt_png" y="166" scaleX="-1" right="0"/>
 	<ns1:PKSmallMap id="smallMap" skinName="PKSmallMapSkin" bottom="472" horizontalCenter="0" locked="true"/>
 	<ns1:PKCtrlCon id="pkCtrlCon" x="0" skinName="PKCtrlConSkin" bottom="0"/>
 	<ns1:PKTopUI id="pkTop" x="0" skinName="PKTopSkin"/>

@@ -23,7 +23,7 @@ class PKManager {
 
 
     constructor(){
-        this.recordList = SharedObjectManager.getInstance().getMyValue('pk_replay') || []
+        this.recordList = SharedObjectManager.getInstance().getMyValue('pk_replay1') || []
         this.recordTime = SharedObjectManager.getInstance().getMyValue('pk_record_time') || 0
 
         for(var i=0;i<this.recordList.length;i++)//去除录像版本不对的
@@ -232,7 +232,7 @@ class PKManager {
         }
         this.recordList.unshift(data)
 
-        SharedObjectManager.getInstance().setMyValue('pk_replay',this.recordList)
+        SharedObjectManager.getInstance().setMyValue('pk_replay1',this.recordList)
 
         if(data.result == 1 && data.type == PKManager.TYPE_SLAVE)
         {
@@ -286,7 +286,7 @@ class PKManager {
                 if(b)
                 {
                     ArrayUtil.sortByField(this.recordList,['pktime'],[1]);
-                    SharedObjectManager.getInstance().setMyValue('pk_replay',this.recordList)
+                    SharedObjectManager.getInstance().setMyValue('pk_replay1',this.recordList)
                 }
                 SharedObjectManager.getInstance().setMyValue('pk_record_time',this.recordTime)
             }

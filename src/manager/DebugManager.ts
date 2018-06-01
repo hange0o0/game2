@@ -57,7 +57,7 @@ class DebugManager {
     public testCard(list1,list2,view=false,hp=5){
         var PD = PKData.getInstance()
         var data = {
-            seed:1521192425,//TM.now(),
+            seed:TM.now(),
             players:[
                 {id:1,gameid:'test1',team:1,autolist:list1,force:0,type:0,hp:hp},
                 {id:2,gameid:'test2',team:2,autolist:list2,force:0,type:0,hp:hp}

@@ -8,7 +8,9 @@ class S265 extends SBase {
         var player = user.getOwner()
         player.teamData.hp += user.getSkillValue(1);
         PD.addVideo({
-            type:PKConfig.VIDEO_TEAM_HP_CHANGE
+            type:PKConfig.VIDEO_TEAM_HP_CHANGE,
+            addHp:true,
+            user:player
         })
         return [];
     }

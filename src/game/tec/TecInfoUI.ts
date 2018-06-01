@@ -25,6 +25,7 @@ class TecInfoUI extends game.BaseWindow {
 
 
     public dataIn
+    public dataArray = new eui.ArrayCollection()
     public constructor() {
         super();
         this.skinName = "TecInfoUISkin";
@@ -41,6 +42,7 @@ class TecInfoUI extends game.BaseWindow {
             HelpManager.getInstance().showHelp('tec')
         })
 
+        this.list.dataProvider = this.dataArray
     }
 
     private onClick(){
@@ -100,7 +102,9 @@ class TecInfoUI extends game.BaseWindow {
         }
 
         var arr = TCM.getLevelUpCost(this.dataIn.id);
-        this.list.dataProvider = new eui.ArrayCollection(arr)
+        this.dataArray.source = arr;
+        this.dataArray.refresh()
+
         if(TCM.testRed(this.dataIn.id))
             this.btnGroup.addChild(this.okBtn);
         else

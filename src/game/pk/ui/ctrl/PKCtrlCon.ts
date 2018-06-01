@@ -23,6 +23,8 @@ class PKCtrlCon extends game.BaseContainer {
     private costMC: eui.Image;
     private costText: eui.Label;
     private helpBtn: eui.Image;
+    private tipsMC: eui.Image;
+
 
 
 
@@ -44,6 +46,7 @@ class PKCtrlCon extends game.BaseContainer {
 
     private dragTarget
     private overTarget
+    private hideTips = true
 
     private lastAddCardTime = 0//上次加卡的时间
     private needRenewCard = false
@@ -203,6 +206,14 @@ class PKCtrlCon extends game.BaseContainer {
         item.mvAdd();
         this.placeArr.push(item);
         this.needRenewCard = true;
+
+        if(this.tipsMC.visible && !this.hideTips)
+        {
+            this.hideTips = true;           //.to({scaleX:1.2,scaleY:1.2},200).to({scaleX:0,scaleY:0,alpha:0},200)
+            egret.Tween.get(this.tipsMC).to({alpha:0},1000).call(()=>{
+                this.tipsMC.visible = false;
+            },this)
+        }
     }
 
     private mvRemoveItem(data){
@@ -375,6 +386,12 @@ class PKCtrlCon extends game.BaseContainer {
         this.needRenewInfo = false;
         this.overMC.visible = false
 
+        this.hideTips = false;
+        this.tipsMC.visible = true;
+        egret.Tween.removeTweens(this.tipsMC)
+        //this.tipsMC.scaleX = this.tipsMC.scaleY = 1
+        this.tipsMC.alpha = 1;
+
         this.remove();
         this.renewCard();
         this.costMC.mask = new egret.Rectangle(0,32-0,27,0);
@@ -411,6 +428,11 @@ class PKCtrlCon extends game.BaseContainer {
             this.placeGroup.addChild(item);
             item.data = data;
             this.placeArr.push(item);
+            if(this.tipsMC.visible)
+            {
+                this.hideTips = true;
+                this.tipsMC.visible = false;
+            }
         }
 
         this.needRenewCard = true;
@@ -530,7 +552,6 @@ class PKCtrlCon extends game.BaseContainer {
             this.needRenewCard = false;
             var PD = PKData.getInstance();
             var handCard = PKData.getInstance().myPlayer.getHandCard();
-            console.log(handCard)
 
             for(var s in this.cardObj)
             {

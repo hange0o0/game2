@@ -8,7 +8,9 @@ class S269 extends SBase {
         var player = user.getOwner()
         player.teamData.enemy.hp -= user.getSkillValue(1);
         PD.addVideo({
-            type:PKConfig.VIDEO_TEAM_HP_CHANGE
+            type:PKConfig.VIDEO_TEAM_HP_CHANGE,
+            addHp:false,
+            user:player
         })
         if(player.teamData.enemy.hp <=0)
             PD.isGameOver = true;

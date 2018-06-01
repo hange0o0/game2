@@ -13,7 +13,10 @@ class S502 extends SBase {
         }
         player.teamData.hp -= 1
         PD.addVideo({
-            type:PKConfig.VIDEO_TEAM_HP_CHANGE
+            type:PKConfig.VIDEO_TEAM_HP_CHANGE,
+            addHp:false,
+            toSelf:true,
+            user:player
         })
         if(player.teamData.hp <=0)
             PD.isGameOver = true;

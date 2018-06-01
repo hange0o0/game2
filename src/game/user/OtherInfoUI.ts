@@ -182,6 +182,7 @@ class OtherInfoUI extends game.BaseUI {
     public onShow(){
         this.scroller.viewport.scrollV = 0;
         this.renew();
+        this.onTimer();
         this.addPanelOpenEvent(GameEvent.client.info_change,this.regetInfo)
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
     }

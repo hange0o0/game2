@@ -25,11 +25,6 @@
 			</e:layout>
 		</e:Group>
 	</e:Group>
-	<e:List id="list" y="280" left="30" right="30">
-		<e:layout>
-		<e:VerticalLayout paddingLeft="0"/>
-		</e:layout>
-	</e:List>
 	<e:Group horizontalCenter="0" y="20">
 		<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="360" x="0" y="0"/>
 		<e:Label id="nameText" text="设置" y="10.18" size="24" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
@@ -43,5 +38,10 @@
 		<e:HorizontalLayout gap="30"/>
 		</e:layout>
 	</e:Group>
+	<e:List id="list" y="200" left="30" right="30">
+		<e:layout>
+		<e:VerticalLayout paddingLeft="0" paddingTop="80"/>
+		</e:layout>
+	</e:List>
 
 </e:Skin>

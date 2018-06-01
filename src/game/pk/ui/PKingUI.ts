@@ -25,6 +25,11 @@ class PKingUI extends game.BaseUI {
     private nameText2: eui.Label;
 
 
+    private hurt1: eui.Image;
+    private hurt2: eui.Image;
+
+
+
 
 
     public scrollTime = 0;
@@ -40,6 +45,21 @@ class PKingUI extends game.BaseUI {
     public childrenCreated() {
         super.childrenCreated();
         this.scroller.addEventListener(egret.Event.CHANGE,this.onScroll,this)
+        PKData.getInstance().addEventListener('video',this.onVideoEvent,this);
+    }
+
+    public onVideoEvent(e){
+        if(!this.stage)
+            return;
+        //var item:PKMonsterItem;
+        var videoData = e.data;
+        switch(videoData.type)//动画类型
+        {
+            case PKConfig.VIDEO_MONSTER_WIN:
+                var rota = videoData.user.getOwner().teamData.atkRota == PKConfig.ROTA_LEFT?PKConfig.ROTA_RIGHT:PKConfig.ROTA_LEFT
+                this.showHurt(rota);
+                break;
+        }
     }
 
     private onScroll(){
@@ -135,8 +155,14 @@ class PKingUI extends game.BaseUI {
         PKVideoCon.getInstance().x = 0;
         PKVideoCon.getInstance().y = 0;
 
-        var vY = this.pkTop.y + 200;
-        var vH = GameManager.stage.stageHeight - 480-170 - this.pkTop.y
+        var vY = this.pkTop.y + 170;
+        var vH = GameManager.stage.stageHeight - 480 - vY
+
+
+
+        var hurtY = (vH - 320)/2 + vY - 30
+        this.hurt1.y = this.hurt2.y = hurtY;
+
 
         this.scroller.viewport.scrollH = (PKConfig.floorWidth + PKConfig.appearPos*2-640)/2
         this.scroller.touchEnabled = this.scroller.touchChildren = false;
@@ -144,7 +170,7 @@ class PKingUI extends game.BaseUI {
         this.roundText.text = '3'
         this.roundText.alpha = 1;
         this.roundText.skewX = 0;
-        this.roundText.y = vY + vH/5*1
+        this.roundText.y = vY + vH/6*2
         this.addChild(this.roundText);
         this.roundText.scaleX =  this.roundText.scaleY = 0;
         egret.Tween.removeTweens(this.roundText)
@@ -163,10 +189,31 @@ class PKingUI extends game.BaseUI {
         this.forceText2.text = player.force
         this.headMC2.setData(player.head,player.type)
 
+        this.hurt1.visible = false
+        this.hurt2.visible = false
+        egret.Tween.removeTweens(this.hurt1)
+        egret.Tween.removeTweens(this.hurt2)
+
         this.showMV();
 
         if(GuideManager.getInstance().isGuiding)
             GuideUI.getInstance().hide();
+    }
+
+    public showHurt(rota){
+        var mc;
+         if(rota == PKConfig.ROTA_LEFT)
+             mc = this.hurt1
+        else
+             mc = this.hurt2
+
+
+        egret.Tween.removeTweens(mc);
+        mc.visible = true
+        mc.alpha = 0
+        egret.Tween.get(mc).to({alpha:1},150).to({alpha:0},150).call(function(){
+            mc.visible = false
+        },this)
     }
 
     public startPlay(){
@@ -201,16 +248,12 @@ class PKingUI extends game.BaseUI {
         tw.wait(800).to({scaleX:1.8,scaleY:1.8},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '2'})
             .to({scaleX:0,scaleY:0}).to({scaleX:1.8,scaleY:1.8},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '1'})
             .to({scaleX:0,scaleY:0}).to({scaleX:1.8,scaleY:1.8},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{
-                this.roundText.text = 'START';
+                this.roundText.text = '';
                 egret.Tween.get(this.vsMC).to({scaleX:0.6,scaleY:0.6},200).to({scaleX:0,scaleY:0},200)
                 egret.Tween.get(this.playerGroup1).to({x:20},200).to({x:-280},200)
                 egret.Tween.get(this.playerGroup2).to({right:20},200).to({right:-280},200)
                 this.startGame();
-                this.tw = null}).to({
-                scaleX:3,scaleY:3
-            },500).to({
-                alpha:0,scaleX:0,scaleY:0
-            },200).call(()=>{
+                this.tw = null}).wait(500).call(()=>{
                 MyTool.removeMC(this.roundText);
                 this.vsGroup.visible = false
                 this.pkTop.appearMV();

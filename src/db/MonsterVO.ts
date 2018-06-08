@@ -80,6 +80,17 @@ class MonsterVO {
         this.skillcd = data.skillcd * 1000
         this.mv_atk = data.mv_atk * 1000
         this.mv_atk2 = data.mv_atk2
+
+        //var arr = [];
+        //for(var s in SkillVO.data)
+        //{
+        //   arr.push(SkillVO.data[s])
+        //}
+        //ArrayUtil.sortByField(arr,['level'],[0])
+        //for(var i=0;i<arr.length;i++)
+        //{
+        //    console.log(arr[i].level,arr[i].name)
+        //}
     }
 
     public getImage(gay){
@@ -124,7 +135,7 @@ class MonsterVO {
     public getDes(forceRate){
         return this.des.replace('#1',this.sv1 + '').replace('#2',this.sv2 + '').replace('#3',this.sv3 + '')
             .replace('$1',this.changeValue(this.sv1,forceRate) + '').replace('$2',this.changeValue(this.sv2,forceRate) + '')
-            .replace('$3',this.changeValue(this.sv3,forceRate) + '').replace('#CD',MyTool.toFixed(this.cd/1000,1) + '')
+            .replace('$3',this.changeValue(this.sv3,forceRate) + '').replace('#CD',MyTool.toFixed(this.cd/1000,1) + '')   //CD初始时乘了1000
     }
     private changeValue(v,forceRate){
         if(!v)

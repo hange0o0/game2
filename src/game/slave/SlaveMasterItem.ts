@@ -12,6 +12,7 @@ class SlaveMasterItem extends game.BaseItem {
     private cdGroup: eui.Group;
     private cdText: eui.Label;
     private coinText: eui.Label;
+    private typeMC: eui.Image;
 
 
 
@@ -59,6 +60,7 @@ class SlaveMasterItem extends game.BaseItem {
         this.nameText.text = '' + this.data.nick;
         this.coinText.text = '' + NumberUtil.formatStrNum(Math.ceil(UM.hourcoin*0.2)) + ' 金币'
         this.headMC.setData(this.data.head,this.data.type);
+        MyTool.setTypeImg(this.typeMC,this.data.type)
         this.onTimer();
     }
 

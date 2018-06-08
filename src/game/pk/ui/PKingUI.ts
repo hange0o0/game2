@@ -24,6 +24,10 @@ class PKingUI extends game.BaseUI {
     private forceText2: eui.Label;
     private nameText2: eui.Label;
 
+    private typeMC1: eui.Image;
+    private typeMC2: eui.Image;
+
+
 
     private hurt1: eui.Image;
     private hurt2: eui.Image;
@@ -184,10 +188,14 @@ class PKingUI extends game.BaseUI {
         this.nameText1.text = player.nick
         this.forceText1.text = player.force
         this.headMC1.setData(player.head,player.type)
+        MyTool.setTypeImg(this.typeMC1,player.type)
+
+
         player = PD.getTeamByRota(PKConfig.ROTA_RIGHT).members[0]
         this.nameText2.text = player.nick
         this.forceText2.text = player.force
         this.headMC2.setData(player.head,player.type)
+        MyTool.setTypeImg(this.typeMC2,player.type)
 
         this.hurt1.visible = false
         this.hurt2.visible = false

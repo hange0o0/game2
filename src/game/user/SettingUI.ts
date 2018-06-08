@@ -8,6 +8,7 @@ class SettingUI extends game.BaseWindow {
     }
 
     private headMC: HeadMC;
+    private typeMC: eui.Image;
     private nameText: eui.Label;
     private idText: eui.Label;
     private btnGroup: eui.Group;
@@ -16,9 +17,10 @@ class SettingUI extends game.BaseWindow {
     private effectCB: eui.CheckBox;
     private musicCB: eui.CheckBox;
     private modeCB: eui.CheckBox;
+    private qqText: eui.Label;
     private versionText: eui.Label;
     private logBtn: eui.Label;
-    private qqText: eui.Label;
+
 
 
     public constructor() {
@@ -96,7 +98,8 @@ class SettingUI extends game.BaseWindow {
         this.musicCB.selected = SoundManager.getInstance().bgPlaying
         this.effectCB.selected = SoundManager.getInstance().soundPlaying
         this.modeCB.selected = SharedObjectManager.getInstance().getValue("renderMode") == 'canvas';
-        this.headMC.setData(UM.head,0);
+        this.headMC.setData(UM.head,UM.type);
+        MyTool.setTypeImg(this.typeMC,UM.type)
         this.nameText.text = UM.nick
         this.idText.text = '游戏ID：'+UM.uid
         //this.idText.textFlow = <Array<egret.ITextElement>>[

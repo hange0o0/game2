@@ -4,12 +4,15 @@ class MailItem extends game.BaseItem {
         this.skinName = "MailItemSkin";
     }
 
+    private nameGroup: eui.Group;
+    private typeMC: eui.Image;
     private nameText: eui.Label;
     private headMC: HeadMC;
     private timeText: eui.Label;
     private desText: eui.Label;
     private redMC: eui.Image;
     private awardMC: eui.Image;
+
 
 
 
@@ -29,10 +32,13 @@ class MailItem extends game.BaseItem {
         {
             this.nameText.text = '系统消息'
             this.headMC.setData('sys');
+            MyTool.removeMC(this.typeMC)
         }
         else
         {
             this.nameText.text = Base64.decode(content.nick)
+            MyTool.setTypeImg(this.typeMC,content.type)
+            this.nameGroup.addChildAt(this.typeMC,0)
             this.headMC.setData(content.head,content.type);
         }
 

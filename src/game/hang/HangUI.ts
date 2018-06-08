@@ -139,7 +139,7 @@ class HangUI extends game.BaseItem {
 
         //this.bg.source = PKManager.getInstance().getBG(HangManager.getInstance().getHangBGID());
 
-        console.log('renew')
+        //console.log('renew')
 
 
 
@@ -189,11 +189,11 @@ class HangUI extends game.BaseItem {
             var pkvideo = PKVideoCon.getInstance()
             if(pkvideo.parent != this.con)
                 this.reset();
-            else
-                console.log(pkvideo.parent)
+            //else
+            //    console.log(pkvideo.parent)
 
             this.addEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
-            console.log('addListener')
+            //console.log('addListener')
 
 
         }
@@ -215,7 +215,7 @@ class HangUI extends game.BaseItem {
     }
 
     public reset(stopStart?){
-        console.log('reset')
+        //console.log('reset')
 
         var data = {
             seed:TM.now(),
@@ -247,10 +247,10 @@ class HangUI extends game.BaseItem {
         var pkvideo = PKVideoCon.getInstance()
         if(pkvideo.parent == this.con)
         {
-            console.log('clean')
+            //console.log('clean')
             egret.Tween.removeTweens(pkvideo)
             this.removeEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
-            console.log('removeListener')
+            //console.log('removeListener')
             PKBulletManager.getInstance().freeAll()
             pkvideo.remove();
             this.pkMV.stop();

@@ -24,7 +24,7 @@
 				<e:TileLayout requestedColumnCount="3" verticalGap="20" paddingLeft="0" paddingTop="0" paddingBottom="0" horizontalGap="50"/>
 				</e:layout>
 			</e:List>
-			<e:Group horizontalCenter="0" y="20" height="50">
+			<e:Group id="diamondTitle" horizontalCenter="0" y="20" height="50">
 				<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="480" x="0" y="0"/>
 				<e:Label text="购买钻石 " y="10.18" size="24" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
 			</e:Group>

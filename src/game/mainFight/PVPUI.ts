@@ -14,6 +14,11 @@ class PVPUI extends game.BaseItem {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.addBtnEvent(this, this.onPvp)
+    }
+
+    private onPvp(){
+        MyWindow.ShowTips('即将开放，敬请期待')
     }
 
     public renew(){

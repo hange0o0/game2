@@ -13,10 +13,13 @@ class MailPKItem extends game.BaseItem {
     private nameText2: eui.Label;
     private headMC1: HeadMC;
     private headMC2: HeadMC;
-    private timeText: eui.Label;
     private viewBtn: eui.Button;
     private scoreBG: eui.Image;
     private scoreText: eui.Label;
+    private timeText: eui.Label;
+    private typeMC1: eui.Image;
+    private typeMC2: eui.Image;
+
 
 
 
@@ -97,9 +100,10 @@ class MailPKItem extends game.BaseItem {
     }
 
     private renewPlayer(index,data){
-         this['headMC' + index].setData(data.head,data.type)
-         this['forceText' + index].text = data.force;
-         this['nameText' + index].text = Base64.decode(data.nick);
+        this['headMC' + index].setData(data.head,data.type)
+        this['forceText' + index].text = data.force;
+        this['nameText' + index].text = Base64.decode(data.nick);
+        MyTool.setTypeImg(this['typeMC' + index],data.type)
 
         var arr = [];
         var obj = {};

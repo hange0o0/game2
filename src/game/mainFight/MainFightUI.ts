@@ -41,8 +41,8 @@ class MainFightUI extends MainBase {
         this.addBtnEvent(this.defBtn, this.onDef)
         this.addBtnEvent(this.atkBtn, this.onAtk)
 
-        this.addBtnEvent(this.pvpBtn, this.onPvp)
-        this.addBtnEvent(this.fightBtn, this.onFight)
+
+
         this.addBtnEvent(this.mailBtn, this.onMail)
         this.addBtnEvent(this.rankBtn, this.onRank)
         this.addBtnEvent(this.shopBtn, this.onShop)
@@ -59,13 +59,8 @@ class MainFightUI extends MainBase {
         this.mailRed.visible = MailManager.getInstance().getNotAwardNum() > 0;
     }
 
-    private onPvp(){
-         MyWindow.ShowTips('即将开放，敬请期待')
-    }
-    private onFight(){
-        //MyWindow.ShowTips('即将开放，敬请期待')
-        FightInfoUI.getInstance().show();
-    }
+
+
 
     //public setTopPos(scrollV){
     //    if(this.hideTopState)
@@ -140,6 +135,8 @@ class MainFightUI extends MainBase {
     public onPKEnd(){
         if(this.stage && MainUI.getInstance().visible)
             this.mapBtn.renew()
+
+        this.fightBtn.renew();
     }
 
 
@@ -165,6 +162,7 @@ class MainFightUI extends MainBase {
         //this.bottomGroup.bottom = 25
         this.scroller.viewport.scrollV = 0;
         this.renewHang();
+        this.fightBtn.renew();
     }
 
     public renewHang(){

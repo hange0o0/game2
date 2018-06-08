@@ -23,4 +23,5 @@
 			</e:layout>
 		</e:Group>
 	</e:Group>
+	<e:Image id="typeMC" source="icon_type1_png" x="-7.48" y="-8.61" scaleX="0.6" scaleY="0.6" includeIn="normal"/>
 </e:Skin>

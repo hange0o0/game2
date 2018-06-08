@@ -8,6 +8,7 @@ class InfoItem extends game.BaseItem {
     private nameText: eui.Label;
     private coinText: eui.Label;
     private forceText: eui.Label;
+    private typeMC: eui.Image;
 
 
 
@@ -33,6 +34,7 @@ class InfoItem extends game.BaseItem {
         this.coinText.text = '时产：' + this.data.hourcoin;
         this.forceText.text = '战力：'  + this.data.tec_force;
         this.headMC.setData(this.data.head,this.data.type);
+        MyTool.setTypeImg(this.typeMC,this.data.type)
 
         this.currentState = this.data.isMaster?'msater':'slave'
     }

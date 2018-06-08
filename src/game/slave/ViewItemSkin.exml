@@ -2,16 +2,17 @@
 <e:Skin class="ViewItemSkin" width="300" height="120"  xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*"  states="master,slave,normal" >
 	<e:Image source="bg2_png" scale9Grid="11,8,9,13"  left="0" right="0" top="0" bottom="0"/>
 	<ns1:HeadMC width="100" height="100" skinName="HeadMCSkin" id="headMC" y="10" x="10"/>
+	<e:Group x="0" y="0" includeIn="master,slave">
+		<e:Rect fillColor="0xff0000" strokeColor="0x000000" strokeWeight="2" left="0" right="0" top="0" bottom="0" ellipseWidth="10" fillColor.slave="0x0000ff"/>
+		<e:Label text="主" size="18" right="5" left="5" top="5" bottom="5" text.slave="奴"/>
+	</e:Group>
 
-	<e:Group y="10" x="120">
-		<e:Group x="0" y="0" height="28">
-			<e:Group x="0" y="0" includeIn="master,slave">
-				<e:Rect fillColor="0xff0000" strokeColor="0x000000" strokeWeight="2" left="0" right="0" top="0" bottom="0" ellipseWidth="10" fillColor.slave="0x0000ff"/>
-				<e:Label text="主" size="18" right="5" left="5" top="5" bottom="5" text.slave="奴"/>
-			</e:Group>
-			<e:Label id="nameText" text="Label" x="0" y="34" size="26" stroke="1"/>
+	<e:Group y="6" x="120">
+		<e:Group x="0" y="0">
+			<e:Image id="typeMC" source="icon_type1_png" x="70" y="0" scaleX="0.5" scaleY="0.5"/>
+			<e:Label id="nameText" text="Label" x="0" y="0.97" size="26" stroke="1"/>
 			<e:layout>
-				<e:HorizontalLayout verticalAlign="middle"/>
+			<e:HorizontalLayout verticalAlign="middle"/>
 			</e:layout>
 		</e:Group>
 		<e:Group x="180" height="32" y="0">

@@ -21,16 +21,19 @@ class Config {
 
 
 
-    public static friendLevel = 3;
-    public static gambleLevel = 20;
+    public static fightLevel = 1//20;
 
 
-    public static mapLevel = 5;
-    public static dayLevel = 15;
-    public static serverLevel = 25;//卡士二阶
-    public static serverEqualLevel = 45;  //卡士五阶
-    public static leaderLevel = 95;  //
-    public static leaderSkillLevel = 145;  //
+    //public static friendLevel = 3;
+    //public static gambleLevel = 20;
+    //
+    //
+    //public static mapLevel = 5;
+    //public static dayLevel = 15;
+    //public static serverLevel = 25;//卡士二阶
+    //public static serverEqualLevel = 45;  //卡士五阶
+    //public static leaderLevel = 95;  //
+    //public static leaderSkillLevel = 145;  //
 
 
     public static platform = '';

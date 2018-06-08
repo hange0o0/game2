@@ -39,8 +39,8 @@ class MyTool {
     }
 
 
-    public static getTypeImg(type){
-        return 'icon_type' + type + '_png'
+    public static setTypeImg(mc,type){
+        mc.source =  'icon_type' + type + '_png'
     }
 
     public static clearList(list){

@@ -38,4 +38,6 @@
 			<e:HorizontalLayout/>
 		</e:layout>
 	</e:Group>
+	<e:Image id="typeMC1" source="icon_type1_png" x="0" y="0" scaleX="0.6" scaleY="0.6"/>
+	<e:Image id="typeMC2" source="icon_type1_png" scaleX="0.6" scaleY="0.6" right="0" top="0"/>
 </e:Skin>

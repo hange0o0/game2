@@ -30,8 +30,8 @@
 				</e:Group>
 			</e:Group>
 			<e:Group x="0" y="550" width="100%">
-				<ns1:PVPUI id="pvpBtn" x="75" y="88" skinName="PVPUISkin"/>
 				<ns1:FightUI id="fightBtn" x="245" y="99" skinName="FightUISkin"/>
+				<ns1:PVPUI id="pvpBtn" x="75" y="88" skinName="PVPUISkin"/>
 				<e:layout>
 					<e:HorizontalLayout horizontalAlign="center" gap="0"/>
 				</e:layout>

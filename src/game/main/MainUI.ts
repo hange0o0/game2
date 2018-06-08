@@ -59,6 +59,11 @@ class MainUI extends game.BaseUI {
         var blurFliter = new egret.BlurFilter( 10 , 10);
         this.bg.filters = [blurFliter];
         this.bg.cacheAsBitmap  = true;
+
+        if(_get['app'])
+        {
+            this.addDiamondBtn.visible = false;
+        }
     }
 
     private onAddForce(){
@@ -81,7 +86,7 @@ class MainUI extends game.BaseUI {
         if(mv)
         {
             var tw = egret.Tween.get(this.bg)
-            tw.to({x:toX},200)
+            tw.to({x:toX},350,egret.Ease.sineOut)
         }
         else
         {
@@ -111,7 +116,7 @@ class MainUI extends game.BaseUI {
            egret.Tween.removeTweens(this.bottomSelectMC)
            var tw = egret.Tween.get(this.bottomSelectMC)
            var bottomX = this.getBottomX()
-           tw.to({x:bottomX},200)
+           tw.to({x:bottomX},350,egret.Ease.sineOut)
 
            this.renewBGX(true);
 
@@ -127,7 +132,7 @@ class MainUI extends game.BaseUI {
            this.currentUI.x = 640*rota;
            egret.Tween.removeTweens(this.con)
            var tw = egret.Tween.get(this.con)
-           tw.to({x:-640*rota},200).call(function(){
+           tw.to({x:-640*rota},350,egret.Ease.sineOut).call(function(){
                this.con.x = 0
                this.currentUI.x = 0
                if(this.lastUI)

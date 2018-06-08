@@ -12,6 +12,7 @@ class ShopUI extends game.BaseUI {
     private cdText: eui.Label;
     private list: eui.List;
     private diamondList: eui.List;
+    private diamondTitle: eui.Group;
     private bottomUI: BottomUI;
 
 
@@ -28,8 +29,13 @@ class ShopUI extends game.BaseUI {
         this.bottomUI.setHide(this.hide,this);
         this.list.itemRenderer = ShopItem
         this.diamondList.itemRenderer = ShopDiamondItem
-
         this.diamondList.dataProvider = new eui.ArrayCollection(PayManager.getInstance().diamondList)
+        if(_get['app'] && !Config.isDebug)
+        {
+            MyTool.removeMC(this.diamondTitle)
+            MyTool.removeMC(this.diamondList)
+        }
+
     }
 
     public show(toBottom?){

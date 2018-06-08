@@ -23,6 +23,7 @@ class OtherInfoUI extends game.BaseUI {
     private bottomUI: BottomUI;
     private okBtn: eui.Button;
     private viewBtn: eui.Button;
+    private typeMC: eui.Image;
 
 
 
@@ -231,6 +232,7 @@ class OtherInfoUI extends game.BaseUI {
         //this.coinText.text = '产出：' + data.hourcoin + '/小时';
         //this.forceText.text = '战力：'  + data.tec_force;
         this.headMC.setData(data.head,data.type);
+        MyTool.setTypeImg(this.typeMC,data.type)
 
         var slaveList = slave.slave.concat();
 

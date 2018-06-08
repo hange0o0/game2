@@ -12,6 +12,7 @@ class SlaveItem extends game.BaseItem {
     private clickArea: eui.Group;
     private cdGroup: eui.Group;
     private cdText: eui.Label;
+    private typeMC: eui.Image;
 
 
 
@@ -145,6 +146,7 @@ class SlaveItem extends game.BaseItem {
 
             //this.nameText.text = '' + this.data.nick;
             this.headMC.setData(this.data.head,this.data.type);
+            MyTool.setTypeImg(this.typeMC,this.data.type)
             //this.type.source = 'icon_type' + this.data.type + '_png'
             this.onTimer();
         }

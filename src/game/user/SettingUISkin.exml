@@ -3,7 +3,13 @@
 	<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
 	<e:Group y="100.01" horizontalCenter="0">
 		<ns1:HeadMC x="0" skinName="HeadMCSkin" id="headMC" y="0"/>
-		<e:Label id="nameText" text="更换头像需花费：" y="10" x="110" size="30" stroke="2" strokeColor="0x331c03"/>
+		<e:Group x="110" y="10">
+			<e:Image id="typeMC" source="icon_type1_png" x="14" y="358.03" scaleX="0.6" scaleY="0.6"/>
+			<e:Label id="nameText" text="更换头像需花费：" y="0" x="0" size="30" stroke="2" strokeColor="0x331c03"/>
+			<e:layout>
+				<e:HorizontalLayout verticalAlign="middle"/>
+			</e:layout>
+		</e:Group>
 		<e:Label id="idText" text="更换头像需花费：" x="110" size="24" y="60" textColor="0xffde96"/>
 	</e:Group>
 	<e:Image source="bg3_png" scale9Grid="16,15,7,7" left="30" right="30" top="220" bottom="120"/>

@@ -10,6 +10,7 @@ class RankItem extends game.BaseItem {
     private headMC: HeadMC;
     private scoreText: eui.Label;
     private indexMC: eui.Image;
+    private typeMC: eui.Image;
 
 
 
@@ -34,6 +35,7 @@ class RankItem extends game.BaseItem {
 
         this.nameText.text = this.data.nick
         this.headMC.setData(this.data.head,this.data.type);
+        MyTool.setTypeImg(this.typeMC,this.data.type)
         this.scoreText.text = this.data.score;
         this.currentState = this.data.gameid == UM.gameid?'self':'normal'
 

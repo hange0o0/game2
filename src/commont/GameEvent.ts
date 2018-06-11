@@ -81,6 +81,8 @@ class GameEvent {
         award_hang:'hang.award_hang',
         pk_hang:'hang.pk_hang',
         pk_test:'hang.pk_test',
+        hang_video_list:'hang.hang_video_list',
+        hang_video:'hang.hang_video',
         pk_hang_result:'hang.pk_hang_result'
     }
 

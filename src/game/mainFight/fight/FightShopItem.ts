@@ -88,8 +88,9 @@ class FightShopItem extends game.BaseItem {
             var svo = SkillVO.getObject(this.data.id.substr(5));
             this.skillID = svo.id;
             name = this.createHtml(svo.name,0xFFD27F) + '×' + this.data.num;
-            this.cardMC.data = this.skillID
             this.currentState = 'card'
+            this.cardMC.data = this.skillID
+            //console.log(this.cardMC.)
         }
         else
         {

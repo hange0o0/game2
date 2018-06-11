@@ -46,7 +46,7 @@ class PKPosItem extends game.BaseItem {
     public childrenCreated() {
         super.childrenCreated();
 
-
+        this.img.hideType = true;
         //var tw = this.tw = egret.Tween.get(this.lightBG,{loop:true});
         //this.lightBG.scaleX = this.lightBG.scaleY = 1.1;
         //tw.to({scaleX:1.3,scaleY:1.3},500,egret.Ease.sineInOut).to({scaleX:1.1,scaleY:1.1},500,egret.Ease.sineInOut)

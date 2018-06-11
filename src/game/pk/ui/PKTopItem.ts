@@ -20,6 +20,7 @@ class PKTopItem extends game.BaseItem {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.img.hideType = true;
         MyTool.addLongTouch(this,this.onLongTouch,this)
     }
 

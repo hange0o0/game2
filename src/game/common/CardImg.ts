@@ -5,10 +5,13 @@ class CardImg extends game.BaseItem{
     }
 
     private img: eui.Image;
-    private txt: eui.Label;
+    private typeMC: eui.Image;
 
 
 
+
+
+    public hideType = false
     public lastSource;
     public childrenCreated() {
         super.childrenCreated();
@@ -19,16 +22,15 @@ class CardImg extends game.BaseItem{
     }
 
     public changeGay(b){
-        var source = CM.getCardVO(this.data).getImage(b);
+        var vo =  CM.getCardVO(this.data);
+        var source = vo.getImage(b);
         if(source != this.lastSource)
         {
             this.img.source = source
             this.lastSource = source;
+            this.typeMC.visible = this.data > PKConfig.skillBeginID && !this.hideType;
+            this.typeMC.source = vo.getTypeIcon();
         }
-        //if(this.data > PKConfig.skillBeginID)
-        //    this.txt.text = CM.getCardVO(this.data).name + '\n' + this.data;
-        //else
-            this.txt.text = ''
     }
 
 }

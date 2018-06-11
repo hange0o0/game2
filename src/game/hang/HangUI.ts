@@ -19,6 +19,8 @@ class HangUI extends game.BaseItem {
     public openBtn: eui.Button;
     private awardRed: eui.Image;
     private helpBtn: eui.Image;
+    private videoBtn: eui.Group;
+    private videoIcon: eui.Image;
 
 
 
@@ -52,6 +54,10 @@ class HangUI extends game.BaseItem {
         this.addBtnEvent(this.helpBtn,(e)=>{
             e.stopImmediatePropagation()
             HelpManager.getInstance().showHelp('hang')
+        })
+        this.addBtnEvent(this.videoBtn,(e)=>{
+            e.stopImmediatePropagation()
+            HangHelpUI.getInstance().show()
         })
 
         this.con.mask = new egret.Rectangle(0,0,this.con.width,this.con.height)
@@ -197,6 +203,9 @@ class HangUI extends game.BaseItem {
 
 
         }
+
+        var lastHistory = SharedObjectManager.getInstance().getMyValue('hang_video') || {};
+        this.videoBtn.visible = HM.level>= 10 && lastHistory.level === HM.level && lastHistory.fail >= 1
 
         this.onTimer();
 

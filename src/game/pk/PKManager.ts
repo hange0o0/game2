@@ -121,6 +121,20 @@ class PKManager {
             case PKManager.TYPE_FIGHT:
                 FightManager.getInstance().pkFail(fun);
                 break;
+            case PKManager.TYPE_HANG:
+                var lastHistory = SharedObjectManager.getInstance().getMyValue('hang_video') || {};
+                if(lastHistory.level === HangManager.getInstance().level)
+                {
+                    lastHistory.fail ++;
+                }
+                else
+                {
+                    lastHistory.level = HangManager.getInstance().level
+                    lastHistory.fail = 0;
+                }
+                SharedObjectManager.getInstance().setMyValue('hang_video',lastHistory)
+                fun && fun();
+                break;
             default:
                 fun && fun();
                 break;

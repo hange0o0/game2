@@ -19,6 +19,7 @@ class BasePosItem extends game.BaseItem {
     public stopMove = true;
     public childrenCreated() {
         super.childrenCreated();
+        this.img.hideType = true;
         MyTool.addLongTouch(this,this.onLongTouch,this)
         //this.addBtnEvent(this,this.onClick)
     }
@@ -56,6 +57,8 @@ class BasePosItem extends game.BaseItem {
         var vo:any = CM.getCardVO(this.data.id);
         this.img.data = vo.id;
         this.bg.source = vo.getBG();
+
+        this.img.hideType = true;
 
 
         this.skillType.visible = false

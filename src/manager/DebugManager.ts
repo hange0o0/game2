@@ -9,42 +9,76 @@ class DebugManager {
 
     public myData:any = {"vedio":-1}
     public stop = 0;
-    public winCardArr;
+    public winCardArr = [];
     public testFinishFun;
     public constructor() {
         this.myData = SharedObjectManager.getInstance().getMyValue('share') || {"vedio":-1,};
     }
 
-    public maxMonsterID = 100;
     public MML = 100;  //测试出战怪的等级
-    public printDetail = false;  //打印胜出怪物
+    public addSkill = false
+    public cardLen = 15
+    public createHangFlag = false;
 
+
+    public printDetail = false;  //打印胜出怪物
     public winMonster = {}
 
-    public createHang(time = 1){
-        while(time--)
+    public createHang(level,cardLen){
+        this.createHangFlag = true
+        this.MML = level;
+        this.cardLen = cardLen;
+        this.winCardArr.length = 0
+        this.addSkill = false;
+        this.test();
+    }
+
+    public showHangResult(){
+        for(var i=0;i<this.winCardArr.length;i++)
         {
-            var newList = this.randomList();;
-            console.log(newList.join(','))
+             var card = this.winCardArr[i];
+            var arr = card.split(',');
+            var temp = [{t:1,num:0},{t:2,num:0},{t:3,num:0}]
+            for(var s in arr)
+            {
+                var vo = MonsterVO.getObject(arr[s])
+                temp[vo.type-1].num ++;
+            }
+            ArrayUtil.sortByField(temp,['num'],[1])
+            console.log(temp[0].t + '\t\t' + card)
         }
     }
 
+
+
     public randomList(){
         var arr = []
-        var level = 100;
-        var len = 15;
+        var level = 900;
+        var len = this.cardLen;
+
         for(var s in MonsterVO.data)
         {
             var mvo = MonsterVO.data[s]
             if(mvo.level <= level)
+            {
                 arr.push(mvo.id)
+                arr.push(mvo.id)
+                arr.push(mvo.id)
+            }
         }
-        //for(var s in SkillVO.data)
-        //{
-        //    var svo = SkillVO.data[s]
-        //    if(svo.level <= level)
-        //        arr.push(svo.id)
-        //}
+        if(this.addSkill)
+        {
+            for(var s in SkillVO.data)
+            {
+                var svo = SkillVO.data[s]
+                if(svo.level <= level)
+                {
+                    arr.push(svo.id)
+                    arr.push(svo.id)
+                    arr.push(svo.id)
+                }
+            }
+        }
 
         var newList = [];
         for(var i=0;i<len;i++)
@@ -97,15 +131,22 @@ class DebugManager {
     }
 
     private printResult(){
+        if(this.createHangFlag)
+        {
+            this.showHangResult();
+            return;
+        }
         var arr = [];
         for(var s in MonsterVO.data)
         {
-            arr.push({id:s,num:this.winMonster[s] || 0})
+            if(MonsterVO.data[s].level < 999)
+                arr.push({id:s,num:this.winMonster[s] || 0})
         }
-        //for(var s in SkillVO.data)
-        //{
-        //    arr.push({id:s,num:this.winMonster[s] || 0})
-        //}
+        for(var s in SkillVO.data)
+        {
+            if(SkillVO.data[s].level < 999)
+                arr.push({id:s,num:this.winMonster[s] || 0})
+        }
         ArrayUtil.sortByField(arr,['num'],[1]);
         for(var i=0;i<arr.length;i++)
         {
@@ -157,7 +198,9 @@ class DebugManager {
                 else
                     this.winMonster[id] = 1;
             }
+            this.winCardArr.push(arr[i]);
         }
+
         console.log(this.testNum + ':' + (egret.getTimer()-t))
         if(this.stop)
         {
@@ -186,7 +229,6 @@ class DebugManager {
         var winlist;
         if(PD.isWin())
         {
-
             return [list1];
         }
         else if(PD.isDraw())
@@ -198,9 +240,11 @@ class DebugManager {
             return [list2];
         }
     }
-
 }
 //DM.testCard('1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16','1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16')
 //DM.testMV('mv2',10,[30,31])
 //javascript:DM.showAllMV();
 //Net.send('clean_server')
+//DM.test();
+//DM.createHang(0,5);
+//DM.stop = 1;

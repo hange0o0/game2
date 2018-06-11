@@ -10,6 +10,7 @@ class HangManager {
     public awardtime;
     public pktime;
     public lastlist;
+    public videoData:any = {};
     public init(data){
         this.level = data.level
         this.awardtime = data.awardtime
@@ -124,6 +125,78 @@ class HangManager {
             if (fun)
                 fun();
         });
+    }
+
+    public getVideoList(fun?) {
+        var level = this.level + 1;
+        if(this.videoData.level == level && TM.now() - this.videoData.time < 60*10)
+        {
+            if (fun)
+                fun();
+            return;
+        }
+        var oo:any = {level:level};
+        Net.send(GameEvent.hang.hang_video_list, oo, (data)=> {
+            var msg = data.msg;
+            this.videoData.level = level;
+            this.videoData.time = TM.now();
+            this.videoData.list = msg.list;
+
+            for(var i=0;i<msg.list.length;i++)
+            {
+                var info = JSON.parse(msg.list[i].info);
+                if(info.version != Config.pk_version)
+                {
+                    msg.list.splice(i,1);
+                    i--;
+                }
+            }
+            if (fun)
+                fun();
+        });
+    }
+
+    public getVideo(id,time,fun?) {
+        if(this.videoData[id+'_'+time])
+        {
+            this.showHangVideo(this.videoData[id+'_'+time]);
+            return;
+        }
+        var oo:any = {};
+        oo.id = id;
+        oo.time = time;
+        Net.send(GameEvent.hang.hang_video, oo, (data)=> {
+            var msg = data.msg;
+            if(!msg.data.data)
+            {
+                MyWindow.ShowTips('该录像已过期！')
+                this.videoData.time = 0;
+                this.getVideoList(()=>{
+                    HangHelpUI.getInstance().renew();
+                })
+                return;
+            }
+            this.videoData[id+'_'+time] = JSON.parse(msg.data.data)
+            this.showHangVideo(this.videoData[id+'_'+time]);
+        });
+    }
+
+    private showHangVideo(data){
+
+        var pkData = data.pkdata
+
+        pkData.type = PKManager.TYPE_HANG;
+        pkData.result = 1;
+        for(var i=0;i<pkData.players.length;i++)
+        {
+            var players = pkData.players[i];
+            if(players.autolist && !players.card)
+                players.card = players.autolist
+            if(players.team == 1)
+            players.actionlist = data.pklist;
+        }
+
+        PKManager.getInstance().playReplay(pkData);
     }
 
 

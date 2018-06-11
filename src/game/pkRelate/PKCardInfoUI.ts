@@ -33,6 +33,7 @@ class PKCardInfoUI extends game.BaseContainer {
     public childrenCreated() {
         super.childrenCreated();
 
+        this.img.hideType = true;
         this.list1.itemRenderer = PKCardInfoItem
         this.list2.itemRenderer = PKCardInfoItem
     }

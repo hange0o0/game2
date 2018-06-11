@@ -12,6 +12,7 @@ class PosListHeadItem extends game.BaseItem {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.img.hideType = true;
         //this.addBtnEvent(this,this.onClick)
     }
 

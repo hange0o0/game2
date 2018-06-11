@@ -20,6 +20,7 @@ class PosCardItem extends game.BaseItem {
     //public selectAble = true
     public childrenCreated() {
         super.childrenCreated();
+
         MyTool.addLongTouch(this,this.onLongTouch,this)
     }
 

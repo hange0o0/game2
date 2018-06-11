@@ -16,7 +16,7 @@ class PKMonsterInfoItem extends game.BaseItem {
 
     public childrenCreated() {
         super.childrenCreated();
-
+        this.img.hideType = true;
     }
 
 

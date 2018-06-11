@@ -15,6 +15,7 @@ class PKSkillItem extends game.BaseItem {
     public childrenCreated() {
         super.childrenCreated();
         this.touchChildren = this.touchEnabled = false;
+        this.img.hideType = true;
     }
 
 

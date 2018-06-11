@@ -41,6 +41,9 @@ class PKCardItem extends game.BaseItem {
         this.anchorOffsetX = 90/2
         this.anchorOffsetY = 110/2
 
+        this.img.hideType = true;
+        this.img2.hideType = true;
+
         this.addBtnEvent(this,this.onClick)
         MyTool.addLongTouch(this,this.onLongTouch,this)
         this.tw = egret.Tween.get(this.loading,{loop:true})

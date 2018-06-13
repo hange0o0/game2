@@ -14,7 +14,9 @@ class PKMonsterInfoUI extends game.BaseContainer {
     private selfIcon: eui.Image;
     private type: eui.Image;
     private nameText: eui.Label;
+    private forceText: eui.Label;
     private spaceText: eui.Label;
+
 
 
 
@@ -74,7 +76,8 @@ class PKMonsterInfoUI extends game.BaseContainer {
         this.playerData = playerData;
 
         this.type.source = 'icon_type'+playerData.type+'_png'
-        this.nameText.text = playerData.nick + ' ('+playerData.force+')';
+        this.nameText.text = playerData.nick;
+        this.forceText.text = '' + playerData.force + ''
         this.selfIcon.visible = playerData == PKData.getInstance().myPlayer;
 
         if(this.playerData.teamData.atkRota == PKConfig.ROTA_LEFT)
@@ -122,7 +125,7 @@ class PKMonsterInfoUI extends game.BaseContainer {
 
     private renewNum(){
         var PD = PKData.getInstance();
-        this.spaceText.text = '体积：' + PD.getMonsterSpaceByPlayer(this.playerData.id) + '/' + PKConfig.maxMonsterSpace
+        this.spaceText.text = '' + PD.getMonsterSpaceByPlayer(this.playerData.id) + '/' + PKConfig.maxMonsterSpace
     }
 
     public renewList(){

@@ -143,6 +143,11 @@ class HangUI extends game.BaseItem {
         var HM = HangManager.getInstance();
         this.titleText.text = '第 '+(HM.level+1)+' 关'
 
+
+        var lastHistory = SharedObjectManager.getInstance().getMyValue('hang_video') || {};
+        this.videoBtn.visible = HM.level>= 10 && lastHistory.level === HM.level && lastHistory.fail >= 1
+
+
         //this.bg.source = PKManager.getInstance().getBG(HangManager.getInstance().getHangBGID());
 
         //console.log('renew')
@@ -204,8 +209,7 @@ class HangUI extends game.BaseItem {
 
         }
 
-        var lastHistory = SharedObjectManager.getInstance().getMyValue('hang_video') || {};
-        this.videoBtn.visible = HM.level>= 10 && lastHistory.level === HM.level && lastHistory.fail >= 1
+
 
         this.onTimer();
 

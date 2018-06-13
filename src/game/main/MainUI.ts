@@ -45,11 +45,11 @@ class MainUI extends game.BaseUI {
         this.addBtnEvent(this.addEnergyBtn, this.onAddEnergy)
         this.addBtnEvent(this.addDiamondBtn, this.onAddDiamond)
 
-        this.b0.data = {text:'奴隶',index:0,source:'main_slave_png',type:'slave'}
-        this.b1.data = {text:'背包',index:1,source:'main_bag_png',type:'bag'}
+        this.b0.data = {text:'背包',index:0,source:'main_bag_png',type:'bag'}
+        this.b1.data = {text:'奴隶',index:1,source:'main_slave_png',type:'slave'}
         this.b2.data = {text:'战斗',index:2,source:'main_pk_png',type:'main'}
-        this.b3.data = {text:'卡牌',index:3,source:'main_card_png',type:'card'}
-        this.b4.data = {text:'科技',index:4,source:'main_tec_png',type:'tec'}
+        this.b3.data = {text:'科技',index:3,source:'main_tec_png',type:'tec'}
+        this.b4.data = {text:'卡牌',index:4,source:'main_card_png',type:'card'}
         this.bottomItems.push(this.b0)
         this.bottomItems.push(this.b1)
         this.bottomItems.push(this.b2)
@@ -264,19 +264,19 @@ class MainUI extends game.BaseUI {
     public setCurrentUI(){
         switch(this.currentIndex)
         {
-            case 0:
+            case 1:
                 this.currentUI = SlaveUI.getInstance();
                 break;
-            case 1:
+            case 0:
                 this.currentUI = BagUI.getInstance();
                 break;
             case 2:
                 this.currentUI = MainFightUI.getInstance();
                 break;
-            case 3:
+            case 4:
                 this.currentUI = CardUI.getInstance();
                 break;
-            case 4:
+            case 3:
                 this.currentUI = TecUI.getInstance();
                 break;
         }

@@ -114,7 +114,6 @@ class TecManager {
             {
                 arr.push({type:'prop',id:101,num:1});
             }
-
         }
 
 

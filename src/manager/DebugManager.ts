@@ -53,7 +53,7 @@ class DebugManager {
 
     public randomList(){
         var arr = []
-        var level = 900;
+        var level = this.MML;
         var len = this.cardLen;
 
         for(var s in MonsterVO.data)
@@ -131,27 +131,33 @@ class DebugManager {
     }
 
     private printResult(){
-        if(this.createHangFlag)
-        {
-            this.showHangResult();
-            return;
-        }
+
         var arr = [];
         for(var s in MonsterVO.data)
         {
-            if(MonsterVO.data[s].level < 999)
+            if(MonsterVO.data[s].level <= this.MML)
                 arr.push({id:s,num:this.winMonster[s] || 0})
         }
-        for(var s in SkillVO.data)
+        if(this.addSkill)
         {
-            if(SkillVO.data[s].level < 999)
-                arr.push({id:s,num:this.winMonster[s] || 0})
+            for(var s in SkillVO.data)
+            {
+                if(SkillVO.data[s].level <= this.MML)
+                    arr.push({id:s,num:this.winMonster[s] || 0})
+            }
         }
+
         ArrayUtil.sortByField(arr,['num'],[1]);
         for(var i=0;i<arr.length;i++)
         {
             var id = arr[i].id;
             console.log('id:' +id +  '\t\tnum:' +  arr[i].num + '\t\tcost:' +  CM.getCardVO(id).cost + '\t\tname:' +  CM.getCardVO(id).name + '\t\tlevel:' +  CM.getCardVO(id).level + '\t\ttype:' +  CM.getCardVO(id).type)
+        }
+
+        if(this.createHangFlag)
+        {
+            console.log('====================================')
+            this.showHangResult();
         }
     }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="PKMonsterInfoSkin" width="470" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Image source="bg10_png" scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%"/>
+	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
 	<e:List id="list" anchorOffsetX="0" anchorOffsetY="0" top="70" bottom="15" left="15" right="15" minHeight="100">
 		<e:layout>
 			<e:TileLayout requestedColumnCount="5" horizontalGap="10" verticalGap="10"/>
@@ -18,10 +18,16 @@
 	</e:Group>
 	<e:Image y="58.51" horizontalCenter="0" width="440" source="line2_png"/>
 	<e:Group y="18" right="20">
-		<e:Image source="icon_pos_png" x="0" y="0"/>
-		<e:Label id="spaceText" text="苦顶替" y="9.999999999999947" size="24" stroke="3" verticalAlign="bottom" x="46"/>
+		<e:Group x="0" y="0">
+			<e:Image source="icon_force2_png" x="0" y="0" scaleX="0.8" scaleY="0.8"/>
+			<e:Label id="forceText" text="苦顶替" x="40" y="6" size="24" stroke="3" verticalAlign="bottom"/>
+		</e:Group>
+		<e:Group x="120" y="2">
+			<e:Image source="icon_pos_png" x="0" y="0"/>
+			<e:Label id="spaceText" text="苦顶替" y="4" size="24" stroke="3" verticalAlign="bottom" x="35"/>
+		</e:Group>
 		<e:layout>
-			<e:HorizontalLayout verticalAlign="middle"/>
+			<e:HorizontalLayout verticalAlign="middle" gap="20"/>
 		</e:layout>
 	</e:Group>
 </e:Skin>

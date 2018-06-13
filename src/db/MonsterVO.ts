@@ -82,14 +82,14 @@ class MonsterVO {
         this.mv_atk2 = data.mv_atk2
 
         //var arr = [];
-        //for(var s in SkillVO.data)
+        //for(var s in MonsterVO.data)
         //{
-        //   arr.push(SkillVO.data[s])
+        //   arr.push(MonsterVO.data[s])
         //}
         //ArrayUtil.sortByField(arr,['level'],[0])
         //for(var i=0;i<arr.length;i++)
         //{
-        //    console.log(arr[i].level,arr[i].name)
+        //    console.log(arr[i].level,arr[i].id,arr[i].name)
         //}
     }
 

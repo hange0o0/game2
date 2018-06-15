@@ -3,6 +3,7 @@ class S263 extends SBase {
         super();
     }
 
+    public mvID1 = 166;
     public onSkill(user:PKPosCardData) {
         var PD = PKData.getInstance();
         var arr = PD.monsterList.concat();

@@ -40,9 +40,9 @@ class M44 extends MBase {
         var mv = AtkMVCtrl.getInstance().playAniOn(target.id,this.mvID1)
         if(mv)
         {
-            mv.scaleX = mv.scaleY = 0.5;
-            mv.x -= 10
-            mv.y -= 30
+            mv.scaleX = mv.scaleY = 1;
+            //mv.x -= 10
+            mv.y -= 40
         }
 
     }

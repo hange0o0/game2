@@ -3,6 +3,8 @@ class S222 extends SBase {
         super();
     }
 
+    public mvID1 = 30
+
     public onSkill(user:PKPosCardData) {
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData);

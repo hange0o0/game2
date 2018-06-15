@@ -188,6 +188,8 @@ class BasePosChooseUI extends game.BaseUI {
         {
             list.pop();
             this.tab.width = 450
+            if(this.tab.selectedIndex == 3)
+                this.tab.selectedIndex = 0;
         }
         else
             this.tab.width = 600

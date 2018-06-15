@@ -3,7 +3,7 @@ class S211 extends SBase {
         super();
     }
 
-    public mvID1 = 103;
+    public mvID1 = 102;
 
     //预加载
     public preload() {

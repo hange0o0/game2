@@ -3,6 +3,7 @@ class S266 extends SBase {
         super();
     }
 
+    public mvID1 = 30;
     public onSkill(user:PKPosCardData) {
         var PD = PKData.getInstance();
         var player = user.getOwner()
@@ -12,6 +13,8 @@ class S266 extends SBase {
             addHp:true,
             user:player
         })
+
+        AtkMVCtrl.getInstance().hpSkillMV(266,player.teamData,0.8)
         return [];
     }
 }

@@ -45,7 +45,6 @@ class MailItem extends game.BaseItem {
         this.timeText.text = DateUtil.getStringBySeconds(Math.max(TM.now() - this.data.time,1),false,2) + '前'
         this.desText.text = StringUtil.getString(MailManager.getInstance().getMailDes(this.data),this.desText)
 
-        console.log(this.desText.text)
         this.redMC.visible = this.data.type > 100 && !parseInt(this.data.stat);
         this.awardMC.visible = this.data.type > 100 && !!parseInt(this.data.stat)
     }

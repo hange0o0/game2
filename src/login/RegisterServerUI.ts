@@ -108,6 +108,8 @@ class RegisterServerUI extends game.BaseWindow {
             MyTool.removeMC(this.backBtn);
         }
         this.renewType();
+
+        RES.loadGroup("guide");
     }
 
 

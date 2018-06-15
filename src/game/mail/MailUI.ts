@@ -13,6 +13,8 @@ class MailUI extends game.BaseUI {
     private list: eui.List;
     private tab: eui.TabBar;
     private emptyGroup: eui.Group;
+    private desText: eui.Label;
+
 
 
     private typeObj = {
@@ -78,13 +80,16 @@ class MailUI extends game.BaseUI {
            PKManager.getInstance().getPKRecord(()=>{
                this.renewPK();
            });
+            this.desText.text = '只保留最近'+ PKManager.getInstance().recordLen + '条PK记录'
         }
         else
         {
             var list = MailManager.getInstance().getListByTpyes(this.typeObj[this.tab.selectedIndex].type)
             this.list.dataProvider = new eui.ArrayCollection(list);
             this.emptyGroup.visible = list.length == 0;
+            this.desText.text = '只保留最近3天的消息'
         }
+
 
     }
 

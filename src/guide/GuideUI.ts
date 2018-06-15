@@ -33,6 +33,7 @@ class GuideUI extends game.BaseContainer{
     public constructor() {
         super(); 
         this.skinName = "GuideSkin";
+
         //GameManager.stage.addEventListener(egret.Event.RESIZE,this.resizeFun,this);
     }
 

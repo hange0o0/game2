@@ -21,7 +21,7 @@ class PKManager {
     public getRecordTime;
     public recordTime;
 
-
+    public recordLen = 20;
     constructor(){
         this.recordList = SharedObjectManager.getInstance().getMyValue('pk_replay1') || []
         this.recordTime = SharedObjectManager.getInstance().getMyValue('pk_record_time') || 0
@@ -34,8 +34,8 @@ class PKManager {
                  i--;
              }
         }
-        if(this.recordList.length > 20)
-            this.recordList.length = 20;
+        if(this.recordList.length > this.recordLen)
+            this.recordList.length = this.recordLen;
     }
 
     public pkWord = ['投降，或者死亡','来战个痛快','小心你的背后','这招看你怎么躲','我要认真了','你就只会这几招吗','我要出大招了','我会赐予你死亡','你究竟想怎样...','我的魔法会撕碎你','我已饥渴难耐','你会记住我的名字的',
@@ -47,7 +47,7 @@ class PKManager {
         '我的魔法会撕碎你','我已饥渴难耐','你会记住我的名字的','祈祷别对上我吧','我的怒火\n会毁灭一切','噢，亲爱的\n要坚持住','你死定了','你们这是自寻死路','品尝我的愤怒吧','你死期将至！','我要粉碎你！','你是我的猎物','你对力量一无所知',
         '这就是王者之气啊','刚才你们说什么来着','看到我们有多强了吧','等会去哪庆功好呢','留几个给我杀啊','放轻点，别把对面吓跑了','蠢材！','让我来干掉你....',
         '我要打呵欠了','让我好好抱抱你！','我准备好了','我已经等不及了','→_→','@_@','( ¯ □ ¯ )','（╯＾╰）','>_<','(╯▔▽▔)╯','(╬▔皿▔)凸', '到此为止了','别烦我!','还没有结束的～', '有点本事啊', '我绝不认输',
-        '我只是变的更坚强了','我和你没完','不胜利毋宁死','死亡，没什么好怕的']
+        '我只是变的更坚强了','我和你没完','不胜利毋宁死','死亡，没什么好怕的','为胜利献身']
 
 
     public defaultCardList = '1,2,3,3,3,2,2,6,6,6,31,31,31,41,41,41,65,65,65,64';
@@ -61,6 +61,7 @@ class PKManager {
     }
 
     public testFail(failID){
+        //['']
         MyWindow.Alert('PK异常！错误码：' + failID);
         return true;
         //switch(failID)
@@ -176,13 +177,23 @@ class PKManager {
                 atkList = atkList.concat(temp)
             }
         }
+
+        var index = 0;
+        while(atkList[index] && atkList[index]>PKConfig.skillBeginID)
+            continue;
+        var head2 = atkList[index];
+        var head1 = def.list.split(',')[0];
+
+
+
+
         atkList = atkList.join(',')
 
         var pkData = {
             seed:TM.now(),
             players:[
-                {id:1,gameid:'npc',team:2,autolist:def.list,force:UM.tec_force,type:UM.type,hp:5,nick:def.name},
-                {id:2,gameid:UM.gameid,team:1,card:atkList,force:UM.tec_force,nick:atk.name,type:UM.type,hp:5}
+                {id:1,gameid:'npc',team:2,autolist:def.list,force:UM.tec_force,type:UM.type,hp:TecManager.getInstance().getHp(),nick:def.name,head:head1},
+                {id:2,gameid:UM.gameid,team:1,card:atkList,force:UM.tec_force,nick:atk.name,type:UM.type,hp:TecManager.getInstance().getHp(),head:head2}
             ]
         };
         PKManager.getInstance().pkType = PKManager.TYPE_TEST

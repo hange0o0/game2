@@ -210,7 +210,7 @@ class PKCtrlCon extends game.BaseContainer {
         if(this.tipsMC.visible && !this.hideTips)
         {
             this.hideTips = true;           //.to({scaleX:1.2,scaleY:1.2},200).to({scaleX:0,scaleY:0,alpha:0},200)
-            egret.Tween.get(this.tipsMC).to({alpha:0},1000).call(()=>{
+            egret.Tween.get(this.tipsMC).wait(500).to({alpha:0},500).call(()=>{
                 this.tipsMC.visible = false;
             },this)
         }

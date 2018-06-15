@@ -3,7 +3,7 @@ class M36 extends MBase {
         super();
     }
 
-    public mvID1 = 128;
+    public mvID1 = 119;
     public onDie(user:PKMonsterData){
         if(user.skillTemp[36])
             return;
@@ -56,7 +56,11 @@ class M36 extends MBase {
         var monster = PD.addMonster(mData);
         monster.skillTemp[36] = true;
 
-        AtkMVCtrl.getInstance().playAniOn(monster.id,this.mvID1)
+        var mc = AtkMVCtrl.getInstance().playAniOn(monster.id,this.mvID1)
+        if(mc)
+        {
+            mc.y -= 30
+        }
     }
 
 

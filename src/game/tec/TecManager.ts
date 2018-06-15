@@ -24,6 +24,10 @@ class TecManager {
         //2个科技，资源组合不同
     }
 
+    public getHp(){
+        return 2 + this.getLevel(2);
+    }
+
     //取这个等级每小时能得到的金币
     public getCoinAdd(id,lv){
         var vo = TecVO.getObject(id);

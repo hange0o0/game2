@@ -15,7 +15,7 @@ class DebugManager {
         this.myData = SharedObjectManager.getInstance().getMyValue('share') || {"vedio":-1,};
     }
 
-    public MML = 100;  //测试出战怪的等级
+    public MML = 998;  //测试出战怪的等级
     public addSkill = false
     public cardLen = 15
     public createHangFlag = false;
@@ -151,7 +151,7 @@ class DebugManager {
         for(var i=0;i<arr.length;i++)
         {
             var id = arr[i].id;
-            console.log('id:' +id +  '\t\tnum:' +  arr[i].num + '\t\tcost:' +  CM.getCardVO(id).cost + '\t\tname:' +  CM.getCardVO(id).name + '\t\tlevel:' +  CM.getCardVO(id).level + '\t\ttype:' +  CM.getCardVO(id).type)
+            console.log((i + 1) + '\tid:' +id +  '\t\tnum:' +  arr[i].num + '\t\tcost:' +  CM.getCardVO(id).cost + '\t\tname:' +  CM.getCardVO(id).name + '\t\tlevel:' +  CM.getCardVO(id).level + '\t\ttype:' +  CM.getCardVO(id).type)
         }
 
         if(this.createHangFlag)

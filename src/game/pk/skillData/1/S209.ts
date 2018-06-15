@@ -3,7 +3,7 @@ class S209 extends SBase {
         super();
     }
 
-    public mvID1 = 128;
+    public mvID1 = 119;
 
 
     public onSkill(user:PKPosCardData) {
@@ -83,7 +83,11 @@ class S209StateListener extends PKStateListener {
         var monster = PD.addMonster(mData);
         monster.skillTemp[209] = true;
 
-        AtkMVCtrl.getInstance().playAniOn(monster.id,this.mvID)
+        var mc = AtkMVCtrl.getInstance().playAniOn(monster.id,this.mvID)
+        if(mc)
+        {
+            mc.y -= 30
+        }
     }
 
 }

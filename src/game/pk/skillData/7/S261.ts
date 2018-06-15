@@ -3,6 +3,7 @@ class S261 extends SBase {
         super();
     }
 
+    public mvID1 = 111;
     public onSkill(user:PKPosCardData) {
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);

@@ -44,10 +44,15 @@ class TecUI extends MainBase {
     }
 
     public renew(){
-        if(this.tab.selectedIndex == 2)
+        if(this.tab.selectedIndex == 1)
+        {
+            this.currentState = 'force'
+            this.coinText.text = '' + UM.tec_force + ''
+        }
+        else if(this.tab.selectedIndex == 2)
         {
             this.currentState = 'coin'
-            this.coinText.text = '时产：' + NumberUtil.addNumSeparator(UM.hourcoin) + ''
+            this.coinText.text = '' + NumberUtil.addNumSeparator(UM.hourcoin) + ''
         }
         else
             this.currentState = 'normal'

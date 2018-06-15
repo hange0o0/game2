@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="SlaveChooseUISkin" width="620" height="640" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 		<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
-	<e:Image source="bg1_png" scale9Grid="8,8,14,14" anchorOffsetY="0" left="10" right="10" top="100" bottom="15" anchorOffsetX="0"/>
+	<e:Image scale9Grid="8,8,14,14" anchorOffsetY="0" left="10" right="10" top="100" bottom="15" anchorOffsetX="0" source="bg9_png"/>
 	<e:List id="list" width="586" horizontalCenter="0" y="110">
 		<e:layout>
 			<e:TileLayout requestedColumnCount="2" verticalGap="15"/>

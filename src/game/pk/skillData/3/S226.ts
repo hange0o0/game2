@@ -2,7 +2,7 @@ class S226 extends SBase {
     constructor() {
         super();
     }
-
+    public mvID1 = 102;
     public onSkill(user:PKPosCardData) {
         var PD = PKData.getInstance();
         var teamData = user.getOwner().teamData.enemy;

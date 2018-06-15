@@ -2,7 +2,7 @@ class S228 extends SBase {
     constructor() {
         super();
     }
-
+    public mvID1 = 128;
     public onSkill(user:PKPosCardData) {
         var PD = PKData.getInstance();
         var arr = PD.monsterList.concat();

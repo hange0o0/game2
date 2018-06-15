@@ -9,18 +9,19 @@ class MainUI extends game.BaseUI {
     private bg: eui.Image;
     private con: eui.Group;
     private topCon: eui.Group;
-    private forceText: eui.Label;
-    private addForceBtn: eui.Image;
+    private addCoinBtn: eui.Image;
+    private coinText: eui.Label;
     private energyText: eui.Label;
     private addEnergyBtn: eui.Image;
     private diamondText: eui.Label;
     private addDiamondBtn: eui.Image;
-    private bottomSelectMC: eui.Rect;
+    private bottomSelectMC: eui.Image;
     private b0: MainBottomBtn;
     private b1: MainBottomBtn;
     private b2: MainBottomBtn;
     private b3: MainBottomBtn;
     private b4: MainBottomBtn;
+
 
 
 
@@ -41,15 +42,15 @@ class MainUI extends game.BaseUI {
     public childrenCreated() {
         super.childrenCreated();
 
-        this.addBtnEvent(this.addForceBtn, this.onAddForce)
+        this.addBtnEvent(this.addCoinBtn, this.onAddCoin)
         this.addBtnEvent(this.addEnergyBtn, this.onAddEnergy)
         this.addBtnEvent(this.addDiamondBtn, this.onAddDiamond)
 
         this.b0.data = {text:'背包',index:0,source:'main_bag_png',type:'bag'}
         this.b1.data = {text:'奴隶',index:1,source:'main_slave_png',type:'slave'}
         this.b2.data = {text:'战斗',index:2,source:'main_pk_png',type:'main'}
-        this.b3.data = {text:'科技',index:3,source:'main_tec_png',type:'tec'}
-        this.b4.data = {text:'卡牌',index:4,source:'main_card_png',type:'card'}
+        this.b3.data = {text:'卡牌',index:3,source:'main_card_png',type:'card'}
+        this.b4.data = {text:'科技',index:4,source:'main_tec_png',type:'tec'}
         this.bottomItems.push(this.b0)
         this.bottomItems.push(this.b1)
         this.bottomItems.push(this.b2)
@@ -66,9 +67,9 @@ class MainUI extends game.BaseUI {
         }
     }
 
-    private onAddForce(){
+    private onAddCoin(){
         this.onBottomSelect(4);
-        TecUI.getInstance().setTab(1)
+        TecUI.getInstance().setTab(2)
     }
 
     private onAddEnergy(){
@@ -177,6 +178,10 @@ class MainUI extends game.BaseUI {
 
         //GuideManager.getInstance().isGuiding = true;
 
+        if(GuideManager.getInstance().isGuiding)
+            this.LoadFiles = ['guide']
+
+
         super.show()
     }
 
@@ -193,7 +198,6 @@ class MainUI extends game.BaseUI {
         //this.bg.source = Config.localResRoot  + 'main_bg'+UM.type+'.jpg';
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
-        this.addPanelOpenEvent(GameEvent.client.force_change,this.renewTop)
         this.addPanelOpenEvent(GameEvent.client.diamond_change,this.renewTop)
         this.addPanelOpenEvent(GameEvent.client.energy_change,this.renewEnergy)
         this.addPanelOpenEvent(GameEvent.client.hang_change,this.onHangChange)
@@ -217,11 +221,15 @@ class MainUI extends game.BaseUI {
 
     private onTimer(){
         this.renewEnergy();
+        this.renewCoin();
     }
 
     public renewTop(){
-        this.forceText.text = UM.tec_force + ''
         this.diamondText.text = UM.diamond + ''
+    }
+
+    private renewCoin(){
+        this.coinText.text = NumberUtil.addNumSeparator(UM.getCoin())
     }
 
     public renewEnergy(){
@@ -242,6 +250,7 @@ class MainUI extends game.BaseUI {
     public renew(){
         this.renewTop();
         this.renewEnergy();
+        this.renewCoin();
 
         for(var i=0;i<this.bottomItems.length;i++)
         {
@@ -273,10 +282,10 @@ class MainUI extends game.BaseUI {
             case 2:
                 this.currentUI = MainFightUI.getInstance();
                 break;
-            case 4:
+            case 3:
                 this.currentUI = CardUI.getInstance();
                 break;
-            case 3:
+            case 4:
                 this.currentUI = TecUI.getInstance();
                 break;
         }

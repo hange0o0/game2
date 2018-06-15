@@ -3,6 +3,7 @@ class S269 extends SBase {
         super();
     }
 
+    public mvID1 = 166;
     public onSkill(user:PKPosCardData) {
         var PD = PKData.getInstance();
         var player = user.getOwner()
@@ -12,6 +13,7 @@ class S269 extends SBase {
             addHp:false,
             user:player
         })
+        AtkMVCtrl.getInstance().hpSkillMV(269,player.teamData.enemy,1)
         if(player.teamData.enemy.hp <=0)
             PD.isGameOver = true;
         return [];

@@ -20,6 +20,10 @@ class MainFightUI extends MainBase {
     private fightBtn: FightUI;
     private defBtn: eui.Group;
     private atkBtn: eui.Group;
+    private forceGroup: eui.Group;
+    private forceText: eui.Label;
+
+
 
 
 
@@ -41,7 +45,7 @@ class MainFightUI extends MainBase {
         this.addBtnEvent(this.defBtn, this.onDef)
         this.addBtnEvent(this.atkBtn, this.onAtk)
 
-
+        this.addBtnEvent(this.forceGroup, this.onAddForce)
 
         this.addBtnEvent(this.mailBtn, this.onMail)
         this.addBtnEvent(this.rankBtn, this.onRank)
@@ -53,6 +57,11 @@ class MainFightUI extends MainBase {
         EM.addEvent(GameEvent.client.pk_begin,this.onPKBegin,this)
         EM.addEvent(GameEvent.client.pk_end,this.onPKEnd,this)
 
+    }
+
+    private onAddForce(){
+        MainUI.getInstance().onBottomSelect(4);
+        TecUI.getInstance().setTab(1)
     }
 
     private renewRed(){
@@ -122,11 +131,17 @@ class MainFightUI extends MainBase {
     public onShow(){
         GuideManager.getInstance().enableScrollV(this.scroller);
         this.renew();
+        this.renewForce();
         this.renewRed();
 
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
         this.addPanelOpenEvent(GameEvent.client.red_change,this.renewRed)
+        this.addPanelOpenEvent(GameEvent.client.force_change,this.renewForce)
 
+    }
+
+    private renewForce(){
+        this.forceText.text = UM.tec_force + ''
     }
 
     public onPKBegin(){

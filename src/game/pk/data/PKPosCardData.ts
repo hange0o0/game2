@@ -238,7 +238,6 @@ class PKPosCardData {
         this.cardData.waiting = false;
         this.cardData.remove = true;
         this.getOwner().onPosCardEnable(this);
-        console.log('enableWaiting')
 
         PKData.getInstance().addVideo({
             type:PKConfig.VIDEO_CARD_WAITING_CHANGE,

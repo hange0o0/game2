@@ -234,7 +234,7 @@ class AniManager {
             return mc
         }
         mc.frameRate = 12//技能动画变慢
-        mc.scaleX = mc.scaleY = 2;
+        mc.scaleX = mc.scaleY = 1;
         mc.rotation = 0;
         return mc;
     }

@@ -3,6 +3,7 @@ class S256 extends SBase {
         super();
     }
 
+    public mvID1 = 128;
     public onSkill(user:PKPosCardData) {
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData);

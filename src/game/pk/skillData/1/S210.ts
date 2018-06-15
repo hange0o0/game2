@@ -3,8 +3,7 @@ class S210 extends SBase {
         super();
     }
 
-    public mvID1 = 128;
-    public mvID2 = 30;
+    public mvID1 = 119;
 
 
     public onSkill(user:PKPosCardData) {
@@ -71,6 +70,10 @@ class S210 extends SBase {
         }
 
         var monster = PD.addMonster(mData);
-        AtkMVCtrl.getInstance().playAniOn(monster.id,this.mvID1)
+        var mc = AtkMVCtrl.getInstance().playAniOn(monster.id,this.mvID1)
+        if(mc)
+        {
+            mc.y -= 30
+        }
     }
 }

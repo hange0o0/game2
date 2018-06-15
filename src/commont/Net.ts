@@ -186,7 +186,6 @@ class Net extends egret.EventDispatcher{
         GameManager.getInstance().stopTimer();
         GameManager.container.touchChildren = GameManager.container.touchEnabled = true;
         this.removeLoading();
-
     }
     private refresh(){
         location.reload();

@@ -138,6 +138,9 @@ class Main extends eui.UILayer {
         else if (event.groupName == "preload_png") {
             this.removeLoadEvent();
             this.createScene();
+            RES.loadGroup("preload_jpg");
+            RES.loadGroup("preload_png32")
+
         }
     }
 
@@ -203,7 +206,8 @@ class Main extends eui.UILayer {
             MyTool.removeMC(this.loadingView);
             egret.setTimeout(function(){
                 RES.loadGroup("preload_png");//预加载第一阶段
-                //RES.loadGroup("preload_jpg");//预加载第一阶段
+                RES.loadGroup("preload_jpg");//预加载第一阶段
+                RES.loadGroup("preload_png32");//预加载第一阶段
             },this,200)
             LoginUI.getInstance().show();
         }

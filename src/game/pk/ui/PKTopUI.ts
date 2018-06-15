@@ -3,18 +3,10 @@ class PKTopUI extends game.BaseContainer {
     public static getInstance() {
         return this._instance;
     }
-    private hpGroup1: eui.Group;
+    public hpGroup1: eui.Group;
     public hpGroupIcon: eui.Image;
     private hpText1: eui.Label;
-    private defGroup1: eui.Group;
-    private defBG1: eui.Rect;
-    private defBGMask1: eui.Image;
-    private defText1: eui.Label;
-    private defGroup2: eui.Group;
-    private defBG2: eui.Rect;
-    private defBGMask2: eui.Image;
-    private defText2: eui.Label;
-    private hpGroup2: eui.Group;
+    public hpGroup2: eui.Group;
     private hpText2: eui.Label;
     private topUI: TopUI;
 
@@ -41,11 +33,6 @@ class PKTopUI extends game.BaseContainer {
     public childrenCreated() {
         super.childrenCreated();
         PKData.getInstance().addEventListener('video',this.onVideoEvent,this);
-        this.defBG1.mask = this.defBGMask1
-        this.defBG2.mask = this.defBGMask2
-
-        MyTool.removeMC(this.defGroup1)
-        MyTool.removeMC(this.defGroup2)
         this.touchEnabled = false;
     }
 
@@ -68,12 +55,12 @@ class PKTopUI extends game.BaseContainer {
             case PKConfig.VIDEO_TEAM_HP_CHANGE:
                 this.renewHp();
                 break;
-            case PKConfig.VIDEO_TEAM_DEF:
-                this.def1(videoData.user);
-                break;
-            case PKConfig.VIDEO_TEAM_DEF2:
-                this.def2();
-                break;
+            //case PKConfig.VIDEO_TEAM_DEF:
+            //    this.def1(videoData.user);
+            //    break;
+            //case PKConfig.VIDEO_TEAM_DEF2:
+            //    this.def2();
+            //    break;
             case PKConfig.VIDEO_MYPLAYER_CHANGE:
                 this.onMyPlayerChange();
                 break;
@@ -225,18 +212,13 @@ class PKTopUI extends game.BaseContainer {
 
         egret.Tween.removeTweens(this.hpGroup1)
         egret.Tween.removeTweens(this.hpGroup2)
-        egret.Tween.removeTweens(this.defGroup1)
-        egret.Tween.removeTweens(this.defGroup2)
+
         this.hpGroup1.scaleX = this.hpGroup1.scaleY = 0
         this.hpGroup2.scaleX = this.hpGroup2.scaleY = 0
         //this.defGroup1.scaleX = this.defGroup1.scaleY = 0
         //this.defGroup2.scaleX = this.defGroup2.scaleY = 0
 
 
-        this.defBG1.visible = true
-        this.defBG2.visible = true
-        this.defBG1.height = 0
-        this.defBG2.height = 0
         //
         //this.defScoreGroup1.x = 180
         //this.defScoreGroup2.x = 390
@@ -244,8 +226,6 @@ class PKTopUI extends game.BaseContainer {
         //this.defScoreGroup2.y = 250
 
         var PD = PKData.getInstance();
-        this.defText1.text = '+'+PD.getTeamByRota(PKConfig.ROTA_LEFT).getTeamDef()+'%'
-        this.defText2.text = '+'+PD.getTeamByRota(PKConfig.ROTA_RIGHT).getTeamDef()+'%'
     }
 
     public appearMV(){
@@ -263,65 +243,6 @@ class PKTopUI extends game.BaseContainer {
         this.hpText2.text = Math.max(0,team2.hp) + ''// + team2.maxhp   //  ' 增加防御:' + team2.def + ' '+
     }
 
-    public def1(user){
-        var team = user.getOwner().teamData;
-        //this.defScoreGroup1.visible = true
-        //this.defScoreGroup2.visible = true
-       if(team.atkRota == PKConfig.ROTA_LEFT)
-       {
-           var txt = this.defText1
-           var bg = this.defBG1
-       }
-        else
-       {
-           var txt = this.defText2
-           var bg = this.defBG2
-       }
-        var text =  '+' + team.getTeamDef() + '%';
-        if(txt.text != text)
-        {
-            txt.text = text;
-            egret.Tween.removeTweens(txt);
-            txt.scaleX = txt.scaleY = 1.3;
-            var tw = egret.Tween.get(txt);
-            tw.to({scaleX:1,scaleY:1},200);
-        }
-        if(team.def)
-        {
-            //bg.visible = true
-            egret.Tween.removeTweens(bg);
-            var tw = egret.Tween.get(bg)
-            var h = 30 * (team.def%5 || 5)/5;
-
-            if(h < bg.height)
-            {
-                tw.to({height:30},50).to({height:0}).to({height:h},50)
-            }
-            else
-                tw.to({height:h},100)
-        }
-        else
-            bg.visible = false
-
-    }
-    public def2(){
-        this.defBG1.visible = false
-        this.defBG2.visible = false
-        //var PD = PKData.getInstance();
-        //
-        //this.defText1.text = '+' +  PD.getTeamByRota(PKConfig.ROTA_LEFT).getTeamDef() + '%'
-        //this.defText2.text = '+' +  PD.getTeamByRota(PKConfig.ROTA_RIGHT).getTeamDef()  + '%'
-        //
-        //var tw = egret.Tween.get(this.defScoreGroup1)
-        //tw.to({x:10,y:230},300)
-        //var tw = egret.Tween.get(this.defScoreGroup2)
-        //tw.to({x:570,y:230},300).call(function(){
-        //    this.defGroup1.visible = true
-        //    this.defGroup2.visible = true
-        //    this.defScoreGroup1.visible = false
-        //    this.defScoreGroup2.visible = false
-        //},this)
-    }
 
     public addSkillItem(data){
         for(var i=0;i<this.itemArr.length;i++)

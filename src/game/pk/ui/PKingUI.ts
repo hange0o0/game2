@@ -43,6 +43,7 @@ class PKingUI extends game.BaseUI {
     public constructor() {
         super();
         this.skinName = "PKingUISkin";
+        this.LoadFiles = ['pk']
     }
 
 
@@ -95,6 +96,7 @@ class PKingUI extends game.BaseUI {
     }
 
     public show(){
+        EM.dispatchEventWith(GameEvent.client.pk_begin)
         this.hideBehind = false;
         var self = this;
         self.superShow();
@@ -145,7 +147,7 @@ class PKingUI extends game.BaseUI {
 
     public onShow(){
         SoundManager.getInstance().playSound(SoundConfig.bg_pk);
-        EM.dispatchEventWith(GameEvent.client.pk_begin)
+
 
         var PD = PKData.getInstance();
 

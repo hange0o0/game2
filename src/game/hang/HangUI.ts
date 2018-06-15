@@ -84,7 +84,7 @@ class HangUI extends game.BaseItem {
         if(this.lockGroup.visible)
             return;
         PKBeforeUI.getInstance().show({
-            title:'挂机PK',
+            title:'挑战 战役' + (HangManager.getInstance().level + 1),
             fun:function(id){
                 HangManager.getInstance().pk(id)
             }
@@ -141,7 +141,7 @@ class HangUI extends game.BaseItem {
 
     public renew(){
         var HM = HangManager.getInstance();
-        this.titleText.text = '第 '+(HM.level+1)+' 关'
+        this.titleText.text = '战役 '+(HM.level+1)+''
 
 
         var lastHistory = SharedObjectManager.getInstance().getMyValue('hang_video') || {};

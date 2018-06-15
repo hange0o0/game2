@@ -22,6 +22,16 @@ class S278 extends SBase {
             buff.isDebuff = true;
             buff.endTime = PKData.getInstance().actionTime + cd;
             target.addBuff(buff)
+
+            if(buff.ing)
+            {
+                PKData.getInstance().addVideo({
+                    type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+                    user:target,
+                    key:'def',
+                    stateType:2
+                })
+            }
         }
         return arr;
     }

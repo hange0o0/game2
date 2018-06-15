@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="TecUISkin" width="640" height="800" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing" states="normal,coin" >
+<e:Skin class="TecUISkin" width="640" height="800" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing" states="normal,coin,force" >
 	<e:Image source="bg14_png" x="0" top="140" bottom="-30" width="640" scale9Grid="32,29,8,10"/>
-	<e:Scroller id="scroller" width="640" top="143" bottom="0" bounces="false" top.coin="200">
+	<e:Scroller id="scroller" width="640" top="143" bottom="0" bounces="false" top.coin="200" top.force="200">
 		<e:Group>
 		<e:List id="list" width="200" height="200" x="142" y="175">
 			<e:layout>
@@ -25,9 +25,9 @@
 	</e:TabBar>
 	<e:Group top="150" left="0" right="0" height="50" visible.normal="false">
 		<e:Image source="black_bg_png" y="0" left="20" right="20" scale9Grid="43,7,7,42" height="50"/>
-		<e:Group horizontalCenter="0" verticalCenter="0">
-			<e:Label text="金币收益：" y="10" size="22" x="10"/>
-			<e:Image source="icon_coin_png" x="192" y="10" scaleX="0.8" scaleY="0.8"/>
+		<e:Group horizontalCenter="0" verticalCenter="0" height="40">
+			<e:Label text="每小时产出" y="10" size="22" x="10" text.force="当前战力"/>
+			<e:Image id="icon" source="icon_coin_png" x="192" y="10" scaleX="0.8" scaleY="0.8" source.force="icon_force2_png"/>
 			<e:Label id="coinText" text="Label/小时" y="0" size="22" x="0" textColor="0xffd866"/>
 			<e:layout>
 				<e:HorizontalLayout verticalAlign="middle"/>

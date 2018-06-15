@@ -17,12 +17,14 @@ class PKPosItem extends game.BaseItem {
     }
 
     private group: eui.Group;
+    private lightBG: eui.Rect;
     private bg: eui.Image;
     private img: CardImg;
     private barGroup: eui.Group;
     private barMC: eui.Image;
     private numGroup: eui.Group;
     private numText: eui.Label;
+
 
 
 
@@ -91,6 +93,7 @@ class PKPosItem extends game.BaseItem {
     }
 
 
+    private lastFullCD = 0;
     private onTimer(){
         var data:PKPosCardData = this.data;
         var barWidth = 204
@@ -129,8 +132,17 @@ class PKPosItem extends game.BaseItem {
 
         this.barMC.width = barWidth * (maxCD - cd) / maxCD;
 
-
+        if(cd == 0)
+        {
+             this.lightBG.visible = egret.getTimer() - this.lastFullCD < 200
+            this.lastFullCD = egret.getTimer();
+        }
+        else
+        {
+            this.lightBG.visible = false
+        }
     }
+
     private renewImg(mid){
         var vo:any = CM.getCardVO(mid)
         this.img.data = vo.id;

@@ -3,7 +3,7 @@ class M10 extends MBase {
         super();
     }
 
-    public mvID1 = 30;
+    public mvID1 = 128;
 
     public initMonster(user:PKMonsterData){
         user.atkAble =  false;

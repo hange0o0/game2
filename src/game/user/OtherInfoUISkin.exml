@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="OtherInfoUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
 	<e:Image source="bg14_png" x="0" top="-30" bottom="0" width="640" scale9Grid="32,29,8,10"/>
+	<e:Image source="pk_bg1_jpg" x="0" height="1056" bottom="100"/>
 	<e:Scroller id="scroller" width="640" x="0" top="0" bottom="100" bounces="false">
 		<e:Group>
 			<e:Group y="50" horizontalCenter="0" minWidth="320" x="160" width="640" height="280">
@@ -36,7 +37,7 @@
 				</e:Group>
 			</e:Group>
 			<e:Group x="20" y="540" width="100%">
-				<e:Image source="bg1_png" scale9Grid="8,8,14,14" left="20" right="20" top="30" bottom="0"/>
+				<e:Image scale9Grid="8,8,14,14" left="20" right="20" top="30" bottom="0" source="bg9_png"/>
 				<e:List id="cardList" width="572" top="90" bottom="20" horizontalCenter="0">
 				<e:layout>
 					<e:TileLayout horizontalGap="8" verticalGap="8"/>
@@ -46,7 +47,7 @@
 				<e:Label text="出战卡组" y="10" size="24" stroke="2" horizontalCenter="0"/>
 			</e:Group>
 			<e:Group x="20" y="240" width="100%">
-				<e:Image source="bg1_png" scale9Grid="8,8,14,14" left="20" right="20" top="30" bottom="0"/>
+				<e:Image scale9Grid="8,8,14,14" left="20" right="20" top="30" bottom="0" source="bg9_png"/>
 				<e:Image y="0" source="title_bg3_png" scale9Grid="101,9,7,61" width="400" horizontalCenter="0"/>
 				<e:Label text="社会关系" y="10" size="24" stroke="2" horizontalCenter="0"/>
 				<e:Group id="cdGroup" x="199" y="60">

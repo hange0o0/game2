@@ -13,6 +13,7 @@ class LoginUI extends game.BaseWindow {
     private loginBtn: eui.Button;
 
 
+    public debugStep = 0;
     public noMV: boolean = true;
     public constructor() {
         super();
@@ -73,11 +74,22 @@ class LoginUI extends game.BaseWindow {
     }
 
     private onRegister(){
-        if(this.nameText.text == 'debug' && this.passwordText.text == 'debug')
+        if(this.nameText.text == 'debug')
         {
-            SharedObjectManager.getInstance().setValue('debug_open',true)
-            Config.isDebug = true;
-            return
+            if(this.passwordText.text == 'debug')
+            {
+                this.debugStep ++;
+                this.passwordText.text = 'debug' + this.debugStep
+            }
+            if(this.debugStep == 1 && !this.passwordText.text)
+            {
+                SharedObjectManager.getInstance().setValue('debug_open',true)
+                this.nameText.text = ''
+                this.passwordText.text = ''
+                Config.isDebug = true;
+            }
+            if(this.debugStep)
+                return
         }
         RegisterUI.getInstance().show();
     }

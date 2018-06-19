@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="SlaveMasterItemSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*"  width="450" height="210">
+	<e:Image source="pk_win_png" right="350" bottom="15"/>
+	<e:Image source="pk_win_png" scaleX="-1" left="350" bottom="15"/>
 	<e:Image left="-15" right="-15" top="-60" bottom="0" scale9Grid="30,29,5,8" source="bg7_png"/>
 	<ns1:HeadMC width="150" height="150" skinName="HeadMCSkin" id="headMC" y="0" x="18.18"/>
 	<e:Group y="142" x="-4.82">

@@ -23,7 +23,7 @@ class HangManager {
     }
 
     public getPKCD(){
-        return 10 + this.level*3;
+        return Math.floor(this.level/10)*9;
     }
 
     public getPKLeft(){

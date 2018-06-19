@@ -79,6 +79,7 @@ class SlaveChooseUI extends game.BaseWindow {
     public renew(){
         var SM =  SlaveManager.getInstance()
         var arr = SM.missList;
+        this.list.layout['requestedColumnCount'] = arr.length > 3?2:1
         this.list.dataProvider = new eui.ArrayCollection(arr)
         this.emptyGroup.visible = arr.length == 0.
         this.onTimer();

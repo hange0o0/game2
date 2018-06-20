@@ -24,7 +24,7 @@
 	
 
 	<e:Group y="185" horizontalCenter="0">
-		<e:RadioButton id="r0" label="查找昵称" x="0" y="0" skinName="MyCheckBoxSkin"/>
+		<e:RadioButton id="r0" label="查找代号" x="0" y="0" skinName="MyCheckBoxSkin"/>
 		<e:RadioButton id="r1" y="0" label="查找ID" skinName="MyCheckBoxSkin" x="180"/>
 	</e:Group>
 </e:Skin>

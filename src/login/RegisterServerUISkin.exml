@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<e:Skin class="RegisterServerUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="520" height="740">
+<e:Skin class="RegisterServerUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="520" height="640">
 	<e:Image scale9Grid="33,31,4,6" source="bg14_png" top="20" bottom="0" anchorOffsetY="0" width="480" horizontalCenter="0" locked="true"/>
-	<e:Image y="85" left="50" right="50" height="446.97" source="bg7_png" scale9Grid="33,28,6,11" anchorOffsetY="0" locked="true"/>
+	<e:Image y="85" left="50" right="50" height="350" source="bg7_png" scale9Grid="33,28,6,11" anchorOffsetY="0"/>
 
 
 
@@ -10,13 +10,13 @@
 
 	<e:Group horizontalCenter="0" bottom="28">
 		<e:Button id="backBtn" y="0" label="返回" x="0" width="150" skinName="Btn3Skin"/>
-		<e:Button id="registerBtn" y="0" label="注册" x="176" skinName="Btn4Skin" width="150"/>
+		<e:Button id="registerBtn" y="0" label="创建" x="176" skinName="Btn4Skin" width="150"/>
 		<e:layout>
 			<e:HorizontalLayout gap="40"/>
 		</e:layout>
 	</e:Group>
 	<e:Group horizontalCenter="0" bottom="120">
-		<e:TextInput id="nameText" width="300" y="2" skinName="MyTextInputSkin" height="50" x="0" maxChars="7" prompt="名字最长为7个中文" text="12345671234567"/>
+		<e:TextInput id="nameText" width="300" y="2" skinName="MyTextInputSkin" height="50" x="0" maxChars="7" prompt="代号最长为7个中文" text="12345671234567"/>
 		<e:Group id="randomBtn" y="-4" right="-54">
 
 			<e:Image source="random_btn_png" x="15" y="10" scaleY="0.6" scaleX="0.6"/>
@@ -24,12 +24,13 @@
 	</e:Group>
 	<e:Image source="title_bg3_png" y="0" scale9Grid="73,9,62,61" scaleX="1.2" scaleY="1.2" left="0" right="0"/>
 	<e:Label text="创建角色" horizontalCenter="0" y="12" strokeColor="0x000000" textColor="0xffffff" stroke="1"/>
-	<e:Rect id="chooseMC" width="74" height="74" x="121" y="362.03" ellipseWidth="74" ellipseHeight="74" fillColor="0xbf530f"/>
-	<e:Image id="arrowMC" source="arrow3_png" y="448.94" scaleY="-1" x="249"/>
-	<e:Image id="type1" source="icon_type1_png" x="124" y="368.03"/>
-	<e:Image id="type2" x="228" y="368.03" source="icon_type2_png"/>
-	<e:Image id="type3" x="332" y="368.03" source="icon_type3_png"/>
-	<e:Label id="desText" text="天赋：对元素系士兵有10%加成" y="473.85" horizontalCenter="0.5" size="24" stroke="1" textColor="0x704919"/>
-	<e:Label text="请选择天赋" y="318.18" horizontalCenter="0.5" size="26" textColor="0x000000" bold="true"/>
-	<e:Image source="type_tips_png" y="115" horizontalCenter="0"/>
+	<e:Rect id="chooseMC" width="74" height="74" x="157" y="264.03" ellipseWidth="74" ellipseHeight="74" fillColor="0xbf530f"/>
+	<e:Image id="arrowMC" source="arrow3_png" y="349.94" scaleY="-1" x="183"/>
+	<e:Image source="type_tips_png" y="164" horizontalCenter="0"/>
+	<e:Image id="type1" source="icon_type1_png" x="224.48" y="164.06"/>
+	<e:Image id="type2" x="294.15" y="268.03" source="icon_type2_png"/>
+	<e:Image id="type3" x="162.3" y="270.06" source="icon_type3_png"/>
+	<e:Label id="desText" text="天赋：对元素系士兵有10%加成" y="370" size="24" stroke="1" textColor="0x704919" horizontalCenter="0"/>
+	<e:Label text="请选择天赋" y="115" horizontalCenter="0.5" size="26" textColor="0x000000" bold="true"/>
+
 </e:Skin>

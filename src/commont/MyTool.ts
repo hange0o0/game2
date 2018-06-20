@@ -66,14 +66,16 @@ class MyTool {
     public static maxUserHead = 82;
 
     public static randomName(){
-        var len = Math.floor(Math.random()*3) + 2;
         var s = '';
-        var wLen = BadWords.NAME_WORDS.length;
-        while(len--)
-        {
-            s += BadWords.NAME_WORDS.charAt(Math.floor(Math.random()*wLen));
-        }
-        return  s;
+        var wLen = BadWords.NAME_WORDS1.length;
+        var wLen2 = BadWords.NAME_WORDS2.length;
+        s += BadWords.NAME_WORDS1.charAt(Math.floor(Math.random()*wLen));
+        if(Math.random() < 0.3)
+            s += BadWords.NAME_WORDS1.charAt(Math.floor(Math.random()*wLen));
+        s += BadWords.NAME_WORDS2.charAt(Math.floor(Math.random()*wLen2));
+        if(s.length < 3 && Math.random() < 0.1)
+            s += BadWords.NAME_WORDS2.charAt(Math.floor(Math.random()*wLen2));
+        return  s + '-' + (Math.random()+'').substr(-3);
     }
     public static getHeadUrl(id,isRound?){
         if(id == 'sys')

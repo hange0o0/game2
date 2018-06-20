@@ -34,7 +34,7 @@ class FriendSearchUI extends game.BaseWindow {
 
     private onRChange(){
         if(this.r0.selected)
-            this.nameText.prompt="请输入对方昵称"
+            this.nameText.prompt="请输入对方代号"
         else
             this.nameText.prompt="请输入对方ID"
     }

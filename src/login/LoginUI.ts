@@ -92,5 +92,19 @@ class LoginUI extends game.BaseWindow {
                 return
         }
         RegisterUI.getInstance().show();
+
+        var a = '牛马狗虫虎豹象鹫狐貂獭鼬狼豚鸦蚕猪熊蜴猫龟蝶犀豺雀蛛蚕兽鹤驹鹤鳄蝎貘雕蛇龙蝉雁兔蚊狮猴蛙凤鹿凰蚁狸驹猪蛊鼠鸡猿蜂犬蒲竹梅兰菊松柏杏李桃槐鳖麝蜃虾鲸獐隼獒'.split('');
+        var oo = {};
+        for(var i=0;i<a.length;i++)
+        {
+            if(oo[a[i]])
+            {
+                a.splice(i,1);
+                i--;
+            }
+            else
+                oo[a[i]] = true
+        }
+        console.log(a.join(''))
     }
 }

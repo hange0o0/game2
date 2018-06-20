@@ -19,6 +19,7 @@ class RegisterServerUI extends game.BaseWindow {
 
 
 
+
     private type = 1;
 
     public constructor() {
@@ -57,7 +58,7 @@ class RegisterServerUI extends game.BaseWindow {
         var LM = LoginManager.getInstance();
         if(!this.nameText.text || this.nameText.text == '神秘人' || BadWordsFilter.validateName(this.nameText.text))
         {
-            MyWindow.Alert('名字中含有非法字符');
+            MyWindow.Alert('代号中含有非法字符');
             return;
         }
 
@@ -99,6 +100,7 @@ class RegisterServerUI extends game.BaseWindow {
     public onShow(){
         this.onRandom();
         this.type = Math.floor(Math.random()*3 + 1)
+        console.log(this.type)
 
         if(FromManager.getInstance().h5Form)
         {
@@ -115,20 +117,22 @@ class RegisterServerUI extends game.BaseWindow {
 
     private renewType(){
         var mc = this['type' + this.type]
-        var arr = ['',
-            this.createHtml('兽人系',0x00FFFF),
-            this.createHtml('元素系',0x00FFFF),
-            this.createHtml('暗黑系',0x000000)
-        ]
+        //var arr = ['',
+        //    this.createHtml(PKConfig.TYPENAME[1],0x00FFFF),
+        //    this.createHtml(PKConfig.TYPENAME[2],0x00FFFF),
+        //    this.createHtml(PKConfig.TYPENAME[3],0x000000)
+        //]
 
         this.chooseMC.x = mc.x - 5;
-        this.setHtml(this.desText, '加强' + arr[this.type] + '属性10%')
+        this.chooseMC.y = mc.y - 5;
+        this.setHtml(this.desText, '加强' + this.createHtml(PKConfig.TYPENAME[this.type]+'类型',PKConfig.TYPECOLOR[this.type]) + '单位属性10%')
 
         egret.Tween.removeTweens(this.arrowMC)
-        this.arrowMC.y = 246
+        var baseY = this.chooseMC.y + this.chooseMC.height + 10;
+        this.arrowMC.y = baseY
         this.arrowMC.x = mc.x + 64/2 - 22/2
         var tw = egret.Tween.get(this.arrowMC,{loop:true});
-        tw.to({y:this.arrowMC.y + 8},500).to({y:246},500);
+        tw.to({y:this.arrowMC.y + 8},500).to({y:baseY},500);
     }
 
 

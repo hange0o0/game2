@@ -1,4 +1,4 @@
-class OtherInfoUI extends game.BaseUI {
+class OtherInfoUI extends game.BaseWindow {
     private static _instance: OtherInfoUI;
     public static getInstance(): OtherInfoUI {
         if(!this._instance)
@@ -12,18 +12,22 @@ class OtherInfoUI extends game.BaseUI {
     }
 
     private scroller: eui.Scroller;
+    private con: eui.Group;
+    private cdGroup: eui.Group;
+    private cdText: eui.Label;
     private headMC: HeadMC;
+    private typeMC: eui.Image;
     private nameText: eui.Label;
     private coinText: eui.Label;
     private forceText: eui.Label;
     private cardList: eui.List;
-    private cdGroup: eui.Group;
-    private cdText: eui.Label;
+    private slaveGroup: eui.Group;
     private list: eui.List;
-    private bottomUI: BottomUI;
     private okBtn: eui.Button;
     private viewBtn: eui.Button;
-    private typeMC: eui.Image;
+
+
+
 
 
 
@@ -39,7 +43,7 @@ class OtherInfoUI extends game.BaseUI {
 
     public childrenCreated() {
         super.childrenCreated();
-        this.bottomUI.setHide(this.hide,this);
+        //this.bottomUI.setHide(this.hide,this);
 
         //this.scroller.viewport = this.list;
         this.list.itemRenderer = InfoItem
@@ -49,6 +53,9 @@ class OtherInfoUI extends game.BaseUI {
 
         this.addBtnEvent(this.okBtn,this.onPK)
         this.addBtnEvent(this.viewBtn,this.onView)
+
+        this.touchEnabled = false;
+
     }
 
     private onView(){
@@ -78,7 +85,7 @@ class OtherInfoUI extends game.BaseUI {
             {
                 SlaveManager.getInstance().addView(this.gameid,()=>{
 
-                    this.viewBtn.label = '取消\n关注';
+                    this.viewBtn.label = '取消关注';
                     this.viewBtn.skinName = 'Btn2Skin'
                     MyWindow.ShowTips('关注成功！')
                 })
@@ -198,11 +205,12 @@ class OtherInfoUI extends game.BaseUI {
             else
                 var str = DateUtil.getStringBySeconds(cd,false,2)
             this.cdText.text = str
-            this.cdGroup.visible = true
+            this.con.addChildAt(this.cdGroup,0)
+
         }
         else
         {
-            this.cdGroup.visible = false
+            MyTool.removeMC(this.cdGroup)
         }
     }
 
@@ -219,7 +227,7 @@ class OtherInfoUI extends game.BaseUI {
         var slave = InfoManager.getInstance().otherSlave[this.gameid];
         this.nameText.text = '' + data.nick + '  LV.' + (data.level||1);
         this.coinText.text = '时产：' + data.hourcoin
-        this.coinText.text = '战力：' + data.tec_force
+        this.forceText.text = '战力：' + data.tec_force
 
         //var infoArr = [
         //    {title:'主城等级：',value:'LV.' + (data.level||1)},
@@ -250,9 +258,10 @@ class OtherInfoUI extends game.BaseUI {
                 slave.master.hourcoin = UM.hourcoin
             }
         }
-        while(slaveList.length %3 != 0)
-            slaveList.push(null)
+        //while(slaveList.length %3 != 0)
+        //    slaveList.push(null)
         this.list.dataProvider = new eui.ArrayCollection(slaveList)
+        this.slaveGroup.visible = slaveList.length > 0;
 
         //console.log(slaveList)
 
@@ -277,11 +286,11 @@ class OtherInfoUI extends game.BaseUI {
         }
         else
         {
-            this.okBtn.label = this.master == UM.gameid?'释放\n奴隶':'收服\n奴隶'
+            this.okBtn.label = this.master == UM.gameid?'释放奴隶':'收服奴隶'
             this.okBtn.skinName = this.master == UM.gameid?'Btn2Skin':'Btn1Skin'
         }
 
-        this.viewBtn.label = SlaveManager.getInstance().viewObj[this.gameid]?'取消\n关注':'关注';
+        this.viewBtn.label = SlaveManager.getInstance().viewObj[this.gameid]?'取消关注':'关注';
         this.viewBtn.skinName = SlaveManager.getInstance().viewObj[this.gameid]?'Btn2Skin':'Btn1Skin'
 
         if(data.last_card)

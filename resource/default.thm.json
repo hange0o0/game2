@@ -45,6 +45,7 @@
     "src/game/common/AwardUISkin.exml",
     "src/game/common/CardImgSkin.exml",
     "src/game/common/HeadMCSkin.exml",
+    "src/game/hang/GiftUISkin.exml",
     "src/game/hang/HangHelpItemSkin.exml",
     "src/game/hang/HangHelpUISkin.exml",
     "src/game/hang/HangItemSkin.exml",

@@ -7,6 +7,7 @@ class HangManager {
     }
 
     public level;
+    public giftnum;
     public awardtime;
     public pktime;
     public lastlist;
@@ -15,6 +16,7 @@ class HangManager {
         this.level = data.level
         this.awardtime = data.awardtime
         this.pktime = data.pktime
+        this.giftnum = data.giftnum || 0;
         this.lastlist = (data.lastlist || '').split(',')
     }
 

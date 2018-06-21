@@ -137,6 +137,7 @@ class PKManager {
                 {
                     lastHistory.level = HangManager.getInstance().level
                     lastHistory.fail = 0;
+                    lastHistory.gift = 0;
                 }
                 SharedObjectManager.getInstance().setMyValue('hang_video',lastHistory)
                 fun && fun();

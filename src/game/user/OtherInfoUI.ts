@@ -20,11 +20,17 @@ class OtherInfoUI extends game.BaseWindow {
     private nameText: eui.Label;
     private coinText: eui.Label;
     private forceText: eui.Label;
+    private infoList: eui.List;
     private cardList: eui.List;
     private slaveGroup: eui.Group;
     private list: eui.List;
-    private okBtn: eui.Button;
     private viewBtn: eui.Button;
+    private okBtn: eui.Button;
+    private slaveIcon: eui.Group;
+    private slaveBG: eui.Rect;
+    private slaveText: eui.Label;
+
+
 
 
 
@@ -225,18 +231,19 @@ class OtherInfoUI extends game.BaseWindow {
         this.isMyMaster = false
         var data = InfoManager.getInstance().otherInfo[this.gameid]
         var slave = InfoManager.getInstance().otherSlave[this.gameid];
-        this.nameText.text = '' + data.nick + '  LV.' + (data.level||1);
+        this.nameText.text = '' + data.nick //+ '  LV.' + (data.level||1);
         this.coinText.text = '时产：' + data.hourcoin
         this.forceText.text = '战力：' + data.tec_force
 
-        //var infoArr = [
-        //    {title:'主城等级：',value:'LV.' + (data.level||1)},
-        //    {title:'召唤战力：',value:data.tec_force},
-        //    {title:'金币产出：',value:data.hourcoin + '/小时'}
-        //];
+        var infoArr = [
+            {title:'科技等级：',value:'LV.' + (data.level||1)},
+            {title:'队伍生命：',value:data.hp + ' 点'},
+            {title:'奴隶上限：',value:data.maxslave + ' 个'},
+            {title:'手牌上限：',value:data.maxcard + ' 张'},
+        ];
 
 
-        //this.infoList.dataProvider = new eui.ArrayCollection(infoArr)
+        this.infoList.dataProvider = new eui.ArrayCollection(infoArr)
         //this.coinText.text = '产出：' + data.hourcoin + '/小时';
         //this.forceText.text = '战力：'  + data.tec_force;
         this.headMC.setData(data.head,data.type);
@@ -244,6 +251,7 @@ class OtherInfoUI extends game.BaseWindow {
 
         var slaveList = slave.slave.concat();
 
+        this.slaveIcon.visible = false
 
         this.master = this.gameid;
         if(slave.master)
@@ -256,12 +264,19 @@ class OtherInfoUI extends game.BaseWindow {
                 slave.master.head = UM.head
                 slave.master.tec_force = UM.tec_force
                 slave.master.hourcoin = UM.hourcoin
+
+                this.slaveIcon.visible = true
+                this.slaveBG.fillColor = 0x0000FF
+                this.slaveText.text = '奴'
             }
         }
         //while(slaveList.length %3 != 0)
         //    slaveList.push(null)
         this.list.dataProvider = new eui.ArrayCollection(slaveList)
-        this.slaveGroup.visible = slaveList.length > 0;
+        if(slaveList.length > 0)
+            this.con.addChild(this.slaveGroup);
+        else
+            MyTool.removeMC(this.slaveGroup);
 
         //console.log(slaveList)
 
@@ -275,6 +290,10 @@ class OtherInfoUI extends game.BaseWindow {
                  slaveList[i].head = UM.head
                  slaveList[i].tec_force = UM.tec_force
                  slaveList[i].hourcoin = UM.hourcoin
+
+                 this.slaveIcon.visible = true
+                 this.slaveBG.fillColor = 0xFF0000
+                 this.slaveText.text = '主'
                  break;
              }
         }

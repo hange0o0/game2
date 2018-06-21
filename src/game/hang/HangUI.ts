@@ -21,6 +21,8 @@ class HangUI extends game.BaseItem {
     private helpBtn: eui.Image;
     private videoBtn: eui.Group;
     private videoIcon: eui.Image;
+    private giftMC: eui.Image;
+
 
 
 
@@ -40,6 +42,7 @@ class HangUI extends game.BaseItem {
 
     private pkMV;
     private callStop = true;
+    private giftTW;
 
     public constructor() {
         super();
@@ -58,6 +61,10 @@ class HangUI extends game.BaseItem {
         this.addBtnEvent(this.videoBtn,(e)=>{
             e.stopImmediatePropagation()
             HangHelpUI.getInstance().show()
+        })
+        this.addBtnEvent(this.giftMC,(e)=>{
+            e.stopImmediatePropagation()
+            GiftUI.getInstance().show()
         })
 
         this.con.mask = new egret.Rectangle(0,0,this.con.width,this.con.height)
@@ -78,6 +85,11 @@ class HangUI extends game.BaseItem {
         //this.bg.cacheAsBitmap  = true;
 
         this.initTime = egret.getTimer();
+
+        var tw =this.giftTW= egret.Tween.get(this.giftMC,{loop:true});
+        tw.to({scaleX:1.1,scaleY:0.8},200).to({scaleX:1,scaleY:1.1,y:this.giftMC.y -10},200).
+            to({scaleX:1.1,scaleY:0.8,y:this.giftMC.y},200).to({scaleX:1,scaleY:1},300).wait(2000);
+        this.giftTW.setPaused(true)
     }
 
     public onPK(){
@@ -146,6 +158,10 @@ class HangUI extends game.BaseItem {
 
         var lastHistory = SharedObjectManager.getInstance().getMyValue('hang_video') || {};
         this.videoBtn.visible = HM.level>= 10 && lastHistory.level === HM.level && lastHistory.fail >= 1
+
+        var showGift = !lastHistory.gift && lastHistory.fail >= 2;
+        this.giftTW.setPaused(false)
+        console.log('showGift:' + showGift)
 
 
         //this.bg.source = PKManager.getInstance().getBG(HangManager.getInstance().getHangBGID());
@@ -225,6 +241,7 @@ class HangUI extends game.BaseItem {
 
     public stop(){
         this.callStop = true
+        this.giftTW.setPaused(true)
     }
 
     public reset(stopStart?){

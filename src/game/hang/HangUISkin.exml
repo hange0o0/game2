@@ -28,4 +28,7 @@
 		<e:Image source="btn4_png" scale9Grid="20,21,9,5" x="0" y="0"/>
 		<e:Image id="videoIcon" source="replay_mc_png" verticalCenter="0" horizontalCenter="0"/>
 	</e:Group>
+	<e:Group id="giftGroup" right="10" bottom="70" height="98" width="88">
+		<e:Image id="giftMC" source="gift_mc_png" anchorOffsetX="44" anchorOffsetY="90" x="44" y="90"/>
+	</e:Group>
 </e:Skin>

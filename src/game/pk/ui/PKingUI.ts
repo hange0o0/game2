@@ -268,12 +268,16 @@ class PKingUI extends game.BaseUI {
                 this.vsGroup.visible = false
                 this.pkTop.appearMV();
                 this.pkCtrlCon.initInfo();
-                if(GuideManager.getInstance().isGuiding)
-                {
-                    this.setStop(true);
-                    GuideManager.getInstance().showGuide()
-                }
+
             })
+        if(GuideManager.getInstance().isGuiding)
+        {
+            tw.wait(800).call(()=>{
+                this.setStop(true);
+                GuideManager.getInstance().showGuide()
+            })
+        }
+
     }
 
     public callFail(){

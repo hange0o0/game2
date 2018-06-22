@@ -14,6 +14,7 @@ class HangUI extends game.BaseItem {
     private titleText: eui.Label;
     private awardBtn: eui.Button;
     private lockGroup: eui.Group;
+    private giftGroup: eui.Group;
     private lockBar: eui.Rect;
     private lockText: eui.Label;
     public openBtn: eui.Button;
@@ -47,6 +48,7 @@ class HangUI extends game.BaseItem {
     public constructor() {
         super();
         this.skinName = "HangUISkin";
+        HangUI._instance = this;
     }
 
     public childrenCreated() {
@@ -86,7 +88,7 @@ class HangUI extends game.BaseItem {
 
         this.initTime = egret.getTimer();
 
-        var tw =this.giftTW= egret.Tween.get(this.giftMC,{loop:true});
+        var tw = this.giftTW = egret.Tween.get(this.giftMC,{loop:true});
         tw.to({scaleX:1.1,scaleY:0.8},200).to({scaleX:1,scaleY:1.1,y:this.giftMC.y -10},200).
             to({scaleX:1.1,scaleY:0.8,y:this.giftMC.y},200).to({scaleX:1,scaleY:1},300).wait(2000);
         this.giftTW.setPaused(true)
@@ -108,8 +110,13 @@ class HangUI extends game.BaseItem {
         HangManager.getInstance().award(()=>{
             this.awardBtn.visible = false
             this.awardRed.visible = false
+            this.resetGiftPos();
             this.onTimer();
         })
+    }
+
+    private resetGiftPos(){
+        this.giftGroup.bottom = this.awardBtn.visible?70:10
     }
 
 
@@ -144,7 +151,10 @@ class HangUI extends game.BaseItem {
 
         var awardCD = TM.now() - HM.awardtime;
         if(!this.awardBtn.visible && HM.getAwardLeft() < 0)
+        {
             this.awardBtn.visible = true;
+            this.resetGiftPos();
+        }
         if(!this.awardRed.visible && awardCD >= 3600*10)
             this.awardRed.visible = true;
         this.timeText.text = DateUtil.getStringBySecond(Math.min(3600*10,awardCD))
@@ -159,9 +169,17 @@ class HangUI extends game.BaseItem {
         var lastHistory = SharedObjectManager.getInstance().getMyValue('hang_video') || {};
         this.videoBtn.visible = HM.level>= 10 && lastHistory.level === HM.level && lastHistory.fail >= 1
 
-        var showGift = !lastHistory.gift && lastHistory.fail >= 2;
-        this.giftTW.setPaused(false)
-        console.log('showGift:' + showGift)
+        var showGift = HM.giftnum<HM.maxGiftNum && !lastHistory.gift && lastHistory.fail >= 2;
+        if(showGift)
+        {
+            this.giftTW.setPaused(false)
+            this.giftGroup.visible = true
+        }
+        else
+        {
+            this.giftTW.setPaused(true)
+            this.giftGroup.visible = false
+        }
 
 
         //this.bg.source = PKManager.getInstance().getBG(HangManager.getInstance().getHangBGID());
@@ -192,6 +210,7 @@ class HangUI extends game.BaseItem {
 
             this.lockGroup.visible = HM.getPKLeft() > 0;
             this.awardBtn.visible = HM.getAwardLeft() < 0;
+            this.resetGiftPos();
             this.awardRed.visible = false
 
             this.pkMV.visible = !this.lockGroup.visible
@@ -241,7 +260,12 @@ class HangUI extends game.BaseItem {
 
     public stop(){
         this.callStop = true
+        this.hideGift();
+    }
+
+    public hideGift(){
         this.giftTW.setPaused(true)
+        this.giftGroup.visible = false;
     }
 
     public reset(stopStart?){

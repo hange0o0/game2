@@ -61,6 +61,7 @@ var game_file_list = [
 	"bin-debug/game/common/HeadMC.js",
 	"bin-debug/game/common/MonsterAtkMV.js",
 	"bin-debug/game/common/MonsterMV.js",
+	"bin-debug/game/hang/GiftUI.js",
 	"bin-debug/game/hang/HangHelpItem.js",
 	"bin-debug/game/hang/HangHelpUI.js",
 	"bin-debug/game/hang/HangItem.js",
@@ -202,7 +203,7 @@ var game_file_list = [
 	"bin-debug/game/pk/skillData/13/S325.js",
 	"bin-debug/game/pk/skillData/13/S326.js",
 	"bin-debug/game/pk/skillData/13/S327.js",
-	"bin-debug/util/StringUtil.js",
+	"bin-debug/LoadingUI.js",
 	"bin-debug/game/pk/skillData/13/S329.js",
 	"bin-debug/game/pk/skillData/13/S330.js",
 	"bin-debug/game/pk/skillData/2/S211.js",
@@ -395,7 +396,7 @@ var game_file_list = [
 	"bin-debug/util/ObjectUtil.js",
 	"bin-debug/util/PopUpManager.js",
 	"bin-debug/util/ShapeObject.js",
-	"bin-debug/LoadingUI.js",
+	"bin-debug/util/StringUtil.js",
 	//----auto game_file_list end----
 ];
 

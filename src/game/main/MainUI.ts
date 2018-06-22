@@ -100,7 +100,7 @@ class MainUI extends game.BaseUI {
     public onBottomSelect(index){
        if(index != this.currentIndex)
        {
-           if(index == 0 && ObjectUtil.objLength(PosManager.getInstance().defList) == 0)//奴隶
+           if(index == 1 && ObjectUtil.objLength(PosManager.getInstance().defList) == 0)//奴隶
            {
                MyWindow.Alert('请先设置防守阵容',()=>{
                    BasePosUI.getInstance().show('def',0);

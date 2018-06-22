@@ -203,6 +203,8 @@ class GuideUI extends game.BaseContainer{
                 else
                 {
                     var rect = mc.getBounds();
+                    rect.x += mc.anchorOffsetX
+                    rect.y += mc.anchorOffsetY
                     var p1 = mc.localToGlobal(rect.x,rect.y);
                     var p2 = mc.localToGlobal(rect.x + rect.width,rect.y + rect.height);
 

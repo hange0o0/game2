@@ -29,13 +29,12 @@ class GiftUI extends game.BaseWindow {
     }
 
     public onClick(){
-        MailManager.getInstance().get_mail_award(this.dataIn,()=>{
-            this.renew();
+        HangManager.getInstance().getGift(()=>{
+            this.hide();
         })
     }
 
     public show(v?){
-        this.dataIn = v
         super.show()
     }
 
@@ -49,7 +48,7 @@ class GiftUI extends game.BaseWindow {
     }
 
     public renew(){
-
+        this.dataIn = HangManager.getInstance().giftnum + 1;
         var propNum = TecManager.getInstance().getOtherNeed(this.dataIn,1)*5
         var awardData = {
             coin: TecManager.getInstance().getCoinNeed(this.dataIn)*5,

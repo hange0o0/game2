@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<e:Skin class="GiftUISkin" width="560" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" height="660">
+<e:Skin class="GiftUISkin" width="560" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" height="720">
 	<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
 	<e:Group y="110" left="30" right="30" height="200">
 		<e:Image source="bar_bg_png" scale9Grid="11,13,187,5" left="0" right="0" top="0" bottom="0"/>
@@ -14,15 +14,13 @@
 			<e:HorizontalLayout gap="30"/>
 		</e:layout>
 	</e:Group>
-	<e:Scroller width="500" horizontalCenter="0" top="330" bottom="100" minHeight="200" maxHeight="500" bounces="false">
-		<e:Group>
-			<e:List id="list" width="500" minHeight="200" itemRendererSkinName="AwardItemSkin" x="0">
-				<e:layout>
-				<e:VerticalLayout verticalAlign="middle" gap="8"/>
-				</e:layout>
-			</e:List>
-		</e:Group>
-	</e:Scroller>
+
+	<e:List id="list" width="500" top="320" bottom="100" itemRendererSkinName="AwardItemSkin" x="0" horizontalCenter="0">
+		<e:layout>
+		<e:VerticalLayout verticalAlign="middle" gap="8"/>
+		</e:layout>
+	</e:List>
+
 	<e:Group y="25" horizontalCenter="0">
 		<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="420" x="0" y="0"/>
 		<e:Label text="物资援助" y="10.18" size="24" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>

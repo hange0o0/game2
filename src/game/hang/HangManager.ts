@@ -6,6 +6,8 @@ class HangManager {
         return this._instance;
     }
 
+    public maxGiftNum = 10
+
     public level;
     public giftnum;
     public awardtime;
@@ -180,6 +182,31 @@ class HangManager {
             }
             this.videoData[id+'_'+time] = JSON.parse(msg.data.data)
             this.showHangVideo(this.videoData[id+'_'+time]);
+        });
+    }
+
+    public getGift(fun?) {
+        var oo:any = {};
+        Net.addUser(oo);
+        Net.send(GameEvent.hang.hang_gift, oo, (data)=> {
+            var msg = data.msg;
+            if(msg.fail)
+            {
+                GiftUI.getInstance().hide();
+                MyWindow.Alert('你已经很强，不再需要我的帮助了')
+                this.giftnum = this.maxGiftNum;
+                HangUI.getInstance().hideGift();
+                return;
+            }
+            this.giftnum ++
+            var lastHistory = SharedObjectManager.getInstance().getMyValue('hang_video') || {};
+            lastHistory.gift = 1;
+            SharedObjectManager.getInstance().setMyValue('hang_video',lastHistory)
+
+            AwardUI.getInstance().show(msg.award)
+            HangUI.getInstance().hideGift();
+            if (fun)
+                fun();
         });
     }
 

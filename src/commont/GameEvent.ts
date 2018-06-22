@@ -83,6 +83,7 @@ class GameEvent {
         pk_test:'hang.pk_test',
         hang_video_list:'hang.hang_video_list',
         hang_video:'hang.hang_video',
+        hang_gift:'hang.hang_gift',
         pk_hang_result:'hang.pk_hang_result'
     }
 

@@ -62,6 +62,12 @@ class PKSettingUI extends game.BaseWindow {
             this.okBtn.label = '退出'
             this.cancelBtn.label = '继续'
         }
+        else if(PKManager.getInstance().pkType == PKManager.TYPE_TEST)
+        {
+            this.des.text = '确定要结束本轮测试吗？'
+            this.okBtn.label = '结束'
+            this.cancelBtn.label = '继续'
+        }
         else
         {
             this.des.text = '确定要认输退出吗？'

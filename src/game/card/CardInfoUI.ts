@@ -94,7 +94,13 @@ class CardInfoUI extends game.BaseWindow {
 
     private onClick(){
         if(!this.upAble)
+        {
+            if(this.data.isMonster)
+                MyWindow.ShowTips('金币不足')
+            else
+                MyWindow.ShowTips('远征秘石不足！')
             return
+        }
         if(this.data.isMonster)
         {
             CardManager.getInstance().card_open(this.data.id,()=>{

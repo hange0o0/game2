@@ -166,6 +166,8 @@ class DebugManager {
         this.testNum ++;
         var arr = []
         var n = 1024;
+        if(this.createHangFlag)
+            n = 2048;
         for(var i=0;i<n;i++)
         {
              arr.push(this.randomList().join(','))

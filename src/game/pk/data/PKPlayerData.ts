@@ -244,7 +244,7 @@ class PKPlayerData {
         var list = []
         for(var s in this.handCard)
         {
-              if(this.handCard[s].mid == data.mid && !this.handCard[s].remove)
+              if(this.handCard[s] && this.handCard[s].mid == data.mid && !this.handCard[s].remove)
               {
                   list.push({index:s,autoIndex:this.handCard[s].index})
               }

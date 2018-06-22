@@ -36,7 +36,7 @@ class FightShopBuyUI extends game.BaseWindow {
     private onClick(){
         if(FightManager.getInstance().value < this.dataIn.diamond)
         {
-            MyWindow.ShowTips('远征点不足！')
+            MyWindow.ShowTips('远征秘石不足！')
             return;
         }
         PayManager.getInstance().buy_shop(this.dataIn.id,()=>{

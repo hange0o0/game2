@@ -207,11 +207,11 @@ class PKCtrlCon extends game.BaseContainer {
         this.placeArr.push(item);
         this.needRenewCard = true;
 
-        if(this.tipsMC.visible && !this.hideTips)
+        if(this.tipsMC['cstate'] == 0 && !this.hideTips)
         {
             this.hideTips = true;           //.to({scaleX:1.2,scaleY:1.2},200).to({scaleX:0,scaleY:0,alpha:0},200)
-            egret.Tween.get(this.tipsMC).wait(500).to({alpha:0},500).call(()=>{
-                this.tipsMC.visible = false;
+            egret.Tween.get(this.tipsMC).wait(500).to({x:534,y:269,scaleX:0.5,scaleY:0.5},500).call(()=>{
+                this.tipsMC['cstate'] = 1;
             },this)
         }
     }
@@ -388,9 +388,12 @@ class PKCtrlCon extends game.BaseContainer {
 
         this.hideTips = false;
         this.tipsMC.visible = true;
+        this.tipsMC.x = 222;
+        this.tipsMC.y = 151;
         egret.Tween.removeTweens(this.tipsMC)
-        //this.tipsMC.scaleX = this.tipsMC.scaleY = 1
+        this.tipsMC.scaleX = this.tipsMC.scaleY = 1
         this.tipsMC.alpha = 1;
+        this.tipsMC['cstate'] = 0
 
         this.remove();
         this.renewCard();
@@ -406,6 +409,7 @@ class PKCtrlCon extends game.BaseContainer {
 
         if(PD.isReplay)
         {
+            this.tipsMC.visible = false;
             this.replayGroup.visible = true
             this.renewReplay();
         }
@@ -428,10 +432,14 @@ class PKCtrlCon extends game.BaseContainer {
             this.placeGroup.addChild(item);
             item.data = data;
             this.placeArr.push(item);
-            if(this.tipsMC.visible)
+            if(this.tipsMC['cstate'] == 0)
             {
                 this.hideTips = true;
-                this.tipsMC.visible = false;
+                this.tipsMC['cstate'] = 1
+                this.tipsMC.scaleX = this.tipsMC.scaleY = 0.5;
+                this.tipsMC.x = 534;
+                this.tipsMC.y = 269;
+                //this.tipsMC.visible = false;
             }
         }
 

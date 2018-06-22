@@ -2,7 +2,7 @@
 <e:Skin class="PKCtrlConSkin" width="640" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing" height="520">
 	<e:Image source="pk_pos_bg_jpg" x="0" y="48" height="330"/>
 	<e:Image source="bg17_png" x="0" scaleY="-1" top="50" height="60" scale9Grid="12,0,51,41" width="400"/>
-	<e:Image id="tipsMC" source="type_tips_png" horizontalCenter="0" verticalCenter="-25"/>
+	<e:Image id="tipsMC" source="type_tips_png" x="534" y="269" scaleX="0.5" scaleY="0.5"/>
 	<e:Group id="overMC" width="640" x="2" anchorOffsetX="0" bottom="160" height="230" alpha="0.3">
 		<e:layout>
 		<e:TileLayout horizontalGap="15" verticalGap="10" paddingLeft="10"/>

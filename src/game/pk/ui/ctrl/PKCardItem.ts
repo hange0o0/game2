@@ -27,6 +27,7 @@ class PKCardItem extends game.BaseItem {
     public defaultY = 30 +55
     public isDragMC = false;
     public stopDrag;
+    public guideStopDrag = false;
     public stopMove = true;
     public tw:egret.Tween
     public loadingTimer
@@ -103,7 +104,7 @@ class PKCardItem extends game.BaseItem {
             this.loading.visible = false
             return;
         }
-        this.stopDrag = false
+        this.stopDrag = this.guideStopDrag
         this.currentState = 'normal'
         var vo:any = CM.getCardVO(this.data.mid)
         this.img.data = this.data.mid;

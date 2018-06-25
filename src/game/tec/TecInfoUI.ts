@@ -18,8 +18,8 @@ class TecInfoUI extends game.BaseWindow {
     private nameText: eui.Label;
     private helpBtn: eui.Image;
     private btnGroup: eui.Group;
-    private cancelBtn: eui.Button;
-    private okBtn: eui.Button;
+    public cancelBtn: eui.Button;
+    public okBtn: eui.Button;
 
 
 
@@ -48,6 +48,7 @@ class TecInfoUI extends game.BaseWindow {
     private onClick(){
         TecManager.getInstance().tec_up(this.dataIn.id,()=>{
             this.renew()
+            GuideManager.getInstance().testShowGuide()
         });
     }
 
@@ -58,11 +59,17 @@ class TecInfoUI extends game.BaseWindow {
 
     public hide() {
         super.hide();
+        GuideManager.getInstance().testShowGuide()
     }
 
     public onShow(){
         this.renew();
+
         //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
+    }
+
+    public showFinish(){
+        GuideManager.getInstance().testShowGuide()
     }
 
     public renew(){

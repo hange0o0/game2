@@ -49,10 +49,9 @@ class PKPosItem extends game.BaseItem {
         super.childrenCreated();
 
         this.img.hideType = true;
-        //var tw = this.tw = egret.Tween.get(this.lightBG,{loop:true});
-        //this.lightBG.scaleX = this.lightBG.scaleY = 1.1;
-        //tw.to({scaleX:1.3,scaleY:1.3},500,egret.Ease.sineInOut).to({scaleX:1.1,scaleY:1.1},500,egret.Ease.sineInOut)
-        //this.tw.setPaused(true)
+        var tw = this.tw = egret.Tween.get(this.lightBG,{loop:true});
+        tw.to({alpha:0},500,egret.Ease.sineInOut).to({alpha:1},500,egret.Ease.sineInOut)
+        this.tw.setPaused(true)
 
 
 
@@ -135,11 +134,13 @@ class PKPosItem extends game.BaseItem {
         if(cd == 0)
         {
              this.lightBG.visible = egret.getTimer() - this.lastFullCD < 200
+            this.tw.setPaused(false)
             this.lastFullCD = egret.getTimer();
         }
         else
         {
             this.lightBG.visible = false
+            this.tw.setPaused(true)
         }
     }
 

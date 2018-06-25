@@ -8,7 +8,7 @@ class CardUI extends MainBase {
     }
 
     private scroller: eui.Scroller;
-    private list: eui.List;
+    public list: eui.List;
     private tab: eui.TabBar;
     private emptyGroup: eui.Group;
 
@@ -99,6 +99,10 @@ class CardUI extends MainBase {
     public onShow(){
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.card_change,this.justRenewList)
+    }
+
+    public showFinish(){
+        GuideManager.getInstance().testShowGuide()
     }
 
     public justRenewList(){

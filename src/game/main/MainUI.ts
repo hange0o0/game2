@@ -141,6 +141,7 @@ class MainUI extends game.BaseUI {
                    this.lastUI.hide()
                    this.lastUI = null;
                }
+               this.currentUI.showFinish && this.currentUI.showFinish();
            },this)
            this.setTopPos(0);
        }

@@ -25,6 +25,8 @@ class TecItem extends game.BaseItem {
          this.nameText.text = this.data.name;
         this.redMC.visible = TecManager.getInstance().testRed(this.data.id);
         this.mc.source = this.data.getThumb();
+
+
     }
 
 }

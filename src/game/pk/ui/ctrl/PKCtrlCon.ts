@@ -259,6 +259,11 @@ class PKCtrlCon extends game.BaseContainer {
              {
                  if(GuideManager.getInstance().isGuiding && GuideManager.getInstance().guideKey == "addCard")
                  {
+                     for(var s in this.cardObj)
+                     {
+                         this.cardObj[s].guideStopDrag = false;
+                         this.cardObj[s].stopDrag = false;
+                     }
                      GuideManager.getInstance().showGuide()
                  }
              }
@@ -279,6 +284,8 @@ class PKCtrlCon extends game.BaseContainer {
         var cardData = this.chooseCard.data
         this.onAddPosCard(cardData)
         PD.myPlayer.addPosCard(cardData);
+
+
         return true;
     }
 
@@ -416,6 +423,15 @@ class PKCtrlCon extends game.BaseContainer {
         else
         {
             this.replayGroup.visible = false
+        }
+
+        if(GuideManager.getInstance().isGuiding)
+        {
+            for(var s in this.cardObj)
+            {
+                this.cardObj[s].guideStopDrag = true;
+                this.cardObj[s].stopDrag = true;
+            }
         }
     }
 

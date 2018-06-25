@@ -207,7 +207,10 @@ class PKingUI extends game.BaseUI {
         this.showMV();
 
         if(GuideManager.getInstance().isGuiding)
+        {
             GuideUI.getInstance().hide();
+            this.touchChildren = false;
+        }
     }
 
     public showHurt(rota){
@@ -233,6 +236,7 @@ class PKingUI extends game.BaseUI {
 
         if(GuideManager.getInstance().isGuiding)
         {
+            this.touchChildren = true;
             GuideManager.getInstance().showGuide()
         }
         else
@@ -272,7 +276,7 @@ class PKingUI extends game.BaseUI {
             })
         if(GuideManager.getInstance().isGuiding)
         {
-            tw.wait(800).call(()=>{
+            tw.wait(300).call(()=>{
                 this.setStop(true);
                 GuideManager.getInstance().showGuide()
             })

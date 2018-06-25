@@ -20,7 +20,7 @@ class MainFightUI extends MainBase {
     private fightBtn: FightUI;
     private defBtn: eui.Group;
     private atkBtn: eui.Group;
-    private forceGroup: eui.Group;
+    public forceGroup: eui.Group;
     private forceText: eui.Label;
 
 

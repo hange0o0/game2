@@ -6,7 +6,7 @@
 class GuideManager {
     private static _instance: GuideManager;
     public currentStepId: Number;
-    public isGuiding:boolean=false;
+    public isGuiding:boolean=true//false;
 
     public temp;
 
@@ -27,6 +27,13 @@ class GuideManager {
         if(!this._instance)
             this._instance = new GuideManager();
         return this._instance;
+    }
+
+    public testShowGuide(){
+        if(this.isGuiding)
+        {
+           this.showGuide()
+        }
     }
 
     public enableScrollV(scroller){
@@ -167,6 +174,45 @@ class GuideManager {
                 GuideUI.getInstance().hide();
             }
         })
+        ////////////////////////////////////
+        this.addGuideObj({
+            mc:function(){return MainFightUI.getInstance().forceGroup},
+            text:'随着战役的推进，遇到的敌人会越来越强，我们必需增强自身的实力以应对各种情况。',
+        })
+
+        this.addGuideObj({
+            mc:function(){return TecUI.getInstance().list.getChildAt(0)},
+            text:'我们可通过提升战力科技提升战力。',
+        })
+
+        this.addGuideObj({
+            mc:function(){return TecInfoUI.getInstance().okBtn},
+            text:'战力提升会影响所有的出战卡牌，一点提升，处处可用！',
+        })
+
+        this.addGuideObj({
+            mc:function(){return TecInfoUI.getInstance().cancelBtn},
+            text:'因此为了提升战力我们需要多去收集升级科技的资源',
+        })
+
+        this.addGuideObj({
+            mc:function(){return MainUI.getInstance().bottomItems[3]},
+            text:'当然，除了提升战后外，拥有更多的卡牌，可让你在对战中拥有更大的操作空间',
+        })
+        this.addGuideObj({
+            mc:function(){return CardUI.getInstance().list.getChildAt(3)},
+            text:'点击未解锁的卡牌进行解锁',
+        })
+        this.addGuideObj({
+            mc:function(){return CardInfoUI.getInstance().okBtn},
+            text:'解锁后你就可以在对战和防守阵容中使用该卡牌了',
+        })
+        this.addGuideObj({
+            mc:function(){return CardInfoUI.getInstance().closeBtn},
+            text:'当你的主科技等级提升时，你可以获得更多的未解锁卡牌',
+        })
+
+        ////////////////////////////////////
 
         this.addGuideObj({
             text:'基于召唤的对战玩法介绍，到这里就结束了。',
@@ -193,6 +239,7 @@ class GuideManager {
             text:'那我就此别过，以后有机会一起驰骋疆场吧！',
             fun:function(){
                 self.endGuide()
+                MainUI.getInstance().onBottomSelect(2);
             }
         })
     }
@@ -245,5 +292,11 @@ class GuideManager {
     private getMainGameRect2(){
         return new egret.Rectangle(0,80+390,640,GameManager.stage.stageHeight-80-100-390);
     }
+    private getCardInfoCloseRect(){
+        var mc = CardInfoUI.getInstance().closeBtn
+        var topY = mc.parent.localToGlobal(0,mc.y).y
+        return new egret.Rectangle(0,topY,640,GameManager.stage.stageHeight - topY);
+    }
+
 
 }

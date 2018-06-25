@@ -19,7 +19,8 @@ class CardInfoUI extends game.BaseWindow {
     private r1: eui.RadioButton;
     private coinText: eui.Label;
     private icon: eui.Image;
-    private okBtn: eui.Button;
+    public closeBtn: eui.Image;
+    public okBtn: eui.Button;
 
 
 
@@ -46,11 +47,13 @@ class CardInfoUI extends game.BaseWindow {
         this.addBtnEvent(this.likeCB,this.onLike)
         this.addBtnEvent(this.unlikeCB,this.onUnlike)
 
+        this.addBtnEvent(this.closeBtn,this.hide)
+
         this.addBtnEvent(this.helpBtn,()=>{
             HelpManager.getInstance().showHelp('card')
         })
 
-        this.touchEnabled = false;
+        //this.touchEnabled = false;
     }
 
     private onLike(){
@@ -105,6 +108,7 @@ class CardInfoUI extends game.BaseWindow {
         {
             CardManager.getInstance().card_open(this.data.id,()=>{
                 this.renew();
+                GuideManager.getInstance().testShowGuide()
             })
         }
         else
@@ -127,6 +131,7 @@ class CardInfoUI extends game.BaseWindow {
 
     public hide() {
         super.hide();
+        GuideManager.getInstance().testShowGuide()
     }
 
     public onShow(){
@@ -134,6 +139,10 @@ class CardInfoUI extends game.BaseWindow {
         this.r1.selected = !this.r0.selected
         this.renew();
         //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
+    }
+
+    public showFinish(){
+        GuideManager.getInstance().testShowGuide()
     }
 
     public renew(){

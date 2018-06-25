@@ -92,7 +92,9 @@ class PopUpManager {
                     scaleY:1,
                     x:x,
                     y:y
-                },150)
+                },150).call(()=>{
+                    display['showFinish'] && display['showFinish']()
+                })
             }
 
         }

@@ -8,7 +8,7 @@ class TecUI extends MainBase {
     }
 
     private scroller: eui.Scroller;
-    private list: eui.List;
+    public list: eui.List;
     private tab: eui.TabBar;
     private coinText: eui.Label;
 
@@ -40,7 +40,10 @@ class TecUI extends MainBase {
 
     public onShow(){
         this.renew();
-        this.addPanelOpenEvent(GameEvent.client.tec_change,this.renew)
+    }
+
+    public showFinish(){
+        GuideManager.getInstance().testShowGuide()
     }
 
     public renew(){

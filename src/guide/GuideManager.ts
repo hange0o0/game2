@@ -6,7 +6,7 @@
 class GuideManager {
     private static _instance: GuideManager;
     public currentStepId: Number;
-    public isGuiding:boolean=true//false;
+    public isGuiding:boolean = false;
 
     public temp;
 

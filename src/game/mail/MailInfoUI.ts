@@ -17,6 +17,7 @@ class MailInfoUI extends game.BaseWindow {
 
 
 
+    private btnState = '';
     public dataIn
     public constructor() {
         super();
@@ -30,6 +31,12 @@ class MailInfoUI extends game.BaseWindow {
     }
 
     public onClick(){
+        if(this.btnState == 'pk')
+        {
+            var content = JSON.parse(this.dataIn.content);
+            SlaveManager.getInstance().showSlaveVideo(content.pkdata)
+            return;
+        }
          MailManager.getInstance().get_mail_award(this.dataIn,()=>{
               this.renew();
          })
@@ -54,6 +61,8 @@ class MailInfoUI extends game.BaseWindow {
         if(this.dataIn.from_gameid == 'sys')
         {
             this.titleText.text = '系统消息'
+            if(content.title)
+                this.titleText.text = Base64.decode(content.title);
         }
         else
         {
@@ -74,9 +83,17 @@ class MailInfoUI extends game.BaseWindow {
             if(canAward)
             {
                 this.btnGroup.addChild(this.okBtn)
+                this.okBtn.label = '领取'
+                this.btnState = 'award'
             }
             else
                 MyTool.removeMC(this.okBtn);
+        }
+        else if(content.pkdata)
+        {
+            this.btnGroup.addChild(this.okBtn)
+            this.okBtn.label = '战斗过程'
+            this.btnState = 'pk'
         }
         else
         {

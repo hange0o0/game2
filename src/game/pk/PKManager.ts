@@ -55,7 +55,7 @@ class PKManager {
         '祝你好运！','赐予我力量！','你们这是自寻死路！','我快没有时间了！','哈，那家伙死定了！','你想玩个游戏吗','灵魂，躁动不安','恐惧，如影随形','不可饶恕','都是你的错','恐惧吧，哀嚎吧','放纵你内心的恐惧吧','死期将至','戳死你！','残酷的命运']
 
 
-    public defaultCardList = '6,1,2,3,31,65,41,64,2,6,6,31,31,41,41,65,65,64';
+    public defaultCardList = '6,2,3,31,65,41,64,2,6,6,31,31,41,41,65,65,64';
 
     public getPKBG(){
         return this.getBG(HangManager.getInstance().getHangBGID())
@@ -265,66 +265,66 @@ class PKManager {
 
         SharedObjectManager.getInstance().setMyValue('pk_replay1',this.recordList)
 
-        if(data.result == 1 && data.type == PKManager.TYPE_SLAVE)
-        {
-            var gameid = PD.myPlayer.teamData.enemy.members[0].gameid;
-            setTimeout(()=>{
-                this.sendPKRecord(gameid,data);
-            },1000)
-
-        }
+        //if(data.result == 1 && data.type == PKManager.TYPE_SLAVE)
+        //{
+        //    var gameid = PD.myPlayer.teamData.enemy.members[0].gameid;
+        //    setTimeout(()=>{
+        //        this.sendPKRecord(gameid,data);
+        //    },1000)
+        //
+        //}
     }
 
-    private sendPKRecord(gameid,data)
-    {
-        var oo:any = {};
-        oo.otherid = gameid;
-        oo.pkdata = data;
-        Net.addUser(oo);
-        Net.send(GameEvent.pk.save_record, oo, (data)=> {
+    //private sendPKRecord(gameid,data)
+    //{
+    //    var oo:any = {};
+    //    oo.otherid = gameid;
+    //    oo.pkdata = data;
+    //    Net.addUser(oo);
+    //    Net.send(GameEvent.pk.save_record, oo, (data)=> {
+    //
+    //    });
+    //}
 
-        });
-    }
-
-    public getPKRecord(fun?)
-    {
-        if(TM.now() - this.getRecordTime < 60*30)
-        {
-            fun && fun();
-            return;
-        }
-        var oo:any = {};
-        oo.time = this.recordTime
-        Net.addUser(oo);
-        Net.send(GameEvent.pk.get_record, oo, (data)=> {
-            var msg = data.msg;
-            var list = msg.list || [];
-            if(list.length > 0)
-            {
-                var b = false
-                for(var i=0;i<list.length;i++)
-                {
-                    var oo = list[i];
-                    oo.pkdata = JSON.parse(oo.pkdata);
-                    if(oo.pkdata.version == Config.pk_version)
-                    {
-                        oo.pkdata.result = 2;//对方赢就是我输
-                        this.recordList.push(oo.pkdata)
-                        b = true
-                    }
-                    this.recordTime = Math.max(this.recordTime,oo.time);
-                }
-                if(b)
-                {
-                    ArrayUtil.sortByField(this.recordList,['pktime'],[1]);
-                    SharedObjectManager.getInstance().setMyValue('pk_replay1',this.recordList)
-                }
-                SharedObjectManager.getInstance().setMyValue('pk_record_time',this.recordTime)
-            }
-            this.getRecordTime = TM.now();
-            fun && fun();
-        });
-    }
+    //public getPKRecord(fun?)
+    //{
+    //    if(TM.now() - this.getRecordTime < 60*30)
+    //    {
+    //        fun && fun();
+    //        return;
+    //    }
+    //    var oo:any = {};
+    //    oo.time = this.recordTime
+    //    Net.addUser(oo);
+    //    Net.send(GameEvent.pk.get_record, oo, (data)=> {
+    //        var msg = data.msg;
+    //        var list = msg.list || [];
+    //        if(list.length > 0)
+    //        {
+    //            var b = false
+    //            for(var i=0;i<list.length;i++)
+    //            {
+    //                var oo = list[i];
+    //                oo.pkdata = JSON.parse(oo.pkdata);
+    //                if(oo.pkdata.version == Config.pk_version)
+    //                {
+    //                    oo.pkdata.result = 2;//对方赢就是我输
+    //                    this.recordList.push(oo.pkdata)
+    //                    b = true
+    //                }
+    //                this.recordTime = Math.max(this.recordTime,oo.time);
+    //            }
+    //            if(b)
+    //            {
+    //                ArrayUtil.sortByField(this.recordList,['pktime'],[1]);
+    //                SharedObjectManager.getInstance().setMyValue('pk_replay1',this.recordList)
+    //            }
+    //            SharedObjectManager.getInstance().setMyValue('pk_record_time',this.recordTime)
+    //        }
+    //        this.getRecordTime = TM.now();
+    //        fun && fun();
+    //    });
+    //}
 
     public sendPosToServer(posCard:PKPosCardData,fun?)
     {

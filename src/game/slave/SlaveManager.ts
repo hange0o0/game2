@@ -441,4 +441,27 @@ class SlaveManager {
                 fun();
         });
     }
+
+    public showSlaveVideo(data){
+        if(data.version != Config.pk_version)
+        {
+            MyWindow.ShowTips('对战记录已过期')
+            return;
+        }
+
+        var pkData = data.pkdata
+
+        pkData.type = PKManager.TYPE_SLAVE;
+        pkData.result = 1;
+        for(var i=0;i<pkData.players.length;i++)
+        {
+            var players = pkData.players[i];
+            if(players.autolist && !players.card)
+                players.card = players.autolist
+            if(players.team == 1)
+                players.actionlist = data.pklist;
+        }
+
+        PKManager.getInstance().playReplay(pkData);
+    }
 }

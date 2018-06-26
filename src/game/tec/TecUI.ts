@@ -40,6 +40,11 @@ class TecUI extends MainBase {
 
     public onShow(){
         this.renew();
+        this.addPanelOpenEvent(GameEvent.client.tec_change,this.renewList)
+    }
+
+    private renewList(){
+        MyTool.renewList(this.list)
     }
 
     public showFinish(){

@@ -77,9 +77,9 @@ class MailUI extends game.BaseUI {
     public renew(){
         if(this.typeObj[this.tab.selectedIndex].isPK)
         {
-           PKManager.getInstance().getPKRecord(()=>{
+           //PKManager.getInstance().getPKRecord(()=>{
                this.renewPK();
-           });
+           //});
             this.desText.text = '只保留最近'+ PKManager.getInstance().recordLen + '条PK记录'
         }
         else

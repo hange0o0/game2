@@ -40,5 +40,9 @@ class PosListHeadItem extends game.BaseItem {
 
     }
 
+    public setGray(b){
+        this.img.changeGay(b)
+    }
+
 
 }

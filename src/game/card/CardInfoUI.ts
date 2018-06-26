@@ -68,7 +68,7 @@ class CardInfoUI extends game.BaseWindow {
     }
 
     private testSendLike(like){
-        if(this.currentState == 'buy')
+        if(!CardManager.getInstance().isOwnCard(this.data.id))
         {
             MyWindow.ShowTips('你还没拥有该卡牌，无法投票')
             return false

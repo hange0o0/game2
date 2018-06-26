@@ -70,6 +70,7 @@ class PKPosItem extends game.BaseItem {
             return;
         var player = PKData.getInstance().myPlayer
         PKCardInfoUI.getInstance().show({
+            target:this,
             mid:data.mid,
             force:player.force,
             type:player.type,

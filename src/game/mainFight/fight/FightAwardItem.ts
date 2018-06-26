@@ -16,11 +16,13 @@ class FightAwardItem extends game.BaseItem {
     }
 
     private onLongTouch(){
-        PKCardInfoUI.getInstance().show({
-            mid:this.data,
-            force:UM.tec_force,
-            type:UM.type
-        })
+        //PKCardInfoUI.getInstance().show({
+        //    mid:this.data,
+        //    force:UM.tec_force,
+        //    type:UM.type
+        //})
+
+        CardInfoUI.getInstance().show(CM.getCardVO(this.data),{})
 
     }
 

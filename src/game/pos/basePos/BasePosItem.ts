@@ -27,12 +27,12 @@ class BasePosItem extends game.BaseItem {
     private onLongTouch(){
         if(!this.data.id)
             return;
-        PKCardInfoUI.getInstance().show({
-            mid:this.data.id,
-            force:UM.tec_force,
-            type:UM.type
-        })
-
+        //PKCardInfoUI.getInstance().show({
+        //    mid:this.data.id,
+        //    force:UM.tec_force,
+        //    type:UM.type
+        //})
+        CardInfoUI.getInstance().show(CM.getCardVO(this.data.id))
     }
 
     private onClick(){

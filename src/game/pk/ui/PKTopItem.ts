@@ -29,6 +29,7 @@ class PKTopItem extends game.BaseItem {
             return;
         var player = this.data.getOwner()
         PKCardInfoUI.getInstance().show({
+            target:this,
             mid:this.data.mid,
             force:player.force,
             type:player.type,

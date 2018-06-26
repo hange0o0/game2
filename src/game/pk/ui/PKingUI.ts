@@ -238,6 +238,16 @@ class PKingUI extends game.BaseUI {
         {
             this.touchChildren = true;
             GuideManager.getInstance().showGuide()
+            //setTimeout(()=>{
+            //    var mc = GuideUI.getInstance()['tipsBg']
+            //    //MyWindow.Alert('x:'+PKingUI.getInstance().parent.getChildIndex(PKingUI.getInstance()))
+            //
+            //    MyWindow.Alert('alpha:'+mc.fillAlpha)
+            //    MyWindow.Alert('strokeAlpha:'+mc.strokeAlpha)
+            //    mc.validateNow()
+            //    //mc.visible = false;
+            //},300)
+
         }
         else
         {

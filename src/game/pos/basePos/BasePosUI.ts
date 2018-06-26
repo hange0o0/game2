@@ -39,6 +39,7 @@ class BasePosUI extends game.BaseUI {
     private selectData;
     private selectIndex;
     private pkData;
+    private sp;
 
     public constructor() {
         super();
@@ -298,7 +299,7 @@ class BasePosUI extends game.BaseUI {
     }
 
     /*
-    *  {
+    *  pkData:{
     *   list
     *   noTab
     *   fun
@@ -308,11 +309,18 @@ class BasePosUI extends game.BaseUI {
     *   stopAdd
     *   stopRemoveTips
     *  }
+    *  sp:{
+    *  index,
+    *  list
+    *  }
     * */
-    public show(type?,pkData?){
+    public show(type?,pkData?,sp?){
         this.type = type;
         this.pkData = pkData;
+        this.sp = sp || {};
         this.index = type == 'atk'?(SharedObjectManager.getInstance().getMyValue('pk_choose') || 0):0;
+        if(this.sp.index)
+            this.index = this.sp.index;
         super.show()
     }
 
@@ -359,7 +367,7 @@ class BasePosUI extends game.BaseUI {
     public setTabSelect(index){
         if(this.index == index)
             return;
-
+        this.sp = {};
         this.testSave(()=>{
             this.index = index;
             this.renew();
@@ -422,9 +430,13 @@ class BasePosUI extends game.BaseUI {
             }
         }
         var arr = [];
-        if(data)
+        if(data || this.sp.list)
         {
-            var list = data.list.split(',')
+            var list
+            if(this.sp.list)
+                list = this.sp.list;
+            else
+                list = data.list.split(',')
             for(var i=0;i<list.length;i++)
             {
                 var id = list[i];
@@ -446,7 +458,7 @@ class BasePosUI extends game.BaseUI {
             if(this.type == 'def')
             {
                 this.openBtn.visible = true;
-                this.openBtn.selected = !data.close
+                this.openBtn.selected = data && !data.close
             }
             else
             {

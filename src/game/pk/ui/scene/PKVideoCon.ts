@@ -107,7 +107,7 @@ class PKVideoCon extends game.BaseContainer {
         this.txtPool.push(item);
     }
 
-    public getItemByID(id){
+    public getItemByID(id):PKMonsterItem{
         for(var i=0;i<this.itemArr.length;i++)
         {
             var item = this.itemArr[i];
@@ -306,8 +306,12 @@ class PKVideoCon extends game.BaseContainer {
             throw new Error('XXX')
             return;
         }
+        var scale = Math.max(1,(atker.data.getVO().height)/70);
         var AM = AniManager.getInstance();
-        return AM.playOnItem(mvID,atker);
+        var mv = AM.playOnItem(mvID,atker);
+        if(mv)
+            mv.scaleX = mv.scaleY = scale
+        return  mv;
     }
     //在A里播放动画
     public playAniIn(a,mvID){
@@ -319,8 +323,12 @@ class PKVideoCon extends game.BaseContainer {
             throw new Error('XXX')
             return;
         }
+        var scale = Math.max(1,(atker.data.getVO().height)/70);
         var AM = AniManager.getInstance();
-        return AM.playInItem(mvID,atker);
+        var mv = AM.playInItem(mvID,atker);
+        if(mv)
+            mv.scaleX = mv.scaleY = scale
+        return  mv;
     }
 
     //掉在头上

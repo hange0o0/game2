@@ -15,6 +15,9 @@ class OtherInfoUI extends game.BaseWindow {
     private con: eui.Group;
     private cdGroup: eui.Group;
     private cdText: eui.Label;
+    private slaveIcon: eui.Group;
+    private slaveBG: eui.Rect;
+    private slaveText: eui.Label;
     private headMC: HeadMC;
     private typeMC: eui.Image;
     private nameText: eui.Label;
@@ -22,13 +25,19 @@ class OtherInfoUI extends game.BaseWindow {
     private forceText: eui.Label;
     private infoList: eui.List;
     private cardList: eui.List;
+    private copyBtn: eui.Group;
     private slaveGroup: eui.Group;
     private list: eui.List;
     private viewBtn: eui.Button;
     private okBtn: eui.Button;
-    private slaveIcon: eui.Group;
-    private slaveBG: eui.Rect;
-    private slaveText: eui.Label;
+    private copyGroup: eui.Group;
+    private t0: OtherInfoChooseItem;
+    private t1: OtherInfoChooseItem;
+    private t2: OtherInfoChooseItem;
+    private t3: OtherInfoChooseItem;
+    private t4: OtherInfoChooseItem;
+
+
 
 
 
@@ -44,6 +53,8 @@ class OtherInfoUI extends game.BaseWindow {
     private gameid;
     private master;
     private isMyMaster;
+    private chooseArray = []
+    private copyResult = [];
 
     private dataArray = new eui.ArrayCollection()
 
@@ -59,9 +70,92 @@ class OtherInfoUI extends game.BaseWindow {
 
         this.addBtnEvent(this.okBtn,this.onPK)
         this.addBtnEvent(this.viewBtn,this.onView)
+        this.addBtnEvent(this.copyBtn,this.onCopy)
 
         this.touchEnabled = false;
 
+        for(var i=0;i<5;i++)
+        {
+            var mc = this['t'+i]
+            mc.data = i;
+            this.chooseArray.push(mc)
+            this.addBtnEvent(mc,this.onChooseCopy)
+        }
+
+    }
+
+    private onChooseCopy(e){
+        var index = e.currentTarget.data;
+        if(this.copyResult.length == 0)
+        {
+            MyWindow.ShowTips('你没拥有任意一张卡牌，无法复制')
+            return;
+        }
+        BasePosUI.getInstance().show('atk',null,{index:index,list:this.copyResult});
+    }
+
+    private onCopy(){
+
+        //把没有的灰掉
+        var list = this.cardList
+        var CRM = CardManager.getInstance();
+        var skillCardNum = {};
+        this.copyResult = [];
+        var grayItems = [];
+        for(var i=0;i<list.numChildren;i++)
+        {
+            var item:PosListHeadItem = <PosListHeadItem>list.getChildAt(i)
+            var vo = CM.getCardVO(item.data)
+            var gray;
+            if(vo.isMonster)
+                gray = (!CRM.isOwnCard(vo.id))
+            else
+            {
+                gray = (CRM.getSkillNum(vo.id)-(skillCardNum[vo.id] || 0)<=0)
+                skillCardNum[vo.id] = (skillCardNum[vo.id] || 0) + 1
+            }
+
+
+            if(!gray)
+               this.copyResult.push(vo.id);
+            else
+                grayItems.push(item)
+        }
+
+        if(this.copyResult.length == 0)
+        {
+            MyWindow.ShowTips('你没拥有任意一张卡牌，无法复制')
+            this.dataArray.refresh()
+            return;
+        }
+
+        for(var i=0;i<grayItems.length;i++)
+        {
+            grayItems[i].setGray(true)
+        }
+
+        this.copyGroup.visible = true;
+        egret.callLater(()=>{
+            GameManager.stage.once(egret.TouchEvent.TOUCH_END,()=>{
+                this.closeCopy();
+            },this)
+        },this)
+
+        var p = this.copyBtn.localToGlobal(0,0);
+        p = this.globalToLocal(p.x,p.y,p);
+        this.copyGroup.y = p.y - 180 + 50;
+
+        //显示状态
+        for(var i=0;i<this.chooseArray.length;i++)
+        {
+            this.chooseArray[i].dataChanged();
+        }
+
+    }
+
+    private closeCopy(){
+        this.copyGroup.visible = false;
+        this.dataArray.refresh()
     }
 
     private onView(){
@@ -229,6 +323,7 @@ class OtherInfoUI extends game.BaseWindow {
 
     public renew(){
         this.isMyMaster = false
+        this.copyGroup.visible = false
         var data = InfoManager.getInstance().otherInfo[this.gameid]
         var slave = InfoManager.getInstance().otherSlave[this.gameid];
         this.nameText.text = '' + data.nick //+ '  LV.' + (data.level||1);

@@ -20,8 +20,15 @@ class MailItem extends game.BaseItem {
     public childrenCreated() {
         super.childrenCreated();
         this.addBtnEvent(this,this.onClick)
+        this.addBtnEvent(this.headMC,this.onHead)
     }
 
+    private onHead(e){
+        e.stopImmediatePropagation()
+        if(this.data.from_gameid == 'sys')
+            return;
+        OtherInfoUI.getInstance().show(this.data.from_gameid);
+    }
     private onClick(){
         MailInfoUI.getInstance().show(this.data)
     }
@@ -30,7 +37,9 @@ class MailItem extends game.BaseItem {
          var content = JSON.parse(this.data.content);
         if(this.data.from_gameid == 'sys')
         {
-            this.nameText.text = '系统消息'
+            this.nameText.text =  '系统消息'
+            if(content.title)
+                this.nameText.text = Base64.decode(content.title);
             this.headMC.setData('sys');
             MyTool.removeMC(this.typeMC)
         }

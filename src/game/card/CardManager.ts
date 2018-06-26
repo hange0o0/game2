@@ -35,6 +35,14 @@ class CardManager {
             this.skillList[s] = msg.skill[s];
     }
 
+    public isOwnCard(id){
+       if(CM.getCardVO(id).isMonster)
+       {
+           return this.monsterList[id]
+       }
+        return this.getSkillNum(id) > 0
+    }
+
     public getSkillNum(id){
          return this.skillList[id] || 0
     }
@@ -202,7 +210,7 @@ class CardManager {
     }
 
     public getCardLike(id,fun?){
-        if(this.cardLike[id] && TM.now() - this.cardLike[id].time < 60)
+        if(this.cardLike[id] && TM.now() - this.cardLike[id].time < 60*3)
         {
             fun && fun();
             return;

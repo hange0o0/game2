@@ -49,15 +49,26 @@ class PKCardInfoUI extends game.BaseContainer {
         var w = 560
         this.x = Math.min(Math.max(GameManager.stageX - w/2,0),640-w)
         this.renew(v);
+        var y = 0;
         if(GameManager.stageY < GameManager.stage.stageHeight/2)
         {
-            this.y = Math.min(GameManager.stageY + 50,GameManager.stage.stageHeight - this.height)
+            y = GameManager.stageY + 50
+            if(v.target)
+            {
+                y = v.target.localToGlobal(0,0).y  + v.target.height + 50
+            }
+            this.y = Math.min(y,GameManager.stage.stageHeight - this.height)
             //    this.bottom = undefined
             //this.top = Math.max(0,GameManager.stageY + 50)
         }
         else
         {
-            this.y = Math.max(GameManager.stageY - 50 - this.height,0)
+            y = GameManager.stageY - 50 - this.height
+            if(v.target)
+            {
+                y = v.target.localToGlobal(0,0).y  - 50 -this.height
+            }
+            this.y = Math.max(y,0)
             //this.top = undefined
             //this.bottom = Math.max(0,(GameManager.stage.stageHeight - GameManager.stageY) + 50)
         }

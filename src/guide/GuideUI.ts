@@ -4,7 +4,6 @@
  *
  */
 class GuideUI extends game.BaseContainer{
-    private tipsBg: eui.Rect;
     private tipsGroup: eui.Group;
     private tipTxt: eui.Label;
     private anyClick: eui.Label;
@@ -15,6 +14,7 @@ class GuideUI extends game.BaseContainer{
     private rightRect: eui.Group;
     private bottomRect: eui.Group;
     private soundBtn: eui.Image;
+
 
 
 
@@ -42,8 +42,8 @@ class GuideUI extends game.BaseContainer{
         this.addBtnEvent(this,this.onClick);
         this.addBtnEvent(this.soundBtn,this.onSoundClick);
 
-        this.stopClickGroup.touchEnabled = false;
-        this.tipsBg.touchEnabled = false;
+        this.stopClickGroup.touchEnabled = true;
+        //this.tipsBg.touchEnabled = false;
 
         this.handMC.x = this.handMC.y = 0
 
@@ -261,24 +261,35 @@ class GuideUI extends game.BaseContainer{
         var y2 = GameManager.stage.stageHeight - y-height
         var borderWidth = Math.max(x,y,x2,y2)
 
-        this.tipsBg.strokeWeight = borderWidth
-        this.tipsBg.width = borderWidth*2 + width;
-        this.tipsBg.height = borderWidth*2 + height;
-        this.tipsBg.x =  -(borderWidth - x)
-        this.tipsBg.y =  -(borderWidth - y)
+        //this.tipsBg.strokeWeight = borderWidth
+        //this.tipsBg.width = borderWidth*2 + width;
+        //this.tipsBg.height = borderWidth*2 + height;
+        //this.tipsBg.x =  -(borderWidth - x)
+        //this.tipsBg.y =  -(borderWidth - y)
+
+
+        this.topRect.height = Math.max(0,y);
+        this.leftRect.width = Math.max(0,x);
+        this.rightRect.width = Math.max(0,x2);
+        this.bottomRect.height = Math.max(0,y2);
+
+        this.leftRect.height = this.rightRect.height = height
+        this.leftRect.y = this.rightRect.y = y
+        //this.rightRect.width = Math.max(0,x2);
 
         if(itemClick)
         {
-            this.addChild(this.stopClickGroup);
-            this.topRect.height = Math.max(0,y);
-            this.leftRect.width = Math.max(0,x);
-            this.rightRect.width = Math.max(0,x2);
-            this.bottomRect.height = Math.max(0,y2);
+            MyTool.removeMC(this.stopClickGroup)
+
+            //this.topRect.height = Math.max(0,y);
+            //this.leftRect.width = Math.max(0,x);
+            //this.rightRect.width = Math.max(0,x2);
+            //this.bottomRect.height = Math.max(0,y2);
             this.touchEnabled = false;
         }
         else
         {
-            MyTool.removeMC(this.stopClickGroup)
+            this.addChild(this.stopClickGroup);
             this.touchEnabled = true;
         }
 

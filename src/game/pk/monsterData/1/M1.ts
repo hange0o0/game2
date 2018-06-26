@@ -7,9 +7,9 @@ class M1 extends MBase{
 
 
     //伤害飞行时间
-    protected getAtkArriveCD(user:PKMonsterData,target:PKMonsterData){
-        return Math.abs(user.x - target.x) + 200;
-    }
+    //protected getAtkArriveCD(user:PKMonsterData,target:PKMonsterData){
+    //    return Math.abs(user.x - target.x) + 200;
+    //}
 
 
     //技能动画

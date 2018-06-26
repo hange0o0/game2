@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="OtherInfoUISkin" width="560" height="800" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
 	<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
-	<e:Scroller id="scroller" width="100%" top="2" bottom="100" bounces="false" horizontalCenter="0">
+	<e:Scroller id="scroller" width="100%" top="2" bottom="100" bounces="false" horizontalCenter="0" locked="true">
 		<e:Group id="con">
 			<e:Group id="cdGroup" x="199" y="60">
 				<e:Label text="剩余保护时间:" size="24" stroke="2" textAlign="center" y="-24" x="55"/>
@@ -49,7 +49,7 @@
 					</e:layout>
 				</e:List>
 			</e:Group>
-			<e:Group x="180" y="264">
+			<e:Group x="180" y="264" width="500">
 				<e:Image source="bg13_png" scale9Grid="19,19,9,10" y="0" width="200" horizontalCenter="0"/>
 				<e:Label text="最近使用卡牌" size="22" horizontalCenter="0" y="14"/>
 				<e:List id="cardList" horizontalCenter="0" bottom="10" top="60">
@@ -58,6 +58,9 @@
 					</e:layout>
 				</e:List>
 				<e:Rect width="100%" height="1" x="0" bottom="0" fillColor="0x563413"/>
+				<e:Group id="copyBtn" y="0" width="60" height="60" right="0">
+					<e:Image source="copy_btn_png" scaleX="1.2" scaleY="1.2" y="7" right="0"/>
+				</e:Group>
 			</e:Group>
 			<e:Group id="slaveGroup" x="190" y="274">
 				<e:Image source="bg13_png" scale9Grid="19,19,9,10" y="0" width="200" horizontalCenter="0"/>
@@ -73,7 +76,7 @@
 			</e:layout>
 		</e:Group>
 	</e:Scroller>
-	<e:Group horizontalCenter="0" bottom="20">
+	<e:Group horizontalCenter="0" bottom="20" locked="true">
 		<e:Button id="viewBtn" label="收服奴隶" skinName="Btn1Skin" x="0" y="0" width="160"/>
 		<e:Button id="okBtn" label="收服奴隶" skinName="Btn1Skin" x="100" y="0" width="160"/>
 		<e:layout>
@@ -82,5 +85,16 @@
 	</e:Group>
 	<e:Image source="close_btn2_png" horizontalCenter="0" bottom="-40" touchEnabled="false"/>
 	<e:Image source="line2_png" bottom="97" left="10" right="10" fillMode="repeat"/>
+	<e:Group id="copyGroup" y="114" right="30">
+		<e:Image source="border_4_png" x="0" y="0" width="220" scale9Grid="23,21,5,6" height="180"/>
+		<e:Group y="55" horizontalCenter="0">
+			<ns1:OtherInfoChooseItem id="t0" x="0" y="0" skinName="BasePosTabSkin"/>
+			<ns1:OtherInfoChooseItem id="t1" x="60" y="0" skinName="BasePosTabSkin"/>
+			<ns1:OtherInfoChooseItem id="t2" x="120" y="0" skinName="BasePosTabSkin"/>
+			<ns1:OtherInfoChooseItem id="t3" x="30" y="60" skinName="BasePosTabSkin"/>
+			<ns1:OtherInfoChooseItem id="t4" x="90" y="60" skinName="BasePosTabSkin"/>
+		</e:Group>
+		<e:Label text="复制到出战卡组" y="18" horizontalCenter="0" size="24"/>
+	</e:Group>
 
 </e:Skin>

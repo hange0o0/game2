@@ -58,6 +58,7 @@ class PKCardItem extends game.BaseItem {
             return;
         var player = PKData.getInstance().myPlayer
         PKCardInfoUI.getInstance().show({
+            target:this,
             mid:this.data.mid,
             force:player.force,
             rota:player.teamData.atkRota,

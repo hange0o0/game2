@@ -295,6 +295,9 @@ class AtkMVCtrl {
 
 
     ////////////////////////////////////////////////////////////////
+    public skillMV1(user,target,actionTime,endTime){
+        this.atkMV1(user,target,actionTime,endTime)
+    }
 
     public skillMV3(user,target,actionTime,endTime){
         this.atkMV3(user,target,actionTime,endTime)

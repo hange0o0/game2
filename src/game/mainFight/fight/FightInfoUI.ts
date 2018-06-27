@@ -96,6 +96,7 @@ class FightInfoUI extends game.BaseWindow {
             stopAdd:true,
             title:'调整阵容',
             noTab:true,
+            stopTest:true,
             list:FM.card.join(','),
             fun:function(data){
                 FM.changePos(data,()=>{
@@ -113,6 +114,7 @@ class FightInfoUI extends game.BaseWindow {
         PKBeforeUI.getInstance().show({
             title:'初始阵容',
             noTab:true,
+            stopTest:true,
             stopRemoveTips:true,
             list:SharedObjectManager.getInstance().getMyValue('fightDefault') || PKManager.getInstance().getDefaultPKList(),
             fun:function(data){

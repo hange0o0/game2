@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="MailItemSkin" width="620" height="100" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
 	<e:Image source="bg2_png" scale9Grid="9,9,11,10" x="0" y="0" width="100%" height="100%"/>
-	<e:Group id="nameGroup" x="110" y="10">
-		<e:Image id="typeMC" source="icon_type1_png" x="81.52" y="0" scaleX="0.6" scaleY="0.6"/>
-		<e:Label id="nameText" text="苦顶替" size="26" stroke="3" verticalAlign="bottom" x="0" textColor="0xFFFFFF" strokeColor="0x231507" y="2.61"/>
+	<e:Group id="nameGroup" x="110" y="12">
+		<e:Image id="typeMC" source="icon_type1_png" x="81.52" y="0" scaleX="0.5" scaleY="0.5"/>
+		<e:Label id="nameText" text="苦顶替" size="24" stroke="3" verticalAlign="bottom" x="0" textColor="0xFFFFFF" strokeColor="0x231507" y="2.61"/>
 		<e:layout>
 			<e:HorizontalLayout verticalAlign="middle"/>
 		</e:layout>

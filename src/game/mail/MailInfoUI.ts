@@ -75,6 +75,7 @@ class MailInfoUI extends game.BaseWindow {
 
         var haveAward = this.dataIn.type > 100
 
+        this.currentState = haveAward?'award':'normal';
         if(haveAward)
         {
             var canAward = haveAward && !parseInt(this.dataIn.stat);

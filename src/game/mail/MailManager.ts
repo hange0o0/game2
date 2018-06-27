@@ -46,6 +46,34 @@ class MailManager {
         SharedObjectManager.getInstance().setMyValue('mailData',this.mailData);
     }
 
+    public getMailTitle(data){
+        var content = JSON.parse(data.content);
+        var index = content.rd || 0;//用于文本随机
+        var nick = MyTool.createHtml('' + Base64.decode(content.nick) + '',0xFFBC68);
+        switch(parseInt(data.type))
+        {
+            case 1:
+                return this.getDesByArr([
+                    nick + '成了你的主人'
+                ],index);
+            case 2:
+                return this.getDesByArr([
+                    nick + '抢了你的奴隶'
+                ],index);
+            case 3:
+                return this.getDesByArr([
+                    nick + '抛弃了你'
+                ],index);
+            case 4:
+                return this.getDesByArr([
+                    nick + '起义了'
+                ],index);
+            case 101:
+                return Base64.decode(content.des);
+        }
+        return nick;
+    }
+
     public getMailDes(data){
         var content = JSON.parse(data.content);
         var index = content.rd || 0;//用于文本随机

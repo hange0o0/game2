@@ -33,8 +33,8 @@ class SlaveManager {
         var mtime = 0;
         if(this.lastGetSlaveTime)//有取过奴隶数据
         {
-             if(this.master)
-                 mtime = this.master.addtime;
+             if(this.master && this.selfData)
+                 mtime = this.selfData.addtime;
         }
         var master = UM.openData.masterstep.split(',').pop().split('|');
         if(master.length == 2 && master[0] == 1)

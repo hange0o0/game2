@@ -12,23 +12,20 @@
 					<e:HorizontalLayout verticalAlign="middle" horizontalAlign="center"/>
 				</e:layout>
 				</e:Group>
-				<e:Button id="proBtn" label="增加保护" skinName="Btn2Skin" width="180" x="0" y="0"/>
+				<e:Button id="proBtn" label="增加保护" width="180" x="0" y="0" skinName="Btn1Skin"/>
 				<e:layout>
 				<e:VerticalLayout verticalAlign="middle" horizontalAlign="center" gap="10" paddingBottom="10"/>
 				</e:layout>
 			</e:Group>
-		<e:Group id="masterGroup" x="0" y="0" height="330">
+		<e:Group id="masterGroup" x="0" y="0" height="310">
 			<ns1:SlaveMasterItem id="masterItem" y="100" skinName="SlaveMasterItemSkin" scaleX="1" scaleY="1" horizontalCenter="0"/>
 			<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="520" y="0" horizontalCenter="0"/>
 			<e:Label text="你的主人" y="9.09" size="24" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
 		</e:Group>
-		<e:Group x="0" y="0" height="60">
-			<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="630" x="0" y="0"/>
-			<e:Label text="你的奴隶" y="9.09" size="24" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
-		</e:Group>
-		<e:List id="slaveList" y="96" horizontalCenter="0" itemRendererSkinName="SlaveItemSkin">
+			<e:Button id="defBtn" label="防守阵容调整" x="2183" y="1492" width="220" skinName="Btn4Skin"/>
+		<e:List id="slaveList" y="467.67" horizontalCenter="-8" itemRendererSkinName="SlaveItemSkin" width="580">
 			<e:layout>
-			<e:TileLayout requestedColumnCount="3" horizontalGap="20" verticalGap="20"/>
+				<e:VerticalLayout gap="15" paddingTop="0"/>
 			</e:layout>
 			<e:ArrayCollection>
 			<e:Array>
@@ -39,7 +36,7 @@
 			</e:ArrayCollection>
 		</e:List>
 		<e:layout>
-			<e:VerticalLayout horizontalAlign="center" paddingTop="30" paddingBottom="20"/>
+			<e:VerticalLayout horizontalAlign="center" paddingTop="30" paddingBottom="20" gap="15"/>
 		</e:layout>
 		</e:Group>
 	</e:Scroller>
@@ -54,7 +51,7 @@
         			<e:HorizontalLayout horizontalAlign="justify"/>
         		</e:layout>
 	</e:TabBar>
-	<e:Group id="group2" x="0" top="150" bottom="0">
+	<e:Group id="group2" x="0" top="150" bottom="0" locked="true" visible="false">
 		<e:Scroller id="scroller2" width="640" bounces="false" x="0" top="50" bottom="0">
 			<e:Group>
 			<e:List id="list" width="200" height="200" x="142" y="175">
@@ -62,6 +59,7 @@
 					<e:TileLayout requestedColumnCount="2" horizontalGap="10" verticalGap="10" paddingLeft="15" paddingTop="10"/>
 				</e:layout>
 			</e:List>
+				
 			</e:Group>
 		</e:Scroller>
 		<e:Image source="black_bg_png" y="0" left="20" right="20" scale9Grid="43,7,7,42" height="50"/>

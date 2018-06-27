@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="SlaveItemSkin" width="170" height="260"  currentState="empty" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" states="normal,empty,lock,pos" >
+<e:Skin class="SlaveItemSkin" width="580" height="120"  currentState="empty" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" states="normal,empty,lock,pos" >
 	<e:Rect width="100%" height="100%" includeIn="pos" x="0" y="0" strokeWeight="2" strokeColor="0x422901" fillAlpha="0.1" ellipseWidth="15"/>
 	<e:Image source="bg2_png" scale9Grid="11,8,9,13" includeIn="normal,empty,lock"  left="0" right="0" top="0" bottom="0"/>
-	<ns1:HeadMC width="150" height="150" skinName="HeadMCSkin" id="headMC" includeIn="normal" horizontalCenter="0" y="10"/>
+	<ns1:HeadMC width="100" height="100" skinName="HeadMCSkin" id="headMC" includeIn="normal" verticalCenter="0" x="10"/>
 	<e:Image source="icon_add1_png" includeIn="empty" horizontalCenter="0" verticalCenter="0"/>
-	<e:Image source="icon_lock_png" includeIn="lock" horizontalCenter="0" y="80" scaleX="1.5" scaleY="1.5"/>
-	<e:Label id="lockText" text="Label" includeIn="lock" y="155" horizontalCenter="0" size="26" stroke="2" textColor="0xffeac6"/>
-	<e:Button id="getBtn" label="收取" skinName="Btn1Skin" width="150" includeIn="normal" bottom="5" horizontalCenter="0"/>
-	<e:Group includeIn="normal" horizontalCenter="0.5" bottom="68">
-		<e:Label id="coinText" text="苦顶替" size="20" stroke="3" verticalAlign="bottom" includeIn="normal" x="35" strokeColor="0x231507" textColor="0xfcdb79" verticalCenter="0"/>
-		<e:Image source="icon_coin_png" x="0" y="0" scaleX="0.6" scaleY="0.6" includeIn="normal"/>
+	<e:Group x="258" y="38" includeIn="normal,lock" horizontalCenter.lock="0" verticalCenter.lock="0">
+		<e:Image source="icon_lock_png" includeIn="lock" scaleX="1.5" scaleY="1.5" x="14" y="0"/>
+		<e:Label id="lockText" text="Label" includeIn="lock" y="117" size="26" stroke="2" textColor="0xffeac6" x="0"/>
+		<e:layout>
+			<e:HorizontalLayout verticalAlign="middle" gap="20"/>
+		</e:layout>
 	</e:Group>
-	<e:Image id="redMC" source="red_mc_png" includeIn="normal" right="5" bottom="40"/>
-	<e:Group id="clickArea" width="100%" height="200" includeIn="normal" x="0" y="0"/>
-	<e:Group id="cdGroup" includeIn="normal" y="3" horizontalCenter="0">
-		<e:Image source="black_bg_png" includeIn="normal" x="0" y="0" width="100%" scale9Grid="46,7,3,42" height="40"/>
-		<e:Group includeIn="normal" left="25" right="25" verticalCenter="0">
+	<e:Button id="getBtn" label="收取" skinName="Btn1Skin" width="150" includeIn="normal" bottom="10" right="10"/>
+	<e:Group includeIn="normal" x="120" y="66.08">
+		<e:Label id="coinText" text="苦顶替" size="24" stroke="3" verticalAlign="bottom" includeIn="normal" x="50" strokeColor="0x231507" textColor="0xfcdb79" verticalCenter="0"/>
+		<e:Image source="icon_coin_png" x="3.04" y="0" scaleX="0.75" scaleY="0.75" includeIn="normal"/>
+	</e:Group>
+	<e:Image id="redMC" source="red_mc_png" includeIn="normal" right="-1" bottom="48"/>
+	<e:Group id="clickArea" width="140" height="100%" includeIn="normal" x="0" y="0" anchorOffsetX="0"/>
+	<e:Group id="cdGroup" includeIn="normal" y="0" right="0">
+		<e:Image includeIn="normal" width="100%" source="bg17_png" scale9Grid="46,7,3,28" scaleX="-1" scaleY="-1" top="0" right="0"/>
+		<e:Group includeIn="normal" left="30" right="10" verticalCenter="0">
 			<e:Image source="icon_clock_png" includeIn="normal" x="0" y="0"/>
-			<e:Label id="cdText" text="Label" includeIn="normal" size="24" stroke="2" textAlign="center" y="16" x="45"/>
+			<e:Label id="cdText" text="123456789" includeIn="normal" size="24" stroke="2" textAlign="center" y="16" x="45"/>
 			<e:layout>
 			<e:HorizontalLayout verticalAlign="middle" horizontalAlign="center" gap="10"/>
 			</e:layout>
 		</e:Group>
 	</e:Group>
-	<e:Image id="typeMC" source="icon_type1_png" x="-7.48" y="-8.61" scaleX="0.6" scaleY="0.6" includeIn="normal"/>
+	<e:Group x="120" y="16.08" includeIn="normal">
+		<e:Image id="typeMC" source="icon_type1_png" x="0" y="1" scaleX="0.6" scaleY="0.6" includeIn="normal"/>
+		<e:Label id="nameText" text="Label" x="50" y="5"/>
+	</e:Group>
 </e:Skin>

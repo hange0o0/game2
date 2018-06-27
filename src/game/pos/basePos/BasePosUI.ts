@@ -308,6 +308,7 @@ class BasePosUI extends game.BaseUI {
     *   helpKey
     *   stopAdd
     *   stopRemoveTips
+    *   stopTest
     *  }
     *  sp:{
     *  index,
@@ -319,7 +320,7 @@ class BasePosUI extends game.BaseUI {
         this.pkData = pkData;
         this.sp = sp || {};
         this.index = type == 'atk'?(SharedObjectManager.getInstance().getMyValue('pk_choose') || 0):0;
-        if(this.sp.index)
+        if('index' in this.sp)
             this.index = this.sp.index;
         super.show()
     }
@@ -341,8 +342,11 @@ class BasePosUI extends game.BaseUI {
         this.currentState = 'normal'
         if(this.pkData)
         {
+            if(this.pkData.stopTest)
+                MyTool.removeMC(this.testBtn)
+            else
+                this.btnGroup.addChild(this.testBtn)
             this.btnGroup.addChild(this.pkBtn)
-            MyTool.removeMC(this.testBtn)
             if(this.pkData.noTab)
                 this.currentState = 'pk'
         }

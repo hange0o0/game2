@@ -13,17 +13,20 @@ class SlaveUI extends MainBase {
     private cdGroup: eui.Group;
     private cdText: eui.Label;
     private proBtn: eui.Button;
-    private addViewBtn: eui.Button;
     private masterGroup: eui.Group;
     private masterItem: SlaveMasterItem;
+    private defBtn: eui.Button;
     private slaveList: eui.List;
     private tab: eui.TabBar;
     private group2: eui.Group;
     private scroller2: eui.Scroller;
     private list: eui.List;
     private viewNumText: eui.Label;
+    private addViewBtn: eui.Button;
     private emptyGroup: eui.Group;
     private helpBtn: eui.Image;
+
+
 
 
 
@@ -56,6 +59,9 @@ class SlaveUI extends MainBase {
 
         this.addBtnEvent(this.proBtn,this.onPro);
         this.addBtnEvent(this.addViewBtn,this.onAddView);
+        this.addBtnEvent(this.defBtn,()=>{
+            BasePosUI.getInstance().show('def');
+        });
 
         this.addBtnEvent(this.helpBtn,()=>{
             //if(this.tab.selectedIndex == 0)
@@ -179,8 +185,8 @@ class SlaveUI extends MainBase {
         if(maxLen < SM.maxNum)
             arr.push({lock:true})
 
-        while(arr.length%3 != 0)
-            arr.push({pos:true})
+        //while(arr.length%3 != 0)
+        //    arr.push({pos:true})
 
         this.dataArray.source = arr
         this.dataArray.refresh()

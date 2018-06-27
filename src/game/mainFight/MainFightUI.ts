@@ -57,6 +57,9 @@ class MainFightUI extends MainBase {
         EM.addEvent(GameEvent.client.pk_begin,this.onPKBegin,this)
         EM.addEvent(GameEvent.client.pk_end,this.onPKEnd,this)
 
+        this.defBtn.visible = false
+        this.atkBtn.visible = false
+
     }
 
     private onAddForce(){

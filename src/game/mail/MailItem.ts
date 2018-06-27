@@ -45,7 +45,8 @@ class MailItem extends game.BaseItem {
         }
         else
         {
-            this.nameText.text = Base64.decode(content.nick)
+            var nameStr = MailManager.getInstance().getMailTitle(this.data)
+            this.setHtml(this.nameText,nameStr)
             MyTool.setTypeImg(this.typeMC,content.type)
             this.nameGroup.addChildAt(this.typeMC,0)
             this.headMC.setData(content.head,content.type);

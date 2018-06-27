@@ -80,6 +80,13 @@ class PosTestUI extends game.BaseUI {
                 });
             }
         }
+        if(arr.length < 5)
+        {
+            arr.push({
+                add:true,
+                type:this.testType == 'atk'?'def':'atk'
+            })
+        }
 
         this.list.dataProvider = new eui.ArrayCollection(arr)
     }

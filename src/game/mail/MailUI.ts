@@ -14,6 +14,8 @@ class MailUI extends game.BaseUI {
     private tab: eui.TabBar;
     private emptyGroup: eui.Group;
     private desText: eui.Label;
+    private redMC: eui.Image;
+
 
 
 
@@ -67,11 +69,17 @@ class MailUI extends game.BaseUI {
 
     public onShow(){
         this.renew();
+        this.renewRed();
         this.addPanelOpenEvent(GameEvent.client.mail_change,this.justRenewList)
     }
 
     private justRenewList(){
         MyTool.renewList(this.list);
+        this.renewRed();
+    }
+
+    private renewRed(){
+       this.redMC.visible = MailManager.getInstance().getNotAwardNum()>0
     }
 
     public renew(){

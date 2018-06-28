@@ -200,7 +200,7 @@ class HangManager {
             }
             this.giftnum ++
             var lastHistory = SharedObjectManager.getInstance().getMyValue('hang_video') || {};
-            lastHistory.gift = 1;
+            lastHistory.gift  = lastHistory.fail;
             SharedObjectManager.getInstance().setMyValue('hang_video',lastHistory)
 
             AwardUI.getInstance().show(msg.award)

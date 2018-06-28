@@ -169,7 +169,7 @@ class HangUI extends game.BaseItem {
         var lastHistory = SharedObjectManager.getInstance().getMyValue('hang_video') || {};
         this.videoBtn.visible = HM.level>= 10 && lastHistory.level === HM.level && lastHistory.fail >= 1
 
-        var showGift = HM.giftnum<HM.maxGiftNum && !lastHistory.gift && lastHistory.fail >= 2;
+        var showGift = HM.giftnum<HM.maxGiftNum && lastHistory.gift <= lastHistory.fail-2// && lastHistory.fail >= 2;
         if(showGift)
         {
             this.giftTW.setPaused(false)

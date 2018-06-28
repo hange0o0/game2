@@ -73,6 +73,17 @@ class BasePosChooseUI extends game.BaseUI {
     private onTab(){
         //this.renewDownList();
         this.renewList();
+        if(this.tab.selectedIndex == 3 && !SharedObjectManager.getInstance().getMyValue('skill_tips'))
+        {
+            SharedObjectManager.getInstance().setMyValue('skill_tips',true)
+            MyWindow.Alert('重要事情说三遍！！！(1)\n上阵技能后，开始对战就会消耗技能次数！',()=>{
+                MyWindow.Alert('重要事情说三遍！！！(2)\n即使在对战中没有使用到该技能，也会消耗已上阵技能的次数！',()=>{
+                    MyWindow.Alert('重要事情说三遍！！！(3)\n只要阵容中有技能，挑战开始后就会马上扣除对应技能次数！',()=>{
+                        MyWindow.Alert('因此上阵了技能后，就要在对战中使用到，否则你就浪费了！还不如不上阵！')
+                    })
+                })
+            })
+        }
     }
 
     //选中

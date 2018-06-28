@@ -97,10 +97,8 @@ class PKData extends egret.EventDispatcher{
         {
             var player = new PKPlayerData(data.players[i])
             player.teamData = this.getTeamByID(data.players[i].team)
-            if(player.getHandCard()[1])
-            {
-                player.teamData.autoDef = 0
-            }
+            player.teamData.autoDef = Math.max(data.players[i].def || 0,player.teamData.autoDef)
+
             player.teamData.hp += player.hp;
             this.playerObj[player.id] = player;
             if(player.gameid == UM.gameid)

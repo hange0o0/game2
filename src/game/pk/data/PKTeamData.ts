@@ -20,7 +20,7 @@ class PKTeamData {
     constructor(obj?){
         if(obj)
             this.fill(obj);
-        this.autoDef = PKConfig.autoDef;
+        //this.autoDef = PKConfig.autoDef;
     }
 
     public fill(obj)

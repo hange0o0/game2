@@ -4,11 +4,12 @@ class SlaveChooseItem extends game.BaseItem {
         this.skinName = "SlaveChooseItemSkin";
     }
 
+    private headMC: HeadMC;
+    private typeMC: eui.Image;
     private nameText: eui.Label;
     private coinText: eui.Label;
     private forceText: eui.Label;
-    private headMC: HeadMC;
-    private typeMC: eui.Image;
+
 
 
 

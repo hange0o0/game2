@@ -14,8 +14,16 @@ class PKMonsterInfoUI extends game.BaseContainer {
     private selfIcon: eui.Image;
     private type: eui.Image;
     private nameText: eui.Label;
+    private type1Text: eui.Label;
+    private type2Text: eui.Label;
+    private type3Text: eui.Label;
     private forceText: eui.Label;
     private spaceText: eui.Label;
+    private typeGroup: eui.Group;
+    private tg1: eui.Group;
+    private tg2: eui.Group;
+    private tg3: eui.Group;
+
 
 
 
@@ -125,7 +133,27 @@ class PKMonsterInfoUI extends game.BaseContainer {
 
     private renewNum(){
         var PD = PKData.getInstance();
-        this.spaceText.text = '' + PD.getMonsterSpaceByPlayer(this.playerData.id) + '/' + PKConfig.maxMonsterSpace
+        this.spaceText.text = '' + PD.getMonsterSpaceByPlayer(this.playerData.id) + '/' + PKConfig.maxMonsterSpace;
+        this.typeGroup.removeChildren();
+        var arr = [
+            {type:1,num:PD.getMonsterByPlayer(this.playerData.id,1).length},
+            {type:2,num:PD.getMonsterByPlayer(this.playerData.id,2).length},
+            {type:3,num:PD.getMonsterByPlayer(this.playerData.id,3).length}
+        ]
+        ArrayUtil.sortByField(arr,['num','type'],[1,0])
+        for(var i=0;i<arr.length;i++)
+        {
+            var oo = arr[i];
+            if(oo.num)
+            {
+                this.typeGroup.addChild(this['tg' + oo.type])
+                this['type'+oo.type+'Text'].text = PKConfig.TYPENAME[oo.type] + ' ×' + oo.num;
+            }
+        }
+        //this.type1Text.text = PKConfig.TYPENAME[1] + '×' + ;
+        //this.type2Text.text = PKConfig.TYPENAME[2] + '×' + PD.getMonsterByPlayer(this.playerData.id,2).length
+        //this.type3Text.text = PKConfig.TYPENAME[3] + '×' + PD.getMonsterByPlayer(this.playerData.id,3).length
+
     }
 
     public renewList(){

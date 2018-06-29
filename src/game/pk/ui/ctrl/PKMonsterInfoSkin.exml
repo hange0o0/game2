@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="PKMonsterInfoSkin" width="470" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
-	<e:List id="list" anchorOffsetX="0" anchorOffsetY="0" top="70" bottom="15" left="15" right="15" minHeight="100">
+	<e:List id="list" anchorOffsetX="0" anchorOffsetY="0" top="110" bottom="15" left="15" right="15" minHeight="100">
 		<e:layout>
 			<e:TileLayout requestedColumnCount="5" horizontalGap="10" verticalGap="10"/>
 		</e:layout>
@@ -17,6 +17,23 @@
 		</e:layout>
 	</e:Group>
 	<e:Image y="58.51" horizontalCenter="0" width="440" source="line2_png"/>
+	<e:Group id="typeGroup" x="20" y="70">
+		<e:Group id="tg1" x="0" y="0" scaleX="0.8" scaleY="0.8" width="180">
+			<e:Image source="icon_type1_png" scaleX="0.6" scaleY="0.6" y="0" x="0"/>
+			<e:Label id="type1Text" text="苦顶替" x="45" y="7" size="24" stroke="3" verticalAlign="bottom"/>
+		</e:Group>
+		<e:Group id="tg2" x="0" y="0" scaleX="0.8" scaleY="0.8" width="180">
+			<e:Image scaleX="0.6" scaleY="0.6" y="0" x="0" source="icon_type2_png"/>
+			<e:Label id="type2Text" text="苦顶替" x="45" y="7" size="24" stroke="3" verticalAlign="bottom"/>
+		</e:Group>
+		<e:Group id="tg3" x="10" y="10" scaleX="0.8" scaleY="0.8" width="180">
+			<e:Image scaleX="0.6" scaleY="0.6" y="0" x="0" source="icon_type3_png"/>
+			<e:Label id="type3Text" text="苦顶替" x="45" y="7" size="24" stroke="3" verticalAlign="bottom"/>
+		</e:Group>
+		<e:layout>
+			<e:HorizontalLayout/>
+		</e:layout>
+	</e:Group>
 	<e:Group y="18" right="20">
 		<e:Group x="0" y="0">
 			<e:Image source="icon_force2_png" x="0" y="0" scaleX="0.8" scaleY="0.8"/>

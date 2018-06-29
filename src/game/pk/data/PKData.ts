@@ -231,13 +231,15 @@ class PKData extends egret.EventDispatcher{
     }
 
     //找玩家对应的怪
-    public getMonsterByPlayer(playerid){
+    public getMonsterByPlayer(playerid,type=0){
         var arr = [];
         for(var i=0;i<this.monsterList.length;i++)
         {
             var oo = this.monsterList[i];
              if(oo.owner == playerid)
              {
+                 if(type && oo.getVO().type != type)
+                    continue
                  arr.push(oo)
              }
         }

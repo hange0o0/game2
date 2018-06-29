@@ -150,11 +150,11 @@ class PKTool {
         if(des == 1)
         {
             if(atkType< defType)
-                return 1.5;
+                return 2;
             return 0.5
         }
         if(atkType > defType)
-            return 1.5;
+            return 2;
         return 0.5
     }
 }

@@ -280,8 +280,9 @@ class SlaveManager {
                 i--;
             }
         }
-        this.missList = this.missNoUse.splice(0,5);
-        if(this.missList.length < 5 && this.missUse.length > 0)//去除主人和奴隶
+        var needNum = 4
+        this.missList = this.missNoUse.splice(0,needNum);
+        if(this.missList.length < needNum && this.missUse.length > 0)//去除主人和奴隶
         {
             for(var i=0;i<this.missUse.length;i++)
             {
@@ -293,7 +294,7 @@ class SlaveManager {
             }
 
             ArrayUtil.random(this.missUse);
-            this.missList = this.missList.concat(this.missUse.splice(0,5 - this.missList.length));
+            this.missList = this.missList.concat(this.missUse.splice(0,needNum - this.missList.length));
         }
         return true;
     }

@@ -25,17 +25,17 @@ class HeadMC extends game.BaseItem {
     public setData(head,type?){
 
         this.mc.source = MyTool.getHeadUrl(head || 1)
-        if(type)
-        {
-            this.rect.visible = true
-            this.bg.visible = false
-            this.rect.fillColor = PKConfig.TYPECOLOR[type];
-        }
-        else
-        {
+        //if(type)
+        //{
+        //    this.rect.visible = true
+        //    this.bg.visible = false
+        //    this.rect.fillColor = PKConfig.TYPECOLOR[type];
+        //}
+        //else
+        //{
             this.rect.visible = false
             this.bg.visible = true
-        }
+        //}
     }
 
 }

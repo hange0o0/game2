@@ -105,6 +105,8 @@ class OtherInfoUI extends game.BaseWindow {
         for(var i=0;i<list.numChildren;i++)
         {
             var item:PosListHeadItem = <PosListHeadItem>list.getChildAt(i)
+            if(!item.visible)
+                continue;
             var vo = CM.getCardVO(item.data)
             var gray;
             if(vo.isMonster)
@@ -122,6 +124,7 @@ class OtherInfoUI extends game.BaseWindow {
                 grayItems.push(item)
         }
 
+        console.log(this.copyResult)
         if(this.copyResult.length == 0)
         {
             MyWindow.ShowTips('你没拥有任意一张卡牌，无法复制')
@@ -400,8 +403,21 @@ class OtherInfoUI extends game.BaseWindow {
         }
         else
         {
-            this.okBtn.label = this.master == UM.gameid?'释放奴隶':'收服奴隶'
-            this.okBtn.skinName = this.master == UM.gameid?'Btn2Skin':'Btn1Skin'
+            if(this.master == UM.gameid)
+            {
+                this.okBtn.label = '释放奴隶'
+                this.okBtn.skinName = 'Btn2Skin'
+            }
+            else if(this.master == this.gameid)
+            {
+                this.okBtn.label = '收服奴隶'
+                this.okBtn.skinName = 'Btn1Skin'
+
+            }
+            else{
+                this.okBtn.label = '抢夺奴隶'
+                this.okBtn.skinName = 'Btn9Skin'
+            }
         }
 
         this.viewBtn.label = SlaveManager.getInstance().viewObj[this.gameid]?'取消关注':'关注';

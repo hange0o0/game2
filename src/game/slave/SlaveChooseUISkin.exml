@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="SlaveChooseUISkin" width="620" height="640" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="SlaveChooseUISkin" width="540" height="740" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 		<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
-	<e:List id="list" horizontalCenter="0" verticalCenter="-5">
+	<e:List id="list" horizontalCenter="0" width="500" y="100" height="510">
 		<e:layout>
-			<e:TileLayout verticalGap="15"/>
+			<e:VerticalLayout paddingTop="10" paddingBottom="10" gap="10"/>
 		</e:layout>
 	</e:List>
 	<e:Group horizontalCenter="0" bottom="40">
@@ -21,6 +21,4 @@
 		<e:Image source="icon_empty_png" y="0" scaleX="1.3" scaleY="1.3" horizontalCenter="-0.5"/>
 		<e:Label id="emptyText" text="没有找到合适的推荐对象" y="100" horizontalCenter="0" size="24"/>
 	</e:Group>
-	<e:Image source="line2_png" fillMode="repeat" left="5" right="5" bottom="110"/>
-	<e:Image source="line2_png" y="100" fillMode="repeat" left="5" right="5"/>
 </e:Skin>

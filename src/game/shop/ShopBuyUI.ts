@@ -34,7 +34,7 @@ class ShopBuyUI extends game.BaseWindow {
     }
 
     private onClick(){
-        if(UM.diamond < this.dataIn.diamond)
+        if(UM.diamond < PayManager.getInstance().getShopDiamond(this.dataIn))
         {
             MyWindow.ShowTips('钻石不足！')
             return;

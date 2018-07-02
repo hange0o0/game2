@@ -27,6 +27,10 @@ class PayManager {
         }
     }
 
+    public getShopDiamond(data){
+        return data.diamond*((data.times || 0) + 1)
+    }
+
     public get_shop(fun?){
         if(this.shopTime && DateUtil.isSameDay(this.shopTime))
         {
@@ -70,7 +74,7 @@ class PayManager {
             {
                 if(this.shopData[i].id == id)
                 {
-                    this.shopData[i].isbuy = true;
+                    this.shopData[i].times  = (this.shopData[i].times || 0) + 1;
                     break;
                 }
             }

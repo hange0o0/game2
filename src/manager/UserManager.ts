@@ -124,7 +124,7 @@ class UserManager {
     public onOpenDataChange(){
         var mailTime = UM.openData.mailtime
         var slaveTime = UM.openData.slavetime
-        if(slaveTime > SlaveManager.getInstance().lastGetSlaveTime)
+        if(SlaveManager.getInstance().lastGetSlaveTime && slaveTime > SlaveManager.getInstance().lastGetSlaveTime)
         {
             SlaveManager.getInstance().lastGetSlaveTime = 0
             if(SlaveUI.getInstance().stage)

@@ -70,8 +70,8 @@ class ShopItem extends game.BaseItem {
             MyTool.changeGray(this.img,false)
             this.sellFinish.visible = false
             this.diamondGroup.visible =  true
-            this.diamondText.text = this.data.diamond
-            this.diamondText.textColor = (UM.diamond < this.data.diamond)?0xFF0000:0xFFFFFF;
+            this.diamondText.text = PayManager.getInstance().getShopDiamond(this.data)  + ''
+            this.diamondText.textColor = (UM.diamond < PayManager.getInstance().getShopDiamond(this.data))?0xFF0000:0xFFFFFF;
         }
     }
 

@@ -29,7 +29,7 @@ class SlaveManager {
 
 
     //取最近一个主人的有效开始时间
-    public getMasterTime(){
+    public getMasterTime(test?){
         var mtime = 0;
         if(this.lastGetSlaveTime)//有取过奴隶数据
         {
@@ -42,16 +42,17 @@ class SlaveManager {
             var mtime2 = parseInt(master[1]);
             if(mtime2 != mtime)//奴隶数据库与玩家的open数据不一致
             {
-                if(mtime > mtime2)//openData数据太旧
+                if(mtime > mtime2 || test)//openData数据太旧
                 {
                     this.slave_reset_open();
                 }
-                else //玩家列表数据太旧
+                else if(this.lastGetSlaveTime)//玩家列表数据太旧
                 {
                     this.lastGetSlaveTime = 0;
                     if(SlaveUI.getInstance().stage)
                     {
                          this.slave_list(()=>{
+                             this.getMasterTime(true);
                              EM.dispatchEventWith(GameEvent.client.slave_change)
                          })
                     }

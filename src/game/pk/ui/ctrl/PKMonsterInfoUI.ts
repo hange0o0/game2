@@ -40,6 +40,7 @@ class PKMonsterInfoUI extends game.BaseContainer {
         this.hide();
         this.list.itemRenderer = PKMonsterInfoItem;
         PKData.getInstance().addEventListener('video',this.onVideoEvent,this);
+        this.verticalCenter = 0;
     }
     public onVideoEvent(e){
         if(!this.visible)
@@ -89,11 +90,13 @@ class PKMonsterInfoUI extends game.BaseContainer {
         this.selfIcon.visible = playerData == PKData.getInstance().myPlayer;
 
         if(this.playerData.teamData.atkRota == PKConfig.ROTA_LEFT)
-            this.x = 10
-        else
             this.x = 160
+        else
+            this.x = 10
+
 
         this.resetList();
+        this.minHeight = 640;
         this.renewFlag = false;
     }
 
@@ -128,7 +131,7 @@ class PKMonsterInfoUI extends game.BaseContainer {
     }
 
     private renewBottom(){
-        this.bottom = GameManager.stage.stageHeight - Math.max(this.xy.y-10,this.height)
+        //this.bottom = GameManager.stage.stageHeight - Math.max(this.xy.y-10,this.height)
     }
 
     private renewNum(){

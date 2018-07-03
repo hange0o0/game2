@@ -16,10 +16,10 @@ class RankUI extends game.BaseUI {
 
 
 
-    private typeObj = {
-        0:{key:'force',name:'战力'},
-        1:{key:'hang',name:'战役'},
-        2:{key:'hourcoin',name:'生产'},
+    public typeObj = {
+        0:{key:'force',name:'战力',title:'战力'},
+        1:{key:'hang',name:'战役',title:'关卡'},
+        2:{key:'hourcoin',name:'生产',title:'时产'},
     }
     public constructor() {
         super();
@@ -74,16 +74,19 @@ class RankUI extends game.BaseUI {
             for(var i=0;i<arr.length;i++)
             {
                 var oo = arr[i];
+                oo.title = this.typeObj[this.tab.selectedIndex].title
                 if(oo.gameid == UM.gameid)
                 {
                     rank = oo.index;
-                    break;
                 }
             }
+
+            //arr.unshift({title:this.typeObj[this.tab.selectedIndex].title})
             if(rank)
                 arr.unshift({text:'你的排名：第 '+rank+' 名'})
             else
                 arr.unshift({text:'你还没上榜'})
+
 
         }
         this.emptyGroup.visible = arr.length == 0;

@@ -81,6 +81,8 @@ class SlaveManager {
 
     //取奴隶数据
     public getSlave(gameid){
+        if(!this.slaveList)
+            return null;
         for(var i=0;i<this.slaveList.length;i++)
         {
             var oo = this.slaveList[i];

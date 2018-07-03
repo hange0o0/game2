@@ -14,6 +14,7 @@ class ShopBuyUI extends game.BaseWindow {
     private shopItem: ShopItem;
     private cancelBtn: eui.Button;
     private okBtn: eui.Button;
+    private titleText: eui.Label;
 
 
     private dataIn
@@ -30,7 +31,15 @@ class ShopBuyUI extends game.BaseWindow {
     }
 
     public onShow(){
+         this.renew();
+    }
+
+    private renew(){
         this.shopItem.data = this.dataIn;
+        if(!this.dataIn.times)
+            this.titleText.text = '首次购买'
+        else
+            this.titleText.text = '第'+(this.dataIn.times + 1)+'次购买'
     }
 
     private onClick(){
@@ -40,11 +49,13 @@ class ShopBuyUI extends game.BaseWindow {
             return;
         }
 
+
         PayManager.getInstance().buy_shop(this.dataIn.id,()=>{
             MyWindow.ShowTips('购买成功！')
             ShopUI.getInstance().renewList()
+            this.renew();
         })
 
-        this.hide();
+        //this.hide();
     }
 }

@@ -29,6 +29,14 @@ class ViewItem extends game.BaseItem {
         this.headMC.setData(this.data.head,this.data.type);
         MyTool.setTypeImg(this.typeMC,this.data.type)
 
+        var SM = SlaveManager.getInstance();
+
+        if(SM.master && SM.master == this.data.gameid)
+            this.currentState = 'msater'
+        else if(SM.getSlave(this.data.gameid))
+            this.currentState = 'slave'
+        else
+            this.currentState = 'normal'
     }
 
 }

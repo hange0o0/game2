@@ -55,12 +55,12 @@ class BagUI extends MainBase {
 
     public renew(){
         var arr = PropManager.getInstance().getListByType(this.tab.selectedIndex + 1);
-        if(this.tab.selectedIndex == 1)
-        {
+        //if(this.tab.selectedIndex == 1)
+        //{
             //var coin = UM.getCoin();
             //if(coin)
-                arr.unshift({coin:true});
-        }
+            //    arr.unshift({coin:true});
+        //}
         //else
         //{
         //    this.list.itemRenderer = BagItem2

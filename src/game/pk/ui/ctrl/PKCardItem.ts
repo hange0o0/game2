@@ -166,8 +166,8 @@ class PKCardItem extends game.BaseItem {
     public onMpTest(nowMp){
         if(!this.data)
             return;
-
-        var mp = CM.getCardVO(this.data.mid).cost
+        var vo:any = CM.getCardVO(this.data.mid)
+        var mp = vo.cost
 
         var barW = 80
         var barH = 92
@@ -183,12 +183,14 @@ class PKCardItem extends game.BaseItem {
             var PD = PKData.getInstance();
             var cd = ((PKTool.getMPTime(mp + PD.myPlayer.useMP) - PD.actionTime)/1000).toFixed(1);
             this.cdText.text = cd + 's';
+            this.bg.source = 'border_16_png'
         }
         else
         {
             this.costText.textColor = 0xFFFFFF
             this.img2.visible = false;
             this.cdText.visible = false;
+            this.bg.source = vo.getBG();
         }
     }
 

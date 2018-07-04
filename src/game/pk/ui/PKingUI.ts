@@ -40,6 +40,10 @@ class PKingUI extends game.BaseUI {
     public counting = false;
     public tw:egret.Tween;
 
+
+    public displayY
+    private isAciveStop //窗口切换导致的暂停
+
     public constructor() {
         super();
         this.skinName = "PKingUISkin";
@@ -87,6 +91,8 @@ class PKingUI extends game.BaseUI {
         SoundManager.getInstance().playSound(SoundConfig.bg);
         this.removeAll();
         this.removeEventListener(egret.Event.ENTER_FRAME,this.onE,this)
+        GameManager.stage.removeEventListener(egret.Event.ACTIVATE,this.onActive,this)
+        GameManager.stage.removeEventListener(egret.Event.DEACTIVATE,this.onDeActive,this)
         EM.dispatchEventWith(GameEvent.client.pk_end)
 
         if(GuideManager.getInstance().isGuiding)
@@ -100,13 +106,32 @@ class PKingUI extends game.BaseUI {
         this.hideBehind = false;
         var self = this;
         self.superShow();
+
+        GameManager.stage.addEventListener(egret.Event.ACTIVATE,this.onActive,this)
+        GameManager.stage.addEventListener(egret.Event.DEACTIVATE,this.onDeActive,this)
+    }
+
+    private onActive(){
+        if(this.isAciveStop)
+            this.setStop(false)
+    }
+    private onDeActive(){
+        if(this.isStoping)
+            return;
+        this.setStop(true)
+        this.isAciveStop = true
     }
 
     private superShow(){
         super.show();
     }
 
+    public get isStoping(){
+        return PKData.getInstance().stopTime > 0
+    }
+
     public setStop(b){
+        this.isAciveStop = false
         if(b)
         {
             if(this.tw)
@@ -161,7 +186,7 @@ class PKingUI extends game.BaseUI {
         PKVideoCon.getInstance().x = 0;
         PKVideoCon.getInstance().y = 0;
 
-        var vY = this.pkTop.y + 170;
+        var vY = this.displayY = this.pkTop.y + 170;
         var vH = GameManager.stage.stageHeight - 480 - vY
 
 

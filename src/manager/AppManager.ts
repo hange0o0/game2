@@ -37,10 +37,12 @@ class AppManager {
 
 function onAppResume(){
     SoundManager.getInstance().resumeSound();
+    GameManager.stage.dispatchEventWith(egret.Event.ACTIVATE);
 }
 
 function onAppPause(){
     SoundManager.getInstance().stopBgSound();
+    GameManager.stage.dispatchEventWith(egret.Event.DEACTIVATE);
 }
 
 function onAppDealFinish(){

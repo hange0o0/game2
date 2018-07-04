@@ -53,7 +53,7 @@ class ShopBuyUI extends game.BaseWindow {
         PayManager.getInstance().buy_shop(this.dataIn.id,()=>{
             MyWindow.ShowTips('购买成功！')
             ShopUI.getInstance().renewList()
-            this.renew();
+            this.hide();
         })
 
         //this.hide();

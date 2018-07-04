@@ -49,7 +49,7 @@ class PKCardInfoItem extends game.BaseItem {
         if(this.data.rate)
         {
             this.barMC.visible = true;
-            this.barMC.width = this.data.rate * 250;
+            this.barMC.width = this.data.rate * 205;
         }
 
     }

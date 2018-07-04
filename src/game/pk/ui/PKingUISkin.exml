@@ -10,7 +10,7 @@
 	<ns1:PKCtrlCon id="pkCtrlCon" x="0" skinName="PKCtrlConSkin" bottom="0"/>
 	<ns1:PKTopUI id="pkTop" x="0" skinName="PKTopSkin"/>
 	<e:Label id="roundText" text="START" size="60" horizontalCenter="0" stroke="3" strokeColor="0x000000" anchorOffsetY="40" width="200" textAlign="center" anchorOffsetX="100" textColor="0xffff00" y="400" locked="true"/>
-	<ns1:PKMonsterInfoUI id="pkInfo" skinName="PKMonsterInfoSkin" bottom="580" x="160" visible="false"/>
+	<ns1:PKMonsterInfoUI id="pkInfo" skinName="PKMonsterInfoSkin" x="160" visible="false"/>
 	<e:Group id="vsGroup" x="0" y="264" width="640" height="80">
 		<e:Image id="vsMC" source="icon_vs_png" scaleX="0.5" scaleY="0.5" horizontalCenter="0" verticalCenter="0"/>
 		<e:Group id="playerGroup1" y="0" width="260" x="0">

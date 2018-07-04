@@ -38,7 +38,7 @@ class MailInfoUI extends game.BaseWindow {
             return;
         }
          MailManager.getInstance().get_mail_award(this.dataIn,()=>{
-              this.renew();
+              this.hide();
          })
     }
 

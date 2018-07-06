@@ -51,7 +51,7 @@ class GiftUI extends game.BaseWindow {
         this.dataIn = HangManager.getInstance().giftnum + 1;
         var propNum = TecManager.getInstance().getOtherNeed(this.dataIn,1)*5
         var awardData = {
-            coin: TecManager.getInstance().getCoinNeed(this.dataIn)*5,
+            coin: TecManager.getInstance().getCoinNeed(this.dataIn)*15,
             props:{
                 1:propNum,
                 2:propNum,

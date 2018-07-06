@@ -118,6 +118,8 @@ class PKingUI extends game.BaseUI {
     private onDeActive(){
         if(this.isStoping)
             return;
+        if(DEBUG)
+            return;
         this.setStop(true)
         this.isAciveStop = true
     }

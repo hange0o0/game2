@@ -97,17 +97,21 @@ class MainUI extends game.BaseUI {
 
     }
 
-    public onBottomSelect(index){
+    public onBottomSelect(index,stopMV?){
        if(index != this.currentIndex)
        {
            if(index == 1 && ObjectUtil.objLength(PosManager.getInstance().defList) == 0)//奴隶
            {
                MyWindow.Alert('请先设置防守阵容',()=>{
-                   BasePosUI.getInstance().show('def',0);
+                   BasePosUI.getInstance().show('def',0,{fun:()=>{
+                       if(ObjectUtil.objLength(PosManager.getInstance().defList))
+                            this.onBottomSelect(index,true)
+                   }});
                });
                return;
            }
 
+           var cd = stopMV?0:350
            SoundManager.getInstance().playEffect(SoundConfig.effect_button);
            var t = egret.getTimer();
            this.bottomItems[this.currentIndex].select(false)
@@ -117,7 +121,7 @@ class MainUI extends game.BaseUI {
            egret.Tween.removeTweens(this.bottomSelectMC)
            var tw = egret.Tween.get(this.bottomSelectMC)
            var bottomX = this.getBottomX()
-           tw.to({x:bottomX},350,egret.Ease.sineOut)
+           tw.to({x:bottomX},cd,egret.Ease.sineOut)
 
            this.renewBGX(true);
 
@@ -133,7 +137,7 @@ class MainUI extends game.BaseUI {
            this.currentUI.x = 640*rota;
            egret.Tween.removeTweens(this.con)
            var tw = egret.Tween.get(this.con)
-           tw.to({x:-640*rota},350,egret.Ease.sineOut).call(function(){
+           tw.to({x:-640*rota},cd,egret.Ease.sineOut).call(function(){
                this.con.x = 0
                this.currentUI.x = 0
                if(this.lastUI)
@@ -141,10 +145,19 @@ class MainUI extends game.BaseUI {
                    this.lastUI.hide()
                    this.lastUI = null;
                }
-               this.currentUI.showFinish && this.currentUI.showFinish();
+               if(!stopMV)
+                     this.runUIShowFinish();
+               else
+               {
+                   this.once(egret.Event.ENTER_FRAME,this.runUIShowFinish,this)
+               }
            },this)
            this.setTopPos(0);
        }
+    }
+
+    private runUIShowFinish(){
+        this.currentUI.showFinish && this.currentUI.showFinish();
     }
 
 

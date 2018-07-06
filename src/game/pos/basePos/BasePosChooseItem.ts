@@ -9,8 +9,17 @@ class BasePosChangeItem extends BasePosItem {
         DragManager.getInstance().setDrag(this,true);
     }
 
-    private renewSelect(data){
-        this.selectMC.visible = data == this.data;
+    private renewSelect(datas){
+        var b = false
+        for(var i=0;i<datas.length;i++)
+        {
+             if(datas[i] == this.data)
+             {
+                 b = true;
+                 break;
+             }
+        }
+        this.selectMC.visible = b;
     }
 
 }

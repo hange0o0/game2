@@ -63,7 +63,7 @@ class MainFightUI extends MainBase {
     }
 
     private onAddForce(){
-        MainUI.getInstance().onBottomSelect(4);
+        MainUI.getInstance().onBottomSelect(4,GuideManager.getInstance().isGuiding);
         TecUI.getInstance().setTab(1)
     }
 

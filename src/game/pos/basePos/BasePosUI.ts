@@ -38,6 +38,8 @@ class BasePosUI extends game.BaseUI {
     private listData:eui.ArrayCollection
     private selectData;
     private selectIndex;
+    private lastIndex;
+    private swapData;
     private pkData;
     private sp;
 
@@ -141,8 +143,12 @@ class BasePosUI extends game.BaseUI {
             this.pkData.hideFun && this.pkData.hideFun(this.changeToServerList());
             return;
         }
-        if(this.testSave())
+        if(this.testSave(()=>{
+                this.sp.fun && this.sp.fun();
+            }))
+        {
             this.hide();
+        }
     }
 
     private testSave(fun?){
@@ -255,8 +261,9 @@ class BasePosUI extends game.BaseUI {
     }
 
     private onDragStart(e){
+        this.swapData = null;
         this.selectData = e.target.data;
-        this.selectIndex = this.listData.source.indexOf(this.selectData);
+        this.lastIndex = this.selectIndex = this.listData.source.indexOf(this.selectData);
         this.dragTarget.data = e.target.data
         this.stage.addChild(this.dragTarget);
         this.dragTarget.x = e.data.x;
@@ -264,6 +271,59 @@ class BasePosUI extends game.BaseUI {
 
         this.renewSelectItem();
     }
+
+    //private onDragMove(e){
+    //    this.dragTarget.x = e.data.x - this.dragTarget.width/2;
+    //    this.dragTarget.y = e.data.y - this.dragTarget.height/2;
+    //
+    //    var p = this.list.globalToLocal(e.data.x,e.data.y)
+    //    p.x -= 8;
+    //    p.y -= 10;
+    //    //90*110
+    //    //8/20
+    //    var maxIndex = this.listData.length - 2;
+    //    var index = Math.max(0,Math.min(maxIndex,Math.floor((p.x + 30)/105) + Math.floor(p.y/130)*6))
+    //    var isOver = p.x%105 >30 && p.x%105 <80;
+    //    console.log(index);
+    //
+    //
+    //
+    //    if(index != this.selectIndex || isOver != (!!this.swapData))
+    //    {
+    //        //console.log(isOver)
+    //        if(this.swapData)//还原回去
+    //        {
+    //            var swapIndex = this.listData.getItemIndex(this.swapData)
+    //            this.listData.removeItemAt(swapIndex)
+    //            this.listData.addItemAt(this.swapData,this.selectIndex + 1)//插入到当前位置
+    //        }
+    //        this.listData.removeItemAt(this.selectIndex)//先把自己去掉
+    //        this.selectIndex = index;
+    //        this.listData.addItemAt(this.selectData,index)//插入到当前位置
+    //        if(isOver)//交换
+    //        {
+    //            if(this.lastIndex != this.selectIndex)
+    //            {
+    //                var data = this.listData.removeItemAt(this.selectIndex+1)//把下家去掉
+    //                if(this.lastIndex > this.selectIndex)
+    //                    this.listData.addItemAt(data,this.lastIndex)//插入到以前位置
+    //                else if(this.lastIndex < this.selectIndex)
+    //                    this.listData.addItemAt(data,this.lastIndex+1)//插入到以前位置
+    //                this.swapData = data
+    //            }
+    //            else //指回原来位置
+    //            {
+    //                this.swapData = null;
+    //            }
+    //        }
+    //        else
+    //        {
+    //            this.swapData = null;
+    //        }
+    //    }
+    //    egret.callLater(this.renewSelectItem,this);
+    //    //this.once(egret.Event.ENTER_FRAME,this.renewSelectItem,this)
+    //}
     private onDragMove(e){
         this.dragTarget.x = e.data.x - this.dragTarget.width/2;
         this.dragTarget.y = e.data.y - this.dragTarget.height/2;
@@ -280,13 +340,14 @@ class BasePosUI extends game.BaseUI {
             this.listData.removeItemAt(this.selectIndex)
             this.selectIndex = index;
             this.listData.addItemAt(this.selectData,index)
-            this.once(egret.Event.ENTER_FRAME,this.renewSelectItem,this)
+            egret.callLater(this.renewSelectItem,this);
         }
     }
 
     private onDragEnd(e){
         MyTool.removeMC(this.dragTarget)
         this.selectData = null
+        this.swapData = null
         this.selectIndex = -1
         this.renewSelectItem();
     }
@@ -294,7 +355,7 @@ class BasePosUI extends game.BaseUI {
     private renewSelectItem(){
         for(var i=0;i<this.list.numChildren;i++)
         {
-            this.list.getChildAt(i)['renewSelect'](this.selectData);
+            this.list.getChildAt(i)['renewSelect']([this.selectData,this.swapData]);
         }
     }
 

@@ -45,28 +45,39 @@ class TecUI extends MainBase {
 
     private renewList(){
         MyTool.renewList(this.list)
+        egret.callLater(this.renewTop,this)//同步数据未处理完
     }
 
     public showFinish(){
         GuideManager.getInstance().testShowGuide()
     }
 
-    public renew(){
+    private renewTop(){
         if(this.tab.selectedIndex == 1)
         {
-            this.currentState = 'force'
             this.coinText.text = '' + UM.tec_force + ''
         }
         else if(this.tab.selectedIndex == 2)
         {
-            this.currentState = 'coin'
             this.coinText.text = '' + NumberUtil.addNumSeparator(UM.hourcoin) + ''
+        }
+    }
+
+    public renew(){
+        if(this.tab.selectedIndex == 1)
+        {
+            this.currentState = 'force'
+        }
+        else if(this.tab.selectedIndex == 2)
+        {
+            this.currentState = 'coin'
         }
         else
             this.currentState = 'normal'
         var arr =  TecManager.getInstance().getListByType(this.tab.selectedIndex + 1);
         this.dataArray.source = arr
         this.dataArray.refresh()
+        this.renewTop();
     }
 
     public setTab(index){

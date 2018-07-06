@@ -51,7 +51,7 @@ class GuideManager {
     public reInit(){
         this.guideRandom = 0;
         this.guidePK = 0;
-        this.guideArr[0].text = '['+UM.nick+']您好，欢迎来到召唤争霸！'
+        this.guideArr[0].text = '['+UM.nick+'](代号)您好，欢迎来到召唤争霸！'
     }
 
     private init(){

@@ -17,6 +17,9 @@ class MainBase extends game.BaseContainer {
     public onShow(){
 
     }
+    public showFinish(){
+
+    }
 
     public hide(){
         MyTool.removeMC(this)

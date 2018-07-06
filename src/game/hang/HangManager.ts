@@ -23,7 +23,7 @@ class HangManager {
     }
 
     public getHangBGID(){
-        return Math.ceil((this.level+1)/3)%10 || 10
+        return Math.ceil((this.level+1)/4)%10 || 10
     }
 
     public getPKCD(){
@@ -201,6 +201,7 @@ class HangManager {
             this.giftnum ++
             var lastHistory = SharedObjectManager.getInstance().getMyValue('hang_video') || {};
             lastHistory.gift  = lastHistory.fail;
+            lastHistory.gifttimes ++;
             SharedObjectManager.getInstance().setMyValue('hang_video',lastHistory)
 
             AwardUI.getInstance().show(msg.award)

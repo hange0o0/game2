@@ -56,9 +56,13 @@ class DebugManager {
         var level = this.MML;
         var len = this.cardLen;
 
+        //var type = 3
+
         for(var s in MonsterVO.data)
         {
             var mvo = MonsterVO.data[s]
+            //if(mvo.type == type)   /////
+            //    continue;    ////
             if(mvo.level <= level)
             {
                 arr.push(mvo.id)

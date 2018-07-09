@@ -16,7 +16,7 @@
 		<e:Label id="coinText" text="苦顶替" size="24" stroke="3" verticalAlign="bottom" includeIn="normal" x="50" strokeColor="0x231507" textColor="0xfcdb79" verticalCenter="0"/>
 		<e:Image source="icon_coin_png" x="3.04" y="0" scaleX="0.75" scaleY="0.75" includeIn="normal"/>
 	</e:Group>
-	<e:Image id="redMC" source="red_mc_png" includeIn="normal" right="-1" bottom="48"/>
+
 
 	<e:Group id="cdGroup" includeIn="normal" y="0" right="0">
 		<e:Image includeIn="normal" width="100%" source="bg17_png" scale9Grid="46,7,3,28" scaleX="-1" scaleY="-1" top="0" right="0"/>
@@ -34,4 +34,5 @@
 	</e:Group>
 	<e:Group id="clickArea" width="100%" height="100%" includeIn="normal" x="0" y="0" anchorOffsetX="0"/>
 	<e:Button id="getBtn" label="收取" skinName="Btn1Skin" width="150" includeIn="normal" bottom="10" right="10"/>
+	<e:Image id="redMC" source="red_mc_png" includeIn="normal" right="-1" bottom="48"/>
 </e:Skin>

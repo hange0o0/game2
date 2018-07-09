@@ -21,7 +21,7 @@ class Config {
 
 
 
-    public static fightLevel = 20;
+    public static fightLevel = 1;
 
 
     //public static friendLevel = 3;

@@ -172,6 +172,7 @@ class TecManager {
                 TecInfoUI.getInstance().renew();
                 return;
             }
+            MyWindow.ShowTips('升级成功！')
             SoundManager.getInstance().playEffect(SoundConfig.effect_u_up);
             if (fun)
                 fun();

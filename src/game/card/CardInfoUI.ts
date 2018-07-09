@@ -100,6 +100,10 @@ class CardInfoUI extends game.BaseWindow {
         {
             if(this.data.isMonster)
                 MyWindow.ShowTips('金币不足')
+            else if(this.sp.diamondShop)
+            {
+                UM.testDiamond(PayManager.getInstance().getShopDiamond(this.sp))
+            }
             else
                 MyWindow.ShowTips('远征秘石不足！')
             return
@@ -113,6 +117,15 @@ class CardInfoUI extends game.BaseWindow {
         }
         else
         {
+            if(this.sp.diamondShop)
+            {
+                PayManager.getInstance().buy_shop(this.sp.id,()=>{
+                    MyWindow.ShowTips('购买成功！')
+                    ShopUI.getInstance().renewList()
+                    this.hide();
+                })
+                return;
+            }
              FightManager.getInstance().buy_shop(this.sp.id,()=>{
                  this.sp = {};
                  this.renew();
@@ -196,11 +209,25 @@ class CardInfoUI extends game.BaseWindow {
             else
             {
                 this.currentState = 'buy'
-                this.coinText.text = this.sp.diamond + ''
-                this.upAble = this.sp.diamond <= FightManager.getInstance().value
-                this.okBtn.label = '兑换'
+                if(this.sp.diamondShop)
+                {
+                    var cost = PayManager.getInstance().getShopDiamond(this.sp)
+                    this.coinText.text = cost + ''
+                    this.upAble = cost <= UM.diamond
+                    this.icon.source = MyTool.getPropDiamond();
+                    this.okBtn.label = '购买'
+                }
+                else
+                {
+                    this.coinText.text = this.sp.diamond + ''
+                    this.upAble = this.sp.diamond <= FightManager.getInstance().value
+                    this.icon.source = MyTool.getPropFight();
+                    this.okBtn.label = '兑换'
+                }
+
+
                 this.okBtn.skinName = 'Btn1Skin'
-                this.icon.source = MyTool.getPropFight();
+
             }
         }
         this.coinText.textColor = this.upAble?0xFFFFFF:0xFF0000;

@@ -12,15 +12,23 @@ class ShopItem extends game.BaseItem {
     private diamondIcon: eui.Image;
     private diamondText: eui.Label;
     private sellFinish: eui.Label;
+    private cardMC: CardImg;
 
 
-
+    private skillID
     public childrenCreated() {
         super.childrenCreated();
         this.addBtnEvent(this,this.onClick)
     }
 
     private onClick(){
+        if(this.skillID)
+        {
+            this.data.diamondShop = true
+            CardInfoUI.getInstance().show(CM.getCardVO(this.skillID),this.data);
+            return;
+        }
+
         if(this.data.isbuy)
             return;
 
@@ -40,6 +48,7 @@ class ShopItem extends game.BaseItem {
     }
 
     public dataChanged(){
+        this.skillID = 0
         var name = ''
         if(this.data.id == 'coin')
         {
@@ -50,6 +59,15 @@ class ShopItem extends game.BaseItem {
         {
             name = this.createHtml('体力',0xFFD27F)  + '\n×' + NumberUtil.formatStrNum(this.data.num);
             this.img.source = MyTool.getPropEnergy()
+        }
+        else if((this.data.id + '').substr(0,5) == 'skill')
+        {
+            var svo = SkillVO.getObject(this.data.id.substr(5));
+            this.skillID = svo.id;
+            name = this.createHtml(svo.name,0xFFD27F) + '×' + this.data.num;
+            this.currentState = 'card'
+            this.cardMC.data = this.skillID
+            //console.log(this.cardMC.)
         }
         else
         {

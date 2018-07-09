@@ -1,4 +1,4 @@
-class BasePosChangeItem extends BasePosItem {
+class BasePosChooseItem extends BasePosItem {
     public constructor() {
         super();
     }
@@ -9,17 +9,9 @@ class BasePosChangeItem extends BasePosItem {
         DragManager.getInstance().setDrag(this,true);
     }
 
-    private renewSelect(datas){
-        var b = false
-        for(var i=0;i<datas.length;i++)
-        {
-             if(datas[i] == this.data)
-             {
-                 b = true;
-                 break;
-             }
-        }
-        this.selectMC.visible = b;
+    public renewSelect(selectData,swapData){
+        this.alpha = selectData == this.data?0.5:1
+        this.selectMC.visible = swapData == this.data;
     }
 
 }

@@ -35,6 +35,11 @@ class MyTool {
             var prop =  PropVO.getObject(s);
             arr.push({img:prop.getThumb(),name:prop.propname,'num':'×' + NumberUtil.addNumSeparator(dataIn.props[s])})
         }
+        for(var s in dataIn.skills)
+        {
+            var skill =  SkillVO.getObject(s);
+            arr.push({img:skill.getImage(),name:skill.name,'num':'×' + NumberUtil.addNumSeparator(dataIn.skills[s])})
+        }
         return arr;
     }
 

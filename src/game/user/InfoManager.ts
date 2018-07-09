@@ -22,16 +22,16 @@ class InfoManager {
 
     public getHeadList(){
         var arr = [];
-        var len = 10 + UM.level*2
-        for(var i=1;i<len;i++)
-            arr.push(i);
-        //var data = MonsterVO.data;
-        //for(var s in data)
-        //{
-        //    var vo =  data[s];
-        //    if(vo.level <= UM.level)
-        //        arr.push(vo);
-        //}
+        //var len = 10 + UM.level*2
+        //for(var i=1;i<len;i++)
+        //    arr.push(i);
+        var data = MonsterVO.data;
+        for(var s in data)
+        {
+            var vo =  data[s];
+            if(vo.level <= UM.level)
+                arr.push(vo.id);
+        }
         return arr;
     }
 

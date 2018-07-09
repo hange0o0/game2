@@ -48,7 +48,7 @@ class SkillVO {
         this.sv4 = data.sv4
     }
 
-    public getImage(gay){
+    public getImage(gay?){
         if(gay)
             return Config.localResRoot + 'card_gay/card_'+this.id+'.jpg';
         return Config.localResRoot + 'card/card_'+this.id+'.jpg';

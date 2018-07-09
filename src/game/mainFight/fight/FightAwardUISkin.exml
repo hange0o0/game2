@@ -9,7 +9,7 @@
 
 	<e:Group  id="btnGroup" horizontalCenter="0" bottom="20">
 		<e:Button id="cancelBtn" label="关闭" width="150" x="0" y="0" skinName="Btn2Skin"/>
-		<e:Button id="okBtn" label="确定挑战" width="150" skinName="Btn1Skin" x="0" y="0"/>
+		<e:Button id="okBtn" label="选好了" width="150" skinName="Btn1Skin" x="0" y="0"/>
 		<e:layout>
 			<e:HorizontalLayout gap="30"/>
 		</e:layout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="ShopUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
-	<e:Image x="0" y="0" width="100%" height="100%" source="bg15_png" scale9Grid="16,15,20,18"/>
+	<e:Image x="0" y="0" width="100%" height="100%" scale9Grid="16,15,20,18" source="bg14_png"/>
 	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
 	<e:Scroller id="scroller" width="640" x="0" top="60" bottom="100" bounces="false">
 		<e:Group>

@@ -69,5 +69,9 @@
 		<e:HorizontalLayout gap="0"/>
 		</e:layout>
 	</e:Group>
+	<e:Group id="arrowGroup" x="23" y="270">
+		<e:Image id="arrowMC" source="arror4_png" x="0" y="0" anchorOffsetX="27" anchorOffsetY="55" width="54"/>
+		<e:Image id="changePosMC" source="change_icon_png" y="-25" anchorOffsetX="22" anchorOffsetY="18" x="0" scaleX="1.3" scaleY="1.3"/>
+	</e:Group>
 
 </e:Skin>

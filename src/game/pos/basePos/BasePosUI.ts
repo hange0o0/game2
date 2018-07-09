@@ -21,6 +21,9 @@ class BasePosUI extends game.BaseUI {
     private titleText: eui.Label;
     private tabList: eui.List;
     private openBtn: eui.CheckBox;
+    private arrowGroup: eui.Group;
+    private arrowMC: eui.Image;
+    private changePosMC: eui.Image;
 
 
 
@@ -38,10 +41,16 @@ class BasePosUI extends game.BaseUI {
     private listData:eui.ArrayCollection
     private selectData;
     private selectIndex;
-    private lastIndex;
-    private swapData;
+
+    private targetIndex;
+    private insertPos = 0;
+
+    //private swapData;
     private pkData;
     private sp;
+    private arrowTW;
+    private changeTW;
+
 
     public constructor() {
         super();
@@ -53,7 +62,7 @@ class BasePosUI extends game.BaseUI {
         this.bottomUI.setHide(this.onClose,this);
 
         this.dragTarget.alpha = 0.3;
-        this.list.itemRenderer =  BasePosChangeItem;
+        this.list.itemRenderer =  BasePosChooseItem;
         this.list.addEventListener('start_drag',this.onDragStart,this);
         this.list.addEventListener('end_drag',this.onDragEnd,this);
         this.list.addEventListener('move_drag',this.onDragMove,this);
@@ -71,6 +80,21 @@ class BasePosUI extends game.BaseUI {
         this.addBtnEvent(this.upBtn,this.onUp)
         this.addBtnEvent(this.downBtn,this.onDown)
         this.addBtnEvent(this.openBtn,this.onOpen)
+
+        var tw = this.arrowTW = egret.Tween.get(this.arrowMC,{loop:true});
+        tw.to({scaleX:1.1,scaleY:0.8},200).to({scaleX:1,scaleY:1.1,y:this.arrowMC.y -10},200).
+            to({scaleX:1.1,scaleY:0.8,y:this.arrowMC.y},200).to({scaleX:1,scaleY:1},300).wait(200);
+        this.arrowTW.setPaused(true)
+
+
+        var tw = this.changeTW = egret.Tween.get(this.changePosMC,{loop:true});
+        tw.to({rotation:30},100).to({rotation:-30},200).to({rotation:20},150).to({rotation:-20},150).to({rotation:0},70).wait(200);
+        this.changeTW.setPaused(true)
+
+
+
+        this.arrowGroup.touchChildren = this.arrowGroup.touchEnabled = false;
+        this.arrowGroup.visible = false;
     }
 
     private onOpen(e){
@@ -261,15 +285,53 @@ class BasePosUI extends game.BaseUI {
     }
 
     private onDragStart(e){
-        this.swapData = null;
+        this.insertPos = 0;
         this.selectData = e.target.data;
-        this.lastIndex = this.selectIndex = this.listData.source.indexOf(this.selectData);
+        this.targetIndex = this.selectIndex = this.listData.source.indexOf(this.selectData);
         this.dragTarget.data = e.target.data
         this.stage.addChild(this.dragTarget);
         this.dragTarget.x = e.data.x;
         this.dragTarget.y = e.data.y;
 
         this.renewSelectItem();
+    }
+
+    private onDragMove(e){
+        this.dragTarget.x = e.data.x - this.dragTarget.width/2;
+        this.dragTarget.y = e.data.y - this.dragTarget.height/2;
+
+        var p = this.list.globalToLocal(e.data.x,e.data.y)
+        p.x -= 8;
+        p.y -= 10;
+        //90*110
+        //8/20
+        var maxIndex = this.listData.length - 2;
+        var orginIndex= Math.floor((p.x)/105) + Math.floor(p.y/130)*6;
+        var index = Math.max(0,Math.min(maxIndex,orginIndex))
+        //var isOver = p.x%105 >30 && p.x%105 <80;
+        var lastInsetPos = this.insertPos;
+        if(p.x%105 <= 30)
+            this.insertPos = -1;
+        else if(p.x%105 >= 80)
+            this.insertPos = 1;
+        else
+            this.insertPos = 0;
+
+        if(orginIndex > maxIndex) //越界了
+        {
+            this.insertPos = 0
+            this.targetIndex = -1;
+        }
+        else if(index != this.targetIndex || lastInsetPos != this.insertPos)
+        {
+            this.targetIndex = index
+        }
+
+
+
+
+        egret.callLater(this.renewSelectItem,this);
+        //this.once(egret.Event.ENTER_FRAME,this.renewSelectItem,this)
     }
 
     //private onDragMove(e){
@@ -302,13 +364,13 @@ class BasePosUI extends game.BaseUI {
     //        this.listData.addItemAt(this.selectData,index)//插入到当前位置
     //        if(isOver)//交换
     //        {
-    //            if(this.lastIndex != this.selectIndex)
+    //            if(this.targetIndex != this.selectIndex)
     //            {
     //                var data = this.listData.removeItemAt(this.selectIndex+1)//把下家去掉
-    //                if(this.lastIndex > this.selectIndex)
-    //                    this.listData.addItemAt(data,this.lastIndex)//插入到以前位置
-    //                else if(this.lastIndex < this.selectIndex)
-    //                    this.listData.addItemAt(data,this.lastIndex+1)//插入到以前位置
+    //                if(this.targetIndex > this.selectIndex)
+    //                    this.listData.addItemAt(data,this.targetIndex)//插入到以前位置
+    //                else if(this.targetIndex < this.selectIndex)
+    //                    this.listData.addItemAt(data,this.targetIndex+1)//插入到以前位置
     //                this.swapData = data
     //            }
     //            else //指回原来位置
@@ -324,38 +386,99 @@ class BasePosUI extends game.BaseUI {
     //    egret.callLater(this.renewSelectItem,this);
     //    //this.once(egret.Event.ENTER_FRAME,this.renewSelectItem,this)
     //}
-    private onDragMove(e){
-        this.dragTarget.x = e.data.x - this.dragTarget.width/2;
-        this.dragTarget.y = e.data.y - this.dragTarget.height/2;
 
-        var p = this.list.globalToLocal(e.data.x,e.data.y)
-        p.x -= 8;
-        p.y -= 10;
-        //90*110
-        //8/20
-        var maxIndex = this.listData.length - 2;
-        var index = Math.max(0,Math.min(maxIndex,Math.floor(p.x/98) + Math.floor(p.y/130)*6))
-        if(index != this.selectIndex)
-        {
-            this.listData.removeItemAt(this.selectIndex)
-            this.selectIndex = index;
-            this.listData.addItemAt(this.selectData,index)
-            egret.callLater(this.renewSelectItem,this);
-        }
-    }
+
+    //private onDragMove(e){
+    //    this.dragTarget.x = e.data.x - this.dragTarget.width/2;
+    //    this.dragTarget.y = e.data.y - this.dragTarget.height/2;
+    //
+    //    var p = this.list.globalToLocal(e.data.x,e.data.y)
+    //    p.x -= 8;
+    //    p.y -= 10;
+    //    //90*110
+    //    //8/20
+    //    var maxIndex = this.listData.length - 2;
+    //    var index = Math.max(0,Math.min(maxIndex,Math.floor(p.x/98) + Math.floor(p.y/130)*6))
+    //    if(index != this.selectIndex)
+    //    {
+    //        this.listData.removeItemAt(this.selectIndex)
+    //        this.selectIndex = index;
+    //        this.listData.addItemAt(this.selectData,index)
+    //        egret.callLater(this.renewSelectItem,this);
+    //    }
+    //}
 
     private onDragEnd(e){
         MyTool.removeMC(this.dragTarget)
+        var index = Math.max(0,this.insertPos + this.targetIndex)
+        if(this.targetIndex != -1 && this.selectIndex != index)
+        {
+            if(this.insertPos == 0)
+            {
+                var item = this.listData.replaceItemAt(this.selectData,index)
+                this.listData.replaceItemAt(item,this.selectIndex)
+            }
+            else
+            {
+                this.listData.removeItemAt(this.selectIndex)
+                if(index > this.selectIndex && this.insertPos > 0)
+                    index --;
+                this.listData.addItemAt(this.selectData,index)
+            }
+        }
+
+
+
         this.selectData = null
-        this.swapData = null
         this.selectIndex = -1
+        this.targetIndex = -1
+        this.insertPos = 0
+
         this.renewSelectItem();
+
+
     }
 
     private renewSelectItem(){
+        var chooseData = this.listData.getItemAt(this.targetIndex);
+        var swapData = this.selectData && this.targetIndex != this.selectIndex && this.insertPos==0?chooseData:null;
+        var targetItem;
         for(var i=0;i<this.list.numChildren;i++)
         {
-            this.list.getChildAt(i)['renewSelect']([this.selectData,this.swapData]);
+            var item:BasePosChooseItem = <BasePosChooseItem>this.list.getChildAt(i);
+            item.renewSelect(this.selectData,swapData);
+            if(item.data == chooseData)
+                targetItem = item;
+        }
+        if(this.targetIndex == -1)
+        {
+            this.arrowTW.setPaused(true)
+            this.changeTW.setPaused(true)
+            this.arrowGroup.visible = false
+        }
+        else
+        {
+
+            this.arrowGroup.visible = true
+            var p = targetItem.localToGlobal(0,0)
+            this.arrowGroup.y = p.y - 5;
+            if(this.insertPos == 0)
+            {
+                this.arrowGroup.x = p.x + targetItem.width/2
+                this.changePosMC.visible = true
+                this.arrowMC.visible = false
+                this.changeTW.setPaused(false)
+            }
+            else
+            {
+                this.changePosMC.visible = false
+                this.arrowMC.visible = true
+                this.arrowTW.setPaused(false)
+                if(this.insertPos == -1)
+                    this.arrowGroup.x = p.x - 4
+                else
+                    this.arrowGroup.x = p.x + targetItem.width +  4
+            }
         }
     }
 

@@ -82,6 +82,37 @@ class TecInfoUI extends game.BaseWindow {
         this.desText.text = this.dataIn.des
         switch(this.dataIn.type)
         {
+            case 1:
+                if(this.dataIn.id == 1)
+                    this.upGroup.visible = false
+                else
+                {
+                    this.upGroup.visible = true
+                    var icon
+                    if(this.dataIn.id == 2)
+                    {
+                        this.text1.text = '' + TCM.getHp()
+                        this.text2.text = '' + (TCM.getHp() + 1)
+                        icon = 'icon_love_png'
+                    }
+                    else if(this.dataIn.id == 3)
+                    {
+                        this.text1.text = '' + SlaveManager.getInstance().getCurrentMax()
+                        this.text2.text = '' + (SlaveManager.getInstance().getCurrentMax() + 1)
+                        icon = 'tec_slave_icon_png'
+                    }
+                    else if(this.dataIn.id == 4)
+                    {
+                        this.text1.text = '' + PosManager.getInstance().maxPosNum()
+                        this.text2.text = '' + (PosManager.getInstance().maxPosNum() + 1)
+                        icon = 'icon_card_png'
+                    }
+                    this.icon1.source = icon
+                    this.icon2.source = icon
+
+                }
+
+                break;
             case 2:
                 this.upGroup.visible = true
                 this.icon1.source = 'icon_force2_png'

@@ -6,6 +6,7 @@ class TecManager {
         return this._instance;
     }
 
+    public maxMainLevel = 20
     public tecData = {};
     public init(data){
         this.tecData = data;
@@ -134,6 +135,8 @@ class TecManager {
     }
 
     public testRed(id){
+        if(id == 1 && this.getLevel(1) >= this.maxMainLevel)
+            return false;
          var arr = this.getLevelUpCost(id);
         for(var i=0;i<arr.length;i++)
         {

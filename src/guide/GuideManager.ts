@@ -207,10 +207,10 @@ class GuideManager {
             mc:function(){return CardInfoUI.getInstance().okBtn},
             text:'解锁后你就可以在对战和防守阵容中使用该卡牌了',
         })
-        this.addGuideObj({
-            mc:function(){return CardInfoUI.getInstance().closeBtn},
-            text:'当你的主科技等级提升时，你可以获得更多的未解锁卡牌',
-        })
+        //this.addGuideObj({
+        //    mc:function(){return CardInfoUI.getInstance().closeBtn},
+        //    text:'当你的主科技等级提升时，你可以获得更多的未解锁卡牌',
+        //})
 
         ////////////////////////////////////
 
@@ -228,17 +228,18 @@ class GuideManager {
             }
         })
 
-        this.addGuideObj({
-            text:'我觉得以您的智慧，应该也不再需要我的手把手教学了吧？',
-            fun:function(){
-                self.showGuide()
-            }
-        })
+        //this.addGuideObj({
+        //    text:'我觉得以您的智慧，应该也不再需要我的手把手教学了吧？',
+        //    fun:function(){
+        //        self.showGuide()
+        //    }
+        //})
 
         this.addGuideObj({
             text:'那我就此别过，以后有机会一起驰骋疆场吧！',
             fun:function(){
                 self.endGuide()
+                CardInfoUI.getInstance().hide();
                 MainUI.getInstance().onBottomSelect(2);
             }
         })

@@ -15,7 +15,7 @@
 				<e:Group y="0" height="75" right="0">
 					<e:Group id="shopBtn" x="100" y="0" height="80" width="80">
 						<e:Image source="main_shop_png" verticalCenter="0" horizontalCenter="0"/>
-						<e:Label text="商店" size="22" horizontalCenter="0" stroke="2" bottom="10"/>
+						<e:Label text="商城" size="22" horizontalCenter="0" stroke="2" bottom="10"/>
 					</e:Group>
 					<e:Group id="rankBtn" x="100" y="0" height="80" width="80">
 					<e:Image source="main_rank_png" horizontalCenter="0" verticalCenter="0"/>

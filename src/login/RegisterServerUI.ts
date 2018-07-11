@@ -125,7 +125,7 @@ class RegisterServerUI extends game.BaseWindow {
 
         this.chooseMC.x = mc.x - 5;
         this.chooseMC.y = mc.y - 5;
-        this.setHtml(this.desText, '加强' + this.createHtml(PKConfig.TYPENAME[this.type]+'类型',PKConfig.TYPECOLOR[this.type]) + '单位属性10%')
+        this.setHtml(this.desText, '加强【' + this.createHtml(PKConfig.TYPENAME[this.type]+'类型',PKConfig.TYPECOLOR[this.type]) + '】单位属性10%')
 
         egret.Tween.removeTweens(this.arrowMC)
         var baseY = this.chooseMC.y + this.chooseMC.height + 10;

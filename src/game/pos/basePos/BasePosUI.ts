@@ -136,15 +136,17 @@ class BasePosUI extends game.BaseUI {
     }
 
     private onTest(){
-        if(this.testSave())
-        {
+        this.testSave(()=>{
             if(this.type == 'atk')
                 SharedObjectManager.getInstance().setMyValue('pk_choose',this.index)
             PosTestUI.getInstance().show(this.type,{
                 list:this.changeToServerList(),
                 name:Base64.encode((this.type == 'atk'?'进攻':'防御') + this.index),
             })
-        }
+
+            this.sp = {};
+            this.renew();
+        })
 
     }
 

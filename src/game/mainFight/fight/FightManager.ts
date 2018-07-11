@@ -202,7 +202,7 @@ class FightManager {
             EM.dispatchEventWith(GameEvent.client.fight_change)
             if (fun)
                 fun();
-        });
+        },true,1,true);
     }
 
     public changePos(list,fun?){

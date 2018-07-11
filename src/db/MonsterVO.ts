@@ -82,10 +82,12 @@ class MonsterVO {
         this.mv_atk2 = data.mv_atk2
 
         //var arr = [];
-        //for(var s in MonsterVO.data)
+        //for(var s in SkillVO.data)
         //{
-        //   arr.push(MonsterVO.data[s])
+        //    if(SkillVO.data[s].level < 998)
+        //   arr.push('"'+s+'":999')
         //}
+        //console.log(arr.join(','));
         //ArrayUtil.sortByField(arr,['level'],[0])
         //for(var i=0;i<arr.length;i++)
         //{
@@ -132,15 +134,26 @@ class MonsterVO {
         return Math.floor(sv * (1+force/100));
     }
 
-    public getDes(forceRate){
-        return this.des.replace('#1',this.sv1 + '').replace('#2',this.sv2 + '').replace('#3',this.sv3 + '')
-            .replace('$1',this.changeValue(this.sv1,forceRate) + '').replace('$2',this.changeValue(this.sv2,forceRate) + '')
-            .replace('$3',this.changeValue(this.sv3,forceRate) + '').replace('#CD',MyTool.toFixed(this.cd/1000,1) + '')   //CD初始时乘了1000
+    public getDes(forceRate,fillColor?){
+        return this.des.replace('#1',this.fillColor(this.sv1,fillColor)).
+            replace('#2',this.fillColor(this.sv2,fillColor)).
+            replace('#3',this.fillColor(this.sv3,fillColor)).
+            replace('$1',this.changeValue(this.sv1,forceRate,fillColor)).
+            replace('$2',this.changeValue(this.sv2,forceRate,fillColor) + '').
+            replace('$3',this.changeValue(this.sv3,forceRate,fillColor)).
+            replace('#CD',MyTool.toFixed(this.cd/1000,1) + '')   //CD初始时乘了1000
     }
-    private changeValue(v,forceRate){
+
+    private fillColor(str,fillColor){
+        if(fillColor)
+            return MyTool.createHtml(str,0xFFD67F)
+        return str
+    }
+
+    private changeValue(v,forceRate,fillColor){
         if(!v)
             return;
-        return Math.ceil(v*forceRate);
+        return this.fillColor(Math.ceil(v*forceRate),fillColor);
     }
 
     public getAtkDis(){

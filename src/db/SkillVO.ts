@@ -74,15 +74,26 @@ class SkillVO {
          SBase.getData(this.id).preload();
     }
 
-    public getDes(forceRate){
-        return this.des.replace('#1',this.sv1 + '').replace('#2',this.sv2 + '').replace('#3',this.sv3 + '')
-            .replace('$1',this.changeValue(this.sv1,forceRate) + '').replace('$2',this.changeValue(this.sv2,forceRate) + '')
-            .replace('$3',this.changeValue(this.sv3,forceRate) + '').replace('#CD',MyTool.toFixed(this.cd/1000,1) + '')
+    public getDes(forceRate,fillColor?){
+        return this.des.replace('#1',this.fillColor(this.sv1,fillColor)).
+            replace('#2',this.fillColor(this.sv2,fillColor)).
+            replace('#3',this.fillColor(this.sv3,fillColor)).
+            replace('$1',this.changeValue(this.sv1,forceRate,fillColor)).
+            replace('$2',this.changeValue(this.sv2,forceRate,fillColor) + '').
+            replace('$3',this.changeValue(this.sv3,forceRate,fillColor)).
+            replace('#CD',MyTool.toFixed(this.cd/1000,1) + '')   //CD初始时乘了1000
     }
-    private changeValue(v,forceRate){
+
+    private fillColor(str,fillColor){
+        if(fillColor)
+            return MyTool.createHtml(str,0xFFD67F)
+        return str
+    }
+
+    private changeValue(v,forceRate,fillColor){
         if(!v)
             return;
-        return Math.ceil(v*forceRate);
+        return this.fillColor(Math.ceil(v*forceRate),fillColor);
     }
 
     public getAdd(force,type?){

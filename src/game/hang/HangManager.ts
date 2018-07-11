@@ -128,7 +128,7 @@ class HangManager {
             EM.dispatch(GameEvent.client.hang_change);
             if (fun)
                 fun();
-        });
+        },true,1,true);
     }
 
     public getVideoList(fun?) {

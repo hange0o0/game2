@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <e:Skin class="FightInfoUISkin" width="600" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" height="880" states="normal,first" >
 	<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
-	<e:Image source="pk_bg1_jpg" left="5" right="5" top="5" bottom="5"/>
-	<e:Image source="bg18_png" scale9Grid="32,31,6,8" left="0" right="0" top="0" bottom="0"/>
+	<e:Image source="bg18_png" scale9Grid="32,31,6,8" left="0" right="0" top="0" bottom="0" includeIn="normal"/>
 	<e:List id="list" y="330" horizontalCenter="5.5">
 		<e:layout>
 		<e:TileLayout requestedColumnCount="3" verticalGap="20" paddingLeft="0" paddingTop="0" paddingBottom="0" horizontalGap="50"/>
@@ -20,14 +19,14 @@
 			</e:layout>
 		</e:Group>
 		<e:Button id="okBtn" label="开始挑战" width="150" skinName="Btn1Skin" y="100" right.normal="10" horizontalCenter.first="0" y.first="105" y.normal="102"/>
-		<e:Label text="参加远征可获得大量资源，并可获得秘石兑换道具" includeIn="first" y="20" horizontalCenter="0" size="26" width="320" lineSpacing="15"/>
+		<e:Label text="参加远征可获得大量资源，并可获得秘石兑换道具" includeIn="first" y="30" horizontalCenter="0" size="24" width="310" lineSpacing="15" textAlign="center"/>
 		<e:Button id="cancelBtn" label="结束挑战" width="150" y="31.12" skinName="Btn2Skin" right="10" includeIn="normal"/>
 	</e:Group>
 	<e:Group y="20" horizontalCenter="0">
 		<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="420" x="0" y="0"/>
 		<e:Label text="远　征" y="10.18" size="24" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
 	</e:Group>
-	<e:Group y="270" right="30" right.normal="30" y.normal="280">
+	<e:Group  right="30" y="280">
 		<e:Image source="icon_clock_png" x="0" y="0"/>
 		<e:Label id="cdText" text="Label" size="24" stroke="2" textAlign="center" y="16" x="45" textColor="0xFFE79B"/>
 		<e:layout>

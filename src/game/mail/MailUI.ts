@@ -48,7 +48,7 @@ class MailUI extends game.BaseUI {
     }
 
     private onTab(){
-        this.topUI.setTitle(this.typeObj[this.tab.selectedIndex].name);
+        //this.topUI.setTitle(this.typeObj[this.tab.selectedIndex].name);
         this.renew();
     }
 

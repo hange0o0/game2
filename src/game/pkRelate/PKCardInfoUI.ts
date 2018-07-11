@@ -111,7 +111,7 @@ class PKCardInfoUI extends game.BaseContainer {
 
         var baseForceAdd = CM.getCardVO(this.dataIn.mid).getAdd(this.dataIn.force)
         var forceAdd = CM.getCardVO(this.dataIn.mid).getAdd(this.dataIn.force,this.dataIn.type)
-        this.desText.text = vo.getDes(forceAdd);
+        this.setHtml(this.desText,vo.getDes(forceAdd,true));
         console.log(forceAdd)
         var str = vo.isMonster? '传送':'施法'
 
@@ -204,7 +204,7 @@ class PKCardInfoUI extends game.BaseContainer {
                 var skillNum = CRM.getSkillNum(vo.id);
                 var arr3:any = []
                 if(skillNum >= CRM.maxSkill)
-                    arr3.push({index:1,icon:'icon_atk_png',iconScale:1,title:'永久使用',rate:1})
+                    arr3.push({index:1,icon:'icon_atk_png',iconScale:1,title:'使用次数',rate:1,value:'无限'})
                 else
                     arr3.push({index:1,icon:'icon_atk_png',iconScale:1,title:'当前拥有',value:skillNum + ' /' + CRM.maxSkill,rate:skillNum/CRM.maxSkill})
                 if(this.dataIn.sp.num)

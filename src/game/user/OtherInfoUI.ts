@@ -300,7 +300,7 @@ class OtherInfoUI extends game.BaseWindow {
 
     private onTimer(){
         var data = InfoManager.getInstance().otherInfo[this.gameid]
-        if(data.protime > TM.now())
+        if(data && data.protime > TM.now())
         {
             var cd = data.protime - TM.now();
             if(cd < 3600*24)
@@ -325,6 +325,7 @@ class OtherInfoUI extends game.BaseWindow {
     }
 
     public renew(){
+        this.currentState = this.gameid == UM.gameid?'self':'other'
         this.isMyMaster = false
         this.copyGroup.visible = false
         var data = InfoManager.getInstance().otherInfo[this.gameid]

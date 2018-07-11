@@ -6,8 +6,8 @@ class Net extends egret.EventDispatcher{
     }
 
     //发送消息
-    public static send(head,msg,fun?,isMode = true,serverType=1){
-        Net.getInstance().send(head,msg,fun,isMode,serverType);
+    public static send(head,msg,fun?,isMode = true,serverType=1,isRepeat=false){
+        Net.getInstance().send(head,msg,fun,isMode,serverType,isRepeat);
     }
     //添加用户信息
     public static addUser(msg){
@@ -58,13 +58,15 @@ class Net extends egret.EventDispatcher{
         return variables;
     }
 
-    public send(head,msg,fun?,isMode = true,serverType=1){
+    public send(head,msg,fun?,isMode = true,serverType=1,isRepeat=false){
         var loader = new egret.URLLoader();
         loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
         loader['isMode'] = isMode
         loader['fun'] = fun
         loader['head'] = head
         loader['msg'] = msg;
+        loader['isRepeat'] = isRepeat;
+
         if(serverType == 1)
         {
             var request = new egret.URLRequest(Config.host);
@@ -182,8 +184,23 @@ class Net extends egret.EventDispatcher{
         var loader = e.currentTarget;
         loader.removeEventListener(egret.Event.COMPLETE, this.onComplete, this);
         loader.removeEventListener(egret.IOErrorEvent.IO_ERROR, this.onError, this);
-        MyWindow.Alert('与服务器失去连接！',this.refresh);
-        GameManager.getInstance().stopTimer();
+        if(loader.isRepeat)
+        {
+            MyWindow.Confirm('数据提交失败，与服务器失去连接！',(b)=>{
+                if(b==1)
+                {
+                    this.send(loader.head,loader.msg,loader.fun,loader.isMode,1,true);
+                }
+                else
+                    this.refresh();
+            },['刷新', '重试']);
+        }
+        else
+        {
+            MyWindow.Alert('与服务器失去连接！',this.refresh);
+            GameManager.getInstance().stopTimer();
+        }
+
         GameManager.container.touchChildren = GameManager.container.touchEnabled = true;
         this.removeLoading();
     }

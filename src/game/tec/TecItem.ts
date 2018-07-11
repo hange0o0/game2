@@ -17,6 +17,11 @@ class TecItem extends game.BaseItem {
     }
 
     private onClick(){
+        if(this.data.id == 1 && TecManager.getInstance().getLevel(this.data.id) >= TecManager.getInstance().maxMainLevel)
+        {
+            MyWindow.Alert('下一等级暂未开放！')
+            return;
+        }
         TecInfoUI.getInstance().show(this.data);
     }
 

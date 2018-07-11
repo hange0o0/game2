@@ -16,7 +16,7 @@ class DebugManager {
     }
 
     public MML = 998;  //测试出战怪的等级
-    public addSkill = true
+    public addSkill = false
     public cardLen = 15
     public createHangFlag = false;
 

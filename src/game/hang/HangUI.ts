@@ -398,7 +398,7 @@ class HangUI extends game.BaseItem {
         {
             while(true)
             {
-                var id = parseInt(ArrayUtil.randomOne(HangManager.getInstance().lastlist));
+                var id = parseInt(ArrayUtil.randomOne(HangManager.getInstance().lastlist));   //敌人的出战列表，一定有
                 if(id < PKConfig.skillBeginID)
                     break;
             }

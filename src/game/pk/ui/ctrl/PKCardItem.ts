@@ -72,6 +72,8 @@ class PKCardItem extends game.BaseItem {
     private onClick(){
         if(game.BaseUI.isStopEevent)
             return;
+        if(PKData.getInstance().isReplay)
+            return
         if(this.data && !this.data.waiting)
         {
             this.con.setChooseCard(this);

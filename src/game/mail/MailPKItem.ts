@@ -90,6 +90,9 @@ class MailPKItem extends game.BaseItem {
             case PKManager.TYPE_SLAVE:
                 this.typeText.text = '奴隶PK';
                 break;
+            case PKManager.TYPE_FIGHT:
+                this.typeText.text = '远征PK';
+                break;
         }
 
         for(var i=0;i<this.data.players.length;i++)

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="OtherInfoUISkin" width="560" height="800" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+<e:Skin class="OtherInfoUISkin" width="560" height="800" currentState="other" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" states="other,self" >
 	<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
-	<e:Scroller id="scroller" width="100%" top="2" bottom="100" bounces="false" horizontalCenter="0">
+	<e:Scroller id="scroller" width="100%" top="2" bottom="100" bounces="false" horizontalCenter="0" bottom.self="2">
 		<e:Group id="con">
 			<e:Group id="cdGroup" x="199" y="60">
 				<e:Label text="剩余保护时间:" size="24" stroke="2" textAlign="center" y="-24" x="55"/>
@@ -76,7 +76,7 @@
 			</e:layout>
 		</e:Group>
 	</e:Scroller>
-	<e:Group horizontalCenter="0" bottom="20" locked="true">
+	<e:Group horizontalCenter="0" bottom="20" includeIn="other">
 		<e:Button id="viewBtn" label="收服奴隶" skinName="Btn1Skin" x="0" y="0" width="160"/>
 		<e:Button id="okBtn" label="收服奴隶" skinName="Btn1Skin" x="100" y="0" width="160"/>
 		<e:layout>
@@ -84,7 +84,7 @@
 		</e:layout>
 	</e:Group>
 	<e:Image source="close_btn2_png" horizontalCenter="0" bottom="-40" touchEnabled="false"/>
-	<e:Image source="line2_png" bottom="97" left="10" right="10" fillMode="repeat"/>
+	<e:Image source="line2_png" bottom="97" left="10" right="10" fillMode="repeat" includeIn="other"/>
 	<e:Group id="copyGroup" y="114" right="30">
 		<e:Image source="border_4_png" x="0" y="0" width="220" scale9Grid="23,21,5,6" height="180"/>
 		<e:Group y="55" horizontalCenter="0">

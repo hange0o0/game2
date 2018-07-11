@@ -12,6 +12,18 @@ class MyWindow {
         var panel = new AlertUI();
         panel.show(msg, fun, btnLabel);
     }
+    public static AlertRelogin(msg) {
+
+        if (_get['debug'] == 100) {
+            document.body.style.background = '#000000'
+            return;
+        }
+
+        var panel = new AlertUI();
+        panel.show(msg, ()=>{
+            MyTool.refresh();
+        });
+    }
 
 //fun(type){type:1确定，2：取消，3右上角关闭}
     public static Confirm(msg, fun?, btnWord = ['取消', '确定'], sp?) {

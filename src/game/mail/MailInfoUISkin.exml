@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<e:Skin class="MailInfoUISkin" width="560" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" height="640" states="normal,award"  height.normal="520">
+<e:Skin class="MailInfoUISkin" width="560" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" minHeight="520" maxHeight="860" states="normal,award"  minHeight.normal="520">
 	<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
 
 	<e:Group  id="btnGroup" horizontalCenter="0" bottom="20">
@@ -9,7 +9,7 @@
 			<e:HorizontalLayout gap="30"/>
 		</e:layout>
 	</e:Group>
-	<e:Scroller width="500" horizontalCenter="0" top="280" bottom="100" minHeight="200" maxHeight="500" bounces="false" includeIn="award">
+	<e:Scroller id="scroller" width="500" horizontalCenter="0" top="280" bottom="100" minHeight="200" maxHeight="500" bounces="false" includeIn="award">
 		<e:Group>
 			<e:List id="list" width="500" minHeight="200" itemRendererSkinName="AwardItemSkin" x="0">
 				<e:layout>

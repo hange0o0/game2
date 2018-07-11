@@ -136,10 +136,7 @@ class CardInfoUI extends game.BaseWindow {
     public show(v?,sp?){
         this.data = v;
         this.sp = sp || {};
-        CardManager.getInstance().getCardLike(this.data.id,()=>{
-            super.show()
-        })
-
+        super.show()
     }
 
     public hide() {
@@ -151,6 +148,10 @@ class CardInfoUI extends game.BaseWindow {
         this.r0.selected = SharedObjectManager.getInstance().getMyValue('show_card_base') || false;
         this.r1.selected = !this.r0.selected
         this.renew();
+
+        CardManager.getInstance().getCardLike(this.data.id,()=>{
+              this.renewCardLike();
+        })
         //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
     }
 
@@ -236,9 +237,9 @@ class CardInfoUI extends game.BaseWindow {
 
     private renewCardLike(){
         var w = 180
-        var likeObj = CardManager.getInstance().cardLike[this.data.id];
-        this.likeText.text = NumberUtil.formatStrNum(likeObj.like_num) ||  '暂无票数'
-        this.unlikeText.text = NumberUtil.formatStrNum(likeObj.unlike_num) ||  '暂无票数'
+        var likeObj = CardManager.getInstance().cardLike[this.data.id] || {like_num:0,unlike_num:0};
+        this.likeText.text = likeObj.like_num?NumberUtil.formatStrNum(likeObj.like_num): '暂无票数'
+        this.unlikeText.text = likeObj.unlike_num?NumberUtil.formatStrNum(likeObj.unlike_num):'暂无票数'
         var total = (likeObj.like_num + likeObj.unlike_num);
         if(total)
         {

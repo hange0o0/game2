@@ -28,7 +28,7 @@ class RankUI extends game.BaseUI {
 
     public childrenCreated() {
         super.childrenCreated();
-
+        this.topUI.setTitle('排行榜');
 
         this.bottomUI.setHide(this.hide,this);
 
@@ -40,7 +40,7 @@ class RankUI extends game.BaseUI {
     }
 
     private onTab(){
-        this.topUI.setTitle(this.typeObj[this.tab.selectedIndex].name);
+        //this.topUI.setTitle(this.typeObj[this.tab.selectedIndex].name);
         this.getData();
     }
 
@@ -53,7 +53,7 @@ class RankUI extends game.BaseUI {
     }
 
     public onShow(){
-        this.topUI.setTitle(this.typeObj[this.tab.selectedIndex].name + '排行');
+
         this.getData();
         //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
     }

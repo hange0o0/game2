@@ -48,9 +48,15 @@ class CardItem extends game.BaseItem {
                 this.currentState = 'skill';
                 var num = CardManager.getInstance().getSkillNum(vo.id)
                 if(num < CardManager.getInstance().maxSkill)
+                {
                     this.numText.text = num + ''
+                    //this.numText.size = 22;
+                }
                 else
+                {
                     this.numText.text = '∞'
+                    //this.numText.size = 30;
+                }
             }
         }
         else if(isOpen)

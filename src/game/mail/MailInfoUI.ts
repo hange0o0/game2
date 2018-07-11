@@ -14,6 +14,7 @@ class MailInfoUI extends game.BaseWindow {
     private titleText: eui.Label;
     private desText: eui.Label;
     private timeText: eui.Label;
+    private scroller: eui.Scroller;
 
 
 
@@ -28,6 +29,7 @@ class MailInfoUI extends game.BaseWindow {
         super.childrenCreated();
         this.addBtnEvent(this.okBtn,this.onClick)
         this.addBtnEvent(this.cancelBtn,this.hide)
+        this.scroller.viewport = this.list
     }
 
     public onClick(){
@@ -81,6 +83,7 @@ class MailInfoUI extends game.BaseWindow {
             var canAward = haveAward && !parseInt(this.dataIn.stat);
             var arr = MyTool.getAwardArr(content.award);
             this.list.dataProvider = new eui.ArrayCollection(arr)
+            //this.scroller.viewport.scrollV = 0;
             if(canAward)
             {
                 this.btnGroup.addChild(this.okBtn)

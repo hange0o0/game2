@@ -3,6 +3,7 @@
 	<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
 	<e:Group y="100.01" horizontalCenter="0">
 		<ns1:HeadMC x="0" skinName="HeadMCSkin" id="headMC" y="0"/>
+		<e:Label text="更换" x="7" y="72" size="22" textColor="0xffe399" stroke="3" touchEnabled="false"/>
 		<e:Group x="110" y="10">
 			<e:Image id="typeMC" source="icon_type1_png" x="14" y="358.03" scaleX="0.6" scaleY="0.6"/>
 			<e:Label id="nameText" text="更换头像需花费：" y="0" x="0" size="30" stroke="2" strokeColor="0x331c03"/>
@@ -36,7 +37,7 @@
 	<e:Group x="63" y="400">
 		<e:Group x="0" y="0">
 			<e:Label y="4" textColor="0xEFE5AD" size="24" text="游戏官方QQ群：" x="0"/>
-			<e:Label id="qqText" y="0" textColor="0xEDCB24" size="24" text="1624431545" x="192"/>
+			<e:Label id="qqText" y="0" textColor="0xEDCB24" size="24" text="347331204" x="192"/>
 			<e:layout>
 			<e:HorizontalLayout/>
 			</e:layout>

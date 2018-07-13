@@ -128,6 +128,8 @@ class FightManager {
                     break;
                 }
             }
+            this.value -=  this.shopData[i].diamond;
+            EM.dispatchEventWith(GameEvent.client.fight_change)
             SoundManager.getInstance().playEffect(SoundConfig.effect_buy);
             if(fun)
                 fun();

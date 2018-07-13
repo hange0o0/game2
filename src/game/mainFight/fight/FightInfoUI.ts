@@ -150,7 +150,7 @@ class FightInfoUI extends game.BaseWindow {
         this.getNextData = false
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
-        this.addPanelOpenEvent(GameEvent.client.fight_change,this.renewInfo)
+        this.addPanelOpenEvent(GameEvent.client.fight_change,this.renew)
     }
 
     private onTimer(){

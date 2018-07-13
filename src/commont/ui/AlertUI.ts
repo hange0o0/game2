@@ -14,6 +14,7 @@ class AlertUI extends game.BaseWindow {
     private btnLabel;
 
     public childrenCreated() {
+        this.canBGClose = false;
         super.childrenCreated();
         this.addBtnEvent(this.okBtn, this.onClick);
         MyTool.removeMC(this.closeBtn)

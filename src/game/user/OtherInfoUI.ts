@@ -31,6 +31,7 @@ class OtherInfoUI extends game.BaseWindow {
     private viewBtn: eui.Button;
     private okBtn: eui.Button;
     private copyGroup: eui.Group;
+    private btnGroup: eui.Group;
     private t0: OtherInfoChooseItem;
     private t1: OtherInfoChooseItem;
     private t2: OtherInfoChooseItem;
@@ -239,7 +240,7 @@ class OtherInfoUI extends game.BaseWindow {
                 MyWindow.Alert('当前保护时间剩余' + proStr + '\n无法收服其作为你的奴隶')
                 return;
             }
-            if(PosManager.getInstance().defList.length == 0)
+            if(ObjectUtil.objLength(PosManager.getInstance().defList) == 0)
             {
                 MyWindow.Alert('请先设置防守阵容',()=>{
                     BasePosUI.getInstance().show('def',0);
@@ -257,6 +258,8 @@ class OtherInfoUI extends game.BaseWindow {
     }
 
     public show(gameid?){
+        if(!gameid)
+            return;
         this.gameid = gameid;
         SlaveManager.getInstance().viewList(()=>{
             InfoManager.getInstance().getInfo(gameid,()=>{
@@ -434,6 +437,15 @@ class OtherInfoUI extends game.BaseWindow {
             this.dataArray.source = [];
         }
         this.dataArray.refresh()
+
+        if(!slave.self) //该玩家未进入过奴隶模块
+        {
+            MyTool.removeMC(this.okBtn)
+        }
+        else
+        {
+            this.btnGroup.addChild(this.okBtn)
+        }
 
     }
 }

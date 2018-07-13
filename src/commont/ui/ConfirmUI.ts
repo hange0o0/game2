@@ -16,6 +16,7 @@ class ConfirmUI extends game.BaseWindow {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.canBGClose = false;
         this.addBtnEvent(this.okBtn, this.onClick);
         this.addBtnEvent(this.cancelBtn, this.onCancelClick);
         this.addBtnEvent(this.closeBtn, this.onCloseClick);

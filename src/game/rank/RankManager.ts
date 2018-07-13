@@ -18,16 +18,17 @@ class RankManager {
                 switch (ranktype)
                 {
                     case 'force':
-                        list[i].source = UM.tec_force;
+                        list[i].score = UM.tec_force;
                         break;
                     case 'hang':
-                        list[i].source = HangManager.getInstance().level;
+                        list[i].score = HangManager.getInstance().level;
                         break;
                     case 'hourcoin':
-                        list[i].source = UM.hourcoin;
+                        list[i].score = UM.hourcoin;
                         break;
                 }
             }
+            list[i].score = parseInt(list[i].score);
         }
         ArrayUtil.sortByField(list,['score'],[1]);
         for(var i=0;i<list.length;i++)

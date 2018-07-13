@@ -83,10 +83,10 @@ class LoginUI extends game.BaseWindow {
             }
             if(this.debugStep == 1 && !this.passwordText.text)
             {
-                SharedObjectManager.getInstance().setValue('debug_open',true)
                 this.nameText.text = ''
                 this.passwordText.text = ''
                 Config.isDebug = !Config.isDebug;
+                SharedObjectManager.getInstance().setValue('debug_open',Config.isDebug)
             }
             if(this.debugStep)
                 return

@@ -338,6 +338,11 @@ class SlaveManager {
             }
             if(msg.fail == 7)
             {
+                MyWindow.Alert('对主保护CD中')
+                return;
+            }
+            if(msg.fail == 8)
+            {
                 MyWindow.Alert('奴隶数达上限')
                 return;
             }

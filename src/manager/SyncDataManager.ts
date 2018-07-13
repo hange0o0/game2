@@ -27,6 +27,11 @@ class SyncDataManager{
                     break;
                 case 'sync_opendata':
                     UM.openData = value;
+                    if(data.mail_award)
+                    {
+                        MailManager.getInstance().serverAward++;
+                        EM.dispatchEventWith(GameEvent.client.red_change)
+                    }
                     UM.onOpenDataChange()
                     break;
                 case 'sync_prop':

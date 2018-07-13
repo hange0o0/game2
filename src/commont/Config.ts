@@ -10,6 +10,8 @@ class Config {
     public static isDebug: boolean = true;
     public static userHost: string = 'hangegame.com';
     public static host: string = 'hangegame.com';
+    public static pkServerHost: string = '172.17.196.195';
+    public static pkServerPose = 3000;
     public static serverID: number = 1;
     //public static host: string = '172.17.196.195:90';
     public static user_version: number = 1;
@@ -21,7 +23,7 @@ class Config {
 
 
 
-    public static fightLevel = 1;
+    public static fightLevel = 20;
 
 
     //public static friendLevel = 3;

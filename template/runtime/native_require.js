@@ -312,6 +312,7 @@ var game_file_list = [
 	"bin-debug/game/pkRelate/result/PKAwardItem.js",
 	"bin-debug/game/pkRelate/result/PKFailUI.js",
 	"bin-debug/game/pkRelate/result/PKWinUI.js",
+	"bin-debug/game/pkServer/PKServerManager.js",
 	"bin-debug/game/pos/PosCardItem.js",
 	"bin-debug/game/pos/PosListHeadItem.js",
 	"bin-debug/game/pos/PosManager.js",

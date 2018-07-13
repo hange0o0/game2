@@ -76,7 +76,7 @@
 			</e:layout>
 		</e:Group>
 	</e:Scroller>
-	<e:Group horizontalCenter="0" bottom="20" includeIn="other">
+	<e:Group id="btnGroup" horizontalCenter="0" bottom="20" includeIn="other">
 		<e:Button id="viewBtn" label="收服奴隶" skinName="Btn1Skin" x="0" y="0" width="160"/>
 		<e:Button id="okBtn" label="收服奴隶" skinName="Btn1Skin" x="100" y="0" width="160"/>
 		<e:layout>

@@ -57,8 +57,11 @@ class MainUI extends game.BaseUI {
         this.bottomItems.push(this.b3)
         this.bottomItems.push(this.b4)
 
-        var blurFliter = new egret.BlurFilter( 10 , 10);
-        this.bg.filters = [blurFliter];
+        if(egret.Capabilities.renderMode == 'webgl')
+        {
+            var blurFliter = new egret.BlurFilter( 10 , 10);
+            this.bg.filters = [blurFliter];
+        }
         this.bg.cacheAsBitmap  = true;
 
         if(_get['app'])

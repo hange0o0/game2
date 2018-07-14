@@ -32,7 +32,7 @@ class TecManager {
     //取这个等级每小时能得到的金币
     public getCoinAdd(id,lv){
         var vo = TecVO.getObject(id);
-        return this.getTecValue(lv,vo.value1,3);
+        return this.getTecValue(lv,vo.value1,10);
     }
 
     public getForceAdd(id,lv){

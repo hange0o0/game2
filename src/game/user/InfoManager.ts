@@ -57,6 +57,11 @@ class InfoManager {
         var self = this;
         var oo:any = {};
         oo.otherid = otherid;
+        if(!otherid)
+        {
+            sendClientError('otherid not find')
+            return;
+        }
         Net.addUser(oo);
         Net.send(GameEvent.user.user_info, oo, (data)=>{
             var msg = data.msg;
@@ -90,6 +95,11 @@ class InfoManager {
         var self = this;
         var oo:any = {};
         oo.othernick = nick;
+        if(!nick)
+        {
+            sendClientError('othernick not find')
+            return;
+        }
         Net.addUser(oo);
         Net.send(GameEvent.user.user_info, oo, (data)=> {
             var msg = data.msg;
@@ -123,6 +133,11 @@ class InfoManager {
         var self = this;
         var oo:any = {};
         oo.otheruid = uid;
+        if(!uid)
+        {
+            sendClientError('otheruid not find')
+            return;
+        }
         Net.addUser(oo);
         Net.send(GameEvent.user.user_info, oo, (data)=> {
             var msg = data.msg;

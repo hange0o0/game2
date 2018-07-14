@@ -408,7 +408,7 @@ class PKMonsterData {
         {
             MBase.getData(data.atker.mid).onKill(data.atker,this);
         }
-        //PKData.getInstance().actionRecord.push('atk|' + this.actionTime + '|' + this.id + '|' + this.hp)
+
     }
 
     //直接死亡
@@ -488,6 +488,7 @@ class PKMonsterData {
             MBase.getData(this.mid).onDie(this);
         }
         this.getOwner().teamData.testState(PKConfig.LISTENER_DIE,this);
+        PKData.getInstance().actionRecord.push('die|' + this.actionTime + '|' + this.id + '|' + this.passEnd)
 
         //if(this.skillTemp[210] == 1)
         //{

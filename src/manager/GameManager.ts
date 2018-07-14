@@ -137,4 +137,8 @@ function handleErr(msg,url, line, col, errorObj)
     //}
     return false
 }
+
+function sendClientError(txt){
+    Net.send(GameEvent.sys.client_error,{msg:UM.gameid + ':' + txt});
+}
 onerror=handleErr;

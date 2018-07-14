@@ -8,7 +8,7 @@
 		<e:Group>
 		<e:List id="list" width="200" height="200" x="56" y="68">
 			<e:layout>
-				<e:VerticalLayout paddingLeft="10"/>
+				<e:VerticalLayout paddingLeft="10" paddingBottom="6"/>
 			</e:layout>
 		</e:List>
 		</e:Group>

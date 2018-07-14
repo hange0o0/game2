@@ -35,7 +35,7 @@ class PKData extends egret.EventDispatcher{
     public history = {};
     public disableKey = {}; //同一时间不能起效的KEY
 
-    //public actionRecord = []
+    public actionRecord = []
 
         //public stateObj = [] //所有要触发动画的集合
     //public topVideoList = [] //影响关部的动画的集合
@@ -72,7 +72,7 @@ class PKData extends egret.EventDispatcher{
     public init(data){
         this.isReplay = false;
         this.baseData = data;
-        //this.actionRecord = [];
+        this.actionRecord = [];
         this.quick = false
         this.history = {};
         this.monsterList.length = 0;
@@ -388,7 +388,7 @@ class PKData extends egret.EventDispatcher{
             actionTime:this.actionTime
         })
         monster['xxx'] = this.actionTime + '|' + monster.id
-        //this.actionRecord.push('create|' + this.actionTime + '|' + monster.id + '|' + monster.mid)
+        this.actionRecord.push('create|' + this.actionTime + '|' + monster.id + '|' + monster.mid)
         return monster;
     }
 

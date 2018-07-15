@@ -27,11 +27,17 @@ class SlaveMasterItem extends game.BaseItem {
     }
 
     private onPK(){
+        if(this.cdGroup.visible)
+        {
+            MyWindow.ShowTips('保护时间中，无法反抗')
+            return;
+        }
         var gameid = this.data.gameid
         var master = this.data.master
         PKBeforeUI.getInstance().show({
             fun:function(id){
-                SlaveManager.getInstance().slave_pk_begin(gameid,master,id)
+
+                SlaveManager.getInstance().slave_pk_begin(UM.gameid,gameid,id)
             }
         })
     }
@@ -41,7 +47,7 @@ class SlaveMasterItem extends game.BaseItem {
     }
 
     public onTimer(){
-        var cd = this.data.protime - TM.now()
+        var cd = SlaveManager.getInstance().protime - TM.now()
         if(cd > 0)
         {
             this.cdText.text = DateUtil.getStringBySecond(cd);

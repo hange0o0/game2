@@ -36,6 +36,9 @@ class UserManager {
     public maxEnergy = 60;
     public maxLevel = 50;
 
+    public closeVersion = 0;
+    public closeTime = 0;
+
 
     public fill(data:any):void{
         this.gameid = data.gameid;
@@ -71,7 +74,7 @@ class UserManager {
         //生产影响
         var cd = 60;
         var step = Math.round(this.hourcoin/60);
-        var add = Math.floor((time - this.coin.t)/cd);
+        var add = Math.floor(Math.min(time - this.coin.t,48*3600)/cd);
         if(add > 0)
         {
             this.coin.v += add*step;

@@ -12,9 +12,11 @@ class ShopBuyUI extends game.BaseWindow {
     }
 
     private shopItem: ShopItem;
+    private titleText: eui.Label;
     private cancelBtn: eui.Button;
     private okBtn: eui.Button;
-    private titleText: eui.Label;
+    private desText: eui.Label;
+
 
 
     private dataIn
@@ -40,6 +42,14 @@ class ShopBuyUI extends game.BaseWindow {
             this.titleText.text = '首次购买'
         else
             this.titleText.text = '第'+(this.dataIn.times + 1)+'次购买'
+
+        if(this.dataIn.id == 101){
+             this.currentState = 'des'
+            this.desText.text = '这个'+PropVO.getObject(101).propname+'会在战役第'+this.dataIn.level+'关掉落，是否花费'+PayManager.getInstance().getShopDiamond(this.dataIn)+'钻石提前获得？'
+        }
+        else {
+             this.currentState = 'normal'
+        }
     }
 
     private onClick(){

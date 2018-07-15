@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<e:Skin class="ShopBuyUISkin" width="480" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" height="520">
+<e:Skin class="ShopBuyUISkin" width="480" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" height="520" states="normal,des"  height.des="580">
 	<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
 	<ns1:ShopItem id="shopItem" y="110" skinName="ShopItemSkin" horizontalCenter="0"/>
 	<e:Group y="15" horizontalCenter="0">
@@ -13,5 +13,7 @@
 			<e:HorizontalLayout gap="30"/>
 		</e:layout>
 	</e:Group>
+	<e:Image source="bg11_png" scale9Grid="15,14,7,10" includeIn="des" anchorOffsetX="0" width="400" anchorOffsetY="0" height="80" horizontalCenter="0" bottom="120"/>
+	<e:Label id="desText" text="这个升级 石会在第XXX关掉落，是否花费XXX钻三种提前获得？" includeIn="des" size="24" textColor="0xfce2a9" width="360" horizontalCenter="0" lineSpacing="10" height="60" verticalAlign="middle" bottom="130"/>
 
 </e:Skin>

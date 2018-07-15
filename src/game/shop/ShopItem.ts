@@ -22,6 +22,8 @@ class ShopItem extends game.BaseItem {
     }
 
     private onClick(){
+        if(this.sellFinish.visible)
+            return;
         if(this.skillID)
         {
             this.data.diamondShop = true
@@ -77,9 +79,13 @@ class ShopItem extends game.BaseItem {
 
         }
         this.setHtml(this.nameText, name)
-        if(this.data.isbuy)
+        if(this.data.id == 101 && (this.data.times || HangManager.getInstance().level >= this.data.level))
         {
             this.sellFinish.visible = true
+            if(this.data.times)
+                this.sellFinish.text = '已售磬'
+            else
+                this.sellFinish.text = '已失效'
             this.diamondGroup.visible =  false
             MyTool.changeGray(this.img,true)
         }

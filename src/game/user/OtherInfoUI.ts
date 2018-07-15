@@ -261,32 +261,31 @@ class OtherInfoUI extends game.BaseWindow {
         if(!gameid)
             return;
         this.gameid = gameid;
-        SlaveManager.getInstance().viewList(()=>{
-            InfoManager.getInstance().getInfo(gameid,()=>{
-                super.show()
-            })
+        InfoManager.getInstance().getInfo(gameid,()=>{
+            this.superShow()
         })
-
     }
 
     public showNick(nick?){
-        SlaveManager.getInstance().viewList(()=>{
-            InfoManager.getInstance().getInfoByNick(nick,()=>{
-                this.gameid = InfoManager.getInstance().getIDByNick(nick);
-                super.show()
-            })
+        InfoManager.getInstance().getInfoByNick(nick,()=>{
+            this.gameid = InfoManager.getInstance().getIDByNick(nick);
+            this.superShow()
         })
-
     }
 
     public showUID(uid?){
+        InfoManager.getInstance().getInfoByUID(uid,()=>{
+            this.gameid = InfoManager.getInstance().getIDByUID(uid);
+            this.superShow()
+        })
+    }
+
+    public superShow(){
         SlaveManager.getInstance().viewList(()=>{
-            InfoManager.getInstance().getInfoByUID(uid,()=>{
-                this.gameid = InfoManager.getInstance().getIDByUID(uid);
+            SlaveManager.getInstance().slave_list(()=>{
                 super.show()
             })
         })
-
     }
 
     public hide() {
@@ -336,6 +335,8 @@ class OtherInfoUI extends game.BaseWindow {
         this.nameText.text = '' + data.nick //+ '  LV.' + (data.level||1);
         this.coinText.text = '时产：' + data.hourcoin
         this.forceText.text = '战力：' + data.tec_force
+        if(Config.isDebug)
+            this.nameText.text += ' ' + data.uid
 
         var infoArr = [
             {title:'科技等级：',value:'LV.' + (data.level||1)},
@@ -438,7 +439,8 @@ class OtherInfoUI extends game.BaseWindow {
         }
         this.dataArray.refresh()
 
-        if(!slave.self) //该玩家未进入过奴隶模块
+        var slaveFull = !this.isMyMaster &&  this.master != UM.gameid && SlaveManager.getInstance().getCurrentMax()<= SlaveManager.getInstance().slaveList.length
+        if(!slave.self || slaveFull) //该玩家未进入过奴隶模块
         {
             MyTool.removeMC(this.okBtn)
         }

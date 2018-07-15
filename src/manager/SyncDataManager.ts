@@ -6,8 +6,13 @@ class SyncDataManager{
         return this._instance;
     }
 
+    public lastConnectTime;
+
     public snyc(data){
         var ss;
+        this.lastConnectTime = TM.now();
+        UM.closeVersion = data.close_version
+        UM.closeTime = data.close_time
         for(var s  in  data)
         {
             var value = data[s];

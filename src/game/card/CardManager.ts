@@ -149,7 +149,7 @@ class CardManager {
 
     public getUpCoin(id){
         var vo = MonsterVO.getObject(id)
-        return Math.floor(Math.pow(vo.level,3.05)*100);
+        return Math.floor(Math.pow(vo.level,3.05)*100);    //要改成3.9
     }
 
 

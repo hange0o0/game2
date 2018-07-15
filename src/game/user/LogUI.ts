@@ -21,6 +21,7 @@ class LogUI extends game.BaseWindow {
     public childrenCreated() {
         super.childrenCreated();
         this.scroller.viewport = this.list
+        this.list.itemRenderer =HelpItem
         this.list.useVirtualLayout = false;
         this.titleText.text = '更新日志';
         this.height = 560

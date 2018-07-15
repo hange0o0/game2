@@ -303,6 +303,10 @@ class SlaveManager {
     }
 
     public slave_pk_begin(otherid,master,id,fun?) {
+        if(PKManager.getInstance().stopPK())
+            return;
+        if(!UM.testEnergy(1))
+            return;
         var self = this;
         var oo:any = {};
         oo.otherid = otherid;
@@ -338,7 +342,7 @@ class SlaveManager {
             }
             if(msg.fail == 7)
             {
-                MyWindow.Alert('对主保护CD中')
+                MyWindow.Alert('对方保护CD中')
                 return;
             }
             if(msg.fail == 8)

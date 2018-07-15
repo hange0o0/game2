@@ -66,6 +66,10 @@ class GameManager {
         //    }
         //}
         this.lastTime = now
+        if(SyncDataManager.getInstance().lastConnectTime && now - SyncDataManager.getInstance().lastConnectTime > 36000)
+        {
+            MyWindow.AlertRelogin('已经离开很长时间了，请重新登陆吧')
+        }
     }
 
     //取现在到晚上12点还差的时间

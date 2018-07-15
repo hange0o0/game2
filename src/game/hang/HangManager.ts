@@ -56,6 +56,10 @@ class HangManager {
     }
 
     public pk(id,fun?) {
+        if(PKManager.getInstance().stopPK())
+            return;
+        if(!UM.testEnergy(1))
+            return;
         var self = this;
         var oo:any = {};
         oo.id = id;

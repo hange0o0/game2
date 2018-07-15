@@ -467,7 +467,7 @@
 			window["gameCon"].style["height"] = (hh*scale)+"px";
 		}
 
-		egret.runEgret({renderMode:"webgl"}); //SharedObjectManager.getInstance().getValue("renderMode") ||
+		egret.runEgret({renderMode:SharedObjectManager.getInstance().getValue("renderMode") || "webgl"}); //
 
 
 	</script>

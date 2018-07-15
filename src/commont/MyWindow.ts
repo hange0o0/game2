@@ -23,6 +23,7 @@ class MyWindow {
         panel.show(msg, ()=>{
             MyTool.refresh();
         });
+        GameManager.getInstance().stopTimer();
     }
 
 //fun(type){type:1确定，2：取消，3右上角关闭}

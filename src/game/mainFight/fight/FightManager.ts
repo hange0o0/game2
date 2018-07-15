@@ -137,6 +137,8 @@ class FightManager {
     }
 
     public pk(fun?) {
+        if(PKManager.getInstance().stopPK())
+            return;
         if(!UM.testEnergy(1))
             return;
         var self = this;

@@ -75,6 +75,8 @@ class DateUtil {
     
     //转成 XX：XX：XX 格式
     public static getStringBySecond(value: number): string {
+        if(value < 0)
+            value = 0;
         var hour = Math.floor(value / 3600);
         var minute = Math.floor((value % 3600) / 60);
         var second = Math.floor(value % 60);
@@ -171,6 +173,8 @@ class DateUtil {
     }
 
     public static getStringBySeconds(m: number,isSimple?: boolean,type?: number,addNumber?: number): string {
+        if(m < 0)
+            m = 0;
         isSimple = isSimple || false;
         type = type || 0;
         addNumber = addNumber || 0;

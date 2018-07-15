@@ -38,7 +38,7 @@ class SettingUI extends game.BaseWindow {
         this.addBtnEvent(this.cancelBtn,this.hide);
         this.addBtnEvent(this.loginBtn,this.onLoginOut);
         this.addBtnEvent(this.logBtn,this.onLog);
-        this.modeCB.visible = false
+        //this.modeCB.visible = false
     }
 
     private onMode(){

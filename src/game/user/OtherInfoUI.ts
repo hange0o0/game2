@@ -221,7 +221,7 @@ class OtherInfoUI extends game.BaseWindow {
         }
         else if(this.master == UM.gameid)
         {
-            var str = '确定要释放该奴隶吗？'
+            var str = '确定要释放该奴隶吗？\n释放后1小时内不能再收服！\n'
             if(proCD > 0)
             {
                 str += '\n当前保护时间还剩余' + proStr;
@@ -238,6 +238,11 @@ class OtherInfoUI extends game.BaseWindow {
             if(proCD > 0)
             {
                 MyWindow.Alert('当前保护时间剩余' + proStr + '\n无法收服其作为你的奴隶')
+                return;
+            }
+            if(SlaveManager.getInstance().getDeleteCD(gameid))
+            {
+                MyWindow.Alert('无法收服刚释放奴隶\n离下次收服还剩余：' + DateUtil.getStringBySecond(SlaveManager.getInstance().getDeleteCD(gameid)).substr(-5))
                 return;
             }
             if(ObjectUtil.objLength(PosManager.getInstance().defList) == 0)

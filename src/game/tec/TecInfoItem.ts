@@ -51,7 +51,7 @@ class TecInfoItem extends game.BaseItem {
         }
         else if(this.data.type == 'lv')
         {
-            this.nameText.text = '主城等级  '
+            this.nameText.text = '科技等级  '
             this.numText.text = 'LV.' + this.data.num+''
             total = TecManager.getInstance().getLevel(1);
             this.img.source = MyTool.getPropLevel();

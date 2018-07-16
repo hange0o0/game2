@@ -22,11 +22,29 @@ class SlaveManager {
     public missNoUse = [];
     public missUse = [];
 
+    public slaveDeleteTime = {};
+
     public maxNum = 2+6;
     public getCurrentMax(){
         return 1 + TecManager.getInstance().getLevel(3)
     }
 
+    public constructor() {
+        this.slaveDeleteTime = SharedObjectManager.getInstance().getMyValue('slave_delete_time') || {}
+        var t = TM.now();
+        for(var s in this.slaveDeleteTime)
+        {
+            if(t - this.slaveDeleteTime[s] > 3600)
+                delete this.slaveDeleteTime[s];
+        }
+    }
+
+    public getDeleteCD(id){
+        var t = this.slaveDeleteTime[id] || 0
+        if(TM.now() - t < 3600)
+            return t + 3600 - TM.now();
+        return 0;
+    }
 
     //取最近一个主人的有效开始时间
     public getMasterTime(test?){
@@ -161,6 +179,9 @@ class SlaveManager {
                     break;
                 }
             }
+            this.slaveDeleteTime[otherid] = TM.now();
+            SharedObjectManager.getInstance().setMyValue('slave_delete_time',this.slaveDeleteTime)
+
             EM.dispatchEventWith(GameEvent.client.slave_change)
             EM.dispatchEventWith(GameEvent.client.info_change)
             if (fun)

@@ -6,14 +6,16 @@ class SlaveItem extends game.BaseItem {
 
     private headMC: HeadMC;
     private lockText: eui.Label;
-    private getBtn: eui.Button;
     private coinText: eui.Label;
-    private redMC: eui.Image;
-    private clickArea: eui.Group;
     private cdGroup: eui.Group;
     private cdText: eui.Label;
+    private addProBtn: eui.Image;
     private typeMC: eui.Image;
     private nameText: eui.Label;
+    private clickArea: eui.Group;
+    private getBtn: eui.Button;
+    private redMC: eui.Image;
+
 
 
 
@@ -25,6 +27,12 @@ class SlaveItem extends game.BaseItem {
         this.addBtnEvent(this.getBtn,this.onGet)
         //this.addBtnEvent(this.getAllBtn,this.onGetAllClick)
         this.addBtnEvent(this.clickArea,this.onInfo)
+        this.addBtnEvent(this.cdGroup,this.onPro)
+        this.cdGroup.touchEnabled = true;
+    }
+
+    private onPro(){
+        SlaveAddProUI.getInstance().show(this.data.gameid,this.data.protime);
     }
 
     private onClick(){
@@ -87,11 +95,11 @@ class SlaveItem extends game.BaseItem {
              if(cd > 0)
              {
                  this.cdText.text = DateUtil.getStringBySecond(cd);
-                 this.cdGroup.visible = true;
+                 //this.cdGroup.visible = true;
              }
              else
              {
-                 this.cdGroup.visible = false;
+                 this.cdText.text = '无保护'
              }
          }
          //else if(this.currentState == 'master')

@@ -361,6 +361,7 @@ class PKVideoCon extends game.BaseContainer {
             this.freeTxt(txt);
         },this)
 
+
     }
 
     //MISS动画

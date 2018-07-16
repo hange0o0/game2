@@ -21,6 +21,9 @@ class GameManager {
     public static stageY;
     public static container:egret.DisplayObjectContainer;
 
+    public isWebGL(){
+        return egret.Capabilities.renderMode == 'webgl';
+    }
 
     public init(){
         GameManager.stage.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.onTouchMove,this);

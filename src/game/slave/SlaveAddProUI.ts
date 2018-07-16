@@ -38,7 +38,7 @@ class SlaveAddProUI extends game.BaseWindow {
     }
 
     private onDiamond(){
-
+        ShopUI.getInstance().show(true);
     }
 
     private renewCoin() {

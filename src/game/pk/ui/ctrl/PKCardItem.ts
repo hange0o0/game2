@@ -165,25 +165,30 @@ class PKCardItem extends game.BaseItem {
     }
 
 
+    private lastMPChangeTime = 0;
     public onMpTest(nowMp){
         if(!this.data)
             return;
         var vo:any = CM.getCardVO(this.data.mid)
         var mp = vo.cost
+        var canvas = !GameManager.getInstance().isWebGL();
 
         var barW = 80
         var barH = 92
         if(nowMp < mp)
         {
+            if(canvas && this.lastMPChangeTime && egret.getTimer() - this.lastMPChangeTime < 1000)
+                return;
             this.costText.textColor = 0xFF0000
             this.img2.visible = true;
             this.cdText.visible = true;
 
+            this.lastMPChangeTime = egret.getTimer();
             var h = barH * (mp - nowMp)/mp;
             this.img2.mask = new egret.Rectangle(0,barH - h,barW,h)
 
             var PD = PKData.getInstance();
-            var cd = ((PKTool.getMPTime(mp + PD.myPlayer.useMP) - PD.actionTime)/1000).toFixed(1);
+            var cd = ((PKTool.getMPTime(mp + PD.myPlayer.useMP) - PD.actionTime)/1000).toFixed(canvas?0:1);
             this.cdText.text = cd + 's';
             this.bg.source = 'border_16_png'
         }
@@ -193,6 +198,7 @@ class PKCardItem extends game.BaseItem {
             this.img2.visible = false;
             this.cdText.visible = false;
             this.bg.source = vo.getBG();
+            this.lastMPChangeTime = 0;
         }
     }
 

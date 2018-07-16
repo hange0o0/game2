@@ -39,6 +39,11 @@ class ShopUI extends game.BaseUI {
     }
 
     public show(toBottom?){
+        if(toBottom && _get['app'])
+        {
+            MyWindow.ShowTips('测试版本不支持钻石购买')
+            return;
+        }
         this.toBottom = toBottom;
         PayManager.getInstance().get_shop(()=>{
             super.show()

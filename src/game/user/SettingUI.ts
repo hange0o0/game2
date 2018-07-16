@@ -121,7 +121,7 @@ class SettingUI extends game.BaseWindow {
 
 
         this.versionText.textFlow = <Array<egret.ITextElement>>[
-            {text: '1.' + Config.version + '.' + Config.m_version, style: {"underline": true}}
+            {text:  Config.displayVersion, style: {"underline": true}}
         ];
 
         this.logBtn.visible = LoginManager.getInstance().logText.text;

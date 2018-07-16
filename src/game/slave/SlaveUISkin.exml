@@ -6,7 +6,7 @@
 			<e:Group id="proGroup" x="230" y="1140">
 				<e:Group id="cdGroup" x="10" y="18">
 				<e:Label text="剩余保护时间:" size="24" stroke="2" textAlign="center" y="26" x="55"/>
-				<e:Image source="icon_clock_png" x="0" y="0"/>
+					<e:Image source="icon_def1_png" x="2" y="6" scaleX="0.35" scaleY="0.35"/>
 				<e:Label id="cdText" text="Label" size="24" stroke="2" textAlign="center" y="16" x="45"/>
 				<e:layout>
 					<e:HorizontalLayout verticalAlign="middle" horizontalAlign="center"/>

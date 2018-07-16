@@ -37,7 +37,7 @@ class TecManager {
 
     public getForceAdd(id,lv){
         var vo = TecVO.getObject(id);
-        return this.getTecValue(lv,vo.value1,0.3);
+        return this.getTecValue(lv,vo.value1,1.5);
     }
 
     private getTecValue(lv,begin,step){

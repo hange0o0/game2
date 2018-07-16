@@ -11,11 +11,11 @@
 	</e:Group>
 	<e:Group id="clickArea" width="144" height="100%" y="0" x="18.18" anchorOffsetX="0"/>
 	<e:Image source="black_bg_png" y="-52" height="40" scale9Grid="39,17,11,18" width="360" horizontalCenter="0"/>
-	<e:Label id="nameText" text="苦顶替" size="30" stroke="3" verticalAlign="bottom" strokeColor="0x231507" y="-50" textColor="0xfce4a4" anchorOffsetX="0" textAlign="center" horizontalCenter="0"/>
+	<e:Label id="nameText" text="苦顶替" size="30" stroke="3" verticalAlign="bottom" strokeColor="0x231507" y="-47" textColor="0xfce4a4" anchorOffsetX="0" textAlign="center" horizontalCenter="0"/>
 	<e:Group right="0" left="180" height="202" y="0">
 		<e:Button id="getBtn" label="反抗" width="180" skinName="Btn1Skin" bottom="10" horizontalCenter="0"/>
-		<e:Group id="cdGroup" width="160" horizontalCenter="0" bottom="72">
-			<e:Image source="icon_clock_png" x="0" y="0"/>
+		<e:Group id="cdGroup" width="160" horizontalCenter="0" bottom="75">
+			<e:Image source="icon_def1_png" x="2" y="6" scaleX="0.35" scaleY="0.35"/>
 			<e:Label id="cdText" text="Label" size="24" stroke="2" textAlign="center" y="16" x="45"/>
 			<e:layout>
 			<e:HorizontalLayout verticalAlign="middle" horizontalAlign="center"/>

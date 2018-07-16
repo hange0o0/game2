@@ -154,7 +154,7 @@ class PKPosItem extends game.BaseItem {
     public mvAdd(){
         egret.Tween.removeTweens(this.group);
         this.group.scaleX = this.group.scaleY = 0
-         var tw = egret.Tween.get(this.group);
+        var tw = egret.Tween.get(this.group);
         tw.to({scaleX:1.2,scaleY:1.2},200).to({scaleX:1,scaleY:1},200)
     }
 

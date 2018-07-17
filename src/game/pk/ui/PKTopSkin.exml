@@ -10,4 +10,6 @@
 		<e:Label id="hpText2" text="15" size="22" stroke="2" verticalCenter="0" horizontalCenter="0"/>
 	</e:Group>
 	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
+	<e:Image id="view1" source="pk_view_icon_png" x="75" y="188"/>
+	<e:Image id="view2" source="pk_view_icon_png" y="188" right="75"/>
 </e:Skin>

@@ -114,7 +114,7 @@ class MonsterMV extends eui.Group {
     public onE(){
         var w = this.mw
         var h = this.mh
-        var speed = this.speed || 0;
+        var speed = (this.speed || 0);
         if(speed)
         {
             if(speed > 0)

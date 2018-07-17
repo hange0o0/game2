@@ -140,6 +140,10 @@ class CardUI extends MainBase {
 
     }
 
+    public getCurrentList(){
+        return  this.dataArray.source;
+    }
+
     /*private renewSkillInfo(){
         var CRM = CardManager.getInstance();
         var type = this.downList2.selectValue;

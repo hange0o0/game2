@@ -9,6 +9,8 @@ class PKTopUI extends game.BaseContainer {
     public hpGroup2: eui.Group;
     private hpText2: eui.Label;
     private topUI: TopUI;
+    private view1: eui.Image;
+    private view2: eui.Image;
 
 
 
@@ -86,6 +88,7 @@ class PKTopUI extends game.BaseContainer {
                 data.topIndex = this.index - 1 - i;
             item.data = data;
         }
+        this.renewViewPos();
     }
 
     private createSkillItem():PKSkillItem{
@@ -225,7 +228,15 @@ class PKTopUI extends game.BaseContainer {
         //this.defScoreGroup1.y = 250
         //this.defScoreGroup2.y = 250
 
+        this.view1.visible = false
+        this.view2.visible = false
+
+    }
+
+    private renewViewPos(){
         var PD = PKData.getInstance();
+        this.view1.visible = PD.myPlayer.teamData.atkRota == PKConfig.ROTA_LEFT
+        this.view2.visible = PD.myPlayer.teamData.atkRota == PKConfig.ROTA_RIGHT
     }
 
     public appearMV(){
@@ -233,6 +244,11 @@ class PKTopUI extends game.BaseContainer {
         egret.Tween.get(this.hpGroup2).to({scaleX:1.2,scaleY:1.2},300).to({scaleX:1,scaleY:1},300)
         //egret.Tween.get(this.defGroup1).wait(200).to({scaleX:1.2,scaleY:1.2},300).to({scaleX:1,scaleY:1},300)
         //egret.Tween.get(this.defGroup2).wait(200).to({scaleX:1.2,scaleY:1.2},300).to({scaleX:1,scaleY:1},300)
+        var PD = PKData.getInstance();
+        if(PD.isReplay)
+        {
+            this.renewViewPos()
+        }
     }
 
     public renewHp(){

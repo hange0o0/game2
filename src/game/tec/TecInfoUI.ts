@@ -20,10 +20,14 @@ class TecInfoUI extends game.BaseWindow {
     private btnGroup: eui.Group;
     public cancelBtn: eui.Button;
     public okBtn: eui.Button;
+    private leftBtn: eui.Image;
+    private rightBtn: eui.Image;
 
 
 
 
+
+    public openList
     public dataIn
     public dataArray = new eui.ArrayCollection()
     public constructor() {
@@ -35,6 +39,8 @@ class TecInfoUI extends game.BaseWindow {
         super.childrenCreated();
         this.addBtnEvent(this.cancelBtn,this.hide)
         this.addBtnEvent(this.okBtn,this.onClick)
+        this.addBtnEvent(this.leftBtn,this.onLeft)
+        this.addBtnEvent(this.rightBtn,this.onRight)
 
         this.list.itemRenderer = TecInfoItem
 
@@ -43,6 +49,17 @@ class TecInfoUI extends game.BaseWindow {
         })
 
         this.list.dataProvider = this.dataArray
+    }
+
+    private onLeft(){
+        var index = this.openList.indexOf(this.dataIn);
+        this.dataIn = this.openList[index-1];
+        this.renew();
+    }
+    private onRight(){
+        var index = this.openList.indexOf(this.dataIn);
+        this.dataIn = this.openList[index+1];
+        this.renew();
     }
 
     private onClick(){
@@ -63,6 +80,7 @@ class TecInfoUI extends game.BaseWindow {
     }
 
     public onShow(){
+        this.openList =  TecManager.getInstance().getListByType(this.dataIn.type);
         this.renew();
 
         //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
@@ -147,5 +165,9 @@ class TecInfoUI extends game.BaseWindow {
             this.btnGroup.addChild(this.okBtn);
         else
             MyTool.removeMC(this.okBtn);
+
+        var index = this.openList.indexOf(this.dataIn);
+        this.leftBtn.visible = index > 0
+        this.rightBtn.visible = index < this.openList.length - 1;
     }
 }

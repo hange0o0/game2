@@ -24,6 +24,10 @@ class SyncDataManager{
                     break;
                 case 'sync_coin':
                     UM['coin'] = value;
+                    if(UM.getCoin()<0)
+                    {
+                         sendClientError('金币负数：' + JSON.stringify(data) + '|'+TM.now() +"|" + SlaveManager.getInstance().getMasterTime())
+                    }
                     EM.dispatch(GameEvent.client.coin_change);
                     break;
                 case 'sync_diamond':

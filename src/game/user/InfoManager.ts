@@ -196,4 +196,14 @@ class InfoManager {
                 fun();
         });
     }
+
+    public getMsg(fun?) {
+        var oo:any = {};
+        Net.addUser(oo);
+        Net.send(GameEvent.sys.get_msg, oo, (data)=> {
+            var msg = data.msg;
+            if (fun)
+                fun();
+        });
+    }
 }

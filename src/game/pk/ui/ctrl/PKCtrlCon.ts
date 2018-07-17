@@ -24,6 +24,9 @@ class PKCtrlCon extends game.BaseContainer {
     private costText: eui.Label;
     private helpBtn: eui.Image;
     private tipsMC: eui.Image;
+    private speedBtn: eui.Group;
+    private speedText: eui.Label;
+
 
 
 
@@ -94,12 +97,21 @@ class PKCtrlCon extends game.BaseContainer {
             this.addBtnEvent(this.settingBtn,this.onSetting)
         this.addBtnEvent(this.helpBtn,this.onHelp)
         this.addBtnEvent(this.vPlayer,this.onPlayer)
+        this.addBtnEvent(this.speedBtn,this.onSpeed)
 
         PKData.getInstance().addEventListener('video',this.onVideoEvent,this);
 
         this.placeGroup.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.onTouchBegin,this)
         this.placeGroup.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.onTouchMove,this)
         this.addEventListener(egret.TouchEvent.TOUCH_END,this.onTouchEnd,this)
+    }
+
+    private onSpeed(){
+        var PD = PKData.getInstance();
+        PD.playSpeed ++;
+        if(PD.playSpeed >= 4)
+            PD.playSpeed = 1;
+        this.renewSpeedBtn()
     }
 
     private onTouchBegin(e){
@@ -392,6 +404,7 @@ class PKCtrlCon extends game.BaseContainer {
         this.needRenewCard = true;
         this.needRenewInfo = false;
         this.overMC.visible = false
+        this.speedBtn.visible = false
 
         this.hideTips = false;
         this.tipsMC.visible = true;
@@ -495,6 +508,7 @@ class PKCtrlCon extends game.BaseContainer {
     //    return null;
     //}
 
+    //游戏开始
     public initInfo(){
         for(var i=1;i<=4;i++)
         {
@@ -510,6 +524,16 @@ class PKCtrlCon extends game.BaseContainer {
                 mc.visible = false;
             }
         }
+        var PD = PKData.getInstance();
+        if(PD.isReplay)
+        {
+            this.speedBtn.visible = true
+            this.renewSpeedBtn();
+        }
+    }
+
+    private renewSpeedBtn(){
+         this.speedText.text = 'x' + PKData.getInstance().playSpeed
     }
 
     public onTimer(){

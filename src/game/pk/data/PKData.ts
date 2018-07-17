@@ -37,6 +37,10 @@ class PKData extends egret.EventDispatcher{
 
     public actionRecord = []
 
+    public playSpeed = 1;//播放速度
+    public lastDealSpeedTime = 0;//当前播放速度开始时间
+    public speedAddTime = 0;//当前播放速度开始时间
+
         //public stateObj = [] //所有要触发动画的集合
     //public topVideoList = [] //影响关部的动画的集合
     //private topKey = ['monster_win','monster_add'];
@@ -44,9 +48,20 @@ class PKData extends egret.EventDispatcher{
         super();
     }
 
+    //public changeSpeed(speed){
+    //     this.playSpeed = speed;
+    //}
+
     //取经过的时间
     public getPassTime(){
-        return TM.nowMS() - this.startTime;
+        var t = TM.nowMS();
+        var cd = t - (this.lastDealSpeedTime || this.startTime);
+        if(cd)
+        {
+            this.speedAddTime += (this.playSpeed - 1)*cd;
+        }
+        this.lastDealSpeedTime = t;
+        return TM.nowMS() - this.startTime + this.speedAddTime;
     }
 
     //暂停
@@ -79,6 +94,9 @@ class PKData extends egret.EventDispatcher{
         this.playerObj = {};
         this.myPlayer = null;
         this.actionTime = 0;
+        this.playSpeed = 1;
+        this.lastDealSpeedTime = 0;
+        this.speedAddTime = 0;
         this.stopTime = 0;
         this.monsterID = 1;
         this.isGameOver = false;

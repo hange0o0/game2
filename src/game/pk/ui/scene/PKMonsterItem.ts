@@ -174,6 +174,7 @@ class PKMonsterItem extends game.BaseItem {
     }
 
     public run(speed){
+        speed = speed + (PKData.getInstance().playSpeed-1)*100
         var mD:PKMonsterData = this.data
         if(this.monsterMV.speed != speed)
             this.monsterMV.speed = speed;
@@ -193,6 +194,7 @@ class PKMonsterItem extends game.BaseItem {
     }
 
     public die(){
+        this.monsterMV.speed = (PKData.getInstance().playSpeed-1)*100
         this.monsterMV.die();
         this.bar.width = 0;
         this.barGroup.visible = true;
@@ -202,7 +204,7 @@ class PKMonsterItem extends game.BaseItem {
     }
 
     public atk(speed){
-        this.monsterMV.speed = speed
+        this.monsterMV.speed = speed + (PKData.getInstance().playSpeed-1)*100
         this.monsterMV.atk();
     }
 

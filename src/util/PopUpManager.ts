@@ -102,6 +102,15 @@ class PopUpManager {
 
     }
 
+    public static setMiddle(display){
+        var ww = GameManager.container.width;
+        var hh = GameManager.container.height;
+        var x = (ww - display.width) / 2;
+        var y = (hh - display.height) / 2;
+        display.x = x
+        display.y = y
+    }
+
     private static onTap(){
          var ui:game.BaseUI = <game.BaseUI>this.shape.parent.getChildAt(this.shape.parent.numChildren-1);
         if(ui.canBGClose)

@@ -20,6 +20,7 @@
 		<e:Rect id="lockBar" width="190" height="40" x="5" y="5" fillAlpha="0.3"/>
 		<e:Image source="icon_lock_png" x="15" verticalCenter="0"/>
 		<e:Label id="lockText" text="12:15:15" verticalCenter="0" size="24" horizontalCenter="10" stroke="2"/>
+		<e:Label text="正在搜寻敌人..." size="24" stroke="3" horizontalCenter="0" y="-30"/>
 	</e:Group>
 	<e:Button id="openBtn" label="开始挑战" horizontalCenter="0" skinName="Btn5Skin" bottom="100"/>
 	<e:Image id="awardRed" source="red_mc_png" y="430" right="-3"/>

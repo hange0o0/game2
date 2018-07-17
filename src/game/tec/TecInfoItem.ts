@@ -46,7 +46,7 @@ class TecInfoItem extends game.BaseItem {
         {
             this.nameText.text = '金币'
             this.numText.text = '×'+NumberUtil.addNumSeparator(this.data.num)
-            total = UM.getCoin();
+            total = Math.max(0,UM.getCoin());
             this.img.source = MyTool.getPropCoin();
         }
         else if(this.data.type == 'lv')

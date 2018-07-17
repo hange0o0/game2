@@ -31,7 +31,7 @@ class HangManager {
     }
 
     public getPKLeft(){
-        return this.pktime + this.getPKCD() - TM.now()
+        return PKManager.getInstance().pkCountDown - TM.now()
     }
 
     public getAwardLeft(){
@@ -124,11 +124,13 @@ class HangManager {
                 return;
             }
             PKManager.getInstance().pkResult = msg;
+            PKManager.getInstance().setPKCoolDown();
             this.level = msg.level;
             this.pktime = msg.pktime;
             this.lastlist = (msg.lastlist || '').split(',')
             if(!this.awardtime)
                 this.awardtime = this.pktime;
+
             EM.dispatch(GameEvent.client.hang_change);
             if (fun)
                 fun();

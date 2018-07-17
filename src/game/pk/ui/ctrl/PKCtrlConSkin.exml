@@ -68,4 +68,8 @@
 		<e:Label id="playerText" text="请选择" y="0" horizontalCenter="0" size="24" textColor="0xfce6a4" stroke="2"/>
 		<e:Button id="vPlayer" label="切换视色" skinName="Btn1Skin" width="160" horizontalCenter="0" bottom="0"/>
 	</e:Group>
+	<e:Group id="speedBtn" x="412" y="60" visible="false">
+		<e:Image source="speed_btn_png" x="0" y="0" scaleX="0.7" scaleY="0.7"/>
+		<e:Label id="speedText" text="x1" x="52" stroke="3" verticalCenter="0"/>
+	</e:Group>
 </e:Skin>

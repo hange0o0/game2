@@ -246,7 +246,7 @@ class MainUI extends game.BaseUI {
     }
 
     private renewCoin(){
-        this.coinText.text = NumberUtil.addNumSeparator(UM.getCoin())
+        this.coinText.text = NumberUtil.addNumSeparator(Math.max(UM.getCoin(),0),3);
     }
 
     public renewEnergy(){

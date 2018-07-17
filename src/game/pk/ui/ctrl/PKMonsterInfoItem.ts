@@ -1,9 +1,11 @@
 class PKMonsterInfoItem extends game.BaseItem {
 
-    private bg: eui.Image;
-    private img: CardImg;
-    private barMC: eui.Image;
-    private callMC: eui.Image;
+    private bar1: eui.Rect;
+    private bar2: eui.Rect;
+    private text: eui.Label;
+    private selfIcon: eui.Image;
+    private typeMC: eui.Image;
+
 
 
 
@@ -16,21 +18,26 @@ class PKMonsterInfoItem extends game.BaseItem {
 
     public childrenCreated() {
         super.childrenCreated();
-        this.img.hideType = true;
     }
 
 
     public dataChanged(){
-        var vo:any = this.data.getVO();
-        this.img.data = vo.id;
-        this.bg.source = vo.getBG();
-
-        this.callMC.visible = this.data.dieTime > 0;
+        var data = this.data;
+        var w = 270
+        this.typeMC.source = 'icon_type'+data.type+'_png';
+        this.selfIcon.visible = data.type == data.self;
+        this.text.text = data.s1
+        var max = Math.max(data.max,15);
+        this.bar1.width = 20 + data.s1/max*w;
+        this.bar2.width = data.s2/max*w;
+        if(data.s2)
+        {
+            this.text.text += '+' + data.s2
+        }
         this.onTimer();
     }
 
     public onTimer(){
-        var barWidth = 204
-       this.barMC.width = barWidth * this.data.hp/this.data.maxHp;
+
     }
 }

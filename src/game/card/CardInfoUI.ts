@@ -21,14 +21,15 @@ class CardInfoUI extends game.BaseWindow {
     private icon: eui.Image;
     public closeBtn: eui.Image;
     public okBtn: eui.Button;
+    private leftBtn: eui.Image;
+    private rightBtn: eui.Image;
 
 
 
 
 
 
-
-
+    public openList
     public data;
     public sp;
     public upAble = false;
@@ -42,6 +43,8 @@ class CardInfoUI extends game.BaseWindow {
         this.addBtnEvent(this.okBtn,this.onClick)
         this.addBtnEvent(this.r0,this.onCB)
         this.addBtnEvent(this.r1,this.onCB)
+        this.addBtnEvent(this.leftBtn,this.onLeft)
+        this.addBtnEvent(this.rightBtn,this.onRight)
         //this.r0.selected = true;
 
         this.addBtnEvent(this.likeCB,this.onLike)
@@ -54,6 +57,29 @@ class CardInfoUI extends game.BaseWindow {
         })
 
         //this.touchEnabled = false;
+    }
+
+    private onLeft(){
+        var lastStat = this.currentState
+        var index = this.openList.indexOf(this.data);
+        this.data = this.openList[index-1];
+        this.renew();
+        this.getCardLike();
+        if(this.currentState != lastStat)
+            this.validateNow()
+        PopUpManager.setMiddle(this);
+
+
+    }
+    private onRight(){
+        var lastStat = this.currentState
+        var index = this.openList.indexOf(this.data);
+        this.data = this.openList[index+1];
+        this.renew();
+        this.getCardLike();
+        if(this.currentState != lastStat)
+            this.validateNow()
+        PopUpManager.setMiddle(this);
     }
 
     private onLike(){
@@ -145,14 +171,22 @@ class CardInfoUI extends game.BaseWindow {
     }
 
     public onShow(){
+        if(this.sp.num)
+            this.openList = [];
+        else
+            this.openList = CardUI.getInstance().getCurrentList();
         this.r0.selected = SharedObjectManager.getInstance().getMyValue('show_card_base') || false;
         this.r1.selected = !this.r0.selected
         this.renew();
+        this.getCardLike();
 
-        CardManager.getInstance().getCardLike(this.data.id,()=>{
-              this.renewCardLike();
-        })
         //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
+    }
+
+    private getCardLike(){
+        CardManager.getInstance().getCardLike(this.data.id,()=>{
+            this.renewCardLike();
+        })
     }
 
     public showFinish(){
@@ -233,6 +267,10 @@ class CardInfoUI extends game.BaseWindow {
         }
         this.coinText.textColor = this.upAble?0xFFFFFF:0xFF0000;
         this.renewCardLike();
+
+        var index = this.openList.indexOf(this.data);
+        this.leftBtn.visible = index > 0
+        this.rightBtn.visible = index < this.openList.length - 1;
     }
 
     private renewCardLike(){

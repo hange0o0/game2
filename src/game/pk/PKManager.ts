@@ -20,11 +20,16 @@ class PKManager {
     public recordList;
     public getRecordTime;
     public recordTime;
+    public pkCountDown;
+
+
+    public currentPK;
 
     public recordLen = 20;
     constructor(){
         this.recordList = SharedObjectManager.getInstance().getMyValue('pk_replay1') || []
         this.recordTime = SharedObjectManager.getInstance().getMyValue('pk_record_time') || 0
+        this.pkCountDown = SharedObjectManager.getInstance().getMyValue('pkCountDown') || 0
 
         for(var i=0;i<this.recordList.length;i++)//去除录像版本不对的
         {
@@ -99,6 +104,12 @@ class PKManager {
             fun && fun();
             return;
         }
+        if(!this.quickTest())
+        {
+            MyWindow.Alert('PK数据异常！')
+            PKingUI.getInstance().hide();
+            return;
+        }
         this.pkResult = null;
         switch(this.pkType)
         {
@@ -116,6 +127,30 @@ class PKManager {
                 break;
         }
     }
+
+    //测试一下数据正确性
+    public quickTest(){
+        var t = egret.getTimer();
+        this.pkType = PKManager.TYPE_TEST;
+        this.pkResult = null;
+        var PD = PKData.getInstance();
+        var tResult = PD.getPKResult();
+        var actionTime = PD.actionTime
+        var data = ObjectUtil.clone(PD.baseData);
+        for(var i=0;i<data.players.length;i++)
+        {
+            var players = data.players[i];
+            players.actionlist = PD.getPlayer(players.id).posHistory.join(',');
+        }
+        PD.init(data);
+        PD.quick = true;
+        PD.start();
+        PKCode.getInstance().onStep()
+
+        console.log(egret.getTimer() - t)
+        return tResult == PD.getPKResult() && actionTime == PD.actionTime
+    }
+
     public sendFail(fun){
         if(PKData.getInstance().isReplay)
         {
@@ -154,6 +189,10 @@ class PKManager {
         var b =  UM.closeVersion && Config.version <= UM.closeVersion && TM.now()>= UM.closeTime-10*60;
         if(b)
             MyWindow.Alert('服务器在'+DateUtil.getStringBySecond(UM.closeTime - TM.now()).substr(-5)+'后更新，暂时无法PK')
+        if(UM.closeTime - TM.now() <= 0)
+        {
+            InfoManager.getInstance().getMsg();
+        }
         return b;
     }
 
@@ -218,18 +257,18 @@ class PKManager {
         PKingUI.getInstance().show();
     }
 
-    public startPlay(){
-        var PD = PKData.getInstance()
-        var data = {
-            seed:TM.now(),
-            players:[
-                {id:1,gameid:'npc',team:2,autolist:'1,2,1,2,1,2,1,2',force:0,type:1,hp:5},
-                {id:2,gameid:UM.gameid,team:1,card:'1,1,1,2,2,2,1,1,1',force:0,nick:'user',type:1,hp:5}
-            ]
-        };
-        PD.init(data);
-        PKingUI.getInstance().show();
-    }
+    //public startPlay(){
+    //    var PD = PKData.getInstance()
+    //    var data = {
+    //        seed:TM.now(),
+    //        players:[
+    //            {id:1,gameid:'npc',team:2,autolist:'1,2,1,2,1,2,1,2',force:0,type:1,hp:5},
+    //            {id:2,gameid:UM.gameid,team:1,card:'1,1,1,2,2,2,1,1,1',force:0,nick:'user',type:1,hp:5}
+    //        ]
+    //    };
+    //    PD.init(data);
+    //    PKingUI.getInstance().show();
+    //}
 
     public playReplay(data){
         var PD = PKData.getInstance()
@@ -250,6 +289,30 @@ class PKManager {
         Net.addUser(oo)
     }
 
+    public setPKCoolDown(){
+        var pkTime = 0;//15分钟内的PK时间
+        var cd = 15*60;
+        var tt = TM.now() -cd
+        for(var i=0;i<this.recordList.length;i++)
+        {
+            var oo = this.recordList[i];
+            if(oo.actionTime && oo.pktime > tt)
+            {
+                pkTime += oo.actionTime/1000;
+            }
+            else
+                break;
+        }
+
+        if(pkTime/cd > 0.5)
+        {
+            var countDown = 60 + pkTime*2-cd;
+            this.pkCountDown = TM.now() + Math.floor(countDown);
+            SharedObjectManager.getInstance().setMyValue('pkCountDown',this.pkCountDown)
+            return countDown;
+        }
+    }
+
     //把录像保存到本地
     public savePKResult(){
         if(this.pkType > 100)
@@ -261,6 +324,7 @@ class PKManager {
         data.version = Config.pk_version
         data.type = this.pkType;
         data.pktime = TM.now();
+        data.actionTime = PD.actionTime
         data.result = PD.getPKResult();
         data.score = Math.max(0,PD.team1.hp) + ':' + Math.max(0,PD.team2.hp);
         for(var i=0;i<data.players.length;i++)

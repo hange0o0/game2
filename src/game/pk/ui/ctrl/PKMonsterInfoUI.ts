@@ -10,19 +10,14 @@ class PKMonsterInfoUI extends game.BaseContainer {
         this.skinName = "PKMonsterInfoSkin";
     }
 
-    private list: eui.List;
-    private selfIcon: eui.Image;
-    private type: eui.Image;
     private nameText: eui.Label;
-    private type1Text: eui.Label;
-    private type2Text: eui.Label;
-    private type3Text: eui.Label;
-    private forceText: eui.Label;
-    private spaceText: eui.Label;
     private typeGroup: eui.Group;
-    private tg1: eui.Group;
-    private tg2: eui.Group;
-    private tg3: eui.Group;
+    private t1: PKMonsterInfoItem;
+    private t2: PKMonsterInfoItem;
+    private t3: PKMonsterInfoItem;
+    private forceText: eui.Label;
+    private totalText: eui.Label;
+
 
 
 
@@ -31,14 +26,12 @@ class PKMonsterInfoUI extends game.BaseContainer {
 
 
     public playerData:PKPlayerData
-    public renewFlag = false
 
     private xy
 
     public childrenCreated() {
         super.childrenCreated();
         this.hide();
-        this.list.itemRenderer = PKMonsterInfoItem;
         PKData.getInstance().addEventListener('video',this.onVideoEvent,this);
     }
     public onVideoEvent(e){
@@ -52,13 +45,8 @@ class PKMonsterInfoUI extends game.BaseContainer {
         {
             case PKConfig.VIDEO_MONSTER_ADD:
             case PKConfig.VIDEO_MONSTER_WIN:
-                this.addItem(data);
-                break;
             case PKConfig.VIDEO_MONSTER_DIE:
-                this.removeItem(data);
-                break;
-            case PKConfig.VIDEO_MONSTER_HPCHANGE:
-                this.renewFlag = true;
+                this.renew();
                 break;
         }
     }
@@ -66,7 +54,7 @@ class PKMonsterInfoUI extends game.BaseContainer {
     public onTimer(){
         if(!this.visible)
             return;
-        this.renewFlag && this.renewList()
+        //this.renewFlag && this.renewList()
     }
 
     public hide(){
@@ -83,88 +71,55 @@ class PKMonsterInfoUI extends game.BaseContainer {
         this.visible = true;
         this.playerData = playerData;
 
-        this.type.source = 'icon_type'+playerData.type+'_png'
+        //this.type.source = 'icon_type'+playerData.type+'_png'
         this.nameText.text = playerData.nick;
         this.forceText.text = '' + playerData.force + ''
-        this.selfIcon.visible = playerData == PKData.getInstance().myPlayer;
+        //this.selfIcon.visible = playerData == PKData.getInstance().myPlayer;
 
-        if(this.playerData.teamData.atkRota == PKConfig.ROTA_LEFT)
-            this.x = 170
-        else
-            this.x = 0
+        //if(this.playerData.teamData.atkRota == PKConfig.ROTA_LEFT)
+        //    this.x = 150
+        //else
+            this.x = 100
 
 
-        this.resetList();
-        this.y = PKingUI.getInstance().displayY;
-        this.minHeight = GameManager.stage.stageHeight - this.y - 150;
-        this.renewFlag = false;
+        this.renew();
+        this.y = GameManager.stage.stageHeight - 470//this.xy.y + 50
     }
 
-    public resetList(){
+    public renew(){
         var PD = PKData.getInstance();
-        var arr = [];
+        var arr = [
+            {type:1,self:this.playerData.type,s1:0,s2:0,total:0,max:0},
+            {type:2,self:this.playerData.type,s1:0,s2:0,total:0,max:0},
+            {type:3,self:this.playerData.type,s1:0,s2:0,total:0,max:0}
+        ];
+        var total = 0;
+        var max = 0;
         for(var i=0;i<PD.monsterList.length;i++)
         {
             var mvo:PKMonsterData = PD.monsterList[i]
             if(mvo.owner != this.playerData.id)
                 continue;
-            arr.push(mvo);
+
+            var vo = mvo.getVO()
+            var type = vo.type;
+            var oo = arr[type-1];
+            if(mvo.dieTime)
+                oo.s2 += vo.space
+            else
+                oo.s1 += vo.space
+            max = Math.max(max,oo.s1+oo.s2)
+            total += vo.space;
         }
-        this.list.dataProvider = new eui.ArrayCollection(arr);
-        this.renewNum();
-        this.renewBottom();
-    }
-
-    private addItem(data){
-        var arr = <eui.ArrayCollection>(this.list.dataProvider);
-        arr.addItem(data);
-        this.renewNum();
-        this.renewBottom();
-    }
-
-    private removeItem(data){
-        var arr = <eui.ArrayCollection>(this.list.dataProvider);
-        var index = arr.getItemIndex(data);
-        arr.removeItemAt(index);
-        this.renewNum();
-        this.renewBottom();
-    }
-
-    private renewBottom(){
-        //this.bottom = GameManager.stage.stageHeight - Math.max(this.xy.y-10,this.height)
-    }
-
-    private renewNum(){
-        var PD = PKData.getInstance();
-        this.spaceText.text = '' + PD.getMonsterSpaceByPlayer(this.playerData.id) + '/' + PKConfig.maxMonsterSpace;
-        this.typeGroup.removeChildren();
-        var arr = [
-            {type:1,num:PD.getMonsterByPlayer(this.playerData.id,1).length},
-            {type:2,num:PD.getMonsterByPlayer(this.playerData.id,2).length},
-            {type:3,num:PD.getMonsterByPlayer(this.playerData.id,3).length}
-        ]
-        ArrayUtil.sortByField(arr,['num','type'],[1,0])
         for(var i=0;i<arr.length;i++)
         {
-            var oo = arr[i];
-            if(oo.num)
-            {
-                this.typeGroup.addChild(this['tg' + oo.type])
-                this['type'+oo.type+'Text'].text = PKConfig.TYPENAME[oo.type] + ' ×' + oo.num;
-            }
+            var mc = this['t' + (i+1)]
+            var data = arr[i];
+            data.total = total;
+            data.max = max;
+            mc.data = data;
         }
-        //this.type1Text.text = PKConfig.TYPENAME[1] + '×' + ;
-        //this.type2Text.text = PKConfig.TYPENAME[2] + '×' + PD.getMonsterByPlayer(this.playerData.id,2).length
-        //this.type3Text.text = PKConfig.TYPENAME[3] + '×' + PD.getMonsterByPlayer(this.playerData.id,3).length
 
-    }
-
-    public renewList(){
-        this.renewFlag = false;
-         for(var i=0;i<this.list.numChildren;i++)
-         {
-             var item:any = this.list.getChildAt(i);
-             item.onTimer();
-         }
+        this.totalText.text = '总体积：' + total + '/' + PKConfig.maxMonsterSpace;
     }
 }

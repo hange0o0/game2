@@ -31,7 +31,7 @@
 	</e:Group>
 	<e:Image id="helpBtn" source="icon_help_png" y="10" right="10" scaleX="0.8" scaleY="0.8"/>
 	<e:Image y="267" left="30" right="30" source="line2_png" fillMode="repeat"/>
-	<e:Group id="btnGroup" horizontalCenter="0" bottom="25">
+	<e:Group id="btnGroup" horizontalCenter="0" bottom="20">
 		<e:Button id="cancelBtn" label="返回" width="130" x="0" y="0" skinName="Btn2Skin"/>
 		<e:Button id="okBtn" label="升级" width="130" skinName="Btn1Skin" x="0" y="0"/>
 		<e:layout>
@@ -43,5 +43,7 @@
 		<e:VerticalLayout paddingLeft="0" paddingTop="80"/>
 		</e:layout>
 	</e:List>
+	<e:Image id="leftBtn" source="arrow1_png" y="558" scaleX="-1" left="20"/>
+	<e:Image id="rightBtn" source="arrow1_png" y="558" right="20"/>
 
 </e:Skin>

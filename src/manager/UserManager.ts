@@ -86,7 +86,7 @@ class UserManager {
         if(masterTime)
         {
             if(this.coin.st < masterTime)
-                this.coin.st += masterTime;
+                this.coin.st = masterTime;
             var num = Math.floor((time - this.coin.st)/3600)//每小时结算一次
             if(num)
             {

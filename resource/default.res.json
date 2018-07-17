@@ -9,7 +9,7 @@
 			"name":"login_load"
 		},
 		{
-			"keys":"state1_png,totem_png,totem_1_png,icon_vs_png,pk_fail_png,pk_pos_bg_jpg,pk_win_png,bar_bg_png,bar1_png,bar2_png",
+			"keys":"state1_png,totem_png,totem_1_png,icon_vs_png,pk_fail_png,pk_pos_bg_jpg,pk_win_png,bar_bg_png,bar1_png,bar2_png,speed_btn_png,pk_view_icon_png",
 			"name":"pk"
 		},
 		{
@@ -918,6 +918,16 @@
 			"name":"tec_slave_icon_png",
 			"type":"image",
 			"url":"game_assets/step2/tec_slave_icon.png"
+		},
+		{
+			"name":"speed_btn_png",
+			"type":"image",
+			"url":"game_assets/pk/speed_btn.png"
+		},
+		{
+			"name":"pk_view_icon_png",
+			"type":"image",
+			"url":"game_assets/pk/pk_view_icon.png"
 		}
 	]
 }

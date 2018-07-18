@@ -263,7 +263,10 @@ class BasePosUI extends game.BaseUI {
 
 
     public onUnSelect(){
+
         var item = this.list.selectedItem;
+        if(!item)
+            return;
         if(item.setting)
         {
              BasePosChooseUI.getInstance().show(this.listData,this)

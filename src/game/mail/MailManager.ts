@@ -131,6 +131,19 @@ class MailManager {
         return arr;
     }
 
+    public deleteMail(id){
+        for(var i=0;i<this.mailData.list.length;i++)
+        {
+            var oo = this.mailData.list[i];
+            if(oo.id == id)
+            {
+                this.mailData.list.splice(i,1);
+                break
+            }
+        }
+        this.saveData()
+    }
+
     public getMail(fun?){
         if(TM.now() - this.mailData.time < 30*60)
         {
@@ -163,6 +176,23 @@ class MailManager {
         Net.addUser(oo);
         Net.send(GameEvent.mail.get_mail_award,oo,(data) =>{
             var msg = data.msg;
+            if(msg.fail == 3)
+            {
+                MyWindow.Alert('邮件已被领取领取！')
+                mailObj.stat = 1;
+                this.saveData();
+                EM.dispatch(GameEvent.client.mail_change);
+                EM.dispatchEventWith(GameEvent.client.red_change)
+                return
+            }
+            if(msg.fail == 1)
+            {
+                this.deleteMail(mailObj.id)
+                MyWindow.Alert('邮件已过期')
+                EM.dispatch(GameEvent.client.mail_change);
+                EM.dispatchEventWith(GameEvent.client.red_change)
+                return
+            }
             if(msg.fail)
             {
                 MyWindow.Alert('领取失败，错误代码：' + msg.fail)

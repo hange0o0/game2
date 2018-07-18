@@ -29,7 +29,7 @@ class SlaveMasterItem extends game.BaseItem {
     private onPK(){
         if(this.cdGroup.visible)
         {
-            MyWindow.ShowTips('保护时间中，无法反抗')
+            MyWindow.ShowTips('镇压时间内，无法反抗')
             return;
         }
         var gameid = this.data.gameid

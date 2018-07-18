@@ -33,5 +33,6 @@
 				<e:HorizontalLayout verticalAlign="middle"/>
 			</e:layout>
 		</e:Group>
+		<e:Image id="forceHelpBtn" source="icon_help_png" includeIn="force" x="584" y="3" scaleX="0.8" scaleY="0.8"/>
 	</e:Group>
 </e:Skin>

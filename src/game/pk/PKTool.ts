@@ -2,18 +2,30 @@ class PKTool {
 
     //对自动队列进行解析
     private static mpList;
-    public static decodeAutoList(arr) {
+    public static getMPList(){  //每点费用的获得时间
         if(!this.mpList)//初始化一次
         {
             this.mpList = [0];
-            var max = 250
-            for(var i=1;i<=max;i++)
+            while(true)
             {
-                this.mpList[i] = this.getMPTime(i);
+                var time = this.getMPTime(this.mpList.length)
+                this.mpList.push(time);
+                if(time > PKConfig.drawTime)
+                    break
             }
+            //var max = 250
+            //for(var i=1;i<=max;i++)
+            //{
+            //    this.mpList[i] = this.getMPTime(i);
+            //}
         }
+        return this.mpList.concat()
+    }
+
+    public static decodeAutoList(arr) {
+
         //会改到原数组
-        var mpList = this.mpList.concat();
+        var mpList = this.getMPList();
         var returnArr = [];
         var mpCost = 0;
         var index = 1;
@@ -103,6 +115,24 @@ class PKTool {
         return returnArr;
     }
 
+    public static testActionList(arr){
+        var list1 = this.decodeActionList(arr);
+        for(var i=0;i<arr.length;i++)
+        {
+            var group = arr[i].split('#')
+            arr[i] = group[1];
+        }
+        var list2 = this.decodeAutoList(arr);
+        for(var i=0;i<list1.length;i++)
+        {
+            if(list1[i].time < list2[i].time)
+            {
+                console.log(list1[i],list2[i])
+            }
+        }
+
+    }
+
     public static getGroupMp(id){
         var mp = 0;
         if(id < 0)
@@ -150,11 +180,11 @@ class PKTool {
         if(des == 1)
         {
             if(atkType< defType)
-                return 2;
-            return 0.5
+                return 1.5;
+            return 0.8;
         }
         if(atkType > defType)
-            return 2;
-        return 0.5
+            return 1.5;
+        return 0.8;
     }
 }

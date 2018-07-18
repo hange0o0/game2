@@ -123,7 +123,7 @@ class PKVideoCon extends game.BaseContainer {
         else
             str = ('not die but not find:' + id + '|' + PKData.getInstance().monsterID)
         alert(str);
-        throw new Error(str+'#'+JSON.stringify(PKData.getInstance().actionRecord));
+        throw new Error(str+'#'+PKManager.getInstance().pkType+'#'+PKData.getInstance().isReplay+'#'+JSON.stringify(PKData.getInstance().actionRecord));
         return null;
     }
 

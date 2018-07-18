@@ -20,6 +20,7 @@ class PKPlayerData {
     public useCardList = []//使用过的卡
 
     private mp = 0//当前的魔法
+    private mpArr = []//当前的魔法
     public useMP = 0//已使用的魔法
     private lastTime = 0//上一次魔法处理时间
 
@@ -72,6 +73,12 @@ class PKPlayerData {
             }
         }
         this.mp = PKConfig.mpInit;
+        this.mpArr = PKTool.getMPList();
+        while (!this.mpArr[0])
+        {
+            this.mpArr.shift();
+        }
+
         this.posIndex = 1;
     }
 
@@ -95,39 +102,53 @@ class PKPlayerData {
     private resetMp(){
         var t = PKData.getInstance().actionTime;
         var step = 1;
-        //var max = PKConfig.maxMP;
-        //
-        //if(this.mp >= max){
-        //    this.lastTime = t;
-        //    return;
-        //}
-
-        var nextCD = this.getNextCD();
-        while (nextCD <= t) {
+        while (this.mpArr[0] &&  this.mpArr[0]<= t) {
             this.mp += step;
-
-            //if(this.mp >= max){
-            //    this.lastTime = t;
-            //    return;
-            //}
-
-            this.lastTime = nextCD
-            nextCD = this.getNextCD();
+            this.lastTime = this.mpArr[0]
+            this.mpArr.shift();
         }
     }
 
     public nextMpRate(){
-        return  (PKData.getInstance().actionTime - this.lastTime) / (this.getNextCD() - this.lastTime)
+        return  (PKData.getInstance().actionTime - this.lastTime) / (this.mpArr[0] - this.lastTime)
     }
 
-    private getNextCD(){
-        if(this.lastTime < 1000 * 60)
-            return this.lastTime + 2000;
-        else if(this.lastTime < 1000 * 60 * 2)
-            return this.lastTime + 1500;
-        else
-            return this.lastTime + 1000;
-    }
+    //private resetMp(){
+    //    var t = PKData.getInstance().actionTime;
+    //    var step = 1;
+    //    //var max = PKConfig.maxMP;
+    //    //
+    //    //if(this.mp >= max){
+    //    //    this.lastTime = t;
+    //    //    return;
+    //    //}
+    //
+    //    var nextCD = this.getNextCD();
+    //    while (nextCD <= t) {
+    //        this.mp += step;
+    //
+    //        //if(this.mp >= max){
+    //        //    this.lastTime = t;
+    //        //    return;
+    //        //}
+    //
+    //        this.lastTime = nextCD
+    //        nextCD = this.getNextCD();
+    //    }
+    //}
+    //
+    //public nextMpRate(){
+    //    return  (PKData.getInstance().actionTime - this.lastTime) / (this.getNextCD() - this.lastTime)
+    //}
+    //
+    //private getNextCD(){
+    //    if(this.lastTime < 1000 * 60)
+    //        return this.lastTime + 2000;
+    //    else if(this.lastTime < 1000 * 60 * 2)
+    //        return this.lastTime + 1500;
+    //    else
+    //        return this.lastTime + 1000;
+    //}
 
     public addPosCard(cardData){
         var posCard = this.posCard[this.posIndex] =  new PKPosCardData({

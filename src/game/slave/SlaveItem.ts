@@ -99,7 +99,7 @@ class SlaveItem extends game.BaseItem {
              }
              else
              {
-                 this.cdText.text = '无保护'
+                 this.cdText.text = '无镇压'
              }
          }
          //else if(this.currentState == 'master')

@@ -20,7 +20,7 @@ class PKManager {
     public recordList;
     public getRecordTime;
     public recordTime;
-    public pkCountDown;
+    public hangRecord;
 
 
     public currentPK;
@@ -29,7 +29,7 @@ class PKManager {
     constructor(){
         this.recordList = SharedObjectManager.getInstance().getMyValue('pk_replay1') || []
         this.recordTime = SharedObjectManager.getInstance().getMyValue('pk_record_time') || 0
-        this.pkCountDown = SharedObjectManager.getInstance().getMyValue('pkCountDown') || 0
+        this.hangRecord = SharedObjectManager.getInstance().getMyValue('hangRecord') || {list:[],t:0}
 
         for(var i=0;i<this.recordList.length;i++)//去除录像版本不对的
         {
@@ -106,9 +106,25 @@ class PKManager {
         }
         if(!this.quickTest())
         {
-            MyWindow.Alert('PK数据异常！')
-            PKingUI.getInstance().hide();
-            return;
+            if(DEBUG)
+            {
+                MyWindow.Alert('PK数据异常！')
+                PKingUI.getInstance().hide();
+                return;
+            }
+            else
+            {
+                var PD = PKData.getInstance();
+                var tResult = PD.getPKResult();
+                var actionTime = PD.actionTime
+                var data = ObjectUtil.clone(PD.baseData);
+                for(var i=0;i<data.players.length;i++)
+                {
+                    var players = data.players[i];
+                    players.actionlist = PD.getPlayer(players.id).posHistory.join(',');
+                }
+                sendClientError('PK数据异常:'+tResult+'|'+actionTime+'|' + JSON.stringify(data))
+            }
         }
         this.pkResult = null;
         switch(this.pkType)
@@ -130,6 +146,7 @@ class PKManager {
 
     //测试一下数据正确性
     public quickTest(){
+        var lastType = this.pkType
         var t = egret.getTimer();
         this.pkType = PKManager.TYPE_TEST;
         this.pkResult = null;
@@ -146,7 +163,7 @@ class PKManager {
         PD.quick = true;
         PD.start();
         PKCode.getInstance().onStep()
-
+        this.pkType = lastType
         console.log(egret.getTimer() - t)
         return tResult == PD.getPKResult() && actionTime == PD.actionTime
     }
@@ -204,6 +221,7 @@ class PKManager {
         PKingUI.getInstance().show();
     }
 
+    //阵容中的测试
     public test(atk,def){
         var PD = PKData.getInstance()
 
@@ -274,6 +292,7 @@ class PKManager {
         var PD = PKData.getInstance()
         PD.init(data);
         PD.isReplay = true
+        this.pkResult = null;
         this.pkType = data.type;
         PKingUI.getInstance().show();
     }
@@ -289,28 +308,52 @@ class PKManager {
         Net.addUser(oo)
     }
 
+    //6分钟内胜3次
+    //15分钟内游戏6次
+    //30分钟内胜8次
     public setPKCoolDown(){
-        var pkTime = 0;//15分钟内的PK时间
-        var cd = 15*60;
-        var tt = TM.now() -cd
-        for(var i=0;i<this.recordList.length;i++)
+        var rt = TM.now() - 30*60;
+        var tt = TM.now() - 15*60;
+        var wt = TM.now() - 6*60;
+        var list = this.hangRecord.list;
+        var winNum3 = 0;
+        var winNum8 = 0;
+        var gameNum = 0;
+        for(var i=0;i<list.length;i++)
         {
-            var oo = this.recordList[i];
-            if(oo.actionTime && oo.pktime > tt)
+            var oo = list[i];
+            if(oo.t < rt)
             {
-                pkTime += oo.actionTime/1000;
+                list.splice(i,1);
+                i--;
+                continue;
             }
-            else
-                break;
+            if(oo.r == 1)
+            {
+                winNum8 ++;
+                if(oo.t >= wt)
+                    winNum3++;
+            }
+            if(oo.t >= tt)
+                gameNum ++;
+        }
+        var countDown = 0;
+        if(winNum3 >= 3)
+            countDown += 60;
+        if(winNum8 >= 8)
+            countDown += 120;
+        if(gameNum >= 6)
+        {
+            countDown += 60 + (gameNum - 6) * 15;
         }
 
-        if(pkTime/cd > 0.5)
+
+        if(countDown)
         {
-            var countDown = 60 + pkTime*2-cd;
-            this.pkCountDown = TM.now() + Math.floor(countDown);
-            SharedObjectManager.getInstance().setMyValue('pkCountDown',this.pkCountDown)
-            return countDown;
+            this.hangRecord.t = TM.now() + countDown;
+            SharedObjectManager.getInstance().setMyValue('hangRecord',this.hangRecord)
         }
+        return countDown;
     }
 
     //把录像保存到本地
@@ -320,6 +363,8 @@ class PKManager {
         var PD = PKData.getInstance()
         if(PD.isReplay)
             return;
+
+
         var data = ObjectUtil.clone(PD.baseData)
         data.version = Config.pk_version
         data.type = this.pkType;
@@ -339,6 +384,12 @@ class PKManager {
         this.recordList.unshift(data)
 
         SharedObjectManager.getInstance().setMyValue('pk_replay1',this.recordList)
+
+        if(this.pkType == PKManager.TYPE_HANG && HangManager.getInstance().level > 20)
+        {
+            this.hangRecord.list.push({t:TM.now(),r: data.result})
+            SharedObjectManager.getInstance().setMyValue('hangRecord',this.hangRecord)
+        }
 
         //if(data.result == 1 && data.type == PKManager.TYPE_SLAVE)
         //{

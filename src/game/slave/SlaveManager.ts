@@ -39,6 +39,12 @@ class SlaveManager {
         }
     }
 
+    public getProtectedWord(id,masterID){
+        if(id == masterID)
+            return '保护'
+        return '镇压'
+    }
+
     public getDeleteCD(id){
         var t = this.slaveDeleteTime[id] || 0
         if(TM.now() - t < 3600)
@@ -204,7 +210,7 @@ class SlaveManager {
             }
             if(msg.fail == 2)
             {
-                MyWindow.Alert('无法增加保护时间')
+                MyWindow.Alert('增加保护时间')
                 self.lastGetSlaveTime = 0;
                 self.slave_list(()=>{
                     EM.dispatchEventWith(GameEvent.client.slave_change)

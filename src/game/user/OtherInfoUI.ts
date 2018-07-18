@@ -21,6 +21,7 @@ class OtherInfoUI extends game.BaseWindow {
     private headMC: HeadMC;
     private typeMC: eui.Image;
     private nameText: eui.Label;
+    private proTitleText: eui.Label;
     private coinText: eui.Label;
     private forceText: eui.Label;
     private infoList: eui.List;
@@ -210,7 +211,7 @@ class OtherInfoUI extends game.BaseWindow {
         {
             if(proCD > 0)
             {
-                MyWindow.Alert('当前保护时间剩余' + proStr + '\n无法反抗你的主人')
+                MyWindow.Alert('当前镇压时间剩余' + proStr + '\n无法反抗你的主人')
                 return;
             }
             PKBeforeUI.getInstance().show({
@@ -224,7 +225,7 @@ class OtherInfoUI extends game.BaseWindow {
             var str = '确定要释放该奴隶吗？\n释放后1小时内不能再收服！\n'
             if(proCD > 0)
             {
-                str += '\n当前保护时间还剩余' + proStr;
+                str += '\n当前镇压时间还剩余' + proStr;
             }
             MyWindow.Confirm(str,(b)=>{
                 if(b==1)
@@ -237,7 +238,7 @@ class OtherInfoUI extends game.BaseWindow {
         {
             if(proCD > 0)
             {
-                MyWindow.Alert('当前保护时间剩余' + proStr + '\n无法收服其作为你的奴隶')
+                MyWindow.Alert('当前'+SlaveManager.getInstance().getProtectedWord(this.gameid,this.master)+'时间剩余' + proStr + '\n无法收服其作为你的奴隶')
                 return;
             }
             if(SlaveManager.getInstance().getDeleteCD(gameid))
@@ -430,6 +431,7 @@ class OtherInfoUI extends game.BaseWindow {
             }
         }
 
+        this.proTitleText.text = '剩余'+SlaveManager.getInstance().getProtectedWord(this.gameid,this.master)+'时间:'
         this.viewBtn.label = SlaveManager.getInstance().viewObj[this.gameid]?'取消关注':'关注';
         this.viewBtn.skinName = SlaveManager.getInstance().viewObj[this.gameid]?'Btn2Skin':'Btn1Skin'
 

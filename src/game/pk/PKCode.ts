@@ -20,6 +20,11 @@ class PKCode {
         if(PD.stopTime)
             return;
         var cd = PD.getPassTime() - PD.actionTime
+        if(PD.actionTime == 0 && !PD.beginAuto) //在开始前上的怪
+        {
+            PD.beginAuto = true
+            this.autoAction();
+        }
         //console.log(cd)
         while(PD.quick || cd > PKConfig.stepCD)
         {

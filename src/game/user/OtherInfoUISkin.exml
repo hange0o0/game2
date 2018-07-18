@@ -4,7 +4,7 @@
 	<e:Scroller id="scroller" width="100%" top="2" bottom="100" bounces="false" horizontalCenter="0" bottom.self="2">
 		<e:Group id="con">
 			<e:Group id="cdGroup" x="199" y="60">
-				<e:Label text="剩余保护时间:" size="24" stroke="2" textAlign="center" y="-24" x="55"/>
+				<e:Label id="proTitleText" text="剩余保护时间:" size="24" stroke="2" textAlign="center" y="-24" x="55"/>
 				<e:Image source="icon_def1_png" x="2" y="6" scaleX="0.35" scaleY="0.35"/>
 				<e:Label id="cdText" text="Label" size="24" stroke="2" textAlign="center" y="-24" x="45"/>
 				<e:layout>

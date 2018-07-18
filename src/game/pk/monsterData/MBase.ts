@@ -148,6 +148,8 @@ class MBase {
     public atk(user:PKMonsterData,target:PKMonsterData){
         if(!user.doubleAction && target.missRate && PKData.getInstance().random() < target.missRate)  //暴击不可闪
         {
+            if(target.die)
+                return false;
             PKData.getInstance().addVideo({
                 type:PKConfig.VIDEO_MONSTER_MISS,
                 user:target

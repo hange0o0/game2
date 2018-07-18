@@ -10,7 +10,10 @@ class TecUI extends MainBase {
     private scroller: eui.Scroller;
     public list: eui.List;
     private tab: eui.TabBar;
+    private icon: eui.Image;
     private coinText: eui.Label;
+    private forceHelpBtn: eui.Image;
+
 
 
     private dataArray = new eui.ArrayCollection()
@@ -28,6 +31,12 @@ class TecUI extends MainBase {
 
         this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
         this.tab.selectedIndex = 0;
+
+        this.addBtnEvent(this.forceHelpBtn,this.onHelp)
+    }
+
+    private onHelp(){
+        HelpManager.getInstance().showHelp('force');
     }
 
     private onTab(){

@@ -15,6 +15,7 @@ class SlaveAddProUI extends game.BaseWindow {
     private ownDiamondText: eui.Label;
     private addDiamondBtn1: eui.Image;
     private desText: eui.Label;
+    private desTitleText: eui.Label;
 
 
 
@@ -22,6 +23,7 @@ class SlaveAddProUI extends game.BaseWindow {
 
     private openid
     private lastTime
+    private protectWord
     public constructor() {
         super();
         this.skinName = "SlaveAddProUISkin";
@@ -97,15 +99,18 @@ class SlaveAddProUI extends game.BaseWindow {
         }
         else
         {
-            this.desText.text = '无保护'
+            this.desText.text = '无' + this.protectWord
         }
 
     }
 
     public renew(){
+        this.protectWord = SlaveManager.getInstance().getProtectedWord(this.openid,UM.gameid)
         this.ownDiamondText.text = UM.diamond + ''
         this.numInput.nowNum = 1;
         this.onTimer();
         this.renewCoin();
+        this.titleText.text = '增加' + this.protectWord
+        this.desTitleText.text = '当前'+this.protectWord+'剩余时间'
     }
 }

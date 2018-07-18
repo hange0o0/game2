@@ -17,6 +17,7 @@ class PKData extends egret.EventDispatcher{
     public startTime = 0 //游戏开始时间
     public stopTime = 0 //游戏暂停时间
     public actionTime = 0 //游戏数据上处理过的时间
+    public beginAuto = false //正式开始前的上怪处理
 
     public monsterID;//怪物ID下标累计
     public team1:PKTeamData;  //进攻方
@@ -101,6 +102,7 @@ class PKData extends egret.EventDispatcher{
         this.monsterID = 1;
         this.isGameOver = false;
         this.monsterChange = false;
+        this.beginAuto = false;
         this.currentState = 'pk';
         PKMonsterAction.getInstance().init()
 

@@ -76,6 +76,16 @@ class HangManager {
                 MyWindow.Alert('找不到指定阵法')
                 return;
             }
+            if(msg.fail == 3)
+            {
+                MyWindow.Alert('技能卡数量不足')
+                return;
+            }
+            if(msg.fail)
+            {
+                MyWindow.Alert('PK初始异常，错误码：' + msg.fail)
+                return;
+            }
             PKManager.getInstance().startPK(PKManager.TYPE_HANG,msg.pkdata)
             if (fun)
                 fun();
@@ -99,6 +109,8 @@ class HangManager {
                 MyWindow.Alert('找不到指定阵法')
                 return;
             }
+
+
             PKManager.getInstance().startPK(PKManager.TYPE_TEST,msg.pkdata)
             if (fun)
                 fun();

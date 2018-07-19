@@ -146,6 +146,16 @@ class FightManager {
         Net.addUser(oo);
         Net.send(GameEvent.fight.pk_fight, oo, function (data) {
             var msg = data.msg;
+            if(msg.fail == 1)
+            {
+                MyWindow.Alert('体力不足')
+                return;
+            }
+            if(msg.fail)
+            {
+                MyWindow.Alert('PK初始异常，错误码：' + msg.fail)
+                return;
+            }
             PKManager.getInstance().startPK(PKManager.TYPE_FIGHT,msg.pkdata)
             if (fun)
                 fun();

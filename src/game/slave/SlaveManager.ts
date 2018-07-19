@@ -383,6 +383,16 @@ class SlaveManager {
                 EM.dispatchEventWith(GameEvent.client.info_change)
                 return;
             }
+            if(msg.fail == 9)
+            {
+                MyWindow.Alert('技能卡数量不足')
+                return;
+            }
+            if(msg.fail)
+            {
+                MyWindow.Alert('PK初始异常，错误码：' + msg.fail)
+                return;
+            }
             PKManager.getInstance().startPK(PKManager.TYPE_SLAVE,msg.pkdata)
             if (fun)
                 fun();

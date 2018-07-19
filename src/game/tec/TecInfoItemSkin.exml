@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="TecInfoItemSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" height="46" width="480">
+<e:Skin class="TecInfoItemSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" height="46" width="490">
 	<e:Image scale9Grid="16,15,7,7" x="0" y="0" width="100%" height="100%" source="bg9_png"/>
 	<e:Rect id="redMC" width="200" height="40" x="5" y="3" fillColor="0xff0000" fillAlpha="0.3"/>
 	<e:Label id="nameText" text="X25.5K" size="22" stroke="3" verticalAlign="bottom" x="60" strokeColor="0x231507" textColor="0xFCDB79" verticalCenter="1"/>

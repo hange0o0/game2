@@ -70,7 +70,7 @@ class SyncDataManager{
                 case 'sync_skill':
                     for(ss in value)
                     {
-                        CardManager.getInstance().skillList[ss] = value[ss];
+                        CardManager.getInstance().skillList[ss] = value[ss] || 0;
                     }
                     break;
 

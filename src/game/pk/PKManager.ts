@@ -73,6 +73,31 @@ class PKManager {
 
     public testFail(failID){
         //['']
+
+        MyWindow.Alert('PK异常！错误码：' + failID);
+        return true;
+        //switch(failID)
+        //{
+        //    case 101:
+        //
+        //        return true;
+        //    case 102:
+        //        MyWindow.Alert('PK异常！使用了无效的卡牌！');
+        //        return true;
+        //    case 103:
+        //        MyWindow.Alert('PK异常！使用了无效的卡牌！');
+        //        return true;
+        //}
+        //return false;
+    }
+    public testBeginFail(failID){
+        //['']
+
+        if(failID == 3)
+        {
+            MyWindow.Alert('PK异常！法术卡牌数量不足');
+            return true
+        }
         MyWindow.Alert('PK异常！错误码：' + failID);
         return true;
         //switch(failID)

@@ -252,7 +252,15 @@ class DebugManager {
             return [list2];
         }
     }
+
+    public getCardInfo() {
+        CardDebugManger.getInstance().getCardInfo()
+    }
+    public cleanCardRecord(key) {
+        CardDebugManger.getInstance().cleanCardRecord(key)
+    }
 }
+
 //DM.testCard('1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16','1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16')
 //DM.testMV('mv2',10,[30,31])
 //javascript:DM.showAllMV();

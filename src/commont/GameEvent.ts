@@ -40,6 +40,9 @@ class GameEvent {
         quick_register:'quick_register',
         register:'register',
 
+
+
+
         login_server:'sys.login_server',
         register_server:'sys.register_server',
         get_msg:'sys.get_msg',
@@ -130,6 +133,8 @@ class GameEvent {
     }
 
     public static debug = {
+        get_card_record:'debug.get_card_record',
+        clean_card_record:'debug.clean_card_record',
         pk_test:'debug.pk_test'
     }
 

@@ -14,6 +14,11 @@ class TecInfoUI extends game.BaseWindow {
     private text1: eui.Label;
     private icon2: eui.Image;
     private text2: eui.Label;
+    private upGroup2: eui.Group;
+    private icon1_2: eui.Image;
+    private text1_2: eui.Label;
+    private icon2_2: eui.Image;
+    private text2_2: eui.Label;
     private list: eui.List;
     private nameText: eui.Label;
     private helpBtn: eui.Image;
@@ -29,6 +34,7 @@ class TecInfoUI extends game.BaseWindow {
 
     public openList
     public dataIn
+    private upStr
     public dataArray = new eui.ArrayCollection()
     public constructor() {
         super();
@@ -64,6 +70,7 @@ class TecInfoUI extends game.BaseWindow {
 
     private onClick(){
         TecManager.getInstance().tec_up(this.dataIn.id,()=>{
+            MyWindow.ShowTips('升级成功！'+this.upStr)
             this.renew()
             GuideManager.getInstance().testShowGuide()
         });
@@ -98,11 +105,15 @@ class TecInfoUI extends game.BaseWindow {
         this.nameText.text = this.dataIn.name;
         this.mc.source = this.dataIn.getThumb();
         this.desText.text = this.dataIn.des
+        this.upGroup2.visible = false
         switch(this.dataIn.type)
         {
             case 1:
                 if(this.dataIn.id == 1)
+                {
                     this.upGroup.visible = false
+                    this.upStr = '科技等级 +1'
+                }
                 else
                 {
                     this.upGroup.visible = true
@@ -112,18 +123,21 @@ class TecInfoUI extends game.BaseWindow {
                         this.text1.text = '' + TCM.getHp()
                         this.text2.text = '' + (TCM.getHp() + 1)
                         icon = 'icon_love_png'
+                        this.upStr = '队伍生命 +1'
                     }
                     else if(this.dataIn.id == 3)
                     {
                         this.text1.text = '' + SlaveManager.getInstance().getCurrentMax()
                         this.text2.text = '' + (SlaveManager.getInstance().getCurrentMax() + 1)
                         icon = 'tec_slave_icon_png'
+                        this.upStr = '奴隶上限 +1'
                     }
                     else if(this.dataIn.id == 4)
                     {
                         this.text1.text = '' + PosManager.getInstance().maxPosNum()
                         this.text2.text = '' + (PosManager.getInstance().maxPosNum() + 1)
                         icon = 'icon_card_png'
+                        this.upStr = '阵容上限 +1'
                     }
                     this.icon1.source = icon
                     this.icon2.source = icon
@@ -137,6 +151,7 @@ class TecInfoUI extends game.BaseWindow {
                 this.icon2.source = 'icon_force2_png'
                 this.text1.text = '+' + TCM.getForceAdd(this.dataIn.id,lv)
                 this.text2.text = '+' + TCM.getForceAdd(this.dataIn.id,lv + 1)
+                this.upStr = '战力 +'  + (TCM.getForceAdd(this.dataIn.id,lv + 1) - TCM.getForceAdd(this.dataIn.id,lv))
                 break;
             case 3:
                 this.upGroup.visible = true
@@ -144,13 +159,18 @@ class TecInfoUI extends game.BaseWindow {
                 this.icon2.source = 'icon_coin_png'
                 this.text1.text = '+' + TCM.getCoinAdd(this.dataIn.id,lv)
                 this.text2.text = '+' + TCM.getCoinAdd(this.dataIn.id,lv + 1)
+                this.upStr = '每小时金币 +'  + (TCM.getCoinAdd(this.dataIn.id,lv + 1) - TCM.getCoinAdd(this.dataIn.id,lv))
                 break;
             case 4:
                 this.upGroup.visible = true
+                this.upGroup2.visible = true
                 this.icon1.source = PropVO.getObject(this.dataIn.id-300).getThumb()
                 this.icon2.source = PropVO.getObject(this.dataIn.id-300).getThumb()
                 this.text1.text = '+' + lv*5 + '%'
                 this.text2.text = '+' +(lv+1)*5 + '%'
+                this.text1_2.text = '+' + MyTool.toFixed(lv*0.2,1) + '%'
+                this.text2_2.text = '+' +MyTool.toFixed((lv+1)*0.2,1) + '%'
+                this.upStr = PropVO.getObject(this.dataIn.id-300).propname + '获取 +5%，金币 +0.2%'
                 break;
             default:
                 this.upGroup.visible = false

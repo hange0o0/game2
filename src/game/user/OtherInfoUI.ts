@@ -54,6 +54,7 @@ class OtherInfoUI extends game.BaseWindow {
 
     private gameid;
     private master;
+    private masterData;
     private isMyMaster;
     private chooseArray = []
     private copyResult = [];
@@ -253,6 +254,12 @@ class OtherInfoUI extends game.BaseWindow {
                 });
                 return;
             }
+
+            if(gameid != master)
+            {
+                PKMasterInfoUI.getInstance().show(this.masterData,this.gameid)
+                return;
+            }
             PKBeforeUI.getInstance().show({
                 fun:function(id){
                     SlaveManager.getInstance().slave_pk_begin(gameid,master,id)
@@ -363,6 +370,7 @@ class OtherInfoUI extends game.BaseWindow {
         this.slaveIcon.visible = false
 
         this.master = this.gameid;
+        this.masterData = slave.master
         if(slave.master)
         {
             slaveList.unshift(slave.master)

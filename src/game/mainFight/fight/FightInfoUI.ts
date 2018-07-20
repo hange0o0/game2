@@ -15,13 +15,15 @@ class FightInfoUI extends game.BaseWindow {
     }
 
     private list: eui.List;
+    private stepText: eui.Label;
+    private cardText: eui.Label;
+    private numText: eui.Label;
     private okBtn: eui.Button;
     private cancelBtn: eui.Button;
     private cdText: eui.Label;
     private valueText: eui.Label;
-    private stepText: eui.Label;
-    private cardText: eui.Label;
-    private numText: eui.Label;
+    private helpBtn: eui.Image;
+
 
 
     private getNextData = false
@@ -29,10 +31,15 @@ class FightInfoUI extends game.BaseWindow {
         super.childrenCreated();
         this.addBtnEvent(this.okBtn,this.onClick)
         this.addBtnEvent(this.cancelBtn,this.onCancel)
+        this.addBtnEvent(this.helpBtn,this.onHelp)
 
         this.touchEnabled = false;
 
         this.list.itemRenderer = FightShopItem
+    }
+
+    private onHelp(){
+        HelpManager.getInstance().showHelp('fight')
     }
 
     private onCancel(){

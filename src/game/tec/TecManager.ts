@@ -32,7 +32,7 @@ class TecManager {
     //取这个等级每小时能得到的金币
     public getCoinAdd(id,lv){
         var vo = TecVO.getObject(id);
-        return this.getTecValue(lv,vo.value1,20);
+        return this.getTecValue(lv,vo.value1,25);
     }
 
     public getForceAdd(id,lv){
@@ -67,8 +67,8 @@ class TecManager {
 
     //升到该级需要的资源 type:1-3
     public getOtherNeed(lv,type){
-        var v1 = 1.1
-        var v2 = [1.8,1.5,1.2][type-1]
+        var v1 = 1.2
+        var v2 = [2.2,2,1.8][type-1]
         var base = 2;
         for(var i=1;i<lv;i++)
         {
@@ -122,7 +122,7 @@ class TecManager {
         }
 
 
-        var coin = this.getCoinNeed(lv + vo.coinlv + vo.step*lv) //需要的钱
+        var coin = this.getCoinNeed(lv*(0.8+vo.step) + vo.coinlv) //需要的钱
         arr.push({type:'coin',num:coin});
 
         if(vo.prop1)

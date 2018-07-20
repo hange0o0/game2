@@ -259,6 +259,18 @@ class DebugManager {
     public cleanCardRecord(key) {
         CardDebugManger.getInstance().cleanCardRecord(key)
     }
+
+    public getHangForce($hangIndex){
+        var $force=1;
+        for(var $i=1;$i<$hangIndex;$i++)
+        {
+            $force+=Math.floor($i/10+1);
+        }
+        return $force;
+    }
+    public getHangCoin($level,$coinLevel=0){
+        return Math.floor(3600/10*0.3*Math.pow($level,0.85)*(1+$coinLevel*0.002))
+    }
 }
 
 //DM.testCard('1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16','1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16')

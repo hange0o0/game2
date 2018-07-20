@@ -109,6 +109,7 @@
     "src/game/shop/ShopDiamondItemSkin.exml",
     "src/game/shop/ShopUISkin.exml",
     "src/game/slave/FriendSearchUISkin.exml",
+    "src/game/slave/PKMasterInfoUISkin.exml",
     "src/game/slave/SlaveAddProUISkin.exml",
     "src/game/slave/SlaveChooseItemSkin.exml",
     "src/game/slave/SlaveChooseUISkin.exml",

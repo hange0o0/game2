@@ -230,11 +230,14 @@ class PKManager {
     public stopPK(){
         var b =  UM.closeVersion && Config.version <= UM.closeVersion && TM.now()>= UM.closeTime-10*60;
         if(b)
-            MyWindow.Alert('服务器在'+DateUtil.getStringBySecond(UM.closeTime - TM.now()).substr(-5)+'后更新，暂时无法PK')
-        if(UM.closeTime - TM.now() <= 0)
         {
-            InfoManager.getInstance().getMsg();
+            MyWindow.Alert('服务器在'+DateUtil.getStringBySecond(UM.closeTime - TM.now()).substr(-5)+'后更新，暂时无法PK')
+            if(UM.closeTime - TM.now() <= 0)
+            {
+                InfoManager.getInstance().getMsg();
+            }
         }
+
         return b;
     }
 

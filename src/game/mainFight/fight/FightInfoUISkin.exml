@@ -39,4 +39,5 @@
 		<e:Image x="-6" y="-5.5" source="icon_fight_png"/>
 	</e:Group>
 	<e:Image source="close_btn2_png" horizontalCenter="0" bottom="-40" touchEnabled="false"/>
+	<e:Image id="helpBtn" source="icon_help_png" right="10" top="10"/>
 </e:Skin>

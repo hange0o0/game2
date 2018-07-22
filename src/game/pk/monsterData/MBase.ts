@@ -28,6 +28,9 @@ class MBase {
     public onDie(user:PKMonsterData){
 
     }
+    public onRemove(user:PKMonsterData){
+
+    }
     public onBuff(buff:PKBuffData){
 
     }

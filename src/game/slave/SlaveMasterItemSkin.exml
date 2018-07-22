@@ -21,13 +21,23 @@
 			<e:HorizontalLayout verticalAlign="middle" horizontalAlign="center"/>
 			</e:layout>
 		</e:Group>
-		<e:Label id="coinText" text="12345" y="52.42" stroke="2" size="40" textColor="0xF4B213" bold="true" horizontalCenter="0"/>
-		<e:Group y="5" horizontalCenter="0.5">
-			<e:Image source="icon_coin_png" x="0" y="3.27" scaleX="0.7" scaleY="0.7"/>
-			<e:Label text="每小时供奉" y="0" stroke="2" x="4" size="26" bold="true" textColor="0xfcce99"/>
-			<e:layout>
-			<e:HorizontalLayout verticalAlign="middle" gap="6"/>
-			</e:layout>
+		<e:Group y="5" horizontalCenter="0">
+			<e:Group y="0" x="0">
+				<e:Image source="icon_coin_png" x="0" y="3.27" scaleX="0.7" scaleY="0.7"/>
+				<e:Label text="供奉：" y="0" stroke="2" x="4" size="26" bold="true" textColor="0xfcce99"/>
+				<e:Label id="coinText" text="12345" y="5" stroke="2" size="30" textColor="0xF4B213" bold="true" x="86"/>
+				<e:layout>
+				<e:HorizontalLayout verticalAlign="middle" gap="6"/>
+				</e:layout>
+			</e:Group>
+			<e:Group y="45" x="0">
+				<e:Image x="0" y="3.27" scaleX="0.7" scaleY="0.7" source="icon_force_png"/>
+				<e:Label text="战役：" y="0" stroke="2" x="4" size="26" bold="true" textColor="0xFCCE99"/>
+				<e:Label id="addFightText" text="12345" y="5" stroke="2" size="30" textColor="0xF4B213" bold="true" x="86"/>
+				<e:layout>
+				<e:HorizontalLayout verticalAlign="middle" gap="6"/>
+				</e:layout>
+			</e:Group>
 		</e:Group>
 	</e:Group>
 	<e:Image id="typeMC" source="icon_type1_png" x="1.52" y="-13.61" scaleX="0.8" scaleY="0.8"/>

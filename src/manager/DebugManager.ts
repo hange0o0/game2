@@ -16,7 +16,7 @@ class DebugManager {
     }
 
     public MML = 998;  //测试出战怪的等级
-    public addSkill = true
+    public addSkill = false
     public cardLen = 15
     public createHangFlag = false;
 
@@ -269,7 +269,38 @@ class DebugManager {
         return $force;
     }
     public getHangCoin($level,$coinLevel=0){
-        return Math.floor(3600/10*0.3*Math.pow($level,0.85)*(1+$coinLevel*0.002))
+        return Math.floor(3600/10*0.3*Math.pow($level,0.8)*(1+$coinLevel*0.002))
+    }
+
+    public showTecInfo(id){
+        var TCM = TecManager.getInstance();
+        var vo = TecVO.getObject(id)
+        console.log('==========='+id+'============')
+        for(var lv=1;lv<100;lv++)
+        {
+            var cost =  TCM.getLevelUpCost(id,lv)
+            if(vo.type == 2)
+            {
+                var before = TCM.getForceAdd(id,lv-1)
+                var after = TCM.getForceAdd(id,lv)
+            }
+            else if(vo.type == 3)
+            {
+                var before = TCM.getCoinAdd(id,lv-1)
+                var after = TCM.getCoinAdd(id,lv)
+            }
+            var oo = {};
+            for(var s in cost)
+            {
+                var o =cost[s];
+                if(o.id)
+                    oo[o.id] = NumberUtil.formatStrNum(o.num);
+                else
+                    oo[o.type] = NumberUtil.formatStrNum(o.num);
+            }
+
+            console.log(lv + '\t' + before + '->' + after + '('+(after - before)+')\t\t' + JSON.stringify(oo) )
+        }
     }
 }
 

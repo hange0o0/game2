@@ -32,18 +32,18 @@ class TecManager {
     //取这个等级每小时能得到的金币
     public getCoinAdd(id,lv){
         var vo = TecVO.getObject(id);
-        return this.getTecValue(lv,vo.value1,25);
+        return this.getTecValue(lv+vo.coinlv-1,20);
     }
 
     public getForceAdd(id,lv){
         var vo = TecVO.getObject(id);
-        return this.getTecValue(lv,vo.value1,1.5);
+        return this.getTecValue(lv+vo.coinlv-1,1.5);
     }
 
-    private getTecValue(lv,begin,step){
+    private getTecValue(lv,step){
         if(lv == 0)
             return 0;
-        var base = begin;
+        var base = 1;
         for(var i=1;i<lv;i++)
         {
             base += Math.max(1,Math.floor(step*i))
@@ -102,9 +102,9 @@ class TecManager {
     }
 
     //取升级对应花费
-    public getLevelUpCost(id){
+    public getLevelUpCost(id,lv?){
         var arr = []
-       var lv = this.getLevel(id);
+       var lv = lv || this.getLevel(id);
         var vo = TecVO.getObject(id);
         var idAdd = 0
         if(vo.type == 1)//通用类型需要的道具会变化
@@ -122,7 +122,7 @@ class TecManager {
         }
 
 
-        var coin = this.getCoinNeed(lv*(0.8+vo.step) + vo.coinlv) //需要的钱
+        var coin = this.getCoinNeed((lv + vo.coinlv - 1)*(0.8+vo.step + vo.coinlv/200)) //需要的钱
         arr.push({type:'coin',num:coin});
 
         if(vo.prop1)

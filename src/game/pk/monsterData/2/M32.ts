@@ -19,7 +19,7 @@ class M32 extends MBase {
         user.getOwner().teamData.addStateLister(listener)
     }
 
-    public onDie(user:PKMonsterData){
+    public onRemove(user:PKMonsterData){
         //var PD = PKData.getInstance();
         //var arr = PD.getMonsterByTeam(user.getOwner().teamData);
         //for(var i=0;i<arr.length;i++)
@@ -46,7 +46,10 @@ class M32StateListener extends PKStateListener {
         if(PKData.getInstance().actionTime - this.actionTime < 1000)
             return;
 
+
+
         this.actionTime = PKData.getInstance().actionTime;
+
 
         var user:PKMonsterData = <PKMonsterData>this.owner;
         var PD = PKData.getInstance();
@@ -62,6 +65,18 @@ class M32StateListener extends PKStateListener {
             var des = Math.abs(user.x - targetEnemy.x);
             if(des<=atkrage)
             {
+                if(!targetEnemy.skillTemp[32])
+                    targetEnemy.skillTemp[32] = [];
+                if(targetEnemy.skillTemp[32].length >= 3)
+                {
+                    while(targetEnemy.skillTemp[32][0] &&  PKData.getInstance().actionTime - targetEnemy.skillTemp[32][0] > 1000)
+                        targetEnemy.skillTemp[32].shift();
+                }
+                if(targetEnemy.skillTemp[32].length >= 3)
+                {
+                    continue;
+                }
+                targetEnemy.skillTemp[32].push(this.actionTime);
                 targetEnemy.addHp(user.getSkillValue(2,true))
             }
         }

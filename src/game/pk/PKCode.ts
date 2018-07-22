@@ -19,6 +19,13 @@ class PKCode {
         var PD = PKData.getInstance();
         if(PD.stopTime)
             return;
+        if(!PD.startTime)
+        {
+            if(DEBUG)
+                throw new Error('未开始就调用onStep')
+            sendClientError('未开始就调用onStep')
+            return;
+        }
         var cd = PD.getPassTime() - PD.actionTime
         if(PD.actionTime == 0 && !PD.beginAuto) //在开始前上的怪
         {

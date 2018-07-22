@@ -27,6 +27,7 @@ class PKData extends egret.EventDispatcher{
 
     public monsterChange = false//怪有变化
     public randomSeed = 0//随机的种子
+    public randomTimes = 0//随机的种子
     public monsterList = [];//场上的怪的数据
     public playerObj = {};//场上的玩家的数据
     public myPlayer:PKPlayerData;
@@ -86,6 +87,7 @@ class PKData extends egret.EventDispatcher{
 
     //初始化游戏
     public init(data){
+        this.startTime = 0;
         this.isReplay = false;
         this.baseData = data;
         this.actionRecord = [];
@@ -108,6 +110,7 @@ class PKData extends egret.EventDispatcher{
 
 
 
+        this.randomTimes = 0;
         this.randomSeed = data.seed;
         this.team1 = new PKTeamData({id:1})
         this.team2 = new PKTeamData({id:2})
@@ -148,6 +151,7 @@ class PKData extends egret.EventDispatcher{
     }
 
     public random(){
+        this.randomTimes ++;
         var seed = this.randomSeed;
         seed = ( seed * 9301 + 49297 ) % 233280;
         var rd = seed / ( 233280.0 );

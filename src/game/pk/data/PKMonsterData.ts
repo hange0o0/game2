@@ -488,6 +488,7 @@ class PKMonsterData {
             MBase.getData(this.mid).onDie(this);
         }
         this.getOwner().teamData.testState(PKConfig.LISTENER_DIE,this);
+        MBase.getData(this.mid).onRemove(this);
         PKData.getInstance().actionRecord.push('die|' + this.actionTime + '|' + this.id + '|' + this.passEnd)
 
         //if(this.skillTemp[210] == 1)

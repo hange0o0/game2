@@ -36,7 +36,7 @@ class M9 extends MBase {
         user.getOwner().teamData.addStateLister(listener)
     }
 
-    public onDie(user:PKMonsterData){
+    public onRemove(user:PKMonsterData){
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData);
         for(var i=0;i<arr.length;i++)

@@ -323,8 +323,7 @@ class PKingUI extends game.BaseUI {
 
     public callFail(){
         egret.Tween.removeTweens(this.roundText)
-        this.counting = false
-        this.onE();
+        this.showResult();
     }
 
     public startGame(){
@@ -341,7 +340,7 @@ class PKingUI extends game.BaseUI {
 
     public onE(){
         var PC = PKCode.getInstance()
-        var PD = PKData.getInstance()
+
         var isOver = false;
         if(!this.counting)
             isOver = PC.onStep()     //跑数据
@@ -358,29 +357,34 @@ class PKingUI extends game.BaseUI {
 
         if(isOver)
         {
-            SoundManager.getInstance().playSound(SoundConfig.bg_pk_view);
-            PKManager.getInstance().savePKResult();
-            this.removeEventListener(egret.Event.ENTER_FRAME,this.onE,this);
-            if(PD.isWin())
-            {
-                PKManager.getInstance().sendResult(()=>{
-                    PKWinUI.getInstance().show();
-                });
-            }
-            else
-            {
-
-                PKManager.getInstance().sendFail(()=>{
-                    PKFailUI.getInstance().show();
-                })
-            }
-            PKSettingUI.getInstance().hide();
+              this.showResult();
         }
         else if(TM.now() - this.scrollTime > 10)
         {
             this.autoMoveScreen();
         }
 
+    }
+
+    private showResult(){
+        var PD = PKData.getInstance()
+        SoundManager.getInstance().playSound(SoundConfig.bg_pk_view);
+        PKManager.getInstance().savePKResult();
+        this.removeEventListener(egret.Event.ENTER_FRAME,this.onE,this);
+        if(PD.isWin())
+        {
+            PKManager.getInstance().sendResult(()=>{
+                PKWinUI.getInstance().show();
+            });
+        }
+        else
+        {
+
+            PKManager.getInstance().sendFail(()=>{
+                PKFailUI.getInstance().show();
+            })
+        }
+        PKSettingUI.getInstance().hide();
     }
 
     private autoMoveScreen(){

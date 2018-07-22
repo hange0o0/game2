@@ -129,26 +129,27 @@ class PKManager {
             fun && fun();
             return;
         }
-        if(!this.quickTest())
+        var result = this.quickTest()
+        if(result)
         {
             if(DEBUG)
             {
-                MyWindow.Alert('PK数据异常！')
+                MyWindow.Alert('PK数据异常！'+result)
                 PKingUI.getInstance().hide();
                 return;
             }
             else
             {
                 var PD = PKData.getInstance();
-                var tResult = PD.getPKResult();
-                var actionTime = PD.actionTime
+                //var tResult = PD.getPKResult();
+                //var actionTime = PD.actionTime
                 var data = ObjectUtil.clone(PD.baseData);
                 for(var i=0;i<data.players.length;i++)
                 {
                     var players = data.players[i];
                     players.actionlist = PD.getPlayer(players.id).posHistory.join(',');
                 }
-                sendClientError('PK数据异常:'+tResult+'|'+actionTime+'|' + JSON.stringify(data))
+                sendClientError('PK数据异常:'+result+'|' + JSON.stringify(data))
             }
         }
         this.pkResult = null;
@@ -172,12 +173,12 @@ class PKManager {
     //测试一下数据正确性
     public quickTest(){
         var lastType = this.pkType
-        var t = egret.getTimer();
         this.pkType = PKManager.TYPE_TEST;
         this.pkResult = null;
         var PD = PKData.getInstance();
         var tResult = PD.getPKResult();
         var actionTime = PD.actionTime
+        var randomTimes = PD.randomTimes
         var data = ObjectUtil.clone(PD.baseData);
         for(var i=0;i<data.players.length;i++)
         {
@@ -189,8 +190,9 @@ class PKManager {
         PD.start();
         PKCode.getInstance().onStep()
         this.pkType = lastType
-        console.log(egret.getTimer() - t)
-        return tResult == PD.getPKResult() && actionTime == PD.actionTime
+        return (tResult == PD.getPKResult()?'':'1|' + tResult +':'+ PD.getPKResult()) +
+            (actionTime == PD.actionTime?'':'2|' + actionTime +':'+ PD.actionTime) +
+            (randomTimes == PD.randomTimes?'':'3|' + randomTimes +':'+ PD.randomTimes)
     }
 
     public sendFail(fun){

@@ -82,17 +82,40 @@ class MonsterVO {
         this.mv_atk2 = data.mv_atk2
 
         //var arr = [];
-        //for(var s in SkillVO.data)
+        //for(var s in MonsterVO.data)
         //{
-        //    if(SkillVO.data[s].level < 998)
-        //   arr.push('"'+s+'":999')
+        //    if(MonsterVO.data[s].level < 998)
+        //        arr.push(MonsterVO.data[s])
         //}
-        //console.log(arr.join(','));
-        //ArrayUtil.sortByField(arr,['level'],[0])
+        ////console.log(arr.join(','));
+        ////ArrayUtil.sortByField(arr,['level'],[0])
         //for(var i=0;i<arr.length;i++)
         //{
         //    console.log(arr[i].level,arr[i].id,arr[i].name)
         //}
+        var arr = [];
+        var obj = {}
+        for(var s in SkillVO.data)
+        {
+            if(SkillVO.data[s].level < 998)
+            {
+                if(!obj[SkillVO.data[s].level])
+                    obj[SkillVO.data[s].level] = []
+                obj[SkillVO.data[s].level].push(SkillVO.data[s])
+            }
+        }
+        //console.log(arr.join(','));
+        //ArrayUtil.sortByField(arr,['level'],[0])
+        for(var s in obj)
+        {
+            console.log('---------------LV.' + s + '\t\tnum:' + obj[s].length)
+            for(var i=0;i<obj[s].length;i++)
+            {
+                var vo = obj[s][i];
+                console.log('LV.' +vo.level+ '\t\tid:' + vo.id+ '\t\t' + vo.name)
+            }
+
+        }
     }
 
     public getImage(gay){

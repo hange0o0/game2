@@ -9,7 +9,7 @@
 			<e:Image scaleX="1" scaleY="1" left="0" right="0" top="0" bottom="0" source="bg11_png" scale9Grid="9,9,11,10"/>
 			<e:Group x="15" y="10">
 			<e:Image source="icon_like_png" x="0" verticalCenter="0"/>
-			<e:CheckBox id="likeCB" label="要求加强" skinName="MyCheckBoxSkin" x="40" y="0"/>
+			<e:CheckBox id="likeCB" label="推荐使用" skinName="MyCheckBoxSkin" x="40" y="0"/>
 			<e:Group x="200" verticalCenter="0">
 				<e:Rect id="likeBar" width="200" height="20" x="195" fillColor="0x12562b" y="3"/>
 				<e:Label id="likeText" text="10000" x="0" size="26" textColor="0x09eb0d" strokeColor="0x022602" bold="true" stroke="1" y="0"/>
@@ -20,7 +20,7 @@
 			</e:Group>
 			<e:Group x="15" y="55">
 			<e:Image x="0" verticalCenter="0" source="icon_unlike_png"/>
-			<e:CheckBox id="unlikeCB" label="必须削弱" skinName="MyCheckBoxSkin" x="40" y="0"/>
+			<e:CheckBox id="unlikeCB" label="不推荐用" skinName="MyCheckBoxSkin" x="40" y="0"/>
 			<e:Group x="200">
 				<e:Rect id="unlikeBar" width="200" height="20" x="195" y="3" fillColor="0x5b1212"/>
 				<e:Label id="unlikeText" text="10000" x="0" size="26" strokeColor="0x022602" bold="true" stroke="1" y="0" textColor="0xff0202"/>

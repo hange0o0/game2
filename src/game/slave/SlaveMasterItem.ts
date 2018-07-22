@@ -12,6 +12,7 @@ class SlaveMasterItem extends game.BaseItem {
     private cdGroup: eui.Group;
     private cdText: eui.Label;
     private coinText: eui.Label;
+    private addFightText: eui.Label;
     private typeMC: eui.Image;
 
 
@@ -64,7 +65,11 @@ class SlaveMasterItem extends game.BaseItem {
     public dataChanged(){
         this.forceText.text = ''  + this.data.tec_force;
         this.nameText.text = '' + this.data.nick;
-        this.coinText.text = '' + NumberUtil.formatStrNum(Math.ceil(UM.hourcoin*0.2)) + ' 金币'
+        this.coinText.text = '' + NumberUtil.formatStrNum(Math.ceil(UM.hourcoin*0.2)) + '/小时'
+        if(this.data.tec_force > UM.tec_force)
+            this.addFightText.text =  '+' + Math.ceil((this.data.tec_force - UM.tec_force)*0.05)
+        else
+            this.addFightText.text =  '无加成'
         this.headMC.setData(this.data.head,this.data.type);
         MyTool.setTypeImg(this.typeMC,this.data.type)
         this.onTimer();

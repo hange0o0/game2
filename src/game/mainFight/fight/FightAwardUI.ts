@@ -78,6 +78,7 @@ class FightAwardUI extends game.BaseWindow {
     }
 
     private renew(){
+        this.titleText.text = '选择增加手牌（0/5）'
         var award = FightManager.getInstance().award.split(',');
         this.list.dataProvider = new eui.ArrayCollection(award)
         this.list.selectedItems = null;

@@ -15,7 +15,7 @@ class ChangeHeadUI extends game.BaseWindow {
     private titleText: eui.Label;
 
 
-   private cost = 60;
+   //private cost = 60;
     public constructor() {
         super();
         this.skinName = "ChangeHeadUISkin";
@@ -35,8 +35,8 @@ class ChangeHeadUI extends game.BaseWindow {
             this.hide();
             return;
         }
-        if(!UM.testDiamond(this.cost))
-            return;
+        //if(!UM.testDiamond(this.cost))
+        //    return;
         InfoManager.getInstance().change_head(newHead,()=>{
             this.hide();
             MyWindow.ShowTips('更换成功')

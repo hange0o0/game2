@@ -30,7 +30,12 @@ class InfoManager {
         {
             var vo =  data[s];
             if(vo.level <= UM.level)
-                arr.push(vo.id);
+                arr.push(vo);
+        }
+        ArrayUtil.sortByField(arr,['level'],[0]);
+        for(var i=0;i<arr.length;i++)
+        {
+            arr[i] = arr[i].id
         }
         return arr;
     }

@@ -24,7 +24,7 @@ class LogUI extends game.BaseWindow {
         this.list.itemRenderer =HelpItem
         this.list.useVirtualLayout = false;
         this.titleText.text = '更新日志';
-        this.height = 560
+        this.height = 800
         this.addBtnEvent(this.closeBtn,this.hide)
 
     }

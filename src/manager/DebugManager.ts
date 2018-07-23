@@ -16,7 +16,7 @@ class DebugManager {
     }
 
     public MML = 998;  //测试出战怪的等级
-    public addSkill = false
+    public addSkill = true
     public cardLen = 15
     public createHangFlag = false;
 
@@ -92,7 +92,7 @@ class DebugManager {
         return newList;
     }
 
-    public testCard(list1,list2,view=false,hp=5){
+    public testCard(list1,list2,view=false,hp=10){
         var PD = PKData.getInstance()
         var data = {
             seed:TM.now(),
@@ -228,8 +228,8 @@ class DebugManager {
         var data = {
             seed:TM.now(),
             players:[
-                {id:1,gameid:'test1',team:1,autolist:list1,force:0,type:0,hp:5},
-                {id:2,gameid:'test2',team:2,autolist:list2,force:0,type:0,hp:5}
+                {id:1,gameid:'test1',team:1,autolist:list1,force:500,type:0,hp:10},
+                {id:2,gameid:'test2',team:2,autolist:list2,force:500,type:0,hp:10}
             ]
         };
         var t = egret.getTimer();

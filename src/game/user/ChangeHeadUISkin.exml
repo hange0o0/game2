@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<e:Skin class="ChangeHeadUISkin" width="600" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" height="820">
+<e:Skin class="ChangeHeadUISkin" width="600" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" height="790">
 	<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
 
 	<e:Group  id="btnGroup" horizontalCenter="0" bottom="30" locked="true">
@@ -9,7 +9,7 @@
 			<e:HorizontalLayout gap="50"/>
 		</e:layout>
 	</e:Group>
-	<e:Scroller id="scroller" top="120" bottom="150" bounces="false" left="30" right="30">
+	<e:Scroller id="scroller" top="120" bottom="120" bounces="false" left="30" right="30">
 		<e:Group>
 			<e:List id="list" minHeight="200" x="0">
 				<e:layout>
@@ -21,13 +21,5 @@
 	<e:Group horizontalCenter="0" y="20">
 		<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="480" x="0" y="0"/>
 		<e:Label text="更换头像 " y="10.18" size="24" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
-	</e:Group>
-	<e:Group horizontalCenter="0" bottom="100" locked="true">
-		<e:Label text="更换头像需花费：" y="28" x="0" size="28"/>
-		<e:Image source="icon_diamond_png" x="253" y="0" scaleX="0.8" scaleY="0.8"/>
-		<e:Label text="60" y="38" x="10" size="28" textColor="0xffff00"/>
-		<e:layout>
-			<e:HorizontalLayout verticalAlign="middle"/>
-		</e:layout>
 	</e:Group>
 </e:Skin>

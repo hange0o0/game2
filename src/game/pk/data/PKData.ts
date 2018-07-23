@@ -388,6 +388,14 @@ class PKData extends egret.EventDispatcher{
 
     //加入怪到场上
     public addMonster(data){
+        var player = this.getPlayer(data.owner)
+        var toFront = player.teamData.toFront
+        if(toFront > 0)
+        {   var frontItem:any = this.getFirstItem(player.teamData.id);
+            if(frontItem)
+                data.x = frontItem.x;
+        }
+
         var monster = new PKMonsterData(data)
         monster.id = this.monsterID;
         this.monsterID ++;

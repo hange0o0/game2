@@ -44,8 +44,8 @@ class Net extends egret.EventDispatcher{
 
         if(_get['debug_server'])
             oo.debug_server = 1;
-        if(_get['new_version'])
-            oo.new_version = _get['new_version'];
+        if(_get['game_version'])
+            oo.game_version = _get['game_version'];
         if(FromManager.getInstance().h5Form)
             oo.h5 =  FromManager.getInstance().from
 

@@ -227,7 +227,7 @@ class CardInfoUI extends game.BaseWindow {
             {
                 this.currentState = 'buy'
                 var coin = CM.getUpCoin(this.data.id);
-                this.coinText.text = coin + ''
+                this.coinText.text = NumberUtil.addNumSeparator(coin)
                 this.upAble = coin <= UM.getCoin()
                 this.okBtn.label = '解锁'
                 this.okBtn.skinName = 'Btn1Skin'

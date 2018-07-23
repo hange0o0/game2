@@ -15,7 +15,6 @@ class TecVO {
     public des: string;
     public name: string;
     public prop1: string;
-    public value1: string;
     public step: number;
     public level: number;
     public id: number;
@@ -35,7 +34,6 @@ class TecVO {
         this.des = data.des
         this.name = data.name
         this.prop1 = data.prop1
-        this.value1 = data.value1
         this.step = data.step
         this.level = data.level
         this.id = data.id

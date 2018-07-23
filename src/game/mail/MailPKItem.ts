@@ -116,21 +116,28 @@ class MailPKItem extends game.BaseItem {
         for(var i=0;i<autoList.length;i++)
         {
             var temp = autoList[i].split('#');
-            var id = temp[1];
-            if(!obj[id])
-                obj[id] = {id:id,num:1,index:i}
-            else
-                obj[id].num ++
+            var id = parseInt(temp[1]);
+            if(id < 500)
+                arr.push(id);
         }
-        for(var s in obj)
-        {
-            arr.push(obj[s]);
-        }
-        ArrayUtil.sortByField(arr,['num','index'],[1,0]);
-        for(var i=0;i<arr.length;i++)
-        {
-            arr[i] = arr[i].id
-        }
+        //for(var i=0;i<autoList.length;i++)
+        //{
+        //    var temp = autoList[i].split('#');
+        //    var id = temp[1];
+        //    if(!obj[id])
+        //        obj[id] = {id:id,num:1,index:i}
+        //    else
+        //        obj[id].num ++
+        //}
+        //for(var s in obj)
+        //{
+        //    arr.push(obj[s]);
+        //}
+        //ArrayUtil.sortByField(arr,['num','index'],[1,0]);
+        //for(var i=0;i<arr.length;i++)
+        //{
+        //    arr[i] = arr[i].id
+        //}
         if(arr.length > 8)
             arr.length = 8;
          this['list' + index].dataProvider = new eui.ArrayCollection(arr)

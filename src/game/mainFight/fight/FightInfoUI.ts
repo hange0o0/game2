@@ -55,7 +55,7 @@ class FightInfoUI extends game.BaseWindow {
         }
         else if(FM.card.length)
         {
-            MyWindow.Confirm('你目前还有'+FM.card.length+'张手牌，是否仍继续结束本次远征？',(b)=>{
+             MyWindow.Confirm('你目前还有'+FM.card.length+'张手牌，是否仍继续结束本次远征？',(b)=>{
                 if(b==1)
                 {
                     this.sendCancel();

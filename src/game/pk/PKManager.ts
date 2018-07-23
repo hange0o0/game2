@@ -172,10 +172,14 @@ class PKManager {
 
     //测试一下数据正确性
     public quickTest(){
+        var PD = PKData.getInstance();
+        if(!PD.baseData.check)
+            return ''
+        //console.log('============')
         var lastType = this.pkType
         this.pkType = PKManager.TYPE_TEST;
         this.pkResult = null;
-        var PD = PKData.getInstance();
+
         var tResult = PD.getPKResult();
         var actionTime = PD.actionTime
         var randomTimes = PD.randomTimes

@@ -164,15 +164,15 @@ class HangManager {
             this.videoData.time = TM.now();
             this.videoData.list = msg.list;
 
-            for(var i=0;i<msg.list.length;i++)
-            {
-                var info = JSON.parse(msg.list[i].info);
-                if(info.version != Config.pk_version)
-                {
-                    msg.list.splice(i,1);
-                    i--;
-                }
-            }
+            //for(var i=0;i<msg.list.length;i++)
+            //{
+            //    var info = JSON.parse(msg.list[i].info);
+            //    if(info.version != Config.pk_version)
+            //    {
+            //        msg.list.splice(i,1);
+            //        i--;
+            //    }
+            //}
             if (fun)
                 fun();
         });

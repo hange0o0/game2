@@ -25,7 +25,20 @@ class HangHelpItem extends game.BaseItem {
     }
 
     private onClick(){
-         HangManager.getInstance().getVideo(this.data.id,this.data.time)
+        if(this.infoData.version != Config.pk_version)
+        {
+            MyWindow.Confirm('该录像的生成时间为版本调整之前，\n其对战结果可能与当前描述不一致，\n是否仍继续观看？',(b)=>{
+                if(b==1)
+                {
+                    this.view();
+                }
+            },['取消', '观看']);
+            return;
+        }
+        this.view();
+    }
+    private view(){
+        HangManager.getInstance().getVideo(this.data.id,this.data.time)
     }
     private onInfo(){
          OtherInfoUI.getInstance().show(this.infoData.gameid)
@@ -39,9 +52,19 @@ class HangHelpItem extends game.BaseItem {
         this.nameGroup.addChildAt(this.typeMC,0)
         this.headMC.setData(this.infoData.head,this.infoData.type);
         this.forceText.text = '通关战力：'+  this.infoData.force
-        this.cdText.text = '通关时间：'+  MyTool.toFixed(this.infoData.cd/1000,1) + '秒'
+        this.cdText.text = '通关时长：'+  DateUtil.getStringBySecond(this.infoData.cd/1000).substr(-5)
 
         this.timeText.text = DateUtil.getStringBySeconds(Math.max(TM.now() - this.data.time,1),true) + '前'
+
+        if(this.infoData.version != Config.pk_version)
+        {
+              this.btn.skinName = 'Btn2Skin'
+        }
+        else
+        {
+            this.btn.skinName = 'Btn1Skin'
+        }
+
     }
 
 }

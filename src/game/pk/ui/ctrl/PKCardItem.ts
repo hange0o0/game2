@@ -72,7 +72,7 @@ class PKCardItem extends game.BaseItem {
     private onClick(){
         if(game.BaseUI.isStopEevent)
             return;
-        if(PKData.getInstance().isReplay)
+        if(PKData.getInstance().isView())
             return
         if(this.data && !this.data.waiting)
         {
@@ -143,7 +143,7 @@ class PKCardItem extends game.BaseItem {
         this.costText.text = vo.cost;
         this.renewChoose();
 
-        if(PKData.getInstance().isReplay)
+        if(PKData.getInstance().isView())
             this.stopDrag = true
     }
 

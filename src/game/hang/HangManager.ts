@@ -55,7 +55,7 @@ class HangManager {
         });
     }
 
-    public pk(id,fun?) {
+    public pk(id,isAuto?,fun?) {
         if(PKManager.getInstance().stopPK())
             return;
         if(!UM.testEnergy(1))
@@ -63,6 +63,7 @@ class HangManager {
         var self = this;
         var oo:any = {};
         oo.id = id;
+        oo.isauto = isAuto;
         Net.addUser(oo);
         Net.send(GameEvent.hang.pk_hang, oo, function (data) {
             var msg = data.msg;

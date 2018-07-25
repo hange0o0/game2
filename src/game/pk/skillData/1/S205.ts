@@ -8,7 +8,7 @@ class S205 extends SBase {
     public onSkill(user:PKPosCardData){
 
         var PD = PKData.getInstance();
-        var list = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
+        var list = PD.getMonsterByTeam(user.getOwner().teamData);
         var targets = [];
         var skillValue = user.getSkillValue(1);
         var addValue = user.getSkillValue(3,true);

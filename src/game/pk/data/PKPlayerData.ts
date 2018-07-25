@@ -10,6 +10,7 @@ class PKPlayerData {
     public teamData:PKTeamData   //对应队伍
 
     public card//原始的手牌
+    public autolist//原始的autolist
     private handCard = {};//当前的手牌  [{index,mid},]  上限5
     public hideCard = [];//隐藏的手牌  [{index,mid},]
     public posCard = {};//已上阵的手牌 1-4,如果是自动的，不受此限制
@@ -25,6 +26,7 @@ class PKPlayerData {
     private lastTime = 0//上一次魔法处理时间
 
 
+    public isauto;
     public autoList;
     public skillValue = {};
 
@@ -41,6 +43,8 @@ class PKPlayerData {
 
     public fill(obj)
     {
+        obj = ObjectUtil.clone(obj);
+        //console.log(JSON.stringify(obj));
         for (var key in obj) {
             this[key] = obj[key];
         }
@@ -48,7 +52,11 @@ class PKPlayerData {
         this.hideCard = [];
         this.autoList = null;
         if(obj['autolist'])
+        {
             this.autoList = PKTool.decodeAutoList(obj['autolist'].split(','))
+            if(!obj['card'])
+                obj['card'] = obj['autolist'];
+        }
         if(obj['actionlist'])
             this.autoList = PKTool.decodeActionList(obj['actionlist'].split(','))
         if(obj['card'])
@@ -72,6 +80,7 @@ class PKPlayerData {
                 }
             }
         }
+        this.isauto = this.autoList && this.autoList.length > 0
         this.mp = PKConfig.mpInit;
         this.mpArr = PKTool.getMPList();
         while (!this.mpArr[0])
@@ -184,9 +193,13 @@ class PKPlayerData {
             }
         }
 
-        var step = Math.floor(posCard.addTime/PKConfig.stepCD)
-        this.posHistory.push(step + '#' + posCard.cardData.mid);
-        this.useCardList.push(posCard.cardData.mid)
+        if(!this.isauto) //自动上怪那里已加了一次
+        {
+            var step = Math.floor(posCard.addTime/PKConfig.stepCD)
+            this.posHistory.push(step + '#' + posCard.cardData.mid);
+            this.useCardList.push(posCard.cardData.mid)
+        }
+
         if(newCard)
         {
             newCard.showTime = posCard.addTime + 500;
@@ -250,7 +263,7 @@ class PKPlayerData {
                     })
                 }
                 var step = Math.floor(PKData.getInstance().actionTime/PKConfig.stepCD)
-                this.posHistory.push(step + '#' + data.mid);
+                this.posHistory.push(step + '#' +data.mid);
                 this.useCardList.push(data.mid)
             }
             else
@@ -260,7 +273,7 @@ class PKPlayerData {
 
     private removeAutoCard(data:PKPosCardData){
         var PD = PKData.getInstance()
-        if(!PD.isReplay)
+        if(!PD.isView())
             return;
         var list = []
         for(var s in this.handCard)

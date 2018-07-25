@@ -9,6 +9,13 @@ class MsgingUI extends egret.Sprite {
     public constructor() {
         super();
         this.createView();
+
+        if(Config.isDebug)
+        {
+            this.addEventListener(egret.TouchEvent.TOUCH_TAP,()=>{
+                MyWindow.Alert(Net.getInstance().actionRecord.join('\n'));
+            },this)
+        }
     }
 
     private loadingMC
@@ -49,11 +56,13 @@ class MsgingUI extends egret.Sprite {
         var tw = egret.Tween.get(this.loadingMC,{loop:true})
         tw.to({rotation:0}).to({rotation:360},1000);
 
-        this.visible = false;
+        this.alpha = 0;
         egret.clearTimeout(this.timer);
         this.timer = egret.setTimeout(function(){
-            this.visible = true;
+            this.alpha = 1;
         },this,200)
+
+
     }
 
 

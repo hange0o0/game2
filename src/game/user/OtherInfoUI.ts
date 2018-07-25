@@ -74,6 +74,7 @@ class OtherInfoUI extends game.BaseWindow {
         this.addBtnEvent(this.okBtn,this.onPK)
         this.addBtnEvent(this.viewBtn,this.onView)
         this.addBtnEvent(this.copyBtn,this.onCopy)
+        this.addBtnEvent(this.nameText,this.onNameClick)
 
         this.touchEnabled = false;
 
@@ -85,6 +86,18 @@ class OtherInfoUI extends game.BaseWindow {
             this.addBtnEvent(mc,this.onChooseCopy)
         }
 
+    }
+
+    private onNameClick(){
+        if(!Config.isDebug)
+            return;
+        MyWindow.Confirm('要切换到该玩家？',(b)=>{
+            if(b==1)
+            {
+                SharedObjectManager.getInstance().setValue('change_user_gameid',this.gameid)
+                MyTool.refresh();
+            }
+        })
     }
 
     private onChooseCopy(e){

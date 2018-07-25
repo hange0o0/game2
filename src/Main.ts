@@ -196,7 +196,12 @@ class Main extends eui.UILayer {
             return;
         SoundManager.getInstance().preLoad();
         var LM = LoginManager.getInstance();
-        if(LM.quickPassword)
+        if(SharedObjectManager.getInstance().getValue('change_user_gameid'))
+        {
+            LoginManager.getInstance().loginServer2(SharedObjectManager.getInstance().getValue('change_user_gameid'))
+            SharedObjectManager.getInstance().setValue('change_user_gameid',false)
+        }
+        else if(LM.quickPassword)
         {
             this.loadingView.showLogin();
             LoginManager.getInstance().login(LM.lastUser,null)

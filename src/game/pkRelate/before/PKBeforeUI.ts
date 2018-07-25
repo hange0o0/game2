@@ -13,7 +13,10 @@ class PKBeforeUI{
 
 
     public show(dataIn?){
-       BasePosUI.getInstance().show('atk',dataIn)
+        if(dataIn.isAuto)
+            BasePosUI.getInstance().show('def',dataIn)
+        else
+            BasePosUI.getInstance().show('atk',dataIn)
     }
 
     public hide(){

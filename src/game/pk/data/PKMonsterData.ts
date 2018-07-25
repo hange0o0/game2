@@ -29,6 +29,7 @@ class PKMonsterData {
 
 
 
+    private skillTimes=0//技能使用的次数
 
     public x;//当前的位置
     public y;//当前的位置
@@ -327,7 +328,13 @@ class PKMonsterData {
 
     public setSkillUse(actionTime){
         if(this.getVO().skillcd < 0)
-            this.lastSkill = Number.MAX_VALUE;
+        {
+            this.skillTimes += 1000;
+            if(this.getVO().skillcd + this.skillTimes >= 0)
+                this.lastSkill = Number.MAX_VALUE;
+            else
+                this.lastSkill = actionTime;
+        }
         else
             this.lastSkill = actionTime;
     }

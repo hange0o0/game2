@@ -161,7 +161,7 @@ class PKingUI extends game.BaseUI {
     }
     public showMV(){
         var tw = egret.Tween.get(this.pkTop)
-        tw.set({y:this.pkTop.y-200}).to({y:this.pkTop.y},500)
+        tw.set({y:this.pkTop.y-200}).to({y:this.pkTop.y},400)
         //    .wait(200).call(()=>{
         //    this.pkTop.appearMV()
         //},this)
@@ -169,7 +169,7 @@ class PKingUI extends game.BaseUI {
         tw.set({bottom:-500}).to({bottom:0},500)
 
         var tw = egret.Tween.get(this.scroller)
-        tw.set({alpha:0}).wait(100).to({alpha:1},600).wait(300).call(this.startPlay,this);
+        tw.set({alpha:0}).wait(500).to({alpha:1},400).wait(300).call(this.startPlay,this);
     }
 
     public onShow(){
@@ -294,7 +294,7 @@ class PKingUI extends game.BaseUI {
         egret.Tween.get(this.vsMC).to({scaleX:0.4,scaleY:0.4,alpha:1},200).to({scaleX:0.5,scaleY:0.5},200)
         egret.Tween.get(this.playerGroup1).to({x:20},200).to({x:0},200)
         egret.Tween.get(this.playerGroup2).to({right:20},200).to({right:0},200)
-
+        this.pkCtrlCon.showSpeedBtn();
         var tw = this.tw = egret.Tween.get(this.roundText)
         tw.wait(800).to({scaleX:1.8,scaleY:1.8},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '2'})
             .to({scaleX:0,scaleY:0}).to({scaleX:1.8,scaleY:1.8},300).to({scaleX:1,scaleY:1},300).wait(400).call(()=>{this.roundText.text = '1'})
@@ -318,7 +318,19 @@ class PKingUI extends game.BaseUI {
                 GuideManager.getInstance().showGuide()
             })
         }
+    }
 
+    public quickBegin(){
+         if(this.counting)
+         {
+             egret.Tween.removeTweens(this.roundText);
+             this.tw = null
+             this.startGame();
+             this.vsGroup.visible = false
+             MyTool.removeMC(this.roundText);
+             this.pkTop.appearMV();
+             this.pkCtrlCon.initInfo();
+         }
     }
 
     public callFail(){

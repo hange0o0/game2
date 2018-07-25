@@ -23,7 +23,7 @@ class M65 extends MBase {
             actionTime:PD.actionTime
         }
         PD.addMonster(mData);
-        mData.y = -30 + Math.random()*60;
-        PD.addMonster(mData);
+        //mData.y = -30 + Math.random()*60;
+        //PD.addMonster(mData);
     }
 }

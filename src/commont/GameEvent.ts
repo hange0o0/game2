@@ -44,6 +44,7 @@ class GameEvent {
 
 
         login_server:'sys.login_server',
+        login_server2:'sys.login_server2',
         register_server:'sys.register_server',
         get_msg:'sys.get_msg',
 

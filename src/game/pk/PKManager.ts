@@ -176,6 +176,8 @@ class PKManager {
         if(!PD.baseData.check)
             return ''
         //console.log('============')
+        if(DEBUG)
+            console.log(JSON.stringify(PKData.getInstance().actionRecord))
         var lastType = this.pkType
         this.pkType = PKManager.TYPE_TEST;
         this.pkResult = null;
@@ -188,15 +190,19 @@ class PKManager {
         {
             var players = data.players[i];
             players.actionlist = PD.getPlayer(players.id).posHistory.join(',');
+            //console.log(players.actionlist)
+            //players.autolist = null;
         }
         PD.init(data);
         PD.quick = true;
         PD.start();
         PKCode.getInstance().onStep()
         this.pkType = lastType
-        return (tResult == PD.getPKResult()?'':'1|' + tResult +':'+ PD.getPKResult()) +
-            (actionTime == PD.actionTime?'':'2|' + actionTime +':'+ PD.actionTime) +
-            (randomTimes == PD.randomTimes?'':'3|' + randomTimes +':'+ PD.randomTimes)
+        if(DEBUG)
+            console.log(JSON.stringify(PKData.getInstance().actionRecord))
+        return (tResult == PD.getPKResult()?'':'#1|' + tResult +':'+ PD.getPKResult()) +
+            (actionTime == PD.actionTime?'':'#2|' + actionTime +':'+ PD.actionTime) +
+            (randomTimes == PD.randomTimes?'':'#3|' + randomTimes +':'+ PD.randomTimes)
     }
 
     public sendFail(fun){
@@ -334,11 +340,11 @@ class PKManager {
     //PK的校验码
     public addPKKey(oo){
         var PD = PKData.getInstance()
-        var card = PD.myPlayer.card;
+        var card = PD.myPlayer.card || PD.myPlayer.autolist;
         var cd = PD.actionTime
 
         oo.cd = PD.actionTime
-        oo.key = md5.incode(cd + card + oo.list).substr(-8)
+        oo.key = md5.incode(cd + card + oo.list + PD.baseData.seed).substr(-8)
         Net.addUser(oo)
     }
 
@@ -419,7 +425,7 @@ class PKManager {
 
         SharedObjectManager.getInstance().setMyValue('pk_replay1',this.recordList)
 
-        if(this.pkType == PKManager.TYPE_HANG && HangManager.getInstance().level > 20)
+        if(this.pkType == PKManager.TYPE_HANG && HangManager.getInstance().level > 20 && !PD.isAuto)
         {
             this.hangRecord.list.push({t:TM.now(),r: data.result})
             SharedObjectManager.getInstance().setMyValue('hangRecord',this.hangRecord)

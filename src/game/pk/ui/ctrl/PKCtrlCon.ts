@@ -107,9 +107,11 @@ class PKCtrlCon extends game.BaseContainer {
     }
 
     private onSpeed(){
+        PKingUI.getInstance().quickBegin();
         var PD = PKData.getInstance();
         PD.playSpeed ++;
-        if(PD.playSpeed >= 4)
+        var max = PD.isReplay?4:3
+        if(PD.playSpeed >= max)
             PD.playSpeed = 1;
         this.renewSpeedBtn()
     }
@@ -152,6 +154,22 @@ class PKCtrlCon extends game.BaseContainer {
         {
             MyWindow.ShowTips('新手引导期间不能点击')
             return;
+        }
+
+        if(Config.isDebug)
+        {
+            var PD = PKData.getInstance();
+            if(PD.playSpeed == 2)
+            {
+                MyWindow.Confirm('直接完成？',(b)=>{
+                    if(b==1)
+                    {
+                        PD.quick = true
+                    }
+                })
+                return;
+            }
+
         }
         PKingUI.getInstance().setStop(true)
         HelpManager.getInstance().showHelp('pk',()=>{
@@ -446,6 +464,16 @@ class PKCtrlCon extends game.BaseContainer {
                 this.cardObj[s].stopDrag = true;
             }
         }
+
+
+    }
+
+    public showSpeedBtn(){
+        if(PKData.getInstance().isView())
+        {
+            this.speedBtn.visible = true
+            this.renewSpeedBtn();
+        }
     }
 
     public onMyPlayerChange(){
@@ -524,12 +552,7 @@ class PKCtrlCon extends game.BaseContainer {
                 mc.visible = false;
             }
         }
-        var PD = PKData.getInstance();
-        if(PD.isReplay)
-        {
-            this.speedBtn.visible = true
-            this.renewSpeedBtn();
-        }
+
     }
 
     private renewSpeedBtn(){

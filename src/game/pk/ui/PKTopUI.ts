@@ -3,6 +3,7 @@ class PKTopUI extends game.BaseContainer {
     public static getInstance() {
         return this._instance;
     }
+    public con: eui.Group;
     public hpGroup1: eui.Group;
     public hpGroupIcon: eui.Image;
     private hpText1: eui.Label;

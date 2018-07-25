@@ -51,7 +51,7 @@ class GuideManager {
     public reInit(){
         this.guideRandom = 0;
         this.guidePK = 0;
-        this.guideArr[0].text = '['+UM.nick+'](代号)您好，欢迎来到召唤争霸！'
+        this.guideArr[0].text = '['+UM.nick+'](代号)您好，欢迎来到【冲破防线】！'
     }
 
     private init(){
@@ -76,7 +76,7 @@ class GuideManager {
         })
 
         this.addGuideObj({
-            mc:function(){return PKingUI.getInstance().pkTop},
+            mc:function(){return PKingUI.getInstance().pkTop.con},
             text:'这是对方出牌的记录区，顺序记录了敌人所有出过的卡牌。',
             guideKey:'pkTop',
             fun:function(){

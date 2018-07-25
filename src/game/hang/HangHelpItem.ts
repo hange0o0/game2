@@ -5,6 +5,7 @@ class HangHelpItem extends game.BaseItem {
     }
 
     private headMC: HeadMC;
+    private autoGroup: eui.Group;
     private nameGroup: eui.Group;
     private typeMC: eui.Image;
     private nameText: eui.Label;
@@ -47,6 +48,7 @@ class HangHelpItem extends game.BaseItem {
     public dataChanged(){
         this.infoData = JSON.parse(this.data.info);
 
+        this.autoGroup.visible = this.infoData.isauto;
         this.nameText.text = Base64.decode(this.infoData.nick)
         MyTool.setTypeImg(this.typeMC,this.infoData.type)
         this.nameGroup.addChildAt(this.typeMC,0)

@@ -10,6 +10,7 @@ class PKData extends egret.EventDispatcher{
     public quick = false//快速算出结果
     public baseData//原始PK数据
     public isReplay;
+    public isAuto;
     public sendCard = false;//需要向服务器发消息
 
     public jumpMV = false;
@@ -50,6 +51,10 @@ class PKData extends egret.EventDispatcher{
         super();
     }
 
+    public isView(){
+        return this.isAuto || this.isReplay
+    }
+
     //public changeSpeed(speed){
     //     this.playSpeed = speed;
     //}
@@ -78,7 +83,7 @@ class PKData extends egret.EventDispatcher{
     public play(){
         if(this.stopTime)
         {
-            var add = TM.nowMS() - this.stopTime;
+            var add = (TM.nowMS() - this.stopTime)*this.playSpeed;
             this.startTime += add
             //this.actionTime += add;
             this.stopTime = 0;
@@ -89,6 +94,7 @@ class PKData extends egret.EventDispatcher{
     public init(data){
         this.startTime = 0;
         this.isReplay = false;
+        this.isAuto = false;
         this.baseData = data;
         this.actionRecord = [];
         this.quick = false
@@ -130,6 +136,7 @@ class PKData extends egret.EventDispatcher{
                 player.teamData.atkRota = PKConfig.ROTA_LEFT
                 player.teamData.enemy.atkRota = PKConfig.ROTA_RIGHT
                 player.teamData.members.unshift(player);
+                this.isAuto = player.isauto;
             }
             else
                 player.teamData.members.push(player);
@@ -420,7 +427,7 @@ class PKData extends egret.EventDispatcher{
             actionTime:this.actionTime
         })
         monster['xxx'] = this.actionTime + '|' + monster.id
-        this.actionRecord.push('create|' + this.actionTime + '|' + monster.id + '|' + monster.mid)
+        this.actionRecord.push('create|' + this.actionTime + '|' + monster.id + '|' + monster.mid+ '|' + monster.owner)
         return monster;
     }
 

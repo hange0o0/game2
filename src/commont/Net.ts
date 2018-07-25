@@ -20,6 +20,7 @@ class Net extends egret.EventDispatcher{
 
     public modeNum = 0;
     public outPut = true;
+    public actionRecord = []
     public constructor() {
         super();
     }
@@ -58,6 +59,12 @@ class Net extends egret.EventDispatcher{
         return variables;
     }
 
+    private pushRecord(str){
+        this.actionRecord.push(str)
+        while(this.actionRecord.length > 10)
+            this.actionRecord.shift();
+    }
+
     public send(head,msg,fun?,isMode = true,serverType=1,isRepeat=false){
         var loader = new egret.URLLoader();
         loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
@@ -85,9 +92,11 @@ class Net extends egret.EventDispatcher{
         if(isMode)
         {
             this.modeNum ++;
-            GameManager.container.touchChildren = GameManager.container.touchEnabled = false;
+            //GameManager.container.touchChildren = GameManager.container.touchEnabled = false;
             this.addLoading();
         }
+
+        this.pushRecord('send:' + head + '#' + this.modeNum)
 
         loader.load(request);
 
@@ -111,9 +120,10 @@ class Net extends egret.EventDispatcher{
             this.modeNum --;
         if(this.modeNum <= 0)
         {
-            GameManager.container.touchChildren = GameManager.container.touchEnabled = true;
+            //GameManager.container.touchChildren = GameManager.container.touchEnabled = true;
             this.removeLoading();
         }
+        this.pushRecord('receive:' + head + '#' + this.modeNum)
 
 
         loader.removeEventListener(egret.Event.COMPLETE, this.onComplete, this);
@@ -137,7 +147,7 @@ class Net extends egret.EventDispatcher{
         }
         if(data.error)
         {
-            GameManager.container.touchChildren = GameManager.container.touchEnabled = true;
+            //GameManager.container.touchChildren = GameManager.container.touchEnabled = true;
             this.removeLoading();
             switch (data.error)
             {
@@ -165,6 +175,10 @@ class Net extends egret.EventDispatcher{
                     break;
                 case 99:
                     MyWindow.Alert(data.error_str,this.refresh);
+                    GameManager.getInstance().stopTimer();
+                    break;
+                default :
+                    MyWindow.Alert('未知错误',this.refresh);
                     GameManager.getInstance().stopTimer();
                     break;
             }
@@ -200,8 +214,8 @@ class Net extends egret.EventDispatcher{
             MyWindow.Alert('与服务器失去连接！',this.refresh);
             GameManager.getInstance().stopTimer();
         }
-
-        GameManager.container.touchChildren = GameManager.container.touchEnabled = true;
+        this.pushRecord('error' + this.modeNum)
+        //GameManager.container.touchChildren = GameManager.container.touchEnabled = true;
         this.removeLoading();
     }
     private refresh(){

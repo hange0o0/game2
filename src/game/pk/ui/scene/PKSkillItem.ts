@@ -37,12 +37,12 @@ class PKSkillItem extends game.BaseItem {
         if(this.currentState == 'left')
         {
             this.x = -w
-            tw.to({x:20},150).to({x:0},150).wait(1300).to({x:20},150).to({x:-w},150)
+            tw.to({x:20},150).to({x:0},150).wait(2000).to({x:20},150).to({x:-w},150)
         }
         else
         {
             this.x = 640
-            tw.to({x:640-w-20},150).to({x:640-w},150).wait(1300).to({x:640-w-20},150).to({x:640},150)
+            tw.to({x:640-w-20},150).to({x:640-w},150).wait(2000).to({x:640-w-20},150).to({x:640},150)
         }
         tw.call(function(){
             PKTopUI.getInstance().removeSkillItem(this)

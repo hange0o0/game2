@@ -23,6 +23,11 @@ class HangUI extends game.BaseItem {
     private videoBtn: eui.Group;
     private videoIcon: eui.Image;
     private giftMC: eui.Image;
+    private modeGroup: eui.Group;
+    private autoBtn: eui.Button;
+    private handBtn: eui.Button;
+
+
 
 
 
@@ -68,6 +73,8 @@ class HangUI extends game.BaseItem {
             e.stopImmediatePropagation()
             GiftUI.getInstance().show()
         })
+        this.addBtnEvent(this.autoBtn,this.onAuto)
+        this.addBtnEvent(this.handBtn,this.onHand)
 
         this.con.mask = new egret.Rectangle(0,0,this.con.width,this.con.height)
 
@@ -92,17 +99,49 @@ class HangUI extends game.BaseItem {
         tw.to({scaleX:1.1,scaleY:0.8},200).to({scaleX:1,scaleY:1.1,y:this.giftMC.y -10},200).
             to({scaleX:1.1,scaleY:0.8,y:this.giftMC.y},200).to({scaleX:1,scaleY:1},300).wait(2000);
         this.giftTW.setPaused(true)
+        this.modeGroup.visible = false;
+    }
+
+    private onAuto(e?){
+        e && e.stopImmediatePropagation()
+        this.modeGroup.visible = false;
+        PKBeforeUI.getInstance().show({
+            isAuto:true,
+            title:'自动挑战 战役' + (HangManager.getInstance().level + 1),
+            fun:function(id){
+                HangManager.getInstance().pk(id,true)
+            }
+        })
+    }
+    private onHand(e?){
+        e && e.stopImmediatePropagation()
+        this.modeGroup.visible = false;
+        PKBeforeUI.getInstance().show({
+            title:'手动挑战 战役' + (HangManager.getInstance().level + 1),
+            fun:function(id){
+                HangManager.getInstance().pk(id)
+            }
+        })
     }
 
     public onPK(){
         if(this.lockGroup.visible)
             return;
-        PKBeforeUI.getInstance().show({
-            title:'挑战 战役' + (HangManager.getInstance().level + 1),
-            fun:function(id){
-                HangManager.getInstance().pk(id)
-            }
-        })
+        if(this.modeGroup.visible)
+        {
+            this.modeGroup.visible = false;
+            return;
+        }
+
+        if(HangManager.getInstance().level >= 5)
+        {
+            this.modeGroup.visible = true;
+        }
+        else
+        {
+            this.onHand();
+        }
+
     }
 
     public onAward(e){
@@ -185,6 +224,7 @@ class HangUI extends game.BaseItem {
         //this.bg.source = PKManager.getInstance().getBG(HangManager.getInstance().getHangBGID());
 
         //console.log('renew')
+
 
 
 
@@ -298,6 +338,7 @@ class HangUI extends game.BaseItem {
     }
 
     public clean(){
+        this.modeGroup.visible = false;
         var pkvideo = PKVideoCon.getInstance()
         if(pkvideo.parent == this.con)
         {

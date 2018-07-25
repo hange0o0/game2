@@ -208,6 +208,28 @@ class LoginManager{
         });
     }
 
+    public loginServer2(gameid,fun?){
+        var self = this;
+        var oo:any = {};
+        oo.id = gameid;
+
+
+        Net.send(GameEvent.sys.login_server2,oo,function(data){
+            var msg = data.msg;
+            if(msg.fail)
+            {
+                MyWindow.Alert('无法进入!' + msg.fail);
+                return;
+            }
+
+            UM.fill(msg.data);
+            MainUI.getInstance().show();
+            MainLoadingUI.getInstance().hide();
+            if(fun)
+                fun();
+        });
+    }
+
     //public debugLoginServer(gameid,cdkey,fun?){
     //    var self = this;
     //    var oo:any = {};

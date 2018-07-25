@@ -24,6 +24,7 @@ class BasePosUI extends game.BaseUI {
     private arrowGroup: eui.Group;
     private arrowMC: eui.Image;
     private changePosMC: eui.Image;
+    private typeIcon: eui.Image;
 
 
 
@@ -123,7 +124,10 @@ class BasePosUI extends game.BaseUI {
                 this.pkData.fun(this.changeToServerList())
                 return;
             }
-            SharedObjectManager.getInstance().setMyValue('pk_choose',this.index)
+            if(this.type == 'atk')
+                SharedObjectManager.getInstance().setMyValue('pk_choose',this.index)
+            else
+                SharedObjectManager.getInstance().setMyValue('pk_choose_def',this.index)
             this.pkData.fun(this.index)
         })
     }
@@ -139,6 +143,8 @@ class BasePosUI extends game.BaseUI {
         this.testSave(()=>{
             if(this.type == 'atk')
                 SharedObjectManager.getInstance().setMyValue('pk_choose',this.index)
+            else
+                SharedObjectManager.getInstance().setMyValue('pk_choose_def',this.index)
             PosTestUI.getInstance().show(this.type,{
                 list:this.changeToServerList(),
                 name:Base64.encode((this.type == 'atk'?'进攻':'防御') + this.index),
@@ -261,6 +267,10 @@ class BasePosUI extends game.BaseUI {
         return true
     }
 
+    private isStopDelete(){
+        return  this.pkData && this.pkData.stopAdd
+    }
+
 
     public onUnSelect(){
 
@@ -273,13 +283,15 @@ class BasePosUI extends game.BaseUI {
         }
         else if(!game.BaseUI.isStopEevent)
         {
+            var stopDelete = this.isStopDelete();
+            if(stopDelete)
+                return
             var index = this.listData.getItemIndex(item);
             this.useCard[item.id] --;
             this.listData.removeItemAt(index)
             if(!this.listData.getItemAt(this.listData.length-1).setting)
             {
-                var stopDelete = this.pkData && this.pkData.stopAdd
-                if(!stopDelete)
+                //if(!stopDelete)
                     this.listData.addItem({setting:true})
             }
 
@@ -508,7 +520,7 @@ class BasePosUI extends game.BaseUI {
         this.type = type;
         this.pkData = pkData;
         this.sp = sp || {};
-        this.index = type == 'atk'?(SharedObjectManager.getInstance().getMyValue('pk_choose') || 0):0;
+        this.index = type == 'atk'?(SharedObjectManager.getInstance().getMyValue('pk_choose') || 0):(SharedObjectManager.getInstance().getMyValue('pk_choose_def') || 0);
         if('index' in this.sp)
             this.index = this.sp.index;
         super.show()
@@ -522,12 +534,16 @@ class BasePosUI extends game.BaseUI {
         this.openBtn.visible =  this.type == 'def';
         this.maxCard = PosManager.getInstance().maxPosNum();
         if(this.pkData)
-            this.topUI.setTitle(this.pkData.title || '战斗准备',this.pkData.helpKey || 'atkPos')
+            this.topUI.setTitle(this.pkData.title || '战斗准备',this.pkData.helpKey || (this.type == 'atk'?'atkPos':'defPos'))
         else if(this.type == 'atk')
+        {
             this.topUI.setTitle('进攻阵容','atkPos')
+        }
         else
+        {
             this.topUI.setTitle('防守阵容','defPos')
-
+        }
+        this.typeIcon.source = this.type == 'atk'?'icon_atk3_png':'icon_def1_png'
         this.currentState = 'normal'
         if(this.pkData)
         {
@@ -569,7 +585,7 @@ class BasePosUI extends game.BaseUI {
     }
 
     public resetData(){
-        var stopDelete = this.pkData && this.pkData.stopAdd
+        var stopDelete = this.isStopDelete()
         if(this.listData.length < this.maxCard && !stopDelete)
             this.listData.addItem({setting:true})
         this.renewBtn(true);
@@ -608,7 +624,7 @@ class BasePosUI extends game.BaseUI {
         var removeSkill = []
         var PM = PosManager.getInstance();
         var data = this.posData = PM.getListByType(this.type)[this.index]
-        var stopDelete = this.pkData && this.pkData.stopAdd
+        var stopDelete = this.isStopDelete()
         this.useCard = {};
         if(GuideManager.getInstance().isGuiding)
         {

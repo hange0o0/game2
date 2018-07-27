@@ -21,7 +21,7 @@ class S501 extends SBase {
                     arr.push(handCard[s])
             }
 
-            var cardData = PD.randomOne(arr)
+            var cardData = ArrayUtil.randomOne(arr)
             PD.addVideo({
                 type:PKConfig.VIDEO_AUOT_ADD_CARD,
                 user:cardData

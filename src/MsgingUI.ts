@@ -9,19 +9,22 @@ class MsgingUI extends egret.Sprite {
     public constructor() {
         super();
         this.createView();
-
-        if(Config.isDebug)
-        {
-            this.addEventListener(egret.TouchEvent.TOUCH_TAP,()=>{
+        this.addEventListener(egret.TouchEvent.TOUCH_TAP,()=>{
+            if(Config.isDebug)
                 MyWindow.Alert(Net.getInstance().actionRecord.join('\n'));
-            },this)
-        }
+            else if(egret.getTimer() - this.showTimer > 5*1000)
+            {
+                sendClientError('转圈ing:' + Net.getInstance().actionRecord.join('\n'))
+                this.showTimer = egret.getTimer();
+            }
+        },this)
     }
 
     private loadingMC
     private shape
 
     private timer
+    private showTimer
 
     private createView():void {
 
@@ -43,9 +46,12 @@ class MsgingUI extends egret.Sprite {
         this.loadingMC.anchorOffsetX = 70/2
         this.loadingMC.anchorOffsetY = 70/2
 
+
+
     }
 
     public show(){
+        this.showTimer = egret.getTimer();
         GameManager.container.addChild(this);
 
         this.width = 640;
@@ -53,6 +59,7 @@ class MsgingUI extends egret.Sprite {
         this.shape.height = GameManager.stage.stageHeight;
         this.loadingMC.y = this.height/2 - 100;
 
+        egret.Tween.removeTweens(this.loadingMC)
         var tw = egret.Tween.get(this.loadingMC,{loop:true})
         tw.to({rotation:0}).to({rotation:360},1000);
 
@@ -61,8 +68,6 @@ class MsgingUI extends egret.Sprite {
         this.timer = egret.setTimeout(function(){
             this.alpha = 1;
         },this,200)
-
-
     }
 
 

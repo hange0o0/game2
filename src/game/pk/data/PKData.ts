@@ -28,7 +28,7 @@ class PKData extends egret.EventDispatcher{
 
     public monsterChange = false//怪有变化
     public randomSeed = 0//随机的种子
-    public randomTimes = 0//随机的种子
+    public randomTimes = 0//随机的次数
     public monsterList = [];//场上的怪的数据
     public playerObj = {};//场上的玩家的数据
     public myPlayer:PKPlayerData;

@@ -134,7 +134,8 @@ class PKManager {
         {
             if(DEBUG)
             {
-                MyWindow.Alert('PK数据异常！'+result)
+                MyWindow.Alert('PK数据异常！')
+                console.log(result)
                 PKingUI.getInstance().hide();
                 return;
             }
@@ -173,11 +174,14 @@ class PKManager {
     //测试一下数据正确性
     public quickTest(){
         var PD = PKData.getInstance();
-        if(!PD.baseData.check)
+        if(!DEBUG && !PD.baseData.check)
             return ''
+        var mpList = DM.testActionList(PD.myPlayer.posHistory.join(','))
+        //console.log(DM.testActionList(PD.myPlayer.posHistory.join(',')))
         //console.log('============')
-        if(DEBUG)
-            console.log(JSON.stringify(PKData.getInstance().actionRecord))
+        var lastRecord = JSON.stringify(PKData.getInstance().actionRecord)
+        //if(DEBUG)
+        //    console.log(lastRecord)
         var lastType = this.pkType
         this.pkType = PKManager.TYPE_TEST;
         this.pkResult = null;
@@ -198,11 +202,18 @@ class PKManager {
         PD.start();
         PKCode.getInstance().onStep()
         this.pkType = lastType
-        if(DEBUG)
-            console.log(JSON.stringify(PKData.getInstance().actionRecord))
-        return (tResult == PD.getPKResult()?'':'#1|' + tResult +':'+ PD.getPKResult()) +
+        //if(DEBUG)
+        //    console.log(JSON.stringify(PKData.getInstance().actionRecord))
+        var result = (tResult == PD.getPKResult()?'':'#1|' + tResult +':'+ PD.getPKResult()) +
             (actionTime == PD.actionTime?'':'#2|' + actionTime +':'+ PD.actionTime) +
-            (randomTimes == PD.randomTimes?'':'#3|' + randomTimes +':'+ PD.randomTimes)
+            (randomTimes == PD.randomTimes?'':'#3|' + randomTimes +':'+ PD.randomTimes);
+
+        if(mpList.length)
+            result += 'mp:['+mpList.join(',')+']'
+        if(result)
+            result += 'action:['+lastRecord+'|' +JSON.stringify(PKData.getInstance().actionRecord)+ ']'
+
+        return result;
     }
 
     public sendFail(fun){

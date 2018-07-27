@@ -13,7 +13,8 @@ class PKMonsterItem extends game.BaseItem {
          if(!item)
              return;
          item.remove();
-         this.pool.push(item);
+         if(this.pool.indexOf(item) == -1)
+            this.pool.push(item);
      }
 
 
@@ -170,6 +171,8 @@ class PKMonsterItem extends game.BaseItem {
         this.barGroup.horizontalCenter = mD.getVO().headoff * rota;
     }
     public setRota2(targetX){
+        if(this.x == targetX)
+            return;
         this.setRota(this.x > targetX ? 1:-1)
     }
 

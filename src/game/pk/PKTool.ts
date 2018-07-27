@@ -115,23 +115,7 @@ class PKTool {
         return returnArr;
     }
 
-    public static testActionList(arr){
-        var list1 = this.decodeActionList(arr);
-        for(var i=0;i<arr.length;i++)
-        {
-            var group = arr[i].split('#')
-            arr[i] = group[1];
-        }
-        var list2 = this.decodeAutoList(arr);
-        for(var i=0;i<list1.length;i++)
-        {
-            if(list1[i].time < list2[i].time)
-            {
-                console.log(list1[i],list2[i])
-            }
-        }
 
-    }
 
     public static getGroupMp(id){
         var mp = 0;

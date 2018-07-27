@@ -42,6 +42,7 @@ class PKingUI extends game.BaseUI {
 
 
     public displayY
+    public displayCon
     private isAciveStop //窗口切换导致的暂停
 
     public constructor() {
@@ -189,7 +190,7 @@ class PKingUI extends game.BaseUI {
         PKVideoCon.getInstance().y = 0;
 
         var vY = this.displayY = this.pkTop.y + 170;
-        var vH = GameManager.stage.stageHeight - 480 - vY
+        var vH = this.displayCon = GameManager.stage.stageHeight - 480 - vY
 
 
 

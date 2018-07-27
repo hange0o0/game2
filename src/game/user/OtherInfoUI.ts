@@ -91,7 +91,7 @@ class OtherInfoUI extends game.BaseWindow {
     private onNameClick(){
         if(!Config.isDebug)
             return;
-        MyWindow.Confirm('要切换到该玩家？',(b)=>{
+        MyWindow.Confirm('要切换到该玩家？'+this.gameid,(b)=>{
             if(b==1)
             {
                 SharedObjectManager.getInstance().setValue('change_user_gameid',this.gameid)

@@ -129,11 +129,12 @@ function handleErr(msg,url, line, col, errorObj)
 {
     //if(!Net.getInstance().serverHost)
     //    return;
-    var txt = (url|| '').substr(-30,27)+ ':' + UM.gameid + ':' + msg + '|' + line + "--" + col+ "--" + (errorObj && errorObj.stack);
+    var txt = (url|| '').substr(-30,27)+ ':' + msg + '|' + line + "--" + col+ "--" + (errorObj && errorObj.stack);
     var str = MyTool.getBtnPath(GameManager.getInstance().lastTouchMC);
     if(str)
         txt += str;
-    Net.send(GameEvent.sys.client_error,{msg:txt});
+    sendClientError(txt);
+    //Net.send(GameEvent.sys.client_error,{msg:txt});
     //if(LoginManager.getInstance().isAuto)
     //{
     //    LoginManager.getInstance().showLoginUI();
@@ -146,6 +147,6 @@ function handleErr(msg,url, line, col, errorObj)
 }
 
 function sendClientError(txt){
-    Net.send(GameEvent.sys.client_error,{msg:UM.gameid + ':' + txt});
+    Net.send(GameEvent.sys.client_error,{msg:UM.gameid + ':' + txt},null,false);
 }
 onerror=handleErr;

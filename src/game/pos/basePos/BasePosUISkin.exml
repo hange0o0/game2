@@ -2,8 +2,7 @@
 <e:Skin class="BasePosUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing" states="normal,pk" >
 	<e:Image source="bg3_png" scale9Grid="16,15,7,7" x="0" y="0" width="100%" height="100%"/>
 	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
-	<e:Image id="downBtn" source="arrow1_png" rotation="90" scaleX="0.8" scaleY="0.8" right="10" width="54" bottom="120"/>
-	<e:Image id="upBtn" source="arrow1_png" rotation="270" scaleX="0.8" scaleY="0.8" right="10" bottom="120"/>
+
 	<e:Group x="0" top="120" bottom="100" scrollEnabled="true" top.pk="60">
 		<e:Group id="scrollerBG" x="0" y="0" width="100%">
 			<e:Rect width="100%" height="130" x="20" y="20" fillColor="0xE2A75D"/>
@@ -78,5 +77,8 @@
 		<e:Image source="main_button_png" x="0" y="0" includeIn="normal"/>
 		<e:Image id="typeIcon" source="icon_def1_png" includeIn="normal" scaleX="0.8" scaleY="0.8" verticalCenter="3" horizontalCenter="3"/>
 	</e:Group>
+
+	<e:Image id="downBtn" source="arrow1_png" rotation="90" scaleX="0.8" scaleY="0.8" right="10" width="54" bottom="120"/>
+    	<e:Image id="upBtn" source="arrow1_png" rotation="270" scaleX="0.8" scaleY="0.8" right="10" bottom="120"/>
 
 </e:Skin>

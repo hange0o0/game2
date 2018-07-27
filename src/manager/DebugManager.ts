@@ -16,7 +16,7 @@ class DebugManager {
     }
 
     public MML = 998;  //测试出战怪的等级
-    public addSkill = true
+    public addSkill = false
     public cardLen = 15
     public createHangFlag = false;
 
@@ -301,6 +301,27 @@ class DebugManager {
 
             console.log(lv + '\t' + before + '->' + after + '('+(after - before)+')\t\t' + JSON.stringify(oo) )
         }
+    }
+
+    public testActionList(str){
+        var noOKMP = []
+        var arr = str.split(',')
+        var list1 = PKTool.decodeActionList(arr);
+        for(var i=0;i<arr.length;i++)
+        {
+            var group = arr[i].split('#')
+            arr[i] = group[1];
+        }
+        var list2 = PKTool.decodeAutoList(arr);
+        for(var i=0;i<list1.length;i++)
+        {
+            if(list1[i].time < list2[i].time)
+            {
+                noOKMP.push(JSON.stringify(list1[i]) +'--'+ JSON.stringify(list2[i]))
+            }
+        }
+        return noOKMP
+
     }
 }
 

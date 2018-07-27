@@ -83,7 +83,7 @@ class PKMonsterInfoUI extends game.BaseContainer {
 
 
         this.renew();
-        this.y = GameManager.stage.stageHeight - 470//this.xy.y + 50
+        this.y = (PKingUI.getInstance().displayCon-320)/2 + PKingUI.getInstance().displayY//GameManager.stage.stageHeight - 470//this.xy.y + 50
     }
 
     public renew(){

@@ -23,6 +23,7 @@ class Net extends egret.EventDispatcher{
     public actionRecord = []
     public constructor() {
         super();
+        this.modeNum = 0;
     }
 
     private getVariables(head,msg,serverType)

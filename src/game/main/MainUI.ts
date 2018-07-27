@@ -246,7 +246,16 @@ class MainUI extends game.BaseUI {
     }
 
     private renewCoin(){
-        this.coinText.text = NumberUtil.addNumSeparator(Math.max(UM.getCoin(),0),3);
+        var coin = UM.getCoin();
+        if(coin < 0)
+        {
+             this.setHtml(this.coinText,this.createHtml('偿还供奉中...',0xFF9999,22))
+        }
+        else
+        {
+            this.coinText.text = NumberUtil.addNumSeparator(Math.max(UM.getCoin(),0),3);
+        }
+
     }
 
     public renewEnergy(){

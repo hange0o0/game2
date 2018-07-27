@@ -111,7 +111,7 @@ class PKPlayerData {
     private resetMp(){
         var t = PKData.getInstance().actionTime;
         var step = 1;
-        while (this.mpArr[0] &&  this.mpArr[0]<= t) {
+        while (this.mpArr[0] &&  this.mpArr[0]< t) {
             this.mp += step;
             this.lastTime = this.mpArr[0]
             this.mpArr.shift();
@@ -196,8 +196,12 @@ class PKPlayerData {
         if(!this.isauto) //自动上怪那里已加了一次
         {
             var step = Math.floor(posCard.addTime/PKConfig.stepCD)
-            this.posHistory.push(step + '#' + posCard.cardData.mid);
-            this.useCardList.push(posCard.cardData.mid)
+            if(posCard.cardData.mid != 501)//自动上的卡不统计
+            {
+                this.posHistory.push(step + '#' + posCard.cardData.mid);
+                this.useCardList.push(posCard.cardData.mid)
+            }
+
         }
 
         if(newCard)
@@ -263,8 +267,12 @@ class PKPlayerData {
                     })
                 }
                 var step = Math.floor(PKData.getInstance().actionTime/PKConfig.stepCD)
-                this.posHistory.push(step + '#' +data.mid);
-                this.useCardList.push(data.mid)
+                if(data.mid != 501)//自动上的卡不统计
+                {
+                    this.posHistory.push(step + '#' +data.mid);
+                    this.useCardList.push(data.mid)
+                }
+
             }
             else
                 break;

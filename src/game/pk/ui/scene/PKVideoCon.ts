@@ -65,6 +65,7 @@ class PKVideoCon extends game.BaseContainer {
         while(this.itemArr.length)
         {
             var item = this.itemArr.pop();
+            PKData.getInstance().actionRecord.push('mv_remove2|' + (item.data && item.data.id))
             PKMonsterItem.freeItem(item);
         }
         while(this.txtArr.length)
@@ -123,7 +124,7 @@ class PKVideoCon extends game.BaseContainer {
         else
             str = ('not die but not find:' + id + '|' + PKData.getInstance().monsterID)
         alert(str);
-        throw new Error(str+'#'+PKManager.getInstance().pkType+'#'+PKData.getInstance().isReplay+'#'+JSON.stringify(PKData.getInstance().actionRecord));
+        throw new Error(str+'#'+PKManager.getInstance().pkType+'#'+PKData.getInstance().isReplay+'#'+PKData.getInstance().actionTime+'#'+JSON.stringify(PKData.getInstance().actionRecord));
         return null;
     }
 
@@ -159,11 +160,13 @@ class PKVideoCon extends game.BaseContainer {
                 this.con.addChildAt(item,this.getIndexByY(item.y));
                 item.data =data;
                 this.itemArr.push(item);
+                PKData.getInstance().actionRecord.push('mv_add|' + data.id)
                 if(data.mid == 99)
                 {
                     item.stand();
                     item.run(50)
                 }
+
                 break;
             case PKConfig.VIDEO_MONSTER_MOVE:
                 item = this.getItemByID(data.id);
@@ -176,6 +179,8 @@ class PKVideoCon extends game.BaseContainer {
                 item.atk(data.addSpeed);
                 break;
             case PKConfig.VIDEO_MONSTER_DOUBLE:
+                if(data.die)  //死了就不显示
+                    break;
                 item = this.getItemByID(data.id);
                 this.playDoubleHit(item,videoData.value);
                 break;
@@ -259,6 +264,7 @@ class PKVideoCon extends game.BaseContainer {
             {
                 PKMonsterItem.freeItem(item);
                 this.itemArr.splice(i,1);
+                PKData.getInstance().actionRecord.push('mv_remove|' + (item.data && item.data.id))
                 i--;
             }
         }

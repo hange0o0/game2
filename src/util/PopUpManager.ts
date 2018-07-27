@@ -65,8 +65,9 @@ class PopUpManager {
 //            console.log(display.width,display.height);
             var x = (ww - display.width) / 2;
             var y = (hh - display.height) / 2;
-            var x2 = (ww - display.width*1.05) / 2;
-            var y2 = (hh - display.height*1.05) / 2;
+            var x2 = (ww - display.width*1.1) / 2;
+            var y2 = (hh - display.height*1.1) / 2;
+            display.alpha = 1;
             display.visible = true
             if(noMV || haveShow)
             {
@@ -77,14 +78,16 @@ class PopUpManager {
             }
             else
             {
-                display.scaleX = 0;
-                display.scaleY = 0
-                display.x = ww/2
-                display.y = hh/2
+                display.alpha = 0;
+                display.scaleX = 0.6;
+                display.scaleY = 0.6
+                display.x = (ww - display.width*0.6) / 2;
+                display.y = (hh - display.height*0.6) / 2;
                 var tw = egret.Tween.get(display);
                 tw.to({
-                    scaleX:1.05,
-                    scaleY:1.05,
+                    alpha:1,
+                    scaleX:1.1,
+                    scaleY:1.1,
                     x:x2,
                     y:y2
                 },150).to({
@@ -98,8 +101,6 @@ class PopUpManager {
             }
 
         }
-
-
     }
 
     public static setMiddle(display){

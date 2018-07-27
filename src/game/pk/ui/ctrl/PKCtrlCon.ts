@@ -305,6 +305,8 @@ class PKCtrlCon extends game.BaseContainer {
     }
 
     private posCard(){
+        if(!this.chooseCard || !this.chooseCard.data)
+            return false;
         var PD = PKData.getInstance();
         var mp = CM.getCardVO(this.chooseCard.data.mid).cost
         if(PD.myPlayer.getMP() < mp)

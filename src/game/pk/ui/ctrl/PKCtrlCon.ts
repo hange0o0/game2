@@ -643,7 +643,10 @@ class PKCtrlCon extends game.BaseContainer {
                     }
                 }
             }
+            var num = PD.myPlayer.getCardNum();
             this.cardText.text = 'x' + PD.myPlayer.getCardNum();
+            if(num == 0)
+                this.speedBtn.visible = true;
         }
 
     }

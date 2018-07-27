@@ -303,6 +303,7 @@ class DebugManager {
         }
     }
 
+    //没考虑加能量的情况
     public testActionList(str){
         var noOKMP = []
         var arr = str.split(',')

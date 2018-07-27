@@ -176,8 +176,7 @@ class PKManager {
         var PD = PKData.getInstance();
         if(!DEBUG && !PD.baseData.check)
             return ''
-        var mpList = DM.testActionList(PD.myPlayer.posHistory.join(','))
-        //console.log(DM.testActionList(PD.myPlayer.posHistory.join(',')))
+        //var mpList = DM.testActionList(PD.myPlayer.posHistory.join(','))
         //console.log('============')
         var lastRecord = JSON.stringify(PKData.getInstance().actionRecord)
         //if(DEBUG)
@@ -208,8 +207,8 @@ class PKManager {
             (actionTime == PD.actionTime?'':'#2|' + actionTime +':'+ PD.actionTime) +
             (randomTimes == PD.randomTimes?'':'#3|' + randomTimes +':'+ PD.randomTimes);
 
-        if(mpList.length)
-            result += 'mp:['+mpList.join(',')+']'
+        //if(mpList.length)
+        //    result += 'mp:['+mpList.join(',')+']'
         if(result)
             result += 'action:['+lastRecord+'|' +JSON.stringify(PKData.getInstance().actionRecord)+ ']'
 

@@ -28,7 +28,7 @@ class PayManager {
     }
 
     public getShopDiamond(data){
-        return data.diamond*((data.times || 0) + 1)
+        return Math.floor(data.diamond*((data.times || 0)*0.2 + 1))
     }
 
     public get_shop(fun?){
@@ -78,6 +78,7 @@ class PayManager {
                     break;
                 }
             }
+            AwardUI.getInstance().show(msg.award)
             SoundManager.getInstance().playEffect(SoundConfig.effect_buy);
             if(fun)
                 fun();

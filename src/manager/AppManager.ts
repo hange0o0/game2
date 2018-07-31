@@ -37,13 +37,15 @@ class AppManager {
 
 function onAppResume(){
     SoundManager.getInstance().resumeSound();
-    GameManager.stage.dispatchEventWith(egret.Event.ACTIVATE);
+    if(GameManager.stage)
+        GameManager.stage.dispatchEventWith(egret.Event.ACTIVATE);
     GameManager.container.touchChildren = GameManager.container.touchEnabled = true;  //有时回来后不能点？
 }
 
 function onAppPause(){
     SoundManager.getInstance().stopBgSound();
-    GameManager.stage.dispatchEventWith(egret.Event.DEACTIVATE);
+    if(GameManager.stage)
+        GameManager.stage.dispatchEventWith(egret.Event.DEACTIVATE);
 }
 
 function onAppDealFinish(){

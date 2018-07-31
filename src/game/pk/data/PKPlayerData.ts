@@ -25,7 +25,6 @@ class PKPlayerData {
     public useMP = 0//已使用的魔法
     private lastTime = 0//上一次魔法处理时间
 
-
     public isauto;
     public autoList;
     public skillValue = {};

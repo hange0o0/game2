@@ -31,7 +31,7 @@ class HangManager {
     }
 
     public getPKLeft(){
-        return PKManager.getInstance().hangRecord.t - TM.now()
+        return 0//PKManager.getInstance().hangRecord.t - TM.now()
     }
 
     public getAwardLeft(){

@@ -12,6 +12,9 @@ class MyTool {
     public static getPropEnergy(){
         return Config.localResRoot + 'prop/prop_energy.png'
     }
+    public static getPropBox(){
+        return Config.localResRoot + 'prop/prop_energy.png'
+    }
     public static getPropLevel(){
         return Config.localResRoot + 'prop/prop_level.png'
     }
@@ -30,6 +33,8 @@ class MyTool {
             arr.push({img:MyTool.getPropDiamond(),name:'钻石','num':'×' + NumberUtil.addNumSeparator(dataIn.diamond)})
         if(dataIn.fightvalue)
             arr.push({img:MyTool.getPropFight(),name:'远征秘石','num':'×' + NumberUtil.addNumSeparator(dataIn.fightvalue)})
+        if(dataIn.energy)
+            arr.push({img:MyTool.getPropEnergy(),name:' 体力','num':'×' + NumberUtil.addNumSeparator(dataIn.energy)})
         for(var s in dataIn.props)
         {
             var prop =  PropVO.getObject(s);

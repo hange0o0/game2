@@ -58,6 +58,7 @@ class PKMonsterItem extends game.BaseItem {
     }
 
     private onDieFinish(){
+        PKData.getInstance().actionRecord.push('die_mv_remove|' + (this.data && this.data.id))
         this.needRemove = true;
     }
 
@@ -236,11 +237,13 @@ class PKMonsterItem extends game.BaseItem {
         var tw = egret.Tween.get(this);
         tw.to({alpha:0},500).call(function(){
             this.needRemove = true;
+            PKData.getInstance().actionRecord.push('win_mv_remove|' + (this.data && this.data.id))
         },this)
     }
 
     public remove(){
         this.needRemove = true;
+        PKData.getInstance().actionRecord.push('just_mv_remove|' + (this.data && this.data.id))
         egret.Tween.removeTweens(this);
         egret.Tween.removeTweens(this.barGroup);
         MyTool.removeMC(this);

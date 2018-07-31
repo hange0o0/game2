@@ -161,9 +161,10 @@ class PKVideoCon extends game.BaseContainer {
                 item.data =data;
                 this.itemArr.push(item);
                 PKData.getInstance().actionRecord.push('mv_add|' + data.id)
+                item.stand();
                 if(data.mid == 99)
                 {
-                    item.stand();
+
                     item.run(50)
                 }
 

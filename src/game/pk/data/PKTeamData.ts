@@ -14,6 +14,9 @@ class PKTeamData {
 
     public toFront = 0;//前线出兵
 
+    public killNum = 0;//消灭单位数量
+    public bornNum = 0;//生产单位数量
+
     public members = [];
     public posList = []; //全队上阵的顺序
     public stateObj = {};  //监听队伍中的状态，触发

@@ -60,7 +60,12 @@ class ShopItem extends game.BaseItem {
         else if(this.data.id == 'energy')
         {
             name = this.createHtml('体力',0xFFD27F)  + '\n×' + NumberUtil.formatStrNum(this.data.num);
-            this.img.source = MyTool.getPropEnergy()
+            this.img.source = MyTool.getPropEnergy();
+        }
+        else if(this.data.id == 'box_resource')
+        {
+            name = this.createHtml('资源产量',0xFFD27F)  + '\n×' + (this.data.num) + '小时';
+            this.img.source = MyTool.getPropBox();
         }
         else if((this.data.id + '').substr(0,5) == 'skill')
         {

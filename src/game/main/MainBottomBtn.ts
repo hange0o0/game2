@@ -7,6 +7,7 @@ class MainBottomBtn extends game.BaseItem {
     private text: eui.Label;
     private mc: eui.Image;
     private redMC: eui.Image;
+    private lockMC: eui.Image;
 
 
 
@@ -26,6 +27,7 @@ class MainBottomBtn extends game.BaseItem {
 
     public renewRed(){
         this.redMC.visible = false;
+        this.lockMC.visible = false;
         switch(this.data.type)
         {
             case 'slave':
@@ -34,7 +36,8 @@ class MainBottomBtn extends game.BaseItem {
                 break;
             case 'card':
                 break;
-            case 'card':
+            case 'hero':
+                this.lockMC.visible = true
                 break;
         }
     }

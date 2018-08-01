@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="BagItemSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="560">
+<e:Skin class="BagSellItemSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="560" states="sell,buy" >
 	<e:Image y="0" height="90" left="0" right="0" source="bg2_png" scale9Grid="10,10,10,7"/>
 	<e:Group x="10" verticalCenter="0">
 		<e:Image y="0" width="70" height="70" horizontalCenter="0" source="prop_bg_jpg"/>
@@ -7,9 +7,12 @@
 		<e:Image source="border2_png" scale9Grid="12,12,3,3" left="-3" right="-3" top="-3" bottom="-3"/>
 	</e:Group>
 	<e:Label id="nameText" text="Label" y="15" size="28" x="90" stroke="2" strokeColor="0x3f2309" textColor="0xffffff"/>
-	<e:Group right="-8" top="-5">
-		<e:Image source="border1_png" scale9Grid="28,20,26,2" left="0" right="0" top="0" bottom="0"/>
-		<e:Label id="numText" text="*1234" size="22" stroke="2" textColor="0xffe2a3" left="20" right="20" verticalCenter="-3" textAlign="right"/>
+	<e:Group x="90" y="48" y.buy="50">
+		<e:Image source="icon_coin_png" x="0" y="0" scaleX="0.6" scaleY="0.6"/>
+		<e:Label id="desText" text="Label" y="2" size="22" x="0" strokeColor="0x1c0c00" stroke="1" textColor="0xFFE496"/>
+		<e:layout>
+			<e:HorizontalLayout verticalAlign="middle"/>
+		</e:layout>
 	</e:Group>
-	<e:Label id="desText" text="Label" y="50" size="22" x="90" strokeColor="0x1c0c00" stroke="1" textColor="0xFFE496"/>
+	<e:Button id="okBtn" label="交易" right="10" verticalCenter="0" skinName="Btn1Skin" label.sell="出售" label.buy="购买" skinName.buy="Btn4Skin"/>
 </e:Skin>

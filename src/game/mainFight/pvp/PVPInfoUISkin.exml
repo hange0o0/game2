@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="PVPInfoUISkin" width="600" height="880" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image top="0" bottom="0" source="bg14_png" scale9Grid="32,29,8,10" left="0" right="0"/>
+	<e:Group y="20" horizontalCenter="0">
+		<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="420" x="0" y="0"/>
+		<e:Label text="竞技场" y="10.18" size="24" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
+	</e:Group>
+	<e:Group horizontalCenter="0" bottom="20">
+		<e:Group x="-120" y="0">
+			<e:Image scale9Grid="16,15,7,7" x="0" y="0" width="280" height="340" source="bg13_png"/>
+			<e:Image id="icon1" source="pvp_icon_1_png" horizontalCenter="0" y="20"/>
+			<e:Group id="titleGroup1" left="10" right="10" y="270">
+				<e:Image source="black_bg_png" y="0" scale9Grid="41,7,8,42" left="0" right="0"/>
+				<e:Label id="titleText1" text="Label" horizontalCenter="0" verticalCenter="0"/>
+			</e:Group>
+			<e:Button id="pkBtn1" label="防守阵容对决" y="350" horizontalCenter="0" width="240" skinName="Btn7Skin" height="83"/>
+			<e:Group id="expGroup1" y="280" horizontalCenter="0">
+				<e:Rect width="220" height="10" y="0" ellipseWidth="10" fillColor="0x441a02" x="0"/>
+				<e:Rect id="barMC1" width="120" height="10" y="0" ellipseWidth="10" x="0" fillColor="0xd16404"/>
+				<e:Label id="rateText1" text="200/300" y="20" horizontalCenter="0" size="22"/>
+			</e:Group>
+		</e:Group>
+		<e:Group x="-110" y="10">
+			<e:Image scale9Grid="16,15,7,7" x="0" y="0" width="280" height="340" source="bg13_png"/>
+			<e:Image source="pvp_icon_1_png" horizontalCenter="0" y="20" id="icon0"/>
+			<e:Group left="10" right="10" y="270" id="titleGroup0">
+			<e:Image source="black_bg_png" y="0" scale9Grid="41,7,8,42" left="0" right="0"/>
+			<e:Label text="Label" horizontalCenter="0" verticalCenter="0" id="titleText0"/>
+			</e:Group>
+			<e:Button label="进攻阵容对决" y="350" horizontalCenter="0" width="240" height="83" id="pkBtn0" skinName="Btn5Skin"/>
+			<e:Group y="280" horizontalCenter="0" id="expGroup0">
+			<e:Rect width="220" height="10" y="0" ellipseWidth="10" fillColor="0x441A02" x="0"/>
+			<e:Rect width="120" height="10" y="0" ellipseWidth="10" fillColor="0xD16404" x="0" id="barMC0"/>
+			<e:Label text="200/300" y="20" horizontalCenter="0" size="22" id="rateText0"/>
+			</e:Group>
+			<e:Image source="icon_lock_png" y="15" scaleX="1.2" scaleY="1.2" right="15"/>
+		</e:Group>
+		<e:layout>
+			<e:HorizontalLayout/>
+		</e:layout>
+	</e:Group>
+	<e:Image source="close_btn2_png" horizontalCenter="0" bottom="-40" touchEnabled="false"/>
+	<e:Image id="helpBtn" source="icon_help_png" right="10" top="10"/>
+	<e:List id="awardList" width="560" height="300" y="118" horizontalCenter="0" itemRendererSkinName="PvpInfoItemSkin">
+		<e:ArrayCollection>
+			<e:Array>
+				<e:Object null=""/>
+				<e:Object null=""/>
+				<e:Object null=""/>
+				<e:Object null=""/>
+			</e:Array>
+		</e:ArrayCollection>
+		<e:layout>
+			<e:VerticalLayout/>
+		</e:layout>
+	</e:List>
+	<e:Group horizontalCenter="0" y="75">
+		<e:Image source="black_bg_png" y="0" height="40" scale9Grid="42,7,8,42" left="0" right="0"/>
+		<e:Group left="50" right="50" verticalCenter="0">
+		<e:Label text="任务重置时间:" size="24" stroke="2" textAlign="center" y="26" x="55"/>
+		<e:Image source="icon_clock_png" x="0" y="0"/>
+		<e:Label id="cdText" text="Label" size="24" stroke="2" textAlign="center" y="16" x="45" textColor="0xFFE79B"/>
+		<e:layout>
+			<e:HorizontalLayout verticalAlign="middle" horizontalAlign="center" gap="10"/>
+		</e:layout>
+		</e:Group>
+	</e:Group>
+</e:Skin>

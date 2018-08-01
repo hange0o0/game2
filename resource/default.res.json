@@ -5,7 +5,7 @@
 			"name":"preload_png"
 		},
 		{
-			"keys":"data_json,bg1_png,bg2_png,bg3_png,bg4_png,bg5_png,bg6_png,bg7_png,bg8_png,bg9_png,bg10_png,bg11_png,bg12_png,bg13_png,bg14_png,bg15_png,bg16_png,bg17_png,bg18_png,border_4_png,border_10_png,border_13_png,border_15_png,border1_png,border2_png,border3_png,btn1_png,btn2_png,btn3_png,btn4_png,btn5_png,btn6_png,btn7_png,btn8_png,btn9_png,icon_add1_png,icon_add2_png,icon_add3_png,icon_add4_png,icon_coin_png,icon_cost_png,icon_cost_bg_png,icon_dec_png,icon_def1_png,icon_def2_png,icon_diamond_png,icon_force_png,icon_help_png,icon_lock_png,icon_love_png,icon_setting_png,icon_type1_png,icon_type2_png,icon_type3_png,line_png,line2_png,main_bag_png,main_card_png,main_mail_png,main_pk_png,main_rank_png,main_shop_png,main_slave_png,main_tec_png,pk_mv_json,pk_mv_png,radio_btn1_png,radio_btn2_png,random_btn_png,red_mc_png,replay_mc_png,start1_png,start2_png,tab1_png,tab2_png,tab4_png,title_bg1_png,title_bg4_png,type_tips_png,ui_loading_png,loading_ani_json,loading_ani_png",
+			"keys":"data_json,bg1_png,bg2_png,bg3_png,bg4_png,bg5_png,bg6_png,bg7_png,bg8_png,bg9_png,bg10_png,bg11_png,bg12_png,bg13_png,bg14_png,bg15_png,bg16_png,bg17_png,bg18_png,border_4_png,border_10_png,border_13_png,border_15_png,border1_png,border2_png,border3_png,btn1_png,btn2_png,btn3_png,btn4_png,btn5_png,btn6_png,btn7_png,btn8_png,btn9_png,icon_add1_png,icon_add2_png,icon_add3_png,icon_add4_png,icon_coin_png,icon_cost_png,icon_cost_bg_png,icon_dec_png,icon_def1_png,icon_def2_png,icon_diamond_png,icon_force_png,icon_help_png,icon_lock_png,icon_love_png,icon_setting_png,icon_type1_png,icon_type2_png,icon_type3_png,line_png,line2_png,main_bag_png,main_card_png,main_mail_png,main_pk_png,main_rank_png,main_shop_png,main_slave_png,main_tec_png,pk_mv_json,pk_mv_png,radio_btn1_png,radio_btn2_png,random_btn_png,red_mc_png,replay_mc_png,start1_png,start2_png,tab1_png,tab2_png,tab4_png,title_bg1_png,title_bg4_png,type_tips_png,ui_loading_png,loading_ani_json,loading_ani_png,main_hero_png",
 			"name":"login_load"
 		},
 		{
@@ -27,6 +27,10 @@
 		{
 			"keys":"pk_bg1_jpg",
 			"name":"temp"
+		},
+		{
+			"keys":"pvp_icon_1_png,pvp_icon_2_png,pvp_icon_3_png,pvp_icon_4_png,pvp_icon_5_png,pvp_icon_6_png,pvp_icon_7_png,pvp_icon_8_png,pvp_icon_9_png,pvp_icon_10_png,pvp_icon_11_png,pvp_icon_12_png,pvp_icon_13_png,pvp_icon_14_png,pvp_icon_15_png,pvp_icon_16_png,pvp_icon_17_png,pvp_icon_18_png,pvp_icon_19_png,pvp_icon_20_png,pvp_task_2_png,pvp_task_1_png",
+			"name":"pvp"
 		}
 	],
 	"resources":[
@@ -933,6 +937,121 @@
 			"name":"main_button_png",
 			"type":"image",
 			"url":"game_assets/step2/main_button.png"
+		},
+		{
+			"name":"main_hero_png",
+			"type":"image",
+			"url":"game_assets/main_hero.png"
+		},
+		{
+			"name":"pvp_icon_1_png",
+			"type":"image",
+			"url":"game_assets/pvp/pvp_icon_1.png"
+		},
+		{
+			"name":"pvp_icon_2_png",
+			"type":"image",
+			"url":"game_assets/pvp/pvp_icon_2.png"
+		},
+		{
+			"name":"pvp_icon_3_png",
+			"type":"image",
+			"url":"game_assets/pvp/pvp_icon_3.png"
+		},
+		{
+			"name":"pvp_icon_4_png",
+			"type":"image",
+			"url":"game_assets/pvp/pvp_icon_4.png"
+		},
+		{
+			"name":"pvp_icon_5_png",
+			"type":"image",
+			"url":"game_assets/pvp/pvp_icon_5.png"
+		},
+		{
+			"name":"pvp_icon_6_png",
+			"type":"image",
+			"url":"game_assets/pvp/pvp_icon_6.png"
+		},
+		{
+			"name":"pvp_icon_7_png",
+			"type":"image",
+			"url":"game_assets/pvp/pvp_icon_7.png"
+		},
+		{
+			"name":"pvp_icon_8_png",
+			"type":"image",
+			"url":"game_assets/pvp/pvp_icon_8.png"
+		},
+		{
+			"name":"pvp_icon_9_png",
+			"type":"image",
+			"url":"game_assets/pvp/pvp_icon_9.png"
+		},
+		{
+			"name":"pvp_icon_10_png",
+			"type":"image",
+			"url":"game_assets/pvp/pvp_icon_10.png"
+		},
+		{
+			"name":"pvp_icon_11_png",
+			"type":"image",
+			"url":"game_assets/pvp/pvp_icon_11.png"
+		},
+		{
+			"name":"pvp_icon_12_png",
+			"type":"image",
+			"url":"game_assets/pvp/pvp_icon_12.png"
+		},
+		{
+			"name":"pvp_icon_13_png",
+			"type":"image",
+			"url":"game_assets/pvp/pvp_icon_13.png"
+		},
+		{
+			"name":"pvp_icon_14_png",
+			"type":"image",
+			"url":"game_assets/pvp/pvp_icon_14.png"
+		},
+		{
+			"name":"pvp_icon_15_png",
+			"type":"image",
+			"url":"game_assets/pvp/pvp_icon_15.png"
+		},
+		{
+			"name":"pvp_icon_16_png",
+			"type":"image",
+			"url":"game_assets/pvp/pvp_icon_16.png"
+		},
+		{
+			"name":"pvp_icon_17_png",
+			"type":"image",
+			"url":"game_assets/pvp/pvp_icon_17.png"
+		},
+		{
+			"name":"pvp_icon_18_png",
+			"type":"image",
+			"url":"game_assets/pvp/pvp_icon_18.png"
+		},
+		{
+			"name":"pvp_icon_19_png",
+			"type":"image",
+			"url":"game_assets/pvp/pvp_icon_19.png"
+		},
+		{
+			"name":"pvp_icon_20_png",
+			"type":"image",
+			"url":"game_assets/pvp/pvp_icon_20.png"
+		},
+		{
+			"name":"pvp_task_2_png",
+			"type":"image",
+			"url":"game_assets/pvp/pvp_task_2.png"
+		},
+		{
+			"name":"pvp_task_1_png",
+			"type":"image",
+			"url":"game_assets/pvp/pvp_task_1.png"
 		}
 	]
 }

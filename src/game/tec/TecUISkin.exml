@@ -35,4 +35,7 @@
 		</e:Group>
 		<e:Image id="forceHelpBtn" source="icon_help_png" includeIn="force" x="584" y="3" scaleX="0.8" scaleY="0.8"/>
 	</e:Group>
+	<e:Group id="bagBtn" bottom="20" x="0">
+		<e:Image source="main_bag_png" x="0" y="0" scaleX="1.2" scaleY="1.2"/>
+	</e:Group>
 </e:Skin>

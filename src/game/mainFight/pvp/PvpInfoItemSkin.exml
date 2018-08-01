@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="PvpInfoItemSkin" width="560" height="70" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image left="0" right="0" scale9Grid="10,10,10,7" source="bg11_png" top="0" bottom="0"/>
+	<e:Image id="icon" source="pvp_task_1_png" x="15" scaleX="0.6" scaleY="0.6" verticalCenter="0"/>
+	<e:Label id="desText" text="Label" x="80" size="24" verticalCenter="0"/>
+	<e:Image source="pvp_task_2_png" x="492" y="5" width="60" height="60"/>
+	<e:Image id="awardMC" source="get_award_png" scaleX="0.8" scaleY="0.8" verticalCenter="-0.5" right="5"/>
+</e:Skin>

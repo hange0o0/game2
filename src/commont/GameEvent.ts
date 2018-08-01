@@ -56,6 +56,11 @@ class GameEvent {
         get_rank:'rank.get_rank'
     }
 
+    public static prop = {
+        buy_prop_shop:'prop.buy_prop_shop',
+        get_prop_shop:'prop.get_prop_shop',
+    }
+
     public static card = {
         card_buy:'card.card_buy',
         card_draw:'card.card_draw',

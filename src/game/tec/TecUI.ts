@@ -13,6 +13,9 @@ class TecUI extends MainBase {
     private icon: eui.Image;
     private coinText: eui.Label;
     private forceHelpBtn: eui.Image;
+    private bagBtn: eui.Group;
+
+
 
 
 
@@ -33,6 +36,9 @@ class TecUI extends MainBase {
         this.tab.selectedIndex = 0;
 
         this.addBtnEvent(this.forceHelpBtn,this.onHelp)
+        this.addBtnEvent(this.bagBtn,()=>{
+            BagUI.getInstance().show();
+        })
     }
 
     private onHelp(){
@@ -83,6 +89,7 @@ class TecUI extends MainBase {
         }
         else
             this.currentState = 'normal'
+        this.bagBtn.visible = this.tab.selectedIndex == 0;
         var arr =  TecManager.getInstance().getListByType(this.tab.selectedIndex + 1);
         this.dataArray.source = arr
         this.dataArray.refresh()

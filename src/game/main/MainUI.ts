@@ -46,7 +46,7 @@ class MainUI extends game.BaseUI {
         this.addBtnEvent(this.addEnergyBtn, this.onAddEnergy)
         this.addBtnEvent(this.addDiamondBtn, this.onAddDiamond)
 
-        this.b0.data = {text:'背包',index:0,source:'main_bag_png',type:'bag'}
+        this.b0.data = {text:'英雄',index:0,source:'main_hero_png',type:'hero'}
         this.b1.data = {text:'奴隶',index:1,source:'main_slave_png',type:'slave'}
         this.b2.data = {text:'战斗',index:2,source:'main_pk_png',type:'main'}
         this.b3.data = {text:'卡牌',index:3,source:'main_card_png',type:'card'}
@@ -103,6 +103,11 @@ class MainUI extends game.BaseUI {
     public onBottomSelect(index,stopMV?){
        if(index != this.currentIndex)
        {
+           if(index == 0)
+           {
+               MyWindow.Alert('英雄系统即将开放')
+               return;
+           }
            if(index == 1 && ObjectUtil.objLength(PosManager.getInstance().defList) == 0)//奴隶
            {
                MyWindow.Alert('请先设置防守阵容',()=>{
@@ -189,7 +194,7 @@ class MainUI extends game.BaseUI {
         //先初始化，加快切换速度
         MainFightUI.getInstance()
         SlaveUI.getInstance()
-        BagUI.getInstance()
+        //BagUI.getInstance()
         CardUI.getInstance()
         TecUI.getInstance()
 
@@ -302,9 +307,9 @@ class MainUI extends game.BaseUI {
             case 1:
                 this.currentUI = SlaveUI.getInstance();
                 break;
-            case 0:
-                this.currentUI = BagUI.getInstance();
-                break;
+            //case 0:
+            //    this.currentUI = BagUI.getInstance();
+            //    break;
             case 2:
                 this.currentUI = MainFightUI.getInstance();
                 break;

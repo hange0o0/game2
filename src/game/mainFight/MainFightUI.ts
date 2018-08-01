@@ -155,6 +155,7 @@ class MainFightUI extends MainBase {
             this.mapBtn.renew()
 
         this.fightBtn.renew();
+        this.pvpBtn.renew();
     }
 
 
@@ -181,6 +182,7 @@ class MainFightUI extends MainBase {
         this.scroller.viewport.scrollV = 0;
         this.renewHang();
         this.fightBtn.renew();
+        this.pvpBtn.renew();
     }
 
     public renewHang(){

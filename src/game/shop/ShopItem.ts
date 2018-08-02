@@ -64,8 +64,8 @@ class ShopItem extends game.BaseItem {
         }
         else if(this.data.id == 'box_resource')
         {
-            name = this.createHtml('资源产量',0xFFD27F)  + '\n×' + (this.data.num) + '小时';
-            this.img.source = MyTool.getPropBox();
+            name = this.createHtml('资源宝箱',0xFFD27F)  + '\nLV.' + (this.data.num) + '';
+            this.img.source = MyTool.getPropBox(this.data.num);
         }
         else if((this.data.id + '').substr(0,5) == 'skill')
         {

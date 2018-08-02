@@ -2,6 +2,7 @@ class PKManager {
     public static TYPE_HANG = 1;
     public static TYPE_SLAVE = 2;
     public static TYPE_FIGHT = 3;
+    public static TYPE_PVP_OFFLINE = 4;
 
 
     public static TYPE_TEST = 101;
@@ -159,6 +160,9 @@ class PKManager {
             case PKManager.TYPE_HANG:
                 HangManager.getInstance().pkResult(fun);
                 break;
+            case PKManager.TYPE_PVP_OFFLINE:
+                PVPManager.getInstance().pkOfflineWin(fun);
+                break;
             case PKManager.TYPE_TEST:
                 fun && fun();
                 break;
@@ -227,6 +231,9 @@ class PKManager {
             case PKManager.TYPE_FIGHT:
                 FightManager.getInstance().pkFail(fun);
                 break;
+            case PKManager.TYPE_PVP_OFFLINE:
+                PVPManager.getInstance().pkOfflineFail(fun);
+                break
             case PKManager.TYPE_HANG:
                 var lastHistory = SharedObjectManager.getInstance().getMyValue('hang_video') || {};
                 if(lastHistory.level === HangManager.getInstance().level)

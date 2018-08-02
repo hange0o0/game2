@@ -26,6 +26,14 @@ class BasePosUI extends game.BaseUI {
     private changePosMC: eui.Image;
     private typeIcon: eui.Image;
 
+    private infoGroup: eui.Group;
+    private infoList: eui.List;
+    private infoCloseBtn: eui.Image;
+    private infoBtn: eui.Group;
+    private renameBtn: eui.Group;
+
+
+
 
 
 

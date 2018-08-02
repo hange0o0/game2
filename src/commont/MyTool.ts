@@ -12,8 +12,9 @@ class MyTool {
     public static getPropEnergy(){
         return Config.localResRoot + 'prop/prop_energy.png'
     }
-    public static getPropBox(){
-        return Config.localResRoot + 'prop/prop_energy.png'
+    public static getPropBox(id){
+        var type = Math.ceil(id/4)
+        return Config.localResRoot + 'prop/box_r'+type+'.png'
     }
     public static getPropLevel(){
         return Config.localResRoot + 'prop/prop_level.png'
@@ -29,6 +30,8 @@ class MyTool {
         var arr = [];
         if(dataIn.coin)
             arr.push({img:MyTool.getPropCoin(),name:'金币','num':'×' + NumberUtil.addNumSeparator(dataIn.coin)})
+        if(dataIn.offline_value)
+            arr.push({name:'防御场积分','num':(dataIn.offline_value>0?'+':'') + dataIn.offline_value})
         if(dataIn.diamond)
             arr.push({img:MyTool.getPropDiamond(),name:'钻石','num':'×' + NumberUtil.addNumSeparator(dataIn.diamond)})
         if(dataIn.fightvalue)

@@ -15,6 +15,7 @@ class GameEvent {
         head_change:'head_change',
 
         fight_change:'fight_change',
+        pvp_change:'pvp_change',
 
 
         pk_begin:'pk_begin',
@@ -59,6 +60,16 @@ class GameEvent {
     public static prop = {
         buy_prop_shop:'prop.buy_prop_shop',
         get_prop_shop:'prop.get_prop_shop',
+    }
+
+    public static pvp = {
+        get_pvp:'pvp.get_pvp',
+        pk_pvp_offline:'pvp.pk_pvp_offline',
+        pk_pvp_offline_continue:'pvp.pk_pvp_offline_continue',
+        pk_pvp_offline_fail:'pvp.pk_pvp_offline_fail',
+        pk_pvp_offline_win:'pvp.pk_pvp_offline_win',
+        pvp_award:'pvp.pvp_award',
+
     }
 
     public static card = {

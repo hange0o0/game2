@@ -51,11 +51,12 @@ class PosManager {
     }
 
 
-    public addPos(type,id,list,fun?){
+    public addPos(type,id,list,name,fun?){
         var self = this;
         var oo:any = {};
         oo.type = type;
         oo.list = list;
+        oo.name = name;
         oo.id = id;
         Net.addUser(oo);
         Net.send(GameEvent.pos.add_pos,oo,function(data){
@@ -84,6 +85,8 @@ class PosManager {
                 id:id,
                 list:list
             })
+            if(name)
+                self.getListByType(type)[id].name = Base64.encode(name);
             EM.dispatch(GameEvent.client.pos_change)
             if(fun)
                 fun();
@@ -145,6 +148,26 @@ class PosManager {
                 return;
             }
             posData.close = !posData.close;
+            if(fun)
+                fun();
+        });
+    }
+    public changeName(type,id,name,fun?){
+        var self = this;
+        var oo:any = {};
+        oo.type = type;
+        oo.name = name;
+        oo.id = id;
+        var posData = self.getDataByID(type,id);
+        Net.addUser(oo);
+        Net.send(GameEvent.pos.change_name,oo,function(data){
+            var msg = data.msg;
+            if(msg.fail == 1)
+            {
+                MyWindow.Alert('找不到指定阵法')
+                return;
+            }
+            posData.name = Base64.encode(name);
             if(fun)
                 fun();
         });

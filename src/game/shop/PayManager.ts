@@ -72,7 +72,7 @@ class PayManager {
             }
             for(var i=0;i<this.shopData.length;i++)
             {
-                if(this.shopData[i].id == id)
+                if(this.shopData[i].key == id)
                 {
                     this.shopData[i].times  = (this.shopData[i].times || 0) + 1;
                     break;

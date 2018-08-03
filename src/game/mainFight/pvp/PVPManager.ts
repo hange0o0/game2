@@ -11,6 +11,8 @@ class PVPManager {
     public online
     public offline
 
+    public lastEnemyList
+
     public base = {
         1:{score:0,title:'LV1'},
         2:{score:50,title:'LV2'},
@@ -184,6 +186,7 @@ class PVPManager {
             this.offline['score'] = msg.score
             this.offline['maxscore'] = Math.max(this.offline['maxscore']||0,msg.score)
             this.task = msg.task;
+            this.lastEnemyList = null;
             EM.dispatchEventWith(GameEvent.client.pvp_change)
             if (fun)
                 fun();

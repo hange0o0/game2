@@ -25,10 +25,10 @@
 				<e:Label id="titleText1" text="Label" horizontalCenter="0" verticalCenter="0"/>
 			</e:Group>
 			<e:Button id="pkBtn1" label="防御阵容对决" y="350" horizontalCenter="0" width="240" skinName="Btn7Skin" height="83"/>
-			<e:Group id="expGroup1" y="0" horizontalCenter="0" visible="false">
+			<e:Group id="expGroup1" y="0" horizontalCenter="0">
 				<e:Image scale9Grid="16,15,7,7" x="0" y="0" width="280" height="340" source="bg13_png"/>
-				<e:Label text="防御场" y="20" horizontalCenter="0" size="26" stroke="2" strokeColor="0x301800" textColor="0xffca93"/>
-				<e:Label id="infoText1" text="Label" y="65" size="24" x="25" lineSpacing="15"/>
+				<e:Label text="自动场" y="25" horizontalCenter="0" size="28" stroke="2" strokeColor="0x301800" textColor="0xffca93"/>
+				<e:Label id="infoText1" text="Label" y="70" size="24" x="25" lineSpacing="15"/>
 				<e:Group y="270" horizontalCenter="0">
 				<e:Rect width="240" height="12" y="0" ellipseWidth="12" fillColor="0x441a02" x="0"/>
 				<e:Rect id="barMC1" width="120" height="12" y="0" ellipseWidth="12" x="0" fillColor="0xd16404"/>
@@ -46,9 +46,9 @@
 			<e:Label id="titleText0" text="Label" horizontalCenter="0" verticalCenter="0"/>
 			</e:Group>
 			<e:Button id="pkBtn0" label="进攻阵容对决" y="350" horizontalCenter="0" width="240" height="83" skinName="Btn5Skin"/>
-			<e:Group id="expGroup0" y="0" horizontalCenter="0" visible="false">
+			<e:Group id="expGroup0" y="0" horizontalCenter="0">
 			<e:Image scale9Grid="16,15,7,7" x="0" y="0" width="280" height="340" source="bg13_png"/>
-			<e:Label text="进攻场" y="20" horizontalCenter="0" size="26" stroke="2" strokeColor="0x301800" textColor="0xFFCA93"/>
+			<e:Label text="手动场" y="20" horizontalCenter="0" size="26" stroke="2" strokeColor="0x301800" textColor="0xFFCA93"/>
 			<e:Label id="infoText0" text="Label" y="65" size="24" x="25" lineSpacing="15"/>
 			<e:Group y="270" horizontalCenter="0">
 				<e:Rect width="240" height="12" y="0" ellipseWidth="12" fillColor="0x441A02" x="0"/>

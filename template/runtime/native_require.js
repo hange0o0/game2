@@ -86,6 +86,7 @@ var game_file_list = [
 	"bin-debug/game/mainFight/fight/FightShopBuyUI.js",
 	"bin-debug/game/mainFight/fight/FightShopItem.js",
 	"bin-debug/game/mainFight/fight/FightUI.js",
+	"bin-debug/game/mainFight/pvp/PVPContinueUI.js",
 	"bin-debug/game/mainFight/pvp/PVPInfoItem.js",
 	"bin-debug/game/mainFight/pvp/PVPInfoUI.js",
 	"bin-debug/game/mainFight/pvp/PVPManager.js",

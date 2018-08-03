@@ -28,6 +28,7 @@ class PosTestUI extends game.BaseUI {
 
         this.scroller.viewport = this.list;
         this.list.itemRenderer = PosTestItem
+        this.list.useVirtualLayout = false;
     }
 
     public show(v?,listData?){
@@ -63,7 +64,7 @@ class PosTestUI extends game.BaseUI {
             {
                 arr.push({
                     data:PM.defList[s],
-                    name:'防守阵容【' + (parseInt(s)+1)+ '】',
+                    name:(PM.defList[s].name && Base64.decode(PM.defList[s].name)) || '防守阵容【' + (parseInt(s)+1)+ '】',
                     type:'def'
                 });
             }
@@ -75,7 +76,7 @@ class PosTestUI extends game.BaseUI {
             {
                 arr.push({
                     data:PM.atkList[s],
-                    name:'进攻阵容【' + (parseInt(s)+1)+ '】',
+                    name:(PM.atkList[s].name && Base64.decode(PM.atkList[s].name)) || '进攻阵容【' + (parseInt(s)+1)+ '】',
                     type:'atk'
                 });
             }

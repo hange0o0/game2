@@ -95,6 +95,7 @@ class GameEvent {
         add_pos:'pos.add_pos',
         change_pos:'pos.change_pos',
         change_close:'pos.change_close',
+        change_name:'pos.change_name',
         delete_pos:'pos.delete_pos'
     }
 

@@ -49,6 +49,7 @@ class HangUI extends game.BaseItem {
     private pkMV;
     private callStop = true;
     private giftTW;
+    private otherList;
 
     public constructor() {
         super();
@@ -108,6 +109,7 @@ class HangUI extends game.BaseItem {
         PKBeforeUI.getInstance().show({
             isAuto:true,
             title:'自动挑战 战役' + (HangManager.getInstance().level + 1),
+            otherList:this.otherList,
             fun:function(id){
                 HangManager.getInstance().pk(id,true)
             }
@@ -118,6 +120,7 @@ class HangUI extends game.BaseItem {
         this.modeGroup.visible = false;
         PKBeforeUI.getInstance().show({
             title:'手动挑战 战役' + (HangManager.getInstance().level + 1),
+            otherList:this.otherList,
             fun:function(id){
                 HangManager.getInstance().pk(id)
             }
@@ -207,6 +210,10 @@ class HangUI extends game.BaseItem {
 
         var lastHistory = SharedObjectManager.getInstance().getMyValue('hang_video') || {};
         this.videoBtn.visible = HM.level>= 10 && lastHistory.level === HM.level && lastHistory.fail >= 1
+        if(lastHistory.level === HangManager.getInstance().level)
+            this.otherList = lastHistory.otherList;
+        else
+            this.otherList = null
 
         var showGift = HM.giftnum<HM.maxGiftNum && lastHistory.gift <= lastHistory.fail-1-lastHistory.gifttimes// && lastHistory.fail >= 2;
         if(showGift)

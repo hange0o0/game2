@@ -28,26 +28,27 @@ class MyTool {
 
     public static getAwardArr(dataIn){
         var arr = [];
-        if(dataIn.coin)
-            arr.push({img:MyTool.getPropCoin(),name:'金币','num':'×' + NumberUtil.addNumSeparator(dataIn.coin)})
         if(dataIn.offline_value)
             arr.push({name:'防御场积分','num':(dataIn.offline_value>0?'+':'') + dataIn.offline_value})
+        if(dataIn.coin)
+            arr.push({img:MyTool.getPropCoin(),name:'金币','num':'×' + NumberUtil.addNumSeparator(dataIn.coin)})
         if(dataIn.diamond)
             arr.push({img:MyTool.getPropDiamond(),name:'钻石','num':'×' + NumberUtil.addNumSeparator(dataIn.diamond)})
         if(dataIn.fightvalue)
             arr.push({img:MyTool.getPropFight(),name:'远征秘石','num':'×' + NumberUtil.addNumSeparator(dataIn.fightvalue)})
         if(dataIn.energy)
             arr.push({img:MyTool.getPropEnergy(),name:' 体力','num':'×' + NumberUtil.addNumSeparator(dataIn.energy)})
-        for(var s in dataIn.props)
-        {
-            var prop =  PropVO.getObject(s);
-            arr.push({img:prop.getThumb(),name:prop.propname,'num':'×' + NumberUtil.addNumSeparator(dataIn.props[s])})
-        }
         for(var s in dataIn.skills)
         {
             var skill =  SkillVO.getObject(s);
             arr.push({img:skill.getImage(),name:skill.name,'num':'×' + NumberUtil.addNumSeparator(dataIn.skills[s])})
         }
+        for(var s in dataIn.props)
+        {
+            var prop =  PropVO.getObject(s);
+            arr.push({img:prop.getThumb(),name:prop.propname,'num':'×' + NumberUtil.addNumSeparator(dataIn.props[s])})
+        }
+
         return arr;
     }
 

@@ -171,6 +171,7 @@ class PKManager {
                 break;
             case PKManager.TYPE_FIGHT:
                 FightManager.getInstance().pkResult(fun);
+                SharedObjectManager.getInstance().setMyValue('fight_video','')
                 break;
         }
     }
@@ -230,6 +231,8 @@ class PKManager {
         {
             case PKManager.TYPE_FIGHT:
                 FightManager.getInstance().pkFail(fun);
+                var player = PKData.getInstance().getPlayer(2);
+                SharedObjectManager.getInstance().setMyValue('fight_video',this.resetAutoList(PKData.getInstance().getPlayer(2),SharedObjectManager.getInstance().getMyValue('fight_video')));
                 break;
             case PKManager.TYPE_PVP_OFFLINE:
                 PVPManager.getInstance().pkOfflineFail(fun);
@@ -246,7 +249,9 @@ class PKManager {
                     lastHistory.fail = 1;
                     lastHistory.gift = 0;
                     lastHistory.gifttimes = 0;
+                    lastHistory.otherList = ''
                 }
+                lastHistory.otherList = this.resetAutoList(PKData.getInstance().getPlayer(2),lastHistory.otherList)
                 SharedObjectManager.getInstance().setMyValue('hang_video',lastHistory)
                 fun && fun();
                 break;
@@ -254,6 +259,22 @@ class PKManager {
                 fun && fun();
                 break;
         }
+    }
+
+    //重设对方出卡记录
+    public resetAutoList(player:PKPlayerData,lastList){
+        var lastArr = [];
+        if(lastList)
+            lastArr = lastList.split(',');
+        var index = lastArr.indexOf('0');
+        if(index != -1)
+            lastArr.length = index;
+        if(player.useCardList.length > lastArr.length)
+            lastArr = player.useCardList.concat();
+        var len = player.autolist.split(',').length;
+        while(lastArr.length < len)
+            lastArr.push(0);
+        return lastArr.join(',');
     }
 
     public stopPK(){
@@ -276,6 +297,7 @@ class PKManager {
         var PD = PKData.getInstance();
         PD.init(data);
         PKingUI.getInstance().show();
+        PVPContinueUI.getInstance().hide()
     }
 
     //阵容中的测试

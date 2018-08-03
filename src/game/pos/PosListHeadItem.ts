@@ -5,6 +5,7 @@ class PosListHeadItem extends game.BaseItem {
     }
 
     private bg: eui.Image;
+    private wenhao: eui.Image;
     private img: CardImg;
 
 
@@ -32,10 +33,13 @@ class PosListHeadItem extends game.BaseItem {
             //if(gay)
             //    this.img.changeGay(true)
             this.bg.source = vo.getBG();
+            this.currentState = 'normal'
         }
         else
         {
             this.img.visible = false
+            this.currentState = 'unknow'
+            this.bg.source = 'border_16_png'
         }
 
     }

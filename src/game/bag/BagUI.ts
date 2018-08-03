@@ -97,6 +97,7 @@ class BagUI extends game.BaseWindow {
             this.dataArray.source = arr
             this.emptyGroup.visible = arr.length == 0;
             this.dataArray.refresh()
+            this.onTimer();
         })
 
     }

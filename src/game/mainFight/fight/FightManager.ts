@@ -73,6 +73,7 @@ class FightManager {
 
             this.card = list;
             this.step = 0;
+            SharedObjectManager.getInstance().setMyValue('fight_video','')
             EM.dispatchEventWith(GameEvent.client.fight_change)
             //SharedObjectManager.getInstance().removeMyValue('fightDefault');
             this.pk();
@@ -122,13 +123,14 @@ class FightManager {
             }
             for(var i=0;i<this.shopData.length;i++)
             {
-                if(this.shopData[i].id == id)
+                if(this.shopData[i].key == id)
                 {
                     this.shopData[i].isbuy = true;
                     break;
                 }
             }
             this.value -=  this.shopData[i].diamond;
+            AwardUI.getInstance().show(msg.award)
             EM.dispatchEventWith(GameEvent.client.fight_change)
             SoundManager.getInstance().playEffect(SoundConfig.effect_buy);
             if(fun)

@@ -22,7 +22,15 @@ class PKAwardItem extends game.BaseItem {
     }
 
     public dataChanged() {
-        this.img.source = this.data.img
+        if(this.data.img)
+        {
+            this.img.source = this.data.img
+            this.currentState = 's1'
+        }
+        else
+        {
+            this.currentState = 's2'
+        }
         this.nameText.text = this.data.name
         this.numText.text = this.data.num
         egret.Tween.removeTweens(this.group)

@@ -78,6 +78,11 @@ class FightShopItem extends game.BaseItem {
             name = this.createHtml('金币',0xFFD27F)  + '\n×' + NumberUtil.formatStrNum(this.data.num);
             this.img.source = MyTool.getPropCoin()
         }
+        else if(this.data.id == 'box_resource')
+        {
+            name = this.createHtml('资源宝箱',0xFFD27F)  + '\nLV.' + (this.data.num) + '';
+            this.img.source = MyTool.getPropBox(this.data.num);
+        }
         else if(this.data.id == 'energy')
         {
             name = this.createHtml('体力',0xFFD27F)  + '\n×' + NumberUtil.formatStrNum(this.data.num);

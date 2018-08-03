@@ -104,6 +104,7 @@ class FightInfoUI extends game.BaseWindow {
             title:'调整阵容',
             noTab:true,
             stopTest:true,
+            otherList:SharedObjectManager.getInstance().getMyValue('fight_video'),
             list:FM.card.join(','),
             fun:function(data){
                 FM.changePos(data,()=>{

@@ -39,7 +39,7 @@ class FightShopBuyUI extends game.BaseWindow {
             MyWindow.ShowTips('远征秘石不足！')
             return;
         }
-        FightManager.getInstance().buy_shop(this.dataIn.id,()=>{
+        FightManager.getInstance().buy_shop(this.dataIn.key,()=>{
             MyWindow.ShowTips('购买成功！')
             ShopUI.getInstance().renewList()
         })

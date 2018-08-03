@@ -13,6 +13,7 @@ class PosNameUI extends game.BaseWindow {
 
 
     private lastName;
+    private fun;
     public constructor() {
         super();
         this.skinName = "PosNameUISkin";
@@ -30,12 +31,15 @@ class PosNameUI extends game.BaseWindow {
             MyWindow.Alert('还没输入名称')
             return;
         }
-        this.dispatchEventWith('nameChange',false,this.nameText.text);
+        if(this.lastName != this.nameText.text)
+            this.fun(this.nameText.text)
+        //this.dispatchEventWith('nameChange',false,this.nameText.text);
         this.hide();
     }
 
-    public show(v?){
+    public show(v?,fun?){
         this.lastName = v;
+        this.fun = fun;
         super.show()
     }
 

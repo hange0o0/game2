@@ -10,6 +10,8 @@ class PKPlayerData {
     public teamData:PKTeamData   //对应队伍
 
     public card//原始的手牌
+    public level//PVP中有
+    public score//PVP中有
     public autolist//原始的autolist
     private handCard = {};//当前的手牌  [{index,mid},]  上限5
     public hideCard = [];//隐藏的手牌  [{index,mid},]

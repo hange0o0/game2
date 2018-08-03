@@ -39,6 +39,7 @@ class BasePosUI extends game.BaseUI {
 
     public type = 'atk'
     public index = 0  //第X个阵
+    public newName
     public useCard = {}
     public maxCard = 0;
 
@@ -59,6 +60,7 @@ class BasePosUI extends game.BaseUI {
     private sp;
     private arrowTW;
     private changeTW;
+    private deleteBtnIndex;
 
 
     public constructor() {
@@ -83,12 +85,17 @@ class BasePosUI extends game.BaseUI {
         this.tabList.itemRenderer = BasePosTabItem
         this.tabList.dataProvider = new eui.ArrayCollection([0,1,2,3,4])
 
+        this.infoList.itemRenderer = PosListHeadItem;
+
         this.addBtnEvent(this.deleteBtn,this.onDelete)
         this.addBtnEvent(this.pkBtn,this.onPK)
         this.addBtnEvent(this.testBtn,this.onTest)
         this.addBtnEvent(this.upBtn,this.onUp)
         this.addBtnEvent(this.downBtn,this.onDown)
         this.addBtnEvent(this.openBtn,this.onOpen)
+        this.addBtnEvent(this.renameBtn,this.onRename)
+        this.addBtnEvent(this.infoBtn,this.onInfo)
+        this.addBtnEvent(this.infoCloseBtn,this.onInfoClose)
 
         var tw = this.arrowTW = egret.Tween.get(this.arrowMC,{loop:true});
         tw.to({scaleX:1.1,scaleY:0.8},200).to({scaleX:1,scaleY:1.1,y:this.arrowMC.y -10},200).
@@ -104,6 +111,34 @@ class BasePosUI extends game.BaseUI {
 
         this.arrowGroup.touchChildren = this.arrowGroup.touchEnabled = false;
         this.arrowGroup.visible = false;
+    }
+
+    private onInfo(){
+        this.infoGroup.visible = true;
+        this.infoList.dataProvider = new eui.ArrayCollection(this.pkData.otherList.split(','))
+        this.infoList.validateNow();
+        this.infoGroup.bottom = -this.infoGroup.height;
+        egret.Tween.get(this.infoGroup).to({bottom:0},200);
+    }
+    private onInfoClose(){
+        egret.Tween.get(this.infoGroup).to({bottom:-this.infoGroup.height},200).call(()=>{
+            this.infoGroup.visible = false;
+        });
+    }
+
+    private onRename(){
+        PosNameUI.getInstance().show(this.posData && this.posData.name && Base64.decode(this.posData.name),(name)=>{
+            if(!this.posData)
+            {
+                this.newName = name;
+                this.renewTitle()
+                return;
+            }
+             PosManager.getInstance().changeName(this.type,this.index,name,()=>{
+                 //this.posData.name = Base64.encode(name);
+                 this.renewTitle()
+             });
+        })
     }
 
     private onOpen(e){
@@ -238,6 +273,22 @@ class BasePosUI extends game.BaseUI {
             length --;
         this.titleText.text = ''+length+' / '+this.maxCard
 
+        var posName = this.posData && this.posData.name && Base64.decode(this.posData.name) || this.newName
+        if(this.pkData)
+        {
+            if(this.pkData.noTab)
+                posName = '';
+            this.topUI.setTitle((this.pkData.title || '战斗准备') + (posName?'【'+posName+'】':''),this.pkData.helpKey || (this.type == 'atk'?'atkPos':'defPos'))
+        }
+        else if(this.type == 'atk')
+        {
+            this.topUI.setTitle(posName ||  '进攻阵容','atkPos')
+        }
+        else
+        {
+            this.topUI.setTitle(posName || '防守阵容','defPos')
+        }
+
         this.titleGroup.visible = !(this.pkData && this.pkData.stopAdd)
     }
 
@@ -266,7 +317,7 @@ class BasePosUI extends game.BaseUI {
         }
         else
         {
-            PosManager.getInstance().addPos(this.type,this.index,serverList,()=>{
+            PosManager.getInstance().addPos(this.type,this.index,serverList,this.newName,()=>{
                     fun && fun();
                     //MyWindow.ShowTips('保存成功！')
                     //this.posData = PosManager.getInstance().getListByType(this.type)[index]
@@ -518,6 +569,7 @@ class BasePosUI extends game.BaseUI {
     *   stopAdd
     *   stopRemoveTips
     *   stopTest
+    *   otherList//其它人的进功阵容
     *  }
     *  sp:{
     *  index,
@@ -539,36 +591,41 @@ class BasePosUI extends game.BaseUI {
     }
 
     public onShow(){
+        this.infoGroup.visible = false;
         this.openBtn.visible =  this.type == 'def';
         this.maxCard = PosManager.getInstance().maxPosNum();
-        if(this.pkData)
-            this.topUI.setTitle(this.pkData.title || '战斗准备',this.pkData.helpKey || (this.type == 'atk'?'atkPos':'defPos'))
-        else if(this.type == 'atk')
-        {
-            this.topUI.setTitle('进攻阵容','atkPos')
-        }
-        else
-        {
-            this.topUI.setTitle('防守阵容','defPos')
-        }
+
         this.typeIcon.source = this.type == 'atk'?'icon_atk3_png':'icon_def1_png'
         this.currentState = 'normal'
+        this.deleteBtnIndex = 1;
+        this.btnGroup.addChildAt(this.renameBtn,0)
         if(this.pkData)
         {
+            if(this.pkData.otherList)
+            {
+                this.deleteBtnIndex ++;
+                this.btnGroup.addChildAt(this.infoBtn,0)
+            }
+            else
+                MyTool.removeMC(this.infoBtn)
             if(this.pkData.stopTest)
                 MyTool.removeMC(this.testBtn)
             else
                 this.btnGroup.addChild(this.testBtn)
             this.btnGroup.addChild(this.pkBtn)
             if(this.pkData.noTab)
+            {
                 this.currentState = 'pk'
+                this.deleteBtnIndex --;
+                MyTool.removeMC(this.renameBtn)
+            }
         }
         else
         {
             this.btnGroup.addChild(this.testBtn)
             MyTool.removeMC(this.pkBtn)
+            MyTool.removeMC(this.infoBtn)
         }
-
         this.renew();
         this.renewTabList();
         if(GuideManager.getInstance().isGuiding)
@@ -600,7 +657,7 @@ class BasePosUI extends game.BaseUI {
         this.renewTitle();
 
         if(this.listData.length > 1 && !stopDelete)
-            this.btnGroup.addChildAt(this.deleteBtn,0)
+            this.btnGroup.addChildAt(this.deleteBtn,this.deleteBtnIndex)
     }
 
     public renewBtn(toBottom?){
@@ -624,8 +681,12 @@ class BasePosUI extends game.BaseUI {
                 this.downBtn.visible = true
                 this.list.y = 0
             }
-            this.scrollerBG.y = this.list.y
         }
+        else
+        {
+            this.list.y = 0;
+        }
+        this.scrollerBG.y = this.list.y
     }
 
     public renew(){
@@ -634,6 +695,7 @@ class BasePosUI extends game.BaseUI {
         var data = this.posData = PM.getListByType(this.type)[this.index]
         var stopDelete = this.isStopDelete()
         this.useCard = {};
+        this.newName = null;
         if(GuideManager.getInstance().isGuiding)
         {
             data = {
@@ -671,7 +733,8 @@ class BasePosUI extends game.BaseUI {
                 arr.push({id:id})
             }
 
-            this.btnGroup.addChildAt(this.deleteBtn,0)
+
+            this.btnGroup.addChildAt(this.deleteBtn,this.deleteBtnIndex)
             if(this.type == 'def')
             {
                 this.openBtn.visible = true;

@@ -24,7 +24,7 @@ class HeadMC extends game.BaseItem {
 
     public setData(head,type?){
 
-        this.mc.source = MyTool.getHeadUrl(head || 1)
+        this.mc.source = MyTool.getHeadUrl(head)
         //if(type)
         //{
         //    this.rect.visible = true

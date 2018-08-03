@@ -67,6 +67,7 @@
     "src/game/mainFight/fight/FightInfoUISkin.exml",
     "src/game/mainFight/fight/FightShopItemSkin.exml",
     "src/game/mainFight/fight/FightShopBuyUISkin.exml",
+    "src/game/mainFight/pvp/PVPContinueUISkin.exml",
     "src/game/mainFight/pvp/PVPInfoUISkin.exml",
     "src/game/mainFight/pvp/PvpInfoItemSkin.exml",
     "src/game/pk/ui/PKTopItemSkin.exml",

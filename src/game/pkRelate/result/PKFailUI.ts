@@ -73,7 +73,12 @@ class PKFailUI extends game.BaseUI {
     private onOK(){
         if(!this.closeBtn.visible)
             return;
+
+        if(PKManager.getInstance().pkType == PKManager.TYPE_PVP_OFFLINE)
+            PVPContinueUI.getInstance().show();
         this.hide();
         PKingUI.getInstance().hide();
+
+
     }
 }

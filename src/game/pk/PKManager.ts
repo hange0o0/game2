@@ -1,4 +1,5 @@
 class PKManager {
+    //录像里也要调
     public static TYPE_HANG = 1;
     public static TYPE_SLAVE = 2;
     public static TYPE_FIGHT = 3;

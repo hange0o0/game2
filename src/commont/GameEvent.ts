@@ -54,7 +54,9 @@ class GameEvent {
 
 
     public static rank = {
-        get_rank:'rank.get_rank'
+        get_rank:'rank.get_rank',
+        create_rank:'rank.create_rank',
+        get_rank2:'rank.get_rank2'
     }
 
     public static prop = {

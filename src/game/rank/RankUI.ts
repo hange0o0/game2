@@ -20,6 +20,7 @@ class RankUI extends game.BaseUI {
         0:{key:'force',name:'战力',title:'战力'},
         1:{key:'hang',name:'战役',title:'关卡'},
         2:{key:'hourcoin',name:'生产',title:'时产'},
+        3:{key:'offline',name:'自动场',title:'积分'},
     }
     public constructor() {
         super();

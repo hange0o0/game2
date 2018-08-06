@@ -4,6 +4,7 @@
 	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
 	<e:Scroller id="scroller" width="640" x="0" top="60" bottom="100" bounces="false">
 		<e:Group>
+			<ns1:ResourceBar id="resourceBar" x="24" y="28" skinName="ResourceBarSkin" height="40"/>
 			<e:Group horizontalCenter="0" y="20" height="80">
 				<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="480" x="0" y="0"/>
 				<e:Label text="每日商店 " y="10.18" size="24" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
@@ -34,7 +35,7 @@
 				</e:layout>
 			</e:List>
 			<e:layout>
-				<e:VerticalLayout horizontalAlign="center" paddingTop="20" gap="30"/>
+				<e:VerticalLayout horizontalAlign="center" paddingTop="10" gap="30"/>
 			</e:layout>
 		</e:Group>
 	</e:Scroller>

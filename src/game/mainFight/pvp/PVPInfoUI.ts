@@ -141,7 +141,7 @@ class PVPInfoUI extends game.BaseWindow {
         this.setHtml(this.infoText1,arr.join('\n'))
 
         this.icon1.source = 'pvp_icon_1_png'
-        this.titleText1.text = PM.base[lv].title
+        this.titleText1.text = PM.base[lv].title + '竞技场'
         var s1 = PM.base[lv].score
         if(PM.base[lv+1])
         {
@@ -172,7 +172,7 @@ class PVPInfoUI extends game.BaseWindow {
         this.setHtml(this.infoText0,arr.join('\n'))
 
         this.icon0.source = 'pvp_icon_1_png'
-        this.titleText0.text = PM.base[lv].title
+        this.titleText0.text = PM.base[lv].title + '竞技场'
         var s1 = PM.base[lv].score
         if(PM.base[lv+1])
         {

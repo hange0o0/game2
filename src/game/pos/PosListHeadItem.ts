@@ -17,9 +17,6 @@ class PosListHeadItem extends game.BaseItem {
         //this.addBtnEvent(this,this.onClick)
     }
 
-    private onClick(){
-
-    }
 
     public dataChanged(){
         //var gay = this.data.indexOf('@') == 0;

@@ -93,6 +93,9 @@ class MailPKItem extends game.BaseItem {
             case PKManager.TYPE_FIGHT:
                 this.typeText.text = '远征PK';
                 break;
+            case PKManager.TYPE_PVP_OFFLINE:
+                this.typeText.text = '竞技场PK';
+                break;
         }
 
         for(var i=0;i<this.data.players.length;i++)

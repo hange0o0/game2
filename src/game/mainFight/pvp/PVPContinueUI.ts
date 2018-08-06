@@ -25,22 +25,24 @@ class PVPContinueUI extends game.BaseWindow {
     private pkBtn: eui.Button;
 
 
+    private lastSeed;
     public childrenCreated() {
         super.childrenCreated();
         this.addBtnEvent(this.pkBtn, this.onPK)
         this.addBtnEvent(this.cancelBtn, this.onClose)
 
-        this.list.itemRenderer = PosListHeadItem
+        this.list.itemRenderer = PosListHeadClickItem
         this.lvIcon.source = MyTool.getPropLevel()
     }
 
     private onPK(){
+        var self = this;
         PKBeforeUI.getInstance().show({
             title:'防御阵容对决',
             isAuto:true,
             otherList:PVPManager.getInstance().lastEnemyList,
             fun:function(id){
-                PVPManager.getInstance().pkOffLineContinue(id)
+                PVPManager.getInstance().pkOffLineContinue(id,self.lastSeed)
             }
         })
     }
@@ -50,8 +52,21 @@ class PVPContinueUI extends game.BaseWindow {
     }
 
     private renew(){
+        this.lastSeed = PKData.getInstance().baseData.seed
         var player = PKData.getInstance().getPlayer(2);
-        this.lvText.text = player.level ? 'LV.' + player.level:'???'
+        if(player.level)
+            this.lvText.text = 'LV.' + player.level;
+        else
+        {
+            var card = player.autolist.split(',')
+            var level = 0;
+            for(var i=0;i<card.length;i++)
+            {
+                level = Math.max(CM.getCardVO(card[i]).level,level)
+            }
+            this.lvText.text = 'LV.' + Math.max(level,UM.level);
+        }
+
         this.hpText.text = player.hp
 
         this.nameText.text = player.nick

@@ -16,6 +16,9 @@ class MyTool {
         var type = Math.ceil(id/4)
         return Config.localResRoot + 'prop/box_r'+type+'.png'
     }
+    public static getSkillBox(id){
+        return Config.localResRoot + 'prop/box_s'+id+'.png'
+    }
     public static getPropLevel(){
         return Config.localResRoot + 'prop/prop_level.png'
     }
@@ -97,7 +100,7 @@ class MyTool {
         //if(isRound)
         //    return MonsterVO.getObject(id).thumbRound
         //return MonsterVO.getObject(id).thumb
-        return Config.localResRoot + 'head/m_head'+id+'.jpg';
+        return Config.localResRoot + 'head/m_head'+(id || 0)+'.jpg';
     }
     public static removeMC(mc:any){
         if(mc && mc.parent)

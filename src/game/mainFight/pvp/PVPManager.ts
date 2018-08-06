@@ -13,27 +13,28 @@ class PVPManager {
 
     public lastEnemyList
 
+
     public base = {
-        1:{score:0,title:'LV1'},
-        2:{score:50,title:'LV2'},
-        3:{score:120,title:'LV3'},
-        4:{score:200,title:'LV4'},
-        5:{score:300,title:'LV5'},
-        6:{score:500,title:'LV6'},
-        7:{score:800,title:'LV7'},
-        8:{score:1200,title:'LV8'},
-        9:{score:1800,title:'LV9'},
-        10:{score:2500,title:'LV10'},
-        11:{score:3200,title:'LV11'},
-        12:{score:4000,title:'LV12'},
-        13:{score:5000,title:'LV13'},
-        14:{score:6000,title:'LV14'},
-        15:{score:7000,title:'LV15'},
-        16:{score:8000,title:'LV16'},
-        17:{score:9000,title:'LV17'},
-        18:{score:10000,title:'LV18'},
-        19:{score:12000,title:'LV19'},
-        20:{score:15000,title:'LV20'},
+        1:{score:0,title:'新兵'},
+        2:{score:100,title:'进阶'},
+        3:{score:250,title:'法师'},
+        4:{score:500,title:'狙击'},
+        5:{score:800,title:'神射'},
+        6:{score:1100,title:'龙卫'},
+        7:{score:1500,title:'星空'},
+        8:{score:2000,title:'剑盾'},
+        9:{score:2500,title:'冰雪'},
+        10:{score:3000,title:'海洋'},
+        11:{score:3500,title:'烈焰'},
+        12:{score:4000,title:'幽月'},
+        13:{score:4500,title:'火阳'},
+        14:{score:5000,title:'自然'},
+        15:{score:5500,title:'森林'},
+        16:{score:6000,title:'生命'},
+        17:{score:6500,title:'阴影'},
+        18:{score:7000,title:'圣光'},
+        19:{score:7500,title:'神皇'},
+        20:{score:8000,title:'究极'},
     }
 
     public getLevel(score){
@@ -43,6 +44,7 @@ class PVPManager {
                 return i;
         }
     }
+
 
     private renewInfo(info) {
 
@@ -110,7 +112,7 @@ class PVPManager {
                 fun();
         });
     }
-    public pkOffLineContinue(id,fun?) {
+    public pkOffLineContinue(id,seed,fun?) {
         if(PKManager.getInstance().stopPK())
             return;
         if(!UM.testEnergy(1))
@@ -118,6 +120,7 @@ class PVPManager {
         var self = this;
         var oo:any = {};
         oo.id = id;
+        oo.seed = seed;
         Net.addUser(oo);
         Net.send(GameEvent.pvp.pk_pvp_offline_continue, oo, function (data) {
             var msg = data.msg;

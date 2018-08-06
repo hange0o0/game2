@@ -19,6 +19,7 @@
 			<e:Object label="战力"/>
 			<e:Object label="战役"/>
 			<e:Object label="生产"/>
+			<e:Object label="自动场"/>
 		</e:Array>
 		</e:ArrayCollection>
 				<e:layout>

@@ -61,6 +61,11 @@ class PayManager {
         Net.addUser(oo);
         Net.send(GameEvent.pay.buy_shop,oo,(data) =>{
             var msg = data.msg;
+            if(msg.fail == 101)
+            {
+                MyWindow.Alert("购买失败，你目前的技能已满");
+                return
+            }
             if(msg.fail)
             {
                 MyWindow.Alert("购买失败，错误码：" + msg.fail);

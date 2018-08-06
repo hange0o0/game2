@@ -9,10 +9,11 @@ class ShopUI extends game.BaseUI {
 
     private topUI: TopUI;
     private scroller: eui.Scroller;
+    private resourceBar: ResourceBar;
     private cdText: eui.Label;
     private list: eui.List;
-    private diamondList: eui.List;
     private diamondTitle: eui.Group;
+    private diamondList: eui.List;
     private bottomUI: BottomUI;
 
 
@@ -90,9 +91,12 @@ class ShopUI extends game.BaseUI {
             })
         }
 
+        this.resourceBar.onTimer()
+
     }
 
     public renew(){
+        this.resourceBar.data = {showAdd:false}
         this.list.dataProvider = new eui.ArrayCollection(PayManager.getInstance().shopData)
         this.onTimer();
     }

@@ -85,7 +85,7 @@ class BasePosUI extends game.BaseUI {
         this.tabList.itemRenderer = BasePosTabItem
         this.tabList.dataProvider = new eui.ArrayCollection([0,1,2,3,4])
 
-        this.infoList.itemRenderer = PosListHeadItem;
+        this.infoList.itemRenderer = PosListHeadClickItem;
 
         this.addBtnEvent(this.deleteBtn,this.onDelete)
         this.addBtnEvent(this.pkBtn,this.onPK)

@@ -124,7 +124,7 @@ class PKVideoCon extends game.BaseContainer {
         else
             str = ('not die but not find:' + id + '|' + PKData.getInstance().monsterID)
         alert(str);
-        throw new Error(str+'#'+PKManager.getInstance().pkType+'#'+PKData.getInstance().isReplay+'#'+PKData.getInstance().actionTime+'#'+JSON.stringify(PKData.getInstance().actionRecord));
+        sendClientError(str+'#'+PKManager.getInstance().pkType+'#'+PKData.getInstance().isReplay+'#'+PKData.getInstance().actionTime+'#'+JSON.stringify(PKData.getInstance().actionRecord));
         return null;
     }
 
@@ -171,7 +171,8 @@ class PKVideoCon extends game.BaseContainer {
                 break;
             case PKConfig.VIDEO_MONSTER_MOVE:
                 item = this.getItemByID(data.id);
-                item.run(data.addSpeed);
+                if(item)
+                    item.run(data.addSpeed);
                 break;
             case PKConfig.VIDEO_MONSTER_ATK:
                 item = this.getItemByID(data.id);

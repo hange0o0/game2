@@ -90,6 +90,7 @@
     "src/game/pkRelate/PKCardInfoItemSkin.exml",
     "src/game/pkRelate/PKSettingUISkin.exml",
     "src/game/pkRelate/before/PKBeforeUISkin.exml",
+    "src/game/pkRelate/history/PKHistoryUISkin.exml",
     "src/game/pkRelate/result/PKAwardItemSkin.exml",
     "src/game/pkRelate/result/PKFailUISkin.exml",
     "src/game/pkRelate/result/PKWinUISkin.exml",

@@ -27,7 +27,6 @@
 	</e:Group>
 	<e:Image source="close_btn2_png" horizontalCenter="0" bottom="-40"/>
 	<e:Image source="line2_png" y="67" left="3" right="3" fillMode="repeat"/>
-	<e:Image id="helpBtn" source="icon_help_png" y="10" right="10"/>
 	<e:Group horizontalCenter="0" includeIn="sell" y="80">
 		<e:Image source="black_bg_png" y="0" height="40" scale9Grid="42,7,8,42" left="0" right="0"/>
 		<e:Group left="50" right="50" verticalCenter="0">

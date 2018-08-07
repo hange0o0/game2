@@ -55,7 +55,7 @@ class PopUpManager {
 //            display.x = (ww - display.width) / 2;
 //            display.y = (hh - display.height) / 2;
             if(!haveShow)
-                display.visible = false
+                display.alpha = 0
             display.addEventListener(egret.Event.ENTER_FRAME,onEnterFrame,this);
         }
         

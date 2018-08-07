@@ -51,6 +51,8 @@ class PKCode {
 
             this.actionFinish();
 
+            if(PD.isReplay && PD.actionTime >= PD.replayEndTime)
+                PD.isGameOver = true;
 
             if(PD.isGameOver)
                 return true

@@ -99,12 +99,14 @@ class FightInfoUI extends game.BaseWindow {
 
     public changeCard(){
         var FM = FightManager.getInstance();
+        var history = SharedObjectManager.getInstance().getMyValue('fight_video') || {}
         PKBeforeUI.getInstance().show({
             stopAdd:true,
             title:'调整阵容',
             noTab:true,
             stopTest:true,
-            otherList:SharedObjectManager.getInstance().getMyValue('fight_video'),
+            otherList:history.otherList,
+            history:history.history,
             list:FM.card.join(','),
             fun:function(data){
                 FM.changePos(data,()=>{

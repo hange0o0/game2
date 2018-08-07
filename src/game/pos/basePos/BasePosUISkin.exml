@@ -96,6 +96,10 @@
 			</e:layout>
 		</e:List>
 		<e:Image id="infoCloseBtn" source="icon_error_png" y="-28" right="0"/>
+		<e:Group id="videoBtn" x="0" y="-30">
+			<e:Image source="btn4_png" scale9Grid="20,21,9,5" x="0" y="0" width="60" height="60"/>
+			<e:Image source="replay_mc_png" verticalCenter="0" horizontalCenter="0" scaleX="1.2" scaleY="1.2"/>
+		</e:Group>
 	</e:Group>
 
 </e:Skin>

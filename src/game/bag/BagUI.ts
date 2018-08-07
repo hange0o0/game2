@@ -11,7 +11,7 @@ class BagUI extends game.BaseWindow {
     private scroller: eui.Scroller;
     private list: eui.List;
     private emptyGroup: eui.Group;
-    private helpBtn: eui.Image;
+    //private helpBtn: eui.Image;
     private cdText: eui.Label;
 
 
@@ -38,9 +38,9 @@ class BagUI extends game.BaseWindow {
         this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
         this.tab.selectedIndex = 0;
 
-        this.addBtnEvent(this.helpBtn,()=>{
-            HelpManager.getInstance().showHelp('prop');
-        })
+        //this.addBtnEvent(this.helpBtn,()=>{
+        //    HelpManager.getInstance().showHelp('prop');
+        //})
 
         //this.list.layout['requestedColumnCount'] = 1
         //this.list.layout['paddingLeft'] = 15

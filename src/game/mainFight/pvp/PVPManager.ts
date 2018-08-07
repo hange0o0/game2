@@ -12,6 +12,9 @@ class PVPManager {
     public offline
 
     public lastEnemyList
+    public history
+    public pvpEndTime = 1535904000;
+    public pvpCD = 24*3600*28;
 
 
     public base = {
@@ -45,6 +48,13 @@ class PVPManager {
         }
     }
 
+    public getCurrentRound(){
+        return Math.ceil(Math.max(0,TM.now() - this.pvpEndTime) /this.pvpCD)  + 1
+    }
+
+    public getCurrentEnd(){
+        return this.pvpEndTime + (this.getCurrentRound()-1)*this.pvpCD
+    }
 
     private renewInfo(info) {
 
@@ -190,6 +200,7 @@ class PVPManager {
             this.offline['maxscore'] = Math.max(this.offline['maxscore']||0,msg.score)
             this.task = msg.task;
             this.lastEnemyList = null;
+            this.history = null;
             EM.dispatchEventWith(GameEvent.client.pvp_change)
             if (fun)
                 fun();

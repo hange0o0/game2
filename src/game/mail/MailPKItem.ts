@@ -69,7 +69,8 @@ class MailPKItem extends game.BaseItem {
         //}
 
         this.scoreText.text = this.data.score
-        this.timeText.text = DateUtil.getStringBySeconds(Math.max(TM.now() - this.data.pktime,1),false,2) + '前'
+
+        this.timeText.text = DateUtil.getStringBySeconds(Math.max(TM.now() - this.data.pktime,1),false,2) + '前 (时长：'+DateUtil.getStringBySecond(this.data.actionTime/1000).substr(-5)+')'
         switch(this.data.result)
         {
             case 1:

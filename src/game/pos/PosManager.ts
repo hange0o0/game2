@@ -99,6 +99,7 @@ class PosManager {
         var posData = self.getDataByID(type,id);
         oo.type = type;
         oo.id = id;
+        oo.lv = TecManager.getInstance().getLevel(4);
         if(list && posData.list != list)
             oo.list = list;
         if(!oo.list)

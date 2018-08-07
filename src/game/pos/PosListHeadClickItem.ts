@@ -8,6 +8,8 @@ class PosListHeadClickItem extends PosListHeadItem {
     }
 
     private onClick() {
-        CardInfoUI.getInstance().show(CM.getCardVO(this.data));
+        var vo = CM.getCardVO(this.data);
+        if(vo)
+            CardInfoUI.getInstance().show(vo);
     }
 }

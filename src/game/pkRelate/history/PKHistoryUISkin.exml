@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="PKHistoryUISkin" width="600" height="800" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image top="0" bottom="0" source="bg14_png" scale9Grid="32,29,8,10" left="0" right="0"/>
+	<e:Group horizontalCenter="0" y="-40">
+		<e:Image source="title_bg3_png" scale9Grid="83,15,285,45" x="0" y="0" width="560"/>
+		<e:Label text="对战记录" y="23" size="30" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
+	</e:Group>
+	<e:Scroller id="scroller" width="620" anchorOffsetX="0" scaleX="0.9" scaleY="0.9" horizontalCenter="0" top="80" bottom="20">
+		<e:Group>
+			<e:List id="list" width="500" anchorOffsetY="0" horizontalCenter="0" top="180" bottom="150" x="25.882352941176464" y="88.23529411764707">
+				<e:layout>
+					<e:VerticalLayout paddingTop="10"/>
+				</e:layout>
+			</e:List>
+		</e:Group>
+	</e:Scroller>
+	<e:Image id="closeBtn" source="close_btn2_png" bottom="-45" horizontalCenter="0"/>
+</e:Skin>

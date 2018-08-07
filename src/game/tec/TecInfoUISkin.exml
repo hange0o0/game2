@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="TecInfoUISkin" width="540" height="640" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+<e:Skin class="TecInfoUISkin" width="540" height="620" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
 	<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
-	<e:Group y="75" horizontalCenter="0" width="120">
+	<e:Group y="40" horizontalCenter="0" width="120">
 		<e:Image source="title_bg1_png" y="0" scale9Grid="29,5,13,30" left="0" right="0"/>
 		<e:Label id="levelText" text="LV.20" size="20" textColor="0xFFFFFF" left="30" right="30" verticalCenter="0" textAlign="center"/>
 	</e:Group>
-	<e:Group x="25" y="130">
+	<e:Group x="25" y="95.15">
 		<e:Group x="0" y="0">
 			<e:Image width="130" height="130" x="0" y="0" source="bg5_png" scale9Grid="9,9,12,11"/>
 			<e:Image id="mc" width="118" height="118" x="6" y="6" source="bg5_png"/>
 		</e:Group>
 	</e:Group>
-	<e:Group y="130" height="130" left="160" right="25">
+	<e:Group y="95.15" height="130" left="160" right="25">
 		<e:Image source="bg1_png" scale9Grid="8,8,14,14" x="0" y="0" width="100%" height="100%"/>
 		<e:Label id="desText" text="LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" size="22" left="10" right="10" top="10" bottom="10" lineSpacing="5"/>
 		<e:Group id="upGroup" x="10" bottom="8" height="35">
@@ -36,12 +36,12 @@
 			</e:layout>
 		</e:Group>
 	</e:Group>
-	<e:Group horizontalCenter="0" y="20">
-		<e:Image source="title_bg3_png" scale9Grid="83,9,37,61" width="360" x="0" y="0"/>
-		<e:Label id="nameText" text="设置" y="10.18" size="24" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
+	<e:Group horizontalCenter="0" y="-40">
+		<e:Image source="title_bg3_png" scale9Grid="83,15,285,45" width="500" x="0" y="0"/>
+		<e:Label id="nameText" text="设置" y="23" size="30" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
 	</e:Group>
 	<e:Image id="helpBtn" source="icon_help_png" y="10" right="10" scaleX="0.8" scaleY="0.8"/>
-	<e:Image y="267" left="25" right="25" source="line2_png" fillMode="repeat"/>
+	<e:Image y="232.15" left="25" right="25" source="line2_png" fillMode="repeat"/>
 	<e:Group id="btnGroup" horizontalCenter="0" bottom="20">
 		<e:Button id="cancelBtn" label="返回" width="130" x="0" y="0" skinName="Btn2Skin"/>
 		<e:Button id="okBtn" label="升级" width="130" skinName="Btn1Skin" x="0" y="0"/>
@@ -49,12 +49,12 @@
 		<e:HorizontalLayout gap="30"/>
 		</e:layout>
 	</e:Group>
-	<e:List id="list" y="200" left="25" right="25">
+	<e:List id="list" y="165.15" left="25" right="25">
 		<e:layout>
 		<e:VerticalLayout paddingLeft="0" paddingTop="80"/>
 		</e:layout>
 	</e:List>
-	<e:Image id="leftBtn" source="arrow1_png" y="558" scaleX="-1" left="20"/>
-	<e:Image id="rightBtn" source="arrow1_png" y="558" right="20"/>
+	<e:Image id="leftBtn" source="arrow1_png" y="540" scaleX="-1" left="20"/>
+	<e:Image id="rightBtn" source="arrow1_png" y="540" right="20"/>
 
 </e:Skin>

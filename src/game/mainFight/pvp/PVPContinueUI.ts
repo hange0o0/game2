@@ -23,16 +23,30 @@ class PVPContinueUI extends game.BaseWindow {
     private headMC: HeadMC;
     private cancelBtn: eui.Button;
     private pkBtn: eui.Button;
+    private videoBtn: eui.Group;
+
 
 
     private lastSeed;
+    private player;
     public childrenCreated() {
         super.childrenCreated();
         this.addBtnEvent(this.pkBtn, this.onPK)
+        this.addBtnEvent(this.headMC, this.onHead)
         this.addBtnEvent(this.cancelBtn, this.onClose)
+        this.addBtnEvent(this.videoBtn,this.onVideo)
 
         this.list.itemRenderer = PosListHeadClickItem
         this.lvIcon.source = MyTool.getPropLevel()
+    }
+
+    private onVideo(){
+        PKHistoryUI.getInstance().show(PVPManager.getInstance().history);
+    }
+
+    private onHead(){
+        if(this.player.gameid != 'npc')
+            OtherInfoUI.getInstance().show(this.player.gameid)
     }
 
     private onPK(){
@@ -41,6 +55,7 @@ class PVPContinueUI extends game.BaseWindow {
             title:'防御阵容对决',
             isAuto:true,
             otherList:PVPManager.getInstance().lastEnemyList,
+            history:PVPManager.getInstance().history,
             fun:function(id){
                 PVPManager.getInstance().pkOffLineContinue(id,self.lastSeed)
             }
@@ -53,7 +68,7 @@ class PVPContinueUI extends game.BaseWindow {
 
     private renew(){
         this.lastSeed = PKData.getInstance().baseData.seed
-        var player = PKData.getInstance().getPlayer(2);
+        var player = this.player = PKData.getInstance().getPlayer(2);
         if(player.level)
             this.lvText.text = 'LV.' + player.level;
         else
@@ -76,11 +91,15 @@ class PVPContinueUI extends game.BaseWindow {
 
         PVPManager.getInstance().lastEnemyList = PKManager.getInstance().resetAutoList(player,PVPManager.getInstance().lastEnemyList)
         this.list.dataProvider = new eui.ArrayCollection(PVPManager.getInstance().lastEnemyList.split(','));
-        console.log(PVPManager.getInstance().lastEnemyList)
+
+        if(!PVPManager.getInstance().history)
+            PVPManager.getInstance().history = [];
+        PVPManager.getInstance().history.unshift(PKManager.getInstance().recordList[0])
     }
 
     private onClose(){
         PVPManager.getInstance().lastEnemyList = null;
+        PVPManager.getInstance().history = null;
         this.hide();
     }
 }

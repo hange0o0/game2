@@ -76,6 +76,11 @@ class FriendSearchUI extends game.BaseWindow {
                 OtherInfoUI.getInstance().show(UM.gameid);
                 return
             }
+            if((parseInt(txt) || '')+'' != txt)
+            {
+                MyWindow.Alert('输入内容非法，ID只能由数字组成')
+                return
+            }
             IM.getInfoByUID(txt,function(){
                 OtherInfoUI.getInstance().showUID(txt);
                 self.hide();

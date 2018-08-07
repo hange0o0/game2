@@ -316,6 +316,7 @@ var game_file_list = [
 	"bin-debug/game/pkRelate/PKCardInfoUI.js",
 	"bin-debug/game/pkRelate/PKSettingUI.js",
 	"bin-debug/game/pkRelate/before/PKBeforeUI.js",
+	"bin-debug/game/pkRelate/history/PKHistoryUI.js",
 	"bin-debug/game/pkRelate/result/PKAwardItem.js",
 	"bin-debug/game/pkRelate/result/PKFailUI.js",
 	"bin-debug/game/pkRelate/result/PKWinUI.js",

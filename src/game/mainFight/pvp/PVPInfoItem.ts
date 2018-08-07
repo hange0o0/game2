@@ -21,7 +21,10 @@ class PVPInfoItem extends game.BaseItem {
 
     private onClick(){
         if(this.data.current < this.data.num)
+        {
+            MyWindow.ShowTips(this.data.box + '级资源宝箱，任务达成后可领取')
             return;
+        }
         PVPManager.getInstance().getAward(this.data.index);
     }
 

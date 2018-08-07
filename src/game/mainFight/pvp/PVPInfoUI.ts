@@ -35,11 +35,13 @@ class PVPInfoUI extends game.BaseWindow {
     private helpBtn: eui.Image;
     private awardList: eui.List;
     private cdText: eui.Label;
+    private cdTitle: eui.Label;
 
 
 
 
     private getNextData = false
+    private openTime
 
     public childrenCreated() {
         super.childrenCreated();
@@ -88,6 +90,7 @@ class PVPInfoUI extends game.BaseWindow {
     }
 
     public onShow(){
+        this.openTime = TM.now();
         this.expGroup1.visible = false
         this.expGroup0.visible = false
         this.getNextData = false
@@ -103,6 +106,7 @@ class PVPInfoUI extends game.BaseWindow {
         {
             var cd = DateUtil.getNextDateTimeByHours(0) - TM.now()
             this.cdText.text = DateUtil.getStringBySecond(cd);
+            this.cdTitle.text = '任务重置时间:'
         }
         else if(!this.getNextData)
         {
@@ -111,6 +115,18 @@ class PVPInfoUI extends game.BaseWindow {
                 this.renew()
                 this.getNextData = false
             })
+        }
+
+        if(TM.now() - this.openTime >=10)
+        {
+            var cd = PM.getCurrentEnd() - TM.now()
+            if(cd < 24*3600)
+                this.cdText.text = DateUtil.getStringBySecond(cd);
+            else
+                this.cdText.text = DateUtil.getStringBySeconds(cd,false,2);
+            this.cdTitle.text = '赛季结算时间:'
+            if(TM.now() - this.openTime >=20)
+                this.openTime = TM.now();
         }
     }
 

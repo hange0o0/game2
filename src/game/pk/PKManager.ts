@@ -233,7 +233,12 @@ class PKManager {
             case PKManager.TYPE_FIGHT:
                 FightManager.getInstance().pkFail(fun);
                 var player = PKData.getInstance().getPlayer(2);
-                SharedObjectManager.getInstance().setMyValue('fight_video',this.resetAutoList(PKData.getInstance().getPlayer(2),SharedObjectManager.getInstance().getMyValue('fight_video')));
+                var history = SharedObjectManager.getInstance().getMyValue('fight_video') || {}
+                history.otherList = this.resetAutoList(PKData.getInstance().getPlayer(2),history.otherList)
+                if(!history.history)
+                    history.history = [];
+                history.history.unshift(this.recordList[0]);
+                SharedObjectManager.getInstance().setMyValue('fight_video',history);
                 break;
             case PKManager.TYPE_PVP_OFFLINE:
                 PVPManager.getInstance().pkOfflineFail(fun);
@@ -251,8 +256,12 @@ class PKManager {
                     lastHistory.gift = 0;
                     lastHistory.gifttimes = 0;
                     lastHistory.otherList = ''
+                    lastHistory.history = [];
                 }
                 lastHistory.otherList = this.resetAutoList(PKData.getInstance().getPlayer(2),lastHistory.otherList)
+                if(!lastHistory.history)
+                    lastHistory.history = [];
+                lastHistory.history.unshift(this.recordList[0]);
                 SharedObjectManager.getInstance().setMyValue('hang_video',lastHistory)
                 fun && fun();
                 break;
@@ -372,6 +381,7 @@ class PKManager {
         var PD = PKData.getInstance()
         PD.init(data);
         PD.isReplay = true
+        PD.replayEndTime = data.actionTime;
         this.pkResult = null;
         this.pkType = data.type;
         PKingUI.getInstance().show();

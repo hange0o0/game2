@@ -10,6 +10,7 @@ class PKData extends egret.EventDispatcher{
     public quick = false//快速算出结果
     public baseData//原始PK数据
     public isReplay;
+    public replayEndTime;
     public isAuto;
     public sendCard = false;//需要向服务器发消息
 

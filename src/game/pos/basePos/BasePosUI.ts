@@ -31,6 +31,7 @@ class BasePosUI extends game.BaseUI {
     private infoCloseBtn: eui.Image;
     private infoBtn: eui.Group;
     private renameBtn: eui.Group;
+    private videoBtn: eui.Group;
 
 
 
@@ -96,6 +97,7 @@ class BasePosUI extends game.BaseUI {
         this.addBtnEvent(this.renameBtn,this.onRename)
         this.addBtnEvent(this.infoBtn,this.onInfo)
         this.addBtnEvent(this.infoCloseBtn,this.onInfoClose)
+        this.addBtnEvent(this.videoBtn,this.onVideo)
 
         var tw = this.arrowTW = egret.Tween.get(this.arrowMC,{loop:true});
         tw.to({scaleX:1.1,scaleY:0.8},200).to({scaleX:1,scaleY:1.1,y:this.arrowMC.y -10},200).
@@ -113,12 +115,17 @@ class BasePosUI extends game.BaseUI {
         this.arrowGroup.visible = false;
     }
 
+    private onVideo(){
+        PKHistoryUI.getInstance().show(this.pkData.history);
+    }
+
     private onInfo(){
         this.infoGroup.visible = true;
         this.infoList.dataProvider = new eui.ArrayCollection(this.pkData.otherList.split(','))
         this.infoList.validateNow();
         this.infoGroup.bottom = -this.infoGroup.height;
         egret.Tween.get(this.infoGroup).to({bottom:0},200);
+        this.videoBtn.visible = this.pkData.history && this.pkData.history.length > 0
     }
     private onInfoClose(){
         egret.Tween.get(this.infoGroup).to({bottom:-this.infoGroup.height},200).call(()=>{
@@ -569,6 +576,7 @@ class BasePosUI extends game.BaseUI {
     *   stopAdd
     *   stopRemoveTips
     *   stopTest
+    *   history//可看的录像
     *   otherList//其它人的进功阵容
     *  }
     *  sp:{
@@ -583,6 +591,17 @@ class BasePosUI extends game.BaseUI {
         this.index = type == 'atk'?(SharedObjectManager.getInstance().getMyValue('pk_choose') || 0):(SharedObjectManager.getInstance().getMyValue('pk_choose_def') || 0);
         if('index' in this.sp)
             this.index = this.sp.index;
+        if(this.pkData && this.pkData.history)//移除过期的
+        {
+             for(var i=0;i<this.pkData.history.length;i++)
+             {
+                  if(this.pkData.history[i].version != Config.pk_version)
+                  {
+                      this.pkData.history.splice(i,1);
+                      i--;
+                  }
+             }
+        }
         super.show()
     }
 

@@ -16,6 +16,7 @@ class GameEvent {
 
         fight_change:'fight_change',
         pvp_change:'pvp_change',
+        PVP_END:'PVP_END',
 
 
         pk_begin:'pk_begin',
@@ -71,6 +72,7 @@ class GameEvent {
         pk_pvp_offline_fail:'pvp.pk_pvp_offline_fail',
         pk_pvp_offline_win:'pvp.pk_pvp_offline_win',
         pvp_award:'pvp.pvp_award',
+        pvp_round_award:'pvp.pvp_round_award',
 
     }
 

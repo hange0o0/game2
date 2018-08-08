@@ -62,8 +62,15 @@ class PVPContinueUI extends game.BaseWindow {
         })
     }
 
+    public show(){
+        if(PVPManager.getInstance().nearEnd())
+            return
+        super.show();
+    }
+
     public onShow(){
          this.renew();
+        this.addPanelOpenEvent(GameEvent.client.PVP_END,this.hide)
     }
 
     private renew(){

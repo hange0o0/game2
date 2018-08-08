@@ -225,7 +225,7 @@ class FightInfoUI extends game.BaseWindow {
         }
     }
 
-    private renew(){
+    public renew(){
         this.renewInfo();
         this.onTimer();
         this.list.dataProvider = new eui.ArrayCollection(FightManager.getInstance().shopData)

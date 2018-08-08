@@ -117,7 +117,7 @@ class FightManager {
                 MyWindow.Alert("购买失败，错误码：" + msg.fail);
                 this.shopTime = 0;
                 this.getInfo(()=>{
-                    ShopUI.getInstance().renew();
+                    FightInfoUI.getInstance().renew();
                 })
                 return;
             }

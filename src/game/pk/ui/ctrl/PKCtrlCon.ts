@@ -447,7 +447,7 @@ class PKCtrlCon extends game.BaseContainer {
             mc.visible = false;
         }
 
-        if(PD.isReplay)
+        if(PD.isReplay && PKManager.getInstance().pkType == PKManager.TYPE_SLAVE)
         {
             this.tipsMC.visible = false;
             this.replayGroup.visible = true

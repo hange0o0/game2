@@ -24,7 +24,7 @@ class BagSellItem extends game.BaseItem {
             MyWindow.Alert('【' + pvo.propname + '】数量不足\n需求数量：' + this.data.num+ '\n当前拥有：' + propNum)
             return;
         }
-        var coin = UM.getCoin
+        var coin = UM.getCoin()
         if(this.data.type == 2 && coin < (this.data.diamond))
         {
             MyWindow.Alert('金币数量不足\n需求数量：' + this.data.diamond+ '\n当前拥有：' + coin)

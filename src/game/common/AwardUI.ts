@@ -15,6 +15,9 @@ class AwardUI extends game.BaseWindow {
 
 
     private dataIn;
+    private title;
+    private des;
+    private fun;
     public constructor() {
         super();
         this.skinName = "AwardUISkin";
@@ -25,13 +28,19 @@ class AwardUI extends game.BaseWindow {
         this.addBtnEvent(this.okBtn,this.hide)
     }
 
-    public show(v?){
+    public show(v?,title?,des?,fun?){
+        if(!v)
+            return;
         this.dataIn = v;
+        this.title = title;
+        this.des = des;
+        this.fun = fun;
         super.show()
     }
 
     public hide() {
         super.hide();
+        this.fun && this.fun();
     }
 
     public onShow(){
@@ -40,7 +49,17 @@ class AwardUI extends game.BaseWindow {
     }
 
     public renew(){
+        this.titleText.text = this.title || '恭喜获得'
         var arr = MyTool.getAwardArr(this.dataIn);
         this.list.dataProvider = new eui.ArrayCollection(arr);
+        if(this.des)
+        {
+            this.currentState = 'des'
+            this.desText.text = this.des;
+        }
+        else
+        {
+            this.currentState = 'normal'
+        }
     }
 }

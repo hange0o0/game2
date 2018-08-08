@@ -145,14 +145,14 @@ class CardInfoUI extends game.BaseWindow {
         {
             if(this.sp.diamondShop)
             {
-                PayManager.getInstance().buy_shop(this.sp.id,()=>{
+                PayManager.getInstance().buy_shop(this.sp.key,()=>{
                     MyWindow.ShowTips('购买成功！')
                     ShopUI.getInstance().renewList()
                     this.hide();
                 })
                 return;
             }
-             FightManager.getInstance().buy_shop(this.sp.id,()=>{
+             FightManager.getInstance().buy_shop(this.sp.key,()=>{
                  this.sp = {};
                  this.renew();
              })

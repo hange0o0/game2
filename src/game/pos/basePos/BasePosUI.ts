@@ -57,7 +57,7 @@ class BasePosUI extends game.BaseUI {
     private insertPos = 0;
 
     //private swapData;
-    private pkData;
+    public pkData;
     private sp;
     private arrowTW;
     private changeTW;
@@ -638,6 +638,8 @@ class BasePosUI extends game.BaseUI {
                 this.deleteBtnIndex --;
                 MyTool.removeMC(this.renameBtn)
             }
+            if(this.pkData.isPVP)
+                this.addPanelOpenEvent(GameEvent.client.PVP_END,this.hide)
         }
         else
         {
@@ -651,6 +653,8 @@ class BasePosUI extends game.BaseUI {
         {
             GuideManager.getInstance().showGuide()
         }
+
+
     }
 
     private renewTabList(){

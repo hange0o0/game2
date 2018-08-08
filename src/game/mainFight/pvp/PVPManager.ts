@@ -10,6 +10,7 @@ class PVPManager {
     public task
     public online
     public offline
+    public serverRound//服务器的论次
 
     public lastEnemyList
     public history
@@ -55,13 +56,24 @@ class PVPManager {
     public getCurrentEnd(){
         return this.pvpEndTime + (this.getCurrentRound()-1)*this.pvpCD
     }
+    //将要结臬
+    public nearEnd(){
+        if(this.getCurrentEnd() - TM.now() < 10*60)
+        {
+            if(!PKingUI.getInstance().stage)
+                MyWindow.Alert("竞技场即将结算，请稍后")
+            EM.dispatchEventWith(GameEvent.client.PVP_END)
+            return true;
+        }
+        return false
+    }
 
     private renewInfo(info) {
 
     }
 
     public getPVP(fun?) {
-        if(this.getTime && DateUtil.isSameDay(this.getTime))
+        if(this.getTime && DateUtil.isSameDay(this.getTime) && this.serverRound == this.getCurrentRound())
         {
             if(fun)
                 fun()
@@ -79,6 +91,7 @@ class PVPManager {
             this.offline = msg.offline || {};
             this.online = msg.online || {};
             this.task = msg.task;
+            this.serverRound = msg.round;
             this.getTime = TM.now();
             fun && fun();
         });
@@ -223,6 +236,35 @@ class PVPManager {
             AwardUI.getInstance().show(msg.award)
             if (fun)
                 fun();
+        });
+    }
+
+    public getRoundAward(type,fun?) {
+        var oo:any = {};
+        oo.type = type
+        Net.addUser(oo)
+        Net.send(GameEvent.pvp.pvp_round_award, oo, (data)=> {
+            var msg = data.msg;
+            if(msg.fail)
+            {
+                MyWindow.Alert("领奖错误，错误码：" + msg.fail);
+                return;
+            }
+            if(type == 'offline')
+            {
+                var lv = this.getLevel(this.offline.award);
+                var str = '自动场最终段位为：' + this.base[lv].title+'竞技场\n你获得了以下的奖励：'
+                this.offline.award=0
+            }
+            else if(type == 'online')
+            {
+                var lv = this.getLevel(this.online.award);
+                var str = '手动场最终段位为：' + this.base[lv].title+'竞技场\n你获得了以下的奖励：'
+                this.online.award=0
+            }
+
+            AwardUI.getInstance().show(msg.award,'赛季结束',str,fun)
+            SoundManager.getInstance().playEffect(SoundConfig.pk_win);
         });
     }
 

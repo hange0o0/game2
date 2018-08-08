@@ -15,8 +15,8 @@ class Config {
     public static serverID: number = 1;
     //public static host: string = '172.17.196.195:90';
     public static user_version: number = 1;
-    public static version: number = 5;
-    public static displayVersion = '1.2.3';   //只是客户端变，服务器没变
+    public static version: number = 6;
+    public static displayVersion = '1.2.4';   //只是客户端变，服务器没变
     public static pk_version: number = 2;
     public static cdn: string = "";
     public static localResRoot:string = "resource/net_resource/";

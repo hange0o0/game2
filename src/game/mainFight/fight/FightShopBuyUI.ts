@@ -40,7 +40,7 @@ class FightShopBuyUI extends game.BaseWindow {
             return;
         }
         FightManager.getInstance().buy_shop(this.dataIn.key,()=>{
-            MyWindow.ShowTips('购买成功！')
+            //MyWindow.ShowTips('购买成功！')
             ShopUI.getInstance().renewList()
         })
 

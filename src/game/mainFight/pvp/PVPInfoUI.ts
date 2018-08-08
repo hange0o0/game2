@@ -61,6 +61,7 @@ class PVPInfoUI extends game.BaseWindow {
         PKBeforeUI.getInstance().show({
             title:'防御阵容对决',
             isAuto:true,
+            isPVP:true,
             fun:function(id){
                 PVPManager.getInstance().pkOffLine(id)
             }
@@ -84,6 +85,8 @@ class PVPInfoUI extends game.BaseWindow {
     }
 
     public show(){
+        if(PVPManager.getInstance().nearEnd())
+            return
         PVPManager.getInstance().getPVP(()=>{
             super.show()
         })
@@ -95,13 +98,35 @@ class PVPInfoUI extends game.BaseWindow {
         this.expGroup0.visible = false
         this.getNextData = false
         this.renew();
+        this.testRoundAward();
 
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
         this.addPanelOpenEvent(GameEvent.client.pvp_change,this.renew)
     }
 
+    private testRoundAward(){
+        var PM = PVPManager.getInstance();
+        if(PM.offline.award)
+        {
+            PM.getRoundAward('offline',()=>{
+                this.testRoundAward()
+            })
+        }
+        else if(PM.online.award)
+        {
+            PM.getRoundAward('online',()=>{
+                this.testRoundAward()
+            })
+        }
+    }
+
     private onTimer(){
         var PM = PVPManager.getInstance();
+        if(PM.nearEnd())
+        {
+            this.hide();
+            return
+        }
         if(DateUtil.isSameDay(PM.getTime))
         {
             var cd = DateUtil.getNextDateTimeByHours(0) - TM.now()

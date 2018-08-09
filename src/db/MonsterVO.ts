@@ -43,6 +43,7 @@ class MonsterVO {
     public sv4: number;  //no use
 
 
+    public temp = 0
     public constructor(data?: any) {
         if(data)
             this.fill(data);
@@ -118,10 +119,29 @@ class MonsterVO {
         }
     }
 
-    public getImage(gay){
+    public getHeroSkill(){
+        var arr = []
+        for(var i=1;i<=5;i++)
+        {
+            var vo = HeroSkillVO.getObject(this.id+'_' + i);
+            arr.push(vo);
+        }
+    }
+
+    public isHero(){
+        return this.level == 1000;
+    }
+
+    public getImage(gay?){
+        if(this.isHero())
+            return Config.localResRoot + 'hero_head/'+this.id+'.png';
         if(gay)
             return Config.localResRoot + 'card_gay/card_'+this.id+'.jpg';
         return Config.localResRoot + 'card/card_'+this.id+'.jpg';
+    }
+
+    public getHeroBG(star){
+        return 'hero_bg'+star+'_png'
     }
 
     public getBG(){

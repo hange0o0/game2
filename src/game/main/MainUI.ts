@@ -103,9 +103,9 @@ class MainUI extends game.BaseUI {
     public onBottomSelect(index,stopMV?){
        if(index != this.currentIndex)
        {
-           if(index == 0)
+           if(index == 0 && !HeroManager.getInstance().isHeroOpen())
            {
-               MyWindow.Alert('英雄系统即将开放')
+               MyWindow.Alert('英雄系统战役'+Config.heroLevel+'开放')
                return;
            }
            if(index == 1 && ObjectUtil.objLength(PosManager.getInstance().defList) == 0)//奴隶
@@ -194,7 +194,7 @@ class MainUI extends game.BaseUI {
         //先初始化，加快切换速度
         MainFightUI.getInstance()
         SlaveUI.getInstance()
-        //BagUI.getInstance()
+        HeroUI.getInstance()
         CardUI.getInstance()
         TecUI.getInstance()
 
@@ -307,9 +307,9 @@ class MainUI extends game.BaseUI {
             case 1:
                 this.currentUI = SlaveUI.getInstance();
                 break;
-            //case 0:
-            //    this.currentUI = BagUI.getInstance();
-            //    break;
+            case 0:
+                this.currentUI = HeroUI.getInstance();
+                break;
             case 2:
                 this.currentUI = MainFightUI.getInstance();
                 break;

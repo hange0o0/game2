@@ -33,6 +33,11 @@ class BasePosUI extends game.BaseUI {
     private renameBtn: eui.Group;
     private videoBtn: eui.Group;
 
+    private listCon: eui.Group;
+    private heroList: eui.List;
+
+
+
 
 
 

@@ -50,4 +50,5 @@
 			</e:Group>
 		</e:Group>
 	</e:Group>
+	<e:Image id="heroMC" source="pk_hero_jpg" y="276.09" horizontalCenter="0"/>
 </e:Skin>

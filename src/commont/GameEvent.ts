@@ -13,6 +13,7 @@ class GameEvent {
         hang_change:'hang_change',
         card_change:'card_change',
         head_change:'head_change',
+        hero_change:'hero_change',
 
         fight_change:'fight_change',
         pvp_change:'pvp_change',

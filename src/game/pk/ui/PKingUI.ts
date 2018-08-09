@@ -31,6 +31,7 @@ class PKingUI extends game.BaseUI {
 
     private hurt1: eui.Image;
     private hurt2: eui.Image;
+    private heroMC: eui.Image;
 
 
 
@@ -229,8 +230,10 @@ class PKingUI extends game.BaseUI {
 
         this.hurt1.visible = false
         this.hurt2.visible = false
+        this.heroMC.visible = false
         egret.Tween.removeTweens(this.hurt1)
         egret.Tween.removeTweens(this.hurt2)
+        egret.Tween.removeTweens(this.heroMC)
 
         this.showMV();
 

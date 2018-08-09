@@ -17,6 +17,7 @@ class CacheManager{
         this.register(PropVO);
         this.register(HangVO);
         this.register(TecVO);
+        this.register(HeroSkillVO);
         //this.register(MonsterSkillVO);
         //this.register(TaskVO);
         //this.register(LeaderSkillVO);

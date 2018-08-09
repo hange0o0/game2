@@ -1,9 +1,17 @@
 class PKTopItem extends game.BaseItem {
 
+    private heroBG: eui.Image;
+    private heroMC: eui.Image;
+    private s0: eui.Image;
+    private s1: eui.Image;
+    private s2: eui.Image;
+    private s3: eui.Image;
+    private s4: eui.Image;
     private group: eui.Group;
     private bg: eui.Image;
     private img: CardImg;
     private indexText: eui.Label;
+
 
 
 

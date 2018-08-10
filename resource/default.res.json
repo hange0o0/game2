@@ -17,7 +17,7 @@
 			"name":"preload_jpg"
 		},
 		{
-			"keys":"black_bg_png,black_bg2_png,border_9_png,pk_hurt_png",
+			"keys":"black_bg_png,black_bg2_png,border_9_png,pk_hurt_png,m_shadow_mc_png",
 			"name":"preload_png32"
 		},
 		{
@@ -1102,6 +1102,11 @@
 			"name":"pk_hero_jpg",
 			"type":"image",
 			"url":"game_assets/pk/pk_hero.jpg"
+		},
+		{
+			"name":"m_shadow_mc_png",
+			"type":"image",
+			"url":"game_assets/png32/m_shadow_mc.png"
 		}
 	]
 }

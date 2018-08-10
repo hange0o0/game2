@@ -27,6 +27,7 @@ class MailInfoUI extends game.BaseWindow {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.list.itemRenderer = AwardItem;
         this.addBtnEvent(this.okBtn,this.onClick)
         this.addBtnEvent(this.cancelBtn,this.hide)
         this.scroller.viewport = this.list

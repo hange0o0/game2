@@ -9,6 +9,7 @@ class PKPlayerData {
     public force;//怪的基础属性
     public teamData:PKTeamData   //对应队伍
 
+
     public card//原始的手牌
     public level//PVP中有
     public score//PVP中有
@@ -29,6 +30,7 @@ class PKPlayerData {
 
     public isauto;
     public autoList;
+    public heroList   //英雄列表
     public skillValue = {};
 
 
@@ -60,6 +62,8 @@ class PKPlayerData {
         }
         if(obj['actionlist'])
             this.autoList = PKTool.decodeActionList(obj['actionlist'].split(','))
+        if(obj['hero'])
+            this.heroList = PKTool.decodeHeroList(obj['hero'].split(','))
         if(obj['card'])
         {
             var card = obj['card'].split(',');
@@ -159,6 +163,34 @@ class PKPlayerData {
     //    else
     //        return this.lastTime + 1000;
     //}
+
+    //出英雄
+    public addHero(index){
+        if(!this.heroList)
+            return false;
+        var oo = this.heroList[index - 1]
+        if(oo.mid)
+        {
+            var PD = PKData.getInstance();
+            var owner = this;
+            var atkRota = owner.teamData.atkRota;
+            var x = atkRota == PKConfig.ROTA_LEFT ? PKConfig.appearPos:PKConfig.floorWidth + PKConfig.appearPos;
+            var monsterData =  {
+                force:owner.force,
+                mid:oo.mid,
+                owner:this.id,
+                atkRota:atkRota,
+                fromPos:true,
+                level:oo.level,
+                x:x,
+                y:-25 + Math.random()*50,
+                actionTime:PD.actionTime
+            }
+            PD.addMonster(monsterData);
+            return true;
+        }
+        return false
+    }
 
     public addPosCard(cardData){
         var posCard = this.posCard[this.posIndex] =  new PKPosCardData({

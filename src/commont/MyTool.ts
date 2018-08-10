@@ -51,6 +51,11 @@ class MyTool {
             var prop =  PropVO.getObject(s);
             arr.push({img:prop.getThumb(),name:prop.propname,'num':'×' + NumberUtil.addNumSeparator(dataIn.props[s])})
         }
+        for(var s in dataIn.hero)
+        {
+            var hero =  MonsterVO.getObject(s);
+            arr.push({img:hero.getImage(),name:hero.name,'num':'×' + NumberUtil.addNumSeparator(dataIn.hero[s]),isHero:true})
+        }
 
         return arr;
     }

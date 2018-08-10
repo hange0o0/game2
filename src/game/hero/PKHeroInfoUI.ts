@@ -26,6 +26,7 @@ class PKHeroInfoUI extends game.BaseContainer {
 
 
     public dataIn
+    public heroItem;
 
     private stageX
     private stageY
@@ -38,6 +39,10 @@ class PKHeroInfoUI extends game.BaseContainer {
         super.childrenCreated();
         this.infoList.itemRenderer = PKCardInfoItem
         this.skillList.itemRenderer = HeroInfoItem
+        this.heroItem = new HeroMVItem()
+        this.heroItem.x = 110
+        this.heroItem.y = 220
+        this.cardGroup.addChild(this.heroItem);
     }
 
 
@@ -86,7 +91,9 @@ class PKHeroInfoUI extends game.BaseContainer {
 
     public renew(v){
         this.dataIn = v;
+        this.bg.source = PKManager.getInstance().getBG(HangManager.getInstance().getHangBGID())
         var vo:MonsterVO = MonsterVO.getObject(this.dataIn.mid)
+        this.heroItem.load(this.dataIn.mid)
         //this.img.data = vo.id;
         //this.bg.source = vo.getBG();
         this.nameText.text = vo.name;
@@ -103,7 +110,7 @@ class PKHeroInfoUI extends game.BaseContainer {
         }
 
         var lv = this.dataIn.level;
-        for(var i=0;i<lv;i++)
+        for(var i=0;i<5;i++)
             this['s' + i].source = lv>i?'start1_png':'start2_png'
 
 

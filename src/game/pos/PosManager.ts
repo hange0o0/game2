@@ -51,11 +51,12 @@ class PosManager {
     }
 
 
-    public addPos(type,id,list,name,fun?){
+    public addPos(type,id,list,name,hero,fun?){
         var self = this;
         var oo:any = {};
         oo.type = type;
         oo.list = list;
+        oo.hero = hero;
         oo.name = name;
         oo.id = id;
         Net.addUser(oo);
@@ -83,7 +84,8 @@ class PosManager {
             }
             self.getListByType(type)[id] = ({
                 id:id,
-                list:list
+                list:list,
+                hero:hero
             })
             if(name)
                 self.getListByType(type)[id].name = Base64.encode(name);
@@ -93,7 +95,7 @@ class PosManager {
         });
     }
 
-    public changePos(type,id,list,fun?){
+    public changePos(type,id,list,hero,fun?){
         var self = this;
         var oo:any = {};
         var posData = self.getDataByID(type,id);
@@ -102,7 +104,9 @@ class PosManager {
         oo.lv = TecManager.getInstance().getLevel(4);
         if(list && posData.list != list)
             oo.list = list;
-        if(!oo.list)
+        if(hero && posData.hero != hero)
+            oo.hero = hero;
+        if(!oo.list && !oo.hero)
         {
             fun && fun();
             return;
@@ -127,6 +131,8 @@ class PosManager {
             }
             if(list)
                 posData.list = list
+            if(hero)
+                posData.hero = hero
 
             EM.dispatch(GameEvent.client.pos_change)
             if(fun)

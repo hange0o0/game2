@@ -12,6 +12,7 @@ class FightManager {
     public step
     public card
     public enemy
+    public hero
     public award
     public value
 
@@ -24,6 +25,11 @@ class FightManager {
             this.card = info.card.split(',')
         else
             this.card = [];
+
+        if(info.hero)
+            this.hero = info.hero.split(',')
+        else
+            this.hero = [];
 
         this.enemy = info.enemy
         this.award = info.award
@@ -51,7 +57,7 @@ class FightManager {
     }
 
     //初始化队伍
-    public initFight(list,diamond?,fun?)
+    public initFight(list,hero,diamond?,fun?)
     {
         if(!UM.testEnergy(1))
             return;
@@ -60,6 +66,7 @@ class FightManager {
 
         var oo:any = {};
         oo.list = list;
+        oo.hero = hero;
         oo.diamond = diamond;
         Net.addUser(oo);
         Net.send(GameEvent.fight.init_fight, oo, (data)=> {
@@ -71,7 +78,8 @@ class FightManager {
             }
 
 
-            this.card = list;
+            this.card = list.split(',');
+            this.hero = hero.split(',');
             this.step = 0;
             SharedObjectManager.getInstance().setMyValue('fight_video','')
             EM.dispatchEventWith(GameEvent.client.fight_change)

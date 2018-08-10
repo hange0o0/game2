@@ -35,6 +35,7 @@ class PKData extends egret.EventDispatcher{
     public myPlayer:PKPlayerData;
     public sysPlayer:PKPlayerData;
     public diamondData;
+    public heroStep;
 
     public history = {};
     public disableKey = {}; //同一时间不能起效的KEY
@@ -94,6 +95,7 @@ class PKData extends egret.EventDispatcher{
     //初始化游戏
     public init(data){
         this.startTime = 0;
+        this.heroStep = 0;
         this.isReplay = false;
         this.isAuto = false;
         this.baseData = data;

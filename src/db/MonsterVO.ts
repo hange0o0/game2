@@ -107,16 +107,16 @@ class MonsterVO {
         }
         //console.log(arr.join(','));
         //ArrayUtil.sortByField(arr,['level'],[0])
-        for(var s in obj)
-        {
-            console.log('---------------LV.' + s + '\t\tnum:' + obj[s].length)
-            for(var i=0;i<obj[s].length;i++)
-            {
-                var vo = obj[s][i];
-                console.log('LV.' +vo.level+ '\t\tid:' + vo.id+ '\t\t' + vo.name)
-            }
-
-        }
+        //for(var s in obj)
+        //{
+        //    console.log('---------------LV.' + s + '\t\tnum:' + obj[s].length)
+        //    for(var i=0;i<obj[s].length;i++)
+        //    {
+        //        var vo = obj[s][i];
+        //        console.log('LV.' +vo.level+ '\t\tid:' + vo.id+ '\t\t' + vo.name)
+        //    }
+        //
+        //}
     }
 
     public getHeroSkill(){
@@ -126,6 +126,7 @@ class MonsterVO {
             var vo = HeroSkillVO.getObject(this.id+'_' + i);
             arr.push(vo);
         }
+        return arr;
     }
 
     public isHero(){
@@ -157,7 +158,10 @@ class MonsterVO {
     }
 
     public preLoad(){
-        RES.getResAsync('"enemy'+this.id+'_png',function(){},this)
+        if(this.isHero())
+            HeroMVManager.getInstance().preload(this.id)
+        else
+            RES.getResAsync('"enemy'+this.id+'_png',function(){},this)
          MBase.getData(this.id).preload();
     }
 

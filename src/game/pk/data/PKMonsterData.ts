@@ -11,6 +11,7 @@ class PKMonsterData {
     public hpChange = 0  //每秒改变的HP值,是1秒，处理时会除2
     public lastHpChange = 0  //上次改变的HP值的时间
     public atkAble = true  //可以攻击
+    public level = 0  //英雄的等级
 
     //隐藏属性
     public doubleRate  = 0

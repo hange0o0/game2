@@ -211,7 +211,7 @@ class BasePosChooseUI extends game.BaseUI {
         this.renewTitle();
         //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
 
-        if(BasePosUI.getInstance().pkData.isPVP)
+        if(BasePosUI.getInstance().pkData && BasePosUI.getInstance().pkData.isPVP)
             this.addPanelOpenEvent(GameEvent.client.PVP_END,this.hide)
     }
 

@@ -37,7 +37,7 @@ class MainBottomBtn extends game.BaseItem {
             case 'card':
                 break;
             case 'hero':
-                this.lockMC.visible = true
+                this.lockMC.visible = !HeroManager.getInstance().isHeroOpen()
                 break;
         }
     }

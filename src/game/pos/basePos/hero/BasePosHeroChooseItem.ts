@@ -60,7 +60,7 @@ class BasePosHeroChooseItem extends game.BaseItem {
         this.bg.source = vo.getHeroBG(lv)
         this.nameText.text = vo.name
 
-        for(var i=0;i<lv;i++)
+        for(var i=0;i<5;i++)
             this['s' + i].source = lv>i?'start1_png':'start2_png'
     }
 

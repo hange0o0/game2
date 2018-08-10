@@ -73,6 +73,12 @@ class SyncDataManager{
                         CardManager.getInstance().skillList[ss] = value[ss] || 0;
                     }
                     break;
+                case 'sync_hero':
+                    for(ss in value)
+                    {
+                        HeroManager.getInstance().heroData[ss] = value[ss] || 0;
+                    }
+                    break;
 
             }
         }

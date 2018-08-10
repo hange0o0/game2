@@ -98,6 +98,7 @@ class PKTool {
     //    }
     //    return returnArr;
     //}
+
     //对玩家出战队列进行解析
     public static decodeActionList(arr) {
         var returnArr = [];
@@ -108,6 +109,23 @@ class PKTool {
             returnArr.push({
                 mid:group[1],
                 time:PKConfig.stepCD*group[0],
+                id:index
+            })
+            index ++;
+        }
+        return returnArr;
+    }
+
+    //对玩家英雄队列进行解析
+    public static decodeHeroList(arr) {
+        var returnArr = [];
+        var index = 1;
+        for(var i=0;i<arr.length;i++)
+        {
+            var group = arr[i].split('|')
+            returnArr.push({
+                mid:parseInt(group[0]),
+                level:parseInt(group[1]),
                 id:index
             })
             index ++;

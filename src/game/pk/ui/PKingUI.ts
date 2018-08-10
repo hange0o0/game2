@@ -70,6 +70,9 @@ class PKingUI extends game.BaseUI {
                 var rota = videoData.user.getOwner().teamData.atkRota == PKConfig.ROTA_LEFT?PKConfig.ROTA_RIGHT:PKConfig.ROTA_LEFT
                 this.showHurt(rota);
                 break;
+            case PKConfig.VIDEO_HERO_ADD:
+                this.showHero();
+                break;
         }
     }
 
@@ -242,6 +245,15 @@ class PKingUI extends game.BaseUI {
             GuideUI.getInstance().hide();
             this.touchChildren = false;
         }
+    }
+
+    public showHero(){
+        egret.Tween.removeTweens(this.heroMC);
+        this.heroMC.visible = true
+        this.heroMC.alpha = 1
+        egret.Tween.get(this.heroMC).to({alpha:0.3},42*10).to({alpha:1},42*10).to({alpha:0.3},42*10).to({alpha:1},42*10).to({alpha:0},42*10).call(function(){
+            this.heroMC.visible = false
+        },this)
     }
 
     public showHurt(rota){

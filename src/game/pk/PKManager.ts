@@ -124,6 +124,13 @@ class PKManager {
             return data.list;
         return this.defaultCardList;
     }
+    public getDefaultPKHero(){
+        var index = SharedObjectManager.getInstance().getMyValue('pk_choose')
+        var data = PosManager.getInstance().getListByType('atk')[index];
+        if(data && data.hero)
+            return data.hero;
+        return '';
+    }
 
     public sendResult(fun){
         if(PKData.getInstance().isReplay)

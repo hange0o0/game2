@@ -27,7 +27,7 @@ class PKMonsterItem extends game.BaseItem {
 
    public talkItm:PKTalkItem;
 
-    public monsterMV:MonsterMV = new MonsterMV();
+    public monsterMV:PKMonsterMV = new PKMonsterMV();
     public needRemove = false
     public stateMV = {};
     public addStateMV = new PKAddState();
@@ -58,6 +58,7 @@ class PKMonsterItem extends game.BaseItem {
     }
 
     private onDieFinish(){
+        PKData.getInstance().actionRecord.push(PKData.getInstance().actionTime)
         PKData.getInstance().actionRecord.push('die_mv_remove|' + (this.data && this.data.id))
         this.needRemove = true;
     }
@@ -140,7 +141,7 @@ class PKMonsterItem extends game.BaseItem {
         var mD:PKMonsterData = this.data
         this.needRemove = false;
         this.monsterMV.load(mD.mid)
-        this.monsterMV.play();
+        this.monsterMV.stand();
         this.alpha = 1;
         this.cleanAllState();
 

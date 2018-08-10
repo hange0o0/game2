@@ -25,6 +25,7 @@ class AwardUI extends game.BaseWindow {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.list.itemRenderer = AwardItem;
         this.addBtnEvent(this.okBtn,this.hide)
     }
 

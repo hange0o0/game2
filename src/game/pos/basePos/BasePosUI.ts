@@ -55,6 +55,7 @@ class BasePosUI extends game.BaseUI {
     private dragTarget = new BasePosItem()
 
     private listData:eui.ArrayCollection
+    private heroListData:eui.ArrayCollection
     private selectData;
     private selectIndex;
 
@@ -80,13 +81,17 @@ class BasePosUI extends game.BaseUI {
 
         this.dragTarget.alpha = 0.3;
         this.list.itemRenderer =  BasePosChooseItem;
+        this.heroList.itemRenderer =  BasePosHeroItem;
         this.list.addEventListener('start_drag',this.onDragStart,this);
         this.list.addEventListener('end_drag',this.onDragEnd,this);
         this.list.addEventListener('move_drag',this.onDragMove,this);
         this.listData = new eui.ArrayCollection()
+        this.heroListData = new eui.ArrayCollection()
         this.list.dataProvider = this.listData
+        this.heroList.dataProvider = this.heroListData
 
         this.list.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onUnSelect,this);
+        this.heroList.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onHeroSelect,this);
 
         this.tabList.itemRenderer = BasePosTabItem
         this.tabList.dataProvider = new eui.ArrayCollection([0,1,2,3,4])
@@ -176,7 +181,7 @@ class BasePosUI extends game.BaseUI {
         this.testSave(()=>{
             if(this.pkData && this.pkData.list)
             {
-                this.pkData.fun(this.changeToServerList())
+                this.pkData.fun(this.changeToServerList(),this.changeToServerHero())
                 return;
             }
             if(this.type == 'atk')
@@ -202,6 +207,7 @@ class BasePosUI extends game.BaseUI {
                 SharedObjectManager.getInstance().setMyValue('pk_choose_def',this.index)
             PosTestUI.getInstance().show(this.type,{
                 list:this.changeToServerList(),
+                hero:this.changeToServerHero(),
                 name:Base64.encode((this.type == 'atk'?'进攻':'防御') + this.index),
             })
 
@@ -222,12 +228,22 @@ class BasePosUI extends game.BaseUI {
         }
         return arr.join(',');
     }
+    public changeToServerHero(){
+        var arr = [];
+        var source = this.heroListData.source;
+        for(var i=0;i<source.length;i++)
+        {
+            var item = source[i];
+            arr.push(item.id || 0)
+        }
+        return arr.join(',');
+    }
 
     public onClose(){
         if(this.pkData && this.pkData.list)
         {
             this.hide();
-            this.pkData.hideFun && this.pkData.hideFun(this.changeToServerList());
+            this.pkData.hideFun && this.pkData.hideFun(this.changeToServerList(),this.changeToServerHero());
             return;
         }
         if(this.testSave(()=>{
@@ -251,7 +267,7 @@ class BasePosUI extends game.BaseUI {
 
         var b = !this.posData && this.listData.length > 1
         if(!b)
-            b = this.posData && this.posData.list != this.changeToServerList()
+            b = this.posData && (this.posData.list != this.changeToServerList() || this.posData.hero != this.changeToServerHero() )
         if(b) //有变化
         {
             this.onSave(fun)
@@ -320,16 +336,17 @@ class BasePosUI extends game.BaseUI {
             return false;
         }
         var serverList = this.changeToServerList();
+        var serverHeroList = this.changeToServerHero();
         if(this.posData)
         {
-            PosManager.getInstance().changePos(this.type,this.index,serverList,()=>{
+            PosManager.getInstance().changePos(this.type,this.index,serverList,serverHeroList,()=>{
                     fun && fun();
                     //MyWindow.ShowTips('保存成功！')
                 })
         }
         else
         {
-            PosManager.getInstance().addPos(this.type,this.index,serverList,this.newName,()=>{
+            PosManager.getInstance().addPos(this.type,this.index,serverList,this.newName,serverHeroList,()=>{
                     fun && fun();
                     //MyWindow.ShowTips('保存成功！')
                     //this.posData = PosManager.getInstance().getListByType(this.type)[index]
@@ -370,6 +387,24 @@ class BasePosUI extends game.BaseUI {
                 MyTool.removeMC(this.deleteBtn)
             this.renewTitle()
         }
+    }
+
+    public onHeroSelect(){
+
+        if(this.pkData && this.pkData.stopAdd)
+            return;
+        var item = this.heroList.selectedItem;
+        if(!item)
+            return;
+        if(!game.BaseUI.isStopEevent)
+        {
+            BasePosHeroChooseUI.getInstance().show(item,ObjectUtil.arrayToObj(this.heroListData.source,'id','index'))
+        }
+    }
+
+    public resetHero(index,id){
+        this.heroListData.source[index-1].id = id
+        this.heroListData.refresh();
     }
 
     private onDragStart(e){
@@ -572,7 +607,7 @@ class BasePosUI extends game.BaseUI {
 
     /*
     *  pkData:{
-    *   list
+    *   list,hero//传阵容进去
     *   noTab
     *   fun
     *   hideFun
@@ -689,32 +724,38 @@ class BasePosUI extends game.BaseUI {
     }
 
     public renewBtn(toBottom?){
+        var heroOpen = HeroManager.getInstance().isHeroOpen();
         this.upBtn.visible = false
         this.downBtn.visible = false
+        this.heroList.visible = heroOpen
+
+        var heroHeight = heroOpen?150:0
         var listHeight = Math.ceil(this.listData.length/6)*130
         if(this.pkData && this.pkData.noTab)
             var scrollHeight = GameManager.stage.stageHeight-60-100
         else
             var scrollHeight = GameManager.stage.stageHeight-120-100
-        if( listHeight > scrollHeight)
+        if( listHeight + heroHeight > scrollHeight)
         {
             if(toBottom)
             {
                 this.upBtn.visible = true
                 this.list.y = scrollHeight - listHeight
-
             }
             else
             {
                 this.downBtn.visible = true
-                this.list.y = 0
+                this.list.y = heroHeight
+
             }
         }
         else
         {
-            this.list.y = 0;
+            this.list.y = heroHeight;
         }
-        this.scrollerBG.y = this.list.y
+
+        this.scrollerBG.y = this.list.y - 150
+        this.heroList.y = this.scrollerBG.y
     }
 
     public renew(){
@@ -733,7 +774,8 @@ class BasePosUI extends game.BaseUI {
         else if(this.pkData && this.pkData.list)
         {
             data = {
-                list:this.pkData.list
+                list:this.pkData.list,
+                hero:this.pkData.hero,
             }
         }
         var arr = [];
@@ -778,6 +820,30 @@ class BasePosUI extends game.BaseUI {
             MyTool.removeMC(this.deleteBtn)
             this.openBtn.visible = false;
         }
+
+        var heroArr = [];
+        if(data || this.sp.hero)
+        {
+            var list2 = []
+            if(this.sp.hero)
+                list2 = this.sp.hero;
+            else if(data.hero)
+                list2 = data.hero.split(',')
+            for(var i=0;i<5;i++)
+            {
+                var id = list2[i] || 0;
+                heroArr.push({index:i+1,id:parseInt(id)})
+            }
+        }
+        else
+        {
+            for(var i=0;i<5;i++)
+            {
+                heroArr.push({index:i+1,id:0})
+            }
+        }
+        this.heroListData.source = heroArr
+        this.heroListData.refresh()
 
 
         if(stopDelete)

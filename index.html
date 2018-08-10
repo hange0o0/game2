@@ -43,7 +43,7 @@
 	<script egret="lib" src="bin-debug/game/pk/skillData/SBase.js"></script>
 	<script egret="lib" src="bin-debug/game/pos/PosListHeadItem.js"></script>
 	<script egret="lib" src="bin-debug/game/pos/basePos/BasePosItem.js"></script>
-	<script egret="lib" src="bin-debug/game/pk/skillData/13/S327.js"></script>
+	<script egret="lib" src="bin-debug/game/pk/skillData/13/S324.js"></script>
 	<script egret="lib" src="bin-debug/commont/GameEvent.js"></script>
 	<script egret="lib" src="bin-debug/commont/MovieSimpleMC.js"></script>
 	<script egret="lib" src="bin-debug/commont/MyTool.js"></script>
@@ -63,6 +63,7 @@
 	<script egret="lib" src="bin-debug/commont/ui/TouchTipsUI.js"></script>
 	<script egret="lib" src="bin-debug/commont/ui/UpList.js"></script>
 	<script egret="lib" src="bin-debug/db/HangVO.js"></script>
+	<script egret="lib" src="bin-debug/db/HeroSkillVO.js"></script>
 	<script egret="lib" src="bin-debug/db/MonsterVO.js"></script>
 	<script egret="lib" src="bin-debug/db/PropVO.js"></script>
 	<script egret="lib" src="bin-debug/db/SkillVO.js"></script>
@@ -85,6 +86,7 @@
 	<script egret="lib" src="bin-debug/game/card/CardItem.js"></script>
 	<script egret="lib" src="bin-debug/game/card/CardManager.js"></script>
 	<script egret="lib" src="bin-debug/game/card/CardUI.js"></script>
+	<script egret="lib" src="bin-debug/game/common/AwardItem.js"></script>
 	<script egret="lib" src="bin-debug/game/common/AwardUI.js"></script>
 	<script egret="lib" src="bin-debug/game/common/CardImg.js"></script>
 	<script egret="lib" src="bin-debug/game/common/HeadMC.js"></script>
@@ -97,6 +99,14 @@
 	<script egret="lib" src="bin-debug/game/hang/HangItem.js"></script>
 	<script egret="lib" src="bin-debug/game/hang/HangManager.js"></script>
 	<script egret="lib" src="bin-debug/game/hang/HangUI.js"></script>
+	<script egret="lib" src="bin-debug/game/hero/HeroInfoItem.js"></script>
+	<script egret="lib" src="bin-debug/game/hero/HeroInfoUI.js"></script>
+	<script egret="lib" src="bin-debug/game/hero/HeroItem.js"></script>
+	<script egret="lib" src="bin-debug/game/hero/HeroManager.js"></script>
+	<script egret="lib" src="bin-debug/game/hero/HeroMVItem.js"></script>
+	<script egret="lib" src="bin-debug/game/hero/HeroMVManager.js"></script>
+	<script egret="lib" src="bin-debug/game/hero/HeroUI.js"></script>
+	<script egret="lib" src="bin-debug/game/hero/PKHeroInfoUI.js"></script>
 	<script egret="lib" src="bin-debug/game/mail/MailInfoUI.js"></script>
 	<script egret="lib" src="bin-debug/game/mail/MailItem.js"></script>
 	<script egret="lib" src="bin-debug/game/mail/MailManager.js"></script>
@@ -187,6 +197,7 @@
 	<script egret="lib" src="bin-debug/game/pk/monsterData/3/M76.js"></script>
 	<script egret="lib" src="bin-debug/game/pk/monsterData/3/M77.js"></script>
 	<script egret="lib" src="bin-debug/game/pk/monsterData/3/M78.js"></script>
+	<script egret="lib" src="bin-debug/game/pk/monsterData/hero/M101.js"></script>
 	<script egret="lib" src="bin-debug/game/pk/skillData/S501.js"></script>
 	<script egret="lib" src="bin-debug/game/pk/skillData/S502.js"></script>
 	<script egret="lib" src="bin-debug/ThemeAdapter.js"></script>
@@ -233,10 +244,10 @@
 	<script egret="lib" src="bin-debug/game/pk/skillData/13/S321.js"></script>
 	<script egret="lib" src="bin-debug/game/pk/skillData/13/S322.js"></script>
 	<script egret="lib" src="bin-debug/game/pk/skillData/13/S323.js"></script>
-	<script egret="lib" src="bin-debug/game/pk/skillData/13/S324.js"></script>
+	<script egret="lib" src="bin-debug/LoadingUI.js"></script>
 	<script egret="lib" src="bin-debug/game/pk/skillData/13/S325.js"></script>
 	<script egret="lib" src="bin-debug/game/pk/skillData/13/S326.js"></script>
-	<script egret="lib" src="bin-debug/LoadingUI.js"></script>
+	<script egret="lib" src="bin-debug/game/pk/skillData/13/S327.js"></script>
 	<script egret="lib" src="bin-debug/game/pk/skillData/13/S328.js"></script>
 	<script egret="lib" src="bin-debug/game/pk/skillData/13/S329.js"></script>
 	<script egret="lib" src="bin-debug/game/pk/skillData/13/S330.js"></script>
@@ -334,6 +345,7 @@
 	<script egret="lib" src="bin-debug/game/pk/ui/ctrl/PKSmallMap.js"></script>
 	<script egret="lib" src="bin-debug/game/pk/ui/scene/PKAddState.js"></script>
 	<script egret="lib" src="bin-debug/game/pk/ui/scene/PKMonsterItem.js"></script>
+	<script egret="lib" src="bin-debug/game/pk/ui/scene/PKMonsterMV.js"></script>
 	<script egret="lib" src="bin-debug/game/pk/ui/scene/PKSkillItem.js"></script>
 	<script egret="lib" src="bin-debug/game/pk/ui/scene/PKState.js"></script>
 	<script egret="lib" src="bin-debug/game/pk/ui/scene/PKTalkItem.js"></script>
@@ -361,6 +373,9 @@
 	<script egret="lib" src="bin-debug/commont/Config.js"></script>
 	<script egret="lib" src="bin-debug/game/pos/basePos/BasePosTabItem.js"></script>
 	<script egret="lib" src="bin-debug/game/pos/basePos/BasePosUI.js"></script>
+	<script egret="lib" src="bin-debug/game/pos/basePos/hero/BasePosHeroChooseItem.js"></script>
+	<script egret="lib" src="bin-debug/game/pos/basePos/hero/BasePosHeroChooseUI.js"></script>
+	<script egret="lib" src="bin-debug/game/pos/basePos/hero/BasePosHeroItem.js"></script>
 	<script egret="lib" src="bin-debug/game/pos/defPos/DefPosListItem.js"></script>
 	<script egret="lib" src="bin-debug/game/pos/defPos/DefPosListUI.js"></script>
 	<script egret="lib" src="bin-debug/game/pos/defPos/DefPosUI.js"></script>

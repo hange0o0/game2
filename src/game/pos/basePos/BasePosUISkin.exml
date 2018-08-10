@@ -19,7 +19,7 @@
 		</e:Group>
 		<e:List id="heroList" y="10" horizontalCenter="0">
 			<e:layout>
-				<e:HorizontalLayout/>
+				<e:HorizontalLayout paddingTop="10" gap="5"/>
 			</e:layout>
 		</e:List>
 		<e:List id="list" width="640" x="0" y="0">

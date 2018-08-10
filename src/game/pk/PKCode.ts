@@ -45,9 +45,7 @@ class PKCode {
             this.monsterAction();
             this.monsterMove();
             PKMonsterAction.getInstance().actionAtk(PD.actionTime);//攻击落实
-
-
-
+            this.heroAdd();
 
             this.actionFinish();
 
@@ -62,6 +60,27 @@ class PKCode {
         return false;
     }
     ///////////////*********************************************************
+
+    //英雄出动
+    public heroAdd(){
+        var PD = PKData.getInstance();
+        if(PD.heroStep < Math.floor(PD.actionTime/PKConfig.heroCD))
+        {
+            PD.heroStep ++;
+            var b = false
+            for(var i=1;i<=PD.playerNum;i++) //暂时4个玩家
+            {
+                var player = PD.playerObj[i];
+                if (!player)
+                    continue
+                b = player.addHero(PD.heroStep) || b;
+            }
+            if(b)
+                PD.addVideo({
+                    type:PKConfig.VIDEO_HERO_ADD
+                })
+        }
+    }
 
     //自动出战上怪
     public autoAction(){

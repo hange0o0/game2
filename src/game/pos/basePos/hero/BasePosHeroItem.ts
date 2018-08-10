@@ -7,11 +7,13 @@ class BasePosHeroItem extends game.BaseItem {
 
     private bg: eui.Image;
     private mc: eui.Image;
+    private emptyIndexText: eui.Label;
     private s0: eui.Image;
     private s1: eui.Image;
     private s2: eui.Image;
     private s3: eui.Image;
     private s4: eui.Image;
+
 
 
 
@@ -36,6 +38,8 @@ class BasePosHeroItem extends game.BaseItem {
         if(!this.data.id)
         {
             this.currentState = 'empty'
+            this.bg.source = 'hero_bg0_png'
+            this.emptyIndexText.text = this.data.index;
             return;
         }
 
@@ -45,7 +49,7 @@ class BasePosHeroItem extends game.BaseItem {
         this.mc.source = vo.getImage();
         this.bg.source = vo.getHeroBG(lv)
 
-        for(var i=0;i<lv;i++)
+        for(var i=0;i<5;i++)
             this['s' + i].source = lv>i?'start1_png':'start2_png'
     }
 

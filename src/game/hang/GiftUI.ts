@@ -24,6 +24,7 @@ class GiftUI extends game.BaseWindow {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.list.itemRenderer = AwardItem;
         this.addBtnEvent(this.okBtn,this.onClick)
         this.addBtnEvent(this.cancelBtn,this.hide)
     }

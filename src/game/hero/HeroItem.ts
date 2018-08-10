@@ -29,13 +29,13 @@ class HeroItem extends game.BaseItem {
         var lv = HeroManager.getInstance().getHeroLevel(vo.id);
         var isOwn = lv > 0
         this.bg.source = vo.getHeroBG(lv);
-        this.nameText.text = vo.name;
-        this.mc.source = vo.getImage();
         if(isOwn)
         {
             this.currentState = 'normal';
-            for(var i=0;i<lv;i++)
+            for(var i=0;i<5;i++)
                 this['s' + i].source = lv>i?'start1_png':'start2_png'
+            this.nameText.text = vo.name;
+            this.mc.source = vo.getImage();
 
         }
         else

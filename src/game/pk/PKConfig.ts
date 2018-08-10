@@ -40,6 +40,7 @@ class PKConfig {
     public static drawTime = 1000*60*5; //超时
     //public static autoDef = 10; //防守方队伍加成
     public static skillBeginID = 200; //大于这个的是技能
+    public static heroCD = 10*1000; //出英雄的CD
 
 
     public static VIDEO_MONSTER_DOUBLE = 1;//爆击
@@ -73,6 +74,7 @@ class PKConfig {
     public static VIDEO_AUOT_ADD_CARD = 25 //自动上卡
     public static VIDEO_TEAM_HP_CHANGE = 26 //队伍血量发生变化
     public static VIDEO_CARD_WAITING_CHANGE = 27 //位置生效
+    public static VIDEO_HERO_ADD = 28 //有英雄出现
 
 
 

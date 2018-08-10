@@ -32,15 +32,15 @@ class HeroSkillVO {
         this.des = data.des
         this.cd = data.cd * 1000
         this.name = data.name
-        this.id = data.id
+
+        this.heroid = data.heroid
+        this.level = data.level
         this.sv1 = data.sv1
         this.sv2 = data.sv2
         this.sv3 = data.sv3
         this.sv4 = data.sv4
 
-        var temp = this.id.split('_');
-        this.heroid = parseInt(temp[0])
-        this.level = parseInt(temp[1])
+        this.id = data.heroid +'_' + this.level
     }
 
     //public getImage(gay?){

@@ -108,6 +108,7 @@ class FightInfoUI extends game.BaseWindow {
             otherList:history.otherList,
             history:history.history,
             list:FM.card.join(','),
+            hero:FM.hero.join(','),
             fun:function(data){
                 FM.changePos(data,()=>{
                     FM.pk()
@@ -127,24 +128,28 @@ class FightInfoUI extends game.BaseWindow {
             stopTest:true,
             stopRemoveTips:true,
             list:SharedObjectManager.getInstance().getMyValue('fightDefault') || PKManager.getInstance().getDefaultPKList(),
-            fun:function(data){
+            hero:SharedObjectManager.getInstance().getMyValue('hero') || PKManager.getInstance().getDefaultPKHero(),
+            fun:function(data,hero){
                 var arr = data.split(',')
                 if(arr.length < PosManager.getInstance().maxPosNum())
                 {
                     MyWindow.Confirm('还可继续上阵卡牌，确定就这样出战吗？',(b)=>{
                         if(b==1)
                         {
-                            FM.initFight(data,diamond);
+                            FM.initFight(data,hero,diamond);
                         }
                     })
                     return;
                 }
                 SharedObjectManager.getInstance().setMyValue('fightDefault',data)
-                FM.initFight(data,diamond)
+                SharedObjectManager.getInstance().setMyValue('fightHero',hero)
+                FM.initFight(data,hero,diamond)
             },
-            hideFun:function(data){
+            hideFun:function(data,hero){
                 if(data)
                     SharedObjectManager.getInstance().setMyValue('fightDefault',data)
+                if(hero)
+                    SharedObjectManager.getInstance().setMyValue('fightHero',hero)
             }
         })
     }

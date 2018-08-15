@@ -41,7 +41,7 @@ class PKHeroInfoUI extends game.BaseContainer {
         this.skillList.itemRenderer = HeroInfoItem
         this.heroItem = new HeroMVItem()
         this.heroItem.x = 110
-        this.heroItem.y = 220
+        this.heroItem.y = 200
         this.cardGroup.addChild(this.heroItem);
     }
 
@@ -138,7 +138,7 @@ class PKHeroInfoUI extends game.BaseContainer {
         }
         this.infoList.dataProvider = new eui.ArrayCollection(arr2)
 
-        var list = vo.getHeroSkill();
+        var list = vo.getHeroSkillArr();
         for(var i=0;i<list.length;i++)
         {
             list[i] = {

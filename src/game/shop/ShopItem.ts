@@ -72,6 +72,11 @@ class ShopItem extends game.BaseItem {
             name = this.createHtml('技能宝箱',0xFFD27F)  + '\nLV.' + (this.data.num) + '';
             this.img.source = MyTool.getSkillBox(this.data.num);
         }
+        else if(this.data.id == 'box_hero')
+        {
+            name = this.createHtml('英雄宝箱',0xFFD27F)  + '\nLV.' + (this.data.num) + '';
+            this.img.source = MyTool.getHeroBox(this.data.num);
+        }
         else if((this.data.id + '').substr(0,5) == 'skill')
         {
             var svo = SkillVO.getObject(this.data.id.substr(5));

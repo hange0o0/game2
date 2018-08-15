@@ -338,6 +338,13 @@ class AtkMVCtrl {
 
 
     ////////////////////////////////////////////////////////////////
+    public skillMV101(user,target,actionTime,endTime){
+        var mBase = MBase.getData(101)
+        if(user.useingHeroSkill == 1 || user.useingHeroSkill == 2)
+            this.playAniOn(target.id,mBase.mvID1)
+    }
+
+    ////////////////////////////////////////////////////////////////
 
 
     public skillMV203(target:PKMonsterData){

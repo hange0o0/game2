@@ -17,7 +17,7 @@ class M1 extends MBase{
 
 
     public skill(user:PKMonsterData,target){
-        var hp = Math.ceil(this.getAtkHp(user,target)*user.getSkillValue(2)/100);
+        var hp = Math.ceil(user.getSkillValue(2,true));
         target.beAtkAction({hp:hp,atker:user})
         user.atkAction({hp:hp})
     }

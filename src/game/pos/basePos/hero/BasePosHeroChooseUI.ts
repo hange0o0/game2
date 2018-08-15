@@ -14,7 +14,6 @@ class BasePosHeroChooseUI extends game.BaseWindow {
 
 
 
-    private dataIn;
     private pos;
     public constructor() {
         super();
@@ -36,26 +35,27 @@ class BasePosHeroChooseUI extends game.BaseWindow {
         var item = this.list.selectedItem;
         if(!item)
             return;
-        if(item.remove)
-        {
-            BasePosUI.getInstance().resetHero(item.remove,0)
-            this.hide();
-            return;
-        }
-        if(item.id)
-        {
-            if(this.pos[item.id])
-                BasePosUI.getInstance().resetHero(this.pos[item.id],0)
-            BasePosUI.getInstance().resetHero(this.dataIn.index,item.id)
-            this.hide();
-        }
+        BasePosUI.getInstance().resetHero(item.id)
+        this.hide();
+        //if(item.remove)
+        //{
+        //    BasePosUI.getInstance().resetHero(item.remove,0)
+        //    this.hide();
+        //    return;
+        //}
+        //if(item.id)
+        //{
+        //    if(this.pos[item.id])
+        //        BasePosUI.getInstance().resetHero(this.pos[item.id],0)
+        //    BasePosUI.getInstance().resetHero(this.dataIn.index,item.id)
+        //    this.hide();
+        //}
 
     }
 
 
 
-    public show(v?,pos?){
-        this.dataIn = v;
+    public show(pos?){
         this.pos = pos;
         super.show();
     }
@@ -70,18 +70,16 @@ class BasePosHeroChooseUI extends game.BaseWindow {
     }
 
     public renew(){
-        this.titleText.text = '选择英雄（'+this.dataIn.index+'号位）'
+        this.titleText.text = '选择英雄'
         var arr = HeroManager.getInstance().getMyHeroList();
         var list = [];
-        if(this.dataIn.id)
-            list.push({remove:this.dataIn.index})
+        //if(this.dataIn.id)
+        //    list.push({remove:this.dataIn.index})
         for(var i=0;i<arr.length;i++)
         {
             var id = arr[i].id;
-            list.push({
-                id:id,
-                pos:this.pos[id]
-            })
+            if(!this.pos[id])
+                list.push({id:id})
         }
         this.list.dataProvider = new eui.ArrayCollection(list)
     }

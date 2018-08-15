@@ -11,6 +11,7 @@ class PKPlayerData {
 
 
     public card//原始的手牌
+    public hero//原始的英雄
     public level//PVP中有
     public score//PVP中有
     public autolist//原始的autolist
@@ -169,7 +170,7 @@ class PKPlayerData {
         if(!this.heroList)
             return false;
         var oo = this.heroList[index - 1]
-        if(oo.mid)
+        if(oo && oo.mid)
         {
             var PD = PKData.getInstance();
             var owner = this;

@@ -39,7 +39,7 @@ class HeroManager {
         for(var s in data)
         {
             var vo =  data[s];
-            if(vo.level == 1000)
+            if(vo.id > 100 && vo.id < 130)
                 arr.push(vo);
         }
         return arr;

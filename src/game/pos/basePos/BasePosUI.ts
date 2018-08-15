@@ -53,6 +53,7 @@ class BasePosUI extends game.BaseUI {
 
 
     private dragTarget = new BasePosItem()
+    private dragTarget2 = new BasePosHeroItem()
 
     private listData:eui.ArrayCollection
     private heroListData:eui.ArrayCollection
@@ -80,11 +81,15 @@ class BasePosUI extends game.BaseUI {
         this.bottomUI.setHide(this.onClose,this);
 
         this.dragTarget.alpha = 0.3;
+        this.dragTarget2.alpha = 0.3;
         this.list.itemRenderer =  BasePosChooseItem;
         this.heroList.itemRenderer =  BasePosHeroItem;
         this.list.addEventListener('start_drag',this.onDragStart,this);
         this.list.addEventListener('end_drag',this.onDragEnd,this);
         this.list.addEventListener('move_drag',this.onDragMove,this);
+        this.heroList.addEventListener('start_drag',this.onDragStart2,this);
+        this.heroList.addEventListener('end_drag',this.onDragEnd2,this);
+        this.heroList.addEventListener('move_drag',this.onDragMove2,this);
         this.listData = new eui.ArrayCollection()
         this.heroListData = new eui.ArrayCollection()
         this.list.dataProvider = this.listData
@@ -131,12 +136,19 @@ class BasePosUI extends game.BaseUI {
 
     private onInfo(){
         this.infoGroup.visible = true;
-        this.infoList.dataProvider = new eui.ArrayCollection(this.pkData.otherList.split(','))
+        this.infoList.dataProvider = new eui.ArrayCollection(this.resetOtherList())
         this.infoList.validateNow();
         this.infoGroup.bottom = -this.infoGroup.height;
         egret.Tween.get(this.infoGroup).to({bottom:0},200);
         this.videoBtn.visible = this.pkData.history && this.pkData.history.length > 0
     }
+
+    private resetOtherList(){
+         var listData = this.pkData.otherList;
+        if(typeof listData == 'string')
+            return  listData.split(',');
+    }
+
     private onInfoClose(){
         egret.Tween.get(this.infoGroup).to({bottom:-this.infoGroup.height},200).call(()=>{
             this.infoGroup.visible = false;
@@ -234,8 +246,11 @@ class BasePosUI extends game.BaseUI {
         for(var i=0;i<source.length;i++)
         {
             var item = source[i];
-            arr.push(item.id || 0)
+            if(item.id)
+                arr.push(item.id)
         }
+        if(arr.length == 0)
+            arr.push(0);
         return arr.join(',');
     }
 
@@ -390,20 +405,35 @@ class BasePosUI extends game.BaseUI {
     }
 
     public onHeroSelect(){
-
         if(this.pkData && this.pkData.stopAdd)
             return;
         var item = this.heroList.selectedItem;
         if(!item)
             return;
-        if(!game.BaseUI.isStopEevent)
+
+        if(item.setting)
         {
-            BasePosHeroChooseUI.getInstance().show(item,ObjectUtil.arrayToObj(this.heroListData.source,'id','index'))
+            BasePosHeroChooseUI.getInstance().show(ObjectUtil.arrayToObj(this.heroListData.source,'id','@whole'))
+        }
+        else if(!game.BaseUI.isStopEevent)
+        {
+            var stopDelete = this.isStopDelete();
+            if(stopDelete)
+                return
+            var index = this.heroListData.getItemIndex(item);
+            this.heroListData.removeItemAt(index)
+            if(!this.heroListData.getItemAt(this.heroListData.length-1).setting)
+            {
+                this.heroListData.addItem({setting:true})
+            }
         }
     }
 
-    public resetHero(index,id){
-        this.heroListData.source[index-1].id = id
+    public resetHero(id){
+        this.heroListData.source.pop()
+        this.heroListData.source.push({id:id});
+        if(this.heroListData.source.length < 5)
+            this.heroListData.source.push({setting:true})
         this.heroListData.refresh();
     }
 
@@ -457,80 +487,6 @@ class BasePosUI extends game.BaseUI {
         //this.once(egret.Event.ENTER_FRAME,this.renewSelectItem,this)
     }
 
-    //private onDragMove(e){
-    //    this.dragTarget.x = e.data.x - this.dragTarget.width/2;
-    //    this.dragTarget.y = e.data.y - this.dragTarget.height/2;
-    //
-    //    var p = this.list.globalToLocal(e.data.x,e.data.y)
-    //    p.x -= 8;
-    //    p.y -= 10;
-    //    //90*110
-    //    //8/20
-    //    var maxIndex = this.listData.length - 2;
-    //    var index = Math.max(0,Math.min(maxIndex,Math.floor((p.x + 30)/105) + Math.floor(p.y/130)*6))
-    //    var isOver = p.x%105 >30 && p.x%105 <80;
-    //    console.log(index);
-    //
-    //
-    //
-    //    if(index != this.selectIndex || isOver != (!!this.swapData))
-    //    {
-    //        //console.log(isOver)
-    //        if(this.swapData)//还原回去
-    //        {
-    //            var swapIndex = this.listData.getItemIndex(this.swapData)
-    //            this.listData.removeItemAt(swapIndex)
-    //            this.listData.addItemAt(this.swapData,this.selectIndex + 1)//插入到当前位置
-    //        }
-    //        this.listData.removeItemAt(this.selectIndex)//先把自己去掉
-    //        this.selectIndex = index;
-    //        this.listData.addItemAt(this.selectData,index)//插入到当前位置
-    //        if(isOver)//交换
-    //        {
-    //            if(this.targetIndex != this.selectIndex)
-    //            {
-    //                var data = this.listData.removeItemAt(this.selectIndex+1)//把下家去掉
-    //                if(this.targetIndex > this.selectIndex)
-    //                    this.listData.addItemAt(data,this.targetIndex)//插入到以前位置
-    //                else if(this.targetIndex < this.selectIndex)
-    //                    this.listData.addItemAt(data,this.targetIndex+1)//插入到以前位置
-    //                this.swapData = data
-    //            }
-    //            else //指回原来位置
-    //            {
-    //                this.swapData = null;
-    //            }
-    //        }
-    //        else
-    //        {
-    //            this.swapData = null;
-    //        }
-    //    }
-    //    egret.callLater(this.renewSelectItem,this);
-    //    //this.once(egret.Event.ENTER_FRAME,this.renewSelectItem,this)
-    //}
-
-
-    //private onDragMove(e){
-    //    this.dragTarget.x = e.data.x - this.dragTarget.width/2;
-    //    this.dragTarget.y = e.data.y - this.dragTarget.height/2;
-    //
-    //    var p = this.list.globalToLocal(e.data.x,e.data.y)
-    //    p.x -= 8;
-    //    p.y -= 10;
-    //    //90*110
-    //    //8/20
-    //    var maxIndex = this.listData.length - 2;
-    //    var index = Math.max(0,Math.min(maxIndex,Math.floor(p.x/98) + Math.floor(p.y/130)*6))
-    //    if(index != this.selectIndex)
-    //    {
-    //        this.listData.removeItemAt(this.selectIndex)
-    //        this.selectIndex = index;
-    //        this.listData.addItemAt(this.selectData,index)
-    //        egret.callLater(this.renewSelectItem,this);
-    //    }
-    //}
-
     private onDragEnd(e){
         MyTool.removeMC(this.dragTarget)
         var index = Math.max(0,this.insertPos + this.targetIndex)
@@ -561,17 +517,110 @@ class BasePosUI extends game.BaseUI {
 
 
     }
+    private onDragStart2(e){
+        this.insertPos = 0;
+        this.selectData = e.target.data;
+        this.targetIndex = this.selectIndex = this.heroListData.source.indexOf(this.selectData);
+        this.dragTarget2.data = e.target.data
+        this.stage.addChild(this.dragTarget2);
+        this.dragTarget2.x = e.data.x;
+        this.dragTarget2.y = e.data.y;
+
+        this.renewSelectItem();
+    }
+
+    private onDragMove2(e){
+        this.dragTarget2.x = e.data.x - this.dragTarget2.width/2;
+        this.dragTarget2.y = e.data.y - this.dragTarget2.height/2;
+
+        var p = this.heroList.globalToLocal(e.data.x,e.data.y)
+        //p.x -= 8;
+        //p.y -= 10;
+        //90*110
+        //8/20
+        var maxIndex = this.heroListData.length - 2;
+        var orginIndex= Math.floor((p.x)/125) + Math.floor(p.y/140)*5;
+        var index = Math.max(0,Math.min(maxIndex,orginIndex))
+        //var isOver = p.x%105 >30 && p.x%105 <80;
+        var lastInsetPos = this.insertPos;
+        if(p.x%125 <= 35)
+            this.insertPos = -1;
+        else if(p.x%125 >= 90)
+            this.insertPos = 1;
+        else
+            this.insertPos = 0;
+
+        if(orginIndex > maxIndex || orginIndex < 0) //越界了
+        {
+            this.insertPos = 0
+            this.targetIndex = -1;
+        }
+        else if(index != this.targetIndex || lastInsetPos != this.insertPos)
+        {
+            this.targetIndex = index
+        }
+
+
+
+
+        egret.callLater(this.renewSelectItem,this);
+        //this.once(egret.Event.ENTER_FRAME,this.renewSelectItem,this)
+    }
+
+    private onDragEnd2(e){
+        MyTool.removeMC(this.dragTarget2)
+        var index = Math.max(0,this.insertPos + this.targetIndex)
+        if(this.targetIndex != -1 && this.selectIndex != index)
+        {
+            if(this.insertPos == 0)
+            {
+                var item = this.heroListData.replaceItemAt(this.selectData,index)
+                this.heroListData.replaceItemAt(item,this.selectIndex)
+            }
+            else
+            {
+                this.heroListData.removeItemAt(this.selectIndex)
+                if(index > this.selectIndex && this.insertPos > 0)
+                    index --;
+                this.heroListData.addItemAt(this.selectData,index)
+            }
+        }
+
+
+
+        this.selectData = null
+        this.selectIndex = -1
+        this.targetIndex = -1
+        this.insertPos = 0
+
+        this.renewSelectItem();
+
+
+    }
 
     private renewSelectItem(){
-        var chooseData = this.listData.getItemAt(this.targetIndex);
+        var isHero = this.dragTarget2.stage;
+        if(isHero)
+        {
+            var chooseData = this.heroListData.getItemAt(this.targetIndex);
+            var list = this.heroList
+        }
+        else
+        {
+            var chooseData = this.listData.getItemAt(this.targetIndex);
+            var list = this.list
+        }
         var swapData = this.selectData && this.targetIndex != this.selectIndex && this.insertPos==0?chooseData:null;
         var targetItem;
-        for(var i=0;i<this.list.numChildren;i++)
+        for(var i=0;i<list.numChildren;i++)
         {
-            var item:BasePosChooseItem = <BasePosChooseItem>this.list.getChildAt(i);
+            var item:any = list.getChildAt(i);
             item.renewSelect(this.selectData,swapData);
             if(item.data == chooseData)
+            {
                 targetItem = item;
+                break;
+            }
         }
         if(this.targetIndex == -1)
         {
@@ -829,19 +878,22 @@ class BasePosUI extends game.BaseUI {
                 list2 = this.sp.hero;
             else if(data.hero)
                 list2 = data.hero.split(',')
-            for(var i=0;i<5;i++)
+            for(var i=0;i<list2.length;i++)
             {
-                var id = list2[i] || 0;
-                heroArr.push({index:i+1,id:parseInt(id)})
+                var hid = parseInt(list2[i]) || 0;
+                if(hid)
+                    heroArr.push({id:hid})
             }
         }
-        else
-        {
-            for(var i=0;i<5;i++)
-            {
-                heroArr.push({index:i+1,id:0})
-            }
-        }
+        //else
+        //{
+        //    for(var i=0;i<list2.length;i++)
+        //    {
+        //        heroArr.push({index:i+1,id:0})
+        //    }
+        //}
+        if(heroArr.length < 5)
+            heroArr.push({setting:true})
         this.heroListData.source = heroArr
         this.heroListData.refresh()
 
@@ -850,6 +902,10 @@ class BasePosUI extends game.BaseUI {
             MyTool.removeMC(this.deleteBtn)
         else if(arr.length < this.maxCard)
             arr.push({setting:true})
+
+
+
+
         this.listData.source = arr;
         this.listData.refresh()
         this.renewTitle();

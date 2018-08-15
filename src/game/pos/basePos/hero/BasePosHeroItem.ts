@@ -7,20 +7,23 @@ class BasePosHeroItem extends game.BaseItem {
 
     private bg: eui.Image;
     private mc: eui.Image;
-    private emptyIndexText: eui.Label;
     private s0: eui.Image;
     private s1: eui.Image;
     private s2: eui.Image;
     private s3: eui.Image;
     private s4: eui.Image;
 
-
-
+    public stopMove = true;
+    public renewSelect(selectData,swapData){
+        //this.alpha = selectData == this.data?0.5:1
+        //this.selectMC.visible = swapData == this.data;
+    }
 
 
     public childrenCreated() {
         super.childrenCreated();
         MyTool.addLongTouch(this,this.onLongTouch,this)
+        DragManager.getInstance().setDrag(this,true);
         //this.addBtnEvent(this,this.onClick)
     }
 
@@ -39,7 +42,6 @@ class BasePosHeroItem extends game.BaseItem {
         {
             this.currentState = 'empty'
             this.bg.source = 'hero_bg0_png'
-            this.emptyIndexText.text = this.data.index;
             return;
         }
 

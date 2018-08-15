@@ -19,6 +19,21 @@ class MBase {
     constructor() {
     }
 
+    public isHeroSkillCDOK(user,id){
+        var lastSkillTime = user.skillTemp['hs' + id] || 0;
+
+        if(PKData.getInstance().actionTime > lastSkillTime + user.getVO().getHeroSkill(id).skillcd)
+        {
+            //console.log(PKData.getInstance().actionTime , lastSkillTime , user.getVO().getHeroSkill(id).skillcd,JSON.stringify(user.skillTemp))
+            return true;
+        }
+        return false;
+    }
+    public setHeroSkillUse(user,id){
+        user.skillTemp['hs' + id] = PKData.getInstance().actionTime;
+        //console.log( JSON.stringify(user.skillTemp))
+    }
+
     public onHpChange(user:PKMonsterData){
 
     }

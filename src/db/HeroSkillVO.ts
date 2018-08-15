@@ -10,7 +10,7 @@ class HeroSkillVO {
 
 
     public des: string;
-    public cd: number;
+    public skillcd: number;
     public name: string;
     public sv1: number;
     public sv2: number;
@@ -30,7 +30,7 @@ class HeroSkillVO {
 
     public fill(data){
         this.des = data.des
-        this.cd = data.cd * 1000
+        this.skillcd = data.skillcd * 1000
         this.name = data.name
 
         this.heroid = data.heroid
@@ -62,7 +62,7 @@ class HeroSkillVO {
             replace('$1',this.changeValue(this.sv1,forceRate,fillColor)).
             replace('$2',this.changeValue(this.sv2,forceRate,fillColor) + '').
             replace('$3',this.changeValue(this.sv3,forceRate,fillColor)).
-            replace('#CD',MyTool.toFixed(this.cd/1000,1) + '')   //CD初始时乘了1000
+            replace('#CD',MyTool.toFixed(this.skillcd/1000,1) + '')   //CD初始时乘了1000
     }
 
     private fillColor(str,fillColor){
@@ -83,10 +83,19 @@ class HeroSkillVO {
         return Math.floor(add);
     }
 
-    public getSkillValue(index,force=0){
+    public getSkillValue(index,user?){
+        var PD = PKData.getInstance();
         var sv = this['sv' + index];
-        if(!force)
+        if(DEBUG)
+        {
+            if(user && this.des.indexOf('$'+index) == -1)
+                throw new Error(this.id + '_$' + index)
+            else if(!user && this.des.indexOf('#'+index) == -1)
+                throw new Error(this.id + '_#' + index)
+        }
+        if(!user)
             return sv
+        var force = PD.getPlayer(user.owner).force
         return Math.floor(sv * (1+force/100));
     }
 }

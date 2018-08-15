@@ -4,10 +4,12 @@ class BagSellItem extends game.BaseItem {
         this.skinName = "BagSellItemSkin";
     }
 
+    private redMC: eui.Rect;
     private mc: eui.Image;
     private nameText: eui.Label;
     private desText: eui.Label;
     private okBtn: eui.Button;
+
 
 
 
@@ -41,18 +43,36 @@ class BagSellItem extends game.BaseItem {
         var pvo = PropVO.getObject(this.data.id);
         if(this.data.type == 1)
         {
+            var propNum = PropManager.getInstance().getNum(this.data.id);
             this.setHtml(this.nameText,this.createHtml('【求购】',0xFFDF7F) +  pvo.propname + ' x' + this.data.num)
             this.currentState = 'sell';
             this.desText.text = 'x' + NumberUtil.addNumSeparator(this.data.diamond);
+
+            var isRed =  propNum/this.data.num;
         }
         else
         {
             this.setHtml(this.nameText,this.createHtml('【出售】',0xFF9630) +  pvo.propname + ' x' + this.data.num)
             this.currentState = 'buy';
             this.desText.text = 'x' + NumberUtil.addNumSeparator(this.data.diamond);
+
+            var isRed = UM.getCoin()/this.data.diamond;
         }
         this.okBtn.visible = !this.data.isbuy
         this.mc.source = pvo.getThumb();
+
+
+
+        if(isRed<1)
+        {
+            this.redMC.width = isRed*(this.width)
+            this.redMC.fillColor = 0xFF0000
+        }
+        else
+        {
+            this.redMC.width = 1/isRed*(this.width)
+            this.redMC.fillColor = 0x00FF00
+        }
     }
 
 }

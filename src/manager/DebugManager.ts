@@ -17,6 +17,7 @@ class DebugManager {
 
     public MML = 998;  //测试出战怪的等级
     public addSkill = false
+    public addHeroLevel = 5
     public cardLen = 15
     public createHangFlag = false;
 
@@ -89,7 +90,25 @@ class DebugManager {
         {
             newList.push(ArrayUtil.randomOne(arr,true))
         }
-        return newList;
+
+        var hero = [];
+        if(this.addHeroLevel)
+        {
+            for(var s in MonsterVO.data)
+            {
+                var mvo = MonsterVO.data[s]
+                if(mvo.id > 100 && mvo.id < 130)
+                {
+                    hero.push(mvo.id + '|' + this.addHeroLevel)
+                }
+            }
+            ArrayUtil.random(hero);
+        }
+
+        return {
+            list:newList.join(','),
+            hero:hero.join(',')
+        };
     }
 
     public testCard(list1,list2,view=false,hp=10){
@@ -97,8 +116,8 @@ class DebugManager {
         var data = {
             seed:TM.now(),
             players:[
-                {id:1,gameid:'test1',team:1,autolist:list1,force:0,type:0,hp:hp},
-                {id:2,gameid:'test2',team:2,autolist:list2,force:0,type:0,hp:hp}
+                {id:1,gameid:'test1',team:1,autolist:list1.list,force:0,type:0,hp:hp,hero:list1.hero},
+                {id:2,gameid:'test2',team:2,autolist:list2.list,force:0,type:0,hp:hp,hero:list2.hero}
             ]
         };
         var t = egret.getTimer();
@@ -174,7 +193,7 @@ class DebugManager {
             n = 2048;
         for(var i=0;i<n;i++)
         {
-             arr.push(this.randomList().join(','))
+             arr.push(this.randomList())
         }
         this.testArr(arr,0,n,egret.getTimer())
     }
@@ -228,8 +247,8 @@ class DebugManager {
         var data = {
             seed:TM.now(),
             players:[
-                {id:1,gameid:'test1',team:1,autolist:list1,force:500,type:0,hp:10},
-                {id:2,gameid:'test2',team:2,autolist:list2,force:500,type:0,hp:10}
+                {id:1,gameid:'test1',team:1,autolist:list1.list,force:1000,type:0,hp:10,hero:list1.hero},
+                {id:2,gameid:'test2',team:2,autolist:list2.list,force:1000,type:0,hp:10,hero:list2.hero}
             ]
         };
         var t = egret.getTimer();

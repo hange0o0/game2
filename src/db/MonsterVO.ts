@@ -119,7 +119,7 @@ class MonsterVO {
         //}
     }
 
-    public getHeroSkill(){
+    public getHeroSkillArr(){
         var arr = []
         for(var i=1;i<=5;i++)
         {
@@ -128,9 +128,12 @@ class MonsterVO {
         }
         return arr;
     }
+    public getHeroSkill(id){
+        return HeroSkillVO.getObject(this.id+'_' + id);;
+    }
 
     public isHero(){
-        return this.level == 1000;
+        return this.id > 100 && this.id < 130;
     }
 
     public getImage(gay?){
@@ -176,6 +179,13 @@ class MonsterVO {
 
     public getSkillValue(index,force=0){
         var sv = this['sv' + index];
+        if(DEBUG)
+        {
+            if(force && this.des.indexOf('$'+index) == -1)
+                throw new Error(this.id + '_$' + index)
+            else if(!force && this.des.indexOf('#'+index) == -1)
+                throw new Error(this.id + '_#' + index)
+        }
         if(!force)
             return sv
         return Math.floor(sv * (1+force/100));

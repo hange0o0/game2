@@ -132,7 +132,12 @@ class PosManager {
             if(list)
                 posData.list = list
             if(hero)
-                posData.hero = hero
+            {
+                if(hero == '0')
+                    posData.hero = ''
+                else
+                    posData.hero = hero
+            }
 
             EM.dispatch(GameEvent.client.pos_change)
             if(fun)

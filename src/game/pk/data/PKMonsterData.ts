@@ -57,6 +57,9 @@ class PKMonsterData {
     public stopReborn = false//禁止目标复活
     public listenerData//保存用于listener的数据
 
+    public callHeroSkill//本次的英雄技能ID
+    public useingHeroSkill//已触发的英雄技能ID
+
 
     constructor(obj?){
         if(obj)
@@ -328,6 +331,15 @@ class PKMonsterData {
     }
 
     public setSkillUse(actionTime){
+
+        if(this.getVO().isHero())
+        {
+            if(this.callHeroSkill)
+                this.useingHeroSkill = this.callHeroSkill;
+            this.callHeroSkill = 0;
+            MBase.getData(this.mid).setHeroSkillUse(this,this.useingHeroSkill)
+        }
+
         if(this.getVO().skillcd < 0)
         {
             this.skillTimes += 1000;
@@ -510,6 +522,7 @@ class PKMonsterData {
 
     public getSkillValue(index,needForce=false){
         var PD = PKData.getInstance();
+
         return CM.getCardVO(this.mid).getSkillValue(index,needForce?PD.getPlayer(this.owner).force:0)
     }
 }

@@ -19,6 +19,9 @@ class MyTool {
     public static getSkillBox(id){
         return Config.localResRoot + 'prop/box_s'+id+'.png'
     }
+    public static getHeroBox(id){
+        return Config.localResRoot + 'prop/box_h'+id+'.png'
+    }
     public static getPropLevel(){
         return Config.localResRoot + 'prop/prop_level.png'
     }

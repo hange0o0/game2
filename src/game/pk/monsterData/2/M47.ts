@@ -5,7 +5,7 @@ class M47 extends MBase {
 
     public mvID1 = 104;
     public skill(user:PKMonsterData,target:PKMonsterData){
-        var skillValue = user.getSkillValue(1);
+        var skillValue = user.getSkillValue(1,true);
         target.manaHp += skillValue
         PKData.getInstance().addVideo({
             type:PKConfig.VIDEO_MANAHP_CHANGE,

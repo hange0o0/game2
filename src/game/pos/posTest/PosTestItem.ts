@@ -55,7 +55,22 @@ class PosTestItem extends game.BaseItem {
         //var str = data.list
         var str = data.list//.replace(new RegExp("#","g"),",")
         var list = str.split(',');
+        if(data.hero)
+        {
+            var hero = data.hero.split(',');
+            for(var i=0;i<hero.length;i++)
+            {
+                var id = hero[i];
+                hero[i] = {
+                    id: id,
+                    isHero: true,
+                    lv: HeroManager.getInstance().getHeroLevel(id),
+                }
+            }
+            list = hero.concat(list)
+        }
 
+        //console.log(list)
         this.dataArray.source = list;
         this.dataArray.refresh()
 

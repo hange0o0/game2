@@ -46,6 +46,13 @@ class MainBottomBtn extends game.BaseItem {
          egret.Tween.removeTweens(this)
          egret.Tween.removeTweens(this.text)
          egret.Tween.removeTweens(this.mc)
+        var bottom1 = 50
+        var bottom2 = 20
+        if(this.data.type == 'hero')
+        {
+            bottom1 -= 8
+            bottom2 -= 8
+        }
         if(mv)
         {
             var tw1 = egret.Tween.get(this)
@@ -56,13 +63,13 @@ class MainBottomBtn extends game.BaseItem {
             {
                 tw1.to({width:200},cd)
                 tw2.to({alpha:1},cd)
-                tw3.to({bottom:50},cd)
+                tw3.to({bottom:bottom1},cd)
             }
             else
             {
                 tw1.to({width:110},cd)
                 tw2.to({alpha:0},cd)
-                tw3.to({bottom:20},cd)
+                tw3.to({bottom:bottom2},cd)
             }
         }
         else
@@ -71,13 +78,13 @@ class MainBottomBtn extends game.BaseItem {
             {
                 this.width = 200
                 this.text.alpha = 1
-                this.mc.bottom = 50
+                this.mc.bottom = bottom1
             }
             else
             {
                 this.width = 110
                 this.text.alpha = 0
-                this.mc.bottom = 20
+                this.mc.bottom = bottom2
             }
         }
 

@@ -282,16 +282,33 @@ class PKManager {
     public resetAutoList(player:PKPlayerData,lastList){
         var lastArr = [];
         if(lastList)
-            lastArr = lastList.split(',');
+        {
+            if(typeof lastList == 'string')
+                lastArr = lastList.split(',');
+            else
+                lastArr = lastList.list
+        }
         var index = lastArr.indexOf('0');
         if(index != -1)
             lastArr.length = index;
         if(player.useCardList.length > lastArr.length)
             lastArr = player.useCardList.concat();
         var len = player.autolist.split(',').length;
+        if(player.heroList)
+        {
+            for(var i=0;i<player.heroList.length;i++)
+            {
+                 if(player.heroList[i].mid)
+                     len ++;
+            }
+        }
         while(lastArr.length < len)
             lastArr.push(0);
-        return lastArr.join(',');
+        return {
+            list:lastArr.join(','),
+            force:player.force,
+            hero:player.hero
+        }
     }
 
     public stopPK(){
@@ -357,18 +374,33 @@ class PKManager {
 
 
 
+
         atkList = atkList.join(',')
 
         var pkData = {
             seed:TM.now(),
             players:[
-                {id:1,gameid:'npc',team:2,autolist:def.list,force:UM.tec_force,type:UM.type,hp:TecManager.getInstance().getHp(),nick:def.name,head:head1},
-                {id:2,gameid:UM.gameid,team:1,card:atkList,force:UM.tec_force,nick:atk.name,type:UM.type,hp:TecManager.getInstance().getHp(),head:head2}
+                {id:1,gameid:'npc',team:2,autolist:def.list,force:UM.tec_force,type:UM.type,hp:TecManager.getInstance().getHp(),nick:def.name,head:head1,hero:this.changeHero(def.hero)},
+                {id:2,gameid:UM.gameid,team:1,card:atkList,force:UM.tec_force,nick:atk.name,type:UM.type,hp:TecManager.getInstance().getHp(),head:head2,hero:this.changeHero(atk.hero)}
             ]
         };
         PKManager.getInstance().pkType = PKManager.TYPE_TEST
         PD.init(pkData);
         PKingUI.getInstance().show();
+    }
+
+    private changeHero(hero){
+        if(!hero)
+            return ''
+        var arr = hero.split(',')
+        for(var i=0;i<5;i++)
+        {
+            var hid = arr[i];
+            if(!hid)
+                hid = 0;
+            arr[i] = hid+'|'+HeroManager.getInstance().getHeroLevel(hid);
+        }
+        return arr.join(',');
     }
 
     //public startPlay(){

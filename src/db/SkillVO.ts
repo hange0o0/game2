@@ -48,6 +48,10 @@ class SkillVO {
         this.sv4 = data.sv4
     }
 
+    public isHero(){
+        return false;
+    }
+
     public getImage(gay?){
         if(gay)
             return Config.localResRoot + 'card_gay/card_'+this.id+'.jpg';
@@ -107,6 +111,13 @@ class SkillVO {
 
     public getSkillValue(index,force=0){
         var sv = this['sv' + index];
+        if(DEBUG)
+        {
+            if(force && this.des.indexOf('$'+index) == -1)
+                throw new Error(this.id + '_$' + index)
+            else if(!force && this.des.indexOf('#'+index) == -1)
+                throw new Error(this.id + '_#' + index)
+        }
         if(!force)
             return sv
         return Math.floor(sv * (1+force/100));

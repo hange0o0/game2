@@ -46,7 +46,7 @@ class M8 extends MBase {
             var target = arr[i];
             if(!target.dieTime)
                 continue;
-            if(target.hp>= user.getSkillValue(2))
+            if(target.hp>= user.getSkillValue(2,true))
                 continue;
             if(!target.beSkillAble())
                 continue;

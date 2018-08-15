@@ -10,6 +10,11 @@ class PosListHeadClickItem extends PosListHeadItem {
     private onClick() {
         var vo = CM.getCardVO(this.data);
         if(vo)
-            CardInfoUI.getInstance().show(vo);
+        {
+            if(vo.isHero())
+                HeroInfoUI.getInstance().show(vo,this.data);
+            else
+                CardInfoUI.getInstance().show(vo,this.data);
+        }
     }
 }

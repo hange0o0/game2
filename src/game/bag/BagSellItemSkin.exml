@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="BagSellItemSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="560" states="sell,buy" >
 	<e:Image y="0" height="90" left="0" right="0" source="bg2_png" scale9Grid="10,10,10,7"/>
+	<e:Rect id="redMC" width="560" height="100%" x="0" y="0" fillColor="0xFF0000" fillAlpha="0.2" ellipseWidth="20"/>
 	<e:Group x="10" verticalCenter="0">
 		<e:Image y="0" width="70" height="70" horizontalCenter="0" source="prop_bg_jpg"/>
 		<e:Image id="mc" width="55" height="55" source="bg5_png" horizontalCenter="0" verticalCenter="0"/>

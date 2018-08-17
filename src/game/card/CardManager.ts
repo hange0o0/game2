@@ -154,6 +154,44 @@ class CardManager {
         return Math.floor(Math.pow(vo.level,3.9)*100);    //要改成3.9
     }
 
+    public resetOtherList(listData){
+
+        if(typeof listData == 'string')
+            return  listData.split(',');
+        //list:lastArr.join(','),
+        //    force:player.force,
+        //    type:player.type,
+        //    hero:player.hero
+        var list = listData.list.split(',')
+        for(var i=0;i<list.length;i++)
+        {
+            var oo:any = {};
+            var vo = CM.getCardVO(list[i])
+            if(!vo)
+                continue;
+            oo.id = list[i];
+            oo.force = listData.force
+            oo.type = listData.type
+            if(vo.isHero())
+            {
+                oo.lv = this.getHeroLV(oo.id,listData.hero)
+            }
+            list[i] = oo;
+        }
+        return list;
+    }
+
+    private getHeroLV(id,data){
+        var arr = data.split(',')
+        for(var i=0;i<arr.length;i++)
+        {
+            var temp = arr[i].split('|');
+            if(temp[0] == id)
+                return parseInt(temp[1]);
+        }
+        return 1;
+    }
+
 
     public card_buy(id,fun?){
         var oo:any = {};

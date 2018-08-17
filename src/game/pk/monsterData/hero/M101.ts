@@ -74,7 +74,7 @@ class M101 extends MBase {
             user.callHeroSkill = 1;
             list = PD.getMonsterByTeam(user.getOwner().teamData.enemy,this.testTarget,[user]);
             if(list.length > 0)
-                return [ArrayUtil.randomOne(list)];
+                return [PKData.getInstance().randomOne(list)];
         }
         if(user.level >= 2 && this.isHeroSkillCDOK(user,2))
         {
@@ -92,9 +92,11 @@ class M101 extends MBase {
         {
             case 1:
             case 2:
+                //PKData.getInstance().actionRecord.push('skill|' + PKData.getInstance().actionTime+'|' + user.id+'|'+target.id)
                 var hp = user.getVO().getHeroSkill(user.useingHeroSkill).getSkillValue(1,user)
                 target.beAtkAction({hp:hp,atker:user})
                 user.atkAction({hp:hp})
+
                 break;
         }
     }

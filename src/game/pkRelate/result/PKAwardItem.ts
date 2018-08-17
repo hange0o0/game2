@@ -22,7 +22,12 @@ class PKAwardItem extends game.BaseItem {
     }
 
     public dataChanged() {
-        if(this.data.img)
+        if(this.data.isHero)
+        {
+            this.img.source = this.data.img
+            this.currentState = 's3'
+        }
+        else if(this.data.img)
         {
             this.img.source = this.data.img
             this.currentState = 's1'

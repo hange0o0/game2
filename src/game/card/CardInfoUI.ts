@@ -197,7 +197,16 @@ class CardInfoUI extends game.BaseWindow {
         var CM = CardManager.getInstance()
         var homeLevel = TecManager.getInstance().getLevel(1)
         this.upAble = true
-        if(this.r0.selected)
+        if(this.sp.force)
+        {
+            this.item.renew({
+                mid:this.data.id,
+                sp:this.sp,
+                force:this.sp.force,
+                type:this.sp.type
+            });
+        }
+        else if(this.r0.selected)
         {
             this.item.renew({
                 mid:this.data.id,
@@ -217,7 +226,12 @@ class CardInfoUI extends game.BaseWindow {
         }
 
 
-        if(this.data.isMonster)
+        if(this.sp.force)
+        {
+            this.currentState = 'view'
+            return;
+        }
+        else if(this.data.isMonster)
         {
             if(CM.monsterList[this.data.id] || this.data.level > homeLevel)
             {

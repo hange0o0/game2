@@ -97,7 +97,7 @@ class PVPContinueUI extends game.BaseWindow {
 
 
         PVPManager.getInstance().lastEnemyList = PKManager.getInstance().resetAutoList(player,PVPManager.getInstance().lastEnemyList)
-        this.list.dataProvider = new eui.ArrayCollection(PVPManager.getInstance().lastEnemyList.split(','));
+        this.list.dataProvider = new eui.ArrayCollection(CardManager.getInstance().resetOtherList(PVPManager.getInstance().lastEnemyList));
 
         if(!PVPManager.getInstance().history)
             PVPManager.getInstance().history = [];

@@ -10,6 +10,7 @@ class BasePosHeroChooseUI extends game.BaseWindow {
     private scroller: eui.Scroller;
     private list: eui.List;
     private titleText: eui.Label;
+    private emptyGroup: eui.Group;
 
 
 
@@ -22,6 +23,7 @@ class BasePosHeroChooseUI extends game.BaseWindow {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.scroller.viewport = this.list;
         this.list.itemRenderer = BasePosHeroChooseItem;
         this.touchEnabled = false
 
@@ -82,5 +84,6 @@ class BasePosHeroChooseUI extends game.BaseWindow {
                 list.push({id:id})
         }
         this.list.dataProvider = new eui.ArrayCollection(list)
+        this.emptyGroup.visible = list.length == 0
     }
 }

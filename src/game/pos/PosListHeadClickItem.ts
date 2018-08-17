@@ -8,7 +8,7 @@ class PosListHeadClickItem extends PosListHeadItem {
     }
 
     private onClick() {
-        var vo = CM.getCardVO(this.data);
+        var vo = CM.getCardVO(this.id);
         if(vo)
         {
             if(vo.isHero())

@@ -136,18 +136,14 @@ class BasePosUI extends game.BaseUI {
 
     private onInfo(){
         this.infoGroup.visible = true;
-        this.infoList.dataProvider = new eui.ArrayCollection(this.resetOtherList())
+        this.infoList.dataProvider = new eui.ArrayCollection(CardManager.getInstance().resetOtherList(this.pkData.otherList))
         this.infoList.validateNow();
         this.infoGroup.bottom = -this.infoGroup.height;
         egret.Tween.get(this.infoGroup).to({bottom:0},200);
         this.videoBtn.visible = this.pkData.history && this.pkData.history.length > 0
     }
 
-    private resetOtherList(){
-         var listData = this.pkData.otherList;
-        if(typeof listData == 'string')
-            return  listData.split(',');
-    }
+
 
     private onInfoClose(){
         egret.Tween.get(this.infoGroup).to({bottom:-this.infoGroup.height},200).call(()=>{

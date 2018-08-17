@@ -227,6 +227,32 @@ class PKManager {
 
         return result;
     }
+    ////主动时数据会多很多，要去掉才能和后面的比较
+    //private resetArr(){
+    //    var arr;
+    //    for(var i=0;i<arr.length;i++)
+    //    {
+    //        if(typeof arr[i] == 'number')
+    //        {
+    //            arr.splice(i,1);
+    //            i--;
+    //            continue;
+    //        }
+    //        if(arr[i].indexOf('mv') != -1)
+    //        {
+    //            arr.splice(i,1);
+    //            i--;
+    //            continue;
+    //        }
+    //        if(arr[i].indexOf('mid') != -1)
+    //        {
+    //            arr.splice(i,1);
+    //            i--;
+    //            continue;
+    //        }
+    //    }
+    //}
+
 
     public sendFail(fun){
         if(PKData.getInstance().isReplay)
@@ -286,7 +312,7 @@ class PKManager {
             if(typeof lastList == 'string')
                 lastArr = lastList.split(',');
             else
-                lastArr = lastList.list
+                lastArr = lastList.list.split(',');
         }
         var index = lastArr.indexOf('0');
         if(index != -1)
@@ -307,6 +333,7 @@ class PKManager {
         return {
             list:lastArr.join(','),
             force:player.force,
+            type:player.type,
             hero:player.hero
         }
     }

@@ -69,8 +69,22 @@ class PVPInfoItem extends game.BaseItem {
         {
             this.boxBtn.visible = true
             MyTool.changeGray(this.boxMC,this.data.current < this.data.num)
-            this.boxMC.source = MyTool.getPropBox(this.data.box)
-            this.boxText.text = 'lv.' + this.data.box
+            if(this.data.box)
+            {
+                this.boxMC.source = MyTool.getPropBox(this.data.box)
+                this.boxText.text = 'lv.' + this.data.box
+            }
+            else if(this.data.skill)
+            {
+                this.boxMC.source = MyTool.getSkillBox(this.data.skill)
+                this.boxText.text = ''
+            }
+            else if(this.data.hero)
+            {
+                this.boxMC.source = MyTool.getHeroBox(this.data.hero)
+                this.boxText.text = ''
+            }
+
         }
 
     }

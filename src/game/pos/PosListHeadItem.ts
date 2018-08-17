@@ -17,7 +17,7 @@ class PosListHeadItem extends game.BaseItem {
 
 
 
-
+    public id
     public childrenCreated() {
         super.childrenCreated();
         this.img.hideType = true;
@@ -33,12 +33,12 @@ class PosListHeadItem extends game.BaseItem {
         var isHero = false
         if(typeof this.data == 'object')
         {
-            var id = this.data.id;
+            var id = this.id = this.data.id;
             isHero = this.data.isHero
             var lv = this.data.lv
         }
         else
-            var id = this.data;
+            var id = this.id = this.data;
         var vo:any = CM.getCardVO(id);
         if(vo)
         {

@@ -213,6 +213,7 @@ class MainUI extends game.BaseUI {
 
     private onHangChange(){
         this.bg.source = PKManager.getInstance().getBG(HangManager.getInstance().getHangBGID());
+        this.renewRed()
     }
 
     public onShow(){

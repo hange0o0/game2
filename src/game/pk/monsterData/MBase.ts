@@ -29,8 +29,8 @@ class MBase {
         }
         return false;
     }
-    public setHeroSkillUse(user,id){
-        user.skillTemp['hs' + id] = PKData.getInstance().actionTime;
+    public setHeroSkillUse(user,id,t?){
+        user.skillTemp['hs' + id] = Math.max(t || PKData.getInstance().actionTime, user.skillTemp['hs' + id] || 0);
         //console.log( JSON.stringify(user.skillTemp))
     }
 
@@ -185,7 +185,7 @@ class MBase {
         var atk = user.atk * user.getAtkRate(target);
         if(user.doubleAction)
             atk *= user.doubleValue;
-        return atk;
+        return Math.ceil(atk);
     }
 
     //取最终伤害
@@ -195,7 +195,7 @@ class MBase {
         var hp = Math.floor(atk * Math.max(1-(target.def + teamDef)/100,0));
         if(hp < 1)
             hp = 1;
-        return hp;
+        return Math.ceil(hp);
     }
 
     protected sendAtkBefore(user,target,actionTime,endTime){

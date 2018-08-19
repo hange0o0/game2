@@ -29,6 +29,7 @@ class PKBuffData {
         //    this.nick = '守卫者' + this.id;
     }
 
+    //def,atk,addSpeed,hpChange
     public addValue(key,value){
         this.add[key] = value
         this.haveValue = true

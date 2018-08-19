@@ -330,6 +330,10 @@ class PKMonsterData {
         return this.skillTargets
     }
 
+    public isHero(){
+        return this.getVO().isHero();
+    }
+
     public setSkillUse(actionTime){
 
         if(this.getVO().isHero())

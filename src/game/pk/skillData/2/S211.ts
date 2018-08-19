@@ -22,6 +22,8 @@ class S211 extends SBase {
             var target = arr[i];
             if(!target.beSkillAble())
                 continue;
+            if(target.isHero())
+                continue;
             list.push(target)
 
         }

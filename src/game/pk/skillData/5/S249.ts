@@ -10,12 +10,16 @@ class S249 extends SBase {
         if(arr.length > num)
         {
             PD.randSort(arr)
-            arr.length = num;
         }
         for(var i=0;i<arr.length;i++)
         {
             var target = arr[i];
+            if(target.isHero())
+                continue;
             target.setDie();
+            num --;
+            if(num <= 0)
+                break;
         }
         return arr;
     }

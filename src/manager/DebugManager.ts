@@ -17,8 +17,9 @@ class DebugManager {
 
     public MML = 998;  //测试出战怪的等级
     public addSkill = false
-    public addHeroLevel = 5
+    public addHeroLevel = 0
     public cardLen = 15
+    public needTestTwo = false
     public createHangFlag = false;
 
 
@@ -220,7 +221,7 @@ class DebugManager {
         arr = this.testOne(arr.shift(),arr.shift())
         for(var i=0;i<arr.length;i++)
         {
-            var temp = arr[i].split(',');
+            var temp = arr[i].list.split(',');
             for(var j=0;j<temp.length;j++)
             {
                 var id = temp[j];
@@ -228,6 +229,18 @@ class DebugManager {
                     this.winMonster[id] ++;
                 else
                     this.winMonster[id] = 1;
+            }
+            if(arr[i].hero)
+            {
+                var temp = arr[i].hero.split(',');
+                for(var j=0;j<temp.length;j++)
+                {
+                    var id = temp[j].split('|')[0];
+                    if(this.winMonster[id])
+                        this.winMonster[id] ++;
+                    else
+                        this.winMonster[id] = 1;
+                }
             }
             this.winCardArr.push(arr[i]);
         }
@@ -257,6 +270,17 @@ class DebugManager {
         PD.quick = true;
         PD.start();
         PKCode.getInstance().onStep()
+        if(this.needTestTwo)
+        {
+            var temp = PD.actionTime;
+            PD.init(data);
+            PD.quick = true;
+            PD.start();
+            PKCode.getInstance().onStep()
+            if(temp != PD.actionTime)
+                throw new Error('11111')
+        }
+
         var winlist;
         if(PD.isWin())
         {

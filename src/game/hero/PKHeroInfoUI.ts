@@ -42,6 +42,7 @@ class PKHeroInfoUI extends game.BaseContainer {
         this.heroItem = new HeroMVItem()
         this.heroItem.x = 110
         this.heroItem.y = 200
+        this.heroItem.scaleX = -1
         this.cardGroup.addChild(this.heroItem);
     }
 

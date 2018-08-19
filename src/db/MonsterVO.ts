@@ -131,6 +131,9 @@ class MonsterVO {
     public getHeroSkill(id){
         return HeroSkillVO.getObject(this.id+'_' + id);;
     }
+    public getHeroSkillValue(id,index,user?){
+        return this.getHeroSkill(id).getSkillValue(index,user);
+    }
 
     public isHero(){
         return this.id > 100 && this.id < 130;

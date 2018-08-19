@@ -11,6 +11,8 @@ class S262 extends SBase {
         for(var i=0;i<arr.length;i++)
         {
             var target = arr[i];
+            if(target.isHero())
+                continue;
             if(target.hp < value)
                 target.setDie();
         }

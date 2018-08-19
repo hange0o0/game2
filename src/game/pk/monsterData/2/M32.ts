@@ -56,12 +56,10 @@ class M32StateListener extends PKStateListener {
         var arr = PD.getMonsterByTeam(user.getOwner().teamData);
         var atkrage = user.getSkillValue(1);
         var list = [];
-
+        var hp = user.getSkillValue(2,true);
         for(var i=0;i<arr.length;i++)
         {
             var targetEnemy = arr[i];
-            if(!targetEnemy.beSkillAble())
-                continue;
             var des = Math.abs(user.x - targetEnemy.x);
             if(des<=atkrage)
             {
@@ -77,7 +75,7 @@ class M32StateListener extends PKStateListener {
                     continue;
                 }
                 targetEnemy.skillTemp[32].push(this.actionTime);
-                targetEnemy.addHp(user.getSkillValue(2,true))
+                targetEnemy.addHp(hp)
             }
         }
         return list;

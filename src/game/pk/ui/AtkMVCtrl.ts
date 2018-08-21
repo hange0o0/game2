@@ -344,6 +344,17 @@ class AtkMVCtrl {
             this.playAniOn(target.id,mBase.mvID1)
     }
 
+    public skillMV102(user,target,actionTime,endTime){
+        var userItem = PKVideoCon.getInstance().getItemByID(user.id);
+        var targetItem = PKVideoCon.getInstance().getItemByID(target.id);
+        PKBulletManager.getInstance().createArrow(userItem,targetItem,actionTime,endTime)
+    }
+
+    public skillMV114(user,target,actionTime,endTime){
+        var mBase = MBase.getData(114)
+        this.playAniOn(target.id,mBase.mvID1)
+    }
+
     ////////////////////////////////////////////////////////////////
 
 

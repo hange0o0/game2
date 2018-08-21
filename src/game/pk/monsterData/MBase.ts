@@ -22,7 +22,12 @@ class MBase {
     public isHeroSkillCDOK(user,id){
         var lastSkillTime = user.skillTemp['hs' + id] || 0;
 
-        if(PKData.getInstance().actionTime > lastSkillTime + user.getVO().getHeroSkill(id).skillcd)
+        var cd = user.getVO().getHeroSkill(id).skillcd;
+        if(user.mid == 102 && user.level >=5) //减CD技能
+        {
+            cd = user.getVO().getHeroSkillValue(5,1) * 1000;
+        }
+        if(PKData.getInstance().actionTime > lastSkillTime + cd)
         {
             //console.log(PKData.getInstance().actionTime , lastSkillTime , user.getVO().getHeroSkill(id).skillcd,JSON.stringify(user.skillTemp))
             return true;

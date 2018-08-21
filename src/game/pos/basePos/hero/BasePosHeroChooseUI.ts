@@ -74,6 +74,7 @@ class BasePosHeroChooseUI extends game.BaseWindow {
     public renew(){
         this.titleText.text = '选择英雄'
         var arr = HeroManager.getInstance().getMyHeroList();
+        ArrayUtil.sortByField(arr,['temp','id'],[1,0])
         var list = [];
         //if(this.dataIn.id)
         //    list.push({remove:this.dataIn.index})

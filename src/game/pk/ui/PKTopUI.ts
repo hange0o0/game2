@@ -47,6 +47,14 @@ class PKTopUI extends game.BaseContainer {
         switch(videoData.type)//动画类型
         {
             case PKConfig.VIDEO_POS_SHOW:
+                if(videoData.isHero)
+                {
+                    if(videoData.user.teamData != PKData.getInstance().myPlayer.teamData)
+                    {
+                        this.addSkillItem(videoData);
+                    }
+                    break
+                }
                 var data:PKPosCardData = videoData.user;
                 var teamData = data.getOwner().teamData
                 if(teamData.id != 'sys' && teamData != PKData.getInstance().myPlayer.teamData)
@@ -261,7 +269,7 @@ class PKTopUI extends game.BaseContainer {
     }
 
 
-    public addSkillItem(data){
+    public addSkillItem(data,isHero?){
         for(var i=0;i<this.itemArr.length;i++)
         {
             var item:PKTopItem = this.itemArr[i];

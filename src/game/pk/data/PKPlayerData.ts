@@ -188,6 +188,18 @@ class PKPlayerData {
                 actionTime:PD.actionTime
             }
             PD.addMonster(monsterData);
+
+            var step = Math.floor(PKData.getInstance().actionTime/PKConfig.stepCD)
+            this.posHistory.push(step + '#' +oo.mid);
+            this.useCardList.push(oo.mid)
+
+            PKData.getInstance().addVideo({
+                type:PKConfig.VIDEO_POS_SHOW,
+                isHero:true,
+                mid:oo.mid,
+                level:oo.level,
+                user:this
+            })
             return true;
         }
         return false

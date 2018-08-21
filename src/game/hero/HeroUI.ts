@@ -11,6 +11,7 @@ class HeroUI extends MainBase {
     public list: eui.List;
     private tab: eui.TabBar;
     private emptyGroup: eui.Group;
+    private helpBtn: eui.Image;
 
 
 
@@ -30,6 +31,12 @@ class HeroUI extends MainBase {
 
         this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
         this.tab.selectedIndex = 0;
+
+        this.addBtnEvent(this.helpBtn,this.onHelp)
+    }
+
+    private onHelp(){
+         HelpManager.getInstance().showHelp('hero')
     }
 
 

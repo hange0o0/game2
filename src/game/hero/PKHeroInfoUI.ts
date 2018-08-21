@@ -25,6 +25,7 @@ class PKHeroInfoUI extends game.BaseContainer {
 
 
 
+    private inPK = false
     public dataIn
     public heroItem;
 
@@ -32,7 +33,7 @@ class PKHeroInfoUI extends game.BaseContainer {
     private stageY
     public constructor() {
         super();
-        this.skinName = "PKCardInfoSkin";
+        this.skinName = "PKHeroInfoSkin";
     }
 
     public childrenCreated() {
@@ -48,7 +49,7 @@ class PKHeroInfoUI extends game.BaseContainer {
 
 
     public show(v){
-
+        this.inPK = true;
         GameManager.container.addChild(this);
         GameManager.stage.once(egret.TouchEvent.TOUCH_END,this.hide,this,true);
         GameManager.stage.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.onMove,this);
@@ -91,6 +92,7 @@ class PKHeroInfoUI extends game.BaseContainer {
 
 
     public renew(v){
+
         this.dataIn = v;
         this.bg.source = PKManager.getInstance().getBG(HangManager.getInstance().getHangBGID())
         var vo:MonsterVO = MonsterVO.getObject(this.dataIn.mid)
@@ -113,6 +115,34 @@ class PKHeroInfoUI extends game.BaseContainer {
         var lv = this.dataIn.level;
         for(var i=0;i<5;i++)
             this['s' + i].source = lv>i?'start1_png':'start2_png'
+        if(this.inPK)
+        {
+            this.currentState = 'normal'
+            this.pkInfoText.text = '品质：' + lv
+        }
+        else
+        {
+            this.currentState = 'info'
+            //    <e:Rect width="180" height="12" ellipseWidth="12" fillColor="0x441A02" x="0" verticalCenter="0"/>
+            //<e:Rect id="barMC" width="120" height="12" ellipseWidth="12" x="0" fillColor="0xD16404" verticalCenter="0"/>
+            //<e:Label id="rateText" text="200/300" size="20" horizontalCenter="0.5" stroke="2" verticalCenter="0"/>
+
+            if(lv == 5)
+            {
+                this.barMC.width = 180;
+                this.rateText.text = 'max'
+            }
+            else
+            {
+                var num =  HeroManager.getInstance().getHero(vo.id);
+                var v1 = HeroManager.getInstance().levelBase[lv]
+                var v2 = HeroManager.getInstance().levelBase[lv + 1]
+                var d1 = num - v1;
+                var d2 = v2 - v1;
+                this.barMC.width = 180*d1/d2;
+                this.rateText.text = d1 + '/' + d2;
+            }
+        }
 
 
         var baseForceAdd = CM.getCardVO(this.dataIn.mid).getAdd(this.dataIn.force)

@@ -35,6 +35,20 @@ class PKTopItem extends game.BaseItem {
     private onLongTouch(){
         if(!this.data)
             return;
+        if(this.data.isHero)
+        {
+            var player = this.data.user
+            PKHeroInfoUI.getInstance().show({
+                target:this,
+                mid:this.data.mid,
+                force:player.force,
+                type:player.type,
+                level:this.data.level,
+                rota:player.teamData.atkRota,
+                teamDef:player.teamData.getTeamDef()
+            })
+            return;
+        }
         var player = this.data.getOwner()
         PKCardInfoUI.getInstance().show({
             target:this,
@@ -54,7 +68,18 @@ class PKTopItem extends game.BaseItem {
         this.alpha = 1;
 
 
-        if(this.data)
+        if(this.data && this.data.isHero)
+        {
+            var mvo = MonsterVO.getObject(this.data.mid)
+            this.heroMC.source = mvo.getImage()
+            this.heroBG.source = mvo.getHeroBG(this.data.level);
+            this.indexText.text = this.data.topIndex;
+            this.currentState = 'hero'
+
+            for(var i=0;i<5;i++)
+                this['s' + i].source = this.data.level>i?'start1_png':'start2_png'
+        }
+        else if(this.data)
         {
             var vo:any = CM.getCardVO(this.data.mid)
             this.img.data = vo.id;

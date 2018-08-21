@@ -17,14 +17,15 @@ class DebugManager {
 
     public MML = 998;  //测试出战怪的等级
     public addSkill = false
-    public addHeroLevel = 0
+    public addHeroLevel = 5
     public cardLen = 15
-    public needTestTwo = false
+    public needTestTwo = true
     public createHangFlag = false;
 
 
     public printDetail = false;  //打印胜出怪物
     public winMonster = {}
+    public winUseCard = []
 
     public createHang(level,cardLen){
         this.createHangFlag = true
@@ -148,6 +149,7 @@ class DebugManager {
         this.testNum = 0;
         this.stop = 0;
         this.winMonster = {};
+        this.winUseCard = [];
         setTimeout(()=>{
             this.testRound();
         },1);
@@ -159,7 +161,7 @@ class DebugManager {
         var arr = [];
         for(var s in MonsterVO.data)
         {
-            if(MonsterVO.data[s].level <= this.MML)
+            if(MonsterVO.data[s].level <= this.MML || this.winMonster[s])
                 arr.push({id:s,num:this.winMonster[s] || 0})
         }
         if(this.addSkill)
@@ -171,6 +173,25 @@ class DebugManager {
             }
         }
 
+        ArrayUtil.sortByField(arr,['num'],[1]);
+        for(var i=0;i<arr.length;i++)
+        {
+            var id = arr[i].id;
+            console.log((i + 1) + '\tid:' +id +  '\t\tnum:' +  arr[i].num + '\t\tcost:' +  CM.getCardVO(id).cost + '\t\tname:' +  CM.getCardVO(id).name + '\t\tlevel:' +  CM.getCardVO(id).level + '\t\ttype:' +  CM.getCardVO(id).type)
+        }
+
+        console.log('\n====================================使用量\n')
+        var oo = {}
+        for(var s in this.winUseCard)
+        {
+            var id = this.winUseCard[s];
+            oo[id] = (oo[id] || 0) + 1
+        }
+        var arr = [];
+        for(var s in oo)
+        {
+                arr.push({id:s,num:oo[s] || 0})
+        }
         ArrayUtil.sortByField(arr,['num'],[1]);
         for(var i=0;i<arr.length;i++)
         {
@@ -240,6 +261,7 @@ class DebugManager {
                         this.winMonster[id] ++;
                     else
                         this.winMonster[id] = 1;
+                    console.log(id)
                 }
             }
             this.winCardArr.push(arr[i]);
@@ -284,14 +306,22 @@ class DebugManager {
         var winlist;
         if(PD.isWin())
         {
+            list1.useCard = PD.getPlayer(1).useCardList;
+            this.winUseCard = this.winUseCard.concat( list1.useCard)
             return [list1];
         }
         else if(PD.isDraw())
         {
+            list1.useCard = PD.getPlayer(1).useCardList;
+            list2.useCard = PD.getPlayer(2).useCardList;
+            this.winUseCard = this.winUseCard.concat( list1.useCard)
+            this.winUseCard = this.winUseCard.concat( list2.useCard)
             return [list1,list2];
         }
         else
         {
+            list2.useCard = PD.getPlayer(2).useCardList;
+            this.winUseCard = this.winUseCard.concat( list2.useCard)
             return [list2];
         }
     }

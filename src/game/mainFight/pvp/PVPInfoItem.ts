@@ -22,7 +22,12 @@ class PVPInfoItem extends game.BaseItem {
     private onClick(){
         if(this.data.current < this.data.num)
         {
-            MyWindow.ShowTips(this.data.box + '级资源宝箱，任务达成后可领取')
+            if(this.data.box)
+                MyWindow.ShowTips(this.data.box + '级资源宝箱，任务达成后可领取')
+            else if(this.data.hero)
+                MyWindow.ShowTips(this.data.hero + '级英雄宝箱，任务达成后可领取')
+            else if(this.data.skill)
+                MyWindow.ShowTips(this.data.skill + '级技能宝箱，任务达成后可领取')
             return;
         }
         PVPManager.getInstance().getAward(this.data.index);

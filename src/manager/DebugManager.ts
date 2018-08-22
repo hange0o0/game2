@@ -19,7 +19,7 @@ class DebugManager {
     public addSkill = false
     public addHeroLevel = 5
     public cardLen = 15
-    public needTestTwo = true
+    public needTestTwo = false
     public createHangFlag = false;
 
 
@@ -34,6 +34,24 @@ class DebugManager {
         this.winCardArr.length = 0
         this.addSkill = false;
         this.test();
+    }
+
+    public createHangHero(level,num){
+        var hero = []
+        for(var s in MonsterVO.data)
+        {
+            var mvo = MonsterVO.data[s]
+            if(mvo.isHero() && mvo.getHeroLevel() <= level)
+            {
+                hero.push(mvo.id)
+            }
+        }
+
+        for(var i=0;i<50;i++)
+        {
+            ArrayUtil.random(hero);
+            console.log(hero.slice(0,num).join(','));
+        }
     }
 
     public showHangResult(){
@@ -261,7 +279,6 @@ class DebugManager {
                         this.winMonster[id] ++;
                     else
                         this.winMonster[id] = 1;
-                    console.log(id)
                 }
             }
             this.winCardArr.push(arr[i]);

@@ -3,7 +3,7 @@ class M108 extends MBase{
         super();
     }
 
-
+    public mvID1 = 103;
     public onCreate(user:PKMonsterData){
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData);
@@ -80,6 +80,7 @@ class M108 extends MBase{
             case 2:
                 var hp = user.getVO().getHeroSkillValue(user.useingHeroSkill,1,user)
                 target.beAtkAction({hp:hp,atker:user})
+                user.addAtkHurt(hp)
 
                 this.testAddHp(user,hp)
 
@@ -95,6 +96,7 @@ class M108 extends MBase{
                 var hp = PKData.getInstance().rand(user.getVO().getHeroSkillValue(user.useingHeroSkill,1,user),
                     user.getVO().getHeroSkillValue(user.useingHeroSkill,2,user))
                 target.beAtkAction({hp:hp,atker:user})
+                user.addAtkHurt(hp)
                 this.testAddHp(user,hp)
                 break;
         }
@@ -111,6 +113,7 @@ class M108 extends MBase{
             {
                 var hp = user.getVO().getHeroSkillValue(4,2,user)
                 target.beAtkAction({hp:hp})
+                user.addAtkHurt(hp)
                 this.testAddHp(user,hp)
 
 

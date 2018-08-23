@@ -26,8 +26,10 @@ class M102 extends MBase{
                     list.push(target)
                 }
             }
+            user.callHeroSkill = 1;
             return list;
         }
+        return [];
     }
 
     public skill(user:PKMonsterData,target){
@@ -35,6 +37,7 @@ class M102 extends MBase{
         {
             var hp = user.getVO().getHeroSkillValue(1,2,user)
             target.beAtkAction({hp:hp,atker:user})
+            user.addAtkHurt(hp)
 
             if(user.level >= 2)
             {

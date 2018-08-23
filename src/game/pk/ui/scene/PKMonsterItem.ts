@@ -109,6 +109,8 @@ class PKMonsterItem extends game.BaseItem {
             return;
         if(id == PKConfig.STATE_NOBEATK)
             return;
+        if(id == PKConfig.STATE_DIE2)
+            return;
         if(!this.stateMV[id])
         {
             var img = new PKState();

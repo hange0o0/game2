@@ -251,7 +251,7 @@ class PKingUI extends game.BaseUI {
         egret.Tween.removeTweens(this.heroMC);
         this.heroMC.visible = true
         this.heroMC.alpha = 1
-        egret.Tween.get(this.heroMC).to({alpha:0.3},42*10).to({alpha:1},42*10).to({alpha:0.3},42*10).to({alpha:1},42*10).to({alpha:0},42*10).call(function(){
+        egret.Tween.get(this.heroMC).to({alpha:0.3},42*10).to({alpha:1},42*10).to({alpha:0.3},42*10).call(function(){
             this.heroMC.visible = false
         },this)
     }

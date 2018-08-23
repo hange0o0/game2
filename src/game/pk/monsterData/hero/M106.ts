@@ -23,7 +23,7 @@ class M106 extends MBase{
             var newTarget = arr[i];
             if(!newTarget.beSkillAble())
                 continue;
-            var tDes = Math.abs(target.x - newTarget.x);
+            var tDes = Math.abs(user.x - newTarget.x);
             if(tDes > atkRage + newTarget.getVO().width/2)
                 continue;
 
@@ -42,14 +42,14 @@ class M106 extends MBase{
                 buff.addState(PKConfig.STATE_DIE);
                 buff.state[106] = heal
             }
-            target.addBuff(buff)
+            newTarget.addBuff(buff)
 
 
             if(buff.ing)
             {
                 PKData.getInstance().addVideo({
                     type:PKConfig.VIDEO_MONSTER_ADD_STATE,
-                    user:target,
+                    user:newTarget,
                     key:'def',
                     stateType:2
                 })
@@ -66,27 +66,31 @@ class M106 extends MBase{
     }
 
     public getSkillTarget(user:PKMonsterData){
-        if(user.level>=4)
+        if(user.level>=4  && this.isHeroSkillCDOK(user,4))
         {
             user.callHeroSkill = 4;
-            return [null];
-        }
-    }
-
-    public skill(user:PKMonsterData,target){
-        if(user.useingHeroSkill == 4)
-        {
             var PD = PKData.getInstance();
             var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
-            var hurt = user.getVO().getHeroSkillValue(4,1,user);
+            var list = [];
             for(var i=0;i<arr.length;i++)
             {
                 var newTarget = arr[i];
                 if(!newTarget.haveBuff(106))
                     continue;
-                newTarget.beAtkAction({hp:hurt})
-                user.addHp(hurt)
+                list.push(newTarget)
             }
+            return list;
+        }
+        return [];
+    }
+
+    public skill(user:PKMonsterData,target){
+        if(user.useingHeroSkill == 4)
+        {
+            var hurt = user.getVO().getHeroSkillValue(4,1,user);
+            target.beAtkAction({hp:hurt})
+            user.addAtkHurt(hurt)
+            user.addHp(hurt)
         }
     }
 }

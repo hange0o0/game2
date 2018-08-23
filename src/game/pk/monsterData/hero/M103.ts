@@ -65,8 +65,6 @@ class M103 extends MBase{
                     for(var i=0;i<arr.length;i++)
                     {
                         var newTarget = arr[i];
-                        if(newTarget == target)
-                            continue;
                         if(isToRight)
                         {
                             if(user.x > newTarget.x)
@@ -80,6 +78,7 @@ class M103 extends MBase{
                         if(tDes > atkRage + newTarget.getVO().width/2)
                             continue;
                         newTarget.beAtkAction({hp:hurt})
+                        user.addAtkHurt(hurt)
 
                         if(user.level >= 4)
                         {
@@ -90,7 +89,7 @@ class M103 extends MBase{
                             buff.user = user;
                             buff.endTime = PKData.getInstance().actionTime + 1000*user.getVO().getHeroSkillValue(4,1);
                             buff.addState(PKConfig.STATE_YUN);
-                            target.addBuff(buff)
+                            newTarget.addBuff(buff)
                         }
                     }
                 }

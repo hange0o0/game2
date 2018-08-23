@@ -46,6 +46,8 @@ class PKMonsterData {
 
     public id;//唯一ID
 
+    public atkHurtCount = 0;//累计输出伤害
+
     public stopTime = 0
     public lastSkill = 0
     public dieTime = 0
@@ -417,8 +419,17 @@ class PKMonsterData {
         return  this.target
     }
 
+    //统计累计伤害
+    public addAtkHurt(v){
+        if(v > 0)
+            this.atkHurtCount += v;
+    }
+
     public atkAction(data){
         this.listenerData = data;
+        if(data.hp)
+            this.addAtkHurt(data.hp)
+
         this.getOwner().teamData.testState(PKConfig.LISTENER_ATK,this);
     }
 
@@ -501,12 +512,13 @@ class PKMonsterData {
             for(var i=0;i<this.buff.length;i++)
             {
                 var oo:PKBuffData =  this.buff[i];
-                if(oo.ing && oo.haveState && oo.state[PKConfig.STATE_DIE])
+                if(oo.ing && oo.haveState && (oo.state[PKConfig.STATE_DIE] || oo.state[PKConfig.STATE_DIE2]))
                 {
-                    if(oo.id < PKConfig.skillBeginID)
-                        MBase.getData(oo.id).onBuff(oo);
+                    var id = parseInt((oo.id + '').split('_').shift())
+                    if(id < PKConfig.skillBeginID)
+                        MBase.getData(id).onBuff(oo);
                     else
-                        SBase.getData(oo.id).onBuff(oo);
+                        SBase.getData(id).onBuff(oo);
                 }
             }
             MBase.getData(this.mid).onDie(this);

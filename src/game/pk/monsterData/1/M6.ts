@@ -31,8 +31,9 @@ class M6 extends MBase {
             if(tDes > atkRage + newTarget.getVO().width/2)
                 continue;
 
-            var hp = this.getAtkHp(user,newTarget);
-            newTarget.beAtkAction({hp:Math.ceil(hp*hitRate)})
+            var hp = Math.ceil(this.getAtkHp(user,newTarget)*hitRate);
+            newTarget.beAtkAction({hp:hp})
+            user.addAtkHurt(hp)
         }
         return true;
     }

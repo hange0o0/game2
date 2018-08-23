@@ -84,6 +84,7 @@ class PKConfig {
     public static STATE_MIANSHANG = 4
     public static STATE_NOBEATK = 6
     public static STATE_DIE = 5 //死亡时触发的BUFF，
+    public static STATE_DIE2 = 6 //和STATE_DIE 一样，只是没图标
 
 
     public static LISTENER_NONE = 0

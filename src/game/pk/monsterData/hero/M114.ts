@@ -97,12 +97,14 @@ class M114 extends MBase{
         {
             var hp = user.getVO().getHeroSkillValue(user.useingHeroSkill,2,user)
             target.beAtkAction({hp:hp,atker:user})
+            user.addAtkHurt(hp)
             this.testSkill(user,target)
         }
         else if(user.useingHeroSkill == 3)
         {
             var hp = user.getVO().getHeroSkillValue(user.useingHeroSkill,2,user)
             target.beAtkAction({hp:hp,atker:user})
+            user.addAtkHurt(hp)
             this.testSkill(user,target)
         }
     }

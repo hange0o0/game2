@@ -17,7 +17,7 @@ class DebugManager {
 
     public MML = 998;  //测试出战怪的等级
     public addSkill = false
-    public addHeroLevel = 5
+    public addHeroLevel = 0
     public cardLen = 15
     public needTestTwo = false
     public createHangFlag = false;
@@ -26,6 +26,12 @@ class DebugManager {
     public printDetail = false;  //打印胜出怪物
     public winMonster = {}
     public winUseCard = []
+
+    public testHero(){
+        this.addHeroLevel = 5
+        this.needTestTwo = true
+        this.test();
+    }
 
     public createHang(level,cardLen){
         this.createHangFlag = true

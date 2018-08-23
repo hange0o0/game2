@@ -84,6 +84,7 @@ class M75StateListener extends PKStateListener {
                 targetX.skillTemp[75][this.id] = true;
                 var hp = MBase.getData(75).getAtkHp(user,targetX);
                 targetX.beAtkAction({hp:hp,atker:user})
+                user.addAtkHurt(hp)
             }
         }
     }

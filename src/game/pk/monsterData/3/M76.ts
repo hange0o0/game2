@@ -29,6 +29,7 @@ class M76 extends MBase {
             {
                 var hp = this.getAtkHp(user,targetX);
                 targetX.beAtkAction({hp:hp,atker:user})
+                user.addAtkHurt(hp)
 
                 if(targetX.beSkillAble())
                 {

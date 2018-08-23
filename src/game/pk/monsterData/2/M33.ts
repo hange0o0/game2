@@ -20,6 +20,7 @@ class M33 extends MBase {
         {
             hp = Math.min(hp,user.getSkillValue(1,true));
             target.beAtkAction({hp:hp})
+            user.addAtkHurt(hp)
             PKData.getInstance().addVideo({
                 type:PKConfig.VIDEO_MONSTER_DOUBLE,
                 user:user,

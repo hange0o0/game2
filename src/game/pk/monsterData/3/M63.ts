@@ -27,6 +27,7 @@ class M63 extends MBase {
             {
                 var hp = this.getAtkHp(user,targetX);
                 targetX.beAtkAction({hp:hp,atker:user})
+                user.addAtkHurt(hp)
 
                 if(targetX.beSkillAble())
                 {
@@ -59,6 +60,7 @@ class M63 extends MBase {
             if(des<=atkrage + targetX.getVO().width/2)
             {
                 targetX.beAtkAction({hp:buff.value})
+                user.addAtkHurt(buff.value)
             }
         }
     }

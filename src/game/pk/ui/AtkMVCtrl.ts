@@ -338,16 +338,16 @@ class AtkMVCtrl {
 
 
     ////////////////////////////////////////////////////////////////
-    public skillMV101(user,target,actionTime,endTime){
-        var mBase = MBase.getData(101)
-        if(user.useingHeroSkill == 1 || user.useingHeroSkill == 2)
-            this.playAniOn(target.id,mBase.mvID1)
-    }
-
     public skillMV102(user,target,actionTime,endTime){
         var userItem = PKVideoCon.getInstance().getItemByID(user.id);
         var targetItem = PKVideoCon.getInstance().getItemByID(target.id);
         PKBulletManager.getInstance().createArrow(userItem,targetItem,actionTime,endTime)
+    }
+
+    public skillMV108(user,target,actionTime,endTime){
+        var mBase = MBase.getData(108)
+        if(user.useingHeroSkill == 3 || user.useingHeroSkill == 2)
+            this.playAniOn(target.id,mBase.mvID1)
     }
 
     public skillMV114(user,target,actionTime,endTime){

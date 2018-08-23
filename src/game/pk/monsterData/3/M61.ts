@@ -27,6 +27,7 @@ class M61 extends MBase {
             {
                 var hp = this.getAtkHp(user,targetX);
                 targetX.beAtkAction({hp:hp,atker:user})
+                user.addAtkHurt(hp)
 
                 var buff = new PKBuffData()
                 buff.user = user;

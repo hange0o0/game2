@@ -39,6 +39,7 @@ class M48 extends MBase {
                 continue;
 
             newTarget.beAtkAction({hp:hurt})
+            user.addAtkHurt(hurt)
         }
         return true;
     }

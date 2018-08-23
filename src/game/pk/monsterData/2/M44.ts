@@ -36,6 +36,7 @@ class M44 extends MBase {
             if(tDes > atkRage)
                 continue;
             newTarget.beAtkAction({hp:hurt})
+            user.addAtkHurt(hurt)
         }
         var mv = AtkMVCtrl.getInstance().playAniOn(target.id,this.mvID1)
         if(mv)

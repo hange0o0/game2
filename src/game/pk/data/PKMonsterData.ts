@@ -291,6 +291,8 @@ class PKMonsterData {
     public canMove(t){
         if(this.owner == 'sys')
             return false;
+        if(this.getVO().speed <=0)
+            return false;
         if(!this.canAction())
             return false
         if(!this.atkAble && PKData.getInstance().currentState == 'def'){
@@ -512,7 +514,7 @@ class PKMonsterData {
             for(var i=0;i<this.buff.length;i++)
             {
                 var oo:PKBuffData =  this.buff[i];
-                if(oo.ing && oo.haveState && (oo.state[PKConfig.STATE_DIE] || oo.state[PKConfig.STATE_DIE2]))
+                if(oo.ing && oo.haveState && (oo.state[PKConfig.STATE_DIE]))
                 {
                     var id = parseInt((oo.id + '').split('_').shift())
                     if(id < PKConfig.skillBeginID)

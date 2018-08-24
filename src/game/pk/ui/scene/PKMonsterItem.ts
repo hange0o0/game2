@@ -23,14 +23,17 @@ class PKMonsterItem extends game.BaseItem {
     private barGroup: eui.Group;
     private bar: eui.Rect;
     private teamMC: eui.Image;
+    private list: eui.List;
+
 
 
    public talkItm:PKTalkItem;
 
+    public addStateList = [];
     public monsterMV:PKMonsterMV = new PKMonsterMV();
     public needRemove = false
     public stateMV = {};
-    public addStateMV = new PKAddState();
+    public stateDataArr:eui.ArrayCollection;
     public constructor() {
         super();
         this.skinName = "PKMonsterItemSkin";
@@ -46,12 +49,9 @@ class PKMonsterItem extends game.BaseItem {
         this.anchorOffsetX = 50;
         this.anchorOffsetY = 300;
 
+        this.stateDataArr = this.list.dataProvider = new eui.ArrayCollection([])
+        this.list.itemRenderer = PKMonsterStateItem;
 
-
-
-        this.addChild(this.addStateMV)
-        this.addStateMV.remove();
-        this.addStateMV.x = 30;
 
 
         //MyTool.addTestBlock(this).y = 300;
@@ -91,26 +91,51 @@ class PKMonsterItem extends game.BaseItem {
                 this.stateMV[s].remove()
             }
         }
+        var showBuffs = [];
         for(var s in mD.currentState)
         {
-            if(parseInt(s) == PKConfig.STATE_MIANSHANG)
+            var id = parseInt(s)
+            if(id == PKConfig.STATE_MIANSHANG)
                 continue;
+            if(id == PKConfig.STATE_MOMIAN)
+                continue;
+            if(id == PKConfig.STATE_NOBEATK)
+                continue;
+            if(id == PKConfig.STATE_DIE)
+                continue;
+            if(id == PKConfig.STATE_SOUL)
+                continue;
+            if(id > 100)
+            {
+                showBuffs.push(id);
+                continue
+            }
             this.initStateMV(s)
         }
 
+        this.renewBuff(showBuffs);
         if(mD.manaHp > 0)
             this.initStateMV(PKConfig.STATE_MODUN)
+        this.alpha = mD.currentState[PKConfig.STATE_SOUL]?0.5:1
+    }
+
+    private renewBuff(showBuffs){
+        var base = {}
+        base[PKConfig.STATE_ILL]  = 'ill'
+        base[PKConfig.STATE_REBORN]  = 'reborn'
+
+        for(var i=0;i<showBuffs.length;i++)
+        {
+            showBuffs[i] = base[showBuffs[i]]
+        }
+        this.stateDataArr.source = showBuffs;
+        this.stateDataArr.refresh();
     }
 
     private initStateMV(s){
         var mD:PKMonsterData = this.data
         var id = parseInt(s)
-        if(id == PKConfig.STATE_MOMIAN)
-            return;
-        if(id == PKConfig.STATE_NOBEATK)
-            return;
-        if(id == PKConfig.STATE_DIE2)
-            return;
+
         if(!this.stateMV[id])
         {
             var img = new PKState();
@@ -129,8 +154,25 @@ class PKMonsterItem extends game.BaseItem {
     }
 
     //增加状态时的动画
-    public  showAddStateMV(key,type){
-        this.addStateMV.showState(key,type);
+    public showAddStateMV(keys){
+        for(var i=0;i<keys.length;i++)
+        {
+            var addStateMV = PKAddState.createItem();
+            this.addStateList.push(addStateMV);
+            this.addChild(addStateMV)
+            addStateMV.y = this.barGroup.y// - 30
+            addStateMV.x = 50 + (Math.random()*this.data.getVO().width - this.data.getVO().width/2)*0.8
+            addStateMV.show(keys[i],this,200*i)
+        }
+    }
+
+    public removeAddState(item){
+        var index = this.addStateList.indexOf(item);
+        if(index != -1)
+        {
+            this.addStateList.splice(index,1);
+        }
+        PKAddState.freeItem(item)
     }
 
     public changeSkin(skinid){
@@ -154,7 +196,7 @@ class PKMonsterItem extends game.BaseItem {
         this.barGroup.visible = false;
         this.barGroup.alpha = 1;
         this.barGroup.y = 300 - mD.getVO().height - 20;
-        this.addStateMV.y = this.barGroup.y - 30
+
         this.teamMC.y = this.barGroup.y - 5
         this.teamMC.visible =  mD.mid != 99
         this.renewHp();
@@ -171,6 +213,7 @@ class PKMonsterItem extends game.BaseItem {
         if(!init && this.monsterMV.scaleX == rota)
             return;
         this.monsterMV.scaleX = rota
+        this.list.x = rota == 1?50 + this.data.getVO().width/2:50 - this.data.getVO().width/2-30
         var mD:PKMonsterData = this.data
         this.barGroup.horizontalCenter = mD.getVO().headoff * rota;
     }
@@ -251,12 +294,19 @@ class PKMonsterItem extends game.BaseItem {
         egret.Tween.removeTweens(this.barGroup);
         MyTool.removeMC(this);
         this.monsterMV.stop();
-        this.addStateMV.remove();
         if(this.talkItm)
         {
             PKTalkItem.freeItem(this.talkItm)
             this.talkItm = null;
         }
+
+        while(this.addStateList.length > 0)
+        {
+            PKAddState.freeItem(this.addStateList.pop())
+        }
+
+        this.stateDataArr.source.length = 0;
+        this.stateDataArr.refresh();
     }
 
     public talk(){

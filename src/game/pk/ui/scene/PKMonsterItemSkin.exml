@@ -5,4 +5,9 @@
 		<e:Rect id="bar" width="40" height="4" x="1" y="1" fillColor="0x512020"/>
 	</e:Group>
 	<e:Image id="teamMC" source="card_battle_png" scaleX="0.5" scaleY="0.5" y="280" horizontalCenter="0"/>
+	<e:List id="list" width="30" x="70" bottom="0" itemRendererSkinName="PKMonsterStateItemSkin">
+		<e:layout>
+			<e:VerticalLayout gap="1"/>
+		</e:layout>
+	</e:List>
 </e:Skin>

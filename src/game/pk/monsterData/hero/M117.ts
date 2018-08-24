@@ -62,71 +62,36 @@ class M117 extends MBase{
         switch(user.useingHeroSkill)
         {
             case 1:
-                var buff = new PKBuffData()
-                buff.value = user.getVO().getHeroSkillValue(user.useingHeroSkill,2,user);
-                buff.id = '117_1';
-                buff.user = user;
-                buff.addValue('atk',buff.value);
-                target.addBuff(buff)
-                if(buff.ing)
-                {
-                    PKData.getInstance().addVideo({
-                        type:PKConfig.VIDEO_MONSTER_ADD_STATE,
-                        user:target,
-                        key:'atk',
-                        stateType:1
-                    })
-                }
+                target.atk += user.getVO().getHeroSkillValue(user.useingHeroSkill,2,user);
+                PKData.getInstance().addVideo({
+                    type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+                    user:target,
+                    keys:['atk+']
+                })
                 break;
             case 2:
-                var buff = new PKBuffData()
-                buff.value = user.getVO().getHeroSkillValue(user.useingHeroSkill,2);
-                buff.id = '117_2';
-                buff.user = user;
-                buff.addValue('def',buff.value);
-                target.addBuff(buff)
-                if(buff.ing)
-                {
-                    PKData.getInstance().addVideo({
-                        type:PKConfig.VIDEO_MONSTER_ADD_STATE,
-                        user:target,
-                        key:'def',
-                        stateType:1
-                    })
-                }
+                target.def += user.getVO().getHeroSkillValue(user.useingHeroSkill,2);
+                PKData.getInstance().addVideo({
+                    type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+                    user:target,
+                    keys:['def+']
+                })
                 break;
             case 3:
-                var buff = new PKBuffData()
-                buff.value = 1;
-                buff.id = '117_3';
-                buff.user = user;
-                buff.addState(PKConfig.STATE_MOMIAN);
-                target.addBuff(buff)
-                if(buff.ing)
-                {
-                    PKData.getInstance().addVideo({
-                        type:PKConfig.VIDEO_MONSTER_ADD_STATE,
-                        user:target,
-                        key:'momian',
-                        stateType:0
-                    })
-                }
+                target.momian = true
+                PKData.getInstance().addVideo({
+                    type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+                    user:target,
+                    keys:['momian']
+                })
                 break;
             case 4:
-                var buff = new PKBuffData()
-                buff.value = user.getVO().getHeroSkillValue(user.useingHeroSkill,2,user);
-                buff.id = '117_4';
-                buff.user = user;
-                buff.addValue('hpChange',buff.value);
-                if(buff.ing)
-                {
-                    PKData.getInstance().addVideo({
-                        type:PKConfig.VIDEO_MONSTER_ADD_STATE,
-                        user:target,
-                        key:'hp',
-                        stateType:1
-                    })
-                }
+                target.hpChange += user.getVO().getHeroSkillValue(user.useingHeroSkill,2,user);
+                PKData.getInstance().addVideo({
+                    type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+                    user:target,
+                    keys:['hp+']
+                })
                 break;
         }
     }

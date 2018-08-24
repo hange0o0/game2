@@ -85,8 +85,7 @@ class M120 extends MBase{
                 PKData.getInstance().addVideo({
                     type:PKConfig.VIDEO_MONSTER_ADD_STATE,
                     user:target,
-                    key:'hp',
-                    stateType:1
+                    keys:['hp+']
                 })
                 break;
 

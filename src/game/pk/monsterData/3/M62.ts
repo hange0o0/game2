@@ -36,7 +36,7 @@ class M62 extends MBase {
                     buff.id = 62;
                     buff.isDebuff = true;
                     buff.value = skillValue;
-                    buff.addValue('atk',-Math.floor(targetX.baseAtk * skillValue/100));
+                    buff.addValue('def',-skillValue);
                     buff.user = user;
                     buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(3);
                     targetX.addBuff(buff)
@@ -46,8 +46,7 @@ class M62 extends MBase {
                         PKData.getInstance().addVideo({
                             type:PKConfig.VIDEO_MONSTER_ADD_STATE,
                             user:targetX,
-                            key:'def',
-                            stateType:2
+                            keys:['def-']
                         })
                     }
                 }

@@ -10,14 +10,13 @@ class S324 extends SBase {
         for(var i=0;i<arr.length;i++)
         {
             var target = arr[i];
-            var type = 'atk'
+            var type = 'atk+'
             target.atk += addValue
 
             PKData.getInstance().addVideo({
                 type:PKConfig.VIDEO_MONSTER_ADD_STATE,
                 user:target,
-                key:type,
-                stateType:1
+                keys:[type]
             })
         }
         return arr;

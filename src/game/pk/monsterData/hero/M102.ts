@@ -48,10 +48,12 @@ class M102 extends MBase{
                 buff.user = user;
                 buff.endTime = PKData.getInstance().actionTime + 1000*user.getVO().getHeroSkillValue(2,2);
 
+                var keys = ['speed-']
                 buff.addValue('addSpeed',-user.getVO().getHeroSkillValue(2,1));
                 if(user.level>=3)
                 {
                     buff.addValue('hpChange',-user.getVO().getHeroSkillValue(3,1,user));
+                    keys.push('hp-')
                 }
                 target.addBuff(buff)
                 if(buff.ing)
@@ -59,8 +61,7 @@ class M102 extends MBase{
                     PKData.getInstance().addVideo({
                         type:PKConfig.VIDEO_MONSTER_ADD_STATE,
                         user:target,
-                        key:'speed',
-                        stateType:2
+                        keys:keys,
                     })
                 }
 

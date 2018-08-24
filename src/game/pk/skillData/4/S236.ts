@@ -36,8 +36,7 @@ class S236StateListener extends PKStateListener {
         PKData.getInstance().addVideo({
             type:PKConfig.VIDEO_MONSTER_ADD_STATE,
             user:target,
-            key:'atk',
-            stateType:1
+            keys:['atk+']
         })
     }
 }

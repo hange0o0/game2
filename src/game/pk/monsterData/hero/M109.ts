@@ -27,17 +27,20 @@ class M109 extends MBase{
             buff.id = 109;
             buff.user = user;
 
+            var keys = ['atk+']
             buff.addValue('atk',buff.value);
             if(user.level >= 2)
+            {
                 buff.addValue('addSpeed',value2);
+                keys.push('speed+')
+            }
             target.addBuff(buff)
             if(buff.ing)
             {
                 PKData.getInstance().addVideo({
                     type:PKConfig.VIDEO_MONSTER_ADD_STATE,
                     user:target,
-                    key:'atk',
-                    stateType:1
+                    keys:keys
                 })
             }
 
@@ -146,10 +149,14 @@ class M109StateListener extends PKStateListener {
         buff.id = 109;
         buff.user = user;
 
+
+        var keys = ['atk+']
         buff.addValue('atk',buff.value);
         if(user.level >= 2)
+        {
             buff.addValue('addSpeed',user.getVO().getHeroSkillValue(2,1));
-
+            keys.push('speed+')
+        }
 
         target.addBuff(buff)
 
@@ -158,8 +165,7 @@ class M109StateListener extends PKStateListener {
             PKData.getInstance().addVideo({
                 type:PKConfig.VIDEO_MONSTER_ADD_STATE,
                 user:target,
-                key:'atk',
-                stateType:1
+                keys:keys
             })
         }
     }

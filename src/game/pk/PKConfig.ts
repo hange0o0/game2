@@ -82,9 +82,13 @@ class PKConfig {
     public static STATE_MOMIAN = 2
     public static STATE_MODUN = 3
     public static STATE_MIANSHANG = 4
-    public static STATE_NOBEATK = 6
     public static STATE_DIE = 5 //死亡时触发的BUFF，
-    public static STATE_DIE2 = 6 //和STATE_DIE 一样，只是没图标
+    public static STATE_NOBEATK = 6
+    public static STATE_SOUL = 7 //灵体
+
+    //显示在右下角
+    public static STATE_ILL = 101
+    public static STATE_REBORN = 102
 
 
     public static LISTENER_NONE = 0

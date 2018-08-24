@@ -2,7 +2,7 @@ class M101 extends MBase{
     constructor() {
         super();
     }
-
+    public mvID1 = 119;
     public onCreate(user:PKMonsterData){
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
@@ -18,11 +18,18 @@ class M101 extends MBase{
             buff.id = 101;
             buff.user = user;
 
+            var keys = ['def-']
             buff.addValue('def',-value1);
             if(user.level>=2)
+            {
                 buff.addValue('atk',-value2);
+                keys.push('atk-')
+            }
             if(user.level>=3)
+            {
                 buff.addValue('addSpeed',-value3);
+                keys.push('speed-')
+            }
             target.addBuff(buff)
 
             if(buff.ing)
@@ -30,8 +37,7 @@ class M101 extends MBase{
                 PKData.getInstance().addVideo({
                     type:PKConfig.VIDEO_MONSTER_ADD_STATE,
                     user:target,
-                    key:'def',
-                    stateType:2
+                    keys:keys
                 })
             }
 
@@ -147,21 +153,27 @@ class M101StateListener extends PKStateListener {
         buff.id = 101;
         buff.user = mvo;
 
+
+        var keys = ['def-']
         buff.addValue('def',-value1);
         if(mvo.level>=2)
+        {
             buff.addValue('atk',-value2);
+            keys.push('atk-')
+        }
         if(mvo.level>=3)
+        {
             buff.addValue('addSpeed',-value3);
+            keys.push('speed-')
+        }
         target.addBuff(buff)
-
 
         if(buff.ing)
         {
             PKData.getInstance().addVideo({
                 type:PKConfig.VIDEO_MONSTER_ADD_STATE,
                 user:target,
-                key:'def',
-                stateType:2
+                keys:keys
             })
         }
     }

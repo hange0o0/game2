@@ -31,8 +31,7 @@ class M42 extends MBase {
                     PKData.getInstance().addVideo({
                         type:PKConfig.VIDEO_MONSTER_ADD_STATE,
                         user:targetX,
-                        key:'hp',
-                        stateType:2
+                        keys:['hp-']
                     })
                 }
             }

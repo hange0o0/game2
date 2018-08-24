@@ -18,28 +18,27 @@ class S242 extends SBase {
                     var v = Math.ceil(addValue/100* target.baseHp)
                     target.maxHp += v
                     target.addHp(v)
-                    type = 'hp'
+                    type = 'hp+'
                     break;
                 case 2:
                     var v = Math.ceil(addValue/100* target.baseAtk)
                     target.atk += v
-                    type = 'atk'
+                    type = 'atk+'
                     break;
                 case 3:
                     target.addSpeed += addValue
-                    type = 'speed'
+                    type = 'speed+'
                     break;
                 case 4:
                     target.def += addValue
-                    type = 'def'
+                    type = 'def+'
                     break;
 
             }
             PKData.getInstance().addVideo({
                 type:PKConfig.VIDEO_MONSTER_ADD_STATE,
                 user:target,
-                key:type,
-                stateType:1
+                keys:[type]
             })
         }
         return arr;

@@ -28,8 +28,7 @@ class S219 extends SBase {
             PKData.getInstance().addVideo({
                 type:PKConfig.VIDEO_MONSTER_ADD_STATE,
                 user:target,
-                key:'momian',
-                stateType:0
+                keys:['momian','atk+','speed+']
             })
         }
         return arr;

@@ -15,6 +15,7 @@ class DebugManager {
         this.myData = SharedObjectManager.getInstance().getMyValue('share') || {"vedio":-1,};
     }
 
+    public testHangView = false //在挂机中测试所有单位动画
     public MML = 998;  //测试出战怪的等级
     public addSkill = false
     public addHeroLevel = 0

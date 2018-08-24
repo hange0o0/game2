@@ -2,7 +2,7 @@ class M8 extends MBase {
     constructor() {
         super();
     }
-
+    public mvID1 = 119;
     //初始化怪物隐藏属性
     public initMonster(user:PKMonsterData){
         user.doubleValue = user.getSkillValue(1)/100;

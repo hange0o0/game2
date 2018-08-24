@@ -25,6 +25,8 @@ class HeroManager {
 
     public getHeroLevel(id){
          var num =  this.getHero(id);
+        if(!num)
+            return 0;
         for(var i=5;i>=0;i--)
         {
              if(num >= this.levelBase[i])

@@ -36,6 +36,7 @@ class M63 extends MBase {
                     buff.isDebuff = true;
                     buff.user = user;
                     buff.addState(PKConfig.STATE_DIE);
+                    buff.addState(PKConfig.STATE_ILL);
                     buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(3);
                     buff.value = user.getSkillValue(2,true)
                     targetX.addBuff(buff)

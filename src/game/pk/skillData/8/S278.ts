@@ -28,8 +28,7 @@ class S278 extends SBase {
                 PKData.getInstance().addVideo({
                     type:PKConfig.VIDEO_MONSTER_ADD_STATE,
                     user:target,
-                    key:'def',
-                    stateType:2
+                    keys:['def-']
                 })
             }
         }

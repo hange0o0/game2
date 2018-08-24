@@ -36,8 +36,7 @@ class M45 extends MBase {
             PKData.getInstance().addVideo({
                 type:PKConfig.VIDEO_MONSTER_ADD_STATE,
                 user:target,
-                key:'speed',
-                stateType:1
+                keys:['speed+']
             })
         }
     }

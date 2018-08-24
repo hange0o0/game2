@@ -441,10 +441,32 @@ class HangUI extends game.BaseItem {
         }
     }
 
+    private getTestID(){
+        var arr = [];
+        var data = MonsterVO.data;
+        for(var s in data)
+        {
+            if(data[s].level != 999)
+                arr.push(s)
+        }
+        //
+        //var data = SkillVO.data;
+        //for(var s in data)
+        //{
+        //    if(data[s].level != 999)
+        //        arr.push(s)
+        //}
+        return ArrayUtil.randomOne(arr);
+    }
+
     private testAddMonster(){
         if(this.cost1 > 0)
         {
             var id = <number>ArrayUtil.randomOne(CardManager.getInstance().getMyMonsterList(0)).id;
+            if(Config.isDebug && DM.testHangView)
+            {
+                id = this.getTestID();
+            }
             var vo = MonsterVO.getObject(id)
             vo.preLoad();
             this.cost1 -= vo.cost
@@ -458,6 +480,10 @@ class HangUI extends game.BaseItem {
                 var id = parseInt(ArrayUtil.randomOne(HangManager.getInstance().lastlist));   //敌人的出战列表，一定有
                 if(id < PKConfig.skillBeginID)
                     break;
+            }
+            if(Config.isDebug && DM.testHangView)
+            {
+                id = this.getTestID();
             }
 
             var vo = MonsterVO.getObject(id)
@@ -480,6 +506,7 @@ class HangUI extends game.BaseItem {
             owner:ownerid,
             atkRota:atkRota,
             x:x,
+            level:DM.testHangView?5:HeroManager.getInstance().getHeroLevel(id),
             y:-25 + Math.random()*50,
             actionTime:PD.actionTime
         }

@@ -304,12 +304,8 @@ class AtkMVCtrl {
     }
 
     public skillMV8(user,target,actionTime,endTime){
-        PKData.getInstance().addVideo({
-            type:PKConfig.VIDEO_MONSTER_ADD_STATE,
-            user:target,
-            key:'change',
-            stateType:0
-        })
+        var mBase = MBase.getData(8)
+        this.playAniOn(target.id,mBase.mvID1)
     }
 
     //技能动画
@@ -338,6 +334,11 @@ class AtkMVCtrl {
 
 
     ////////////////////////////////////////////////////////////////
+    public skillMV101(user,target,actionTime,endTime){
+        var mBase = MBase.getData(101)
+        if(user.useingHeroSkill == 4)
+            this.playAniOn(target.id,mBase.mvID1)
+    }
     public skillMV102(user,target,actionTime,endTime){
         var userItem = PKVideoCon.getInstance().getItemByID(user.id);
         var targetItem = PKVideoCon.getInstance().getItemByID(target.id);

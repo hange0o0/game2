@@ -30,6 +30,7 @@ class S210 extends SBase {
             buff.value = skillValue;
             buff.endTime = Number.MAX_VALUE
             buff.addState(PKConfig.STATE_DIE)
+            buff.addState(PKConfig.STATE_REBORN);
             target.addBuff(buff)
             num--;
         }

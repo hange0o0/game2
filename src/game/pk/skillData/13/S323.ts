@@ -10,15 +10,14 @@ class S323 extends SBase {
         for(var i=0;i<arr.length;i++)
         {
             var target = arr[i];
-            var type = 'hp'
+            var type = 'hp+'
             target.maxHp += addValue
             target.addHp(addValue)
 
             PKData.getInstance().addVideo({
                 type:PKConfig.VIDEO_MONSTER_ADD_STATE,
                 user:target,
-                key:type,
-                stateType:1
+                keys:[type]
             })
         }
         return arr;

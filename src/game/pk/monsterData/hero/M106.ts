@@ -33,10 +33,15 @@ class M106 extends MBase{
             buff.id = 106;
             buff.user = user;
             buff.endTime = cd;
+            buff.addState(PKConfig.STATE_ILL);
 
+            var keys = ['def-']
             buff.addValue('def',-defValue);
             if(user.level>=2)
+            {
                 buff.addValue('hpChange',-hurt);
+                keys.push('hp-')
+            }
             if(user.level>=3)
             {
                 buff.addState(PKConfig.STATE_DIE);
@@ -50,8 +55,7 @@ class M106 extends MBase{
                 PKData.getInstance().addVideo({
                     type:PKConfig.VIDEO_MONSTER_ADD_STATE,
                     user:newTarget,
-                    key:'def',
-                    stateType:2
+                    keys:keys,
                 })
             }
         }

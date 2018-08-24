@@ -30,8 +30,7 @@ class S231 extends SBase {
             PKData.getInstance().addVideo({
                 type:PKConfig.VIDEO_MONSTER_ADD_STATE,
                 user:targetEnemy,
-                key:'atk',
-                stateType:2
+                keys:['atk-']
             })
         }
         return targets;

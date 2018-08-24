@@ -9,7 +9,7 @@
 			"name":"login_load"
 		},
 		{
-			"keys":"state1_png,totem_png,totem_1_png,icon_vs_png,pk_fail_png,pk_pos_bg_jpg,pk_win_png,bar_bg_png,bar1_png,bar2_png,speed_btn_png,pk_view_icon_png,pk_hero_jpg",
+			"keys":"state1_png,totem_png,totem_1_png,icon_vs_png,pk_fail_png,pk_pos_bg_jpg,pk_win_png,bar_bg_png,bar1_png,bar2_png,speed_btn_png,pk_view_icon_png,pk_hero_jpg,buff_1_png,buff_2_png,buff_3_png,buff_5_png,buff_11_png,buff_12_png,buff_13_png,buff_15_png,buff_21_png,buff_22_png,buff_23_png,buff_24_png,buff_25_png,buff_31_png,buff_41_png,buff_42_png,buff_XX_png",
 			"name":"pk"
 		},
 		{
@@ -1107,6 +1107,91 @@
 			"name":"m_shadow_mc_png",
 			"type":"image",
 			"url":"game_assets/png32/m_shadow_mc.png"
+		},
+		{
+			"name":"buff_1_png",
+			"type":"image",
+			"url":"game_assets/pk/buff/buff_1.png"
+		},
+		{
+			"name":"buff_2_png",
+			"type":"image",
+			"url":"game_assets/pk/buff/buff_2.png"
+		},
+		{
+			"name":"buff_3_png",
+			"type":"image",
+			"url":"game_assets/pk/buff/buff_3.png"
+		},
+		{
+			"name":"buff_5_png",
+			"type":"image",
+			"url":"game_assets/pk/buff/buff_5.png"
+		},
+		{
+			"name":"buff_11_png",
+			"type":"image",
+			"url":"game_assets/pk/buff/buff_11.png"
+		},
+		{
+			"name":"buff_12_png",
+			"type":"image",
+			"url":"game_assets/pk/buff/buff_12.png"
+		},
+		{
+			"name":"buff_13_png",
+			"type":"image",
+			"url":"game_assets/pk/buff/buff_13.png"
+		},
+		{
+			"name":"buff_15_png",
+			"type":"image",
+			"url":"game_assets/pk/buff/buff_15.png"
+		},
+		{
+			"name":"buff_21_png",
+			"type":"image",
+			"url":"game_assets/pk/buff/buff_21.png"
+		},
+		{
+			"name":"buff_22_png",
+			"type":"image",
+			"url":"game_assets/pk/buff/buff_22.png"
+		},
+		{
+			"name":"buff_23_png",
+			"type":"image",
+			"url":"game_assets/pk/buff/buff_23.png"
+		},
+		{
+			"name":"buff_24_png",
+			"type":"image",
+			"url":"game_assets/pk/buff/buff_24.png"
+		},
+		{
+			"name":"buff_25_png",
+			"type":"image",
+			"url":"game_assets/pk/buff/buff_25.png"
+		},
+		{
+			"name":"buff_31_png",
+			"type":"image",
+			"url":"game_assets/pk/buff/buff_31.png"
+		},
+		{
+			"name":"buff_41_png",
+			"type":"image",
+			"url":"game_assets/pk/buff/buff_41.png"
+		},
+		{
+			"name":"buff_42_png",
+			"type":"image",
+			"url":"game_assets/pk/buff/buff_42.png"
+		},
+		{
+			"name":"buff_XX_png",
+			"type":"image",
+			"url":"game_assets/pk/buff/buff_XX.png"
 		}
 	]
 }

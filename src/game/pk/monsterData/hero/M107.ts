@@ -21,6 +21,7 @@ class M107 extends MBase{
             buff.id = 107;
             buff.user = user;
             buff.addState(PKConfig.STATE_DIE);
+            buff.addState(PKConfig.STATE_ILL);
             if(user.level >= 2)
             {
                 buff.addValue('addSpeed',-user.getVO().getHeroSkillValue(2,1,user));
@@ -61,9 +62,10 @@ class M107 extends MBase{
                     buff.id = '107_2';
                     buff.user = user;
                     buff.state['stopDieIcon'] = true
-                    buff.addState(PKConfig.STATE_DIE2);
+                    buff.addState(PKConfig.STATE_DIE);
                     buff.addState(PKConfig.STATE_NOBEATK);
                     buff.addState(PKConfig.STATE_MOMIAN);
+                    buff.addState(PKConfig.STATE_SOUL);
                     monsterVO.addBuff(buff)
                 }
             }

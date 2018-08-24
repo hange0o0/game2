@@ -181,7 +181,6 @@ class PKPlayerData {
                 mid:oo.mid,
                 owner:this.id,
                 atkRota:atkRota,
-                fromPos:true,
                 level:oo.level,
                 x:x,
                 y:-25 + Math.random()*50,

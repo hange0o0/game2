@@ -127,6 +127,8 @@ class PKMonsterItem extends game.BaseItem {
         for(var i=0;i<showBuffs.length;i++)
         {
             showBuffs[i] = base[showBuffs[i]]
+            if(!showBuffs[i])
+                throw new Error('9999')
         }
         this.stateDataArr.source = showBuffs;
         this.stateDataArr.refresh();
@@ -161,7 +163,7 @@ class PKMonsterItem extends game.BaseItem {
             this.addStateList.push(addStateMV);
             this.addChild(addStateMV)
             addStateMV.y = this.barGroup.y// - 30
-            addStateMV.x = 50 + (Math.random()*this.data.getVO().width - this.data.getVO().width/2)*0.8
+            addStateMV.x = 50 + (Math.random()*this.data.getVO().width - this.data.getVO().width/2)*0.5
             addStateMV.show(keys[i],this,200*i)
         }
     }

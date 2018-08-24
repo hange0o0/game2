@@ -87,9 +87,10 @@ class M107 extends MBase{
                 }
             }
         }
-        else if(buff.id == '107_2')
+        else if(buff.id == '107_2' && user.level >= 4)
         {
-            user.addHp(target.atkHurtCount)
+            if(!user.die)
+                user.addHp(target.atkHurtCount)
         }
     }
 }

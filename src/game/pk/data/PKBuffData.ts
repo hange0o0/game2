@@ -7,6 +7,7 @@ class PKBuffData {
     public endTime = 0;//到期时间  为0则为图腾类效果
     public add = {};  //改变的值
     public state = {};  //改变的状态
+    public tempValue = {};
     public haveState = false
     public haveValue = false
 

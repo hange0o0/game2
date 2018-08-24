@@ -35,6 +35,8 @@ class PKBulletManager {
             item = new BulletMC();
         }
         item.init(fromMC,toMC,beginTime,endTime,id);
+        if(!fromMC)
+            fromMC = toMC;
         var con = fromMC.parent;
         con.addChildAt(item,con.getChildIndex(fromMC) + 1);
         this.useItem.push(item);
@@ -244,28 +246,39 @@ class BulletMC extends egret.DisplayObjectContainer{
         if(t > this.endTime)
             return false;
         var rate = (t - this.beginTime)/(this.endTime - this.beginTime);
-        var fromY = this.fromMC.y - this.fromMC.data.getVO().height/2 + this.fromMC.data.atkY
         var toY = this.toMC.y - this.toMC.data.getVO().height/2
-        var addX = (this.fromMC.data.atkX * (this.toMC.x > this.fromMC.x?1:-1));
-        this.x = this.fromMC.x + (this.toMC.x - this.fromMC.x - addX)*rate + addX
-        this.y =  fromY + (toY - fromY)*rate
-        this.rotation = this.getRota(
-            {x:this.fromMC.x,y:fromY},
-            {x:this.toMC.x,y:toY}
-        );
-        if(this.id && this.config[this.id].rota)
+        if(this.fromMC)
         {
-            var base = 1
-            if(this.id && Math.abs(this.toMC.x - this.fromMC.x) <this.config[this.id].h)
+            var fromY = this.fromMC.y - this.fromMC.data.getVO().height/2 + this.fromMC.data.atkY
+            var addX = (this.fromMC.data.atkX * (this.toMC.x > this.fromMC.x?1:-1));
+            this.x = this.fromMC.x + (this.toMC.x - this.fromMC.x - addX)*rate + addX
+            this.y =  fromY + (toY - fromY)*rate
+            this.rotation = this.getRota(
+                {x:this.fromMC.x,y:fromY},
+                {x:this.toMC.x,y:toY}
+            );
+            if(this.id && this.config[this.id].rota)
             {
-                base =  Math.abs(this.toMC.x - this.fromMC.x)/this.config[this.id].h
-            }
+                var base = 1
+                if(this.id && Math.abs(this.toMC.x - this.fromMC.x) <this.config[this.id].h)
+                {
+                    base =  Math.abs(this.toMC.x - this.fromMC.x)/this.config[this.id].h
+                }
 
-            if(rate < 0.5)
-                this.scaleY = rate*2*base
-            else
-                this.scaleY = (1-rate)*2*base
+                if(rate < 0.5)
+                    this.scaleY = rate*2*base
+                else
+                    this.scaleY = (1-rate)*2*base
+            }
         }
+        else
+        {
+            this.x = this.toMC.x
+            this.y = toY - 300*(1-rate);
+            this.rotation = this.rota + 90;
+        }
+
+
 
         return true;
 

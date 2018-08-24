@@ -7,6 +7,9 @@ class M114 extends MBase{
     public initMonster(user:PKMonsterData){
         user.skillTemp[114] = 0
         user.missRate =  user.getVO().getHeroSkillValue(1,1)/100;
+
+        user.skillTemp['114_2'] = 0;
+        user.skillTemp['114_3'] = 0;
     }
 
     public atk(user:PKMonsterData,target:PKMonsterData){
@@ -28,7 +31,7 @@ class M114 extends MBase{
                 x:user.x,
                 y:-30 + Math.random()*60,
                 lastSkill:Number.MAX_VALUE,
-                dieTime:PD.actionTime + user.getVO().getHeroSkillValue(4,3)/100,
+                dieTime:PD.actionTime + user.getVO().getHeroSkillValue(4,3)*1000,
                 actionTime:PD.actionTime
             }
             PD.addMonster(mData);
@@ -38,11 +41,12 @@ class M114 extends MBase{
     }
 
     public getSkillTarget(user:PKMonsterData){
-        if(user.level >= 2 && user.skillTemp[114] > 0 && user.skillTemp[114]%user.getVO().getHeroSkillValue(2,1) == 0)
+        console.log(user.skillTemp[114],user.skillTemp['114_2'],user.skillTemp['114_3']);
+        if(user.level >= 2 && user.skillTemp[114] > user.skillTemp['114_2'] && user.skillTemp[114]%user.getVO().getHeroSkillValue(2,1) == 0)
         {
-            user.callHeroSkill = 2;
+
             var PD = PKData.getInstance();
-            var arr = PD.getMonsterByTeam(user.getOwner().teamData);
+            var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
             var atkrage = user.getVO().getHeroSkillValue(2,3);
             var selectTarget
             for(var i=0;i<arr.length;i++)
@@ -60,14 +64,16 @@ class M114 extends MBase{
             }
             if(selectTarget)
             {
+                user.callHeroSkill = 2;
+                user.skillTemp['114_2'] = user.skillTemp[114];
                 return [selectTarget]
             }
         }
-        if(user.level >= 3 && user.skillTemp[114] > 0 && user.skillTemp[114]%user.getVO().getHeroSkillValue(3,1) == 0)
+        if(user.level >= 3 && user.skillTemp[114] > user.skillTemp['114_3'] && user.skillTemp[114]%user.getVO().getHeroSkillValue(3,1) == 0)
         {
-            user.callHeroSkill = 3;
+
             var PD = PKData.getInstance();
-            var arr = PD.getMonsterByTeam(user.getOwner().teamData);
+            var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
             var atkrage = user.getVO().getHeroSkillValue(3,3);
             var selectTarget
             for(var i=0;i<arr.length;i++)
@@ -85,6 +91,8 @@ class M114 extends MBase{
             }
             if(selectTarget)
             {
+                user.callHeroSkill = 3;
+                user.skillTemp['114_3'] = user.skillTemp[114];
                 return [selectTarget]
             }
         }
@@ -93,11 +101,14 @@ class M114 extends MBase{
     }
 
     public skill(user:PKMonsterData,target){
+        console.log(user.useingHeroSkill);
+
         if(user.useingHeroSkill == 2)
         {
             var hp = user.getVO().getHeroSkillValue(user.useingHeroSkill,2,user)
             target.beAtkAction({hp:hp,atker:user})
             user.addAtkHurt(hp)
+            console.log(hp);
             this.testSkill(user,target)
         }
         else if(user.useingHeroSkill == 3)
@@ -106,6 +117,7 @@ class M114 extends MBase{
             target.beAtkAction({hp:hp,atker:user})
             user.addAtkHurt(hp)
             this.testSkill(user,target)
+            console.log(hp);
         }
     }
 

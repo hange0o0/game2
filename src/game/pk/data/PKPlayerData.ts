@@ -165,6 +165,15 @@ class PKPlayerData {
     //        return this.lastTime + 1000;
     //}
 
+    public preloadHero(index){
+        if(!this.heroList)
+            return
+        var oo = this.heroList[index - 1]
+        if(oo && oo.mid) {
+            MonsterVO.getObject(oo.mid).preLoad()
+        }
+    }
+
     //出英雄
     public addHero(index){
         if(!this.heroList)

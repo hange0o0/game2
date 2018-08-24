@@ -85,7 +85,7 @@ class PKAddState extends game.BaseItem {
     public show(type,parent:PKMonsterItem,delay){
         this.alpha = 0;
         PKAddState.fillStateMC(this.stateMC,type);
-        egret.Tween.get(this).wait(delay).to({y:this.y - 50},800)
+        egret.Tween.get(this).wait(delay).to({y:this.y - 40},800)
         egret.Tween.get(this).wait(delay).to({alpha:1}).wait(500).to({alpha:0},300).call(()=>{
             parent.removeAddState(this);
         })

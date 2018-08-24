@@ -5,7 +5,7 @@ class M102 extends MBase{
 
     //伤害飞行时间
     protected getSkillArriveCD(user:PKMonsterData,target:PKMonsterData){
-        return Math.abs(user.x - target.x) + 200;
+        return 300;
     }
 
     public getSkillTarget(user:PKMonsterData){

@@ -45,7 +45,7 @@ class M106 extends MBase{
             if(user.level>=3)
             {
                 buff.addState(PKConfig.STATE_DIE);
-                buff.state[106] = heal
+                buff.tempValue[106] = heal
             }
             newTarget.addBuff(buff)
 
@@ -66,7 +66,7 @@ class M106 extends MBase{
         var user:PKMonsterData = buff.user
         if(user.die)
             return;
-        user.addHp(buff.state[106])
+        user.addHp(buff.tempValue[106])
     }
 
     public getSkillTarget(user:PKMonsterData){

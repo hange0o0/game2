@@ -43,6 +43,7 @@ class MonsterVO {
     public sv4: number;  //no use
 
 
+    public haveLoad = false;
     public temp = 0
     public constructor(data?: any) {
         if(data)
@@ -170,11 +171,14 @@ class MonsterVO {
     }
 
     public preLoad(){
+        if(this.haveLoad)
+            return;
         if(this.isHero())
             HeroMVManager.getInstance().preload(this.id)
         else
-            RES.getResAsync('"enemy'+this.id+'_png',function(){},this)
+            RES.getResAsync('enemy'+this.id+'_png',function(){},this)
          MBase.getData(this.id).preload();
+        this.haveLoad = true;
     }
 
     public getAdd(force,type?){

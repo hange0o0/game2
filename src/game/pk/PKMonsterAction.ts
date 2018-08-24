@@ -35,7 +35,9 @@ class PKMonsterAction {
 
                 //判断攻击是否生效
                 if(target && target.die && !data.stopTestDie)
+                {
                     continue;
+                }
                 if(data.type == 'delay_run')   //延迟执行
                 {
                     data.fun && data.fun();

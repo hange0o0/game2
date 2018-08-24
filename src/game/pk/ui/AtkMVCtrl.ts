@@ -340,9 +340,14 @@ class AtkMVCtrl {
             this.playAniOn(target.id,mBase.mvID1)
     }
     public skillMV102(user,target,actionTime,endTime){
-        var userItem = PKVideoCon.getInstance().getItemByID(user.id);
+        //var userItem = PKVideoCon.getInstance().getItemByID(user.id);
+        //var targetItem = PKVideoCon.getInstance().getItemByID(target.id);
+        //PKBulletManager.getInstance().createArrow(userItem,targetItem,actionTime,endTime)
+
+        //var userItem = PKVideoCon.getInstance().getItemByID(user.id);
         var targetItem = PKVideoCon.getInstance().getItemByID(target.id);
-        PKBulletManager.getInstance().createArrow(userItem,targetItem,actionTime,endTime)
+        var id = [1,6,3,2,5][Math.min(4,user.level)]
+        PKBulletManager.getInstance().createBullet(null,targetItem,actionTime,endTime,id)
     }
 
     public skillMV108(user,target,actionTime,endTime){
@@ -353,7 +358,8 @@ class AtkMVCtrl {
 
     public skillMV114(user,target,actionTime,endTime){
         var mBase = MBase.getData(114)
-        this.playAniOn(target.id,mBase.mvID1)
+        var mvMC = this.playAniOn(target.id,mBase.mvID1)
+        mvMC.y -= target.getVO().height/2
     }
 
     ////////////////////////////////////////////////////////////////

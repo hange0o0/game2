@@ -4,6 +4,7 @@ class M113 extends MBase{
     }
 
     public initMonster(user:PKMonsterData){
+        var keys =  ['atk+']
         if(user.level >= 1)
         {
             user.atk +=  Math.max(1,Math.floor(user.baseAtk*user.getVO().getHeroSkillValue(1,1)/100));
@@ -11,12 +12,20 @@ class M113 extends MBase{
         if(user.level >= 2)
         {
             user.addSpeed +=  user.getVO().getHeroSkillValue(2,1);
+            keys.push('speed+')
         }
         if(user.level >= 3)
         {
             user.doubleRate = user.getVO().getHeroSkillValue(3,1)/100;
             user.doubleValue = user.getVO().getHeroSkillValue(3,2)/100;
         }
+
+        //不可以，这时还没加到舞台上
+        //PKData.getInstance().addVideo({
+        //    type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+        //    user:user,
+        //    keys:keys
+        //})
     }
 
     public atk(user:PKMonsterData,target:PKMonsterData){
@@ -38,13 +47,13 @@ class M113 extends MBase{
             buff.addValue('addSpeed',skillValue);
             buff.user = user;
             buff.endTime = PKData.getInstance().actionTime + 1000*user.getVO().getHeroSkillValue(4,3);
-            target.addBuff(buff)
+            user.addBuff(buff)
 
             if(buff.ing)
             {
                 PKData.getInstance().addVideo({
                     type:PKConfig.VIDEO_MONSTER_ADD_STATE,
-                    user:target,
+                    user:user,
                     keys:['speed+']
                 })
             }

@@ -56,7 +56,8 @@ class PosManager {
         var oo:any = {};
         oo.type = type;
         oo.list = list;
-        oo.hero = hero;
+        if(hero)
+            oo.hero = hero;
         oo.name = name;
         oo.id = id;
         Net.addUser(oo);
@@ -85,7 +86,7 @@ class PosManager {
             self.getListByType(type)[id] = ({
                 id:id,
                 list:list,
-                hero:hero
+                hero:hero == '0'?'':hero
             })
             if(name)
                 self.getListByType(type)[id].name = Base64.encode(name);

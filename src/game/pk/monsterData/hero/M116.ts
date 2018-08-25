@@ -2,7 +2,7 @@ class M116 extends MBase{
     constructor() {
         super();
     }
-
+    public mvID1 = 128;
     public onCreate(user:PKMonsterData){
         var listener = new M116StateListener();
         listener.owner = user;

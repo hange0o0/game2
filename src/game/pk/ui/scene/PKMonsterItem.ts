@@ -307,8 +307,12 @@ class PKMonsterItem extends game.BaseItem {
             PKAddState.freeItem(this.addStateList.pop())
         }
 
-        this.stateDataArr.source.length = 0;
-        this.stateDataArr.refresh();
+        if(this.stateDataArr)
+        {
+            this.stateDataArr.source.length = 0;
+            this.stateDataArr.refresh();
+        }
+
     }
 
     public talk(){

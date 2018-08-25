@@ -120,7 +120,7 @@ class MBase {
     //技能前处理（生成技能事件）
     public skillBefore(user:PKMonsterData,actionTime){
         var endTime = actionTime + this.getAtkMVCD(user)//这个时间后发出攻击时件(前摇)
-        var targets = this.getSkillTarget(user);
+        var targets = user.skillTargets;
         for(var i=0;i<targets.length;i++)
         {
             this.sendSkillBefore(user,targets[i],actionTime,endTime)

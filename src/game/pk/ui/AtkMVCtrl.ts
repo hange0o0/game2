@@ -356,6 +356,16 @@ class AtkMVCtrl {
             this.playAniOn(target.id,mBase.mvID1)
     }
 
+    //技能动画
+    public skillMV116(user,target,actionTime,endTime){
+        var mBase = MBase.getData(116)
+        if(user.useingHeroSkill == 3 || user.useingHeroSkill == 4)
+        {
+            var mv = this.playAniOn(target.id,mBase.mvID1)
+            mv && (mv.y -= 40);
+        }
+    }
+
     public skillMV114(user,target,actionTime,endTime){
         var mBase = MBase.getData(114)
         var mvMC = this.playAniOn(target.id,mBase.mvID1)

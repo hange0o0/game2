@@ -103,13 +103,16 @@ class PKMonsterInfoUI extends game.BaseContainer {
 
             var vo = mvo.getVO()
             var type = vo.type;
+            total += vo.space;
+            if(!type)
+                continue;
             var oo = arr[type-1];
             if(mvo.dieTime)
                 oo.s2 += vo.space
             else
                 oo.s1 += vo.space
             max = Math.max(max,oo.s1+oo.s2)
-            total += vo.space;
+
         }
         for(var i=0;i<arr.length;i++)
         {

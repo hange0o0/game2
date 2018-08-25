@@ -28,6 +28,7 @@ class M114 extends MBase{
                 mid:mid,
                 owner:user.owner,
                 atkRota:atkRota,
+                level:1,
                 x:user.x,
                 y:-30 + Math.random()*60,
                 lastSkill:Number.MAX_VALUE,
@@ -41,7 +42,6 @@ class M114 extends MBase{
     }
 
     public getSkillTarget(user:PKMonsterData){
-        console.log(user.skillTemp[114],user.skillTemp['114_2'],user.skillTemp['114_3']);
         if(user.level >= 2 && user.skillTemp[114] > user.skillTemp['114_2'] && user.skillTemp[114]%user.getVO().getHeroSkillValue(2,1) == 0)
         {
 
@@ -101,14 +101,12 @@ class M114 extends MBase{
     }
 
     public skill(user:PKMonsterData,target){
-        console.log(user.useingHeroSkill);
 
         if(user.useingHeroSkill == 2)
         {
             var hp = user.getVO().getHeroSkillValue(user.useingHeroSkill,2,user)
             target.beAtkAction({hp:hp,atker:user})
             user.addAtkHurt(hp)
-            console.log(hp);
             this.testSkill(user,target)
         }
         else if(user.useingHeroSkill == 3)
@@ -117,7 +115,6 @@ class M114 extends MBase{
             target.beAtkAction({hp:hp,atker:user})
             user.addAtkHurt(hp)
             this.testSkill(user,target)
-            console.log(hp);
         }
     }
 

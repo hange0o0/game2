@@ -24,7 +24,12 @@ class M107 extends MBase{
             buff.addState(PKConfig.STATE_ILL);
             if(user.level >= 2)
             {
-                buff.addValue('addSpeed',-user.getVO().getHeroSkillValue(2,1,user));
+                buff.addValue('hpChange',-user.getVO().getHeroSkillValue(2,1,user));
+                PKData.getInstance().addVideo({
+                    type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+                    user:target,
+                    keys:['hp-']
+                })
             }
             target.addBuff(buff)
         }

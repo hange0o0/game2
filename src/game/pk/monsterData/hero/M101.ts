@@ -109,9 +109,9 @@ class M101 extends MBase{
                 mid:mid,
                 owner:user.owner,
                 atkRota:atkRota,
+                level:user.level,
                 x:user.x,
                 y:-30 + Math.random()*60,
-                lastSkill:Number.MAX_VALUE,
                 actionTime:PD.actionTime
             }
             this.setHeroSkillUse(user,5,Number.MAX_VALUE)

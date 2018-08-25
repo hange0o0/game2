@@ -36,8 +36,8 @@ class M120 extends MBase{
 
     private resetSkillTarget(user,arr){
         var list = [PKData.getInstance().randomOne(arr,true)]
-        if(user.level >= 5 && arr.length > 0)
-            list.push(PKData.getInstance().randomOne(arr,true))
+        if(user.level >= 5)
+            list.push(list[0])
         return list
     }
 
@@ -47,7 +47,7 @@ class M120 extends MBase{
         {
             case 1:
                 var PD = PKData.getInstance();
-                var mid = 101;
+                var mid = target.mid;
                 var owner = PD.getPlayer(user.owner);
                 var atkRota = owner.teamData.atkRota;
                 var mData = {

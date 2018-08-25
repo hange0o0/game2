@@ -405,7 +405,13 @@ class PKData extends egret.EventDispatcher{
         if(toFront > 0)
         {   var frontItem:any = this.getFirstItem(player.teamData.id);
             if(frontItem)
+            {
                 data.x = frontItem.x;
+                if(!MonsterVO.getObject(data.mid).isNearAtk())
+                {
+                    data.x += player.teamData.atkRota == PKConfig.ROTA_LEFT?-60:60
+                }
+            }
         }
 
         var monster = new PKMonsterData(data)

@@ -38,7 +38,7 @@ class M118 extends MBase{
                 var owner = PD.getPlayer(user.owner);
                 var atkRota = owner.teamData.atkRota;
                 var mData = {
-                    force:owner.force/2,
+                    force:<any>(owner.force/2),
                     mid:mid,
                     owner:user.owner,
                     atkRota:atkRota,

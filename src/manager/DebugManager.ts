@@ -19,6 +19,7 @@ class DebugManager {
     public MML = 998;  //测试出战怪的等级
     public addSkill = false
     public addHeroLevel = 0
+    public maxHeroLevel = 13 //已开放的最大英雄等级
     public cardLen = 15
     public needTestTwo = false
     public createHangFlag = false;
@@ -29,6 +30,41 @@ class DebugManager {
     public winUseCard = []
 
     public testHero(){
+        this.testNum = 0;
+        this.stop = 0;
+        this.winMonster = {};
+        this.winUseCard = [];
+        this.testHeroRound();
+    }
+
+    public testHeroRound(){
+        this.testNum ++;
+        var randomList = this.randomList();
+        var heroList = [];
+        for(var s in MonsterVO.data)
+        {
+            var mvo = MonsterVO.data[s]
+            if(mvo.isHero() && mvo.getHeroLevel() <= this.maxHeroLevel)
+            {
+                heroList.push(mvo.id + '|5')
+            }
+        }
+        var testList = []
+        for(var i=0;i<heroList.length;i++)
+        {
+            var oo = ObjectUtil.clone(randomList)
+            oo.hero = heroList[i];
+            testList.push(oo)
+            testList.push(ObjectUtil.clone(oo))
+        }
+        ArrayUtil.random(testList,3)
+        this.testArr(testList,0,testList.length,egret.getTimer(),'hero')
+    }
+
+
+
+
+    public testHeroMonster(){
         this.addHeroLevel = 5
         this.needTestTwo = true
         this.test();
@@ -124,7 +160,7 @@ class DebugManager {
             for(var s in MonsterVO.data)
             {
                 var mvo = MonsterVO.data[s]
-                if(mvo.id > 100 && mvo.id < 130)
+                if(mvo.id > 100 && mvo.id < 130 && mvo.getHeroLevel() <= this.maxHeroLevel)
                 {
                     hero.push(mvo.id + '|' + this.addHeroLevel)
                 }
@@ -181,13 +217,19 @@ class DebugManager {
 
     }
 
-    private printResult(){
+    private printResult(type){
 
         var arr = [];
+        var heroArr = []
         for(var s in MonsterVO.data)
         {
             if(MonsterVO.data[s].level <= this.MML || this.winMonster[s])
-                arr.push({id:s,num:this.winMonster[s] || 0})
+            {
+                if(MonsterVO.data[s].isHero())
+                    heroArr.push({id:s,num:this.winMonster[s] || 0})
+                else
+                    arr.push({id:s,num:this.winMonster[s] || 0})
+            }
         }
         if(this.addSkill)
         {
@@ -198,10 +240,13 @@ class DebugManager {
             }
         }
 
+        ArrayUtil.sortByField(heroArr,['num'],[1]);
         ArrayUtil.sortByField(arr,['num'],[1]);
+        arr = heroArr.concat(arr);
         for(var i=0;i<arr.length;i++)
         {
             var id = arr[i].id;
+
             console.log((i + 1) + '\tid:' +id +  '\t\tnum:' +  arr[i].num + '\t\tcost:' +  CM.getCardVO(id).cost + '\t\tname:' +  CM.getCardVO(id).name + '\t\tlevel:' +  CM.getCardVO(id).level + '\t\ttype:' +  CM.getCardVO(id).type)
         }
 
@@ -213,11 +258,18 @@ class DebugManager {
             oo[id] = (oo[id] || 0) + 1
         }
         var arr = [];
+        var heroArr = [];
         for(var s in oo)
         {
+            var vo = MonsterVO.getObject(s);
+            if(vo.isHero())
+                heroArr.push({id:s,num:oo[s] || 0})
+            else
                 arr.push({id:s,num:oo[s] || 0})
         }
+        ArrayUtil.sortByField(heroArr,['num'],[1]);
         ArrayUtil.sortByField(arr,['num'],[1]);
+        arr = heroArr.concat(arr);
         for(var i=0;i<arr.length;i++)
         {
             var id = arr[i].id;
@@ -245,7 +297,7 @@ class DebugManager {
         this.testArr(arr,0,n,egret.getTimer())
     }
 
-    private testArr(arr,num,total,t){
+    private testArr(arr,num,total,t,type?){
         if(arr.length >2)
         {
             arr = arr.concat(this.testOne(arr.shift(),arr.shift()))
@@ -256,11 +308,11 @@ class DebugManager {
                 {
                     egret.callLater(()=>{
                         console.log('runing')
-                        this.testArr(arr,num,total,t)
+                        this.testArr(arr,num,total,t,type)
                     },this)
                 }
                 else
-                    this.testArr(arr,num,total,t)
+                    this.testArr(arr,num,total,t,type)
                 return
             }
         }
@@ -294,11 +346,14 @@ class DebugManager {
         console.log(this.testNum + ':' + (egret.getTimer()-t))
         if(this.stop)
         {
-            this.printResult();
+            this.printResult(type);
             return;
         }
 
-        egret.callLater(this.testRound,this)
+        if(type == 'hero')
+            egret.callLater(this.testHeroRound,this)
+        else
+            egret.callLater(this.testRound,this)
     }
 
     private testOne(list1,list2){

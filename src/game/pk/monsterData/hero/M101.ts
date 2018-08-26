@@ -3,11 +3,19 @@ class M101 extends MBase{
         super();
     }
     public mvID1 = 119;
+
+    public initMonster(user:PKMonsterData){
+        if(user.level >= 4)
+        {
+           this.setHeroSkillUse(user,4)
+        }
+    }
+
     public onCreate(user:PKMonsterData){
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
         var value1 = user.getVO().getHeroSkillValue(1,1);
-        var value2 = user.getVO().getHeroSkillValue(2,1);
+        var value2 = user.getVO().getHeroSkillValue(2,1)/100;
         var value3 = user.getVO().getHeroSkillValue(3,1);
         for(var i=0;i<arr.length;i++)
         {
@@ -22,7 +30,7 @@ class M101 extends MBase{
             buff.addValue('def',-value1);
             if(user.level>=2)
             {
-                buff.addValue('atk',-value2);
+                buff.addValue('atk',-Math.floor(target.atk*value2));
                 keys.push('atk-')
             }
             if(user.level>=3)
@@ -143,7 +151,7 @@ class M101StateListener extends PKStateListener {
     public actionFun(target?:PKMonsterData){
         var mvo = <MonsterVO>this.owner.getVO();
         var value1 = mvo.getHeroSkillValue(1,1);
-        var value2 = mvo.getHeroSkillValue(2,1);
+        var value2 = mvo.getHeroSkillValue(2,1)/100;
         var value3 = mvo.getHeroSkillValue(3,1);
 
 
@@ -158,7 +166,7 @@ class M101StateListener extends PKStateListener {
         buff.addValue('def',-value1);
         if(mvo.level>=2)
         {
-            buff.addValue('atk',-value2);
+            buff.addValue('atk',-Math.floor(target.atk*value2));
             keys.push('atk-')
         }
         if(mvo.level>=3)

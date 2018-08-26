@@ -115,7 +115,7 @@ class PKHeroInfoUI extends game.BaseContainer {
         var lv = this.dataIn.level;
         for(var i=0;i<5;i++)
             this['s' + i].source = lv>i?'start1_png':'start2_png'
-        if(this.inPK)
+        if(this.inPK || this.dataIn.isView)
         {
             this.currentState = 'normal'
             this.pkInfoText.text = '品质：' + lv
@@ -130,7 +130,7 @@ class PKHeroInfoUI extends game.BaseContainer {
             if(lv == 5)
             {
                 this.barMC.width = 180;
-                this.rateText.text = 'max'
+                this.rateText.text = 'MAX'
             }
             else
             {

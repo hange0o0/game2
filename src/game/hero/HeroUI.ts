@@ -82,6 +82,18 @@ class HeroUI extends MainBase {
     }
 
     public getCurrentList(){
-        return  this.dataArray.source;
+        var arr = this.dataArray.source;
+        if(this.tab.selectedIndex == 0)
+            return arr;
+        arr = arr.concat();
+        for(var i=0;i<arr.length;i++)
+        {
+            if(!HeroManager.getInstance().getHeroLevel(arr[i].id))
+            {
+                arr.splice(i,1);
+                i--;
+            }
+        }
+        return arr;
     }
 }

@@ -127,6 +127,8 @@ class OtherInfoUI extends game.BaseWindow {
             var gray;
             if(vo.isMonster)
                 gray = (!CRM.isOwnCard(vo.id))
+            else if(vo.isHero())
+                gray = (HeroManager.getInstance().getHero(vo.id) == 0)
             else
             {
                 gray = (CRM.getSkillNum(vo.id)-(skillCardNum[vo.id] || 0)<=0)
@@ -459,6 +461,10 @@ class OtherInfoUI extends game.BaseWindow {
         if(data.last_card)
         {
             var list = data.last_card.split(',');
+            if(data.last_hero)
+            {
+                list = data.last_hero.split(',').concat(list)
+            }
             this.dataArray.source = list;
         }
         else

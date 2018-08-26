@@ -86,6 +86,17 @@ class PKPlayerData {
                 }
             }
         }
+        if(this.autoList)//去除里面的英雄，这个会根据时间上的
+        {
+             for(var i=0;i<this.autoList.length;i++)
+             {
+                 if(CM.getCardVO(this.autoList[i].mid).isHero())
+                 {
+                     this.autoList.splice(i,1);
+                     i--;
+                 }
+             }
+        }
         this.isauto = this.autoList && this.autoList.length > 0
         this.mp = PKConfig.mpInit;
         this.mpArr = PKTool.getMPList();
@@ -200,6 +211,7 @@ class PKPlayerData {
             var step = Math.floor(PKData.getInstance().actionTime/PKConfig.stepCD)
             this.posHistory.push(step + '#' +oo.mid);
             this.useCardList.push(oo.mid)
+
 
             PKData.getInstance().addVideo({
                 type:PKConfig.VIDEO_POS_SHOW,

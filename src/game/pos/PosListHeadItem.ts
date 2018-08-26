@@ -18,6 +18,7 @@ class PosListHeadItem extends game.BaseItem {
 
 
     public id
+    public isHero
     public childrenCreated() {
         super.childrenCreated();
         this.img.hideType = true;
@@ -35,13 +36,22 @@ class PosListHeadItem extends game.BaseItem {
         {
             var id = this.id = this.data.id;
             isHero = this.data.isHero
-            var lv = this.data.lv
+            var lv = this.data.lv || 1;
         }
         else
             var id = this.id = this.data;
+
+
         var vo:any = CM.getCardVO(id);
+
+
         if(vo)
         {
+            if(!isHero && vo.isHero())
+            {
+                isHero = true;
+                lv = 1;
+            }
             if(isHero)
             {
                 this.currentState = 'hero'
@@ -65,11 +75,16 @@ class PosListHeadItem extends game.BaseItem {
             this.currentState = 'unknow'
             this.bg.source = 'border_16_png'
         }
-
+        this.isHero = isHero;
     }
 
     public setGray(b){
-        this.img.changeGay(b)
+        if(this.isHero)
+        {
+            this.heroBG.source = MonsterVO.getObject(this.id).getHeroBG(b?0:1)
+        }
+        else
+            this.img.changeGay(b)
     }
 
 

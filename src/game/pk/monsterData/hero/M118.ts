@@ -4,8 +4,6 @@ class M118 extends MBase{
     }
 
     public onDie(user:PKMonsterData){
-        if(user.skillTemp[118] && user.level <5)
-            return;
         if(!user.skillTemp[118])
         {
             var num = user.level + 1;
@@ -29,7 +27,7 @@ class M118 extends MBase{
                 monster.skillTemp[118] = 1;
             }
         }
-        else if(user.skillTemp[118] == 1)
+        else if(user.skillTemp[118] == 1 && user.level >= 5)
         {
             for(var i=0;i<2;i++)
             {

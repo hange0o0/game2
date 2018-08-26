@@ -7,7 +7,7 @@
 	</e:Group>
 	<e:Group x="30" y="270">
 		<e:Image source="bg16_png" x="0" y="0" width="220" height="80" scale9Grid="19,18,14,12"/>
-		<e:Label id="pkInfoText" text="200/300" size="20" horizontalCenter="0.5" stroke="2" verticalCenter="20" includeIn="normal"/>
+		<e:Label id="pkInfoText" text="200/300" size="20" horizontalCenter="0.5" stroke="2" verticalCenter="15" includeIn="normal"/>
 		<e:Group y="45" horizontalCenter="0" includeIn="info">
 			<e:Rect width="180" height="12" ellipseWidth="12" fillColor="0x441A02" x="0" verticalCenter="0"/>
 			<e:Rect id="barMC" width="120" height="12" ellipseWidth="12" x="0" fillColor="0xD16404" verticalCenter="0"/>

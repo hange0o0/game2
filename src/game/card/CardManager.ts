@@ -280,13 +280,13 @@ class CardManager {
                 MyWindow.Alert('投票失败失败，错误代码：' + msg.fail)
                 return;
             }
-            ActiveManager.getInstance().like_obj = msg.like_obj
-            ActiveManager.getInstance().like_time = msg.like_time
+            ActiveManager.getInstance().setLike(id,like)
             if(oo.like==1)
                 this.cardLike[id].like_num ++;
             else
                 this.cardLike[id].unlike_num ++;
-            this.getCardLike(id,fun)
+            fun && fun();
+            //this.getCardLike(id,fun)
         });
     }
 

@@ -30,6 +30,7 @@ class DebugManager {
     public winUseCard = []
 
     public testHero(){
+        PKConfig.heroCD = 40*1000
         this.testNum = 0;
         this.stop = 0;
         this.winMonster = {};

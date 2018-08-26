@@ -11,9 +11,23 @@ class ActiveManager {
 
     public like_time
     public like_obj
+
+    public constructor() {
+        this.like_obj = SharedObjectManager.getInstance().getMyValue('like_obj') || {}
+        this.like_time = this.like_obj.time || 0
+    }
+
+
     public init(data){
-         this.like_time = data.like_time || 0
-         this.like_obj = data.like_obj || {}
+
+    }
+
+    public setLike(id,like)
+    {
+        this.resetLike();
+        this.like_obj[id] = like;
+        this.like_time = this.like_obj.time = TM.now();
+        SharedObjectManager.getInstance().setMyValue('like_obj',this.like_obj);
     }
 
     public resetLike(){
@@ -22,6 +36,7 @@ class ActiveManager {
             this.like_obj = {};
         }
     }
+
     public getLikeChoose(id){
         this.resetLike();
         return this.like_obj[id];

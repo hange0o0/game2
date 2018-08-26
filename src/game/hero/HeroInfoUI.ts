@@ -40,7 +40,7 @@ class HeroInfoUI extends game.BaseWindow {
         this.addBtnEvent(this.closeBtn,this.hide)
 
         this.addBtnEvent(this.helpBtn,()=>{
-            HelpManager.getInstance().showHelp('card')
+            HelpManager.getInstance().showHelp('hero')
         })
 
         //this.touchEnabled = false;
@@ -91,7 +91,7 @@ class HeroInfoUI extends game.BaseWindow {
         if(this.sp.num)
             this.openList = [];
         else
-            this.openList = CardUI.getInstance().getCurrentList();
+            this.openList = HeroUI.getInstance().getCurrentList();
         this.r0.selected = SharedObjectManager.getInstance().getMyValue('show_card_base') || false;
         this.r1.selected = !this.r0.selected
         this.renew();
@@ -100,7 +100,19 @@ class HeroInfoUI extends game.BaseWindow {
 
     public renew(){
         var lv = HeroManager.getInstance().getHeroLevel(this.data.id)
-        if(this.r0.selected)
+        if(this.sp.force)
+        {
+            this.item.renew({
+                mid:this.data.id,
+                sp:this.sp,
+                level:this.sp.level || 1,
+                force:this.sp.force,
+                isView:true
+            });
+            this.currentState = 'view'
+            return;
+        }
+        else if(this.r0.selected)
         {
             this.item.renew({
                 mid:this.data.id,
@@ -121,7 +133,7 @@ class HeroInfoUI extends game.BaseWindow {
 
 
 
-
+        this.currentState = 'normal'
         var index = this.openList.indexOf(this.data);
         this.leftBtn.visible = index > 0
         this.rightBtn.visible = index < this.openList.length - 1;

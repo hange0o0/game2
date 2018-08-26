@@ -41,9 +41,10 @@ class HeroManager {
         for(var s in data)
         {
             var vo =  data[s];
-            if(vo.id > 100 && vo.id < 130)
+            if(vo.isHero())
                 arr.push(vo);
         }
+
         return arr;
     }
 
@@ -55,6 +56,7 @@ class HeroManager {
             vo.temp = this.getHeroLevel(vo.id);
             arr.push(vo);
         }
+
         return arr;
     }
 

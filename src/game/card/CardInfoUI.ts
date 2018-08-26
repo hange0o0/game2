@@ -105,11 +105,11 @@ class CardInfoUI extends game.BaseWindow {
             MyWindow.ShowTips('今天你已对该卡牌投过票了')
             return false
         }
-        if(ObjectUtil.objLength(ActiveManager.getInstance().like_obj) >= 10)
-        {
-            MyWindow.ShowTips('今天你投票次数已达10次，无法继续')
-            return false
-        }
+        //if(ObjectUtil.objLength(ActiveManager.getInstance().like_obj) >= 10)
+        //{
+        //    MyWindow.ShowTips('今天你投票次数已达10次，无法继续')
+        //    return false
+        //}
         CardManager.getInstance().setCardLike(this.data.id,like,()=>{
             this.renewCardLike();
         })

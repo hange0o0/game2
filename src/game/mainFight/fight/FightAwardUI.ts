@@ -36,7 +36,7 @@ class FightAwardUI extends game.BaseWindow {
     }
 
     private onTapChanging(e){
-        if(this.list.selectedIndices.length > 5)
+        if(this.getSelectNum() > 5)
         {
             e.preventDefault();
             MyWindow.ShowTips('不能选择多于5张卡牌')
@@ -45,9 +45,14 @@ class FightAwardUI extends game.BaseWindow {
     }
 
     private onSelected(){
-        var items = this.list.selectedItems
-        this.titleText.text = '选择增加手牌（'+items.length+'/5）'
+        this.titleText.text = '选择增加手牌（'+this.getSelectNum()+'/5）'
+        this.renewList();
     }
+
+    public getSelectNum(){
+        return this.list.selectedItems.length;
+    }
+
     private onClick(){
         var items = this.list.selectedItems
         if(items.length < 5)
@@ -75,6 +80,10 @@ class FightAwardUI extends game.BaseWindow {
 
     public onShow(){
         this.renew()
+    }
+
+    private renewList(){
+        MyTool.renewList(this.list);
     }
 
     private renew(){

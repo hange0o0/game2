@@ -106,6 +106,17 @@ class MailPKItem extends game.BaseItem {
         }
     }
 
+    private getHeroLV(id,data){
+        var arr = data.split(',')
+        for(var i=0;i<arr.length;i++)
+        {
+            var temp = arr[i].split('|');
+            if(temp[0] == id)
+                return parseInt(temp[1]);
+        }
+        return 1;
+    }
+
     private renewPlayer(index,data){
         this['headMC' + index].setData(data.head,data.type)
         this['forceText' + index].text = data.force;
@@ -122,7 +133,18 @@ class MailPKItem extends game.BaseItem {
             var temp = autoList[i].split('#');
             var id = parseInt(temp[1]);
             if(id < 500)
-                arr.push(id);
+            {
+                if(CM.getCardVO(id).isHero())
+                {
+                    arr.push({
+                        id:id,
+                        isHero:true,
+                        level:this.getHeroLV(id,data.hero),
+                    })
+                }
+                else
+                    arr.push(id);
+            }
         }
         //for(var i=0;i<autoList.length;i++)
         //{

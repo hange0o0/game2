@@ -76,6 +76,21 @@ class CardManager {
         }
         return arr;
     }
+    public isSkillFull(){
+        var data = SkillVO.data;
+        for(var s in data)
+        {
+            var vo =  data[s];
+            if(vo.level >= 999)
+                continue
+            if(vo.level > UM.level)
+                continue
+            if(this.getSkillNum(vo.id) >= 999)
+                continue;
+            return false;
+        }
+        return true;
+    }
 
     public getMyMonsterList(type){
         var arr = [];
@@ -174,7 +189,8 @@ class CardManager {
             oo.type = listData.type
             if(vo.isHero())
             {
-                oo.lv = this.getHeroLV(oo.id,listData.hero)
+                oo.level = this.getHeroLV(oo.id,listData.hero)
+                oo.isHero = true;
             }
             list[i] = oo;
         }

@@ -107,7 +107,20 @@ class OtherInfoUI extends game.BaseWindow {
             MyWindow.ShowTips('你没拥有任意一张卡牌，无法复制')
             return;
         }
-        BasePosUI.getInstance().show('atk',null,{index:index,list:this.copyResult});
+        var hero = [];
+        for(var i=0;i<this.copyResult.length;i++)
+        {
+            if(CM.getCardVO(this.copyResult[i]).isHero())
+            {
+                hero.push(this.copyResult[i])
+                this.copyResult.splice(i,1);
+                i--;
+            }
+        }
+        if(this.copyResult.length > PosManager.getInstance().maxPosNum())
+            this.copyResult.length = PosManager.getInstance().maxPosNum()
+
+        BasePosUI.getInstance().show('atk',null,{index:index,list:this.copyResult,hero:hero});
     }
 
     private onCopy(){
@@ -118,17 +131,22 @@ class OtherInfoUI extends game.BaseWindow {
         var skillCardNum = {};
         this.copyResult = [];
         var grayItems = [];
+
         for(var i=0;i<list.numChildren;i++)
         {
             var item:PosListHeadItem = <PosListHeadItem>list.getChildAt(i)
             if(!item.visible)
                 continue;
-            var vo = CM.getCardVO(item.data)
+            var vo = CM.getCardVO(item.data.id || item.data)
             var gray;
-            if(vo.isMonster)
-                gray = (!CRM.isOwnCard(vo.id))
-            else if(vo.isHero())
+            if(vo.isHero())
+            {
                 gray = (HeroManager.getInstance().getHero(vo.id) == 0)
+                console.log(vo.id,gray)
+            }
+            else if(vo.isMonster)
+                gray = (!CRM.isOwnCard(vo.id))
+
             else
             {
                 gray = (CRM.getSkillNum(vo.id)-(skillCardNum[vo.id] || 0)<=0)
@@ -463,7 +481,18 @@ class OtherInfoUI extends game.BaseWindow {
             var list = data.last_card.split(',');
             if(data.last_hero)
             {
-                list = data.last_hero.split(',').concat(list)
+                var hero = data.last_hero.split(',')
+                var heroLevel = InfoManager.getInstance().otherInfo[this.gameid].hero_level;
+                for(var i=0;i<hero.length;i++)
+                {
+                    var id = hero[i];
+                    hero[i] = {
+                        id:id,
+                        isHero:true,
+                        level:heroLevel?HeroManager.getInstance().getHeroLevel(id,heroLevel[id]):1,
+                    }
+                }
+                list = hero.concat(list)
             }
             this.dataArray.source = list;
         }

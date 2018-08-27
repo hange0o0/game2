@@ -18,13 +18,29 @@ class HeroManager {
         this.heroData = hero || {};
     }
 
+    public isFull(){
+        var data = MonsterVO.data;
+        for(var s in data)
+        {
+            var vo =  data[s];
+            if(!vo.isHero())
+                continue;
+            if(vo.getHeroLevel() > UM.level)
+                continue;
+            if(this.getHeroLevel(vo.id) == 5)
+                continue;
+            return false;
+        }
+        return true
+    }
+
 
     public getHero(id){
          return this.heroData[id] || 0;
     }
 
-    public getHeroLevel(id){
-         var num =  this.getHero(id);
+    public getHeroLevel(id,num?){
+         num = num || this.getHero(id);
         if(!num)
             return 0;
         for(var i=5;i>=0;i--)

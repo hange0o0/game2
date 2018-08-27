@@ -64,7 +64,7 @@ class PosTestItem extends game.BaseItem {
                 hero[i] = {
                     id: id,
                     isHero: true,
-                    lv: HeroManager.getInstance().getHeroLevel(id),
+                    level: HeroManager.getInstance().getHeroLevel(id),
                 }
             }
             list = hero.concat(list)

@@ -4,15 +4,15 @@ class M118 extends MBase{
     }
 
     public onDie(user:PKMonsterData){
+        var PD = PKData.getInstance();
+        var mid = 118;
+        var owner = PD.getPlayer(user.owner);
+        var atkRota = owner.teamData.atkRota;
         if(!user.skillTemp[118])
         {
             var num = user.level + 1;
             for(var i=0;i<num;i++)
             {
-                var PD = PKData.getInstance();
-                var mid = 118;
-                var owner = PD.getPlayer(user.owner);
-                var atkRota = owner.teamData.atkRota;
                 var mData = {
                     force:owner.force,
                     mid:mid,
@@ -27,14 +27,10 @@ class M118 extends MBase{
                 monster.skillTemp[118] = 1;
             }
         }
-        else if(user.skillTemp[118] == 1 && user.level >= 5)
+        else if(user.skillTemp[118] == 1 && user.level >= 5 && PD.random()*100 < user.getVO().getHeroSkillValue(5,1))
         {
             for(var i=0;i<2;i++)
             {
-                var PD = PKData.getInstance();
-                var mid = 118;
-                var owner = PD.getPlayer(user.owner);
-                var atkRota = owner.teamData.atkRota;
                 var mData = {
                     force:<any>(owner.force/2),
                     mid:mid,

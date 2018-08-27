@@ -27,6 +27,7 @@ class FightAwardItem extends game.BaseItem {
     }
 
     public dataChanged(){
-         this.cardMC.data = CM.getCardVO(this.data);
+        this.cardMC.data = CM.getCardVO(this.data);
+        this.cardMC.changeGay(!this.selected && FightAwardUI.getInstance().getSelectNum() >= 5)
     }
 }

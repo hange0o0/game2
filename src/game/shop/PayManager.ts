@@ -66,6 +66,11 @@ class PayManager {
                 MyWindow.Alert("购买失败，你目前的技能已满");
                 return
             }
+            if(msg.fail == 102)
+            {
+                MyWindow.Alert("购买失败，你目前的英雄已满");
+                return
+            }
             if(msg.fail)
             {
                 MyWindow.Alert("购买失败，错误码：" + msg.fail);

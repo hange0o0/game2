@@ -278,7 +278,7 @@ class BasePosUI extends game.BaseUI {
 
         var b = !this.posData && this.listData.length > 1
         if(!b)
-            b = this.posData && (this.posData.list != this.changeToServerList() || this.posData.hero != this.changeToServerHero() )
+            b = this.posData && (this.posData.list != this.changeToServerList() || (this.posData.hero || '0') != this.changeToServerHero() )
         if(b) //有变化
         {
             this.onSave(fun)
@@ -775,7 +775,9 @@ class BasePosUI extends game.BaseUI {
         this.heroList.visible = heroOpen
 
         var heroHeight = heroOpen?150:0
-        var listHeight = Math.ceil(this.listData.length/6)*130
+        if(heroHeight && this.heroListData.source.length == 0)
+            heroHeight = 0;
+        var listHeight = Math.ceil((this.listData.length)/6)*130 + 60   //多加一行
         if(this.pkData && this.pkData.noTab)
             var scrollHeight = GameManager.stage.stageHeight-60-100
         else
@@ -888,7 +890,7 @@ class BasePosUI extends game.BaseUI {
         //        heroArr.push({index:i+1,id:0})
         //    }
         //}
-        if(heroArr.length < 5)
+        if(heroArr.length < 5 && !stopDelete)
             heroArr.push({setting:true})
         this.heroListData.source = heroArr
         this.heroListData.refresh()

@@ -36,7 +36,7 @@ class PosListHeadItem extends game.BaseItem {
         {
             var id = this.id = this.data.id;
             isHero = this.data.isHero
-            var lv = this.data.lv || 1;
+            var lv = this.data.level || 1;
         }
         else
             var id = this.id = this.data;

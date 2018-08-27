@@ -35,8 +35,8 @@ class M120 extends MBase{
     }
 
     private resetSkillTarget(user,arr){
-        var list = [PKData.getInstance().randomOne(arr,true)]
-        if(user.level >= 5)
+        var list = [PKData.getInstance().randomOne(arr)]
+        if(user.level >= 5 && PKData.getInstance().random()*100 < user.getVO().getHeroSkillValue(5,1))
             list.push(list[0])
         return list
     }

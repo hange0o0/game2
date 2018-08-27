@@ -31,7 +31,6 @@ class M114 extends MBase{
                 level:1,
                 x:user.x,
                 y:-30 + Math.random()*60,
-                lastSkill:Number.MAX_VALUE,
                 dieTime:PD.actionTime + user.getVO().getHeroSkillValue(4,3)*1000,
                 actionTime:PD.actionTime
             }

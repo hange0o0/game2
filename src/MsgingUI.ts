@@ -12,11 +12,11 @@ class MsgingUI extends egret.Sprite {
         this.addEventListener(egret.TouchEvent.TOUCH_TAP,()=>{
             if(Config.isDebug)
                 MyWindow.Alert(Net.getInstance().actionRecord.join('\n'));
-            else if(egret.getTimer() - this.showTimer > 10*1000)
-            {
-                sendClientError('转圈ing:' + Net.getInstance().actionRecord.join('\n'))
-                this.showTimer = egret.getTimer();
-            }
+            //else if(egret.getTimer() - this.showTimer > 10*1000)
+            //{
+            //    sendClientError('转圈ing:' + Net.getInstance().actionRecord.join('\n'))
+            //    this.showTimer = egret.getTimer();
+            //}
         },this)
     }
 

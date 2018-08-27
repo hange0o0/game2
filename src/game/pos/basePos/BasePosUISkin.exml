@@ -91,8 +91,8 @@
 		<e:Image id="typeIcon" source="icon_def1_png" includeIn="normal" scaleX="0.8" scaleY="0.8" verticalCenter="3" horizontalCenter="3"/>
 	</e:Group>
 
-	<e:Image id="downBtn" source="arrow1_png" rotation="90" scaleX="0.8" scaleY="0.8" right="10" width="54" bottom="120"/>
-    	<e:Image id="upBtn" source="arrow1_png" rotation="270" scaleX="0.8" scaleY="0.8" right="10" bottom="120"/>
+	<e:Image id="downBtn" source="arrow1_png" rotation="90" scaleX="0.8" scaleY="0.8" right="10" width="54" bottom="110"/>
+    	<e:Image id="upBtn" source="arrow1_png" rotation="270" scaleX="0.8" scaleY="0.8" right="10" bottom="110"/>
 	<e:Group id="infoGroup" x="0" width="640" bottom="0">
 		<e:Image source="bg14_png" scale9Grid="32,29,8,10" left="0" right="0" top="0" bottom="0"/>
 		<e:List id="infoList" anchorOffsetY="0" horizontalCenter="0" top="40" bottom="20" width="586">

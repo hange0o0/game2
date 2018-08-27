@@ -38,7 +38,7 @@ class DebugManager {
         this.testHeroRound();
     }
 
-    public testHeroRound(){
+    public testHeroRound(lv=5){
         this.testNum ++;
         var randomList = this.randomList();
         var heroList = [];
@@ -47,7 +47,7 @@ class DebugManager {
             var mvo = MonsterVO.data[s]
             if(mvo.isHero() && mvo.getHeroLevel() <= this.maxHeroLevel)
             {
-                heroList.push(mvo.id + '|5')
+                heroList.push(mvo.id + '|' + lv)
             }
         }
         var testList = []

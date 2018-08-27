@@ -5,6 +5,7 @@ class AwardItem extends game.BaseItem {
     }
 
     private img: eui.Image;
+    private bg: eui.Image;
     private nameText: eui.Label;
     private numText: eui.Label;
 
@@ -27,9 +28,15 @@ class AwardItem extends game.BaseItem {
         this.numText.text = this.data.num
 
         if(this.data.isHero)
+        {
             this.currentState = 'hero'
+            this.bg.source = this.data.bgSource
+        }
         else
+        {
             this.currentState = 'normal'
+            this.bg.source="border2_png"
+        }
 
     }
 }

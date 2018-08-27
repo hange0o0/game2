@@ -9,6 +9,7 @@ class AwardUI extends game.BaseWindow {
 
     private okBtn: eui.Button;
     private list: eui.List;
+    private scroller: eui.Scroller;
     private titleText: eui.Label;
     private desText: eui.Label;
 
@@ -25,6 +26,7 @@ class AwardUI extends game.BaseWindow {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.scroller.viewport = this.list;
         this.list.itemRenderer = AwardItem;
         this.addBtnEvent(this.okBtn,this.hide)
     }

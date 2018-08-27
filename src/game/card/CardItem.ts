@@ -88,8 +88,10 @@ class CardItem extends game.BaseItem {
         //    this.spaceGroup.visible = false
         //    this.skillType.source = vo.getTypeIcon();
         //}
+    }
 
-
+    public changeGay(b){
+        this.img.changeGay(b)
     }
 
 }

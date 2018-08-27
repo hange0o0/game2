@@ -44,7 +44,7 @@ class M107 extends MBase{
         {
             if(!target.getVO().isHero())
             {
-                var num = user.level >= 5?user.getVO().getHeroSkillValue(5,1):1;
+                var num = user.level >= 5 && PD.random()*100 < user.getVO().getHeroSkillValue(5,1)?2:1;
                 for(var i=0;i<num;i++)
                 {
                     var mid = target.mid;

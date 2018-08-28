@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="HeroInfoItemSkin" width="500" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Image id="starMC" source="start1_png" x="7" y="5"/>
-	<e:Label id="desText" text="LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" size="24" left="50" right="0" lineSpacing="8" top="7" bottom="7"/>
+	<e:Label id="desText" text="LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" size="24" left="40" right="0" lineSpacing="8" top="7" bottom="7"/>
 </e:Skin>

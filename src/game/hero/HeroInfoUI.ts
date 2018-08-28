@@ -109,7 +109,8 @@ class HeroInfoUI extends game.BaseWindow {
                 force:this.sp.force,
                 isView:true
             });
-            this.currentState = 'view'
+            if(this.currentState != 'view')
+                this.currentState = 'view'
             return;
         }
         else if(this.r0.selected)
@@ -133,10 +134,12 @@ class HeroInfoUI extends game.BaseWindow {
 
 
 
-        this.currentState = 'normal'
+        if(this.currentState != 'normal')
+            this.currentState = 'normal'
         var index = this.openList.indexOf(this.data);
         this.leftBtn.visible = index > 0
         this.rightBtn.visible = index < this.openList.length - 1;
+        this.validateNow();
     }
 
 

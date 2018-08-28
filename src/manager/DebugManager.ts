@@ -29,7 +29,8 @@ class DebugManager {
     public winMonster = {}
     public winUseCard = []
 
-    public testHero(){
+    public testHero(lv){
+        this.addHeroLevel = lv || 5;
         PKConfig.heroCD = 40*1000
         this.testNum = 0;
         this.stop = 0;
@@ -38,7 +39,7 @@ class DebugManager {
         this.testHeroRound();
     }
 
-    public testHeroRound(lv=5){
+    public testHeroRound(){
         this.testNum ++;
         var randomList = this.randomList();
         var heroList = [];
@@ -47,7 +48,7 @@ class DebugManager {
             var mvo = MonsterVO.data[s]
             if(mvo.isHero() && mvo.getHeroLevel() <= this.maxHeroLevel)
             {
-                heroList.push(mvo.id + '|' + lv)
+                heroList.push(mvo.id + '|' + this.addHeroLevel)
             }
         }
         var testList = []

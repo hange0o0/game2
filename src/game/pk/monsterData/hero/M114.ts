@@ -51,8 +51,8 @@ class M114 extends MBase{
             for(var i=0;i<arr.length;i++)
             {
                 var target = arr[i];
-                if(target.getVO().isHero())
-                    continue;
+                //if(target.getVO().isHero())
+                //    continue;
                 var des = Math.abs(user.x - target.x);
                 if(des<=atkrage)
                 {
@@ -78,8 +78,8 @@ class M114 extends MBase{
             for(var i=0;i<arr.length;i++)
             {
                 var target = arr[i];
-                if(target.getVO().isHero())
-                    continue;
+                //if(target.getVO().isHero())
+                //    continue;
                 var des = Math.abs(user.x - target.x);
                 if(des<=atkrage)
                 {

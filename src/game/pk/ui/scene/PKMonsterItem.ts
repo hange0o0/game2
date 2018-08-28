@@ -130,8 +130,12 @@ class PKMonsterItem extends game.BaseItem {
             if(!showBuffs[i])
                 throw new Error('9999')
         }
-        this.stateDataArr.source = showBuffs;
-        this.stateDataArr.refresh();
+        if(this.stateDataArr)
+        {
+            this.stateDataArr.source = showBuffs;
+            this.stateDataArr.refresh();
+        }
+
     }
 
     private initStateMV(s){

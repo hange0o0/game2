@@ -65,12 +65,12 @@ class M109 extends MBase{
             return;
         var PD = PKData.getInstance();
         var arr = user.skillTemp[109];
-        var cd = PD.actionTime + user.getVO().getHeroSkillValue(5,1)*1000;
+        var owner = PD.getPlayer(user.owner);
+        var atkRota = owner.teamData.atkRota;
+        //var cd = PD.actionTime + user.getVO().getHeroSkillValue(5,1)*1000;
         for(var i=0;i<arr.length;i++)
         {
             var mid = arr[i];
-            var owner = PD.getPlayer(user.owner);
-            var atkRota = owner.teamData.atkRota;
             var mData = {
                 force:owner.force,
                 mid:mid,
@@ -78,7 +78,7 @@ class M109 extends MBase{
                 atkRota:atkRota,
                 x:user.x,
                 y:-30 + Math.random()*60,
-                dieTime:cd,
+                //dieTime:cd,
                 actionTime:PD.actionTime
             }
             PD.addMonster(mData);

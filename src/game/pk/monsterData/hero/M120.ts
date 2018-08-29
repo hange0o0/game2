@@ -62,7 +62,11 @@ class M120 extends MBase{
                 }
                 var monsterData = PD.addMonster(mData);
                 var dec = monsterData.maxHp - monsterData.hp
-                monsterData.maxHp = user.getVO().getHeroSkillValue(user.useingHeroSkill,1,user);
+                monsterData.maxHp = user.getVO().getHeroSkillValue(1,1,user);
+                if(user.level >= 2)
+                    monsterData.maxHp += user.getVO().getHeroSkillValue(2,1,user);
+                if(user.level >= 3)
+                    monsterData.maxHp += user.getVO().getHeroSkillValue(3,1,user);
                 monsterData.hp = monsterData.maxHp - dec;
                 monsterData.skillTemp[120] = true
 

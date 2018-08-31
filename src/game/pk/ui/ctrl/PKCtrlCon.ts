@@ -471,7 +471,7 @@ class PKCtrlCon extends game.BaseContainer {
     }
 
     public showSpeedBtn(){
-        if(PKData.getInstance().isView())
+        if(PKData.getInstance().canSpeed())
         {
             this.speedBtn.visible = true
             this.renewSpeedBtn();

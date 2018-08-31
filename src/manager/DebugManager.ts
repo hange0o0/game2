@@ -263,7 +263,7 @@ class DebugManager {
         var heroArr = [];
         for(var s in oo)
         {
-            var vo = MonsterVO.getObject(s);
+            var vo = CM.getCardVO(s);
             if(vo.isHero())
                 heroArr.push({id:s,num:oo[s] || 0})
             else
@@ -476,7 +476,104 @@ class DebugManager {
             }
         }
         return noOKMP
+    }
 
+    private questionList;
+    private questionRate = 0.1;
+    private questionNum = 0;
+    public createQuestion(rate){
+        if(rate)
+            this.questionRate = rate;
+        this.stop = 0;
+        this.addHeroLevel = 0;
+        this.questionNum = 0;
+        this.questionList = []
+        this.createOneQuestion();
+
+    }
+
+    private createOneQuestion(){
+        this.questionNum ++;
+        this.MML = Math.floor(Math.random()*9 + 3);
+        this.cardLen = 5 + Math.ceil(Math.random()*5);
+
+        this.addSkill = false;
+        var question = this.randomList();
+        this.addSkill = true;
+        var answerList = this.randomList();
+        var list = answerList.list.split(',');
+        var obj = {};
+        var len = this.cardLen*100;
+        obj[list.join(',')] = true;
+        while(len--)
+        {
+            ArrayUtil.random(list,3);
+            obj[list.join(',')] = true;
+        }
+        var result = {win:[],total:ObjectUtil.objLength(obj),winList:{}};
+        var PD = PKData.getInstance()
+        for(var s in obj)
+        {
+            var find = false
+            for(var ss in result.winList)
+            {
+                 if(s.indexOf(ss) == 0)
+                 {
+                     find = true;
+                     break
+                 }
+            }
+            if(find)
+                break;
+            var list1:any = {
+                list:s
+            }
+            this.testOne(list1,question)
+            if(PD.isWin())
+            {
+                result.winList[list1.useCard] = true;
+                result.win.push(s);
+                if(result.win.length/result.total >= this.questionRate)
+                    break;
+            }
+        }
+
+        if(result.win.length && result.win.length/result.total < this.questionRate)//成功
+        {
+            var oo:any = {
+                lv:this.MML,
+                question:question.list,
+                result:result.win,
+                rate:result.win.length/result.total
+            }
+            this.questionList.push(oo)
+            console.log('find:' + this.questionList.length + ' /' + this.questionNum)
+        }
+
+
+        if(this.stop) //打出结果
+        {
+            ArrayUtil.sortByField(this.questionList,['rate'],[0])
+            console.log('====生成数量：' + this.questionList.length)
+            this.printQuestion(10)
+        }
+        else
+            egret.callLater(this.createOneQuestion,this);
+    }
+
+    public printQuestion(num){
+        for(var i=0;i<num;i++)
+        {
+            var oo = this.questionList[i];
+            if(!oo)
+                break;
+
+            console.log('等级：' + oo.lv + '\t\t比例：' + oo.rate + '\t\t胜场：' + oo.result.length)
+            oo.result.sort();
+            //去除重复的（可能早期就赢了）
+
+            console.log('题目：'+oo.question + '\n'+oo.result.join('\n'))
+        }
     }
 }
 

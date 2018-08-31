@@ -41,6 +41,12 @@ class PVPManager {
         20:{score:6800,title:'究极'},
     }
 
+    public getCurrentScore(){
+         if(!this.offline)
+            return 0;
+        return this.getLevel(this.offline.score);
+    }
+
     public getLevel(score){
         for(var i= 20;i>=1;i--)
         {

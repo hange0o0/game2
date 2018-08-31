@@ -57,6 +57,9 @@ class PKData extends egret.EventDispatcher{
     public isView(){
         return this.isAuto || this.isReplay
     }
+    public canSpeed(){
+        return true
+    }
 
     //public changeSpeed(speed){
     //     this.playSpeed = speed;

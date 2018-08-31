@@ -43,7 +43,7 @@
 	<script egret="lib" src="bin-debug/game/pk/skillData/SBase.js"></script>
 	<script egret="lib" src="bin-debug/game/pos/PosListHeadItem.js"></script>
 	<script egret="lib" src="bin-debug/game/pos/basePos/BasePosItem.js"></script>
-	<script egret="lib" src="bin-debug/game/pk/skillData/12/S314.js"></script>
+	<script egret="lib" src="bin-debug/game/pk/skillData/12/S313.js"></script>
 	<script egret="lib" src="bin-debug/commont/GameEvent.js"></script>
 	<script egret="lib" src="bin-debug/commont/MovieSimpleMC.js"></script>
 	<script egret="lib" src="bin-debug/commont/MyTool.js"></script>
@@ -124,6 +124,9 @@
 	<script egret="lib" src="bin-debug/game/mainFight/fight/FightShopBuyUI.js"></script>
 	<script egret="lib" src="bin-debug/game/mainFight/fight/FightShopItem.js"></script>
 	<script egret="lib" src="bin-debug/game/mainFight/fight/FightUI.js"></script>
+	<script egret="lib" src="bin-debug/game/mainFight/pkActive/PKActiveMainPageUI.js"></script>
+	<script egret="lib" src="bin-debug/game/mainFight/pkActive/PKActiveManager.js"></script>
+	<script egret="lib" src="bin-debug/game/mainFight/pkActive/PKActiveUI.js"></script>
 	<script egret="lib" src="bin-debug/game/mainFight/pvp/PVPContinueUI.js"></script>
 	<script egret="lib" src="bin-debug/game/mainFight/pvp/PVPInfoItem.js"></script>
 	<script egret="lib" src="bin-debug/game/mainFight/pvp/PVPInfoUI.js"></script>
@@ -253,8 +256,8 @@
 	<script egret="lib" src="bin-debug/game/pk/skillData/11/S310.js"></script>
 	<script egret="lib" src="bin-debug/game/pk/skillData/12/S311.js"></script>
 	<script egret="lib" src="bin-debug/game/pk/skillData/12/S312.js"></script>
-	<script egret="lib" src="bin-debug/game/pk/skillData/12/S313.js"></script>
 	<script egret="lib" src="bin-debug/LoadingUI.js"></script>
+	<script egret="lib" src="bin-debug/game/pk/skillData/12/S314.js"></script>
 	<script egret="lib" src="bin-debug/game/pk/skillData/12/S315.js"></script>
 	<script egret="lib" src="bin-debug/game/pk/skillData/12/S316.js"></script>
 	<script egret="lib" src="bin-debug/game/pk/skillData/12/S317.js"></script>
@@ -484,7 +487,7 @@
 		 data-resolution-mode="retina"
 		 data-frame-rate="30"
 		 data-content-width="640"
-		 data-content-height="960"
+		 data-content-height="1136"
 		 data-show-paint-rect="false"
 		 data-multi-fingered="2"
 		 data-show-fps="false" data-show-log="false"
@@ -502,16 +505,25 @@
 			Config.host = 'http://hangegame.com/game2/gameindex'+Config.serverID+'.php';
 		}
 
+		var dw = document.body.clientWidth;
+		var dh = document.body.clientHeight;
 		var ua = navigator.userAgent.toLowerCase();
 		var isWindow = ua.indexOf('windows') != -1 || ua.indexOf('macintosh') != -1;
 		if(isWindow){
 			var ww = 640, hh = 960;
-			var dw = document.body.clientWidth;
-			var dh = document.body.clientHeight;
 			var scale = Math.min(1,dh/hh,dw/ww);
 			window["gameCon"].style["width"] = (ww*scale)+"px";
 			window["gameCon"].style["height"] = (hh*scale)+"px";
 		}
+//		else{
+//			var wScale = dw/640;
+//			if(wScale < dh/1136)
+//			{
+//				window["gameCon"].style["height"] = (1136*wScale)+"px";
+//				window["gameCon"].style["top"] = (dh-(1136*wScale))/2 +"px";
+//				console.log((dh-(1136*wScale)/2))
+//			}
+//		}
 
 		egret.runEgret({renderMode:SharedObjectManager.getInstance().getValue("renderMode") || "webgl"}); //
 

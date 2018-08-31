@@ -41,6 +41,7 @@ class Main extends eui.UILayer {
         var assetAdapter = new AssetAdapter();
         this.stage.registerImplementation("eui.IAssetAdapter",assetAdapter);
         this.stage.registerImplementation("eui.IThemeAdapter",new ThemeAdapter());
+        //this.stage.setContentSize(640,1136);
 
         //this.stage.addEventListener(egret.Event.RESIZE,this.setScaleMode,this);
         this.setScaleMode();
@@ -72,8 +73,16 @@ class Main extends eui.UILayer {
     }
 
     private setScaleMode(){
-        if(this.stage.stageWidth/this.stage.stageHeight > 640/960)
+        if(this.stage.stageWidth/this.stage.stageHeight < 640/1136)
+        {
+            this.stage.setContentSize(640,1136)
             this.stage.scaleMode = egret.StageScaleMode.SHOW_ALL;
+        }
+        else if(this.stage.stageWidth/this.stage.stageHeight > 640/960)
+        {
+            this.stage.setContentSize(640,960)
+            this.stage.scaleMode = egret.StageScaleMode.SHOW_ALL;
+        }
         else
             this.stage.scaleMode = egret.StageScaleMode.FIXED_WIDTH;
     }

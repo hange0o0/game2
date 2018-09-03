@@ -181,8 +181,8 @@ class DebugManager {
         var data = {
             seed:TM.now(),
             players:[
-                {id:1,gameid:'test1',team:1,autolist:list1.list,force:0,type:0,hp:hp,hero:list1.hero},
-                {id:2,gameid:'test2',team:2,autolist:list2.list,force:0,type:0,hp:hp,hero:list2.hero}
+                {id:1,gameid:'test1',team:1,autolist:list1.list,force:1000,type:0,hp:hp,hero:list1.hero},
+                {id:2,gameid:'test2',team:2,autolist:list2.list,force:1000,type:0,hp:hp,hero:list2.hero}
             ]
         };
         var t = egret.getTimer();
@@ -358,13 +358,13 @@ class DebugManager {
             egret.callLater(this.testRound,this)
     }
 
-    private testOne(list1,list2){
+    private testOne(list1,list2,hp=10){
         var PD = PKData.getInstance()
         var data = {
             seed:TM.now(),
             players:[
-                {id:1,gameid:'test1',team:1,autolist:list1.list,force:1000,type:0,hp:10,hero:list1.hero},
-                {id:2,gameid:'test2',team:2,autolist:list2.list,force:1000,type:0,hp:10,hero:list2.hero}
+                {id:1,gameid:'test1',team:1,autolist:list1.list,force:1000,type:0,hp:hp,hero:list1.hero},
+                {id:2,gameid:'test2',team:2,autolist:list2.list,force:1000,type:0,hp:hp,hero:list2.hero}
             ]
         };
         var t = egret.getTimer();
@@ -478,8 +478,10 @@ class DebugManager {
         return noOKMP
     }
 
+
+    //////////////////////////////////////////////生成迷题
     private questionList;
-    private questionRate = 0.1;
+    private questionRate = 0.005;
     private questionNum = 0;
     public createQuestion(rate){
         if(rate)
@@ -492,63 +494,95 @@ class DebugManager {
 
     }
 
+
     private createOneQuestion(){
+
         this.questionNum ++;
         this.MML = Math.floor(Math.random()*9 + 3);
-        this.cardLen = 5 + Math.ceil(Math.random()*5);
+        this.cardLen = 6//5 + Math.ceil(Math.random()*3);
 
         this.addSkill = false;
         var question = this.randomList();
         this.addSkill = true;
         var answerList = this.randomList();
         var list = answerList.list.split(',');
+        var fail = false;
         var obj = {};
-        var len = this.cardLen*100;
-        obj[list.join(',')] = true;
-        while(len--)
-        {
-            ArrayUtil.random(list,3);
-            obj[list.join(',')] = true;
+        //var len = this.cardLen*100*(this.cardLen-4);
+        //obj[list.join(',')] = true;
+        function setArr(a,w){
+            if(a.length == 0)
+            {
+                obj[w.substr(1)] = true;
+                return
+            }
+            for(var i=0;i<a.length;i++)
+            {
+                var newA = a.concat();
+                newA.splice(i,1)
+                setArr(newA,w +','+ a[i])
+            }
         }
-        var result = {win:[],total:ObjectUtil.objLength(obj),winList:{}};
+        setArr(list,'');
+        var len = ObjectUtil.objLength(obj)
+        var winNum = 1//Math.max(2,Math.floor(len*this.questionRate))
+        var haveTest = {};
+        var minHave = 0;
+
+
+        var result = {win:[],total:len};
         var PD = PKData.getInstance()
         for(var s in obj)
         {
+            //console.log(len)
             var find = false
-            for(var ss in result.winList)
+            var temp = s.split(',');
+            for(var i=minHave;i<temp.length;i++)
             {
-                 if(s.indexOf(ss) == 0)
-                 {
-                     find = true;
-                     break
-                 }
+                if(haveTest[temp.slice(0,i+1).join(',')])
+                {
+                    find = true;
+                    //console.log('quick ok')
+                    break
+                }
             }
+
             if(find)
-                break;
+                continue;
+
+
             var list1:any = {
                 list:s
             }
-            this.testOne(list1,question)
+            this.testOne(list1,question,3)
+            var useCardList = PD.getPlayer(1).useCardList;
+            haveTest[useCardList.join(',')] = true;
+            minHave = Math.max(minHave,useCardList.length-1);
             if(PD.isWin())
             {
-                result.winList[list1.useCard] = true;
                 result.win.push(s);
-                if(result.win.length/result.total >= this.questionRate)
+                if(result.win.length> winNum)
+                {
+                    fail = true
                     break;
+                }
             }
         }
 
-        if(result.win.length && result.win.length/result.total < this.questionRate)//成功
+        if(!fail && result.win.length)//成功
         {
             var oo:any = {
                 lv:this.MML,
                 question:question.list,
                 result:result.win,
+                total:result.total,
                 rate:result.win.length/result.total
             }
             this.questionList.push(oo)
-            console.log('find:' + this.questionList.length + ' /' + this.questionNum)
+            console.log('find:' + this.questionList.length + ' /' + this.questionNum + '\t\tLV'+this.MML + '\t\t'+result.win.length+ ' /' +result.total + '\t\t'+oo.rate)
         }
+        else
+            console.log('running');
 
 
         if(this.stop) //打出结果
@@ -558,7 +592,15 @@ class DebugManager {
             this.printQuestion(10)
         }
         else
+        {
+            if(this.questionList.length >= 12)
+            {
+                this.outPutQuestion();
+                this.questionList.length = 0;
+                this.questionNum = 0;
+            }
             egret.callLater(this.createOneQuestion,this);
+        }
     }
 
     public printQuestion(num){
@@ -568,13 +610,37 @@ class DebugManager {
             if(!oo)
                 break;
 
-            console.log('等级：' + oo.lv + '\t\t比例：' + oo.rate + '\t\t胜场：' + oo.result.length)
-            oo.result.sort();
+            console.log('等级：' + oo.lv + '\t\t比例：' + oo.rate + '\t\t胜场：' + oo.result.length + ' /' + oo.total)
+            //oo.result.sort();
             //去除重复的（可能早期就赢了）
 
-            console.log('题目：'+oo.question + '\n'+oo.result.join('\n'))
+            //console.log('题目：'+oo.question + '\n'+oo.result.join('\n'))
         }
     }
+
+    public outPutQuestion(){
+        ArrayUtil.sortByField(this.questionList,['lv'],[0])
+        var result = [];
+        var result2 = [];
+        for(var i=0;i<this.questionList.length;i++)
+        {
+            var oo = this.questionList[i];
+            if(!oo)
+                break;
+            //$hang_base = array("1"=>array("id"=>1,"list"=>"3","type"=>1,"hp"=>1,"hero"=>""),
+            var temp = oo.result[0].split(',');
+            ArrayUtil.random(temp,3);
+            result.push('"'+(i+1)+'"=>array("question"=>"'+oo.question+'","answer"=>"'+temp.join(',')+'")')
+            result2.push((i+1) + '->等级：' + oo.lv + '\t\t比例：' + oo.rate + '\t\t胜场：' + oo.result.length + ' /' + oo.total+'\n' + oo.result.join('\n'))
+        }
+
+        console.log('<?php\n$question = array('+result.join(',')+');\n?> ')
+        console.log('================================');
+        for(var i=0;i<result2.length;i++)
+            console.log(result2[i])
+    }
+
+    //=====================================================================
 }
 
 //DM.testCard('1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16','1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16')

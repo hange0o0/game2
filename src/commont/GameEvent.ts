@@ -90,6 +90,10 @@ class GameEvent {
         get_mail_award:'mail.get_mail_award'
     }
 
+    public static active = {
+        get_active:'active.get_active'
+    }
+
     public static pay = {
         add_diamond:'pay.add_diamond',
         buy_shop:'pay.buy_shop',

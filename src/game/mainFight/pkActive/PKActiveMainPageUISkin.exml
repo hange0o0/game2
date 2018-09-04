@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="PKActiveMainPageUISkin" width="640" height="400" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="bg" source="active_bg_jpg" x="-212" y="0" fillMode="repeat" width="1920"/>
+	<e:Image source="active_bg2_png" horizontalCenter="0" bottom="0"/>
+	<e:Image id="pvpBtn" source="pvp_icon_3_png" scaleX="0.8" scaleY="0.8" bottom="150" horizontalCenter="-130"/>
+	<e:Group id="activeBtn" horizontalCenter="130" bottom="150">
+		<e:Image source="active_0_png" x="0" y="0" scaleX="1.1" scaleY="1.1"/>
+		<e:Label id="cdText" text="24:00:00" y="154.73" size="22" stroke="2" horizontalCenter="0.5"/>
+	</e:Group>
+</e:Skin>

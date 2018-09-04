@@ -78,7 +78,7 @@ class HangUI extends game.BaseItem {
         this.addBtnEvent(this.autoBtn,this.onAuto)
         this.addBtnEvent(this.handBtn,this.onHand)
 
-        this.con.mask = new egret.Rectangle(0,0,this.con.width,this.con.height)
+
 
         var name = 'pk_mv'
         var data:any = RES.getRes(name + "_json"); //qid
@@ -102,6 +102,11 @@ class HangUI extends game.BaseItem {
             to({scaleX:1.1,scaleY:0.8,y:this.giftMC.y},200).to({scaleX:1,scaleY:1},300).wait(2000);
         this.giftTW.setPaused(true)
         this.modeGroup.visible = false;
+    }
+
+    public resetHeight(h){
+        this.height = h;
+        this.con.mask = new egret.Rectangle(0,0,640,h-this.con.top)
     }
 
     private onAuto(e?){
@@ -335,12 +340,13 @@ class HangUI extends game.BaseItem {
             ]
         };
         PKManager.getInstance().pkType = PKManager.TYPE_MAIN_HANG
-        PKBulletManager.getInstance().freeAll()
+        PKBulletManager.getInstance().freeAll();
         var PD = PKData.getInstance();
         PD.init(data);
         PD.isReplay = true
-        var pkvideo = PKVideoCon.getInstance()
+        var pkvideo = PKVideoCon.getInstance();
         this.con.addChild(pkvideo)
+        pkvideo.y = 510 - this.height;
         pkvideo.init();
         this.cost1 = 20
         this.cost2 = 20

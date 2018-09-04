@@ -57,6 +57,9 @@ class MainFightUI extends MainBase {
         EM.addEvent(GameEvent.client.pk_begin,this.onPKBegin,this)
         EM.addEvent(GameEvent.client.pk_end,this.onPKEnd,this)
 
+        var h = Math.max(400,(GameManager.stage.stageHeight-140-110)/2)
+        this.mapBtn.resetHeight(h)
+
         //this.defBtn.visible = false
         //this.atkBtn.visible = false
 

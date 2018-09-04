@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <e:Skin class="HangUISkin" width="640" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" height="500">
 	<e:Image width="660" top="0" bottom="0" source="bg15_png" scale9Grid="20,20,9,10" horizontalCenter="0"/>
-	<e:Group id="con" width="640" x="0" top="3" height="497" locked="true">
+	<e:Group id="con" width="640" x="0" top="3" bottom="0" locked="true">
 
 	</e:Group>
 

@@ -7,6 +7,11 @@ class PKActiveMainPageUI extends game.BaseItem {
         return this._instance;
     }
 
+    private bg: eui.Image;
+    private pvpBtn: eui.Image;
+    private activeBtn: eui.Group;
+    private cdText: eui.Label;
+
 
     public constructor() {
         super();

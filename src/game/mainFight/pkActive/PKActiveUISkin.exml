@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="PKActiveUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<e:Image x="0" y="0" width="100%" height="100%" source="bg15_png" scale9Grid="16,15,7,7"/>
+	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
+	<ns1:BottomUI id="bottomUI" x="0" skinName="BottomUISkin" bottom="0"/>
+	<e:Image id="finalAwardMC" source="bg12_png" scale9Grid="16,19,5,5" width="60" height="60" right="20" bottom="20"/>
+	<e:Group x="70" verticalCenter="-10" height="550">
+		<e:Image source="bg7_png" scale9Grid="33,31,4,6" width="500" height="360" x="0" y="0"/>
+		<e:List id="list" height="200" y="110" horizontalCenter="0">
+			<e:layout>
+			<e:HorizontalLayout/>
+			</e:layout>
+		</e:List>
+		<e:Image source="title_bg3_png" y="-41.68" horizontalCenter="0"/>
+		<e:Label id="titleText" text="Label" y="-20" horizontalCenter="0"/>
+		<e:Label id="desText" text="Label" y="430" size="24" horizontalCenter="0.5"/>
+		<e:Button id="pkBtn" label="挑  战" y="460" horizontalCenter="0" x="104" scaleX="1" scaleY="1" skinName="Btn5Skin" width="250"/>
+		<e:Group y="380.99" width="463" height="30" horizontalCenter="0.5" x="19" scaleX="1" scaleY="1">
+			<e:Image source="bg11_png" scale9Grid="15,14,7,10" x="0" y="0" width="463" height="30"/>
+			<e:Group x="5" verticalCenter="1">
+			<e:Rect id="s0" width="35" height="20" x="0" y="0"/>
+			<e:Rect width="35" height="20" x="10" y="10" id="s1"/>
+			<e:Rect width="35" height="20" x="20" y="20" id="s2"/>
+			<e:Rect width="35" height="20" x="30" y="30" id="s3"/>
+			<e:Rect width="35" height="20" x="40" y="40" id="s4"/>
+			<e:Rect width="35" height="20" x="50" y="50" id="s5"/>
+			<e:Rect width="35" height="20" x="60" y="60" id="s6"/>
+			<e:Rect width="35" height="20" x="70" y="70" id="s7"/>
+			<e:Rect width="35" height="20" x="80" y="80" id="s8"/>
+			<e:Rect width="35" height="20" x="90" y="90" id="s9"/>
+			<e:Rect width="35" height="20" x="100" y="100" id="s10"/>
+			<e:Rect width="35" height="20" x="110" y="110" id="s11"/>
+			<e:layout>
+				<e:HorizontalLayout gap="3"/>
+			</e:layout>
+			</e:Group>
+		</e:Group>
+		<e:Group id="resetGroup" y="428" horizontalCenter="0" visible="false">
+			<e:Button id="resetBtn" label="Button" y="40" skinName="Btn2Skin" width="200" horizontalCenter="0"/>
+			<e:Group y="0" horizontalCenter="0">
+				<e:Image source="icon_diamond_png" x="0" y="0" scaleX="0.6" scaleY="0.6"/>
+				<e:Label id="diamondText" text="Label" x="44" y="8" size="24"/>
+				<e:layout>
+				<e:HorizontalLayout verticalAlign="middle"/>
+				</e:layout>
+			</e:Group>
+		</e:Group>
+	</e:Group>
+	<e:Label id="cdText" text="Label" y="75" size="24" x="20"/>
+</e:Skin>

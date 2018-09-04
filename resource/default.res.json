@@ -1,7 +1,7 @@
 {
 	"groups":[
 		{
-			"keys":"1th_png,2th_png,3th_png,arror4_png,arrow1_png,arrow2_png,arrow3_png,arrow4_png,arrow5_png,back_btn_png,block1_png,block2_png,border_5_png,border_6_png,border_7_png,border_8_png,border_14_png,card_battle_png,card_battle2_png,change_icon_png,close_btn2_png,door_png,door2_png,get_award_png,icon_atk_png,icon_atk2_png,icon_atk3_png,icon_atkcd_png,icon_atkhp_png,icon_clock_png,icon_clock2_png,icon_disable_png,icon_edit_png,icon_empty_png,icon_error_png,icon_force2_png,icon_like_png,icon_monster_png,icon_pos_png,icon_rage_png,icon_right_png,icon_skill_png,icon_speed_png,icon_times_png,icon_unlike_png,monster_all_icon_png,skill_all_icon_png,skill_type1_png,skill_type2_png,skill_type3_png,skill_type4_png,skill_type5_png,tab3_png,talk_bg_png,title_bg2_png,title_bg3_png,title_bg6_png,title_bg7_png,title_bg8_png,icon_fight_png,gift_mc_png,copy_btn_png,border_16_png,icon_card_png,tec_slave_icon_png,main_button_png,icon_test_png,icon_wenhao_png,icon_wenhao2_png,hero_bg0_png,hero_bg1_png,hero_bg2_png,hero_bg3_png,hero_bg4_png,hero_bg5_png",
+			"keys":"1th_png,2th_png,3th_png,arror4_png,arrow1_png,arrow2_png,arrow3_png,arrow4_png,arrow5_png,back_btn_png,block1_png,block2_png,border_5_png,border_6_png,border_7_png,border_8_png,border_14_png,card_battle_png,card_battle2_png,change_icon_png,close_btn2_png,door_png,door2_png,get_award_png,icon_atk_png,icon_atk2_png,icon_atk3_png,icon_atkcd_png,icon_atkhp_png,icon_clock_png,icon_clock2_png,icon_disable_png,icon_edit_png,icon_empty_png,icon_error_png,icon_force2_png,icon_like_png,icon_monster_png,icon_pos_png,icon_rage_png,icon_right_png,icon_skill_png,icon_speed_png,icon_times_png,icon_unlike_png,monster_all_icon_png,skill_all_icon_png,skill_type1_png,skill_type2_png,skill_type3_png,skill_type4_png,skill_type5_png,tab3_png,talk_bg_png,title_bg2_png,title_bg3_png,title_bg6_png,title_bg7_png,title_bg8_png,icon_fight_png,gift_mc_png,copy_btn_png,border_16_png,icon_card_png,tec_slave_icon_png,main_button_png,icon_test_png,icon_wenhao_png,icon_wenhao2_png,hero_bg0_png,hero_bg1_png,hero_bg2_png,hero_bg3_png,hero_bg4_png,hero_bg5_png,active_bg2_png",
 			"name":"preload_png"
 		},
 		{
@@ -13,7 +13,7 @@
 			"name":"pk"
 		},
 		{
-			"keys":"main_ac_jpg,main_ac1_jpg,main_ac2_jpg,prop_bg_jpg",
+			"keys":"main_ac_jpg,main_ac1_jpg,main_ac2_jpg,prop_bg_jpg,active_bg_jpg",
 			"name":"preload_jpg"
 		},
 		{
@@ -29,7 +29,7 @@
 			"name":"temp"
 		},
 		{
-			"keys":"pvp_icon_1_png,pvp_icon_2_png,pvp_icon_3_png,pvp_icon_4_png,pvp_icon_5_png,pvp_icon_6_png,pvp_icon_7_png,pvp_icon_8_png,pvp_icon_9_png,pvp_icon_10_png,pvp_icon_11_png,pvp_icon_12_png,pvp_icon_13_png,pvp_icon_14_png,pvp_icon_15_png,pvp_icon_16_png,pvp_icon_17_png,pvp_icon_18_png,pvp_icon_19_png,pvp_icon_20_png,pvp_task_2_png,pvp_task_1_png",
+			"keys":"pvp_icon_1_png,pvp_icon_2_png,pvp_icon_3_png,pvp_icon_4_png,pvp_icon_5_png,pvp_icon_6_png,pvp_icon_7_png,pvp_icon_8_png,pvp_icon_9_png,pvp_icon_10_png,pvp_icon_11_png,pvp_icon_12_png,pvp_icon_13_png,pvp_icon_14_png,pvp_icon_15_png,pvp_icon_16_png,pvp_icon_17_png,pvp_icon_18_png,pvp_icon_19_png,pvp_icon_20_png,pvp_task_2_png,pvp_task_1_png,active_0_png,active_1_png,active_2_png,active_3_png,active_4_png,active_5_png,active_6_png",
 			"name":"pvp"
 		}
 	],
@@ -1192,6 +1192,51 @@
 			"name":"buff_XX_png",
 			"type":"image",
 			"url":"game_assets/pk/buff/buff_XX.png"
+		},
+		{
+			"name":"active_bg2_png",
+			"type":"image",
+			"url":"game_assets/step2/active_bg2.png"
+		},
+		{
+			"name":"active_bg_jpg",
+			"type":"image",
+			"url":"game_assets/jpg/active_bg.jpg"
+		},
+		{
+			"name":"active_0_png",
+			"type":"image",
+			"url":"game_assets/pvp/active_0.png"
+		},
+		{
+			"name":"active_1_png",
+			"type":"image",
+			"url":"game_assets/pvp/active_1.png"
+		},
+		{
+			"name":"active_2_png",
+			"type":"image",
+			"url":"game_assets/pvp/active_2.png"
+		},
+		{
+			"name":"active_3_png",
+			"type":"image",
+			"url":"game_assets/pvp/active_3.png"
+		},
+		{
+			"name":"active_4_png",
+			"type":"image",
+			"url":"game_assets/pvp/active_4.png"
+		},
+		{
+			"name":"active_5_png",
+			"type":"image",
+			"url":"game_assets/pvp/active_5.png"
+		},
+		{
+			"name":"active_6_png",
+			"type":"image",
+			"url":"game_assets/pvp/active_6.png"
 		}
 	]
 }

@@ -10,18 +10,18 @@ class MainFightUI extends MainBase {
 
 
     private scroller: eui.Scroller;
-    private mailBtn: eui.Group;
-    private mailRed: eui.Image;
-    private rankBtn: eui.Group;
-    private shopBtn: eui.Group;
-    private settingBtn: eui.Group;
     public mapBtn: HangUI;
-    private pvpBtn: PVPUI;
-    private fightBtn: FightUI;
-    private defBtn: eui.Group;
-    private atkBtn: eui.Group;
     public forceGroup: eui.Group;
     private forceText: eui.Label;
+    private shopBtn: eui.Group;
+    private rankBtn: eui.Group;
+    private mailBtn: eui.Group;
+    private mailRed: eui.Image;
+    private settingBtn: eui.Group;
+    private activeUI: PKActiveMainPageUI;
+    private defBtn: eui.Group;
+    private atkBtn: eui.Group;
+
 
 
 
@@ -57,8 +57,10 @@ class MainFightUI extends MainBase {
         EM.addEvent(GameEvent.client.pk_begin,this.onPKBegin,this)
         EM.addEvent(GameEvent.client.pk_end,this.onPKEnd,this)
 
-        var h = Math.max(400,(GameManager.stage.stageHeight-140-110)/2)
-        this.mapBtn.resetHeight(h)
+        var h = GameManager.stage.stageHeight-140-110
+        var mapH = Math.max(430,h/2)
+        this.mapBtn.resetHeight(mapH)
+        this.activeUI.resetHeight(Math.max(380,h-mapH))
 
         //this.defBtn.visible = false
         //this.atkBtn.visible = false
@@ -157,8 +159,8 @@ class MainFightUI extends MainBase {
         if(this.stage && MainUI.getInstance().visible)
             this.mapBtn.renew()
 
-        this.fightBtn.renew();
-        this.pvpBtn.renew();
+        //this.fightBtn.renew();
+        //this.pvpBtn.renew();
     }
 
 
@@ -184,8 +186,8 @@ class MainFightUI extends MainBase {
         //this.bottomGroup.bottom = 25
         this.scroller.viewport.scrollV = 0;
         this.renewHang();
-        this.fightBtn.renew();
-        this.pvpBtn.renew();
+        //this.fightBtn.renew();
+        //this.pvpBtn.renew();
     }
 
     public renewHang(){

@@ -260,7 +260,7 @@ class HangUI extends game.BaseItem {
              this.awardRed.visible = false;
             this.pkMV.visible = true
             this.pkMV.play(-1);
-            this.pkMV.y = 280;
+            this.pkMV.y = 280 - (500-this.height);
             this.reset(true);
             PKVideoCon.getInstance().x = (640- PKVideoCon.getInstance().width)/2;
         }
@@ -275,7 +275,7 @@ class HangUI extends game.BaseItem {
             this.awardRed.visible = false
 
             this.pkMV.visible = !this.lockGroup.visible
-            this.pkMV.y = 460;
+            this.pkMV.y = 460 - (500-this.height);
             if(this.pkMV.visible)
                 this.pkMV.play(-1);
             else
@@ -346,7 +346,7 @@ class HangUI extends game.BaseItem {
         PD.isReplay = true
         var pkvideo = PKVideoCon.getInstance();
         this.con.addChild(pkvideo)
-        pkvideo.y = 510 - this.height;
+        pkvideo.y = this.height-510;
         pkvideo.init();
         this.cost1 = 20
         this.cost2 = 20

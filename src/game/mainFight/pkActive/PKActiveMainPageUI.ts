@@ -8,9 +8,11 @@ class PKActiveMainPageUI extends game.BaseItem {
     }
 
     private bg: eui.Image;
+    private lockText: eui.Label;
     private pvpBtn: eui.Image;
     private activeBtn: eui.Group;
     private cdText: eui.Label;
+
 
 
     public constructor() {
@@ -21,6 +23,21 @@ class PKActiveMainPageUI extends game.BaseItem {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.addBtnEvent(this.activeBtn,this.onActive)
+        this.addBtnEvent(this.pvpBtn,this.onPVP)
+
+        egret
+    }
+
+    public resetHeight(h){
+        this.height = h;
+    }
+
+    private onActive(){
+
+    }
+    private onPVP(){
+
     }
 
     public dataChanged(){

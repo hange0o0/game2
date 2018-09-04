@@ -23,7 +23,7 @@
 		<e:Label text="正在搜寻敌人..." size="24" stroke="3" horizontalCenter="0" y="-30"/>
 	</e:Group>
 	<e:Button id="openBtn" label="开始挑战" horizontalCenter="0" skinName="Btn5Skin" bottom="100"/>
-	<e:Image id="awardRed" source="red_mc_png" y="430" right="-3"/>
+	<e:Image id="awardRed" source="red_mc_png" right="-3" bottom="45"/>
 	<e:Image id="helpBtn" source="icon_help_png" y="15" right="5"/>
 	<e:Group id="videoBtn" x="10" y="15">
 		<e:Image source="btn4_png" scale9Grid="20,21,9,5" x="0" y="0"/>

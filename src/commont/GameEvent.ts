@@ -135,6 +135,12 @@ class GameEvent {
         change_pos:'fight.change_pos',
     }
 
+    public static answer = {
+        get_answer:'question.get_answer',
+        answer_pk:'question.answer_pk',
+        answer_pk_result:'question.answer_pk_result',
+    }
+
     public static tec = {
         tec_up:'tec.tec_up'
     }

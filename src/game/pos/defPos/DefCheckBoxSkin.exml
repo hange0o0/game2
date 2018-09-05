@@ -4,5 +4,5 @@
 
 	<e:Rect width="120" height="40" strokeWeight="2" top="0" ellipseWidth="40" strokeColor="0xd6a962" fillColor="0x224c12" fillColor.up="0x721f1b"/>
 	<e:Rect width="32" height="32" ellipseWidth="32" x.upAndSelected="4" x.downAndSelected="4" verticalCenter="0" strokeWeight="1" strokeColor="0x111111" x.up="84" fillColor="0xefeaaa"/>
-	<e:Label text="启用" x="47.67" size="24" verticalCenter="0" stroke="1" verticalCenter.up="0" x.up="24.02" text.up="禁用"/>
+	<e:Label text="出战" x="47.67" size="24" verticalCenter="0" stroke="1" verticalCenter.up="0" x.up="24.02" text.up="休息"/>
 </e:Skin>

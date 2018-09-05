@@ -1,4 +1,9 @@
 class PKActiveManager {
+    public static TYPE_FIGHT = 1
+    public static TYPE_ANSWER = 2
+    public static TYPE_RANDOM = 3
+    public static TYPE_CHOOSE = 4
+    public static TYPE_ENDLESS = 5
     private static _instance:PKActiveManager;
 
     public static getInstance():PKActiveManager {
@@ -9,6 +14,14 @@ class PKActiveManager {
 
     public activeList;
     private pvpScore = 0;
+
+    public base = {
+        1:{diamond:10,label:'增加卡牌'},
+        2:{diamond:10,label:'+3次机会'},
+        3:{diamond:30,label:'+3次机会'},
+        4:{diamond:50,label:'续  命'},
+        5:{diamond:30,label:'+3次机会'},
+    }
 
 
 
@@ -28,6 +41,22 @@ class PKActiveManager {
                 return oo;
         }
         return null;
+    }
+    public getNextActive(){
+        var t = TM.now();
+        var nextActive
+        for(var i=0;i<this.activeList.length;i++)
+        {
+            var oo = this.activeList[i];
+            if(oo.start > t)
+            {
+                if(!nextActive)
+                    nextActive = oo;
+                else if(nextActive.start > oo.start)
+                    nextActive = oo;
+            }
+        }
+        return nextActive;
     }
 
     //取当前的PVP分数
@@ -64,6 +93,46 @@ class PKActiveManager {
             if(fun)
                 fun();
         });
+    }
+
+    //取当前活动的数据
+    public getActiveInfo(type,fun?){
+        switch(type)
+        {
+            case PKActiveManager.TYPE_FIGHT:
+                FightManager.getInstance().getInfo(fun);
+                return
+            case PKActiveManager.TYPE_ANSWER:
+                PKAnswerManager.getInstance().getInfo(fun);
+                return
+
+        }
+    }
+    //点击了PK
+    public onPK(type,fun?){
+        switch(type)
+        {
+            case PKActiveManager.TYPE_FIGHT:
+                FightManager.getInstance().startInit();
+                return
+            case PKActiveManager.TYPE_ANSWER:
+                PKAnswerUI.getInstance().show()
+                return
+
+        }
+    }
+    //点击了重置
+    public onReset(type,fun?){
+        switch(type)
+        {
+            case PKActiveManager.TYPE_FIGHT:
+                FightManager.getInstance().getInfo(fun);
+                return
+            case PKActiveManager.TYPE_ANSWER:
+                PKAnswerManager.getInstance().getInfo(fun);
+                return
+
+        }
     }
 
 

@@ -36,6 +36,46 @@ class FightManager {
         this.value = info.value
     }
 
+    public startInit(diamond?){
+        var FM = FightManager.getInstance();
+        PKBeforeUI.getInstance().show({
+            title:'初始阵容',
+            noTab:true,
+            stopTest:true,
+            stopRemoveTips:true,
+            list:SharedObjectManager.getInstance().getMyValue('fightDefault') || PKManager.getInstance().getDefaultPKList(),
+            hero:SharedObjectManager.getInstance().getMyValue('hero') || PKManager.getInstance().getDefaultPKHero(),
+            fun:function(data,hero){
+                var arr = data.split(',')
+                if(arr.length < PosManager.getInstance().maxPosNum())
+                {
+                    MyWindow.Confirm('还可继续上阵卡牌，确定就这样出战吗？',(b)=>{
+                        if(b==1)
+                        {
+                            FM.initFight(data,hero,diamond);
+                        }
+                    })
+                    return;
+                }
+                SharedObjectManager.getInstance().setMyValue('fightDefault',data)
+                SharedObjectManager.getInstance().setMyValue('fightHero',hero)
+                FM.initFight(data,hero,diamond)
+            },
+            hideFun:function(data,hero){
+                if(data)
+                    SharedObjectManager.getInstance().setMyValue('fightDefault',data)
+                if(hero)
+                    SharedObjectManager.getInstance().setMyValue('fightHero',hero)
+            }
+        })
+    }
+
+    public getActiveInfo(){
+        return {
+
+        }
+    }
+
     //加入新队伍
     public getAward(list,fun?)
     {

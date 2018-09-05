@@ -181,7 +181,7 @@ class PVPInfoUI extends game.BaseWindow {
         arr.push(this.getText('胜利场数',data.winnum|| 0))
         this.setHtml(this.infoText1,arr.join('\n'))
 
-        this.icon1.source = 'pvp_icon_1_png'
+        this.icon1.source = 'pvp_icon_'+lv+'_png'
         this.titleText1.text = PM.base[lv].title + '竞技场'
         var s1 = PM.base[lv].score
         if(PM.base[lv+1])

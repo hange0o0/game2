@@ -141,11 +141,30 @@ class MainFightUI extends MainBase {
         this.renew();
         this.renewForce();
         this.renewRed();
+        this.onHangChange();
 
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
         this.addPanelOpenEvent(GameEvent.client.red_change,this.renewRed)
         this.addPanelOpenEvent(GameEvent.client.force_change,this.renewForce)
+        this.addPanelOpenEvent(GameEvent.client.hang_change,this.onHangChange)
+        this.addPanelOpenEvent(GameEvent.client.pvp_change,this.onPVPChange)
 
+    }
+
+    private onHangChange(){
+         this.renewActive();
+    }
+    private onPVPChange(){
+        this.renewActive();
+    }
+
+    private renewActive(){
+        if(HangManager.getInstance().level == Config.pvpLevel)
+        {
+            PKActiveManager.getInstance().getActive(()=>{
+                this.activeUI.renew()
+            })
+        }
     }
 
     private renewForce(){
@@ -166,12 +185,15 @@ class MainFightUI extends MainBase {
 
     private onTimer(){
         this.mapBtn.onTimer()
+        this.activeUI.onTimer()
     }
 
     public onVisibleChange(b){
+        this.activeUI.onVisibleChanged(b)
         if(b)
         {
             this.renewHang();
+
         }
         else
         {
@@ -186,6 +208,8 @@ class MainFightUI extends MainBase {
         //this.bottomGroup.bottom = 25
         this.scroller.viewport.scrollV = 0;
         this.renewHang();
+        this.renewActive();
+
         //this.fightBtn.renew();
         //this.pvpBtn.renew();
     }

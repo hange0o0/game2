@@ -24,7 +24,7 @@ class Config {
 
 
     public static fightLevel = 20;
-    public static pvpLevel = 30;
+    public static pvpLevel = 20;
     public static heroLevel = 50;
 
 

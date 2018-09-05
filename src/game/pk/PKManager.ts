@@ -4,6 +4,7 @@ class PKManager {
     public static TYPE_SLAVE = 2;
     public static TYPE_FIGHT = 3;
     public static TYPE_PVP_OFFLINE = 4;
+    public static TYPE_ANSWER = 5;
 
 
     public static TYPE_TEST = 101;
@@ -180,6 +181,9 @@ class PKManager {
             case PKManager.TYPE_FIGHT:
                 FightManager.getInstance().pkResult(fun);
                 SharedObjectManager.getInstance().setMyValue('fight_video','')
+                break;
+            case PKManager.TYPE_ANSWER:
+                PKAnswerManager.getInstance().pkResult(fun);
                 break;
         }
     }

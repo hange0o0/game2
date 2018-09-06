@@ -159,7 +159,7 @@ class MainFightUI extends MainBase {
     }
 
     private renewActive(){
-        if(HangManager.getInstance().level == Config.pvpLevel)
+        if(HangManager.getInstance().level >= Config.pvpLevel)
         {
             PKActiveManager.getInstance().getActive(()=>{
                 this.activeUI.renew()

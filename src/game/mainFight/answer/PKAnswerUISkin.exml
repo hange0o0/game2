@@ -6,28 +6,28 @@
 		<e:Label id="titleText" text="竞技场" y="23" size="30" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
 	</e:Group>
 	<e:Image source="close_btn2_png" horizontalCenter="0" bottom="-40" touchEnabled="false"/>
-	<e:List id="list1" horizontalCenter="-165" itemRendererSkinName="PKAnswerItemSkin" width="230" height="410" y="150">
+	<e:List id="list1" horizontalCenter="-160" itemRendererSkinName="PKAnswerItemSkin" width="230" height="410" y="150">
 		<e:layout>
 		<e:TileLayout requestedColumnCount="2" horizontalGap="10" verticalGap="10"/>
 		</e:layout>
 	</e:List>
-	<e:List id="list2" width="230" height="410" y="150" itemRendererSkinName="PKAnswerItemSkin" horizontalCenter="165">
+	<e:List id="list2" width="230" height="410" y="150" itemRendererSkinName="PKAnswerItemSkin" horizontalCenter="160">
 		<e:layout>
 		<e:TileLayout requestedColumnCount="2" horizontalGap="10" verticalGap="10"/>
 		</e:layout>
 	</e:List>
-	<e:Image source="icon_vs_png" scaleX="0.5" scaleY="0.5" x="262" verticalCenter="5"/>
+	<e:Image source="icon_vs_png" scaleX="0.4" scaleY="0.4" verticalCenter="5" horizontalCenter="0"/>
 	<e:Button id="btn" label="解  迷" skinName="Btn1Skin" width="150" horizontalCenter="0" bottom="40"/>
-	<e:Group y="95" horizontalCenter="-165">
+	<e:Group y="95" horizontalCenter="-160">
 		<e:Image source="card_battle2_png" x="0" y="0"/>
 		<e:Label text="我方阵容" x="56" y="12" textColor="0x024dbd" size="23" stroke="1"/>
 		<e:layout>
 			<e:HorizontalLayout verticalAlign="middle"/>
 		</e:layout>
 	</e:Group>
-	<e:Group y="95" horizontalCenter="165">
+	<e:Group y="95" horizontalCenter="160">
 		<e:Image x="0" y="0" source="card_battle_png"/>
-		<e:Label text="我方阵容" x="56" y="12" size="23" textColor="0xdd0202" stroke="1"/>
+		<e:Label text="敌方阵容" x="56" y="12" size="23" textColor="0xdd0202" stroke="1"/>
 		<e:layout>
 		<e:HorizontalLayout verticalAlign="middle"/>
 		</e:layout>

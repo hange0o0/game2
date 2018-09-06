@@ -1,8 +1,8 @@
-class PKAnswerManager {
-    private static instance:PKAnswerManager;
+class PKEndLessManager {
+    private static instance:PKEndLessManager;
 
     public static getInstance() {
-        if (!this.instance) this.instance = new PKAnswerManager();
+        if (!this.instance) this.instance = new PKEndLessManager();
         return this.instance;
     }
 

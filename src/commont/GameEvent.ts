@@ -25,6 +25,8 @@ class GameEvent {
         info_change:'info_change',
         slave_change:'slave_change',
         view_change:'view_change',
+        active_change:'active_change',
+        active_end:'active_end',
 
 
 
@@ -136,9 +138,11 @@ class GameEvent {
     }
 
     public static answer = {
-        get_answer:'question.get_answer',
-        answer_pk:'question.answer_pk',
-        answer_pk_result:'question.answer_pk_result',
+        get_answer:'answer.get_answer',
+        answer_pk:'answer.answer_pk',
+        answer_pk_result:'answer.answer_pk_result',
+        add_chance:'answer.add_chance',
+        final_award:'answer.final_award',
     }
 
     public static tec = {

@@ -16,11 +16,11 @@ class PKActiveManager {
     private pvpScore = 0;
 
     public base = {
-        1:{diamond:10,label:'增加卡牌'},
-        2:{diamond:10,label:'+3次机会'},
-        3:{diamond:30,label:'+3次机会'},
-        4:{diamond:50,label:'续  命'},
-        5:{diamond:30,label:'+3次机会'},
+        1:{diamond:10,label:'增加卡牌',title:'远程模式'},
+        2:{diamond:10,label:'+3次机会',title:'解迷模式'},
+        3:{diamond:30,label:'+3次机会',title:'随机模式'},
+        4:{diamond:50,label:'续  命',title:'选牌模式'},
+        5:{diamond:30,label:'+3次机会',title:'无尽模式'},
     }
 
 
@@ -34,9 +34,9 @@ class PKActiveManager {
     //取当前进行中的活动     {start,end,type,data}
     public getCurrentActive(){
         var t = TM.now();
-        for(var i=0;i<this.activeList.length;i++)
+        for(var s in this.activeList)
         {
-            var oo = this.activeList[i];
+            var oo = this.activeList[s];
             if(oo.start<= t && oo.end>= t)
                 return oo;
         }
@@ -45,9 +45,9 @@ class PKActiveManager {
     public getNextActive(){
         var t = TM.now();
         var nextActive
-        for(var i=0;i<this.activeList.length;i++)
+        for(var s in this.activeList)
         {
-            var oo = this.activeList[i];
+            var oo = this.activeList[s];
             if(oo.start > t)
             {
                 if(!nextActive)
@@ -82,9 +82,9 @@ class PKActiveManager {
             var msg = data.msg;
             this.pvpScore = msg.pvp;
             this.activeList = msg.active;
-            for(var i=0;i<this.activeList.length;i++)
+            for(var s in this.activeList)
             {
-                var oo = this.activeList[i]
+                var oo = this.activeList[s]
                 oo.start = DateUtil.getTimestampByChineseDate(oo.start)
                 oo.end = DateUtil.getTimestampByChineseDate(oo.end)
                 if(DEBUG && oo.start > oo.end)
@@ -121,15 +121,34 @@ class PKActiveManager {
 
         }
     }
-    //点击了重置
-    public onReset(type,fun?){
+
+    //点击了PK
+    public onAward(type,fun?){
         switch(type)
         {
             case PKActiveManager.TYPE_FIGHT:
-                FightManager.getInstance().getInfo(fun);
+                //FightManager.getInstance().startInit();
                 return
             case PKActiveManager.TYPE_ANSWER:
-                PKAnswerManager.getInstance().getInfo(fun);
+                PKAnswerManager.getInstance().award(fun);
+                return
+
+        }
+    }
+
+    //点击了重置
+    public onReset(type,fun?){
+        if(!UM.testDiamond(this.base[type].diamond))
+        {
+            return;
+        }
+        switch(type)
+        {
+            case PKActiveManager.TYPE_FIGHT:
+                //FightManager.getInstance().getInfo(fun);
+                return
+            case PKActiveManager.TYPE_ANSWER:
+                PKAnswerManager.getInstance().addChance(fun);
                 return
 
         }

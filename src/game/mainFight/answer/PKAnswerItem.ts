@@ -7,6 +7,8 @@ class PKAnswerItem extends game.BaseItem {
     private bg: eui.Image;
     private img: CardImg;
     private costText: eui.Label;
+    private indexText: eui.Label;
+
 
 
 
@@ -16,14 +18,15 @@ class PKAnswerItem extends game.BaseItem {
     }
 
     public onClick(){
-        CardInfoUI.getInstance().show(this.data,{force:1000,type:0});
+        CardInfoUI.getInstance().show(CM.getCardVO(this.data.id),{force:1000,type:0});
     }
 
     public dataChanged(){
-        var vo:any = this.data
+        var vo:any = CM.getCardVO(this.data.id)
         this.bg.source = vo.getBG();
         this.costText.text = vo.cost;
         this.img.data = vo.id;
+        this.indexText.text = this.data.index
     }
 
     public changeGay(b){

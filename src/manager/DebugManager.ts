@@ -525,7 +525,7 @@ class DebugManager {
         }
         setArr(list,'');
         var len = ObjectUtil.objLength(obj)
-        var winNum = 1//Math.max(2,Math.floor(len*this.questionRate))
+        var winNum = Math.ceil((this.questionList.length + 1)/4)//Math.max(2,Math.floor(len*this.questionRate))
         var haveTest = {};
         var minHave = 0;
 
@@ -619,7 +619,7 @@ class DebugManager {
     }
 
     public outPutQuestion(){
-        ArrayUtil.sortByField(this.questionList,['lv'],[0])
+        ArrayUtil.sortByField(this.questionList,['rate','lv'],[1,0])
         var result = [];
         var result2 = [];
         for(var i=0;i<this.questionList.length;i++)
@@ -631,13 +631,26 @@ class DebugManager {
             var temp = oo.result[0].split(',');
             ArrayUtil.random(temp,3);
             result.push('"'+(i+1)+'"=>array("question"=>"'+oo.question+'","answer"=>"'+temp.join(',')+'")')
-            result2.push((i+1) + '->等级：' + oo.lv + '\t\t比例：' + oo.rate + '\t\t胜场：' + oo.result.length + ' /' + oo.total+'\n' + oo.result.join('\n'))
+            result2.push((i+1) + '->等级：' + oo.lv + '\t\t比例：' + oo.rate + '\t\t胜场：' + oo.result.length + ' /' + oo.total+'\n' + this.changeResult(oo.result).join('\n'))
         }
 
         console.log('<?php\n$question = array('+result.join(',')+');\n?> ')
         console.log('================================');
         for(var i=0;i<result2.length;i++)
             console.log(result2[i])
+    }
+
+    private changeResult(list){
+        for(var i=0;i<list.length;i++)
+        {
+            var temp = list[i].split(',');
+            for(var j=0;j<temp.length;j++)
+            {
+                temp[j] = CM.getCardVO(temp[j]).name;
+            }
+            list[i] = temp.join(',')
+        }
+        return list;
     }
 
     //=====================================================================

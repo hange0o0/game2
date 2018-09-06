@@ -1,8 +1,8 @@
-class PKAnswerManager {
-    private static instance:PKAnswerManager;
+class PKRandomManager {
+    private static instance:PKRandomManager;
 
     public static getInstance() {
-        if (!this.instance) this.instance = new PKAnswerManager();
+        if (!this.instance) this.instance = new PKRandomManager();
         return this.instance;
     }
 

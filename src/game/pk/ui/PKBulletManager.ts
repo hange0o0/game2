@@ -71,7 +71,7 @@ class PKBulletManager {
         return item;
     }
 
-    //直线4   fun:每次移动触发的方法
+    //直线4
     public createBulletAni2(fromMC,toMC,beginTime,endTime):ArrowMC{
         var item:BulletAniMC2 = this.bulletAniPool2.pop();
         if(!item)
@@ -79,8 +79,8 @@ class PKBulletManager {
             item = new BulletAniMC2();
         }
         item.init(fromMC,toMC,beginTime,endTime);
-        var con = fromMC.parent;
-        con.addChildAt(item,con.getChildIndex(fromMC) + 1);
+        var con = toMC.parent;
+        con.addChildAt(item,con.getChildIndex(toMC) + 1);
         this.useItem.push(item);
         return item;
     }

@@ -37,7 +37,7 @@ class MyTool {
         if(dataIn.offline_value)
             arr.push({name:'防御场积分','num':(dataIn.offline_value>0?'+':'') + dataIn.offline_value})
         if(dataIn.coin)
-            arr.push({img:MyTool.getPropCoin(),name:'金币','num':'×' + NumberUtil.addNumSeparator(dataIn.coin)})
+            arr.push({img:MyTool.getPropCoin(),name:'金币','num':'×' + NumberUtil.addNumSeparator(dataIn.coin),num2:dataIn.coin})
         if(dataIn.diamond)
             arr.push({img:MyTool.getPropDiamond(),name:'钻石','num':'×' + NumberUtil.addNumSeparator(dataIn.diamond)})
         if(dataIn.fightvalue)
@@ -47,7 +47,7 @@ class MyTool {
         for(var s in dataIn.skills)
         {
             var skill =  SkillVO.getObject(s);
-            arr.push({img:skill.getImage(),name:skill.name,'num':'×' + NumberUtil.addNumSeparator(dataIn.skills[s])})
+            arr.push({img:skill.getImage(),name:skill.name,'num':'×' + NumberUtil.addNumSeparator(dataIn.skills[s]),skillID:s})
         }
         for(var s in dataIn.props)
         {

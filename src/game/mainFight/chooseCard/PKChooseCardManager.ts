@@ -1,8 +1,8 @@
-class PKAnswerManager {
-    private static instance:PKAnswerManager;
+class PKChooseCardManager {
+    private static instance:PKChooseCardManager;
 
     public static getInstance() {
-        if (!this.instance) this.instance = new PKAnswerManager();
+        if (!this.instance) this.instance = new PKChooseCardManager();
         return this.instance;
     }
 

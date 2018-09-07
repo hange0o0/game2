@@ -7,12 +7,12 @@ class DebugManager {
         return this._instance;
     }
 
-    public myData:any = {"vedio":-1}
     public stop = 0;
     public winCardArr = [];
-    public testFinishFun;
+    public finishFun = function(){return false}
+
+
     public constructor() {
-        this.myData = SharedObjectManager.getInstance().getMyValue('share') || {"vedio":-1,};
     }
 
     public testHangView = false //在挂机中测试所有单位动画
@@ -28,6 +28,7 @@ class DebugManager {
     public printDetail = false;  //打印胜出怪物
     public winMonster = {}
     public winUseCard = []
+
 
     public testHero(lv){
         this.addHeroLevel = lv || 5;
@@ -102,7 +103,7 @@ class DebugManager {
     public showHangResult(){
         for(var i=0;i<this.winCardArr.length;i++)
         {
-             var card = this.winCardArr[i];
+             var card = this.winCardArr[i].list;
             var arr = card.split(',');
             var temp = [{t:1,num:0},{t:2,num:0},{t:3,num:0}]
             for(var s in arr)
@@ -346,6 +347,9 @@ class DebugManager {
         }
 
         console.log(this.testNum + ':' + (egret.getTimer()-t))
+
+        if(this.finishFun())
+            return;
         if(this.stop)
         {
             this.printResult(type);
@@ -525,7 +529,7 @@ class DebugManager {
         }
         setArr(list,'');
         var len = ObjectUtil.objLength(obj)
-        var winNum = Math.ceil((this.questionList.length + 1)/4)//Math.max(2,Math.floor(len*this.questionRate))
+        var winNum = Math.ceil((this.questionList.length + 1)/2)//Math.max(2,Math.floor(len*this.questionRate))
         var haveTest = {};
         var minHave = 0;
 
@@ -555,6 +559,10 @@ class DebugManager {
                 list:s
             }
             this.testOne(list1,question,3)
+            if(PD.isWin())//再试一次，两次都赢才算，免的机率赢的出现
+                this.testOne(list1,question,3)
+            if(PD.isWin())//再试一次，3次都赢才算，免的机率赢的出现
+                this.testOne(list1,question,3)
             var useCardList = PD.getPlayer(1).useCardList;
             haveTest[useCardList.join(',')] = true;
             minHave = Math.max(minHave,useCardList.length-1);
@@ -654,6 +662,27 @@ class DebugManager {
     }
 
     //=====================================================================
+    //创建活动相关的
+    public createActive(lv){
+        this.createHangFlag = false
+        this.MML = lv;
+        this.cardLen = 20 + this.MML;
+        this.winCardArr.length = 0
+        this.maxHeroLevel = Math.floor(this.MML/3);
+        this.finishFun = ()=>{
+            if(this.winCardArr.length < 30)
+                return false;
+            for(var i=0;i<this.winCardArr.length;i++)
+            {
+                var oo = this.winCardArr[i];
+                this.winCardArr[i] = '"'+oo.list + '|' + oo.hero + '"';
+            }
+            console.log('===================================LV.' + this.MML)
+            console.log('<?php\n$pkActiveBase = array('+this.winCardArr.join(',')+');\n?> ')
+            return true
+        }
+        this.testRound();
+    }
 }
 
 //DM.testCard('1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16','1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16')

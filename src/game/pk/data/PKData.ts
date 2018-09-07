@@ -161,6 +161,8 @@ class PKData extends egret.EventDispatcher{
             this.team2.atkRota = PKConfig.ROTA_RIGHT
             this.myPlayer = this.getPlayer(1)
         }
+        else
+            this.myPlayer.setRandomCard();
         this.team1.reInit();
         this.team2.reInit();
     }

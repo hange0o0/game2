@@ -144,6 +144,29 @@ class GameEvent {
         add_chance:'answer.add_chance',
         final_award:'answer.final_award',
     }
+    public static random = {
+        get_random:'random.get_random',
+        random_pk:'random.random_pk',
+        random_pk_result:'random.random_pk_result',
+        add_chance:'random.add_chance',
+        final_award:'random.final_award',
+    }
+    public static choosecard = {
+        get_choosecard:'choosecard.get_choosecard',
+        set_choosecard:'choosecard.set_choosecard',
+        pos_choosecard:'choosecard.pos_choosecard',
+        choosecard_pk:'choosecard.choosecard_pk',
+        choosecard_pk_result:'choosecard.choosecard_pk_result',
+        add_chance:'choosecard.add_chance',
+        final_award:'choosecard.final_award',
+    }
+    public static endless = {
+        get_endless:'endless.get_endless',
+        endless_pk:'endless.endless_pk',
+        endless_pk_result:'endless.endless_pk_result',
+        add_chance:'endless.add_chance',
+        final_award:'endless.final_award',
+    }
 
     public static tec = {
         tec_up:'tec.tec_up'

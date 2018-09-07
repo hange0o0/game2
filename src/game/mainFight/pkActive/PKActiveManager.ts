@@ -16,11 +16,11 @@ class PKActiveManager {
     private pvpScore = 0;
 
     public base = {
-        1:{diamond:10,label:'增加卡牌',title:'远程模式'},
-        2:{diamond:10,label:'+3次机会',title:'解迷模式'},
-        3:{diamond:30,label:'+3次机会',title:'随机模式'},
-        4:{diamond:50,label:'续  命',title:'选牌模式'},
-        5:{diamond:30,label:'+3次机会',title:'无尽模式'},
+        1:{diamond:10,label:'增加卡牌',title:'远征模式'},
+        2:{diamond:10,label:'+5次机会',title:'解迷模式'},
+        3:{diamond:30,label:'+5次机会',title:'随机模式'},
+        4:{diamond:30,label:'续  命',title:'选牌模式'},
+        5:{diamond:30,label:'+5次机会',title:'无尽模式'},
     }
 
 
@@ -105,6 +105,15 @@ class PKActiveManager {
             case PKActiveManager.TYPE_ANSWER:
                 PKAnswerManager.getInstance().getInfo(fun);
                 return
+            case PKActiveManager.TYPE_RANDOM:
+                PKRandomManager.getInstance().getInfo(fun);
+                return
+            case PKActiveManager.TYPE_CHOOSE:
+                PKChooseCardManager.getInstance().getInfo(fun);
+                return
+            case PKActiveManager.TYPE_ENDLESS:
+                PKEndLessManager.getInstance().getInfo(fun);
+                return
 
         }
     }
@@ -113,10 +122,19 @@ class PKActiveManager {
         switch(type)
         {
             case PKActiveManager.TYPE_FIGHT:
-                FightManager.getInstance().startInit();
+                //FightManager.getInstance().startInit();
                 return
             case PKActiveManager.TYPE_ANSWER:
                 PKAnswerUI.getInstance().show()
+                return
+            case PKActiveManager.TYPE_RANDOM:
+                PKRandomManager.getInstance().pk(fun)
+                return
+            case PKActiveManager.TYPE_CHOOSE:
+                PKChooseCardManager.getInstance().pk(fun);
+                return
+            case PKActiveManager.TYPE_ENDLESS:
+                PKEndLessManager.getInstance().pk(fun);
                 return
 
         }
@@ -131,6 +149,15 @@ class PKActiveManager {
                 return
             case PKActiveManager.TYPE_ANSWER:
                 PKAnswerManager.getInstance().award(fun);
+                return
+            case PKActiveManager.TYPE_RANDOM:
+                PKRandomManager.getInstance().award(fun);
+                return
+            case PKActiveManager.TYPE_CHOOSE:
+                PKChooseCardManager.getInstance().award(fun);
+                return
+            case PKActiveManager.TYPE_ENDLESS:
+                PKEndLessManager.getInstance().award(fun);
                 return
 
         }
@@ -150,6 +177,16 @@ class PKActiveManager {
             case PKActiveManager.TYPE_ANSWER:
                 PKAnswerManager.getInstance().addChance(fun);
                 return
+            case PKActiveManager.TYPE_RANDOM:
+                PKRandomManager.getInstance().addChance(fun);
+                return
+            case PKActiveManager.TYPE_CHOOSE:
+                PKChooseCardManager.getInstance().addChance(fun);
+                return
+            case PKActiveManager.TYPE_ENDLESS:
+                PKEndLessManager.getInstance().addChance(fun);
+                return
+
 
         }
     }

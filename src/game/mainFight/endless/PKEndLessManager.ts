@@ -28,7 +28,7 @@ class PKEndLessManager {
 
         var oo:any = {};
         Net.addUser(oo);
-        Net.send(GameEvent.answer.get_answer,oo,(data) =>{
+        Net.send(GameEvent.endless.get_endless,oo,(data) =>{
             var msg = data.msg;
             if(msg.fail)
             {
@@ -54,7 +54,7 @@ class PKEndLessManager {
             index:data.index+1,
         };
         Net.addUser(oo);
-        Net.send(GameEvent.answer.answer_pk,oo,(data) =>{
+        Net.send(GameEvent.endless.endless_pk,oo,(data) =>{
             var msg = data.msg;
             if(msg.fail == 1)
             {
@@ -68,7 +68,7 @@ class PKEndLessManager {
             }
             this.info.num --;
             EM.dispatch(GameEvent.client.active_change)
-            PKManager.getInstance().startPK(PKManager.TYPE_ANSWER,msg.pkdata)
+            PKManager.getInstance().startPK(PKManager.TYPE_ENDLESS,msg.pkdata)
             if(fun)
                 fun();
         });
@@ -78,7 +78,7 @@ class PKEndLessManager {
         var oo:any = {};
         oo.list = PKData.getInstance().myPlayer.posHistory.join(',');
         PKManager.getInstance().addPKKey(oo)
-        Net.send(GameEvent.answer.answer_pk_result, oo, (data)=> {
+        Net.send(GameEvent.endless.endless_pk_result, oo, (data)=> {
             var msg = data.msg;
             if(msg.fail)
             {
@@ -100,20 +100,20 @@ class PKEndLessManager {
 
     public addChance(fun?) {
         var oo:any = {};
-        PKManager.getInstance().addPKKey(oo)
-        Net.send(GameEvent.answer.add_chance, oo, (data)=> {
+        Net.addUser(oo);
+        Net.send(GameEvent.endless.add_chance, oo, (data)=> {
             var msg = data.msg;
             this.info.num = msg.num;
             EM.dispatch(GameEvent.client.active_change)
             if (fun)
                 fun();
-        },true,1,true);
+        });
     }
 
     public award(fun?) {
         var oo:any = {};
-        PKManager.getInstance().addPKKey(oo)
-        Net.send(GameEvent.answer.final_award, oo, (data)=> {
+        Net.addUser(oo);
+        Net.send(GameEvent.endless.final_award, oo, (data)=> {
             var msg = data.msg;
             delete this.info.final_award
             if(msg.fail)
@@ -125,7 +125,7 @@ class PKEndLessManager {
             EM.dispatch(GameEvent.client.active_change)
             if (fun)
                 fun();
-        },true,1,true);
+        });
     }
 
 }

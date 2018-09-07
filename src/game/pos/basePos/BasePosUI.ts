@@ -32,6 +32,7 @@ class BasePosUI extends game.BaseUI {
     private infoBtn: eui.Group;
     private renameBtn: eui.Group;
     private videoBtn: eui.Group;
+    private chooseCardBtn: eui.Group;
 
     private listCon: eui.Group;
     private heroList: eui.List;
@@ -110,6 +111,7 @@ class BasePosUI extends game.BaseUI {
         this.addBtnEvent(this.downBtn,this.onDown)
         this.addBtnEvent(this.openBtn,this.onOpen)
         this.addBtnEvent(this.renameBtn,this.onRename)
+        this.addBtnEvent(this.chooseCardBtn,this.onChooseCard)
         this.addBtnEvent(this.infoBtn,this.onInfo)
         this.addBtnEvent(this.infoCloseBtn,this.onInfoClose)
         this.addBtnEvent(this.videoBtn,this.onVideo)
@@ -128,6 +130,10 @@ class BasePosUI extends game.BaseUI {
 
         this.arrowGroup.touchChildren = this.arrowGroup.touchEnabled = false;
         this.arrowGroup.visible = false;
+    }
+
+    private onChooseCard(){
+        PKChooseCardUI.getInstance().show();
     }
 
     private onVideo(){
@@ -702,8 +708,14 @@ class BasePosUI extends game.BaseUI {
         this.typeIcon.source = this.type == 'atk'?'icon_atk3_png':'icon_def1_png'
         this.currentState = 'normal'
         this.deleteBtnIndex = 1;
+        MyTool.removeMC(this.chooseCardBtn);
         this.btnGroup.addChildAt(this.renameBtn,0)
-        if(this.pkData)
+        if(this.pkData && this.pkData.chooseCard)
+        {
+            this.btnGroup.removeChildren();
+            this.btnGroup.addChild(this.chooseCardBtn);
+        }
+        else if(this.pkData)
         {
             if(this.pkData.otherList)
             {
@@ -723,6 +735,7 @@ class BasePosUI extends game.BaseUI {
                 this.deleteBtnIndex --;
                 MyTool.removeMC(this.renameBtn)
             }
+
             if(this.pkData.isPVP)
                 this.addPanelOpenEvent(GameEvent.client.PVP_END,this.hide)
         }

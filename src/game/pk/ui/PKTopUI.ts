@@ -9,6 +9,7 @@ class PKTopUI extends game.BaseContainer {
     private hpText1: eui.Label;
     public hpGroup2: eui.Group;
     private hpText2: eui.Label;
+    private cdText: eui.Label;
     private topUI: TopUI;
     private view1: eui.Image;
     private view2: eui.Image;
@@ -209,6 +210,8 @@ class PKTopUI extends game.BaseContainer {
         else
             this.y = -55;
 
+
+        this.cdText.text = ''
         this.index = 1;
         this.renewHp()
 

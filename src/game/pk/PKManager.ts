@@ -5,6 +5,9 @@ class PKManager {
     public static TYPE_FIGHT = 3;
     public static TYPE_PVP_OFFLINE = 4;
     public static TYPE_ANSWER = 5;
+    public static TYPE_RANDOM = 6;
+    public static TYPE_CHOOSECARD= 7;
+    public static TYPE_ENDLESS = 8;
 
 
     public static TYPE_TEST = 101;
@@ -184,6 +187,15 @@ class PKManager {
                 break;
             case PKManager.TYPE_ANSWER:
                 PKAnswerManager.getInstance().pkResult(fun);
+                break;
+            case PKManager.TYPE_RANDOM:
+                PKRandomManager.getInstance().pkResult(fun);
+                break;
+            case PKManager.TYPE_CHOOSECARD:
+                PKChooseCardManager.getInstance().pkResult(fun);
+                break;
+            case PKManager.TYPE_ENDLESS:
+                PKEndLessManager.getInstance().pkResult(fun);
                 break;
         }
     }

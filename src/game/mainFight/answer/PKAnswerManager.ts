@@ -100,19 +100,19 @@ class PKAnswerManager {
 
     public addChance(fun?) {
         var oo:any = {};
-        PKManager.getInstance().addPKKey(oo)
+        Net.addUser(oo);
         Net.send(GameEvent.answer.add_chance, oo, (data)=> {
             var msg = data.msg;
             this.info.num = msg.num;
             EM.dispatch(GameEvent.client.active_change)
             if (fun)
                 fun();
-        },true,1,true);
+        });
     }
 
     public award(fun?) {
         var oo:any = {};
-        PKManager.getInstance().addPKKey(oo)
+        Net.addUser(oo);
         Net.send(GameEvent.answer.final_award, oo, (data)=> {
             var msg = data.msg;
             delete this.info.final_award
@@ -125,7 +125,7 @@ class PKAnswerManager {
             EM.dispatch(GameEvent.client.active_change)
             if (fun)
                 fun();
-        },true,1,true);
+        });
     }
 
 }

@@ -9,6 +9,8 @@ class PKRandomManager {
     public questionData
     public info
 
+    public cardList = []
+
     public getActiveInfo(){
         return {
             index:this.info.index,
@@ -18,8 +20,20 @@ class PKRandomManager {
         }
     }
 
+    public getCard(){
+        return ArrayUtil.randomOne(this.cardList)
+    }
+
+    private setCard(){
+        this.cardList = CardManager.getInstance().getOpenMonsterList(0).concat(CardManager.getInstance().getOpenSkillList(0));
+        for(var i=0;i<this.cardList.length;i++)
+        {
+            this.cardList[i] =  this.cardList[i].id;
+        }
+    }
+
     public getInfo(fun?){
-        if(this.questionData)
+        if(this.info)
         {
             if(fun)
                 fun()
@@ -28,14 +42,13 @@ class PKRandomManager {
 
         var oo:any = {};
         Net.addUser(oo);
-        Net.send(GameEvent.answer.get_answer,oo,(data) =>{
+        Net.send(GameEvent.random.get_random,oo,(data) =>{
             var msg = data.msg;
             if(msg.fail)
             {
                 MyWindow.Alert("数据异常，错误码：" + msg.fail);
                 return;
             }
-            this.questionData = msg.question
             this.info = msg.info
             if(fun)
                 fun();
@@ -47,14 +60,11 @@ class PKRandomManager {
             return;
         if(!UM.testEnergy(1))
             return;
-        var data = this.getActiveInfo()
-        var active = PKActiveManager.getInstance().getCurrentActive()
         var oo:any = {
-            path:active.v1,
-            index:data.index+1,
+            index:this.info.index + 1
         };
         Net.addUser(oo);
-        Net.send(GameEvent.answer.answer_pk,oo,(data) =>{
+        Net.send(GameEvent.random.random_pk,oo,(data) =>{
             var msg = data.msg;
             if(msg.fail == 1)
             {
@@ -66,9 +76,15 @@ class PKRandomManager {
                 MyWindow.Alert('PK初始异常，错误码：' + msg.fail)
                 return;
             }
+            this.setCard();
             this.info.num --;
             EM.dispatch(GameEvent.client.active_change)
-            PKManager.getInstance().startPK(PKManager.TYPE_ANSWER,msg.pkdata)
+
+            //var arr = [];
+            //while(arr.length<6)
+            //    arr.push(this.getCard())
+            //msg.pkdata.players[0].card = arr.join(',')
+            PKManager.getInstance().startPK(PKManager.TYPE_RANDOM,msg.pkdata)
             if(fun)
                 fun();
         });
@@ -78,7 +94,7 @@ class PKRandomManager {
         var oo:any = {};
         oo.list = PKData.getInstance().myPlayer.posHistory.join(',');
         PKManager.getInstance().addPKKey(oo)
-        Net.send(GameEvent.answer.answer_pk_result, oo, (data)=> {
+        Net.send(GameEvent.random.random_pk_result, oo, (data)=> {
             var msg = data.msg;
             if(msg.fail)
             {
@@ -100,20 +116,20 @@ class PKRandomManager {
 
     public addChance(fun?) {
         var oo:any = {};
-        PKManager.getInstance().addPKKey(oo)
-        Net.send(GameEvent.answer.add_chance, oo, (data)=> {
+        Net.addUser(oo);
+        Net.send(GameEvent.random.add_chance, oo, (data)=> {
             var msg = data.msg;
             this.info.num = msg.num;
             EM.dispatch(GameEvent.client.active_change)
             if (fun)
                 fun();
-        },true,1,true);
+        });
     }
 
     public award(fun?) {
         var oo:any = {};
-        PKManager.getInstance().addPKKey(oo)
-        Net.send(GameEvent.answer.final_award, oo, (data)=> {
+        Net.addUser(oo);
+        Net.send(GameEvent.random.final_award, oo, (data)=> {
             var msg = data.msg;
             delete this.info.final_award
             if(msg.fail)
@@ -125,7 +141,7 @@ class PKRandomManager {
             EM.dispatch(GameEvent.client.active_change)
             if (fun)
                 fun();
-        },true,1,true);
+        });
     }
 
 }

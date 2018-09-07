@@ -241,7 +241,30 @@ class PKPlayerData {
         this.posIndex ++
         this.addMP(-CM.getCardVO(cardData.mid).cost)
 
+
+        this.setRandomCard();
         this.sendToServer(posCard)
+    }
+
+    public setRandomCard(){
+        if(PKManager.getInstance().pkType == PKManager.TYPE_RANDOM)
+        {
+            for(var s in this.handCard)
+            {
+                if(this.handCard[s])
+                    this.handCard[s].remove = true;
+            }
+
+            for(var i=1;i<=PKConfig.maxHandCard;i++)
+            {
+                this.handCard[i] = {
+                    index:i,
+                    cardPos:i,
+                    showTime:PKData.getInstance().actionTime + 200,
+                    mid:PKRandomManager.getInstance().getCard()
+                };
+            }
+        }
     }
 
     public onPosCardEnable(posCard:PKPosCardData){

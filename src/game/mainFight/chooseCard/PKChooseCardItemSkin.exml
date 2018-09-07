@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="PKChooseCardItemSkin" width="150" height="200" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*">
+	<ns1:CardItem id="cardMC" x="0" y="0" skinName="CardItemSkin"/>
+</e:Skin>

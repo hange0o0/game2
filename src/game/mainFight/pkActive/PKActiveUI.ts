@@ -151,6 +151,15 @@ class PKActiveUI extends game.BaseUI {
             case PKActiveManager.TYPE_ANSWER:
                 activeInfo = PKAnswerManager.getInstance().getActiveInfo();
                 break
+            case PKActiveManager.TYPE_RANDOM:
+                activeInfo = PKRandomManager.getInstance().getActiveInfo();
+                break
+            case PKActiveManager.TYPE_CHOOSE:
+                activeInfo = PKChooseCardManager.getInstance().getActiveInfo();
+                break
+            case PKActiveManager.TYPE_ENDLESS:
+                activeInfo = PKEndLessManager.getInstance().getActiveInfo();
+                break
         }
 
         var winNum = activeInfo.index;

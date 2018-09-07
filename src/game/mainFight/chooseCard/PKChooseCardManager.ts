@@ -6,7 +6,7 @@ class PKChooseCardManager {
         return this.instance;
     }
 
-    public questionData
+    public maxNum = 30;
     public info
 
     public getActiveInfo(){
@@ -18,8 +18,45 @@ class PKChooseCardManager {
         }
     }
 
+    public onChooseBtn(){
+        PKBeforeUI.getInstance().show({
+            title:'组建阵容',
+            stopAdd:true,
+            noTab:true,
+            stopTest:true,
+            stopRemoveTips:true,
+            list:this.info.chooselist,
+            fun:function(data,hero){
+                var arr = data.split(',')
+                if(arr.length < PosManager.getInstance().maxPosNum())
+                {
+                    MyWindow.Confirm('还可继续上阵卡牌，确定就这样出战吗？',(b)=>{
+                        if(b==1)
+                        {
+                            FM.initFight(data,hero,diamond);
+                        }
+                    })
+                    return;
+                }
+                SharedObjectManager.getInstance().setMyValue('fightDefault',data)
+                SharedObjectManager.getInstance().setMyValue('fightHero',hero)
+                FM.initFight(data,hero,diamond)
+            },
+            hideFun:function(data,hero){
+                if(data)
+                    SharedObjectManager.getInstance().setMyValue('fightDefault',data)
+                if(hero)
+                    SharedObjectManager.getInstance().setMyValue('fightHero',hero)
+            }
+        })
+    }
+
+    public onPKBtn(){
+
+    }
+
     public getInfo(fun?){
-        if(this.questionData)
+        if(this.info)
         {
             if(fun)
                 fun()
@@ -28,14 +65,29 @@ class PKChooseCardManager {
 
         var oo:any = {};
         Net.addUser(oo);
-        Net.send(GameEvent.answer.get_answer,oo,(data) =>{
+        Net.send(GameEvent.choosecard.get_choosecard,oo,(data) =>{
             var msg = data.msg;
             if(msg.fail)
             {
                 MyWindow.Alert("数据异常，错误码：" + msg.fail);
                 return;
             }
-            this.questionData = msg.question
+            this.info = msg.info
+            if(fun)
+                fun();
+        });
+    }
+
+    public setCard(card,fun?){
+        var oo:any = {card:card};
+        Net.addUser(oo);
+        Net.send(GameEvent.choosecard.set_choosecard,oo,(data) =>{
+            var msg = data.msg;
+            if(msg.fail)
+            {
+                MyWindow.Alert("数据异常，错误码：" + msg.fail);
+                return;
+            }
             this.info = msg.info
             if(fun)
                 fun();
@@ -54,7 +106,7 @@ class PKChooseCardManager {
             index:data.index+1,
         };
         Net.addUser(oo);
-        Net.send(GameEvent.answer.answer_pk,oo,(data) =>{
+        Net.send(GameEvent.choosecard.choosecard_pk,oo,(data) =>{
             var msg = data.msg;
             if(msg.fail == 1)
             {
@@ -68,7 +120,7 @@ class PKChooseCardManager {
             }
             this.info.num --;
             EM.dispatch(GameEvent.client.active_change)
-            PKManager.getInstance().startPK(PKManager.TYPE_ANSWER,msg.pkdata)
+            PKManager.getInstance().startPK(PKManager.TYPE_CHOOSECARD,msg.pkdata)
             if(fun)
                 fun();
         });
@@ -78,7 +130,7 @@ class PKChooseCardManager {
         var oo:any = {};
         oo.list = PKData.getInstance().myPlayer.posHistory.join(',');
         PKManager.getInstance().addPKKey(oo)
-        Net.send(GameEvent.answer.answer_pk_result, oo, (data)=> {
+        Net.send(GameEvent.choosecard.choosecard_pk_result, oo, (data)=> {
             var msg = data.msg;
             if(msg.fail)
             {
@@ -98,22 +150,37 @@ class PKChooseCardManager {
     }
 
 
+    public pos(list,fun?) {
+        var oo:any = {};
+        if(list == this.info.chooselist)
+        {
+            fun && fun();
+            return
+        }
+        Net.addUser(oo);
+        Net.send(GameEvent.choosecard.pos_choosecard, oo, (data)=> {
+            var msg = data.msg;
+            this.info.chooselist = msg.list;
+            if (fun)
+                fun();
+        });
+    }
     public addChance(fun?) {
         var oo:any = {};
-        PKManager.getInstance().addPKKey(oo)
-        Net.send(GameEvent.answer.add_chance, oo, (data)=> {
+        Net.addUser(oo);
+        Net.send(GameEvent.choosecard.add_chance, oo, (data)=> {
             var msg = data.msg;
             this.info.num = msg.num;
             EM.dispatch(GameEvent.client.active_change)
             if (fun)
                 fun();
-        },true,1,true);
+        });
     }
 
     public award(fun?) {
         var oo:any = {};
-        PKManager.getInstance().addPKKey(oo)
-        Net.send(GameEvent.answer.final_award, oo, (data)=> {
+        Net.addUser(oo);
+        Net.send(GameEvent.choosecard.final_award, oo, (data)=> {
             var msg = data.msg;
             delete this.info.final_award
             if(msg.fail)
@@ -125,7 +192,7 @@ class PKChooseCardManager {
             EM.dispatch(GameEvent.client.active_change)
             if (fun)
                 fun();
-        },true,1,true);
+        });
     }
 
 }

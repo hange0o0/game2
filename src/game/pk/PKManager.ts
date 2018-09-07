@@ -269,6 +269,14 @@ class PKManager {
     //    }
     //}
 
+    private saveVideo(key){
+        var history = SharedObjectManager.getInstance().getMyValue(key) || {}
+        history.otherList = this.resetAutoList(PKData.getInstance().getPlayer(2),history.otherList)
+        if(!history.history)
+            history.history = [];
+        history.history.unshift(this.recordList[0]);
+        SharedObjectManager.getInstance().setMyValue(key,history);
+    }
 
     public sendFail(fun){
         if(PKData.getInstance().isReplay)
@@ -281,13 +289,10 @@ class PKManager {
         {
             case PKManager.TYPE_FIGHT:
                 FightManager.getInstance().pkFail(fun);
-                var player = PKData.getInstance().getPlayer(2);
-                var history = SharedObjectManager.getInstance().getMyValue('fight_video') || {}
-                history.otherList = this.resetAutoList(PKData.getInstance().getPlayer(2),history.otherList)
-                if(!history.history)
-                    history.history = [];
-                history.history.unshift(this.recordList[0]);
-                SharedObjectManager.getInstance().setMyValue('fight_video',history);
+                this.saveVideo('fight_video');
+                break;
+            case PKManager.TYPE_CHOOSECARD:
+                this.saveVideo('chooseCard_video');
                 break;
             case PKManager.TYPE_PVP_OFFLINE:
                 PVPManager.getInstance().pkOfflineFail(fun);

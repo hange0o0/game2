@@ -15,7 +15,7 @@ class PKChooseCardItem extends game.BaseItem {
     }
 
     public onClick(){
-
+        PKChooseCardManager.getInstance().setCard(this.data)
     }
 
     private onLongTouch(){

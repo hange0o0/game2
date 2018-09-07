@@ -668,7 +668,7 @@ class DebugManager {
         this.MML = lv;
         this.cardLen = 20 + this.MML;
         this.winCardArr.length = 0
-        this.maxHeroLevel = Math.floor(this.MML/3);
+        this.addHeroLevel = Math.max(0,Math.floor(this.MML/3) - 2);
         this.finishFun = ()=>{
             if(this.winCardArr.length < 30)
                 return false;

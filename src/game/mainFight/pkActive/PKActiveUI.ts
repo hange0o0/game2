@@ -121,7 +121,7 @@ class PKActiveUI extends game.BaseUI {
     private renew(){
         var base = PKActiveManager.getInstance().base[this.currentActive.type];
         this.topUI.setTitle(base.title)
-
+        this.pkBtn.label = '挑  战'
 
         var faward = this.currentActive.faward
         if(faward == 'box')
@@ -156,6 +156,10 @@ class PKActiveUI extends game.BaseUI {
                 break
             case PKActiveManager.TYPE_CHOOSE:
                 activeInfo = PKChooseCardManager.getInstance().getActiveInfo();
+                if(PKChooseCardManager.getInstance().info.choose)
+                {
+                    this.pkBtn.label = '选  卡'
+                }
                 break
             case PKActiveManager.TYPE_ENDLESS:
                 activeInfo = PKEndLessManager.getInstance().getActiveInfo();

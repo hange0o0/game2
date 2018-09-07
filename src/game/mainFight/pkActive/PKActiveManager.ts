@@ -131,7 +131,10 @@ class PKActiveManager {
                 PKRandomManager.getInstance().pk(fun)
                 return
             case PKActiveManager.TYPE_CHOOSE:
-                PKChooseCardManager.getInstance().pk(fun);
+                if(PKChooseCardManager.getInstance().info.choose)
+                    PKChooseCardManager.getInstance().onChooseBtn();
+                else
+                    PKChooseCardManager.getInstance().onPKBtn();
                 return
             case PKActiveManager.TYPE_ENDLESS:
                 PKEndLessManager.getInstance().pk(fun);

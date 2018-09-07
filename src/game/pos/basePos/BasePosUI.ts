@@ -714,6 +714,7 @@ class BasePosUI extends game.BaseUI {
         {
             this.btnGroup.removeChildren();
             this.btnGroup.addChild(this.chooseCardBtn);
+            this.onChooseCard()
         }
         else if(this.pkData)
         {

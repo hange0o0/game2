@@ -27,15 +27,7 @@ class PKChooseCardUI extends game.BaseWindow {
         this.addBtnEvent(this.cancelBtn,this.hide)
     }
 
-    private onClick(){
-        PKAnswerManager.getInstance().pk(()=>{
-            this.hide()
-        });
-    }
-
     public onShow(){
-
-
         this.addPanelOpenEvent(GameEvent.client.active_end,this.hide)
     }
 

@@ -19,40 +19,46 @@ class PKChooseCardManager {
     }
 
     public onChooseBtn(){
+        SharedObjectManager.getInstance().setMyValue('chooseCard_video',{})
         PKBeforeUI.getInstance().show({
             title:'组建阵容',
             stopAdd:true,
             noTab:true,
             stopTest:true,
+            isChoose:true,
             stopRemoveTips:true,
             list:this.info.chooselist,
-            fun:function(data,hero){
-                var arr = data.split(',')
-                if(arr.length < PosManager.getInstance().maxPosNum())
-                {
-                    MyWindow.Confirm('还可继续上阵卡牌，确定就这样出战吗？',(b)=>{
-                        if(b==1)
-                        {
-                            FM.initFight(data,hero,diamond);
-                        }
-                    })
-                    return;
-                }
-                SharedObjectManager.getInstance().setMyValue('fightDefault',data)
-                SharedObjectManager.getInstance().setMyValue('fightHero',hero)
-                FM.initFight(data,hero,diamond)
+            fun:function(data){
+                PKChooseCardManager.getInstance().pos(data,()=>{
+                    PKChooseCardManager.getInstance().pk()
+                })
             },
             hideFun:function(data,hero){
-                if(data)
-                    SharedObjectManager.getInstance().setMyValue('fightDefault',data)
-                if(hero)
-                    SharedObjectManager.getInstance().setMyValue('fightHero',hero)
+                PKChooseCardManager.getInstance().pos(data)
             }
         })
     }
 
     public onPKBtn(){
-
+        var history = SharedObjectManager.getInstance().getMyValue('chooseCard_video') || {}
+        PKBeforeUI.getInstance().show({
+            title:'挑战关卡',
+            stopAdd:true,
+            noTab:true,
+            stopTest:true,
+            stopRemoveTips:true,
+            list:this.info.chooselist,
+            otherList:history.otherList,
+            history:history.history,
+            fun:function(data){
+                PKChooseCardManager.getInstance().pos(data,()=>{
+                    PKChooseCardManager.getInstance().pk()
+                })
+            },
+            hideFun:function(data,hero){
+                PKChooseCardManager.getInstance().pos(data)
+            }
+        })
     }
 
     public getInfo(fun?){
@@ -139,6 +145,7 @@ class PKChooseCardManager {
                 return;
             }
             PKManager.getInstance().pkResult = msg;
+            SharedObjectManager.getInstance().setMyValue('chooseCard_video',{})
 
             this.info.index++
             this.info.num++

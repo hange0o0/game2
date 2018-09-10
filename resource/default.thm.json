@@ -69,6 +69,8 @@
     "src/game/mainFight/UnknowUISkin.exml",
     "src/game/mainFight/answer/PKAnswerItemSkin.exml",
     "src/game/mainFight/answer/PKAnswerUISkin.exml",
+    "src/game/mainFight/chooseCard/PKChooseCardItemSkin.exml",
+    "src/game/mainFight/chooseCard/PKChooseCardUISkin.exml",
     "src/game/mainFight/fight/FightAwardItemSkin.exml",
     "src/game/mainFight/fight/FightAwardUISkin.exml",
     "src/game/mainFight/fight/FightInfoUISkin.exml",

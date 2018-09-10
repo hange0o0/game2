@@ -193,7 +193,7 @@ class BasePosUI extends game.BaseUI {
             return
         }
         this.testSave(()=>{
-            if(this.pkData && this.pkData.list)
+            if(this.pkData && (this.pkData.list || this.pkData.newList))
             {
                 this.pkData.fun(this.changeToServerList(),this.changeToServerHero())
                 return;
@@ -257,7 +257,7 @@ class BasePosUI extends game.BaseUI {
     }
 
     public onClose(){
-        if(this.pkData && this.pkData.list)
+        if(this.pkData && (this.pkData.list || this.pkData.newList))
         {
             this.hide();
             this.pkData.hideFun && this.pkData.hideFun(this.changeToServerList(),this.changeToServerHero());
@@ -314,7 +314,7 @@ class BasePosUI extends game.BaseUI {
 
     private renewTitle(){
         var length = this.listData.length
-        if(this.listData.getItemAt(this.listData.length-1).setting)
+        if(this.listData.length>0 && this.listData.getItemAt(this.listData.length-1).setting)
             length --;
         this.titleText.text = ''+length+' / '+this.maxCard
 
@@ -324,6 +324,10 @@ class BasePosUI extends game.BaseUI {
             if(this.pkData.noTab)
                 posName = '';
             this.topUI.setTitle((this.pkData.title || '战斗准备') + (posName?'【'+posName+'】':''),this.pkData.helpKey || (this.type == 'atk'?'atkPos':'defPos'))
+
+            if(this.pkData.chooseCard)
+                this.topUI.setTitle(this.pkData.title + '('+length+'/'+PKChooseCardManager.getInstance().maxNum+')')
+
         }
         else if(this.type == 'atk')
         {
@@ -338,7 +342,7 @@ class BasePosUI extends game.BaseUI {
     }
 
     private onSave(fun?){
-        if(this.pkData && this.pkData.list)
+        if(this.pkData && (this.pkData.list || this.pkData.newList))
         {
             fun && fun();
             return true
@@ -663,6 +667,7 @@ class BasePosUI extends game.BaseUI {
     *   fun
     *   hideFun
     *   title
+    *   newList
     *   helpKey
     *   stopAdd
     *   stopRemoveTips
@@ -715,6 +720,7 @@ class BasePosUI extends game.BaseUI {
             this.btnGroup.removeChildren();
             this.btnGroup.addChild(this.chooseCardBtn);
             this.onChooseCard()
+            this.currentState = 'pk'
         }
         else if(this.pkData)
         {
@@ -819,6 +825,23 @@ class BasePosUI extends game.BaseUI {
         this.heroList.y = this.scrollerBG.y
     }
 
+    public renewPKChooseCard(id,arr){
+        this.listData.addItem({id:id})
+        if(arr)
+        {
+            PKChooseCardUI.getInstance().renew();
+        }
+        else
+        {
+            this.pkData.title = '挑战关卡';
+            this.pkData.chooseCard = false;
+            this.btnGroup.removeChildren();
+            this.btnGroup.addChild(this.pkBtn);
+            PKChooseCardUI.getInstance().hide();
+        }
+        this.renewTitle();
+    }
+
     public renew(){
         var removeSkill = []
         var PM = PosManager.getInstance();
@@ -832,10 +855,10 @@ class BasePosUI extends game.BaseUI {
                 list:PKManager.getInstance().defaultCardList
             }
         }
-        else if(this.pkData && this.pkData.list)
+        else if(this.pkData && (this.pkData.list || this.pkData.newList))
         {
             data = {
-                list:this.pkData.list,
+                list:this.pkData.list || '',
                 hero:this.pkData.hero,
             }
         }
@@ -846,7 +869,7 @@ class BasePosUI extends game.BaseUI {
             if(this.sp.list)
                 list = this.sp.list;
             else
-                list = data.list.split(',')
+                list = data.list?data.list.split(','):[];
             for(var i=0;i<list.length;i++)
             {
                 var id = list[i];

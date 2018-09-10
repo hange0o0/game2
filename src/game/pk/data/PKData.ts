@@ -26,6 +26,7 @@ class PKData extends egret.EventDispatcher{
     public team2:PKTeamData;
     public sysTeam:PKTeamData;
     public playerNum = 2;
+    public endless = 0;//无尽时的倒计时
 
     public monsterChange = false//怪有变化
     public randomSeed = 0//随机的种子
@@ -98,6 +99,7 @@ class PKData extends egret.EventDispatcher{
 
     //初始化游戏
     public init(data){
+
         this.startTime = 0;
         this.heroStep = 0;
         this.preLoadHeroStep = 0;
@@ -126,6 +128,7 @@ class PKData extends egret.EventDispatcher{
 
         this.randomTimes = 0;
         this.randomSeed = data.seed;
+        this.endless = data.endless || 0;
         this.team1 = new PKTeamData({id:1})
         this.team2 = new PKTeamData({id:2})
         this.team1.enemy = this.team2
@@ -254,6 +257,8 @@ class PKData extends egret.EventDispatcher{
     public isWin(){
         var team1 =  this.myPlayer.teamData
         var team2 =  this.myPlayer.teamData.enemy
+        if(this.endless && this.actionTime >= this.endless)
+            return true;
         return team1.hp > 0 &&  team2.hp <= 0;
     }
     //平

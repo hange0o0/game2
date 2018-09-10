@@ -288,11 +288,16 @@ class PKManager {
         switch(this.pkType)
         {
             case PKManager.TYPE_FIGHT:
-                FightManager.getInstance().pkFail(fun);
                 this.saveVideo('fight_video');
+                FightManager.getInstance().pkFail(fun);
                 break;
             case PKManager.TYPE_CHOOSECARD:
                 this.saveVideo('chooseCard_video');
+                fun && fun();
+                break;
+            case PKManager.TYPE_ENDLESS:
+                this.saveVideo('endless_video');
+                fun && fun();
                 break;
             case PKManager.TYPE_PVP_OFFLINE:
                 PVPManager.getInstance().pkOfflineFail(fun);
@@ -536,6 +541,8 @@ class PKManager {
     //把录像保存到本地
     public savePKResult(){
         if(this.pkType > 100)
+            return;
+        if(this.pkType == PKManager.TYPE_RANDOM)
             return;
         var PD = PKData.getInstance()
         if(PD.isReplay)

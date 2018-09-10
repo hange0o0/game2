@@ -40,6 +40,14 @@ class PKTopUI extends game.BaseContainer {
         this.touchEnabled = false;
     }
 
+    public onTimer(){
+        var endless = PKData.getInstance().endless;
+        if(endless)
+        {
+             this.cdText.text = '坚持：' + DateUtil.getStringBySecond(Math.ceil((endless - PKData.getInstance().actionTime)/1000)).substr(-5)
+        }
+    }
+
     public onVideoEvent(e){
         if(!this.stage)
             return;

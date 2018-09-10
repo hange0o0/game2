@@ -28,10 +28,11 @@ class PKChooseCardUI extends game.BaseWindow {
     }
 
     public onShow(){
+        this.renew();
         this.addPanelOpenEvent(GameEvent.client.active_end,this.hide)
     }
 
-    private renew(){
+    public renew(){
         var PCM = PKChooseCardManager.getInstance();
         var num = PCM.info.cardlist.split(',').length;
         this.titleText.text = '选择一个加入手牌('+num+'/'+PCM.maxNum+')'

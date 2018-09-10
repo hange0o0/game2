@@ -92,10 +92,19 @@ class MailPKItem extends game.BaseItem {
                 this.typeText.text = '奴隶PK';
                 break;
             case PKManager.TYPE_FIGHT:
-                this.typeText.text = '远征PK';
+                this.typeText.text = '远征模式';
                 break;
             case PKManager.TYPE_PVP_OFFLINE:
                 this.typeText.text = '竞技场PK';
+                break;
+            case PKManager.TYPE_ANSWER:
+                this.typeText.text = '解迷模式';
+                break;
+            case PKManager.TYPE_CHOOSECARD:
+                this.typeText.text = '选卡模式';
+                break;
+            case PKManager.TYPE_ENDLESS:
+                this.typeText.text = '无尽模式';
                 break;
         }
 

@@ -6,7 +6,6 @@ class PKEndLessManager {
         return this.instance;
     }
 
-    public questionData
     public info
 
     public getActiveInfo(){
@@ -18,8 +17,21 @@ class PKEndLessManager {
         }
     }
 
+
+    public onPKBtn(){
+        var history = SharedObjectManager.getInstance().getMyValue('endless_video') || {}
+        PKBeforeUI.getInstance().show({
+            title:'挑战关卡',
+            otherList:history.otherList,
+            history:history.history,
+            fun:function(id){
+                PKEndLessManager.getInstance().pk(id)
+            }
+        })
+    }
+
     public getInfo(fun?){
-        if(this.questionData)
+        if(this.info)
         {
             if(fun)
                 fun()
@@ -35,14 +47,13 @@ class PKEndLessManager {
                 MyWindow.Alert("数据异常，错误码：" + msg.fail);
                 return;
             }
-            this.questionData = msg.question
             this.info = msg.info
             if(fun)
                 fun();
         });
     }
 
-    public pk(fun?){
+    public pk(id,fun?){
         if(PKManager.getInstance().stopPK())
             return;
         if(!UM.testEnergy(1))
@@ -50,7 +61,7 @@ class PKEndLessManager {
         var data = this.getActiveInfo()
         var active = PKActiveManager.getInstance().getCurrentActive()
         var oo:any = {
-            path:active.v1,
+            id:id,
             index:data.index+1,
         };
         Net.addUser(oo);
@@ -87,6 +98,8 @@ class PKEndLessManager {
                 return;
             }
             PKManager.getInstance().pkResult = msg;
+
+            SharedObjectManager.getInstance().setMyValue('endless_video',{})
 
             this.info.index++
             this.info.num++

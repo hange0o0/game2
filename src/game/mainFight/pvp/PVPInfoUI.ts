@@ -14,28 +14,21 @@ class PVPInfoUI extends game.BaseWindow {
         this.skinName = "PVPInfoUISkin";
     }
 
+    private cdTitle: eui.Label;
+    private cdText: eui.Label;
     private icon1: eui.Image;
     private titleGroup1: eui.Group;
     private titleText1: eui.Label;
-    private pkBtn1: eui.Button;
+    private clickArea1: eui.Group;
     private expGroup1: eui.Group;
     private infoText1: eui.Label;
     private barMC1: eui.Rect;
     private rateText1: eui.Label;
-    private clickArea1: eui.Group;
-    private icon0: eui.Image;
-    private titleGroup0: eui.Group;
-    private titleText0: eui.Label;
-    private pkBtn0: eui.Button;
-    private expGroup0: eui.Group;
-    private infoText0: eui.Label;
-    private barMC0: eui.Rect;
-    private rateText0: eui.Label;
-    private clickArea0: eui.Group;
     private helpBtn: eui.Image;
+    private pkBtn1: eui.Button;
+    private pkBtn0: eui.Button;
     private awardList: eui.List;
-    private cdText: eui.Label;
-    private cdTitle: eui.Label;
+
 
 
 
@@ -48,10 +41,10 @@ class PVPInfoUI extends game.BaseWindow {
         this.addBtnEvent(this.pkBtn1, this.onOffline)
         this.addBtnEvent(this.pkBtn0, this.onOnline)
         this.addBtnEvent(this.helpBtn, this.onHelp)
-        this.addBtnEvent(this.clickArea1, this.onClick1)
-        this.addBtnEvent(this.clickArea0, this.onClick2)
+        //this.addBtnEvent(this.clickArea1, this.onClick1)
+        //this.addBtnEvent(this.clickArea0, this.onClick2)
         this.clickArea1.touchEnabled = true
-        this.clickArea0.touchEnabled = true
+        //this.clickArea0.touchEnabled = true
 
         this.awardList.itemRenderer = PVPInfoItem
         this.touchEnabled = false;
@@ -68,10 +61,10 @@ class PVPInfoUI extends game.BaseWindow {
         })
     }
 
-    private onClick1(){
-        console.log(666)
-        this.expGroup1.visible = !this.expGroup1.visible
-    }
+    //private onClick1(){
+    //    console.log(666)
+    //    this.expGroup1.visible = !this.expGroup1.visible
+    //}
     private onClick2(){
         //this.expGroup0.visible = ! this.expGroup0.visible
     }
@@ -94,8 +87,8 @@ class PVPInfoUI extends game.BaseWindow {
 
     public onShow(){
         this.openTime = TM.now();
-        this.expGroup1.visible = false
-        this.expGroup0.visible = false
+        //this.expGroup1.visible = false
+        //this.expGroup0.visible = false
         this.getNextData = false
         this.renew();
         this.testRoundAward();
@@ -157,7 +150,7 @@ class PVPInfoUI extends game.BaseWindow {
 
     private renew(){
         this.renewOffline()
-        this.renewOnline()
+        //this.renewOnline()
         this.renewAward();
         this.onTimer();
     }
@@ -190,48 +183,48 @@ class PVPInfoUI extends game.BaseWindow {
             var r0 = score - s1
             var r1 = s2 - s1
             this.rateText1.text = r0+'/'+r1
-            this.barMC1.width = 240 * r0/r1;
+            this.barMC1.width = 180 * r0/r1;
         }
         else
         {
-            this.barMC1.width = 240;
+            this.barMC1.width = 180;
             this.rateText1.text = '已达最高段位'
         }
     }
 
-    private renewOnline(){
-        var PM = PVPManager.getInstance();
-        var data = PM.online;
-        var score = data.score || 0
-        var lv = PM.getLevel(score);
-        var arr = [];
-        arr.push(this.getText('段位等级','LV.' + lv))
-        arr.push(this.getText('当前积分',data.score|| 0))
-        arr.push(this.getText('历史最高',data.maxscore|| 0))
-        arr.push(this.getText('对决场数',data.pknum|| 0))
-        arr.push(this.getText('胜利场数',data.winnum|| 0))
-        this.setHtml(this.infoText0,arr.join('\n'))
-
-        this.icon0.source = 'pvp_icon_1_png'
-        this.titleText0.text = PM.base[lv].title + '竞技场'
-        var s1 = PM.base[lv].score
-        if(PM.base[lv+1])
-        {
-            var s2 = PM.base[lv+1].score
-            var r0 = score - s1
-            var r1 = s2 - s1
-            this.rateText0.text = r0+'/'+r1
-            this.barMC0.width = 240 * r0/r1;
-        }
-        else
-        {
-            this.barMC0.width = 240;
-            this.rateText0.text = '已达最高段位'
-        }
-        MyTool.changeGray(this.icon0,true)
-    }
+    //private renewOnline(){
+    //    var PM = PVPManager.getInstance();
+    //    var data = PM.online;
+    //    var score = data.score || 0
+    //    var lv = PM.getLevel(score);
+    //    var arr = [];
+    //    arr.push(this.getText('段位等级','LV.' + lv))
+    //    arr.push(this.getText('当前积分',data.score|| 0))
+    //    arr.push(this.getText('历史最高',data.maxscore|| 0))
+    //    arr.push(this.getText('对决场数',data.pknum|| 0))
+    //    arr.push(this.getText('胜利场数',data.winnum|| 0))
+    //    this.setHtml(this.infoText0,arr.join('\n'))
+    //
+    //    this.icon0.source = 'pvp_icon_1_png'
+    //    this.titleText0.text = PM.base[lv].title + '竞技场'
+    //    var s1 = PM.base[lv].score
+    //    if(PM.base[lv+1])
+    //    {
+    //        var s2 = PM.base[lv+1].score
+    //        var r0 = score - s1
+    //        var r1 = s2 - s1
+    //        this.rateText0.text = r0+'/'+r1
+    //        this.barMC0.width = 240 * r0/r1;
+    //    }
+    //    else
+    //    {
+    //        this.barMC0.width = 240;
+    //        this.rateText0.text = '已达最高段位'
+    //    }
+    //    MyTool.changeGray(this.icon0,true)
+    //}
 
     private getText(title,value){
-       return this.createHtml(title+'：',0xFCBE4E)  + value;
+       return this.createHtml(title+'：',0x441A02)  + value;
     }
 }

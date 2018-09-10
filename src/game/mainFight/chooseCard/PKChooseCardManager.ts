@@ -25,9 +25,10 @@ class PKChooseCardManager {
             stopAdd:true,
             noTab:true,
             stopTest:true,
-            isChoose:true,
+            chooseCard:true,
             stopRemoveTips:true,
-            list:this.info.chooselist,
+            newList:true,
+            list:this.info.cardlist,
             fun:function(data){
                 PKChooseCardManager.getInstance().pos(data,()=>{
                     PKChooseCardManager.getInstance().pk()
@@ -47,7 +48,7 @@ class PKChooseCardManager {
             noTab:true,
             stopTest:true,
             stopRemoveTips:true,
-            list:this.info.chooselist,
+            list:this.info.cardlist,
             otherList:history.otherList,
             history:history.history,
             fun:function(data){
@@ -84,8 +85,8 @@ class PKChooseCardManager {
         });
     }
 
-    public setCard(card,fun?){
-        var oo:any = {card:card};
+    public setCard(id,fun?){
+        var oo:any = {id:id};
         Net.addUser(oo);
         Net.send(GameEvent.choosecard.set_choosecard,oo,(data) =>{
             var msg = data.msg;
@@ -94,7 +95,16 @@ class PKChooseCardManager {
                 MyWindow.Alert("数据异常，错误码：" + msg.fail);
                 return;
             }
-            this.info = msg.info
+            this.info.choose = msg.choose
+            if(this.info.cardlist)
+                this.info.cardlist += ',' + id
+            else
+                this.info.cardlist = id + ''
+
+            if(!this.info.choose)
+                EM.dispatch(GameEvent.client.active_change)
+
+            BasePosUI.getInstance().renewPKChooseCard(id,msg.choose)
             if(fun)
                 fun();
         });
@@ -108,7 +118,6 @@ class PKChooseCardManager {
         var data = this.getActiveInfo()
         var active = PKActiveManager.getInstance().getCurrentActive()
         var oo:any = {
-            path:active.v1,
             index:data.index+1,
         };
         Net.addUser(oo);
@@ -158,8 +167,8 @@ class PKChooseCardManager {
 
 
     public pos(list,fun?) {
-        var oo:any = {};
-        if(list == this.info.chooselist)
+        var oo:any = {list:list};
+        if(list == this.info.cardlist)
         {
             fun && fun();
             return
@@ -167,7 +176,12 @@ class PKChooseCardManager {
         Net.addUser(oo);
         Net.send(GameEvent.choosecard.pos_choosecard, oo, (data)=> {
             var msg = data.msg;
-            this.info.chooselist = msg.list;
+            if(msg.fail)
+            {
+                MyWindow.Alert('保存阵容出错，错误码：' + msg.fail)
+                return;
+            }
+            this.info.cardlist = msg.list;
             if (fun)
                 fun();
         });
@@ -178,6 +192,8 @@ class PKChooseCardManager {
         Net.send(GameEvent.choosecard.add_chance, oo, (data)=> {
             var msg = data.msg;
             this.info.num = msg.num;
+            this.info.choose = msg.choose;
+            this.info.cardlist = '';
             EM.dispatch(GameEvent.client.active_change)
             if (fun)
                 fun();

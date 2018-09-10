@@ -16,48 +16,22 @@
 		<e:Image source="title_bg3_png" scale9Grid="83,15,285,45" width="560" x="0" y="0"/>
 		<e:Label text="竞技场" y="23" size="30" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
 	</e:Group>
-	<e:Group horizontalCenter="0" bottom="25">
+	<e:Group horizontalCenter="0" bottom="130">
 		<e:Group x="-120" y="0">
-			<e:Image scale9Grid="16,15,7,7" x="0" y="0" width="280" height="340" source="bg13_png"/>
-			<e:Image id="icon1" source="pvp_icon_1_png" horizontalCenter="0.5" y="42" scaleX="0.8" scaleY="0.8"/>
-			<e:Group id="titleGroup1" left="10" right="10" y="262">
-				<e:Image source="black_bg_png" y="0" scale9Grid="41,7,8,42" left="0" right="0"/>
-				<e:Label id="titleText1" text="Label" horizontalCenter="0" verticalCenter="0"/>
-			</e:Group>
-			<e:Button id="pkBtn1" label="防御阵容对决" y="355" horizontalCenter="0" width="240" skinName="Btn7Skin" height="83"/>
-			<e:Group id="expGroup1" y="0" horizontalCenter="0">
-				<e:Image scale9Grid="16,15,7,7" x="0" y="0" width="280" height="340" source="bg13_png"/>
-				<e:Label text="自动场" y="25" horizontalCenter="0" size="28" stroke="2" strokeColor="0x301800" textColor="0xffca93"/>
-				<e:Label id="infoText1" text="Label" y="70" size="24" x="25" lineSpacing="15"/>
-				<e:Group y="270" horizontalCenter="0">
-				<e:Rect width="240" height="12" y="0" ellipseWidth="12" fillColor="0x441a02" x="0"/>
-				<e:Rect id="barMC1" width="120" height="12" y="0" ellipseWidth="12" x="0" fillColor="0xd16404"/>
-				<e:Label id="rateText1" text="200/300" y="25" size="22" horizontalCenter="0"/>
-				</e:Group>
-			</e:Group>
-			<e:Group id="clickArea1" width="280" height="340" x="0" y="0" touchThrough="false" touchEnabled="true" touchChildren="true">
-			</e:Group>
-		</e:Group>
-		<e:Group x="-110" y="10">
-			<e:Image scale9Grid="16,15,7,7" x="0" y="0" width="280" height="340" source="bg13_png"/>
-			<e:Image id="icon0" source="pvp_icon_1_png" horizontalCenter="0.5" y="42" scaleX="0.8" scaleY="0.8"/>
-			<e:Group id="titleGroup0" left="10" right="10" y="262">
+			<e:Image id="icon1" source="pvp_icon_1_png" horizontalCenter="20" y="42" scaleX="0.8" scaleY="0.8"/>
+			<e:Group id="titleGroup1" left="30" right="-10" y="250">
 			<e:Image source="black_bg_png" y="0" scale9Grid="41,7,8,42" left="0" right="0"/>
-			<e:Label id="titleText0" text="Label" horizontalCenter="0" verticalCenter="0"/>
+			<e:Label id="titleText1" text="Label" horizontalCenter="0" verticalCenter="0"/>
 			</e:Group>
-			<e:Button id="pkBtn0" label="进攻阵容对决" y="355" horizontalCenter="0" width="240" height="83" skinName="Btn5Skin"/>
-			<e:Group id="expGroup0" y="0" horizontalCenter="0">
-			<e:Image scale9Grid="16,15,7,7" x="0" y="0" width="280" height="340" source="bg13_png"/>
-			<e:Label text="手动场" y="20" horizontalCenter="0" size="26" stroke="2" strokeColor="0x301800" textColor="0xFFCA93"/>
-			<e:Label id="infoText0" text="Label" y="65" size="24" x="25" lineSpacing="15"/>
-			<e:Group y="270" horizontalCenter="0">
-				<e:Rect width="240" height="12" y="0" ellipseWidth="12" fillColor="0x441A02" x="0"/>
-				<e:Rect id="barMC0" width="120" height="12" y="0" ellipseWidth="12" x="0" fillColor="0xD16404"/>
-				<e:Label id="rateText0" text="200/300" y="25" size="22" horizontalCenter="0"/>
-			</e:Group>
-			</e:Group>
-			<e:Group id="clickArea0" width="280" height="340" x="0" y="0" touchThrough="false" touchEnabled="true" touchChildren="true">
-				<e:Image source="icon_lock_png" x="20" y="20" scaleX="1.2" scaleY="1.2"/>
+			<e:Group id="clickArea1" width="280" height="340" x="0" y="0" touchThrough="false" touchEnabled="true" touchChildren="true"/>
+		</e:Group>
+		<e:Group id="expGroup1" y="0" horizontalCenter="0" width="280" height="340">
+			<e:Image source="bg7_png" scale9Grid="32,32,7,9" left="30" right="30" top="30" bottom="30"/>
+			<e:Label id="infoText1" text="Label" y="50" size="24" x="50" lineSpacing="15"/>
+			<e:Group y="250" horizontalCenter="0">
+			<e:Rect width="180" height="12" y="0" ellipseWidth="12" fillColor="0x441a02" x="0"/>
+			<e:Rect id="barMC1" width="120" height="12" y="0" ellipseWidth="12" x="0" fillColor="0xd16404"/>
+			<e:Label id="rateText1" text="200/300" y="25" size="22" horizontalCenter="0"/>
 			</e:Group>
 		</e:Group>
 		<e:layout>
@@ -66,6 +40,13 @@
 	</e:Group>
 	<e:Image source="close_btn2_png" horizontalCenter="0" bottom="-40" touchEnabled="false"/>
 	<e:Image id="helpBtn" source="icon_help_png" right="10" top="10"/>
+	<e:Group bottom="25" horizontalCenter="0">
+		<e:Button id="pkBtn1" label="防御阵容对决" y="353.67" width="240" skinName="Btn7Skin" height="83" x="173"/>
+		<e:Button id="pkBtn0" label="进攻阵容对决" y="812.33" width="240" height="83" skinName="Btn5Skin" x="337"/>
+		<e:layout>
+			<e:HorizontalLayout gap="50"/>
+		</e:layout>
+	</e:Group>
 	<e:List id="awardList" width="560" height="300" y="90" horizontalCenter="0" itemRendererSkinName="PvpInfoItemSkin">
 		<e:ArrayCollection>
 			<e:Array>

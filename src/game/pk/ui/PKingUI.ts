@@ -382,6 +382,8 @@ class PKingUI extends game.BaseUI {
 
         //详情栏动画
         this.pkInfo.onTimer();
+        //详情栏动画
+        this.pkTop.onTimer();
 
         if(isOver)
         {

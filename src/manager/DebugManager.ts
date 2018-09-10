@@ -169,6 +169,8 @@ class DebugManager {
                 }
             }
             ArrayUtil.random(hero);
+            if(hero.length > 5)
+                hero.length = 5
         }
 
         return {
@@ -365,7 +367,7 @@ class DebugManager {
     private testOne(list1,list2,hp=10){
         var PD = PKData.getInstance()
         var data = {
-            seed:TM.now(),
+            seed:TM.now() + Math.floor(100000000*Math.random()),
             players:[
                 {id:1,gameid:'test1',team:1,autolist:list1.list,force:1000,type:0,hp:hp,hero:list1.hero},
                 {id:2,gameid:'test2',team:2,autolist:list2.list,force:1000,type:0,hp:hp,hero:list2.hero}
@@ -569,7 +571,7 @@ class DebugManager {
             if(PD.isWin())
             {
                 result.win.push(s);
-                if(result.win.length> winNum)
+                if(useCardList.length < this.cardLen || result.win.length> winNum)
                 {
                     fail = true
                     break;
@@ -584,6 +586,7 @@ class DebugManager {
                 question:question.list,
                 result:result.win,
                 total:result.total,
+                winNum:result.win.length,
                 rate:result.win.length/result.total
             }
             this.questionList.push(oo)
@@ -627,7 +630,7 @@ class DebugManager {
     }
 
     public outPutQuestion(){
-        ArrayUtil.sortByField(this.questionList,['rate','lv'],[1,0])
+        ArrayUtil.sortByField(this.questionList,['winNum','lv'],[1,0])
         var result = [];
         var result2 = [];
         for(var i=0;i<this.questionList.length;i++)
@@ -668,14 +671,21 @@ class DebugManager {
         this.MML = lv;
         this.cardLen = 20 + this.MML;
         this.winCardArr.length = 0
-        this.addHeroLevel = Math.max(0,Math.floor(this.MML/3) - 2);
+        this.addHeroLevel = 0
+        if(this.MML >= 6)
+            this.addHeroLevel = Math.min(5,Math.floor((this.MML-3)/3));
         this.finishFun = ()=>{
             if(this.winCardArr.length < 30)
                 return false;
             for(var i=0;i<this.winCardArr.length;i++)
             {
                 var oo = this.winCardArr[i];
-                this.winCardArr[i] = '"'+oo.list + '|' + oo.hero + '"';
+                var hero = oo.hero.split(',');
+                for(var j=0;j<hero.length;j++)
+                {
+                    hero[j] = hero[j].split('|')[0];
+                }
+                this.winCardArr[i] = '"'+oo.list + '|' + hero.join(',') + '"';
             }
             console.log('===================================LV.' + this.MML)
             console.log('<?php\n$pkActiveBase = array('+this.winCardArr.join(',')+');\n?> ')

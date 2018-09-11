@@ -122,7 +122,7 @@ class PKActiveManager {
         switch(type)
         {
             case PKActiveManager.TYPE_FIGHT:
-                //FightManager.getInstance().startInit();
+                FightManager.getInstance().onPKBtn();
                 return
             case PKActiveManager.TYPE_ANSWER:
                 PKAnswerUI.getInstance().show()
@@ -143,12 +143,12 @@ class PKActiveManager {
         }
     }
 
-    //点击了PK
+    //点击了大奖
     public onAward(type,fun?){
         switch(type)
         {
             case PKActiveManager.TYPE_FIGHT:
-                //FightManager.getInstance().startInit();
+                FightManager.getInstance().finalAward(fun);
                 return
             case PKActiveManager.TYPE_ANSWER:
                 PKAnswerManager.getInstance().award(fun);
@@ -175,7 +175,10 @@ class PKActiveManager {
         switch(type)
         {
             case PKActiveManager.TYPE_FIGHT:
-                //FightManager.getInstance().getInfo(fun);
+                FightManager.getInstance().addChance(()=>{
+                    FightManager.getInstance().continuePK();
+                    fun && fun();
+                });
                 return
             case PKActiveManager.TYPE_ANSWER:
                 PKAnswerManager.getInstance().addChance(fun);
@@ -189,8 +192,6 @@ class PKActiveManager {
             case PKActiveManager.TYPE_ENDLESS:
                 PKEndLessManager.getInstance().addChance(fun);
                 return
-
-
         }
     }
 

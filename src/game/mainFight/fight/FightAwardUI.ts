@@ -67,7 +67,7 @@ class FightAwardUI extends game.BaseWindow {
         }
         FightManager.getInstance().getAward(items,()=>{
             this.hide();
-            FightInfoUI.getInstance().changeCard();
+            //FightInfoUI.getInstance().changeCard();
         })
     }
 

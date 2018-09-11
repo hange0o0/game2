@@ -6,21 +6,24 @@ class FightManager {
         return this.instance;
     }
 
-    public shopTime
-    public shopData
-    public num
-    public step
+    //public shopTime
+    //public shopData
+    //public num
+    //public step
     public card
     public enemy
     public hero
     public award
-    public value
+    //public value
+
+    public info
 
     public cost = 100;
 
     private renewInfo(info){
-        this.num = info.num
-        this.step = info.step
+        this.info = info
+        //this.num = info.num
+        //this.step = info.step
         if(info.card)
             this.card = info.card.split(',')
         else
@@ -33,10 +36,17 @@ class FightManager {
 
         this.enemy = info.enemy
         this.award = info.award
-        this.value = info.value
+        //this.value = info.value
     }
 
-    public startInit(diamond?){
+    public onPKBtn(){
+         if(this.info.init)
+            this.continuePK();
+        else
+            this.startInit();
+    }
+
+    public startInit(){
         var FM = FightManager.getInstance();
         PKBeforeUI.getInstance().show({
             title:'初始阵容',
@@ -52,14 +62,14 @@ class FightManager {
                     MyWindow.Confirm('还可继续上阵卡牌，确定就这样出战吗？',(b)=>{
                         if(b==1)
                         {
-                            FM.initFight(data,hero,diamond);
+                            FM.initFight(data,hero);
                         }
                     })
                     return;
                 }
                 SharedObjectManager.getInstance().setMyValue('fightDefault',data)
                 SharedObjectManager.getInstance().setMyValue('fightHero',hero)
-                FM.initFight(data,hero,diamond)
+                FM.initFight(data,hero)
             },
             hideFun:function(data,hero){
                 if(data)
@@ -70,9 +80,43 @@ class FightManager {
         })
     }
 
+    public continuePK(){
+        var FM = FightManager.getInstance();
+        var history = SharedObjectManager.getInstance().getMyValue('fight_video') || {}
+        PKBeforeUI.getInstance().show({
+            stopAdd:true,
+            title:'调整阵容',
+            fight:true,
+            noTab:true,
+            newList:true,
+            stopTest:true,
+            otherList:history.otherList,
+            history:history.history,
+            list:FM.card.join(','),
+            hero:FM.hero.join(','),
+            fun:function(data,hero){
+                if(FM.award)
+                {
+                    FightAwardUI.getInstance().show();
+                    return;
+                }
+                FM.changePos(data,hero,()=>{
+                    FM.pk()
+                })
+            },
+            hideFun:function(data,hero){
+                FM.changePos(data,hero)
+            }
+        })
+    }
+
     public getActiveInfo(){
         return {
-
+            index:this.info.index,
+            init:this.info.init,
+            num:this.card.length,
+            haveAward:!this.info.final_award,
+            win_award:MyTool.getAwardArr(this.info.win_award)
         }
     }
 
@@ -90,24 +134,24 @@ class FightManager {
                 return;
             }
             this.card = this.card.concat(list);
+            BasePosUI.getInstance().renewFightChooseCard(list)
             this.award = '';
-            EM.dispatchEventWith(GameEvent.client.fight_change)
+            EM.dispatchEventWith(GameEvent.client.active_change)
              fun && fun();
         });
     }
 
     //初始化队伍
-    public initFight(list,hero,diamond?,fun?)
+    public initFight(list,hero,fun?)
     {
         if(!UM.testEnergy(1))
             return;
-        if(diamond && !UM.testDiamond(100))
-            return;
+        //if(diamond && !UM.testDiamond(100))
+        //    return;
 
         var oo:any = {};
         oo.list = list;
         oo.hero = hero;
-        oo.diamond = diamond;
         Net.addUser(oo);
         Net.send(GameEvent.fight.init_fight, oo, (data)=> {
             var msg = data.msg;
@@ -117,12 +161,12 @@ class FightManager {
                 return;
             }
 
-
+            this.info.init = true;
             this.card = list.split(',');
             this.hero = hero.split(',');
-            this.step = 0;
+            //this.step = 0;
             SharedObjectManager.getInstance().setMyValue('fight_video','')
-            EM.dispatchEventWith(GameEvent.client.fight_change)
+            EM.dispatchEventWith(GameEvent.client.active_change)
             //SharedObjectManager.getInstance().removeMyValue('fightDefault');
             this.pk();
             fun && fun();
@@ -130,7 +174,7 @@ class FightManager {
     }
 
     public getInfo(fun?){
-        if(this.shopTime && DateUtil.isSameDay(this.shopTime))
+        if(this.info)
         {
             if(fun)
                 fun()
@@ -146,45 +190,43 @@ class FightManager {
                 return;
             }
             this.renewInfo(msg.info);
-            this.shopData = msg.shop;
-            this.shopTime = TM.now();
             if(fun)
                 fun();
         });
     }
 
 
-    public buy_shop(id,fun?){
-        var oo:any = {};
-        oo.id = id;
-        Net.addUser(oo);
-        Net.send(GameEvent.fight.buy_shop,oo,(data) =>{
-            var msg = data.msg;
-            if(msg.fail)
-            {
-                MyWindow.Alert("购买失败，错误码：" + msg.fail);
-                this.shopTime = 0;
-                this.getInfo(()=>{
-                    FightInfoUI.getInstance().renew();
-                })
-                return;
-            }
-            for(var i=0;i<this.shopData.length;i++)
-            {
-                if(this.shopData[i].key == id)
-                {
-                    this.shopData[i].isbuy = true;
-                    break;
-                }
-            }
-            this.value -=  this.shopData[i].diamond;
-            AwardUI.getInstance().show(msg.award)
-            EM.dispatchEventWith(GameEvent.client.fight_change)
-            SoundManager.getInstance().playEffect(SoundConfig.effect_buy);
-            if(fun)
-                fun();
-        });
-    }
+    //public buy_shop(id,fun?){
+    //    var oo:any = {};
+    //    oo.id = id;
+    //    Net.addUser(oo);
+    //    Net.send(GameEvent.fight.buy_shop,oo,(data) =>{
+    //        var msg = data.msg;
+    //        if(msg.fail)
+    //        {
+    //            MyWindow.Alert("购买失败，错误码：" + msg.fail);
+    //            this.shopTime = 0;
+    //            this.getInfo(()=>{
+    //                FightInfoUI.getInstance().renew();
+    //            })
+    //            return;
+    //        }
+    //        for(var i=0;i<this.shopData.length;i++)
+    //        {
+    //            if(this.shopData[i].key == id)
+    //            {
+    //                this.shopData[i].isbuy = true;
+    //                break;
+    //            }
+    //        }
+    //        this.value -=  this.shopData[i].diamond;
+    //        AwardUI.getInstance().show(msg.award)
+    //        EM.dispatchEventWith(GameEvent.client.fight_change)
+    //        SoundManager.getInstance().playEffect(SoundConfig.effect_buy);
+    //        if(fun)
+    //            fun();
+    //    });
+    //}
 
     public pk(fun?) {
         if(PKManager.getInstance().stopPK())
@@ -222,25 +264,25 @@ class FightManager {
                 this.card = msg.card.split(',')
             else
                 this.card = []
-            EM.dispatchEventWith(GameEvent.client.fight_change)
+            EM.dispatchEventWith(GameEvent.client.active_change)
             if (fun)
                 fun();
         });
     }
 
-    public fightCancel(fun?) {
-        var oo:any = {};
-        Net.addUser(oo);
-        Net.send(GameEvent.fight.fight_cancel, oo, (data)=> {
-            var msg = data.msg;
-            this.award = '';
-            this.card.length = 0
-            this.step = 0
-            EM.dispatchEventWith(GameEvent.client.fight_change)
-            if (fun)
-                fun();
-        });
-    }
+    //public fightCancel(fun?) {
+    //    var oo:any = {};
+    //    Net.addUser(oo);
+    //    Net.send(GameEvent.fight.fight_cancel, oo, (data)=> {
+    //        var msg = data.msg;
+    //        this.award = '';
+    //        this.card.length = 0
+    //        this.step = 0
+    //        EM.dispatchEventWith(GameEvent.client.fight_change)
+    //        if (fun)
+    //            fun();
+    //    });
+    //}
 
 
     public pkResult(fun?) {
@@ -261,27 +303,66 @@ class FightManager {
             else
                 this.card = []
             this.award = msg.cardaward;
-            this.value += msg.award.fightvalue
-            this.step ++;
-            EM.dispatchEventWith(GameEvent.client.fight_change)
+            //this.value += msg.award.fightvalue
+            this.info.index ++;
+            this.info.win_award = msg.win_award;
+            EM.dispatchEventWith(GameEvent.client.active_change)
             if (fun)
                 fun();
         },true,1,true);
     }
 
-    public changePos(list,fun?){
-        var self = this;
+    public changePos(list,hero,fun?){
+        if(this.card.join(',') == list && this.hero.join(',') == hero)
+        {
+            fun && fun();
+            return
+        }
         var oo:any = {};
         oo.list = list;
+        oo.hero = hero;
         Net.addUser(oo);
-        Net.send(GameEvent.fight.change_pos,oo,function(data){
+        Net.send(GameEvent.fight.change_pos,oo,(data)=>{
             var msg = data.msg;
             if(msg.fail)
             {
                 MyWindow.Alert('传入卡牌非法')
                 return;
             }
+            this.card = list.split(',')
+            if(hero)
+                this.hero = hero.split(',')
             if(fun)
+                fun();
+        });
+    }
+
+    public addChance(fun?) {
+        var oo:any = {};
+        Net.addUser(oo);
+        Net.send(GameEvent.fight.add_chance, oo, (data)=> {
+            var msg = data.msg;
+            this.award = msg.award;
+            EM.dispatch(GameEvent.client.active_change)
+            if (fun)
+                fun();
+        });
+    }
+
+    public finalAward(fun?) {
+        var oo:any = {};
+        Net.addUser(oo);
+        Net.send(GameEvent.fight.final_award, oo, (data)=> {
+            var msg = data.msg;
+            delete this.info.final_award
+            if(msg.fail)
+            {
+                MyWindow.Alert('无法领奖，错误码：' + msg.fail)
+                return;
+            }
+            AwardUI.getInstance().show(msg.award)
+            EM.dispatch(GameEvent.client.active_change)
+            if (fun)
                 fun();
         });
     }

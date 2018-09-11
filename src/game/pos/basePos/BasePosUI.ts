@@ -33,6 +33,7 @@ class BasePosUI extends game.BaseUI {
     private renameBtn: eui.Group;
     private videoBtn: eui.Group;
     private chooseCardBtn: eui.Group;
+    private addCardBtn: eui.Group;
 
     private listCon: eui.Group;
     private heroList: eui.List;
@@ -112,6 +113,7 @@ class BasePosUI extends game.BaseUI {
         this.addBtnEvent(this.openBtn,this.onOpen)
         this.addBtnEvent(this.renameBtn,this.onRename)
         this.addBtnEvent(this.chooseCardBtn,this.onChooseCard)
+        this.addBtnEvent(this.addCardBtn,this.onAddCard)
         this.addBtnEvent(this.infoBtn,this.onInfo)
         this.addBtnEvent(this.infoCloseBtn,this.onInfoClose)
         this.addBtnEvent(this.videoBtn,this.onVideo)
@@ -134,6 +136,33 @@ class BasePosUI extends game.BaseUI {
 
     private onChooseCard(){
         PKChooseCardUI.getInstance().show();
+    }
+    private onAddCard(){
+        var FM = FightManager.getInstance();
+        if(FM.award)
+        {
+            FightAwardUI.getInstance().show();
+            return;
+        }
+        if(this.listData.length >= this.maxCard)
+        {
+            MyWindow.Alert('当前阵容卡牌数量已达上限')
+            return;
+        }
+        var diamond = PKActiveManager.getInstance().base[1].diamond;
+        MyWindow.Confirm('确定花费'+diamond+'增加卡牌？',(b)=>{
+            if(b==1)
+            {
+                if(UM.testDiamond(diamond))
+                {
+                    FM.addChance(()=>{
+                        FightAwardUI.getInstance().show();
+                    })
+                }
+
+            }
+        })
+
     }
 
     private onVideo(){
@@ -187,7 +216,7 @@ class BasePosUI extends game.BaseUI {
     }
 
     private onPK(){
-        if(this.listData.length <= 1)
+        if(!this.changeToServerList())
         {
             MyWindow.Alert('还没设置出战卡组')
             return
@@ -207,10 +236,10 @@ class BasePosUI extends game.BaseUI {
     }
     
     private onUp(){
-        this.renewBtn(false)
+        this.renewBtn(false,true)
     }
     private onDown(){
-        this.renewBtn(true)
+        this.renewBtn(true,true)
     }
 
     private onTest(){
@@ -714,12 +743,24 @@ class BasePosUI extends game.BaseUI {
         this.currentState = 'normal'
         this.deleteBtnIndex = 1;
         MyTool.removeMC(this.chooseCardBtn);
+        MyTool.removeMC(this.addCardBtn);
         this.btnGroup.addChildAt(this.renameBtn,0)
         if(this.pkData && this.pkData.chooseCard)
         {
             this.btnGroup.removeChildren();
             this.btnGroup.addChild(this.chooseCardBtn);
             this.onChooseCard()
+            this.currentState = 'pk'
+        }
+        else if(this.pkData && this.pkData.fight)
+        {
+            this.btnGroup.removeChildren();
+            this.btnGroup.addChild(this.addCardBtn);
+            this.btnGroup.addChild(this.pkBtn);
+            if(FightManager.getInstance().award)
+            {
+                FightAwardUI.getInstance().show();
+            }
             this.currentState = 'pk'
         }
         else if(this.pkData)
@@ -788,7 +829,7 @@ class BasePosUI extends game.BaseUI {
             this.btnGroup.addChildAt(this.deleteBtn,this.deleteBtnIndex)
     }
 
-    public renewBtn(toBottom?){
+    public renewBtn(toBottom?,mv?){
         var heroOpen = HeroManager.getInstance().isHeroOpen();
         this.upBtn.visible = false
         this.downBtn.visible = false
@@ -802,27 +843,40 @@ class BasePosUI extends game.BaseUI {
             var scrollHeight = GameManager.stage.stageHeight-60-100
         else
             var scrollHeight = GameManager.stage.stageHeight-120-100
+        var listY = 0;
         if( listHeight + heroHeight > scrollHeight)
         {
             if(toBottom)
             {
                 this.upBtn.visible = true
-                this.list.y = scrollHeight - listHeight
+                listY = scrollHeight - listHeight
             }
             else
             {
                 this.downBtn.visible = true
-                this.list.y = heroHeight
+                listY = heroHeight
 
             }
         }
         else
         {
-            this.list.y = heroHeight;
+            listY = heroHeight;
+        }
+        var heroY = listY - 150;
+        egret.Tween.removeTweens(this.list)
+        egret.Tween.removeTweens(this.scrollerBG)
+        egret.Tween.removeTweens(this.heroList)
+        if(mv)
+        {
+            egret.Tween.get(this.list).to({y:listY},200)
+            egret.Tween.get(this.scrollerBG).to({y:heroY},200)
+            egret.Tween.get(this.heroList).to({y:heroY},200)
+            return
         }
 
-        this.scrollerBG.y = this.list.y - 150
-        this.heroList.y = this.scrollerBG.y
+        this.list.y = listY
+        this.scrollerBG.y = heroY
+        this.heroList.y = heroY
     }
 
     public renewPKChooseCard(id,arr){
@@ -839,6 +893,12 @@ class BasePosUI extends game.BaseUI {
             this.btnGroup.addChild(this.pkBtn);
             PKChooseCardUI.getInstance().hide();
         }
+        this.renewTitle();
+    }
+
+    public renewFightChooseCard(ids){
+        for(var i=0;i<ids.length;i++)
+            this.listData.addItem({id:ids[i]})
         this.renewTitle();
     }
 

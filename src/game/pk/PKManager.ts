@@ -275,6 +275,7 @@ class PKManager {
         if(!history.history)
             history.history = [];
         history.history.unshift(this.recordList[0]);
+        history.time = TM.now();
         SharedObjectManager.getInstance().setMyValue(key,history);
     }
 

@@ -79,7 +79,12 @@
 		</e:Group>
 		<e:Group id="chooseCardBtn" x="20" y="20" width="100" height="80">
 			<e:Label text="选卡" horizontalCenter="0" bottom="0" stroke="2" size="22" textAlign="center" width="100%"/>
-			<e:Image y="0" horizontalCenter="0.5" source="icon_atk2_png" scaleX="0.75" scaleY="0.75"/>
+			<e:Image y="0" horizontalCenter="0.5" scaleX="0.75" scaleY="0.75" source="main_card_png"/>
+		</e:Group>
+		<e:Group id="addCardBtn" x="30" y="30" width="100" height="80">
+			<e:Label text="增加卡牌" horizontalCenter="0" bottom="0" stroke="2" size="22" textAlign="center" width="100%"/>
+			<e:Image y="0" horizontalCenter="0.5" source="main_card_png" scaleX="0.75" scaleY="0.75"/>
+			<e:Image source="icon_diamond_png" y="28.08" scaleX="0.5" scaleY="0.5" right="10"/>
 		</e:Group>
 		<e:layout>
 		<e:HorizontalLayout gap="0"/>

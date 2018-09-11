@@ -28,7 +28,7 @@ class FightUI extends game.BaseItem {
             MyWindow.ShowTips(this.desText.text);
             return;
         }
-        FightInfoUI.getInstance().show();
+        //FightInfoUI.getInstance().show();
     }
 
     public renew(){

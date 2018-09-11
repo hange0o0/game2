@@ -20,6 +20,11 @@ class PKEndLessManager {
 
     public onPKBtn(){
         var history = SharedObjectManager.getInstance().getMyValue('endless_video') || {}
+        if(history.time && history.time < PKActiveManager.getInstance().getCurrentActive().start)
+        {
+            SharedObjectManager.getInstance().setMyValue('endless_video',{})
+            history = {};
+        }
         PKBeforeUI.getInstance().show({
             title:'挑战关卡',
             otherList:history.otherList,

@@ -152,10 +152,10 @@ class CardInfoUI extends game.BaseWindow {
                 })
                 return;
             }
-             FightManager.getInstance().buy_shop(this.sp.key,()=>{
-                 this.sp = {};
-                 this.renew();
-             })
+             //FightManager.getInstance().buy_shop(this.sp.key,()=>{
+             //    this.sp = {};
+             //    this.renew();
+             //})
         }
     }
 
@@ -266,13 +266,13 @@ class CardInfoUI extends game.BaseWindow {
                     this.icon.source = MyTool.getPropDiamond();
                     this.okBtn.label = '购买'
                 }
-                else
-                {
-                    this.coinText.text = this.sp.diamond + ''
-                    this.upAble = this.sp.diamond <= FightManager.getInstance().value
-                    this.icon.source = MyTool.getPropFight();
-                    this.okBtn.label = '兑换'
-                }
+                //else
+                //{
+                //    this.coinText.text = this.sp.diamond + ''
+                //    this.upAble = this.sp.diamond <= FightManager.getInstance().value
+                //    this.icon.source = MyTool.getPropFight();
+                //    this.okBtn.label = '兑换'
+                //}
 
 
                 this.okBtn.skinName = 'Btn1Skin'

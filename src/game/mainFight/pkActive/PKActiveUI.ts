@@ -198,12 +198,25 @@ class PKActiveUI extends game.BaseUI {
             this.currentState = 'normal'
             if(leftNum == 0)
             {
-                this.resetGroup.visible = true
-                this.pkBtn.visible = false
-                this.desText.text = ''
+                if(this.currentActive.type == PKActiveManager.TYPE_FIGHT && (!activeInfo.init || FightManager.getInstance().award))
+                {
+                    this.resetGroup.visible = false
+                    this.pkBtn.visible = true
+                    this.desText.text = ''
+                    if(!activeInfo.init)
+                        this.pkBtn.label = '初始卡牌'
+                    else
+                        this.pkBtn.label = '选择卡牌'
+                }
+                else
+                {
+                    this.resetGroup.visible = true
+                    this.pkBtn.visible = false
+                    this.desText.text = ''
 
-                this.diamondText.text = base.diamond
-                this.resetBtn.label = base.label
+                    this.diamondText.text = base.diamond
+                    this.resetBtn.label = base.label
+                }
             }
             else
             {

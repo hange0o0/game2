@@ -126,15 +126,17 @@ class GameEvent {
     }
 
     public static fight = {
-        buy_shop:'fight.buy_shop',
+        //buy_shop:'fight.buy_shop',
         fight_award:'fight.fight_award',
         get_fight:'fight.get_fight',
         init_fight:'fight.init_fight',
         pk_fight:'fight.pk_fight',
         pk_fight_result:'fight.pk_fight_result',
         pk_fail:'fight.pk_fail',
-        fight_cancel:'fight.fight_cancel',
+        //fight_cancel:'fight.fight_cancel',
         change_pos:'fight.change_pos',
+        add_chance:'fight.add_chance',
+        final_award:'fight.final_award',
     }
 
     public static answer = {

@@ -76,13 +76,14 @@ class BasePosChooseUI extends game.BaseUI {
         if(this.tab.selectedIndex == 3 && !SharedObjectManager.getInstance().getMyValue('skill_tips'))
         {
             SharedObjectManager.getInstance().setMyValue('skill_tips',true)
-            MyWindow.Alert('法术卡牌在战斗中会被消耗！\n法术卡牌在战斗中会被消耗！\n法术卡牌在战斗中会被消耗！',()=>{
-                MyWindow.Alert('如果你战斗胜出，未使用的法术卡牌会被返还。',()=>{
-                    MyWindow.Alert('如果你战斗失败，则本轮出战的所有法术卡牌都会被移除！',()=>{
-
-                    })
-                })
-            })
+            SkillCardAlertUI.getInstance().show();
+            //MyWindow.Alert('法术卡牌在战斗中会被消耗！\n法术卡牌在战斗中会被消耗！\n法术卡牌在战斗中会被消耗！',()=>{
+            //    MyWindow.Alert('如果你战斗胜出，未使用的法术卡牌会被返还。',()=>{
+            //        MyWindow.Alert('如果你战斗失败，则本轮出战的所有法术卡牌都会被移除！',()=>{
+            //
+            //        })
+            //    })
+            //})
         }
     }
 

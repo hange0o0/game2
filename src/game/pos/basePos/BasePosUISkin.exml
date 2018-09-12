@@ -14,6 +14,7 @@
 			<e:Rect width="100%" height="130" x="50" y="50" fillColor="0xF2C379"/>
 			<e:Rect width="100%" height="130" x="50" y="50" fillColor="0xE2A75D"/>
 			<e:Rect width="100%" height="130" x="60" y="60" fillColor="0xF2C379"/>
+			<e:Rect width="100%" height="130" x="50" y="50" fillColor="0xE2A75D"/>
 			<e:layout>
 			<e:VerticalLayout gap="0"/>
 			</e:layout>

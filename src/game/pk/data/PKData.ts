@@ -221,7 +221,7 @@ class PKData extends egret.EventDispatcher{
     public onPosEmpty(player:PKPlayerData){
         if(player.getCardNum())
         {
-            if(player.getMP() >= 18)
+            if(PKManager.getInstance().pkType != PKManager.TYPE_FIGHT && player.getMP() >= 18)
                 player.addPosCard({mid:501})
         }
         else

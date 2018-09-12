@@ -39,7 +39,7 @@ class PKMonsterInfoUI extends game.BaseContainer {
             return;
         var videoData = e.data;
         var data:PKMonsterData = videoData.user;
-        if(data.owner != this.playerData.id)
+        if(!data || data.owner != this.playerData.id) //user不一定有
             return;
         switch(videoData.type)//动画类型
         {

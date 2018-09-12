@@ -250,6 +250,12 @@ class SlaveManager {
             return;
         }
 
+        if(ObjectUtil.objLength(PosManager.getInstance().defList) == 0)
+        {
+            fun && fun();
+            return;
+        }
+
         var self = this;
         var oo:any = {};
         Net.addUser(oo);

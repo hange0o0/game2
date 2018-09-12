@@ -328,6 +328,7 @@ class OtherInfoUI extends game.BaseWindow {
 
     public superShow(){
         SlaveManager.getInstance().viewList(()=>{
+
             SlaveManager.getInstance().slave_list(()=>{
                 super.show()
             })

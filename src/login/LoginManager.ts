@@ -16,6 +16,7 @@ class LoginManager{
     public quickPassword; //上次的登录的密码
 
     public logText;
+    public isOtherLogin = false;
 
     public constructor() {
         var oo =  SharedObjectManager.getInstance().getValue('user') || {};
@@ -222,6 +223,7 @@ class LoginManager{
                 return;
             }
 
+            self.isOtherLogin = true;
             UM.fill(msg.data);
             MainUI.getInstance().show();
             MainLoadingUI.getInstance().hide();

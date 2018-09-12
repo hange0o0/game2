@@ -260,6 +260,11 @@ class FightManager {
         Net.addUser(oo);
         Net.send(GameEvent.fight.pk_fail, oo, (data)=> {
             var msg = data.msg;
+            if(msg.fail)
+            {
+                MyWindow.Alert('出错了，错误码：' + msg.fail)
+                return;
+            }
             if(msg.card)
                 this.card = msg.card.split(',')
             else

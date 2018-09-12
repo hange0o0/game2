@@ -43,6 +43,7 @@
     "src/game/pkRelate/PKCardInfoSkin.exml",
     "src/game/card/CardInfoUISkin.exml",
     "src/game/card/CardUISkin.exml",
+    "src/game/card/SkillCardAlertUISkin.exml",
     "src/game/common/AwardItemSkin.exml",
     "src/game/common/AwardUISkin.exml",
     "src/game/common/CardImgSkin.exml",

@@ -120,7 +120,7 @@ class PKActiveUI extends game.BaseUI {
 
     private renew(){
         var base = PKActiveManager.getInstance().base[this.currentActive.type];
-        this.topUI.setTitle(base.title)
+        this.topUI.setTitle(base.title,base.helpKey)
         this.pkBtn.label = '挑  战'
 
         var faward = this.currentActive.faward

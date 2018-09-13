@@ -59,6 +59,7 @@ class BagSellItem extends game.BaseItem {
             var isRed = UM.getCoin()/this.data.diamond;
         }
         this.okBtn.visible = !this.data.isbuy
+        this.redMC.visible = this.okBtn.visible
         this.mc.source = pvo.getThumb();
 
 

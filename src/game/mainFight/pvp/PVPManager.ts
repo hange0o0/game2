@@ -271,6 +271,7 @@ class PVPManager {
 
             AwardUI.getInstance().show(msg.award,'赛季结束',str,fun)
             SoundManager.getInstance().playEffect(SoundConfig.pk_win);
+            EM.dispatchEventWith(GameEvent.client.pvp_change)
         });
     }
 

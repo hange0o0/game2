@@ -345,7 +345,10 @@ class BasePosUI extends game.BaseUI {
         var length = this.listData.length
         if(this.listData.length>0 && this.listData.getItemAt(this.listData.length-1).setting)
             length --;
-        this.titleText.text = ''+length+' / '+this.maxCard
+        //if(this.pkData && this.pkData.stopAdd)
+        //    this.titleText.text = ''+length;
+        //else
+            this.titleText.text = ''+length+' / '+this.maxCard
 
         var posName = this.posData && this.posData.name && Base64.decode(this.posData.name) || this.newName
         if(this.pkData)
@@ -367,7 +370,7 @@ class BasePosUI extends game.BaseUI {
             this.topUI.setTitle(posName || '防守阵容','defPos')
         }
 
-        this.titleGroup.visible = !(this.pkData && this.pkData.stopAdd)
+        //this.titleGroup.visible = !(this.pkData && this.pkData.stopAdd)
     }
 
     private onSave(fun?){

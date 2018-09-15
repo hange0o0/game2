@@ -23,7 +23,7 @@ class PropManager {
         for(var s in this.props)
         {
             var vo = PropVO.getObject(s);
-            if(this.props[s])
+            if(vo && this.props[s])
             {
                 arr.push(vo);
             }

@@ -135,7 +135,7 @@ class PVPInfoUI extends game.BaseWindow {
             })
         }
 
-        if(TM.now() - this.openTime >=10)
+        if(TM.now() - this.openTime >=6)
         {
             var cd = PM.getCurrentEnd() - TM.now()
             if(cd < 24*3600)
@@ -143,7 +143,7 @@ class PVPInfoUI extends game.BaseWindow {
             else
                 this.cdText.text = DateUtil.getStringBySeconds(cd,false,2);
             this.cdTitle.text = '赛季结算时间:'
-            if(TM.now() - this.openTime >=20)
+            if(TM.now() - this.openTime >= 6*2)
                 this.openTime = TM.now();
         }
     }

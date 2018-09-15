@@ -9,6 +9,7 @@ class PKAnswerManager {
     public questionData
     public info
 
+
     public getActiveInfo(){
         return {
             index:this.info.index,
@@ -42,7 +43,7 @@ class PKAnswerManager {
         });
     }
 
-    public pk(fun?){
+    public pk(fun?,userlist?){
         if(PKManager.getInstance().stopPK())
             return;
         if(!UM.testEnergy(1))
@@ -50,6 +51,7 @@ class PKAnswerManager {
         var data = this.getActiveInfo()
         var active = PKActiveManager.getInstance().getCurrentActive()
         var oo:any = {
+            userlist:userlist,
             path:active.v1,
             index:data.index+1,
         };
@@ -91,6 +93,8 @@ class PKAnswerManager {
             this.info.index++
             this.info.num++
             this.info.win_award = msg.win_award;
+
+            SharedObjectManager.getInstance().setMyValue('answer_video',{})
             EM.dispatch(GameEvent.client.active_change)
             if (fun)
                 fun();

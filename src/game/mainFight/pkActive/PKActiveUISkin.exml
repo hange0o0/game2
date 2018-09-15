@@ -12,7 +12,7 @@
 			</e:layout>
 		</e:List>
 		<e:Image source="title_bg3_png" y="-41.68" horizontalCenter="0"/>
-		<e:Label id="titleText" text="Label" y="-20" horizontalCenter="0"/>
+		<e:Label id="titleText" text="Label" y="-15.44" horizontalCenter="0.5" size="24" stroke="3" strokeColor="0x93520b"/>
 		<e:Label id="desText" text="Label" y="430" size="24" horizontalCenter="0.5" includeIn="normal"/>
 		<e:Button id="pkBtn" label="挑  战" y="460" horizontalCenter="0" x="104" scaleX="1" scaleY="1" skinName="Btn5Skin" width="250" includeIn="normal"/>
 		<e:Group y="380.99" width="463" height="30" horizontalCenter="0.5" x="19" scaleX="1" scaleY="1">

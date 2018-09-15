@@ -129,7 +129,7 @@ class GuideManager {
 
         this.addGuideObj({
             mc:function(){return PKingUI.getInstance().pkCtrlCon.overMC},
-            text:'点击出战区，可把所选卡牌上阵。玩家也可以通过拖放动作实现此操作',
+            text:'点击出战区，可把所选卡牌上阵。玩家也可以通过[拖放]到[出战区]或[战场]上实现此操作',
             guideKey:'addCard',
         })
 

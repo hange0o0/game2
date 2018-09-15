@@ -194,7 +194,7 @@ class PKActiveUI extends game.BaseUI {
         }
         else
         {
-            this.titleText.text = '完成本关可得奖励'
+            this.titleText.text = '完成第'+(winNum + 1)+'关可得奖励'
             this.currentState = 'normal'
             if(leftNum == 0)
             {

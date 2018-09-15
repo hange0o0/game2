@@ -132,7 +132,7 @@ class PKPosItem extends game.BaseItem {
 
         this.barMC.width = barWidth * (maxCD - cd) / maxCD;
 
-        if(cd == 0)
+        if(cd == 0 && data.mid < PKConfig.skillBeginID)
         {
              this.lightBG.visible = egret.getTimer() - this.lastFullCD < 200
             this.tw.setPaused(false)

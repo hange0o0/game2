@@ -531,9 +531,8 @@ class DebugManager {
         }
         setArr(list,'');
         var len = ObjectUtil.objLength(obj)
-        var winNum = Math.ceil((this.questionList.length + 1)/2)//Math.max(2,Math.floor(len*this.questionRate))
-        var haveTest = {};
-        var minHave = 0;
+        var winNum = this.questionList.length + 1//Math.max(2,Math.floor(len*this.questionRate))
+        var haveTest = {}; //会去除前面同时上阵的
 
 
         var result = {win:[],total:len};
@@ -543,18 +542,21 @@ class DebugManager {
             //console.log(len)
             var find = false
             var temp = s.split(',');
-            for(var i=minHave;i<temp.length;i++)
+            var cost = PKConfig.mpInit
+            for(var i=0;i<temp.length;i++)
             {
-                if(haveTest[temp.slice(0,i+1).join(',')])
+                 var vo = CM.getCardVO(temp[i]);
+                cost -= vo.cost;
+                if(cost < 0)
                 {
-                    find = true;
-                    //console.log('quick ok')
-                    break
+                    var key = temp.slice(i).join(',')
+                    break;
                 }
             }
-
-            if(find)
+            if(haveTest[key])
+            {
                 continue;
+            }
 
 
             var list1:any = {
@@ -565,12 +567,11 @@ class DebugManager {
                 this.testOne(list1,question,3)
             if(PD.isWin())//再试一次，3次都赢才算，免的机率赢的出现
                 this.testOne(list1,question,3)
-            var useCardList = PD.getPlayer(1).useCardList;
-            haveTest[useCardList.join(',')] = true;
-            minHave = Math.max(minHave,useCardList.length-1);
+            haveTest[key] = true;
             if(PD.isWin())
             {
                 result.win.push(s);
+                var useCardList = PD.getPlayer(1).useCardList;
                 if(useCardList.length < this.cardLen || result.win.length> winNum)
                 {
                     fail = true

@@ -242,7 +242,8 @@ class PKPlayerData {
         this.addMP(-CM.getCardVO(cardData.mid).cost)
 
 
-        this.setRandomCard();
+        if(cardData.mid < 500)
+            this.setRandomCard();
         this.sendToServer(posCard)
     }
 

@@ -300,6 +300,10 @@ class PKManager {
                 this.saveVideo('endless_video');
                 fun && fun();
                 break;
+            case PKManager.TYPE_ANSWER:
+                this.saveVideo('answer_video');
+                fun && fun();
+                break;
             case PKManager.TYPE_PVP_OFFLINE:
                 PVPManager.getInstance().pkOfflineFail(fun);
                 break

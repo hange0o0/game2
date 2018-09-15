@@ -758,6 +758,8 @@ class BasePosUI extends game.BaseUI {
         else if(this.pkData && this.pkData.fight)
         {
             this.btnGroup.removeChildren();
+            if(this.pkData.otherList)
+                this.btnGroup.addChild(this.infoBtn);
             this.btnGroup.addChild(this.addCardBtn);
             this.btnGroup.addChild(this.pkBtn);
             if(FightManager.getInstance().award)

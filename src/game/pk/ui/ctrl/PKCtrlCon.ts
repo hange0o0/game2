@@ -240,7 +240,7 @@ class PKCtrlCon extends game.BaseContainer {
         if(this.tipsMC['cstate'] == 0 && !this.hideTips)
         {
             this.hideTips = true;           //.to({scaleX:1.2,scaleY:1.2},200).to({scaleX:0,scaleY:0,alpha:0},200)
-            egret.Tween.get(this.tipsMC).wait(500).to({x:534,y:269,scaleX:0.5,scaleY:0.5},500).call(()=>{
+            egret.Tween.get(this.tipsMC).wait(500).to({x:534,y:420,scaleX:0.5,scaleY:0.5},500).call(()=>{
                 this.tipsMC['cstate'] = 1;
             },this)
         }
@@ -360,7 +360,7 @@ class PKCtrlCon extends game.BaseContainer {
         this.overTarget = -1;
         this.overMC.visible = false
 
-        if(e.data.y> GameManager.stage.stageHeight - 160 - 230 && e.data.y < GameManager.stage.stageHeight - 160)
+        if(e.data.y> GameManager.stage.stageHeight - 260 || (e.data.y < GameManager.stage.stageHeight-460 && e.data.y > PKingUI.getInstance().displayY))
         {
             this.overTarget = 1;
             this.overMC.visible = true
@@ -429,7 +429,7 @@ class PKCtrlCon extends game.BaseContainer {
         this.hideTips = false;
         this.tipsMC.visible = true;
         this.tipsMC.x = 222;
-        this.tipsMC.y = 151;
+        this.tipsMC.y = 300;
         egret.Tween.removeTweens(this.tipsMC)
         this.tipsMC.scaleX = this.tipsMC.scaleY = 1
         this.tipsMC.alpha = 1;
@@ -497,7 +497,7 @@ class PKCtrlCon extends game.BaseContainer {
                 this.tipsMC['cstate'] = 1
                 this.tipsMC.scaleX = this.tipsMC.scaleY = 0.5;
                 this.tipsMC.x = 534;
-                this.tipsMC.y = 269;
+                this.tipsMC.y = 420;
                 //this.tipsMC.visible = false;
             }
         }

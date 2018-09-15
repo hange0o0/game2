@@ -17,7 +17,13 @@
 		</e:layout>
 	</e:List>
 	<e:Image source="icon_vs_png" scaleX="0.4" scaleY="0.4" verticalCenter="5" horizontalCenter="0"/>
-	<e:Button id="btn" label="解  迷" skinName="Btn1Skin" width="150" horizontalCenter="0" bottom="40"/>
+	<e:Group horizontalCenter="0" bottom="30">
+		<e:Button id="btn0" label="自动挑战" width="200" skinName="Btn7Skin" x="0" y="0" height="83"/>
+		<e:Button id="btn" label="手动挑战" width="200" skinName="Btn5Skin" x="0" y="44"/>
+		<e:layout>
+			<e:HorizontalLayout gap="50"/>
+		</e:layout>
+	</e:Group>
 	<e:Group y="95" horizontalCenter="-160">
 		<e:Image source="card_battle2_png" x="0" y="0"/>
 		<e:Label text="我方阵容" x="56" y="12" textColor="0x024dbd" size="23" stroke="1"/>
@@ -31,5 +37,9 @@
 		<e:layout>
 		<e:HorizontalLayout verticalAlign="middle"/>
 		</e:layout>
+	</e:Group>
+	<e:Group id="videoBtn" right="15" bottom="45">
+		<e:Image source="btn4_png" scale9Grid="20,21,9,5" x="0" y="0"/>
+		<e:Image source="replay_mc_png" verticalCenter="0" horizontalCenter="0"/>
 	</e:Group>
 </e:Skin>

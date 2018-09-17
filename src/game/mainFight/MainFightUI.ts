@@ -165,6 +165,10 @@ class MainFightUI extends MainBase {
                 this.activeUI.renew()
             })
         }
+        else
+        {
+            this.activeUI.renew();
+        }
     }
 
     private renewForce(){

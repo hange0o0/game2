@@ -670,7 +670,7 @@ class DebugManager {
     public createActive(lv){
         this.createHangFlag = false
         this.MML = lv;
-        this.cardLen = 20 + this.MML;
+        this.cardLen = 15 + this.MML;
         this.winCardArr.length = 0
         this.addHeroLevel = 0
         if(this.MML >= 6)

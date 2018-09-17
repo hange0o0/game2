@@ -30,7 +30,7 @@
 			<e:VerticalLayout/>
 		</e:layout>
 	</e:List>
-	<e:List id="skillList" left="30" right="30" itemRendererSkinName="HeroInfoItemSkin" top="360" bottom="20" bottom.info="80">
+	<e:List id="skillList" left="30" right="30" itemRendererSkinName="HeroInfoItemSkin" top="360" bottom="20" bottom.info="90">
 		<e:layout>
 			<e:VerticalLayout/>
 		</e:layout>

@@ -2,8 +2,8 @@
 <e:Skin class="CardInfoUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" states="normal,buy,view" >
 	<e:Group x="0" top="0" bottom="0" bottom.buy="95">
 		<ns1:PKCardInfoUI id="item" x="0" skinName="PKCardInfoSkin" currentState="window" minHeight="560" y="0" currentState.view="normal"/>
-		<e:Image source="arrow1_png" scaleX="-1" left="20" id="leftBtn" bottom="15" includeIn="normal,buy"/>
-		<e:Image source="arrow1_png" right="20" id="rightBtn" x="10" bottom="15" includeIn="normal,buy"/>
+		<e:Image source="arrow1_png" scaleX="-0.8" left="22" id="leftBtn" bottom="20" includeIn="normal,buy" scaleY="0.8"/>
+		<e:Image source="arrow1_png" right="20" id="rightBtn" x="10" bottom="20" includeIn="normal,buy" scaleX="0.8" scaleY="0.8"/>
 		<e:Image id="helpBtn" source="icon_help_png" y="10" scaleX="0.9" scaleY="0.9" x="501"/>
 		<e:Group bottom="85" height="100" width="510" horizontalCenter="0" includeIn="normal,buy">
 			<e:Image scaleX="1" scaleY="1" left="0" right="0" top="0" bottom="0" source="bg11_png" scale9Grid="9,9,11,10"/>

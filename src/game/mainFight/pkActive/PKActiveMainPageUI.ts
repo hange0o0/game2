@@ -29,7 +29,7 @@ class PKActiveMainPageUI extends game.BaseItem {
         this.addBtnEvent(this.activeBtn,this.onActive)
         this.addBtnEvent(this.pvpBtn,this.onPVP)
 
-        this.lockText.text = '战役'+Config.pvpLevel+' 解锁';
+        this.lockText.text = '达到战役 '+Config.pvpLevel+' 解锁';
 
         this.bg.x = 0;
         this.bgTW = egret.Tween.get(this.bg,{loop:true}).to({x:-(this.bg.width-640)},3*60*1000)
@@ -52,6 +52,8 @@ class PKActiveMainPageUI extends game.BaseItem {
     }
 
     public onTimer(){
+        if(this.currentState == 'lock')
+            return;
         var t = TM.now();
         if(this.currentActive)
         {
@@ -88,6 +90,12 @@ class PKActiveMainPageUI extends game.BaseItem {
     }
 
     public renew(){
+        if(HangManager.getInstance().level < Config.pvpLevel)
+        {
+            this.currentState = 'lock'
+            return;
+        }
+        this.currentState = 'normal';
         var PAM = PKActiveManager.getInstance()
         var lv = PVPManager.getInstance().getLevel(PAM.getPvpScore())
         this.pvpBtn.source = 'pvp_icon_'+lv+'_png'

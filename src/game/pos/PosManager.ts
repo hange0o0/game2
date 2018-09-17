@@ -18,7 +18,7 @@ class PosManager {
 
     //最大出战数量
     public maxPosNum(){
-        return 19 + TecManager.getInstance().getLevel(4);
+        return 9 + TecManager.getInstance().getLevel(4);
     }
 
     public getListByType(type){

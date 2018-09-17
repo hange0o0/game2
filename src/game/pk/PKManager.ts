@@ -2,8 +2,8 @@ class PKManager {
     //录像里也要调
     public static TYPE_HANG = 1;
     public static TYPE_SLAVE = 2;
-    public static TYPE_FIGHT = 3;
-    public static TYPE_PVP_OFFLINE = 4;
+    public static TYPE_PVP_OFFLINE = 3;
+    public static TYPE_FIGHT = 4;
     public static TYPE_ANSWER = 5;
     public static TYPE_RANDOM = 6;
     public static TYPE_CHOOSECARD= 7;
@@ -397,29 +397,38 @@ class PKManager {
         var PD = PKData.getInstance()
 
         //攻击列表乱序
-        var tempList = atk.list.split(',');
+        var list = atk.list.split(',');
         var atkList:any = [];
-        var b = true
-        while(tempList.length > 0)
+
+        list = list.reverse();
+        var len = list.length;
+        var add = 1;
+        var total = 0;
+        for(var i=0;i<len;i++)
         {
-            var temp = [];
-            for(var i=0;i<6;i++)
-            {
-                var data = tempList.shift();
-                if(!data)
-                    break;
-                if(b)
-                    atkList.push(data)
-                else
-                    temp.push(data)
-            }
-            b = false;
-            if(temp.length > 0)
-            {
-                ArrayUtil.random(temp,3)
-                atkList = atkList.concat(temp)
-            }
+            var rate = add;
+            list[i] = {'id':list[i],'rate':rate}
+            add += i+1;
+            total += rate;
         }
+        while(len)
+        {
+            rate = 0;
+            var current = Math.ceil(Math.random()*total);
+            for(i=0;i<len;i++)
+            {
+                rate += list[i]['rate'];
+                if(current <= rate)
+                {
+                    total -= list[i]['rate'];
+                    atkList.push(list[i]['id']);
+                    list.splice(i,1);
+                    break;
+                }
+            }
+            len--;
+        }
+
 
         var index = 0;
         while(atkList[index] && atkList[index]>PKConfig.skillBeginID)

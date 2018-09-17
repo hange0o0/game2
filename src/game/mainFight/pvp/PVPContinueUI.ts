@@ -54,6 +54,7 @@ class PVPContinueUI extends game.BaseWindow {
         PKBeforeUI.getInstance().show({
             title:'防御阵容对决',
             isAuto:true,
+            cardBase:{force:1000,type:UM.type},
             otherList:PVPManager.getInstance().lastEnemyList,
             history:PVPManager.getInstance().history,
             fun:function(id){

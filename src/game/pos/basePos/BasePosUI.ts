@@ -72,6 +72,8 @@ class BasePosUI extends game.BaseUI {
     private changeTW;
     private deleteBtnIndex;
 
+    public cardBaseInfo
+
 
     public constructor() {
         super();
@@ -704,6 +706,7 @@ class BasePosUI extends game.BaseUI {
     *   stopAdd
     *   stopRemoveTips
     *   stopTest
+    *   cardBase
     *   history//可看的录像
     *   otherList//其它人的进功阵容
     *  }
@@ -729,6 +732,12 @@ class BasePosUI extends game.BaseUI {
                       i--;
                   }
              }
+        }
+
+        this.cardBaseInfo = null;
+        if(this.pkData)
+        {
+            this.cardBaseInfo = this.pkData.cardBase
         }
         super.show()
     }
@@ -1002,6 +1011,8 @@ class BasePosUI extends game.BaseUI {
             MyTool.removeMC(this.deleteBtn)
         else if(arr.length < this.maxCard)
             arr.push({setting:true})
+        else if(arr.length > this.maxCard)
+            arr.length = this.maxCard
 
 
 

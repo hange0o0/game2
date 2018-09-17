@@ -34,7 +34,7 @@ class PosCardItem extends game.BaseItem {
         //    type:UM.type
         //})
 
-        CardInfoUI.getInstance().show(CM.getCardVO(this.data.id))
+        CardInfoUI.getInstance().show(CM.getCardVO(this.data.id),BasePosUI.getInstance().cardBaseInfo)
 
     }
 

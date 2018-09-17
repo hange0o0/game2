@@ -61,7 +61,8 @@ class PKFailUI extends game.BaseUI {
             this.closeBtn.visible = true;
         },this)
 
-
+        if(PKM.pkType >= PKManager.TYPE_FIGHT && PKM.pkType <= PKManager.TYPE_ENDLESS)
+            EM.dispatch(GameEvent.client.active_change)
     }
 
     private addItem(tw,arrayCollection,data){

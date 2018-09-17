@@ -30,7 +30,7 @@ class BasePosHeroItem extends game.BaseItem {
     private onLongTouch(){
         if(!this.data.id)
             return;
-        HeroInfoUI.getInstance().show(CM.getCardVO(this.data.id))
+        HeroInfoUI.getInstance().show(CM.getCardVO(this.data.id),BasePosUI.getInstance().cardBaseInfo)
     }
 
     private onClick(){

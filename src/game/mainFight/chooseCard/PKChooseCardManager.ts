@@ -26,6 +26,7 @@ class PKChooseCardManager {
             noTab:true,
             stopTest:true,
             chooseCard:true,
+            cardBase:{force:1000,type:UM.type},
             stopRemoveTips:true,
             newList:true,
             list:this.info.cardlist,
@@ -48,6 +49,7 @@ class PKChooseCardManager {
             noTab:true,
             stopTest:true,
             stopRemoveTips:true,
+            cardBase:{force:1000,type:UM.type},
             list:this.info.cardlist,
             otherList:history.otherList,
             history:history.history,
@@ -134,7 +136,6 @@ class PKChooseCardManager {
                 return;
             }
             this.info.num --;
-            EM.dispatch(GameEvent.client.active_change)
             PKManager.getInstance().startPK(PKManager.TYPE_CHOOSECARD,msg.pkdata)
             if(fun)
                 fun();

@@ -83,7 +83,6 @@ class PKEndLessManager {
                 return;
             }
             this.info.num --;
-            EM.dispatch(GameEvent.client.active_change)
             PKManager.getInstance().startPK(PKManager.TYPE_ENDLESS,msg.pkdata)
             if(fun)
                 fun();

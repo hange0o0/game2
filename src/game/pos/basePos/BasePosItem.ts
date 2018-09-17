@@ -32,7 +32,7 @@ class BasePosItem extends game.BaseItem {
         //    force:UM.tec_force,
         //    type:UM.type
         //})
-        CardInfoUI.getInstance().show(CM.getCardVO(this.data.id))
+        CardInfoUI.getInstance().show(CM.getCardVO(this.data.id),BasePosUI.getInstance().cardBaseInfo)
     }
 
     private onClick(){

@@ -69,7 +69,6 @@ class PKAnswerManager {
                 return;
             }
             this.info.num --;
-            EM.dispatch(GameEvent.client.active_change)
             PKManager.getInstance().startPK(PKManager.TYPE_ANSWER,msg.pkdata)
             if(fun)
                 fun();

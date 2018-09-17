@@ -37,7 +37,7 @@ class PKActiveManager {
         for(var s in this.activeList)
         {
             var oo = this.activeList[s];
-            if(oo.start<= t && oo.end>= t)
+            if(oo.start<= t && oo.end> t)
                 return oo;
         }
         return null;

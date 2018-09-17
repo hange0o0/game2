@@ -1,4 +1,4 @@
-class PVPInfoUI extends game.BaseWindow {
+class PVPInfoUI extends game.BaseUI {
 
     private static _instance:PVPInfoUI;
 
@@ -14,6 +14,8 @@ class PVPInfoUI extends game.BaseWindow {
         this.skinName = "PVPInfoUISkin";
     }
 
+    private topUI: TopUI;
+    private bottomUI: BottomUI;
     private cdTitle: eui.Label;
     private cdText: eui.Label;
     private icon1: eui.Image;
@@ -24,10 +26,10 @@ class PVPInfoUI extends game.BaseWindow {
     private infoText1: eui.Label;
     private barMC1: eui.Rect;
     private rateText1: eui.Label;
-    private helpBtn: eui.Image;
     private pkBtn1: eui.Button;
     private pkBtn0: eui.Button;
     private awardList: eui.List;
+
 
 
 
@@ -40,7 +42,11 @@ class PVPInfoUI extends game.BaseWindow {
         super.childrenCreated();
         this.addBtnEvent(this.pkBtn1, this.onOffline)
         this.addBtnEvent(this.pkBtn0, this.onOnline)
-        this.addBtnEvent(this.helpBtn, this.onHelp)
+
+        this.topUI.setTitle('竞技场','pvp')
+        this.bottomUI.setHide(this.hide,this);
+
+
         //this.addBtnEvent(this.clickArea1, this.onClick1)
         //this.addBtnEvent(this.clickArea0, this.onClick2)
         this.clickArea1.touchEnabled = true
@@ -55,6 +61,7 @@ class PVPInfoUI extends game.BaseWindow {
             title:'防御阵容对决',
             isAuto:true,
             isPVP:true,
+            cardBase:{force:1000,type:UM.type},
             fun:function(id){
                 PVPManager.getInstance().pkOffLine(id)
             }
@@ -73,9 +80,9 @@ class PVPInfoUI extends game.BaseWindow {
          MyWindow.ShowTips('暂未开放')
     }
 
-    private onHelp(){
-        HelpManager.getInstance().showHelp('pvp')
-    }
+    //private onHelp(){
+    //    HelpManager.getInstance().showHelp('pvp')
+    //}
 
     public show(){
         if(PVPManager.getInstance().nearEnd())

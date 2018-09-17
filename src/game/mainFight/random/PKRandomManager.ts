@@ -78,7 +78,6 @@ class PKRandomManager {
             }
             this.setCard();
             this.info.num --;
-            EM.dispatch(GameEvent.client.active_change)
 
             //var arr = [];
             //while(arr.length<6)

@@ -282,7 +282,7 @@ class DateUtil {
     public static getTimestampByChineseDate(str: string): number {
         var date = DateUtil.StringToDate(str);
         var diffMinus = -480 - date.getTimezoneOffset();//和本地时区的 分钟间隔
-        date.setMinutes(diffMinus);
+        date.setMinutes(date.getMinutes() - diffMinus);
         return Math.floor(date.getTime() / 1000);
     }
     

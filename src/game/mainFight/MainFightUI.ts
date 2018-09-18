@@ -58,7 +58,7 @@ class MainFightUI extends MainBase {
         EM.addEvent(GameEvent.client.pk_end,this.onPKEnd,this)
 
         var h = GameManager.stage.stageHeight-140-110
-        var mapH = Math.max(430,h/2)
+        var mapH = Math.min(500,Math.max(430,h*0.6))
         this.mapBtn.resetHeight(mapH)
         this.activeUI.resetHeight(Math.max(380,h-mapH))
 

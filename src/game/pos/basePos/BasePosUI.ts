@@ -749,7 +749,10 @@ class BasePosUI extends game.BaseUI {
     public onShow(){
         this.infoGroup.visible = false;
         this.openBtn.visible =  this.type == 'def';
-        this.maxCard = PosManager.getInstance().maxPosNum();
+        if(this.pkData && this.pkData.maxNum)
+            this.maxCard = this.pkData.maxNum;
+        else
+            this.maxCard = PosManager.getInstance().maxPosNum();
 
         this.typeIcon.source = this.type == 'atk'?'icon_atk3_png':'icon_def1_png'
         this.currentState = 'normal'

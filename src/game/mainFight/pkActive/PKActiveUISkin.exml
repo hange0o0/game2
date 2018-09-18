@@ -39,7 +39,7 @@
 		<e:Button id="awardBtn" label="开启宝箱" includeIn="award" y="460" width="150" horizontalCenter="0" skinName="Btn3Skin"/>
 		<e:Label id="boxText" text="Label" includeIn="award" y="270" horizontalCenter="0" textColor="0xffe4aa"/>
 		<e:Group id="resetGroup" y="428" horizontalCenter="0" includeIn="normal">
-			<e:Button id="resetBtn" label="Button" y="40" skinName="Btn2Skin" width="200" horizontalCenter="0"/>
+			<e:Button id="resetBtn" label="Button" y="50" skinName="Btn2Skin" width="200" horizontalCenter="0"/>
 			<e:Group y="0" horizontalCenter="0">
 				<e:Image source="icon_diamond_png" x="0" y="0" scaleX="0.6" scaleY="0.6"/>
 				<e:Label id="diamondText" text="Label" x="44" y="8" size="24"/>

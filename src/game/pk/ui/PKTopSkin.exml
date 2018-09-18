@@ -13,5 +13,5 @@
 	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
 	<e:Image id="view1" source="pk_view_icon_png" x="75" y="188"/>
 	<e:Image id="view2" source="pk_view_icon_png" y="188" right="75"/>
-	<e:Label id="cdText" text="Label" y="180" horizontalCenter="0" size="24" stroke="3"/>
+	<e:Label id="cdText" text="Label" y="185" horizontalCenter="0" size="24" stroke="3" textColor="0xffeeb7"/>
 </e:Skin>

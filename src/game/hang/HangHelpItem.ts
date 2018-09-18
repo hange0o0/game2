@@ -56,7 +56,11 @@ class HangHelpItem extends game.BaseItem {
         this.forceText.text = '通关战力：'+  this.infoData.force
         this.cdText.text = '通关时长：'+  DateUtil.getStringBySecond(this.infoData.cd/1000).substr(-5)
 
-        this.timeText.text = DateUtil.getStringBySeconds(Math.max(TM.now() - this.data.time,1),true) + '前'
+        var cd = Math.max(TM.now() - this.data.time,1);
+        if(!Config.isDebug && cd > 3600*24)
+            this.timeText.text = '1天前'
+        else
+            this.timeText.text = DateUtil.getStringBySeconds(cd,true) + '前'
 
         if(this.infoData.version != Config.pk_version)
         {

@@ -253,6 +253,10 @@ class PKData extends egret.EventDispatcher{
         return this.playerObj[id]
     }
 
+    public get otherPlayer(){
+        return this.getPlayer(this.myPlayer.id==1?2:1)
+    }
+
     //赢
     public isWin(){
         var team1 =  this.myPlayer.teamData

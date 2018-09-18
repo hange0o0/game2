@@ -469,6 +469,8 @@ class HangUI extends game.BaseItem {
         if(this.cost1 > 0)
         {
             var id = <number>ArrayUtil.randomOne(CardManager.getInstance().getMyMonsterList(0)).id;
+            while(id == 47)
+                id = <number>ArrayUtil.randomOne(CardManager.getInstance().getMyMonsterList(0)).id;
             if(Config.isDebug && DM.testHangView)
             {
                 id = this.getTestID();
@@ -484,6 +486,8 @@ class HangUI extends game.BaseItem {
             while(true)
             {
                 var id = parseInt(ArrayUtil.randomOne(HangManager.getInstance().lastlist));   //敌人的出战列表，一定有
+                if(id == 47)
+                    continue;
                 if(id < PKConfig.skillBeginID)
                     break;
             }

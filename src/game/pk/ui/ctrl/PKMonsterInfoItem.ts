@@ -3,8 +3,8 @@ class PKMonsterInfoItem extends game.BaseItem {
     private bar1: eui.Rect;
     private bar2: eui.Rect;
     private text: eui.Label;
-    private selfIcon: eui.Image;
-    private typeMC: eui.Image;
+    private teamMC: eui.Image;
+
 
 
 
@@ -23,9 +23,9 @@ class PKMonsterInfoItem extends game.BaseItem {
 
     public dataChanged(){
         var data = this.data;
-        var w = 270
-        this.typeMC.source = 'icon_type'+data.type+'_png';
-        this.selfIcon.visible = data.type == data.self;
+        var w = 170;
+        //this.typeMC.source = 'icon_type'+data.type+'_png';
+        this.teamMC.visible = data.type == data.self;
         this.text.text = data.s1
         var max = Math.max(data.max,15);
         this.bar1.width = 20 + data.s1/max*w;

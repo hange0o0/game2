@@ -19,7 +19,7 @@ class PKChooseCardItem extends game.BaseItem {
     }
 
     private onLongTouch(){
-        CardInfoUI.getInstance().show(CM.getCardVO(this.data),{})
+        CardInfoUI.getInstance().show(CM.getCardVO(this.data),{force:1000})
     }
 
     public dataChanged(){

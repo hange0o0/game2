@@ -6,7 +6,7 @@ class PKChooseCardManager {
         return this.instance;
     }
 
-    public maxNum = 30;
+    public maxNum = 20;
     public info
 
     public getActiveInfo(){
@@ -26,6 +26,7 @@ class PKChooseCardManager {
             noTab:true,
             stopTest:true,
             chooseCard:true,
+            maxNum:this.maxNum,
             cardBase:{force:1000,type:UM.type},
             stopRemoveTips:true,
             newList:true,
@@ -48,6 +49,7 @@ class PKChooseCardManager {
             stopAdd:true,
             noTab:true,
             stopTest:true,
+            maxNum:this.maxNum,
             stopRemoveTips:true,
             cardBase:{force:1000,type:UM.type},
             list:this.info.cardlist,

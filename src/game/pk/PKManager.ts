@@ -202,6 +202,8 @@ class PKManager {
 
     //测试一下数据正确性
     public quickTest(){
+        if(DEBUG)
+            return '';
         var PD = PKData.getInstance();
         if(!DEBUG && !PD.baseData.check)
             return ''

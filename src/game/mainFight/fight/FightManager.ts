@@ -115,7 +115,7 @@ class FightManager {
             index:this.info.index,
             init:this.info.init,
             num:this.card.length,
-            haveAward:!this.info.final_award,
+            haveAward:this.info.get_final_award,
             win_award:MyTool.getAwardArr(this.info.win_award)
         }
     }
@@ -359,12 +359,13 @@ class FightManager {
         Net.addUser(oo);
         Net.send(GameEvent.fight.final_award, oo, (data)=> {
             var msg = data.msg;
-            delete this.info.final_award
+            this.info.get_final_award = true;
             if(msg.fail)
             {
                 MyWindow.Alert('无法领奖，错误码：' + msg.fail)
                 return;
             }
+            this.info.win_award = msg.award;
             AwardUI.getInstance().show(msg.award)
             EM.dispatch(GameEvent.client.active_change)
             if (fun)

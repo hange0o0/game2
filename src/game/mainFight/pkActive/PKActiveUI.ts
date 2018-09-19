@@ -11,6 +11,7 @@ class PKActiveUI extends game.BaseUI {
     private topUI: TopUI;
     private bottomUI: BottomUI;
     private finalAwardMC: eui.Image;
+    private scroller: eui.Scroller;
     private list: eui.List;
     private titleText: eui.Label;
     private desText: eui.Label;
@@ -37,6 +38,8 @@ class PKActiveUI extends game.BaseUI {
 
 
 
+
+
     private currentActive
     private activeInfo
 
@@ -50,6 +53,7 @@ class PKActiveUI extends game.BaseUI {
         this.bottomUI.setHide(this.hide,this);
 
 
+        this.scroller.viewport = this.list;
         this.list.itemRenderer = PKActiveItem;
         this.addBtnEvent(this.pkBtn,this.onPK)
         this.addBtnEvent(this.resetBtn,this.onReset)
@@ -170,27 +174,27 @@ class PKActiveUI extends game.BaseUI {
         var leftNum = activeInfo.num;
         var award = activeInfo.win_award;
         this.renewBar(winNum);
+        if(award.length == 1)
+            this.list.layout['requestedColumnCount'] = 1
+        else if(award.length == 2)
+            this.list.layout['requestedColumnCount'] = 2
+        else
+            this.list.layout['requestedColumnCount'] = 3
+
         this.list.dataProvider = new eui.ArrayCollection(award)
         if(winNum == 12)
         {
-
-            this.currentState = 'award'
             this.awardBox.source = this.finalAwardMC.source;
             if(activeInfo.haveAward)
             {
+                this.currentState = 'awarded'
                 this.titleText.text = '副本已完成'
-                this.awardBtn.label = '已开启'
-                this.awardBtn.touchEnabled = false
-                this.awardBtn.skinName = 'Btn3Skin'
             }
             else
             {
+                this.currentState = 'award'
                 this.titleText.text = '获取终极大奖'
-                this.awardBtn.label = '开启宝箱'
-                this.awardBtn.touchEnabled = true
-                this.awardBtn.skinName = 'Btn1Skin'
             }
-
         }
         else
         {

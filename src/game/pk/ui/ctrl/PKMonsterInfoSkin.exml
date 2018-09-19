@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="PKMonsterInfoSkin" width="620" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" height="320">
 	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
-	<e:Group y="20" x="20">
+	<e:Image source="icon_force2_png" y="16" scaleX="0.8" scaleY="0.8" x="292"/>
+	<e:Label id="forceText1" text="苦顶替" y="22" size="24" stroke="3" verticalAlign="bottom" textColor="0xffe4af" right="330"/>
+	<e:Label id="forceText2" text="苦顶替" x="330" y="22" size="24" stroke="3" verticalAlign="bottom" textColor="0xffe4af"/>
+	<e:Group y="19" x="20">
 		<e:Label id="nameText1" text="苦顶替" x="45" y="8.980000000000018" size="30" stroke="3" verticalAlign="bottom"/>
-		<e:Group x="468" y="18">
-			<e:Image source="icon_force2_png" x="0" y="0" scaleX="0.8" scaleY="0.8"/>
-			<e:Label id="forceText1" text="苦顶替" x="40" y="6" size="24" stroke="3" verticalAlign="bottom" textColor="0xffe4af"/>
-		</e:Group>
 		<e:layout>
 			<e:HorizontalLayout verticalAlign="middle" gap="15"/>
 		</e:layout>
 	</e:Group>
-	<e:Group y="20" right="20">
-		<e:Group x="468" y="18">
-			<e:Image source="icon_force2_png" x="0" y="0" scaleX="0.8" scaleY="0.8"/>
-			<e:Label id="forceText2" text="苦顶替" x="40" y="6" size="24" stroke="3" verticalAlign="bottom" textColor="0xffe4af"/>
-		</e:Group>
+	<e:Group y="19" right="20">
 		<e:Label id="nameText2" text="苦顶替" x="45" y="8.980000000000018" size="30" stroke="3" verticalAlign="bottom"/>
 		<e:layout>
 		<e:HorizontalLayout verticalAlign="middle" gap="15"/>

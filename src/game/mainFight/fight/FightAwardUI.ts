@@ -72,6 +72,8 @@ class FightAwardUI extends game.BaseWindow {
     }
 
     public show(){
+        if(!FightManager.getInstance().award)
+            return;
         //PayManager.getInstance().get_shop(()=>{
             super.show()
         //})

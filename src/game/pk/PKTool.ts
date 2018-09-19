@@ -26,6 +26,8 @@ class PKTool {
 
         //会改到原数组
         var mpList = this.getMPList();
+        //技能影响
+
         var returnArr = [];
         var mpCost = 0;
         var index = 1;
@@ -47,7 +49,7 @@ class PKTool {
 
                 if(!vo.isMonster && vo.sv4 == -10001)
                 {
-                    this.addMPTime(mpList,t + PKConfig.beforeCD + vo.cd,vo.sv1)
+                    this.addMPTime(mpList,t + PKConfig.beforeCD + vo.cd,vo.sv1+mp)
                 }
             }
             else

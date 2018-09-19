@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="PKActiveItemSkin" width="150" height="200" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*"   states="prop,card" >
-	<e:Image id="bg" source="border_8_png" x="0" y="0" width="100%" height="200" scale9Grid="12,12,76,76" source.card="border_14_png"/>
+<e:Skin class="PKActiveItemSkin" width="150" height="200" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*"   states="prop,card,hero" >
+	<e:Image id="bg" source="border_8_png" x="0" y="0" width="100%" height="200" scale9Grid="12,12,76,76" source.card="border_14_png" source.hero="border_14_png" includeIn="prop,card"/>
 	<e:Image y="10" width="130" height="130" horizontalCenter="0" includeIn="prop" source="prop_bg_jpg"/>
 	<e:Image id="img" width="90" height="90" y="30.15" horizontalCenter="0" includeIn="prop"/>
-	<e:Label id="nameText" text="Label" size="22" horizontalCenter="0" stroke="1" lineSpacing="5" textAlign="center" y="145" horizontalCenter.card="0" y.card="168"/>
+	<e:Label id="nameText" text="Label" size="22" horizontalCenter="0" stroke="1" lineSpacing="5" textAlign="center" y="145" horizontalCenter.card="0" y.card="168" horizontalCenter.hero="0" y.hero="158" size.hero="24"/>
 	<ns1:CardImg id="cardMC" width="130" height="150" y="10" horizontalCenter="0" includeIn="card"/>
+	<e:Image id="heroBG" source="hero_bg1_png" x="0" y="0" width="150" height="150" includeIn="hero"/>
+	<e:Image id="heroMC" width="123" height="123" y="14" horizontalCenter="0" includeIn="hero"/>
 </e:Skin>

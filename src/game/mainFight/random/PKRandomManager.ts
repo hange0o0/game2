@@ -15,13 +15,16 @@ class PKRandomManager {
         return {
             index:this.info.index,
             num:this.info.num,
-            haveAward:!this.info.final_award,
+            haveAward:this.info.get_final_award,
             win_award:MyTool.getAwardArr(this.info.win_award)
         }
     }
 
     public getCard(){
-        return ArrayUtil.randomOne(this.cardList)
+        var id = ArrayUtil.randomOne(this.cardList)
+        while(id == 268 || id == 269 || id == 270)
+            id = ArrayUtil.randomOne(this.cardList)
+        return id;
     }
 
     private setCard(){
@@ -130,13 +133,14 @@ class PKRandomManager {
         Net.addUser(oo);
         Net.send(GameEvent.random.final_award, oo, (data)=> {
             var msg = data.msg;
-            delete this.info.final_award
+            this.info.get_final_award = true;
             if(msg.fail)
             {
                 MyWindow.Alert('无法领奖，错误码：' + msg.fail)
                 return;
             }
             AwardUI.getInstance().show(msg.award)
+            this.info.win_award = msg.award;
             EM.dispatch(GameEvent.client.active_change)
             if (fun)
                 fun();

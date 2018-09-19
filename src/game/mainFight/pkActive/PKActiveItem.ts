@@ -9,6 +9,9 @@ class PKActiveItem extends game.BaseItem {
     private img: eui.Image;
     private nameText: eui.Label;
     private cardMC: CardImg;
+    private heroBG: eui.Image;
+    private heroMC: eui.Image;
+
 
 
 
@@ -24,6 +27,11 @@ class PKActiveItem extends game.BaseItem {
             CardInfoUI.getInstance().show(CM.getCardVO(this.skillID));
             return;
         }
+        if(this.data.isHero)
+        {
+            HeroInfoUI.getInstance().show(this.data.vo);
+            return;
+        }
     }
 
     public dataChanged(){
@@ -33,6 +41,13 @@ class PKActiveItem extends game.BaseItem {
             this.currentState = 'card'
             this.cardMC.data = this.skillID
             this.setHtml(this.nameText, this.createHtml(this.data.name,0xFFD27F)  + '' + this.data.num)
+        }
+        else if(this.data.isHero)
+        {
+            this.currentState = 'hero'
+            this.heroMC.source = this.data.img;
+            this.heroBG.source = this.data.bgSource;
+            this.setHtml(this.nameText, this.createHtml(this.data.name.replace('【英雄】',''),0xFFD27F))
         }
         else
         {

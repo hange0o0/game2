@@ -57,7 +57,8 @@ class MyTool {
         for(var s in dataIn.hero)
         {
             var hero =  MonsterVO.getObject(s);
-            arr.push({img:hero.getImage(),name:'【英雄】' + hero.name,'num':'×' + NumberUtil.addNumSeparator(dataIn.hero[s]),isHero:true,bgSource:hero.getHeroBG(HeroManager.getInstance().getHeroLevel(hero.id)||1)})
+            arr.push({img:hero.getImage(),name:'【英雄】' + hero.name,'num':'×' + NumberUtil.addNumSeparator(dataIn.hero[s]),
+                isHero:true,bgSource:hero.getHeroBG(HeroManager.getInstance().getHeroLevel(hero.id)||1),vo:hero})
         }
 
         return arr;

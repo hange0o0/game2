@@ -29,6 +29,7 @@ class PKEndLessManager {
             title:'挑战关卡',
             otherList:history.otherList,
             history:history.history,
+            isActive:true,
             fun:function(id){
                 PKEndLessManager.getInstance().pk(id)
             }

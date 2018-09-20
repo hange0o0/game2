@@ -13,5 +13,8 @@
 	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
 	<e:Image id="view1" source="pk_view_icon_png" x="75" y="188"/>
 	<e:Image id="view2" source="pk_view_icon_png" y="188" right="75"/>
-	<e:Label id="cdText" text="Label" y="185" horizontalCenter="0" size="24" stroke="3" textColor="0xffeeb7"/>
+	<e:Group id="cdGroup" y="172" horizontalCenter="0">
+		<e:Image source="black_bg_png" left="0" right="0" top="0" bottom="0" scale9Grid="41,7,8,42"/>
+		<e:Label id="cdText" text="Label" size="24" stroke="3" textColor="0xffeeb7" left="50" right="50" verticalCenter="0"/>
+	</e:Group>
 </e:Skin>

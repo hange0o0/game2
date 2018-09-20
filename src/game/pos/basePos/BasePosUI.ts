@@ -706,6 +706,7 @@ class BasePosUI extends game.BaseUI {
     *   stopAdd
     *   stopRemoveTips
     *   stopTest
+    *   isActive
     *   cardBase
     *   history//可看的录像
     *   otherList//其它人的进功阵容
@@ -803,6 +804,8 @@ class BasePosUI extends game.BaseUI {
 
             if(this.pkData.isPVP)
                 this.addPanelOpenEvent(GameEvent.client.PVP_END,this.hide)
+            if(this.pkData.isActive)
+                this.addPanelOpenEvent(GameEvent.client.active_end,this.hide)
         }
         else
         {

@@ -9,6 +9,7 @@ class PKTopUI extends game.BaseContainer {
     private hpText1: eui.Label;
     public hpGroup2: eui.Group;
     private hpText2: eui.Label;
+    private cdGroup: eui.Group;
     private cdText: eui.Label;
     private topUI: TopUI;
     private view1: eui.Image;
@@ -44,6 +45,7 @@ class PKTopUI extends game.BaseContainer {
         var endless = PKData.getInstance().endless;
         if(endless)
         {
+            this.cdGroup.visible = true
              this.cdText.text = '坚持：' + DateUtil.getStringBySecond(Math.ceil((endless - PKData.getInstance().actionTime)/1000)).substr(-5)
         }
     }
@@ -219,7 +221,7 @@ class PKTopUI extends game.BaseContainer {
             this.y = -55;
 
 
-        this.cdText.text = ''
+        this.cdGroup.visible = false
         this.index = 1;
         this.renewHp()
 

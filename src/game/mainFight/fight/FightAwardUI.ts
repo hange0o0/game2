@@ -74,6 +74,8 @@ class FightAwardUI extends game.BaseWindow {
     public show(){
         if(!FightManager.getInstance().award)
             return;
+        if(PKActiveManager.getInstance().getCurrentActive().type != PKActiveManager.TYPE_FIGHT)
+            return;
         //PayManager.getInstance().get_shop(()=>{
             super.show()
         //})
@@ -82,6 +84,7 @@ class FightAwardUI extends game.BaseWindow {
 
     public onShow(){
         this.renew()
+        this.addPanelOpenEvent(GameEvent.client.active_end,this.hide)
     }
 
     private renewList(){

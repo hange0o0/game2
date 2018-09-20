@@ -401,7 +401,7 @@ class PKingUI extends game.BaseUI {
         SoundManager.getInstance().playSound(SoundConfig.bg_pk_view);
         PKManager.getInstance().savePKResult();
         this.removeEventListener(egret.Event.ENTER_FRAME,this.onE,this);
-        if(DEBUG || PD.isWin())
+        if(PD.isWin()) //DEBUG ||
         {
             PKManager.getInstance().sendResult(()=>{
                 PKWinUI.getInstance().show();

@@ -47,6 +47,7 @@ class PKAnswerUI extends game.BaseWindow {
             title:'调整出战顺序',
             noTab:true,
             stopTest:true,
+            isActive:true,
             cardBase:{force:1000,type:0},
             otherList:this.questionList,
             history:history.history,

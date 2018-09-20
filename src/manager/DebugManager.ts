@@ -512,6 +512,17 @@ class DebugManager {
         this.addSkill = true;
         var answerList = this.randomList();
         var list = answerList.list.split(',');
+        var mNum = 0;
+        for(var i=0;i<list.length;i++)
+        {
+            if(CM.getCardVO(list[i]).isMonster)
+                mNum ++;
+        }
+        if(mNum <=2)
+        {
+            egret.callLater(this.createOneQuestion,this);
+            return;
+        }
         var fail = false;
         var obj = {};
         //var len = this.cardLen*100*(this.cardLen-4);

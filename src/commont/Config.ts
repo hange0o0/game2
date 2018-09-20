@@ -15,9 +15,9 @@ class Config {
     public static serverID: number = 1;
     //public static host: string = '172.17.196.195:90';
     public static user_version: number = 1;
-    public static version: number = 7;
-    public static displayVersion = '1.3.1';
-    public static pk_version: number = 3;
+    public static version: number = 8;
+    public static displayVersion = '1.3.2';
+    public static pk_version: number = 4;
     public static cdn: string = "";
     public static localResRoot:string = "resource/net_resource/";
 

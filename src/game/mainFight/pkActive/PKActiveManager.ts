@@ -32,7 +32,7 @@ class PKActiveManager {
     // 4：选卡   50钻复活并有3条命
     // 5：无尽   30钻+3次机会
     //取当前进行中的活动     {start,end,type,data}
-    public getCurrentActive(){
+    public getCurrentActive():any{
         var t = TM.now();
         for(var s in this.activeList)
         {

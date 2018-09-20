@@ -69,6 +69,10 @@ class BasePosHeroChooseUI extends game.BaseWindow {
     public onShow(){
         this.renew();
         //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
+        if(BasePosUI.getInstance().pkData && BasePosUI.getInstance().pkData.isPVP)
+            this.addPanelOpenEvent(GameEvent.client.PVP_END,this.hide)
+        if(BasePosUI.getInstance().pkData && BasePosUI.getInstance().pkData.isActive)
+            this.addPanelOpenEvent(GameEvent.client.active_end,this.hide)
     }
 
     public renew(){

@@ -31,6 +31,7 @@ class MainBottomBtn extends game.BaseItem {
         switch(this.data.type)
         {
             case 'slave':
+                this.lockMC.visible = !SlaveManager.getInstance().isSlaveOpen()
                 break;
             case 'main':
                 break;

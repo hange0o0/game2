@@ -182,9 +182,15 @@ class TecInfoUI extends game.BaseWindow {
         this.dataArray.refresh()
 
         if(TCM.testRed(this.dataIn.id))
-            this.btnGroup.addChild(this.okBtn);
+        {
+            this.okBtn.skinName = 'Btn1Skin'
+            this.okBtn.touchEnabled = true
+        }
         else
-            MyTool.removeMC(this.okBtn);
+        {
+            this.okBtn.skinName = 'Btn3Skin'
+            this.okBtn.touchEnabled = false
+        }
 
         var index = this.openList.indexOf(this.dataIn);
         this.leftBtn.visible = index > 0

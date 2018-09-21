@@ -111,7 +111,7 @@ class SkillVO {
 
     public getSkillValue(index,force=0){
         var sv = this['sv' + index];
-        if(DEBUG)
+        if(DEBUG && UM.tec_force != 0)
         {
             if(force && this.des.indexOf('$'+index) == -1)
                 throw new Error(this.id + '_$' + index)

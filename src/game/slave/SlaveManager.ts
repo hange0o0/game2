@@ -39,6 +39,10 @@ class SlaveManager {
         }
     }
 
+    public isSlaveOpen(){
+        return HangManager.getInstance().level >= Config.slaveLevel;
+    }
+
     public getProtectedWord(id,masterID){
         if(id == masterID)
             return '保护'

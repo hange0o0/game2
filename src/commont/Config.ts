@@ -23,6 +23,7 @@ class Config {
 
 
 
+    public static slaveLevel = 10;
     public static fightLevel = 20;
     public static pvpLevel = 20;
     public static heroLevel = 50;

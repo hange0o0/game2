@@ -513,16 +513,36 @@ class DebugManager {
         var answerList = this.randomList();
         var list = answerList.list.split(',');
         var mNum = 0;
+        var mpCost = 0;
         for(var i=0;i<list.length;i++)
         {
-            if(CM.getCardVO(list[i]).isMonster)
+            var vo = CM.getCardVO(list[i]);
+            if(vo.isMonster)
                 mNum ++;
+            mpCost += vo.cost
         }
-        if(mNum <=2)
+        if(mNum < 2 || mNum > 4 || mpCost<30)
         {
             egret.callLater(this.createOneQuestion,this);
             return;
         }
+
+        var list2 = question.list.split(',');
+        var mpCost2 = 0;
+        for(var i=0;i<list2.length;i++)
+        {
+            var vo = CM.getCardVO(list2[i]);
+            mpCost2 += vo.cost
+        }
+
+        if(mpCost/mpCost2 < 0.8 || mpCost2/mpCost < 0.8)
+        {
+            egret.callLater(this.createOneQuestion,this);
+            return;
+        }
+
+
+
         var fail = false;
         var obj = {};
         //var len = this.cardLen*100*(this.cardLen-4);
@@ -578,12 +598,14 @@ class DebugManager {
                 this.testOne(list1,question,3)
             if(PD.isWin())//再试一次，3次都赢才算，免的机率赢的出现
                 this.testOne(list1,question,3)
+
+
             haveTest[key] = true;
             if(PD.isWin())
             {
                 result.win.push(s);
                 var useCardList = PD.getPlayer(1).useCardList;
-                if(useCardList.length < this.cardLen || result.win.length> winNum)
+                if(useCardList.length < this.cardLen || result.win.length> winNum || PD.actionTime > 2*60*1000)//战斗时间过长)
                 {
                     fail = true
                     break;

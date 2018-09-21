@@ -8,13 +8,11 @@ class HangUI extends game.BaseItem {
     }
 
     private con: eui.Group;
-    //private bg: eui.Image;
     private clockGroup: eui.Group;
     private timeText: eui.Label;
     private titleText: eui.Label;
     private awardBtn: eui.Button;
     private lockGroup: eui.Group;
-    private giftGroup: eui.Group;
     private lockBar: eui.Rect;
     private lockText: eui.Label;
     public openBtn: eui.Button;
@@ -22,10 +20,14 @@ class HangUI extends game.BaseItem {
     private helpBtn: eui.Image;
     private videoBtn: eui.Group;
     private videoIcon: eui.Image;
+    private giftGroup: eui.Group;
     private giftMC: eui.Image;
     private modeGroup: eui.Group;
     private autoBtn: eui.Button;
     private handBtn: eui.Button;
+    private guideGroup: eui.Group;
+    private guideText: eui.Label;
+
 
 
 
@@ -78,6 +80,8 @@ class HangUI extends game.BaseItem {
         this.addBtnEvent(this.autoBtn,this.onAuto)
         this.addBtnEvent(this.handBtn,this.onHand)
 
+        this.guideText.text = '点击屏幕可开始战斗\n通关战役5后有惊喜哦！'
+        this.guideGroup.visible = false;
 
 
         var name = 'pk_mv'
@@ -280,6 +284,19 @@ class HangUI extends game.BaseItem {
                 this.pkMV.play(-1);
             else
                 this.pkMV.stop();
+
+            egret.Tween.removeTweens(this.guideGroup)
+            this.guideGroup.visible = false
+            if(this.pkMV.visible && HM.level <5)
+            {
+                egret.Tween.get(this.guideGroup,{loop:true}).wait(1000*10).call(()=>{
+                    this.guideGroup.visible = true
+                    this.pkMV.visible = false
+                }).wait(1000*5).call(()=>{
+                    this.guideGroup.visible = false
+                    this.pkMV.visible = true
+                })
+            }
 
             var cd =  1000 -  (egret.getTimer() - this.initTime)
             clearTimeout(this.openTimer);

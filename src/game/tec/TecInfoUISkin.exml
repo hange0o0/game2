@@ -54,7 +54,7 @@
 		<e:VerticalLayout paddingLeft="0" paddingTop="80"/>
 		</e:layout>
 	</e:List>
-	<e:Image id="leftBtn" source="arrow1_png" y="540" scaleX="-1" left="20"/>
-	<e:Image id="rightBtn" source="arrow1_png" y="540" right="20"/>
+	<e:Image id="leftBtn" source="arrow1_png" y="545" scaleX="-0.8" scaleY="0.8" left="20"/>
+	<e:Image id="rightBtn" source="arrow1_png" y="545" right="20" scaleX="0.8" scaleY="0.8"/>
 
 </e:Skin>

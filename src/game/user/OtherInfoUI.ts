@@ -327,8 +327,12 @@ class OtherInfoUI extends game.BaseWindow {
     }
 
     public superShow(){
+        if(!SlaveManager.getInstance().isSlaveOpen())
+        {
+            super.show();
+            return;
+        }
         SlaveManager.getInstance().viewList(()=>{
-
             SlaveManager.getInstance().slave_list(()=>{
                 super.show()
             })
@@ -474,8 +478,7 @@ class OtherInfoUI extends game.BaseWindow {
         }
 
         this.proTitleText.text = '剩余'+SlaveManager.getInstance().getProtectedWord(this.gameid,this.master)+'时间:'
-        this.viewBtn.label = SlaveManager.getInstance().viewObj[this.gameid]?'取消关注':'关注';
-        this.viewBtn.skinName = SlaveManager.getInstance().viewObj[this.gameid]?'Btn2Skin':'Btn1Skin'
+
 
         if(data.last_card)
         {
@@ -503,8 +506,21 @@ class OtherInfoUI extends game.BaseWindow {
         }
         this.dataArray.refresh()
 
+        var slaveOpen = SlaveManager.getInstance().isSlaveOpen()
+        if(!slaveOpen)
+        {
+            MyTool.removeMC(this.viewBtn)
+        }
+        else
+        {
+            this.btnGroup.addChild(this.viewBtn)
+            this.viewBtn.label = SlaveManager.getInstance().viewObj[this.gameid]?'取消关注':'关注';
+            this.viewBtn.skinName = SlaveManager.getInstance().viewObj[this.gameid]?'Btn2Skin':'Btn1Skin'
+        }
+
+
         var slaveFull = !this.isMyMaster &&  this.master != UM.gameid && SlaveManager.getInstance().getCurrentMax()<= SlaveManager.getInstance().slaveList.length
-        if(!slave.self || slaveFull) //该玩家未进入过奴隶模块
+        if(!slave.self || slaveFull || !slaveOpen) //该玩家未进入过奴隶模块
         {
             MyTool.removeMC(this.okBtn)
         }
@@ -512,6 +528,8 @@ class OtherInfoUI extends game.BaseWindow {
         {
             this.btnGroup.addChild(this.okBtn)
         }
+
+
 
     }
 }

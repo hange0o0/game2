@@ -105,7 +105,12 @@ class MainUI extends game.BaseUI {
        {
            if(index == 0 && !HeroManager.getInstance().isHeroOpen())
            {
-               MyWindow.Alert('英雄系统战役'+Config.heroLevel+'开放')
+               MyWindow.Alert('通关战役'+Config.heroLevel+'后解锁英雄系统')
+               return;
+           }
+           if(index == 1 && !SlaveManager.getInstance().isSlaveOpen())
+           {
+               MyWindow.Alert('通关战役'+Config.slaveLevel+'后解锁奴隶系统')
                return;
            }
            if(index == 1 && ObjectUtil.objLength(PosManager.getInstance().defList) == 0)//奴隶

@@ -57,6 +57,12 @@ class PKingUI extends game.BaseUI {
         super.childrenCreated();
         this.scroller.addEventListener(egret.Event.CHANGE,this.onScroll,this)
         PKData.getInstance().addEventListener('video',this.onVideoEvent,this);
+
+        this.addBtnEvent(this.scroller,this.onScrollClick);
+    }
+
+    private onScrollClick(){
+          this.pkCtrlCon.onPosClick()
     }
 
     public onVideoEvent(e){

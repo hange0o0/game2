@@ -117,7 +117,8 @@ class TecManager {
             }
             else
             {
-                arr.push({type:'prop',id:101,num:1});
+                arr.push({type:'prop',id:101,num:lv});
+                arr.push({type:'hang',num:PropVO.getObjectByTec(lv+1).hanglevel});
             }
         }
 

@@ -23,6 +23,7 @@ class SkillVO {
     //public state: string;
     public level: number;
     public type: number;
+    public mid: number;
 
 
     public constructor(data?: any) {
@@ -37,6 +38,7 @@ class SkillVO {
         this.cost = data.cost
         this.name = data.name
         this.num = data.num
+        this.mid = data.mid
         this.id = data.id
         //this.state = data.state
         this.level = data.level

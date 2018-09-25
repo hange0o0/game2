@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="TecInfoUISkin" width="540" height="620" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+<e:Skin class="TecInfoUISkin" width="540" height="640" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
 	<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
 	<e:Group y="40" horizontalCenter="0" width="120">
 		<e:Image source="title_bg1_png" y="0" scale9Grid="29,5,13,30" left="0" right="0"/>
@@ -54,7 +54,7 @@
 		<e:VerticalLayout paddingLeft="0" paddingTop="80"/>
 		</e:layout>
 	</e:List>
-	<e:Image id="leftBtn" source="arrow1_png" y="545" scaleX="-0.8" scaleY="0.8" left="20"/>
-	<e:Image id="rightBtn" source="arrow1_png" y="545" right="20" scaleX="0.8" scaleY="0.8"/>
+	<e:Image id="leftBtn" source="arrow1_png" scaleX="-0.8" scaleY="0.8" left="20" bottom="27"/>
+	<e:Image id="rightBtn" source="arrow1_png" right="20" scaleX="0.8" scaleY="0.8" bottom="27"/>
 
 </e:Skin>

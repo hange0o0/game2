@@ -30,6 +30,7 @@ class PKManager {
 
 
     public currentPK;
+    public showTopNum = 0; //显示敌人的历史阵容的数量
 
     public recordLen = 20;
     constructor(){
@@ -67,7 +68,7 @@ class PKManager {
         '$%&*&$@','@#$%&','( T___T ) ','( 3__3 ) ','zzz ZZZ','╭∩╮','...']
 
 
-    public defaultCardList = '6,2,3,31,65,41,64,2,6,6,31,31,41,41,65,65,64';
+    public defaultCardList = '6,6,6,65,64,41,3,31,64';
 
     public getPKBG(){
         return this.getBG(HangManager.getInstance().getHangBGID())
@@ -389,6 +390,9 @@ class PKManager {
         this.pkType = pkType;
         this.pkResult = null;
         var PD = PKData.getInstance();
+        if(this.showTopNum)
+            data.showTopNum = this.showTopNum;
+        this.showTopNum = 0;
         PD.init(data);
         PKingUI.getInstance().show();
         PVPContinueUI.getInstance().hide()

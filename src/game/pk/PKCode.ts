@@ -262,6 +262,10 @@ class PKCode {
         {
             PD.isGameOver = true;
         }
+        if(PD.needcd && PD.actionTime >= PD.needcd)
+        {
+            PD.isGameOver = true;
+        }
 
 
         //if(PD.actionTime > 60000 && (PD.monsterList.length == 0 || PD.currentState == 'def') && !PD.isGameOver)//如果1min后有一方没牌了也结束

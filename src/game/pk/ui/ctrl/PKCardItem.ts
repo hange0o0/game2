@@ -114,10 +114,10 @@ class PKCardItem extends game.BaseItem {
         this.img2.data = this.data.mid;
         this.img2.changeGay(true)
         this.bg.source = vo.getBG();
+        this.costText.textColor = 0xFFFFFF
 
         if(this.isDragMC)
         {
-            this.costText.textColor = 0xFFFFFF
             this.img2.visible = false;
             this.cdText.visible = false;
         }

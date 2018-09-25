@@ -224,6 +224,23 @@ class BasePosUI extends game.BaseUI {
             return
         }
         this.testSave(()=>{
+            if(this.pkData.otherList) //要显示的数量
+            {
+                var list = CardManager.getInstance().resetOtherList(this.pkData.otherList)
+                var count = 0;
+                for(var i=0;i<list.length;i++)
+                {
+                    if(typeof list[i] == 'object')
+                    {
+                        if(list[i].id)
+                            count ++;
+                    }
+                    else if(Math.floor(list[i]))
+                        count ++;
+                }
+                PKManager.getInstance().showTopNum = count;
+            }
+
             if(this.pkData && (this.pkData.list || this.pkData.newList))
             {
                 this.pkData.fun(this.changeToServerList(),this.changeToServerHero())

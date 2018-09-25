@@ -20,6 +20,7 @@ class PVPInfoUI extends game.BaseUI {
     private cdText: eui.Label;
     private icon1: eui.Image;
     private titleGroup1: eui.Group;
+    private con: eui.Group;
     private titleText1: eui.Label;
     private clickArea1: eui.Group;
     private expGroup1: eui.Group;
@@ -156,6 +157,7 @@ class PVPInfoUI extends game.BaseUI {
     }
 
     private renew(){
+        this.con.layout['gap'] = (GameManager.stage.stageHeight - 730 - 210)/4
         this.renewOffline()
         //this.renewOnline()
         this.renewAward();

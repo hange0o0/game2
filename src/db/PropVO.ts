@@ -6,11 +6,22 @@ class PropVO {
     }
     //public static maxLevel = 300;//最大关卡数
 
+    public static getObjectByTec(lv){
+        var data = CM.table[this.dataKey];
+         for(var s in data)
+         {
+             if(data[s].droplevel == lv)
+                return data[s]
+         }
+        return null;
+    }
 
     public id
     public propdes //arr
     public propname
     public type
+    public hanglevel
+    public droplevel
     public constructor(data?: any) {
         if(data)
             this.fill(data);
@@ -22,6 +33,8 @@ class PropVO {
         this.propdes = data.des;
         this.propname = data.name;
         this.type = data.type;
+        this.hanglevel = data.hanglevel;
+        this.droplevel = data.droplevel;
     }
 
     public getThumb(){

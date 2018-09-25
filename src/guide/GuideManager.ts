@@ -66,13 +66,20 @@ class GuideManager {
 
         this.addGuideObj({
             mc:function(){return MainFightUI.getInstance().mapBtn.openBtn},
-            text:'来不及多解释了，赶快开战吧！',
+            text:'来不及多解释了，赶快出战吧！',
+        })
+
+        this.addGuideObj({
+            text:'出战前可拖动卡牌进行顺序调整，位置靠前的卡牌会有更大机率在早期被抽到。',
+            fun:function(){
+                self.showGuide()
+            }
         })
 
         this.addGuideObj({
             toBottom:100,
             mc:function(){return BasePosUI.getInstance().pkBtn},
-            text:'出战卡牌我都给你配好了，赶快开始吧！',
+            text:'现在出战卡牌我都给你配好了，就赶快开始吧！',
         })
 
         this.addGuideObj({
@@ -200,7 +207,7 @@ class GuideManager {
             text:'当然，除了提升战后外，拥有更多的卡牌，可让你在对战中拥有更大的操作空间',
         })
         this.addGuideObj({
-            mc:function(){return CardUI.getInstance().list.getChildAt(3)},
+            mc:function(){return CardUI.getInstance().list.getChildAt(2)},
             text:'点击未解锁的卡牌进行解锁',
         })
         this.addGuideObj({

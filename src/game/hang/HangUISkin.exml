@@ -25,19 +25,35 @@
 	<e:Button id="openBtn" label="开始挑战" horizontalCenter="0" skinName="Btn5Skin" bottom="100"/>
 	<e:Image id="awardRed" source="red_mc_png" right="-3" bottom="45"/>
 	<e:Image id="helpBtn" source="icon_help_png" y="15" right="5"/>
-	<e:Group id="videoBtn" x="10" y="15" locked="true">
+	<e:Group id="videoBtn" x="8" y="15">
 		<e:Image source="btn4_png" scale9Grid="20,21,9,5" x="0" y="0"/>
 		<e:Image id="videoIcon" source="replay_mc_png" verticalCenter="0" horizontalCenter="0"/>
+	</e:Group>
+	<e:Group id="videoBtn2" x="70" y="15">
+		<e:Image scale9Grid="20,21,9,5" x="0" y="0" source="btn4_png"/>
+		<e:Image verticalCenter="0" horizontalCenter="0" source="replay_mc2_png"/>
 	</e:Group>
 	<e:Group id="giftGroup" right="10" bottom="70" height="98" width="88" locked="true">
 		<e:Image id="giftMC" source="gift_mc_png" anchorOffsetX="44" anchorOffsetY="90" x="44" y="90"/>
 	</e:Group>
-	<e:Group id="modeGroup" horizontalCenter="0" verticalCenter="0" locked="true">
-		<e:Button id="autoBtn" label="自动模式" x="0" y="0" width="200" skinName="Btn7Skin" height="83"/>
-		<e:Button id="handBtn" label="手动模式" x="0" y="0" width="200" skinName="Btn5Skin"/>
-		<e:layout>
-			<e:HorizontalLayout gap="80"/>
-		</e:layout>
+	<e:Group id="modeGroup" horizontalCenter="0" verticalCenter="-40">
+		<e:Group x="0" y="80">
+			<e:Button id="autoBtn" label="自动模式" x="0" y="0" width="200" skinName="Btn7Skin" height="83"/>
+			<e:Button id="handBtn" label="手动模式" x="-280" y="0" width="200" skinName="Btn5Skin"/>
+			<e:layout>
+				<e:HorizontalLayout gap="50"/>
+			</e:layout>
+		</e:Group>
+		<e:Group y="0" horizontalCenter="0">
+			<e:Image source="black_bg_png" left="0" right="0" top="0" bottom="0" scale9Grid="43,7,5,42"/>
+			<e:Group verticalCenter="0" left="30" right="30">
+				<e:Image source="icon_force2_png" x="0" y="0"/>
+				<e:Label id="enemyForceText" text="Label" x="78" y="12" textColor="0xffeeaf" stroke="2"/>
+				<e:layout>
+				<e:HorizontalLayout verticalAlign="middle"/>
+				</e:layout>
+			</e:Group>
+		</e:Group>
 	</e:Group>
 	<e:Group id="guideGroup" horizontalCenter="0" bottom="0">
 		<e:Image source="black_bg_png" scale9Grid="40,16,14,22" left="0" right="0" top="0" bottom="0"/>

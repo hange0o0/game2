@@ -56,6 +56,13 @@ class TecInfoItem extends game.BaseItem {
             total = TecManager.getInstance().getLevel(1);
             this.img.source = MyTool.getPropLevel();
         }
+        else if(this.data.type == 'hang')
+        {
+            this.nameText.text = '战役等级  '
+            this.numText.text = 'LV.' + this.data.num+''
+            total = HangManager.getInstance().level;
+            this.img.source = MyTool.getPropHang();
+        }
         else
         {
             var vo = PropVO.getObject(this.data.id);

@@ -4,7 +4,7 @@
 	<e:Image source="bg_icon_png" fillMode="repeat" scaleX="1.2" scaleY="1.2" left="5" right="5" top="0" bottom="0" alpha="0.5"/>
 	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
 	<ns1:BottomUI id="bottomUI" x="0" skinName="BottomUISkin" bottom="0"/>
-	<e:Group horizontalCenter="0.5" y="70">
+	<e:Group horizontalCenter="0.5" bottom="100" width="100%">
 		<e:Image source="black_bg_png" y="0" height="40" scale9Grid="42,7,8,42" left="0" right="0"/>
 		<e:Group left="50" right="50" verticalCenter="0">
 		<e:Label id="cdTitle" text="任务重置时间:" size="24" stroke="2" textAlign="center" y="26" x="55"/>
@@ -15,8 +15,21 @@
 		</e:layout>
 		</e:Group>
 	</e:Group>
-	<e:Group x="37" top="420" bottom="110">
-		<e:Group x="0" y="0">
+	<e:Group id="con" x="37" top="70" bottom="150">
+		<e:List id="awardList" width="560" y="-300" horizontalCenter="0" itemRendererSkinName="PvpInfoItemSkin" x="3">
+			<e:ArrayCollection>
+			<e:Array>
+				<e:Object null=""/>
+				<e:Object null=""/>
+				<e:Object null=""/>
+				<e:Object null=""/>
+			</e:Array>
+			</e:ArrayCollection>
+			<e:layout>
+			<e:VerticalLayout gap="10"/>
+			</e:layout>
+		</e:List>
+		<e:Group x="0" y="0" height="320">
 			<e:Group x="-120" y="0">
 			<e:Image id="icon1" source="pvp_icon_1_png" horizontalCenter="20" y="40" scaleX="0.8" scaleY="0.8"/>
 			<e:Group id="titleGroup1" left="30" right="-10" y="250">
@@ -35,31 +48,18 @@
 			</e:Group>
 			</e:Group>
 			<e:layout>
-			<e:HorizontalLayout verticalAlign="middle"/>
+			<e:HorizontalLayout verticalAlign="middle" paddingBottom="0"/>
 			</e:layout>
 		</e:Group>
 		<e:Group x="18" y="347">
 			<e:Button id="pkBtn1" label="防御阵容对决" y="353.67" width="240" skinName="Btn7Skin" height="83" x="173"/>
 			<e:Button id="pkBtn0" label="进攻阵容对决" y="812.33" width="240" height="83" skinName="Btn5Skin" x="337"/>
 			<e:layout>
-			<e:HorizontalLayout gap="50"/>
+			<e:HorizontalLayout gap="50" paddingTop="10" paddingBottom="10"/>
 			</e:layout>
 		</e:Group>
 		<e:layout>
-			<e:VerticalLayout verticalAlign="justify"/>
+			<e:VerticalLayout verticalAlign="middle" horizontalAlign="center" gap="10"/>
 		</e:layout>
 	</e:Group>
-	<e:List id="awardList" width="560" height="300" y="120" horizontalCenter="0" itemRendererSkinName="PvpInfoItemSkin">
-		<e:ArrayCollection>
-			<e:Array>
-				<e:Object null=""/>
-				<e:Object null=""/>
-				<e:Object null=""/>
-				<e:Object null=""/>
-			</e:Array>
-		</e:ArrayCollection>
-		<e:layout>
-			<e:VerticalLayout gap="10"/>
-		</e:layout>
-	</e:List>
 </e:Skin>

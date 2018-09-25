@@ -16,6 +16,7 @@ class PKData extends egret.EventDispatcher{
 
     public jumpMV = false;
     public isGameOver = false //游戏结束
+    public showTopNum = 0 //头顶显示敌人出怪的数量
     public startTime = 0 //游戏开始时间
     public stopTime = 0 //游戏暂停时间
     public actionTime = 0 //游戏数据上处理过的时间
@@ -27,6 +28,7 @@ class PKData extends egret.EventDispatcher{
     public sysTeam:PKTeamData;
     public playerNum = 2;
     public endless = 0;//无尽时的倒计时
+    public needcd = 0;//限时的倒计时
 
     public monsterChange = false//怪有变化
     public randomSeed = 0//随机的种子
@@ -128,7 +130,9 @@ class PKData extends egret.EventDispatcher{
 
         this.randomTimes = 0;
         this.randomSeed = data.seed;
+        this.showTopNum = data.showTopNum || 0
         this.endless = data.endless || 0;
+        this.needcd = data.needcd || 0;
         this.team1 = new PKTeamData({id:1})
         this.team2 = new PKTeamData({id:2})
         this.team1.enemy = this.team2
@@ -263,12 +267,16 @@ class PKData extends egret.EventDispatcher{
         var team2 =  this.myPlayer.teamData.enemy
         if(this.endless && this.actionTime >= this.endless)
             return true;
+        if(this.needcd && this.actionTime >= this.needcd)
+            return false;
         return team1.hp > 0 &&  team2.hp <= 0;
     }
     //平
     public isDraw(){
         var team1 =  this.myPlayer.teamData
         var team2 =  this.myPlayer.teamData.enemy
+        if(this.needcd && this.actionTime >= this.needcd)
+            return false;
         return (team1.hp > 0 &&  team2.hp > 0) || (team1.hp <= 0 &&  team2.hp <= 0);
     }
     //赢输平

@@ -26,7 +26,7 @@
 //  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 //////////////////////////////////////////////////////////////////////////////////////
-var UM:UserManager,TM:TimeManager,EM:EventManager,CM:CacheManager,DM;
+var UM:UserManager,TM:TimeManager,EM:EventManager,CM:CacheManager,DM:DebugManager;
 class Main extends eui.UILayer {
     /**
      * 加载进度界面

@@ -14,6 +14,10 @@
 		</e:Group>
 		<e:List id="list" y="266" itemRendererSkinName="PKAwardItemSkin" x="0">
 		</e:List>
+		<e:Group id="helpCon" x="146" y="349" width="500">
+			<e:Image source="border_15_png" scale9Grid="8,7,25,28" left="0" right="0" top="0" bottom="0"/>
+			<e:List id="helpList" left="20" right="20" top="20" bottom="20"/>
+		</e:Group>
 		<e:Label id="closeBtn" text="点击任意地方关闭" x="114" y="482" size="24" stroke="2" textColor="0x9B9999"/>
 		<e:layout>
 			<e:VerticalLayout horizontalAlign="center" gap="20"/>

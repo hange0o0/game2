@@ -14,6 +14,10 @@ class HeroInfoUI extends game.BaseWindow {
     private r0: eui.RadioButton;
     private r1: eui.RadioButton;
     private closeBtn: eui.Image;
+    private coinText: eui.Label;
+    private icon: eui.Image;
+    private okBtn: eui.Button;
+
 
 
 
@@ -38,12 +42,19 @@ class HeroInfoUI extends game.BaseWindow {
         this.addBtnEvent(this.leftBtn,this.onLeft)
         this.addBtnEvent(this.rightBtn,this.onRight)
         this.addBtnEvent(this.closeBtn,this.hide)
+        this.addBtnEvent(this.okBtn,this.onUp)
 
         this.addBtnEvent(this.helpBtn,()=>{
             HelpManager.getInstance().showHelp('hero')
         })
 
+        this.icon.source = PropVO.getObject(101).getThumb()
+
         //this.touchEnabled = false;
+    }
+
+    private onUp(){
+
     }
 
     private onLeft(){

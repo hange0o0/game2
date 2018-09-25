@@ -196,14 +196,14 @@ class BasePosChooseUI extends game.BaseUI {
             {label:PKConfig.TYPENAME[3]},
             {label:'法术'},
         ]
-        if(this.fromUI.type == 'def')
-        {
-            list.pop();
-            this.tab.width = 450
-            if(this.tab.selectedIndex == 3)
-                this.tab.selectedIndex = 0;
-        }
-        else
+        //if(this.fromUI.type == 'def')
+        //{
+        //    list.pop();
+        //    this.tab.width = 450
+        //    if(this.tab.selectedIndex == 3)
+        //        this.tab.selectedIndex = 0;
+        //}
+        //else
             this.tab.width = 600
 
         this.tab.dataProvider = new eui.ArrayCollection(list);

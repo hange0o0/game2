@@ -17,7 +17,7 @@ class PKActiveManager {
 
     public base = {
         1:{diamond:10,label:'增加卡牌',title:'远征模式',helpKey:'fight'},
-        2:{diamond:15,label:'+5次机会',title:'解迷模式',helpKey:'answer'},
+        2:{diamond:20,label:'+10次机会',title:'解迷模式',helpKey:'answer'},
         3:{diamond:30,label:'+5次机会',title:'随机模式',helpKey:'random'},
         4:{diamond:30,label:'续  命',title:'选牌模式',helpKey:'choosecard'},
         5:{diamond:30,label:'+5次机会',title:'无尽模式',helpKey:'endless'},

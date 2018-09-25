@@ -44,7 +44,7 @@ class PVPManager {
     public getCurrentScore(){
          if(!this.offline)
             return 0;
-        return this.getLevel(this.offline.score);
+        return this.offline.score;
     }
 
     public getLevel(score){
@@ -53,6 +53,7 @@ class PVPManager {
             if(score >= this.base[i].score)
                 return i;
         }
+        return 1;
     }
 
     public getCurrentRound(){

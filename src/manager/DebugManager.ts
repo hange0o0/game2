@@ -420,14 +420,7 @@ class DebugManager {
         CardDebugManger.getInstance().cleanCardRecord(key)
     }
 
-    public getHangForce($hangIndex){
-        var $force=1;
-        for(var $i=1;$i<$hangIndex;$i++)
-        {
-            $force+=Math.floor($i/10+1);
-        }
-        return $force;
-    }
+
     public getHangCoin($level,$coinLevel=0){
         return Math.floor(3600/10*0.3*Math.pow($level,0.8)*(1+$coinLevel*0.002))
     }

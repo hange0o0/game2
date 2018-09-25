@@ -71,7 +71,7 @@ class PKTopItem extends game.BaseItem {
         if(this.data && this.data.isHero)
         {
             var mvo = MonsterVO.getObject(this.data.mid)
-            this.heroMC.source = mvo.getImage()
+            this.heroMC.source = mvo.getImage(this.data.isLock)
             this.heroBG.source = mvo.getHeroBG(this.data.level);
             this.indexText.text = this.data.topIndex;
             this.currentState = 'hero'
@@ -86,6 +86,8 @@ class PKTopItem extends game.BaseItem {
             this.bg.source = vo.getBG();
             this.indexText.text = this.data.topIndex;
             this.currentState = 'normal'
+            if(this.data.isLock)
+                this.img.changeGay(true)
         }
         else
             this.currentState = 'empty'

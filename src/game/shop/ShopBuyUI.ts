@@ -45,7 +45,7 @@ class ShopBuyUI extends game.BaseWindow {
 
         if(this.dataIn.id == 101){
              this.currentState = 'des'
-            this.desText.text = '这个'+PropVO.getObject(101).propname+'会在战役第'+this.dataIn.level+'关掉落，是否花费'+PayManager.getInstance().getShopDiamond(this.dataIn)+'钻石提前获得？'
+            this.desText.text = PropVO.getObject(101).propname + '限购一个'
         }
         else {
              this.currentState = 'normal'

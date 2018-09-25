@@ -280,7 +280,7 @@ class PKCtrlCon extends game.BaseContainer {
     }
 
 
-    private onPosClick(e){
+    public onPosClick(e?){
         if(game.BaseUI.isStopEevent)
             return;
         if(this.chooseCard)

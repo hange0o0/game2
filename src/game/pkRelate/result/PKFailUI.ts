@@ -10,7 +10,10 @@ class PKFailUI extends game.BaseUI {
     private bg: eui.Rect;
     private group: eui.Group;
     private list: eui.List;
+    private helpCon: eui.Group;
+    private helpList: eui.List;
     private closeBtn: eui.Label;
+
 
 
 
@@ -24,6 +27,7 @@ class PKFailUI extends game.BaseUI {
     public childrenCreated() {
         super.childrenCreated();
         this.list.itemRenderer = PKAwardItem
+        this.helpList.itemRenderer = PKFailItem
         this.addBtnEvent(this, this.onOK)
         //this.addBtnEvent(this.retryBtn, this.onRetry)
     }

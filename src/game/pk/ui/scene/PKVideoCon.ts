@@ -44,6 +44,8 @@ class PKVideoCon extends game.BaseContainer {
         this.door2.rotation = 0;
         tw.to({rotation:360},3000)
         this.tw1.setPaused(true);
+
+
     }
 
     public init(){

@@ -23,7 +23,7 @@ class HangManager {
     }
 
     public getHangBGID(){
-        return Math.ceil((this.level+1)/4)%10 || 10
+        return Math.ceil((this.level+1)/10)%10 || 10
     }
 
     public getPKCD(){
@@ -36,6 +36,15 @@ class HangManager {
 
     public getAwardLeft(){
         return this.awardtime + 60 - TM.now()
+    }
+
+    public getHangForce($hangIndex){
+        var $force=1;
+        for(var $i=1;$i<$hangIndex;$i++)
+        {
+            $force+=Math.floor($i/10+1);
+        }
+        return $force;
     }
 
     public award(fun?) {

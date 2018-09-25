@@ -48,6 +48,16 @@ class PKTopUI extends game.BaseContainer {
             this.cdGroup.visible = true
              this.cdText.text = '坚持：' + DateUtil.getStringBySecond(Math.ceil((endless - PKData.getInstance().actionTime)/1000)).substr(-5)
         }
+        else
+        {
+            var needcd = PKData.getInstance().needcd;
+            if(needcd)
+            {
+                this.cdGroup.visible = true
+                this.cdText.text = '倒计时：' + DateUtil.getStringBySecond(Math.ceil((needcd - PKData.getInstance().actionTime)/1000)).substr(-5)
+            }
+        }
+
     }
 
     public onVideoEvent(e){
@@ -226,6 +236,7 @@ class PKTopUI extends game.BaseContainer {
         this.renewHp()
 
         this.remove();
+
         for(var i=0;i<7;i++)
         {
             var item = this.createItem();
@@ -234,6 +245,26 @@ class PKTopUI extends game.BaseContainer {
             this.addChild(item);
             item.data = null;
         }
+
+        //处理预显示
+        if(PKData.getInstance().showTopNum)
+        {
+            var list = PKData.getInstance().otherPlayer.autolist.split(',');
+            var num = PKData.getInstance().showTopNum;
+            if(num > 7)
+                num = 7
+            for(var i=0;i<num;i++)
+            {
+                this.itemArr[i].data = {
+                    mid:list[num - i - 1],
+                    isLock:true,
+                    topIndex:num - i
+                }
+            }
+        }
+
+
+
 
         egret.Tween.removeTweens(this.hpGroup1)
         egret.Tween.removeTweens(this.hpGroup2)
@@ -285,6 +316,39 @@ class PKTopUI extends game.BaseContainer {
     public addSkillItem(data,isHero?){
         for(var i=0;i<this.itemArr.length;i++)
         {
+           if(this.itemArr[i].data && this.itemArr[i].data.isLock && this.itemArr[i].data.topIndex == this.index)
+           {
+               this.itemArr[i].data.isLock = false;
+               this.itemArr[i].dataChanged();
+               //要加入一个新的
+               if(i == 1 && this.index+1 < PKData.getInstance().showTopNum)
+               {
+                   var list = PKData.getInstance().otherPlayer.autolist.split(',');
+                   this.removeTopItem();
+                   this.addTopItem({
+                       mid:list[this.index+1],
+                       isLock:true,
+                       topIndex:this.index + 2
+                   });
+               }
+
+               this.index ++
+               return;
+           }
+        }
+
+        this.removeTopItem();
+
+        //加入一个
+        data.topIndex = this.index
+        this.index ++;
+        this.addTopItem(data);
+    }
+
+    private removeTopItem(){
+        //移除一个
+        for(var i=0;i<this.itemArr.length;i++)
+        {
             var item:PKTopItem = this.itemArr[i];
             var targetX = this.getX(i+1);
             egret.Tween.removeTweens(item)
@@ -302,12 +366,15 @@ class PKTopUI extends game.BaseContainer {
                 i--;
             }
         }
+
+    }
+
+    private addTopItem(data){
         var item = this.createItem();
         this.itemArr.unshift(item)
         item.x = this.getX(0);
         this.addChild(item);
-        data.topIndex = this.index
-        this.index ++;
+
         item.data = data;
         item.appear()
     }

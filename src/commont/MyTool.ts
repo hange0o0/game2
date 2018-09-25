@@ -25,6 +25,9 @@ class MyTool {
     public static getPropLevel(){
         return Config.localResRoot + 'prop/prop_level.png'
     }
+    public static getPropHang(){
+        return 'icon_atk3_png'
+    }
     public static getPropDiamond(){
         return Config.localResRoot + 'prop/prop_diamond.png'
     }

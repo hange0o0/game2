@@ -19,6 +19,7 @@ class HangUI extends game.BaseItem {
     private awardRed: eui.Image;
     private helpBtn: eui.Image;
     private videoBtn: eui.Group;
+    private videoBtn2: eui.Group;
     private videoIcon: eui.Image;
     private giftGroup: eui.Group;
     private giftMC: eui.Image;
@@ -27,6 +28,7 @@ class HangUI extends game.BaseItem {
     private handBtn: eui.Button;
     private guideGroup: eui.Group;
     private guideText: eui.Label;
+    private enemyForceText: eui.Label;
 
 
 
@@ -70,6 +72,10 @@ class HangUI extends game.BaseItem {
             HelpManager.getInstance().showHelp('hang')
         })
         this.addBtnEvent(this.videoBtn,(e)=>{
+            e.stopImmediatePropagation()
+            VideoUI.getInstance().show()
+        })
+        this.addBtnEvent(this.videoBtn2,(e)=>{
             e.stopImmediatePropagation()
             HangHelpUI.getInstance().show()
         })
@@ -221,7 +227,7 @@ class HangUI extends game.BaseItem {
 
 
         var lastHistory = SharedObjectManager.getInstance().getMyValue('hang_video') || {};
-        this.videoBtn.visible = HM.level>= 10 && lastHistory.level === HM.level && lastHistory.fail >= 1
+        this.videoBtn2.visible = HM.level>= 10 && lastHistory.level === HM.level && lastHistory.fail >= 1
         if(lastHistory.level === HangManager.getInstance().level)
         {
             this.otherList = lastHistory.otherList;
@@ -272,6 +278,7 @@ class HangUI extends game.BaseItem {
         {
             this.openBtn.visible = false;
             this.clockGroup.visible = true;
+            this.enemyForceText.text = '敌方战力：' + HM.getHangForce(HM.level+1);
 
             this.lockGroup.visible = HM.getPKLeft() > 0;
             this.awardBtn.visible = HM.getAwardLeft() < 0;

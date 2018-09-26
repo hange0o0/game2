@@ -7,6 +7,7 @@ class HeroManager {
     }
 
     public heroData = {}
+    public heroLVData = {}
     public levelBase = [0,1,10,30,60,110]
 
 
@@ -14,8 +15,9 @@ class HeroManager {
         return HangManager.getInstance().level >= Config.heroLevel;
     }
 
-    public init(hero){
-        this.heroData = hero || {};
+    public init(msg){
+        this.heroData = msg.hero || {};
+        this.heroLVData = msg.herolv || {};
     }
 
     public isFull(){
@@ -39,7 +41,14 @@ class HeroManager {
          return this.heroData[id] || 0;
     }
 
-    public getHeroLevel(id,num?){
+    public getHeroLevel(id){
+         if(this.heroLVData[id])
+            return this.heroLVData[id]
+        if(this.getHero(id))
+            return 1
+        return 0;
+    }
+    public getHeroMaxLevel(id,num?){
          num = num || this.getHero(id);
         if(!num)
             return 0;
@@ -76,7 +85,23 @@ class HeroManager {
         return arr;
     }
 
-
+    public hero_up(id,fun?) {
+        var self = this;
+        var oo:any = {};
+        oo.id = id;
+        Net.addUser(oo);
+        Net.send(GameEvent.hero.hero_up, oo, (data)=> {
+            var msg = data.msg;
+            if(msg.fail)
+            {
+                MyWindow.Alert("进化失败，错误码：" + msg.fail);
+                return;
+            }
+            SoundManager.getInstance().playEffect(SoundConfig.effect_u_up);
+            if (fun)
+                fun();
+        });
+    }
 
 
     //public card_buy(id,fun?){

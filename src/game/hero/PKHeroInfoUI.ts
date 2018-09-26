@@ -139,7 +139,7 @@ class PKHeroInfoUI extends game.BaseContainer {
                 var v2 = HeroManager.getInstance().levelBase[lv + 1]
                 var d1 = num - v1;
                 var d2 = v2 - v1;
-                this.barMC.width = 180*d1/d2;
+                this.barMC.width = 180*Math.min(d1/d2,1);
                 this.rateText.text = d1 + '/' + d2;
             }
         }

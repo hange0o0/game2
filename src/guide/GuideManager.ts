@@ -121,7 +121,7 @@ class GuideManager {
 
         this.addGuideObj({
             mc:function(){return PKingUI.getInstance().pkCtrlCon.costGroup},
-            text:'这是手牌能量,上阵卡牌需耗费不同的能量。',
+            text:'这是手牌能量,上阵不同的卡牌需耗费不同的能量。',
             guideKey:'cost',
             fun:function(){
                 self.showGuide()
@@ -141,14 +141,14 @@ class GuideManager {
         })
 
         this.addGuideObj({
-            text:'当战斗卡牌被放入[出战区]时，都会有3秒的准备时间，准备时间过后，卡牌才会生效。',
+            text:'当战斗卡牌被放入[出战区]时，会有3秒的准备时间，准备时间过后，卡牌才会生效。',
             fun:function(){
                 self.showGuide()
             }
         })
 
         this.addGuideObj({
-            text:'由此可见，对战时的预判能力是非常重要的。现在你可以继续放入你的手牌。',
+            text:'由此可见，对战时的预判能力非常重要。现在你可以继续放入手牌。',
             fun:function(){
                 PKingUI.getInstance().showCountDown()
                 GuideUI.getInstance().hide();
@@ -166,7 +166,7 @@ class GuideManager {
 
         this.addGuideObj({
             mc:function(){return PKingUI.getInstance().pkTop.hpGroupIcon},
-            text:'这是队伍生命,当敌方单位冲破敌方出生点后会造成伤害，当生命值为降为0时就会失败。',
+            text:'这是队伍生命,当被敌人冲破出生点后就会扣除相应生命值，生命值降为0时则失败。',
             guideKey:'hp',
             fun:function(){
                 self.showGuide()
@@ -174,7 +174,7 @@ class GuideManager {
         })
 
         this.addGuideObj({
-            text:'好了,现在就开始你的表演吧',
+            text:'好了,现在就开始你的表演吧，要注意兵种间的属性相克哦',
             guideKey:'pk',
             fun:function(){
                 PKingUI.getInstance().setStop(false);
@@ -194,25 +194,25 @@ class GuideManager {
 
         this.addGuideObj({
             mc:function(){return TecInfoUI.getInstance().okBtn},
-            text:'战力提升会影响所有的出战卡牌，一点提升，处处可用！',
+            text:'战力提升会影响所有的出战卡牌，一次提升，处处可用！',
         })
 
         this.addGuideObj({
             mc:function(){return TecInfoUI.getInstance().cancelBtn},
-            text:'因此为了提升战力我们需要多去收集升级科技的资源',
+            text:'战力提升是增强自身最有效的办法，除此之外。。',
         })
 
         this.addGuideObj({
             mc:function(){return MainUI.getInstance().bottomItems[3]},
-            text:'当然，除了提升战后外，拥有更多的卡牌，可让你在对战中拥有更大的操作空间',
+            text:'。。拥有更多的卡牌，可让你在对战中有着更大的操作空间',
         })
         this.addGuideObj({
             mc:function(){return CardUI.getInstance().list.getChildAt(2)},
-            text:'点击未解锁的卡牌进行解锁',
+            text:'点击未解锁的随从卡牌进行解锁',
         })
         this.addGuideObj({
             mc:function(){return CardInfoUI.getInstance().okBtn},
-            text:'解锁后你就可以在对战和防守阵容中使用该卡牌了',
+            text:'解锁后你就可以在进攻和防守阵容中使用该随从卡牌了',
         })
         //this.addGuideObj({
         //    mc:function(){return CardInfoUI.getInstance().closeBtn},
@@ -222,18 +222,18 @@ class GuideManager {
         ////////////////////////////////////
 
         this.addGuideObj({
-            text:'基于召唤的对战玩法介绍，到这里就结束了。',
+            text:'好了，基于召唤的对战玩法介绍，到这里就暂告一段落了。',
             fun:function(){
                 self.showGuide()
             }
         })
-
-        this.addGuideObj({
-            text:'但游戏内还有其它好玩功能，需要玩家您慢慢探索。如有需要，可点击界面内的帮助按钮查看相关说明。',
-            fun:function(){
-                self.showGuide()
-            }
-        })
+        //
+        //this.addGuideObj({
+        //    text:'但游戏内还有其它好玩功能，需要玩家您慢慢探索。如有需要，可点击界面内的帮助按钮查看相关说明。',
+        //    fun:function(){
+        //        self.showGuide()
+        //    }
+        //})
 
         //this.addGuideObj({
         //    text:'我觉得以您的智慧，应该也不再需要我的手把手教学了吧？',
@@ -243,7 +243,7 @@ class GuideManager {
         //})
 
         this.addGuideObj({
-            text:'那我就此别过，以后有机会一起驰骋疆场吧！',
+            text:'加油努力吧，后面还有更精彩的内容等着你呢！',
             fun:function(){
                 self.endGuide()
                 CardInfoUI.getInstance().hide();

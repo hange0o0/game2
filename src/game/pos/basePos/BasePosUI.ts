@@ -837,7 +837,11 @@ class BasePosUI extends game.BaseUI {
             GuideManager.getInstance().showGuide()
         }
 
+        this.addPanelOpenEvent(GameEvent.client.hero_change,this.renewHeroList)
+    }
 
+    public renewHeroList(){
+        MyTool.renewList(this.heroList)
     }
 
     private renewTabList(){

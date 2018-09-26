@@ -34,7 +34,7 @@ class CardManager {
         for(var s in msg.skill)
             this.skillList[s] = msg.skill[s];
 
-        HeroManager.getInstance().init(msg.hero)
+        HeroManager.getInstance().init(msg)
     }
 
     public isOwnCard(id){

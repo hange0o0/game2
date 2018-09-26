@@ -173,6 +173,9 @@ class GameEvent {
     public static tec = {
         tec_up:'tec.tec_up'
     }
+    public static hero = {
+        hero_up:'hero.hero_up'
+    }
 
     public static user = {
         user_info:'user.user_info',

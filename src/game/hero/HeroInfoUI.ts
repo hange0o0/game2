@@ -54,7 +54,7 @@ class HeroInfoUI extends game.BaseWindow {
     }
 
     private onUp(){
-
+       HeroManager.getInstance().hero_up(this.data.id)
     }
 
     private onLeft(){
@@ -106,11 +106,13 @@ class HeroInfoUI extends game.BaseWindow {
         this.r0.selected = SharedObjectManager.getInstance().getMyValue('show_card_base') || false;
         this.r1.selected = !this.r0.selected
         this.renew();
+        this.addPanelOpenEvent(GameEvent.client.hero_change,this.renew)
     }
 
 
     public renew(){
-        var lv = HeroManager.getInstance().getHeroLevel(this.data.id)
+        var HM = HeroManager.getInstance();
+        var lv = HM.getHeroLevel(this.data.id)
         if(this.sp.force)
         {
             this.item.renew({
@@ -143,9 +145,23 @@ class HeroInfoUI extends game.BaseWindow {
             });
         }
 
-
-
-        if(this.currentState != 'normal')
+        if(lv<HM.getHeroMaxLevel(this.data.id))
+        {
+            var num = PropManager.getInstance().getNum(101);
+            this.currentState = 'upgrade'
+            this.coinText.text = num + ' / ' + lv;
+            if(num >= lv)
+            {
+                this.okBtn.touchEnabled = true;
+                this.okBtn.skinName = "Btn1Skin";
+            }
+            else
+            {
+                this.okBtn.touchEnabled = false;
+                this.okBtn.skinName = "Btn3Skin";
+            }
+        }
+        else if(this.currentState != 'normal')
             this.currentState = 'normal'
         var index = this.openList.indexOf(this.data);
         this.leftBtn.visible = index > 0

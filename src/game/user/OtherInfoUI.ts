@@ -493,7 +493,7 @@ class OtherInfoUI extends game.BaseWindow {
                     hero[i] = {
                         id:id,
                         isHero:true,
-                        level:heroLevel?HeroManager.getInstance().getHeroLevel(id,heroLevel[id]):1,
+                        level:heroLevel?heroLevel[id]:1,
                     }
                 }
                 list = hero.concat(list)

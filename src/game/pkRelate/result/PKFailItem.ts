@@ -10,6 +10,7 @@ class PKFailItem extends game.BaseItem {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.btn.visible = false
         this.addBtnEvent(this.btn,this.onClick)
     }
 
@@ -18,6 +19,6 @@ class PKFailItem extends game.BaseItem {
     }
 
     public dataChanged() {
-
+        this.desText.text = this.data.title
     }
 }

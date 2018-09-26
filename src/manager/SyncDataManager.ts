@@ -79,6 +79,13 @@ class SyncDataManager{
                         HeroManager.getInstance().heroData[ss] = value[ss] || 0;
                     }
                     break;
+                case 'sync_herolv':
+                    for(ss in value)
+                    {
+                        HeroManager.getInstance().heroLVData[ss] = value[ss] || 0;
+                    }
+                    EM.dispatch(GameEvent.client.hero_change);
+                    break;
 
             }
         }

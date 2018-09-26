@@ -255,11 +255,12 @@ class PKTopUI extends game.BaseContainer {
                 num = 7
             for(var i=0;i<num;i++)
             {
-                this.itemArr[i].data = {
-                    mid:list[num - i - 1],
-                    isLock:true,
-                    topIndex:num - i
-                }
+                //var cardData = new PKPosCardData({
+                //    mid:list[num - i - 1],
+                //    isLock:true,
+                //    topIndex:num - i
+                //})
+                this.itemArr[i].data = this.createLockData(list[num - i - 1],num - i);
             }
         }
 
@@ -318,18 +319,19 @@ class PKTopUI extends game.BaseContainer {
         {
            if(this.itemArr[i].data && this.itemArr[i].data.isLock && this.itemArr[i].data.topIndex == this.index)
            {
-               this.itemArr[i].data.isLock = false;
+               this.itemArr[i].data = data;
                this.itemArr[i].dataChanged();
                //要加入一个新的
                if(i == 1 && this.index+1 < PKData.getInstance().showTopNum)
                {
                    var list = PKData.getInstance().otherPlayer.autolist.split(',');
                    this.removeTopItem();
-                   this.addTopItem({
-                       mid:list[this.index+1],
-                       isLock:true,
-                       topIndex:this.index + 2
-                   });
+                   this.addTopItem(this.createLockData(list[this.index+1],this.index + 2));
+                   //this.addTopItem({
+                   //    mid:list[this.index+1],
+                   //    isLock:true,
+                   //    topIndex:this.index + 2
+                   //});
                }
 
                this.index ++
@@ -343,6 +345,15 @@ class PKTopUI extends game.BaseContainer {
         data.topIndex = this.index
         this.index ++;
         this.addTopItem(data);
+    }
+
+    private createLockData(mid,index){
+        return  new PKPosCardData({
+            mid:mid,
+            isLock:true,
+            owner:PKData.getInstance().otherPlayer.id,
+            topIndex:index
+        })
     }
 
     private removeTopItem(){

@@ -10,12 +10,12 @@ var game_file_list = [
 	"libs/modules/tween/tween.js",
 	"libs/modules/socket/socket.js",
 	"bin-debug/commont/BaseUI.js",
-	"bin-debug/game/pos/PosListHeadItem.js",
-	"bin-debug/game/pos/basePos/BasePosItem.js",
-	"bin-debug/game/main/MainBase.js",
 	"bin-debug/game/pk/data/PKStateListener.js",
 	"bin-debug/game/pk/monsterData/MBase.js",
 	"bin-debug/game/pk/skillData/SBase.js",
+	"bin-debug/game/pos/PosListHeadItem.js",
+	"bin-debug/game/pos/basePos/BasePosItem.js",
+	"bin-debug/game/main/MainBase.js",
 	"bin-debug/game/pk/skillData/11/S308.js",
 	"bin-debug/commont/GameEvent.js",
 	"bin-debug/commont/MovieSimpleMC.js",
@@ -235,7 +235,7 @@ var game_file_list = [
 	"bin-debug/game/pk/skillData/11/S305.js",
 	"bin-debug/game/pk/skillData/11/S306.js",
 	"bin-debug/game/pk/skillData/11/S307.js",
-	"bin-debug/LoadingUI.js",
+	"bin-debug/util/StringUtil.js",
 	"bin-debug/game/pk/skillData/11/S309.js",
 	"bin-debug/game/pk/skillData/11/S310.js",
 	"bin-debug/game/pk/skillData/12/S311.js",
@@ -460,7 +460,7 @@ var game_file_list = [
 	"bin-debug/util/ObjectUtil.js",
 	"bin-debug/util/PopUpManager.js",
 	"bin-debug/util/ShapeObject.js",
-	"bin-debug/util/StringUtil.js",
+	"bin-debug/LoadingUI.js",
 	//----auto game_file_list end----
 ];
 

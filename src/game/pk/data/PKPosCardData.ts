@@ -17,6 +17,11 @@ class PKPosCardData {
     public num = 0//已使用的次数
     public needRemoveListener = true//结束后移除对应监听
 
+
+    //上方显示用到
+    public isLock = false;
+    public topIndex;
+
     constructor(obj?){
         if(obj)
             this.fill(obj);

@@ -141,7 +141,6 @@ class MainFightUI extends MainBase {
         this.renew();
         this.renewForce();
         this.renewRed();
-        this.onHangChange();
 
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
         this.addPanelOpenEvent(GameEvent.client.red_change,this.renewRed)

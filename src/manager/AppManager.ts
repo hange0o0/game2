@@ -17,6 +17,9 @@ class AppManager {
     public playEffect(mp3){
         this.callFun('playEffect,'+mp3);
     }
+    public joinQQ(){
+        this.callFun('joinQQ');
+    }
 
     //改得太快，APP响应不及时
     public callFun(fun){

@@ -515,7 +515,9 @@ class BasePosUI extends game.BaseUI {
         p.y -= 10;
         //90*110
         //8/20
-        var maxIndex = this.listData.length - 2;
+        var maxIndex = this.listData.length - 1;
+        if(this.listData.getItemAt(maxIndex).setting)
+            maxIndex --;
         var orginIndex= Math.floor((p.x)/105) + Math.floor(p.y/130)*6;
         var index = Math.max(0,Math.min(maxIndex,orginIndex))
         //var isOver = p.x%105 >30 && p.x%105 <80;
@@ -595,7 +597,9 @@ class BasePosUI extends game.BaseUI {
         //p.y -= 10;
         //90*110
         //8/20
-        var maxIndex = this.heroListData.length - 2;
+        var maxIndex = this.heroListData.length - 1;
+        if(this.heroListData.getItemAt(maxIndex).setting)
+            maxIndex --;
         var orginIndex= Math.floor((p.x)/125) + Math.floor(p.y/140)*5;
         var index = Math.max(0,Math.min(maxIndex,orginIndex))
         //var isOver = p.x%105 >30 && p.x%105 <80;

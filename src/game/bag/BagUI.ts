@@ -91,8 +91,8 @@ class BagUI extends game.BaseWindow {
         this.currentState = 'prop'
     }
     private renewSell(){
-        this.currentState = 'sell'
         PropManager.getInstance().getSellList(()=>{
+            this.currentState = 'sell'
             var arr = PropManager.getInstance().shopData;
             this.dataArray.source = arr
             this.emptyGroup.visible = arr.length == 0;

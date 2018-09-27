@@ -32,7 +32,7 @@
 		<e:Group left="50" right="50" verticalCenter="0">
 		<e:Label text="市场重置时间:" size="24" stroke="2" textAlign="center" y="26" x="55"/>
 		<e:Image source="icon_clock_png" x="0" y="0"/>
-		<e:Label id="cdText" text="Label" size="24" stroke="2" textAlign="center" y="16" x="45" textColor="0xFFE79B"/>
+		<e:Label id="cdText" text="00:00" size="24" stroke="2" textAlign="center" y="16" x="45" textColor="0xFFE79B"/>
 		<e:layout>
 			<e:HorizontalLayout verticalAlign="middle" horizontalAlign="center" gap="10"/>
 		</e:layout>

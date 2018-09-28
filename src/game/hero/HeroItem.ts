@@ -12,6 +12,8 @@ class HeroItem extends game.BaseItem {
     private s2: eui.Image;
     private s3: eui.Image;
     private s4: eui.Image;
+    private redMC: eui.Image;
+
 
     public childrenCreated() {
         super.childrenCreated();
@@ -36,14 +38,13 @@ class HeroItem extends game.BaseItem {
                 this['s' + i].source = lv>i?'start1_png':'start2_png'
             this.nameText.text = vo.name;
             this.mc.source = vo.getImage();
-
+            this.redMC.visible = lv<HeroManager.getInstance().getHeroMaxLevel(vo.id) && PropManager.getInstance().getNum(101) >= lv;
         }
         else
         {
             this.currentState = 'lock';
             this.nameText.text = '???'
         }
-
     }
 
 }

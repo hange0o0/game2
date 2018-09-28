@@ -7,9 +7,11 @@ class AwardUI extends game.BaseWindow {
         return this._instance;
     }
 
+    private btnGroup: eui.Group;
     private okBtn: eui.Button;
-    private list: eui.List;
+    private btn2: eui.Button;
     private scroller: eui.Scroller;
+    private list: eui.List;
     private titleText: eui.Label;
     private desText: eui.Label;
 
@@ -19,6 +21,8 @@ class AwardUI extends game.BaseWindow {
     private title;
     private des;
     private fun;
+    private secLabel;
+    private secFun;
     public constructor() {
         super();
         this.skinName = "AwardUISkin";
@@ -29,15 +33,23 @@ class AwardUI extends game.BaseWindow {
         this.scroller.viewport = this.list;
         this.list.itemRenderer = AwardItem;
         this.addBtnEvent(this.okBtn,this.hide)
+        this.addBtnEvent(this.btn2,this.onBtn2)
     }
 
-    public show(v?,title?,des?,fun?){
+    private onBtn2(){
+        this.secFun && this.secFun();
+        this.hide();
+    }
+
+    public show(v?,title?,des?,fun?,secLabel?,secFun?){
         if(!v)
             return;
         this.dataIn = v;
         this.title = title;
         this.des = des;
         this.fun = fun;
+        this.secLabel = secLabel;
+        this.secFun = secFun
         super.show()
     }
 
@@ -64,5 +76,13 @@ class AwardUI extends game.BaseWindow {
         {
             this.currentState = 'normal'
         }
+
+        if(this.secLabel)
+        {
+            this.btnGroup.addChild(this.btn2);
+            this.btn2.label = this.secLabel
+        }
+        else
+            MyTool.removeMC(this.btn2)
     }
 }

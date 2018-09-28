@@ -8,12 +8,13 @@ class MainFightUI extends MainBase {
         return this._instance;
     }
 
-
     private scroller: eui.Scroller;
     public mapBtn: HangUI;
     public forceGroup: eui.Group;
     private forceText: eui.Label;
+    private forceRedMC: eui.Image;
     private shopBtn: eui.Group;
+    private shopRedMC: eui.Image;
     private rankBtn: eui.Group;
     private mailBtn: eui.Group;
     private mailRed: eui.Image;
@@ -21,6 +22,7 @@ class MainFightUI extends MainBase {
     private activeUI: PKActiveMainPageUI;
     private defBtn: eui.Group;
     private atkBtn: eui.Group;
+
 
 
 
@@ -74,6 +76,8 @@ class MainFightUI extends MainBase {
 
     private renewRed(){
         this.mailRed.visible = MailManager.getInstance().getNotAwardNum() > 0;
+        this.forceRedMC.visible = TecManager.getInstance().isForceRed()
+        this.shopRedMC.visible = PayManager.getInstance().isRed()
     }
 
 
@@ -144,6 +148,8 @@ class MainFightUI extends MainBase {
 
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
         this.addPanelOpenEvent(GameEvent.client.red_change,this.renewRed)
+        this.addPanelOpenEvent(GameEvent.client.coin_change,this.renewRed)
+        this.addPanelOpenEvent(GameEvent.client.prop_change,this.renewRed)
         this.addPanelOpenEvent(GameEvent.client.force_change,this.renewForce)
         this.addPanelOpenEvent(GameEvent.client.hang_change,this.onHangChange)
         this.addPanelOpenEvent(GameEvent.client.pvp_change,this.onPVPChange)

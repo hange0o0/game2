@@ -78,7 +78,7 @@ class PVPInfoUI extends game.BaseUI {
     }
 
     private onOnline(){
-         MyWindow.ShowTips('暂未开放')
+         MyWindow.ShowTips('即将开放，敬请期待')
     }
 
     //private onHelp(){

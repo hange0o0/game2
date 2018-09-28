@@ -10,11 +10,15 @@
 					<e:Image source="black_bg2_png" x="0" y="0" height="65" width="300"/>
 					<e:Image source="icon_force_png" x="12" y="0"/>
 					<e:Label text="战力：" x="47" size="30" textColor="0xFCC541" stroke="2" strokeColor="0x662A0E" italic="true" bottom="10"/>
-					<e:Label id="forceText" text="12345" x="125" size="42" textColor="0xfcc541" stroke="3" strokeColor="0x662a0e" italic="true" bottom="5"/>
+					<e:Group x="125" y="18">
+						<e:Label id="forceText" text="12345" x="0" size="42" textColor="0xfcc541" stroke="3" strokeColor="0x662a0e" italic="true" y="0"/>
+						<e:Image id="forceRedMC" source="red_mc_png" right="-30" top="0"/>
+					</e:Group>
 				</e:Group>
 				<e:Group y="0" height="75" right="0">
 					<e:Group id="shopBtn" x="100" y="0" height="80" width="80">
 						<e:Image source="main_shop_png" verticalCenter="0" horizontalCenter="0"/>
+						<e:Image id="shopRedMC" source="red_mc_png" right="0" top="12"/>
 						<e:Label text="商城" size="22" horizontalCenter="0" stroke="2" bottom="10"/>
 					</e:Group>
 					<e:Group id="rankBtn" x="100" y="0" height="80" width="80">

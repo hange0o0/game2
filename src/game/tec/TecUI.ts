@@ -54,8 +54,18 @@ class TecUI extends MainBase {
     }
 
     public onShow(){
+        this.tab.validateNow();
+        this.renewTabRed();
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.tec_change,this.renewList)
+        this.addPanelOpenEvent(GameEvent.client.coin_change,this.renewTabRed)
+    }
+
+    private renewTabRed(){
+        this.tab.getChildAt(0)['redMC'].visible = TecManager.getInstance().isTecRed()
+        this.tab.getChildAt(1)['redMC'].visible = TecManager.getInstance().isForceRed()
+        this.tab.getChildAt(2)['redMC'].visible = TecManager.getInstance().isCoinRed()
+        this.tab.getChildAt(3)['redMC'].visible = TecManager.getInstance().isResourceRed()
     }
 
     private renewList(){

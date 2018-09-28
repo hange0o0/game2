@@ -14,4 +14,5 @@
 		</e:layout>
 	</e:Group>
 	<e:Image source="icon_wenhao2_png" includeIn="lock" y="30" horizontalCenter="0"/>
+	<e:Image id="redMC" source="red_mc_png" includeIn="normal" top="7" right="0"/>
 </e:Skin>

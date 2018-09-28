@@ -97,8 +97,17 @@ class CardUI extends MainBase {
     }
 
     public onShow(){
+        this.tab.validateNow();
+        this.renewTabRed();
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.card_change,this.justRenewList)
+        this.addPanelOpenEvent(GameEvent.client.coin_change,this.renewTabRed)
+    }
+
+    private renewTabRed(){
+       this.tab.getChildAt(0)['redMC'].visible = CardManager.getInstance().isRed(1)
+       this.tab.getChildAt(1)['redMC'].visible = CardManager.getInstance().isRed(2)
+       this.tab.getChildAt(2)['redMC'].visible = CardManager.getInstance().isRed(3)
     }
 
     public showFinish(){

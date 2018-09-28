@@ -71,6 +71,7 @@ class UserManager {
     public getCoin(){
         var time = TM.now();
 
+        var b = false;
         //生产影响
         var cd = 60;
         var step = Math.round(this.hourcoin/60);
@@ -79,6 +80,7 @@ class UserManager {
         {
             this.coin.v += add*step;
             this.coin.t = this.coin.t + add*cd;
+            b = true;
         }
 
         //主人影响
@@ -92,9 +94,11 @@ class UserManager {
             {
                 this.coin.st += num*3600;
                 this.coin.v -= num*Math.floor(this.hourcoin*0.2);
+                b=true;
             }
         }
-
+        if(b)
+            EM.dispatch(GameEvent.client.coin_change)
         return this.coin.v;
     }
 

@@ -20,6 +20,21 @@ class HeroManager {
         this.heroLVData = msg.herolv || {};
     }
 
+    public isRed(){
+        var arr = this.getMyHeroList();
+        var pnum = PropManager.getInstance().getNum(101);
+        for(var i=0;i<arr.length;i++)
+        {
+            var oo = arr[i];
+            var lv = HeroManager.getInstance().getHeroLevel(oo.id);
+            if(lv<HeroManager.getInstance().getHeroMaxLevel(oo.id) &&  pnum>= lv)
+            {
+                return true
+            }
+        }
+        return false;
+    }
+
     public isFull(){
         var data = MonsterVO.data;
         for(var s in data)

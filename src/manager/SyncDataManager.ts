@@ -20,7 +20,7 @@ class SyncDataManager{
             {
                 case 'sync_energy':
                     UM.energy = value;
-                    EM.dispatch(GameEvent.client.energy_change);
+                    this.dispatch(GameEvent.client.energy_change);
                     break;
                 case 'sync_coin':
                     UM['coin'] = value;
@@ -28,18 +28,18 @@ class SyncDataManager{
                     //{
                     //     sendClientError('金币负数：' + JSON.stringify(data) + '|'+TM.now() +"|" + SlaveManager.getInstance().getMasterTime())
                     //}
-                    EM.dispatch(GameEvent.client.coin_change);
+                    this.dispatch(GameEvent.client.coin_change);
                     break;
                 case 'sync_diamond':
                     UM.diamond = value;
-                    EM.dispatch(GameEvent.client.diamond_change);
+                    this.dispatch(GameEvent.client.diamond_change);
                     break;
                 case 'sync_opendata':
                     UM.openData = value;
                     if(data.mail_award)
                     {
                         MailManager.getInstance().serverAward++;
-                        EM.dispatchEventWith(GameEvent.client.red_change)
+                        this.dispatch(GameEvent.client.red_change)
                     }
                     UM.onOpenDataChange()
                     break;
@@ -48,15 +48,15 @@ class SyncDataManager{
                     {
                         PropManager.getInstance().props[ss] = value[ss] || 0;
                     }
-                    EM.dispatch(GameEvent.client.prop_change);
+                    this.dispatch(GameEvent.client.prop_change);
                     break;
                 case 'sync_tec_force':
                     UM.tec_force = value;
-                    EM.dispatch(GameEvent.client.force_change);
+                    this.dispatch(GameEvent.client.force_change);
                     break;
                 case 'sync_hourcoin':
                     UM.hourcoin = value;
-                    EM.dispatch(GameEvent.client.hourcoin_change);
+                    this.dispatch(GameEvent.client.hourcoin_change);
                     break;
 
                 case 'sync_tec':
@@ -65,7 +65,7 @@ class SyncDataManager{
                         TecManager.getInstance().tecData[ss] = value[ss];
                     }
                     UM.level = TecManager.getInstance().getLevel(1);
-                    EM.dispatch(GameEvent.client.tec_change);
+                    this.dispatch(GameEvent.client.tec_change);
                     break;
                 case 'sync_skill':
                     for(ss in value)
@@ -78,16 +78,24 @@ class SyncDataManager{
                     {
                         HeroManager.getInstance().heroData[ss] = value[ss] || 0;
                     }
+                    this.dispatch(GameEvent.client.hero_change);
                     break;
                 case 'sync_herolv':
                     for(ss in value)
                     {
                         HeroManager.getInstance().heroLVData[ss] = value[ss] || 0;
                     }
-                    EM.dispatch(GameEvent.client.hero_change);
+                    this.dispatch(GameEvent.client.hero_change);
                     break;
 
             }
         }
+    }
+
+    private dispatch(event){
+        egret.callLater(()=>{
+            EM.dispatch(event);
+        },this)
+       
     }
 }

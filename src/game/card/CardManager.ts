@@ -37,6 +37,17 @@ class CardManager {
         HeroManager.getInstance().init(msg)
     }
 
+    public isRed(monsterType=0){
+        var coin = UM.getCoin();
+        var arr = this.getOpenMonsterList(monsterType)
+        for(var i=0;i<arr.length;i++)
+        {
+            if(arr[i].isLock && this.getUpCoin(arr[i].id) <= coin)
+                return true;
+        }
+        return false;
+    }
+
     public isOwnCard(id){
        if(CM.getCardVO(id).isMonster)
        {

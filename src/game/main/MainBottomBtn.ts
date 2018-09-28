@@ -32,13 +32,19 @@ class MainBottomBtn extends game.BaseItem {
         {
             case 'slave':
                 this.lockMC.visible = !SlaveManager.getInstance().isSlaveOpen()
+                this.redMC.visible = SlaveManager.getInstance().isRed();
                 break;
             case 'main':
                 break;
             case 'card':
+                this.redMC.visible = CardManager.getInstance().isRed();
                 break;
             case 'hero':
                 this.lockMC.visible = !HeroManager.getInstance().isHeroOpen()
+                this.redMC.visible = HeroManager.getInstance().isRed();
+                break;
+            case 'tec':
+                this.redMC.visible = TecManager.getInstance().isTecRed();
                 break;
         }
     }

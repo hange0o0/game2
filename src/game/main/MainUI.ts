@@ -9,10 +9,14 @@ class MainUI extends game.BaseUI {
     private bg: eui.Image;
     private con: eui.Group;
     private topCon: eui.Group;
+    private coinGroup: eui.Group;
     private addCoinBtn: eui.Image;
     private coinText: eui.Label;
+    private coinRedMC: eui.Image;
+    private energyGroup: eui.Group;
     private energyText: eui.Label;
     private addEnergyBtn: eui.Image;
+    private diamondGroup: eui.Group;
     private diamondText: eui.Label;
     private addDiamondBtn: eui.Image;
     private bottomSelectMC: eui.Image;
@@ -21,6 +25,7 @@ class MainUI extends game.BaseUI {
     private b2: MainBottomBtn;
     private b3: MainBottomBtn;
     private b4: MainBottomBtn;
+
 
 
 
@@ -42,9 +47,9 @@ class MainUI extends game.BaseUI {
     public childrenCreated() {
         super.childrenCreated();
 
-        this.addBtnEvent(this.addCoinBtn, this.onAddCoin)
-        this.addBtnEvent(this.addEnergyBtn, this.onAddEnergy)
-        this.addBtnEvent(this.addDiamondBtn, this.onAddDiamond)
+        this.addBtnEvent(this.coinGroup, this.onAddCoin)
+        this.addBtnEvent(this.energyGroup, this.onAddEnergy)
+        this.addBtnEvent(this.diamondGroup, this.onAddDiamond)
 
         this.b0.data = {text:'英雄',index:0,source:'main_hero_png',type:'hero'}
         this.b1.data = {text:'奴隶',index:1,source:'main_slave_png',type:'slave'}
@@ -80,7 +85,8 @@ class MainUI extends game.BaseUI {
     }
 
     private onAddDiamond(){
-        ShopUI.getInstance().show(true);
+        if(this.addDiamondBtn.visible)
+            ShopUI.getInstance().show(true);
     }
 
 
@@ -229,6 +235,11 @@ class MainUI extends game.BaseUI {
         this.addPanelOpenEvent(GameEvent.client.diamond_change,this.renewTop)
         this.addPanelOpenEvent(GameEvent.client.energy_change,this.renewEnergy)
         this.addPanelOpenEvent(GameEvent.client.hang_change,this.onHangChange)
+        this.addPanelOpenEvent(GameEvent.client.coin_change,this.renewRed)
+        this.addPanelOpenEvent(GameEvent.client.prop_change,this.renewRed)
+        this.addPanelOpenEvent(GameEvent.client.hero_change,this.renewRed)
+        this.addPanelOpenEvent(GameEvent.client.slave_change,this.renewRed)
+        this.addPanelOpenEvent(GameEvent.client.red_change,this.renewRed)
 
         //GuideManager.getInstance().isGuiding = true;
         if(GuideManager.getInstance().isGuiding)
@@ -339,5 +350,7 @@ class MainUI extends game.BaseUI {
         {
             this.bottomItems[i].renewRed();
         }
+        this.coinRedMC.visible = TecManager.getInstance().isCoinRed();
+
     }
 }

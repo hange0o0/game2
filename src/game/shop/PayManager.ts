@@ -16,6 +16,7 @@ class PayManager {
 
     public shopData
     public shopTime
+    public openShopTime
 
     public constructor() {
         this.diamondList = [];
@@ -25,10 +26,16 @@ class PayManager {
             oo.id = s;
             this.diamondList.push(oo);
         }
+
+        this.openShopTime = SharedObjectManager.getInstance().getMyValue('open_shop_time') || 0
     }
 
     public getShopDiamond(data){
         return Math.floor(data.diamond*((data.times || 0)*0.2 + 1))
+    }
+
+    public isRed(){
+        return !DateUtil.isSameDay(this.openShopTime)
     }
 
     public get_shop(fun?){

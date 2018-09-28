@@ -69,6 +69,11 @@ class ShopUI extends game.BaseUI {
         }
         else
             this.scroller.viewport.scrollV = 0;
+
+
+        PayManager.getInstance().openShopTime = TM.now()
+        SharedObjectManager.getInstance().setMyValue('open_shop_time',PayManager.getInstance().openShopTime)
+        EM.dispatch(GameEvent.client.red_change)
     }
 
     public renewList(){

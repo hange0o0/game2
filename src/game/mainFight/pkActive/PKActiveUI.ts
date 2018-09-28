@@ -64,11 +64,11 @@ class PKActiveUI extends game.BaseUI {
 
     private onTips(){
         if(this.currentActive.faward == 'box')
-            MyWindow.ShowTips(24 + '小时资源宝箱，完成所有挑战后可领取')
+            MyWindow.ShowTips(24 + '小时资源宝箱，完成12轮关卡后即可领取')
         else if(this.currentActive.faward == 'hero')
-            MyWindow.ShowTips(1 + '级英雄宝箱，完成所有挑战后可领取')
+            MyWindow.ShowTips(1 + '级英雄宝箱，完成12轮关卡后即可领取')
         else if(this.currentActive.faward == 'skill')
-            MyWindow.ShowTips(2 + '级技能宝箱，完成所有挑战后可领取')
+            MyWindow.ShowTips(2 + '级技能宝箱，完成12轮关卡后即可领取')
     }
 
     private onGetAward(){

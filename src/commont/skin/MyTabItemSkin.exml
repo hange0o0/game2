@@ -7,4 +7,5 @@
 
 
 	<e:Label id="label" text="{data.label}" size="22" verticalAlign="middle" touchEnabled="false" textAlign="center"  verticalCenter="3.5" stroke.upAndSelected="2" left="15" right="15" stroke="2" textColor="0xf6c922" textColor.upAndSelected="0xf6c922" textColor.up="0xedd580" left.up="15" right.up="15" verticalCenter.up="6.5"/>
+	<e:Image id="redMC" source="red_mc_png" top="0" right="-5" visible="false"/>
 </e:Skin>

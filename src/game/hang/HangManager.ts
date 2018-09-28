@@ -58,7 +58,11 @@ class HangManager {
                 return;
             }
             this.awardtime = msg.awardtime;
-            AwardUI.getInstance().show(msg.award)
+            var str = TecManager.getInstance().isResourceRed()?'更多资源':''
+            AwardUI.getInstance().show(msg.award,null,null,null,str,()=>{
+                MainUI.getInstance().onBottomSelect(4,GuideManager.getInstance().isGuiding);
+                TecUI.getInstance().setTab(3)
+            })
             if (fun)
                 fun();
         });

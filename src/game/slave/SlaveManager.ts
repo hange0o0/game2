@@ -24,6 +24,7 @@ class SlaveManager {
 
     public slaveDeleteTime = {};
 
+    public minSlaveAwardTime = 0;
     public maxNum = 2+6;
     public getCurrentMax(){
         return 1 + TecManager.getInstance().getLevel(3)
@@ -38,6 +39,26 @@ class SlaveManager {
                 delete this.slaveDeleteTime[s];
         }
     }
+
+    public isRed(){
+        return this.minSlaveAwardTime && (TM.now() - this.minSlaveAwardTime)/3600 > 10
+    }
+
+    public resetMinSlaveTime(){
+        var lastRed = this.isRed();
+        this.minSlaveAwardTime = Number.MAX_VALUE;
+        for(var i=0;i<this.slaveList.length;i++)
+        {
+            var oo = this.slaveList[i];
+            if(Math.floor(oo.awardtime) < this.minSlaveAwardTime)
+            {
+                this.minSlaveAwardTime = Math.floor(oo.awardtime)
+            }
+        }
+        if(lastRed != this.isRed())
+            EM.dispatch(GameEvent.client.red_change)
+    }
+
 
     public isSlaveOpen(){
         return HangManager.getInstance().level >= Config.slaveLevel;
@@ -167,6 +188,7 @@ class SlaveManager {
                 if(msg.changetime[oo.gameid])
                     oo.awardtime = parseInt(oo.awardtime) + msg.changetime[oo.gameid]*3600
             }
+            this.resetMinSlaveTime();
             AwardUI.getInstance().show(msg)
             if (fun)
                 fun();
@@ -189,6 +211,7 @@ class SlaveManager {
                     break;
                 }
             }
+            this.resetMinSlaveTime();
             this.slaveDeleteTime[otherid] = TM.now();
             SharedObjectManager.getInstance().setMyValue('slave_delete_time',this.slaveDeleteTime)
 
@@ -279,6 +302,8 @@ class SlaveManager {
                     return -1
                 return 1
             })
+            self.resetMinSlaveTime();
+
             if (fun)
                 fun();
         });

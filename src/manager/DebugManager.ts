@@ -555,8 +555,9 @@ class DebugManager {
         }
         setArr(list,'');
         var len = ObjectUtil.objLength(obj)
-        var winNum = this.questionList.length + 1//Math.max(2,Math.floor(len*this.questionRate))
+        var winNum = (this.questionList.length + 1)*3//Math.max(2,Math.floor(len*this.questionRate))
         var haveTest = {}; //会去除前面同时上阵的
+        var haveTest2 = {}; //会记录初期上阵的
 
 
         var result = {win:[],total:len};
@@ -577,6 +578,7 @@ class DebugManager {
                     break;
                 }
             }
+            var key2 = temp.slice(0,2).join(',')//前两个一样的只算作一次赢
             if(haveTest[key])
             {
                 continue;
@@ -596,6 +598,12 @@ class DebugManager {
             haveTest[key] = true;
             if(PD.isWin())
             {
+                if(haveTest2[key2])
+                {
+                    continue;
+                }
+
+                haveTest2[key2] = true;
                 result.win.push(s);
                 var useCardList = PD.getPlayer(1).useCardList;
                 if(useCardList.length < this.cardLen || result.win.length> winNum || PD.actionTime > 2*60*1000)//战斗时间过长)
@@ -669,13 +677,13 @@ class DebugManager {
             var temp = oo.result[0].split(',');
             ArrayUtil.random(temp,3);
             result.push('"'+(i+1)+'"=>array("question"=>"'+oo.question+'","answer"=>"'+temp.join(',')+'")')
-            result2.push((i+1) + '->等级：' + oo.lv + '\t\t比例：' + oo.rate + '\t\t胜场：' + oo.result.length + ' /' + oo.total+'\n' + this.changeResult(oo.result).join('\n'))
+            result2.push('//' + (i+1) + '->等级：' + oo.lv + '\t\t比例：' + oo.rate + '\t\t胜场：' + oo.result.length + ' /' + oo.total+'\n//' + this.changeResult(oo.result)[0])
         }
 
-        console.log('<?php\n$question = array('+result.join(',')+');\n?> ')
+        console.log('<?php\\n$question = array('+result.join(',')+');\n'+result2.join('\n')+'\n?> ')
         console.log('================================');
-        for(var i=0;i<result2.length;i++)
-            console.log(result2[i])
+        //for(var i=0;i<result2.length;i++)
+        //    console.log(result2[i])
     }
 
     private changeResult(list){

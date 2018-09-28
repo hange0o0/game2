@@ -8,22 +8,65 @@ class TecManager {
 
     public maxMainLevel = 20
     public tecData = {};
+
+    public red1 = false
+    public red2 = false
+    public red3 = false
+    public red4 = false
     public init(data){
         this.tecData = data;
-        //通用
-        //等级：第一级￥，第二级3道具，+1
-        //等级，生命。奴隶数量，卡牌上限
-        //
-
-        //一个开始挂机就有3个资源
-
-
-        //4个矿 金 + 3个资源     3个资源加成位
-        //1个矿 + 资源加成
-
-        //4个科技   金 + 3个资源
-        //2个科技，资源组合不同
     }
+
+    public resetAllRed(){
+        this.red1 = false
+        this.red2 = false
+        this.red3 = false
+        this.red4 = false
+    }
+
+
+
+    public isTecRed(){
+        var arr = this.getListByType(1)
+        for(var i=0;i<arr.length;i++)
+        {
+            if(TecManager.getInstance().testRed(arr[i].id))
+                return true;
+        }
+        return false;
+    }
+
+    public isForceRed(){
+        var arr = this.getListByType(2)
+        for(var i=0;i<arr.length;i++)
+        {
+            if(TecManager.getInstance().testRed(arr[i].id))
+                return true;
+        }
+        return false;
+    }
+
+    public isCoinRed(){
+        var arr = this.getListByType(3)
+        for(var i=0;i<arr.length;i++)
+        {
+            if(TecManager.getInstance().testRed(arr[i].id))
+                return true;
+        }
+        return false;
+    }
+
+    public isResourceRed(){
+        var arr = this.getListByType(4)
+        for(var i=0;i<arr.length;i++)
+        {
+            if(TecManager.getInstance().testRed(arr[i].id))
+                return true;
+        }
+        return false;
+    }
+
+
 
     public getHp(){
         return 2 + this.getLevel(2);

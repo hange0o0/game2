@@ -46,19 +46,19 @@ class PVPInfoItem extends game.BaseItem {
                 this.icon.source = 'pvp_task_1_png'
                 break;
             case 1:
-                str = '在竞技场中进行'+this.data.num+'场比赛'
+                str = '在竞技场中进行'+this.createHtml( this.data.num,0xFFBB68)+'场比赛'
                 break;
             case 2:
-                str = '在竞技场中获得'+this.data.num+'场胜利'
+                str = '在竞技场中获得'+this.createHtml(this.data.num,0xFFBB68)+'场胜利'
                 break;
             case 3:
-                str = '在对决中使用【'+MonsterVO.getObject(this.data.mid).name+'】卡牌'+this.data.num+'次'
+                str = '在对决中使用'+this.createHtml('【'+MonsterVO.getObject(this.data.mid).name+'】',0xFFBB68)+'卡牌'+this.createHtml(this.data.num,0xFFBB68)+'次'
                 break;
             case 4:
-                str = '在对决中使用10费及以上卡牌'+this.data.num+'次'
+                str = '在对决中使用'+this.createHtml('10费',0xFFBB68)+'及以上卡牌'+this.createHtml(this.data.num,0xFFBB68)+'次'
                 break;
             case 5:
-                str = '在对决中使用5费及以下卡牌'+this.data.num+'次'
+                str = '在对决中使用'+this.createHtml('5费',0xFFBB68)+'及以下卡牌'+this.createHtml(this.data.num,0xFFBB68)+'次'
                 break;
         }
         this.data.current = Math.min(this.data.current,this.data.num)

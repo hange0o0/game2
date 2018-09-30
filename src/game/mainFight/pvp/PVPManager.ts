@@ -276,4 +276,99 @@ class PVPManager {
         });
     }
 
+
+
+
+
+
+
+
+
+
+
+    public pkOnLine(id,fun?) {
+        if(PKManager.getInstance().stopPK())
+            return;
+        if(!UM.testEnergy(1))
+            return;
+        var self = this;
+        var oo:any = {};
+        oo.id = id;
+        Net.addUser(oo);
+        Net.send(GameEvent.pvp.pk_pvp_online, oo, (data)=>{
+            var msg = data.msg;
+            if(msg.fail == 1)
+            {
+                MyWindow.Alert('体力不足')
+                return;
+            }
+            if(msg.fail == 2)
+            {
+                MyWindow.Alert('找不到指定阵法')
+                return;
+            }
+            if(msg.fail == 3)
+            {
+                MyWindow.Alert('技能卡数量不足')
+                return;
+            }
+            if(msg.fail)
+            {
+                MyWindow.Alert('PK初始异常，错误码：' + msg.fail)
+                return;
+            }
+            this.offline['pknum'] =  (this.offline['pknum'] || 0) + 1
+            PKManager.getInstance().startPK(PKManager.TYPE_PVP_ONLINE,msg.pkdata)
+            EM.dispatchEventWith(GameEvent.client.pvp_change)
+            if (fun)
+                fun();
+        });
+    }
+
+    public pkOnlineFail(fun?) {
+        var oo:any = {};
+        oo.list = PKData.getInstance().myPlayer.posHistory.join(',');
+        PKManager.getInstance().addPKKey(oo);
+        Net.send(GameEvent.pvp.pk_pvp_online_fail, oo, (data)=> {
+            var msg = data.msg;
+            if(msg.fail)
+            {
+                PKManager.getInstance().testFail(msg.fail)
+                PKingUI.getInstance().hide();
+                return;
+            }
+            PKManager.getInstance().pkResult = msg;
+            this.offline['score'] = msg.score
+            this.task = msg.task;
+            EM.dispatchEventWith(GameEvent.client.pvp_change)
+            if (fun)
+                fun();
+        },true,1,true);
+    }
+
+    public pkOnlineWin(fun?) {
+        var oo:any = {};
+        oo.list = PKData.getInstance().myPlayer.posHistory.join(',');
+        PKManager.getInstance().addPKKey(oo)
+        Net.send(GameEvent.pvp.pk_pvp_online_win, oo, (data)=> {
+            var msg = data.msg;
+            if(msg.fail)
+            {
+                PKManager.getInstance().testFail(msg.fail)
+                PKingUI.getInstance().hide();
+                return;
+            }
+            PKManager.getInstance().pkResult = msg;
+            this.offline['winnum'] =  (this.offline['winnum'] || 0) + 1
+            this.offline['score'] = msg.score
+            this.offline['maxscore'] = Math.max(this.offline['maxscore']||0,msg.score)
+            this.task = msg.task;
+            this.lastEnemyList = null;
+            this.history = null;
+            EM.dispatchEventWith(GameEvent.client.pvp_change)
+            if (fun)
+                fun();
+        },true,1,true);
+    }
+
 }

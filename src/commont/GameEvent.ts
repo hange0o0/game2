@@ -77,6 +77,9 @@ class GameEvent {
         pvp_award:'pvp.pvp_award',
         pvp_round_award:'pvp.pvp_round_award',
 
+        pk_pvp_online:'pvp.pk_pvp_online',
+        pk_pvp_online_fail:'pvp.pk_pvp_online_fail',
+        pk_pvp_online_win:'pvp.pk_pvp_online_win',
     }
 
     public static card = {

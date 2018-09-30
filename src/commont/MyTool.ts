@@ -38,7 +38,7 @@ class MyTool {
     public static getAwardArr(dataIn){
         var arr = [];
         if(dataIn.offline_value)
-            arr.push({name:'防御场积分','num':(dataIn.offline_value>0?'+':'') + dataIn.offline_value})
+            arr.push({name:'竞技场积分','num':(dataIn.offline_value>0?'+':'') + dataIn.offline_value})
         if(dataIn.coin)
             arr.push({img:MyTool.getPropCoin(),name:'金币','num':'×' + NumberUtil.addNumSeparator(dataIn.coin),num2:dataIn.coin})
         if(dataIn.diamond)

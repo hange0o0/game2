@@ -1,4 +1,4 @@
-class PKServerManager {
+class PKServerManager extends egret.EventDispatcher{
     private static _instance:PKServerManager;
 
     public static getInstance():PKServerManager {
@@ -8,6 +8,9 @@ class PKServerManager {
     }
 
     private webSocket:egret.WebSocket;
+
+    private callBackFun = {};
+    private callBackIndex = 1;
 
     public connect(){
         this.close();
@@ -22,6 +25,16 @@ class PKServerManager {
     public onReceiveMessage(){
         var msg = this.webSocket.readUTF();
         console.log('socketReceive:'+msg);
+
+        var oo = {};
+        this.dispatchEventWith('aa',false,oo);
+
+
+        if(oo.callbackid)//回调
+        {
+            this.callBackFun[oo.callbackid] && this.callBackFun[oo.callbackid]();
+            delete this.callBackFun[oo.callbackid];
+        }
     }
 
     public onSocketOpen(){
@@ -31,7 +44,7 @@ class PKServerManager {
 
     private onSocketClose(event:egret.Event):void {
         this.webSocket.removeEventListener(egret.Event.CLOSE, this.onSocketClose, this);
-
+        console.log('socket_desconnect');
         //if(DEBUG) console.log(event.type);
         //this.isConnected = false;
         //if(this.reConnectTimes == 0){
@@ -63,12 +76,42 @@ class PKServerManager {
         }
     }
 
-    public sendData(event,data){
-        var cmd = JSON.stringify({
+    public sendData(event,data,fun?){
+        var oo:any = {
             head:event,
-            data:data
-        })
+            gameid:UM.gameid,
+            msg:data
+        }
+        if(fun)
+        {
+            this.callBackFun[this.callBackIndex] = fun;
+            oo.callbackid = this.callBackIndex;
+            this.callBackIndex ++;
+        }
+        var cmd = JSON.stringify(oo);
         this.webSocket.writeUTF(cmd);
         console.log('socketSend:'+cmd);
+    }
+
+
+
+    public pair(fun?){
+
+    }
+
+    public joinBack(fun?){
+
+    }
+
+    public sendAction(fun?){
+
+    }
+
+    public sendFace(fun?){
+
+    }
+
+    public sendResult(isWin,fun?){
+
     }
 }

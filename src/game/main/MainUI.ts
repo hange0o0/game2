@@ -9,7 +9,7 @@ class MainUI extends game.BaseUI {
     private bg: eui.Image;
     private con: eui.Group;
     private topCon: eui.Group;
-    private coinGroup: eui.Group;
+    public coinGroup: eui.Group;
     private addCoinBtn: eui.Image;
     private coinText: eui.Label;
     private coinRedMC: eui.Image;
@@ -42,6 +42,7 @@ class MainUI extends game.BaseUI {
     public constructor() {
         super();
         this.skinName = "MainUISkin";
+        this.LoadFiles = ['guide']
     }
 
     public childrenCreated() {
@@ -211,8 +212,8 @@ class MainUI extends game.BaseUI {
 
         //GuideManager.getInstance().isGuiding = true;
 
-        if(GuideManager.getInstance().isGuiding)
-            this.LoadFiles = ['guide']
+        //if(GuideManager.getInstance().isGuiding)
+
 
 
         super.show()

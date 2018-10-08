@@ -9,9 +9,9 @@ class PKActiveMainPageUI extends game.BaseItem {
 
     private bg: eui.Image;
     private lockText: eui.Label;
-    private pvpBtn: eui.Image;
+    public pvpBtn: eui.Image;
     private activeMC: eui.Image;
-    private activeBtn: eui.Group;
+    public activeBtn: eui.Group;
     private cdText: eui.Label;
 
 

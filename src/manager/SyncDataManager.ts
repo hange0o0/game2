@@ -88,6 +88,14 @@ class SyncDataManager{
                     this.dispatch(GameEvent.client.hero_change);
                     break;
 
+                case 'sync_task':
+                    for(ss in value)
+                    {
+                        ActiveManager.getInstance().task[ss] = value[ss];
+                    }
+                    this.dispatch(GameEvent.client.task_change);
+                    break;
+
             }
         }
     }

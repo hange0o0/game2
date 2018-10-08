@@ -187,7 +187,7 @@ class LoginManager{
             }
 
             MailManager.getInstance().serverAward = msg.mailnum || 0;
-            SlaveManager.getInstance().minSlaveAwardTime = Math.floor(msg.lastslavetime) || 0
+            SlaveManager.getInstance().initLogin(msg)
             UM.fill(msg.data);
 
             self.writeDB();

@@ -62,10 +62,10 @@ class LoginUI extends game.BaseWindow {
         var name = this.nameText.text;
 
         var psw = this.passwordText.text;
-        if(!Config.isDebug && !LM.testName(name))
-        {
-            return;
-        }
+        //if(!Config.isDebug && !LM.testName(name))
+        //{
+        //    return;
+        //}
         if(!Config.isDebug && !LM.testPassword(psw))
         {
             return;

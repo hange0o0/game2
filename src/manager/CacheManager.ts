@@ -18,6 +18,7 @@ class CacheManager{
         this.register(HangVO);
         this.register(TecVO);
         this.register(HeroSkillVO);
+        this.register(TaskVO);
         //this.register(MonsterSkillVO);
         //this.register(TaskVO);
         //this.register(LeaderSkillVO);
@@ -52,7 +53,7 @@ class CacheManager{
     //静态数据初始化后调用
     public initFinish(){
         // MonsterVO.initFinish();
-        //TaskVO.initFinish();
+        TaskVO.initFinish();
     }
 
     public getCardVO(id):MonsterVO|SkillVO{

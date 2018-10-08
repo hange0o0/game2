@@ -26,7 +26,7 @@ class PKServerManager extends egret.EventDispatcher{
         var msg = this.webSocket.readUTF();
         console.log('socketReceive:'+msg);
 
-        var oo = {};
+        var oo:any = {};
         this.dispatchEventWith('aa',false,oo);
 
 
@@ -39,7 +39,7 @@ class PKServerManager extends egret.EventDispatcher{
 
     public onSocketOpen(){
         console.log('socket_open');
-        this.sendData('hello',Math.random())
+        this.sendData('join',{})
     }
 
     private onSocketClose(event:egret.Event):void {

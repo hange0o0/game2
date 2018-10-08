@@ -9,6 +9,8 @@ class ActiveManager {
     public level;
     public time;
 
+    public task;
+
     public like_time
     public like_obj
 
@@ -19,7 +21,7 @@ class ActiveManager {
 
 
     public init(data){
-
+        this.task = data.task
     }
 
     public setLike(id,like)

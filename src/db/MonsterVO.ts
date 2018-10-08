@@ -95,26 +95,26 @@ class MonsterVO {
         //{
         //    console.log(arr[i].level,arr[i].id,arr[i].name)
         //}
-        var arr = [];
-        //var obj = {}
-        for(var s in SkillVO.data)
-        {
-            if(SkillVO.data[s].level < 998)
-            {
-                arr.push(SkillVO.data[s])
-                //if(!obj[MonsterVO.data[s].level])
-                //    obj[MonsterVO.data[s].level] = []
-                //obj[MonsterVO.data[s].level].push(MonsterVO.data[s])
-            }
-        }
+        //var arr = [];
+        ////var obj = {}
+        //for(var s in SkillVO.data)
+        //{
+        //    if(SkillVO.data[s].level < 998)
+        //    {
+        //        arr.push(SkillVO.data[s])
+        //        //if(!obj[MonsterVO.data[s].level])
+        //        //    obj[MonsterVO.data[s].level] = []
+        //        //obj[MonsterVO.data[s].level].push(MonsterVO.data[s])
+        //    }
+        //}
         //console.log(arr.join(','));
         //var arr = MonsterVO.
-        ArrayUtil.sortByField(arr,['level'],[0])
-        for(var i=0;i<arr.length;i++)
-        {
-            var vo = arr[i];
-            console.log('LV.' +vo.level+ '\t\tid:' + vo.id+ '\t\t' + vo.name)
-        }
+        //ArrayUtil.sortByField(arr,['level'],[0])
+        //for(var i=0;i<arr.length;i++)
+        //{
+        //    var vo = arr[i];
+        //    console.log('LV.' +vo.level+ '\t\tid:' + vo.id+ '\t\t' + vo.name)
+        //}
 
         //for(var s in obj)
         //{

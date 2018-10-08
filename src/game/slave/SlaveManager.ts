@@ -25,6 +25,7 @@ class SlaveManager {
     public slaveDeleteTime = {};
 
     public minSlaveAwardTime = 0;
+    public loginSlaveNum = 0;
     public maxNum = 2+6;
     public getCurrentMax(){
         return 1 + TecManager.getInstance().getLevel(3)
@@ -40,8 +41,17 @@ class SlaveManager {
         }
     }
 
+    public initLogin(msg){
+        this.minSlaveAwardTime = Math.floor(msg.lastslavetime) || 0
+        this.loginSlaveNum = Math.floor(msg.loginslavenum) || 0
+    }
+
     public isRed(){
         return this.minSlaveAwardTime && (TM.now() - this.minSlaveAwardTime)/3600 > 10
+    }
+
+    public getSlaveNum(){
+        return SlaveManager.getInstance().slaveList.length || this.loginSlaveNum
     }
 
     public resetMinSlaveTime(){
@@ -55,6 +65,7 @@ class SlaveManager {
                 this.minSlaveAwardTime = Math.floor(oo.awardtime)
             }
         }
+        this.loginSlaveNum = this.slaveList.length;
         if(lastRed != this.isRed())
             EM.dispatch(GameEvent.client.red_change)
     }

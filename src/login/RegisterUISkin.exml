@@ -10,8 +10,8 @@
 
 
 	<e:Group y="33" horizontalCenter="0">
-		<e:Label y="12" text="用户邮箱：" x="0" size="24" textColor="0x211402" bold="true"/>
-		<e:TextInput x="132" skinName="MyTextInputSkin" y="0" height="45" id="nameText" width="280" prompt="请输入您的邮箱"/>
+		<e:Label y="12" text="用户账号：" x="0" size="24" textColor="0x211402" bold="true" width="123"/>
+		<e:TextInput x="132" skinName="MyTextInputSkin" y="0" height="45" id="nameText" width="280" prompt="建议使用邮箱作为账号"/>
 		<e:Label y="69" size="24" text="密　　码：" x="0" textColor="0x211402" bold="true"/>
 		<e:TextInput id="passwordText1" skinName="MyTextInputSkin" y="58" width="280" height="45" x="132" prompt="密码长度最小为6" displayAsPassword="true"/>
 		<e:Label y="125" size="24" text="密码确认：" x="0" textColor="0x211402" bold="true"/>

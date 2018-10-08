@@ -22,6 +22,11 @@ class MainFightUI extends MainBase {
     private activeUI: PKActiveMainPageUI;
     private defBtn: eui.Group;
     private atkBtn: eui.Group;
+    private taskGroup: eui.Group;
+    private taskText: eui.Label;
+    private taskResultText: eui.Label;
+    private taskFinishMC: eui.Image;
+
 
 
 
@@ -35,6 +40,7 @@ class MainFightUI extends MainBase {
 
 
     private hideTopState
+    private taskVO
 
     public constructor() {
         super();
@@ -64,9 +70,21 @@ class MainFightUI extends MainBase {
         this.mapBtn.resetHeight(mapH)
         this.activeUI.resetHeight(Math.max(380,h-mapH))
 
+        this.taskGroup.visible = false;
+        this.addBtnEvent(this.taskGroup, this.onTask)
+
         //this.defBtn.visible = false
         //this.atkBtn.visible = false
 
+    }
+
+    private onTask(){
+        if(this.taskVO.isFinish())
+        {
+            TaskManager.getInstance().getTaskAward(this.taskVO.id);
+        }
+        else
+            this.taskVO.onClick();
     }
 
     private onAddForce(){
@@ -154,13 +172,20 @@ class MainFightUI extends MainBase {
         this.addPanelOpenEvent(GameEvent.client.hang_change,this.onHangChange)
         this.addPanelOpenEvent(GameEvent.client.pvp_change,this.onPVPChange)
 
+        EM.addEvent(GameEvent.client.task_change,this.renewTask,this);
+        EM.addEvent(GameEvent.client.tec_change,this.renewTask,this);
+        EM.addEvent(GameEvent.client.slave_change,this.renewTask,this);
+        EM.addEvent(GameEvent.client.card_change,this.renewTask,this);
+        EM.addEvent(GameEvent.client.active_change,this.renewTask,this);
     }
 
     private onHangChange(){
          this.renewActive();
+        this.renewTask();
     }
     private onPVPChange(){
         this.renewActive();
+        this.renewTask();
     }
 
     private renewActive(){
@@ -178,6 +203,7 @@ class MainFightUI extends MainBase {
 
     private renewForce(){
         this.forceText.text = UM.tec_force + ''
+        this.renewTask();
     }
 
     public onPKBegin(){
@@ -229,5 +255,45 @@ class MainFightUI extends MainBase {
     public hide(){
         super.hide()
         this.mapBtn.stop()
+    }
+
+    public renewTask(){
+        if(GuideManager.getInstance().isGuiding)
+        {
+            this.taskGroup.visible = false;
+            return;
+        }
+        this.taskGroup.visible = true;
+        var count = 0;
+        var arr = TaskManager.getInstance().getCurrentTaskList();
+        //this.list.dataProvider = new eui.ArrayCollection(arr)
+        for(var i=0;i<arr.length;i++)
+        {
+            var item = arr[i];
+            if(item.isFinish())
+            {
+                if(!TaskManager.getInstance().lastFinishStat[item.id])
+                {
+                    MyWindow.ShowTips('【'+item.getDes() + '】　[已完成]',2000);
+                    TaskManager.getInstance().lastFinishStat[item.id] = true;
+                    TaskManager.getInstance().nowAction = null;
+                }
+                count ++;
+            }
+        }
+
+        var vo = this.taskVO = arr[0];
+        MyTool.setColorText(this.taskText,vo.getDes());
+        if(vo.isFinish())
+        {
+            this.taskResultText.text =  ''
+            this.taskResultText.textColor =  0xFFFF00
+        }
+        else
+        {
+            this.taskResultText.text =  vo.getRate()
+            this.taskResultText.textColor =  0xE0A44A
+        }
+        this.taskFinishMC.visible = count > 0;
     }
 }

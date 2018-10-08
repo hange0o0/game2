@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="MainFightUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
 
-	<e:Scroller id="scroller" width="640" horizontalCenter="0" top="0" bottom="0" bounces="false">
+	<e:Scroller id="scroller" width="640" horizontalCenter="0" top="0" bottom="0" bounces="false" locked="true">
 		<e:Group>
 			<e:Group x="0" y="65" width="640">
 				<ns1:HangUI id="mapBtn" x="0" y="75" skinName="HangUISkin" height="450"/>
@@ -45,12 +45,20 @@
 			</e:layout>
 		</e:Group>
 	</e:Scroller>
-	<e:Group id="defBtn" bottom="0" width="110" scaleX="0.8" scaleY="0.8" scrollEnabled="true" x="0">
+	<e:Group id="defBtn" bottom="0" width="110" scaleX="0.8" scaleY="0.8" scrollEnabled="true" x="0" locked="true">
 		<e:Image source="btn7_png" y="0" right="0"/>
 		<e:Image source="icon_def1_png" verticalCenter="-5" horizontalCenter="-10"/>
 	</e:Group>
-	<e:Group id="atkBtn" bottom="0" width="110" right="0" scaleX="0.8" scaleY="0.8" scrollEnabled="true">
+	<e:Group id="atkBtn" bottom="0" width="110" right="0" scaleX="0.8" scaleY="0.8" scrollEnabled="true" locked="true">
 		<e:Image source="btn5_png" x="0" y="0" scaleX="1.53" scaleY="1.53"/>
 		<e:Image source="icon_atk3_png" verticalCenter="0" horizontalCenter="10"/>
+	</e:Group>
+	<e:Group id="taskGroup" horizontalCenter="0" bottom="20" height="60" width="400">
+		<e:Image source="bg10_png" scale9Grid="26,25,10,9" left="0" right="0" top="0" bottom="0"/>
+		<e:Label id="taskText" text="Label" size="24" verticalCenter="0" textColor="0xffe2b7" left="55"/>
+		<e:Label id="taskResultText" text="Label" size="24" verticalCenter="0" textColor="0xFFE2B7" right="60"/>
+		<e:Image source="note_icon_png" x="10" verticalCenter="0" scaleX="0.8" scaleY="0.8"/>
+		<e:Image source="arrow2_png" verticalCenter="0" right="10" scaleX="0.9" scaleY="0.9"/>
+		<e:Image id="taskFinishMC" source="gift_mc_png" scaleX="0.7" scaleY="0.7" right="-10" bottom="0"/>
 	</e:Group>
 </e:Skin>

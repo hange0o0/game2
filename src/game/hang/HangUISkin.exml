@@ -37,12 +37,12 @@
 	<e:Group id="giftGroup" right="10" bottom="70" height="98" width="88" locked="true">
 		<e:Image id="giftMC" source="gift_mc_png" anchorOffsetX="44" anchorOffsetY="90" x="44" y="90"/>
 	</e:Group>
-	<e:Group id="modeGroup" horizontalCenter="0" verticalCenter="-40">
-		<e:Group x="0" y="80">
+	<e:Group id="modeGroup" horizontalCenter="0" verticalCenter="-10">
+		<e:Group y="80" horizontalCenter="0">
 			<e:Button id="autoBtn" label="自动模式" x="0" y="0" width="200" skinName="Btn7Skin" height="83"/>
 			<e:Button id="handBtn" label="手动模式" x="-280" y="0" width="200" skinName="Btn5Skin"/>
 			<e:layout>
-				<e:HorizontalLayout gap="50"/>
+				<e:VerticalLayout gap="10"/>
 			</e:layout>
 		</e:Group>
 		<e:Group y="0" horizontalCenter="0">

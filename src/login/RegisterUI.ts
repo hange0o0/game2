@@ -46,10 +46,10 @@ class RegisterUI extends game.BaseWindow {
 
     private onClick(){
         var LM = LoginManager.getInstance();
-        if(!Config.isDebug && !LM.testName(this.nameText.text))
-        {
-            return;
-        }
+        //if(!Config.isDebug && !LM.testName(this.nameText.text))
+        //{
+        //    return;
+        //}
         if(!Config.isDebug &&!LM.testPassword(this.passwordText1.text))
         {
             return;

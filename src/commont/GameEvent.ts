@@ -14,6 +14,7 @@ class GameEvent {
         card_change:'card_change',
         head_change:'head_change',
         hero_change:'hero_change',
+        task_change:'task_change',
 
         fight_change:'fight_change',
         pvp_change:'pvp_change',
@@ -97,6 +98,9 @@ class GameEvent {
 
     public static active = {
         get_active:'active.get_active'
+    }
+    public static task = {
+        get_task_award:'task.get_task_award'
     }
 
     public static pay = {

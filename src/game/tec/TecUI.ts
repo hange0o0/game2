@@ -50,10 +50,13 @@ class TecUI extends MainBase {
     }
 
     public hide() {
+        TaskManager.getInstance().cleanNowAcrion('resource');
         super.hide();
     }
 
     public onShow(){
+        if(TaskManager.getInstance().nowAction == 'resource')
+            this.tab.selectedIndex = 3;
         this.tab.validateNow();
         this.renewTabRed();
         this.renew();

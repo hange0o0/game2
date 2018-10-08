@@ -222,7 +222,7 @@ class GuideManager {
         ////////////////////////////////////
 
         this.addGuideObj({
-            text:'好了，基于召唤的对战玩法介绍，到这里就暂告一段落了。',
+            text:'好了，游戏的基本玩法介绍，到这里就暂告一段落了。',
             fun:function(){
                 self.showGuide()
             }
@@ -243,11 +243,12 @@ class GuideManager {
         //})
 
         this.addGuideObj({
-            text:'加油努力吧，后面还有更精彩的内容等着你呢！',
+            text:'加油前进吧，后面还有更精彩的内容等着你呢！',
             fun:function(){
                 self.endGuide()
                 CardInfoUI.getInstance().hide();
                 MainUI.getInstance().onBottomSelect(2);
+                EM.dispatch(GameEvent.client.task_change);
             }
         })
     }

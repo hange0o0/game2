@@ -204,6 +204,16 @@ class TecManager {
         return true;
     }
 
+    public getTotalLevel(type){
+        var count = 0;
+        for(var s in this.tecData)
+        {
+            if(TecVO.getObject(s).type == type)
+                count += this.tecData[s]
+        }
+        return count;
+    }
+
 
     public tec_up(id,fun?) {
         var self = this;

@@ -130,6 +130,7 @@ class Main extends eui.UILayer {
             this.isResourceLoadEnd = true;
 
             CM.initData(RES.getRes("data_json"));
+            CM.initData(RES.getRes("task_json"));
             CM.initFinish();
 
             var LM = LoginManager.getInstance();

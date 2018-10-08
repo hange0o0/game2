@@ -20,10 +20,10 @@ class PVPManager {
 
     public base = {
         1:{score:0,title:'新兵'},
-        2:{score:100,title:'进阶'},
-        3:{score:250,title:'法师'},
-        4:{score:500,title:'狙击'},
-        5:{score:800,title:'神射'},
+        2:{score:10,title:'高阶'},
+        3:{score:150,title:'魔法'},
+        4:{score:400,title:'狙击'},
+        5:{score:750,title:'神射'},
         6:{score:1100,title:'龙卫'},
         7:{score:1500,title:'星空'},
         8:{score:2000,title:'剑盾'},

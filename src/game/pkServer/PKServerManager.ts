@@ -39,7 +39,12 @@ class PKServerManager extends egret.EventDispatcher{
 
     public onSocketOpen(){
         console.log('socket_open');
-        this.sendData('join',{})
+        this.sendData(GameEvent.pkserver.pair,{
+            score:0,
+            gameid:_get['gameid'] || '1',
+            pktype:PKManager.TYPE_PVP_ONLINE,
+            pkdata:{},
+        })
     }
 
     private onSocketClose(event:egret.Event):void {
@@ -79,7 +84,7 @@ class PKServerManager extends egret.EventDispatcher{
     public sendData(event,data,fun?){
         var oo:any = {
             head:event,
-            gameid:UM.gameid,
+            gameid:_get['gameid'] || UM.gameid,
             msg:data
         }
         if(fun)

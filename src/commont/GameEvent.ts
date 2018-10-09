@@ -58,6 +58,9 @@ class GameEvent {
     }
 
 
+    public static pkserver = {
+        pair:'pair',
+    }
     public static rank = {
         get_rank:'rank.get_rank',
         create_rank:'rank.create_rank',

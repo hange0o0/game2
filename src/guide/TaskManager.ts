@@ -42,9 +42,15 @@ class TaskManager {
         var task = ActiveManager.getInstance().task;
         var line = TaskVO.lineData;
         var arr = [];
-        var vo = TaskVO.getObject(task.award).getNextTaskVO();
-        if(vo && vo.isEnable())
-            arr.push(vo);
+        if(!task.award)
+            arr.push(line[0])
+        else
+        {
+            var vo = TaskVO.getObject(task.award).getNextTaskVO();
+            if(vo && vo.isEnable())
+                arr.push(vo);
+        }
+
         //for(var s in task)
         //{
         //    if(s == 'stat')
@@ -53,8 +59,7 @@ class TaskManager {
         //    if(vo && vo.isEnable())
         //        arr.push(vo);
         //}
-        if(arr.length == 0)
-            arr.push(line[0])
+
 
         //for(var s in line)
         //{
@@ -88,6 +93,8 @@ class TaskManager {
 
         egret.setTimeout(function(){
             var rect = mc.getBounds();
+            rect.x += mc.anchorOffsetX
+            rect.y += mc.anchorOffsetY
             var p1 = mc.localToGlobal(rect.x, rect.y);
             var p2 = mc.localToGlobal(rect.x + rect.width, rect.y + rect.height);
 
@@ -95,7 +102,7 @@ class TaskManager {
             this.guideLight.y = p1.y + (p2.y - p1.y) / 2
             GameManager.container.addChild(this.guideLight);
             this.guideLight.gotoAndPlay(1, 1);
-        },this,300);
+        },this,200);
 
     }
 

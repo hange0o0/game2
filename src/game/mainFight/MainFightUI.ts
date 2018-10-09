@@ -22,10 +22,13 @@ class MainFightUI extends MainBase {
     private activeUI: PKActiveMainPageUI;
     private defBtn: eui.Group;
     private atkBtn: eui.Group;
+
     private taskGroup: eui.Group;
     private taskText: eui.Label;
     private taskResultText: eui.Label;
+    private taskIcon: eui.Image;
     private taskFinishMC: eui.Image;
+
 
 
 
@@ -263,9 +266,17 @@ class MainFightUI extends MainBase {
             this.taskGroup.visible = false;
             return;
         }
-        this.taskGroup.visible = true;
-        var count = 0;
+
+
         var arr = TaskManager.getInstance().getCurrentTaskList();
+        if(arr.length == 0)
+        {
+            this.taskGroup.visible = false;
+            return;
+        }
+
+        var count = 0;
+        this.taskGroup.visible = true;
         //this.list.dataProvider = new eui.ArrayCollection(arr)
         for(var i=0;i<arr.length;i++)
         {
@@ -286,7 +297,7 @@ class MainFightUI extends MainBase {
         MyTool.setColorText(this.taskText,vo.getDes());
         if(vo.isFinish())
         {
-            this.taskResultText.text =  ''
+            this.taskResultText.text =  '【已完成】'
             this.taskResultText.textColor =  0xFFFF00
         }
         else
@@ -295,5 +306,6 @@ class MainFightUI extends MainBase {
             this.taskResultText.textColor =  0xE0A44A
         }
         this.taskFinishMC.visible = count > 0;
+        this.taskIcon.visible = !this.taskFinishMC.visible;
     }
 }

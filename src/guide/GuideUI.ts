@@ -22,6 +22,7 @@ class GuideUI extends game.BaseContainer{
     private clickFun
     private textIn
     private textIndex
+    private mc
 
 
     private static instance: GuideUI;
@@ -87,6 +88,11 @@ class GuideUI extends game.BaseContainer{
         this.handMC.anchorOffsetY = 30
         var tw:egret.Tween = egret.Tween.get(this.handMC,{loop:true});
         tw.to({anchorOffsetX:90,anchorOffsetY:-10},500).to({anchorOffsetX:70,anchorOffsetY:30},500)
+
+        if(this.mc && !this.clickFun)
+        {
+            TaskManager.getInstance().showGuideMC(this.mc);
+        }
     }
     private handStop(){
         egret.Tween.removeTweens(this.handMC)
@@ -158,7 +164,7 @@ class GuideUI extends game.BaseContainer{
 
 
 
-        var mc = dataIn.mc;
+        var mc = this.mc = dataIn.mc;
         var text = dataIn.text;
         var fun = dataIn.fun;
         var hideHand = dataIn.hideHand;
@@ -207,6 +213,7 @@ class GuideUI extends game.BaseContainer{
                     rect.y += mc.anchorOffsetY
                     var p1 = mc.localToGlobal(rect.x,rect.y);
                     var p2 = mc.localToGlobal(rect.x + rect.width,rect.y + rect.height);
+
 
                 }
                 //console.log(p1,p2)

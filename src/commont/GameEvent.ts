@@ -60,6 +60,10 @@ class GameEvent {
 
     public static pkserver = {
         pair:'pair',
+        pair_success:'pair_success',
+        pk_info:'pk_info',
+        face:'face',
+        pk_result:'pk_result',
     }
     public static rank = {
         get_rank:'rank.get_rank',
@@ -82,6 +86,7 @@ class GameEvent {
         pvp_round_award:'pvp.pvp_round_award',
 
         pk_pvp_online:'pvp.pk_pvp_online',
+        pk_pvp_online_start:'pvp.pk_pvp_online_start',
         pk_pvp_online_fail:'pvp.pk_pvp_online_fail',
         pk_pvp_online_win:'pvp.pk_pvp_online_win',
     }

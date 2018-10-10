@@ -12,7 +12,6 @@ class PKData extends egret.EventDispatcher{
     public isReplay;
     public replayEndTime;
     public isAuto;
-    public sendCard = false;//需要向服务器发消息
 
     public jumpMV = false;
     public isGameOver = false //游戏结束
@@ -484,6 +483,26 @@ class PKData extends egret.EventDispatcher{
             type:PKConfig.VIDEO_MYPLAYER_CHANGE,
             user:this.myPlayer
         })
+    }
+
+    public onPKInfo(data){
+         //console.log(data);
+        //var oo = {
+        //    actiontime:posCard.actionTime,
+        //    id:posCard.id,
+        //    mid:posCard.mid,
+        //    owner:posCard.owner
+        //}
+        if(data.owner != this.myPlayer.id)
+        {
+            var player = this.getPlayer(data.owner)
+            if(Math.abs(data.actiontime - this.actionTime) > 3000)//偏差严重，重置游戏
+            {
+                MyWindow.Alert('重置')
+                return;
+            }
+            player.posCardFormServer(data)
+        }
     }
 
     //把数据发往服务器

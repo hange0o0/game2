@@ -78,7 +78,15 @@ class PVPInfoUI extends game.BaseUI {
     }
 
     private onOnline(){
-         MyWindow.ShowTips('即将开放，敬请期待')
+         //MyWindow.ShowTips('即将开放，敬请期待')
+        PKBeforeUI.getInstance().show({
+            title:'进攻阵容对决',
+            isPVP:true,
+            cardBase:{force:1000,type:UM.type},
+            fun:function(id){
+                PVPManager.getInstance().pkOnLine(id)
+            }
+        })
     }
 
     //private onHelp(){

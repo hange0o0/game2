@@ -106,6 +106,7 @@
     "src/game/pkRelate/result/PKFailItemSkin.exml",
     "src/game/pkRelate/result/PKFailUISkin.exml",
     "src/game/pkRelate/result/PKWinUISkin.exml",
+    "src/game/pkServer/PairingUISkin.exml",
     "src/game/pos/PosCardItemSkin.exml",
     "src/game/pos/PosListHeadItemSkin.exml",
     "src/game/pos/PosNameUISkin.exml",

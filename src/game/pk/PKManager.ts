@@ -28,6 +28,7 @@ class PKManager {
 
     public pkType;
     public pkResult;
+    public isOnline;
     public recordList;
     public getRecordTime;
     public recordTime;
@@ -182,7 +183,8 @@ class PKManager {
                 PVPManager.getInstance().pkOfflineWin(fun);
                 break;
             case PKManager.TYPE_PVP_ONLINE:
-                PVPManager.getInstance().pkOnlineWin(fun);
+                PVPCtrl.getInstance().sendPKResult(true,fun)
+                //PVPManager.getInstance().pkOnlineWin(fun);
                 break;
             case PKManager.TYPE_TEST:
                 fun && fun();
@@ -319,7 +321,8 @@ class PKManager {
                 PVPManager.getInstance().pkOfflineFail(fun);
                 break
             case PKManager.TYPE_PVP_ONLINE:
-                PVPManager.getInstance().pkOnlineFail(fun);
+                PVPCtrl.getInstance().sendPKResult(false,fun)
+                //PVPManager.getInstance().pkOnlineFail(fun);
                 break
             case PKManager.TYPE_HANG:
                 var lastHistory = SharedObjectManager.getInstance().getMyValue('hang_video') || {};
@@ -400,6 +403,7 @@ class PKManager {
     public startPK(pkType,data){
         this.pkType = pkType;
         this.pkResult = null;
+        this.isOnline = false;
         var PD = PKData.getInstance();
         if(this.showTopNum)
             data.showTopNum = this.showTopNum;
@@ -669,13 +673,33 @@ class PKManager {
 
     public sendPosToServer(posCard:PKPosCardData,fun?)
     {
-        var oo:any = {};
-        oo.posCard = posCard
-        Net.addUser(oo);
-        Net.send(GameEvent.pk.get_record, oo, (data)=> {
-            var msg = data.msg;
+        var oo = {
+            actiontime:posCard.actionTime,
+            id:posCard.id,
+            mid:posCard.mid,
+            owner:posCard.owner
+        }
+        PKServerManager.getInstance().sendData(GameEvent.pkserver.pk_info,oo,(msg)=> {
             posCard.enableWaiting();
             fun && fun();
         });
+        //oo.posCard = posCard
+        //Net.addUser(oo);
+        //Net.send(GameEvent.pk.get_record, oo, (data)=> {
+        //    var msg = data.msg;
+        //    posCard.enableWaiting();
+        //    fun && fun();
+        //});
     }
+    //public sendPosToServer(posCard:PKPosCardData,fun?)
+    //{
+    //    var oo:any = {};
+    //    oo.posCard = posCard
+    //    Net.addUser(oo);
+    //    Net.send(GameEvent.pk.get_record, oo, (data)=> {
+    //        var msg = data.msg;
+    //        posCard.enableWaiting();
+    //        fun && fun();
+    //    });
+    //}
 }

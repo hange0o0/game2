@@ -1,4 +1,21 @@
 class PKMonsterMV extends eui.Group {
+    private static pool = [];
+    public static createItem():PKMonsterMV{
+        var item:PKMonsterMV = this.pool.pop();
+        if(!item)
+        {
+            item = new PKMonsterMV();
+        }
+        return item;
+    }
+    public static freeItem(item){
+        if(!item)
+            return;
+        item.remove();
+        if(this.pool.indexOf(item) == -1)
+            this.pool.push(item);
+    }
+
     public monsterMV:MonsterMV
     public heroMV:HeroMVItem
     public currentMV;
@@ -13,6 +30,11 @@ class PKMonsterMV extends eui.Group {
 
     public get state(){
         return this.currentMV.state;
+    }
+
+    public remove(){
+        this.stop()
+        MyTool.removeMC(this);
     }
 
      public load(id){
@@ -59,7 +81,8 @@ class PKMonsterMV extends eui.Group {
      }
 
      public stop(){
-         this.currentMV.stop();
+         if(this.currentMV)
+            this.currentMV.stop();
      }
 
      public run(){

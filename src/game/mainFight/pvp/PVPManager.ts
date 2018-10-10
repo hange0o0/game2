@@ -317,16 +317,33 @@ class PVPManager {
                 MyWindow.Alert('PK初始异常，错误码：' + msg.fail)
                 return;
             }
-            this.offline['pknum'] =  (this.offline['pknum'] || 0) + 1
-            PKManager.getInstance().startPK(PKManager.TYPE_PVP_ONLINE,msg.pkdata)
-            EM.dispatchEventWith(GameEvent.client.pvp_change)
+
+            PVPCtrl.getInstance().pkData = msg.pkdata;
+            PKServerManager.getInstance().connect(PVPCtrl.getInstance());
+
+            //PKManager.getInstance().startPK(PKManager.TYPE_PVP_ONLINE,msg.pkdata)
+            //EM.dispatchEventWith(GameEvent.client.pvp_change)
             if (fun)
                 fun();
         });
     }
 
-    public pkOnlineFail(fun?) {
+    public pkOnlineStart(enemy,seed,fun?) {
         var oo:any = {};
+        oo.enemy = enemy;
+        oo.seed = seed;
+        Net.addUser(oo);
+        Net.send(GameEvent.pvp.pk_pvp_online_start, oo, (data)=> {
+            var msg = data.msg;
+            this.offline['pknum'] =  (this.offline['pknum'] || 0) + 1
+            EM.dispatchEventWith(GameEvent.client.pvp_change)
+            if (fun)
+                fun();
+        },true,1,true);
+    }
+    public pkOnlineFail(serverKey,fun?) {
+        var oo:any = {};
+        oo.serverkey = serverKey;
         oo.list = PKData.getInstance().myPlayer.posHistory.join(',');
         PKManager.getInstance().addPKKey(oo);
         Net.send(GameEvent.pvp.pk_pvp_online_fail, oo, (data)=> {
@@ -346,8 +363,9 @@ class PVPManager {
         },true,1,true);
     }
 
-    public pkOnlineWin(fun?) {
+    public pkOnlineWin(serverKey,fun?) {
         var oo:any = {};
+        oo.serverkey = serverKey;
         oo.list = PKData.getInstance().myPlayer.posHistory.join(',');
         PKManager.getInstance().addPKKey(oo)
         Net.send(GameEvent.pvp.pk_pvp_online_win, oo, (data)=> {

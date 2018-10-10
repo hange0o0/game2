@@ -12,8 +12,12 @@ class PKServerManager extends egret.EventDispatcher{
     private callBackFun = {};
     private callBackIndex = 1;
 
-    public connect(){
+
+    public ctrler
+
+    public connect(ctrler?){
         this.close();
+        this.ctrler = ctrler || PVPCtrl.getInstance();
         var sock = this.webSocket = new egret.WebSocket();
         sock.addEventListener( egret.ProgressEvent.SOCKET_DATA, this.onReceiveMessage, this );
         sock.addEventListener( egret.Event.CONNECT, this.onSocketOpen, this );
@@ -26,25 +30,37 @@ class PKServerManager extends egret.EventDispatcher{
         var msg = this.webSocket.readUTF();
         console.log('socketReceive:'+msg);
 
-        var oo:any = {};
-        this.dispatchEventWith('aa',false,oo);
-
-
-        if(oo.callbackid)//回调
+        var oo:any = JSON.parse(msg);
+        if(oo.callbackid && oo.from == UM.gameid)//回调
         {
-            this.callBackFun[oo.callbackid] && this.callBackFun[oo.callbackid]();
+            this.callBackFun[oo.callbackid] && this.callBackFun[oo.callbackid](oo.msg);
             delete this.callBackFun[oo.callbackid];
         }
+
+        //通用的处理
+        switch(oo.head)
+        {
+            case GameEvent.pkserver.pair_success:
+                this.ctrler.onPairSuccess(oo.msg);
+                PairingUI.getInstance().hide();
+                break;
+            case GameEvent.pkserver.pk_info:
+                this.onPKInfo(oo.msg);
+                break;
+            case GameEvent.pkserver.face:
+                this.onFace(oo.msg);
+                break;
+        }
+
+
+
+        this.dispatchEventWith(oo.head,false,oo.msg);
     }
 
     public onSocketOpen(){
         console.log('socket_open');
-        this.sendData(GameEvent.pkserver.pair,{
-            score:0,
-            gameid:_get['gameid'] || '1',
-            pktype:PKManager.TYPE_PVP_ONLINE,
-            pkdata:{},
-        })
+        this.ctrler.onConnect();
+
     }
 
     private onSocketClose(event:egret.Event):void {
@@ -61,6 +77,7 @@ class PKServerManager extends egret.EventDispatcher{
 
     private onIOError(event:egret.IOErrorEvent):void {
         if(DEBUG) console.log(event.type);
+        MyWindow.Alert('无法连接对战服务器！')
         //this.isConnected = false;
         //if(this.reConnectTimes == 0){
         //    this.reConnect();
@@ -71,6 +88,7 @@ class PKServerManager extends egret.EventDispatcher{
 
 
     public close(){
+        this.ctrler = null;
         if(this.webSocket){
             this.webSocket.removeEventListener(egret.ProgressEvent.SOCKET_DATA, this.onReceiveMessage, this);
             this.webSocket.removeEventListener(egret.Event.CONNECT, this.onSocketOpen, this);
@@ -84,13 +102,14 @@ class PKServerManager extends egret.EventDispatcher{
     public sendData(event,data,fun?){
         var oo:any = {
             head:event,
-            gameid:_get['gameid'] || UM.gameid,
+            gameid:UM.gameid,
             msg:data
         }
         if(fun)
         {
-            this.callBackFun[this.callBackIndex] = fun;
-            oo.callbackid = this.callBackIndex;
+            var carrBackID = this.callBackIndex;
+            this.callBackFun[carrBackID] = fun;
+            oo.callbackid = carrBackID;
             this.callBackIndex ++;
         }
         var cmd = JSON.stringify(oo);
@@ -100,23 +119,11 @@ class PKServerManager extends egret.EventDispatcher{
 
 
 
-    public pair(fun?){
-
+    public onPKInfo(msg){
+        PKData.getInstance().onPKInfo(msg)
     }
 
-    public joinBack(fun?){
-
-    }
-
-    public sendAction(fun?){
-
-    }
-
-    public sendFace(fun?){
-
-    }
-
-    public sendResult(isWin,fun?){
+    public onFace(msg){
 
     }
 }

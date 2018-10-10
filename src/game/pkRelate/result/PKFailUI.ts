@@ -139,6 +139,10 @@ class PKFailUI extends game.BaseUI {
                     break
                 if(type == PKManager.TYPE_FIGHT)
                     break
+                if(type == PKManager.TYPE_PVP_OFFLINE)
+                    break
+                if(type == PKManager.TYPE_PVP_ONLINE)
+                    break
 
                 arr.push({
                     title:'升级你的战力',

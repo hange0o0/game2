@@ -302,7 +302,7 @@ class PKPlayerData {
 
     private sendToServer(posCard:PKPosCardData){
         var PD = PKData.getInstance();
-        if(this == PD.myPlayer && !PD.isReplay && PD.sendCard) //需要通知服务器，等服务器返回成功才应答
+        if(this == PD.myPlayer && !PD.isReplay && PKManager.getInstance().isOnline && posCard.mid < 500) //需要通知服务器，等服务器返回成功才应答
         {
             PKManager.getInstance().sendPosToServer(posCard)
         }
@@ -332,6 +332,11 @@ class PKPlayerData {
     //取手牌  (5)
     public getHandCard(){
         return this.handCard;
+    }
+
+    public posCardFormServer(data){
+        data.actionTime = data.actiontime;
+        this.posCard[data.id] = new PKPosCardData(data);
     }
 
     //自动上阵相关

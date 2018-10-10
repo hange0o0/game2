@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="PairingUISkin" width="400" height="500" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Label id="cdText" text="Label" y="80" size="24" horizontalCenter="0.5" stroke="3"/>
+	<e:Label text="正在匹配中" y="0" size="40" horizontalCenter="0" bold="true" stroke="3" textColor="0xffdba5"/>
+	<e:Button id="cancelBtn" label="取消" skinName="Btn5Skin" horizontalCenter="0" bottom="50"/>
+</e:Skin>

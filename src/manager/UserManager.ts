@@ -13,7 +13,7 @@ class UserManager {
 
 
 
-    public gameid: string = 'test';
+    public gameid: string = _get['gameid'] || 'test';
     public landid: string;
 
     public hourcoin: number;

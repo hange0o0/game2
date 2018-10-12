@@ -23,6 +23,8 @@ class PKConfig {
     }
 
 
+    public static beforeShowTime = 5000; //开始战斗前，进入及倒计时需要的时间
+
     public static nearRage = 20; //少于等于该值为近战
     public static stepCD = 50; //步长
     public static gameTime = 5*60; //游戏时间,超出算平

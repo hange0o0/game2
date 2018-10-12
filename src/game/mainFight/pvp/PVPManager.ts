@@ -355,7 +355,8 @@ class PVPManager {
                 return;
             }
             PKManager.getInstance().pkResult = msg;
-            this.offline['score'] = msg.score
+            if(this.offline)
+                this.offline['score'] = msg.score
             this.task = msg.task;
             EM.dispatchEventWith(GameEvent.client.pvp_change)
             if (fun)
@@ -377,9 +378,12 @@ class PVPManager {
                 return;
             }
             PKManager.getInstance().pkResult = msg;
-            this.offline['winnum'] =  (this.offline['winnum'] || 0) + 1
-            this.offline['score'] = msg.score
-            this.offline['maxscore'] = Math.max(this.offline['maxscore']||0,msg.score)
+            if(this.offline)
+            {
+                this.offline['winnum'] =  (this.offline['winnum'] || 0) + 1
+                this.offline['score'] = msg.score
+                this.offline['maxscore'] = Math.max(this.offline['maxscore']||0,msg.score)
+            }
             this.task = msg.task;
             this.lastEnemyList = null;
             this.history = null;

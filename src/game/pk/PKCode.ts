@@ -33,6 +33,7 @@ class PKCode {
             this.autoAction();
         }
         //console.log(cd)
+        var runStart = TM.nowMS();
         while(PD.quick || cd > PKConfig.stepCD)
         {
             PD.actionTime += PKConfig.stepCD;
@@ -56,6 +57,14 @@ class PKCode {
                 return true
             if(PD.actionTime > PKConfig.drawTime)//5分
                 return true
+
+            if(PD.quick && PD.actionTime >= PD.quickTime)
+            {
+                PD.quick = false;
+                cd = 0;
+                PD.startTime = TM.nowMS() - PD.actionTime + PD.speedAddTime;
+                PD.startTime -= TM.nowMS() - runStart;//扣去运行时间
+            }
         }
         return false;
     }

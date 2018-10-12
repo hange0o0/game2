@@ -15,11 +15,13 @@ class PairingUI extends game.BaseWindow {
     private monsterArr = []
     private card
     private hero
+    private onShowFun
     private startTimer
     public constructor() {
         super();
         this.skinName = "PairingUISkin";
         this.canBGClose = false;
+        this.LoadFiles = ['pk']
     }
 
     public childrenCreated() {
@@ -32,9 +34,10 @@ class PairingUI extends game.BaseWindow {
         this.hide();
     }
 
-    public show(v?,v2?){
+    public show(v?,v2?,fun?){
         this.card = v;
         this.hero = v2;
+        this.onShowFun = fun;
         super.show()
     }
 
@@ -43,6 +46,7 @@ class PairingUI extends game.BaseWindow {
     }
 
     public onShow(){
+        this.onShowFun && this.onShowFun();
         this.startTimer = TM.now();
         this.renew();
         this.onTimer();

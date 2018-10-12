@@ -31,11 +31,20 @@ class PKServerManager extends egret.EventDispatcher{
         console.log('socketReceive:'+msg);
 
         var oo:any = JSON.parse(msg);
-        if(oo.callbackid && oo.from == UM.gameid)//回调
+
+        if(oo.fail)
         {
-            this.callBackFun[oo.callbackid] && this.callBackFun[oo.callbackid](oo.msg);
-            delete this.callBackFun[oo.callbackid];
+            if(oo.head == GameEvent.pkserver.ispking)
+            {
+                this.onCallBack(oo);
+                return;
+            }
+            MyWindow.Alert('游戏连接已断开',MyTool.refresh(),'重新登陆');
+            GameManager.getInstance().stopTimer();
+            PKingUI.getInstance().setStop(true)
+            return;
         }
+        this.onCallBack(oo);
 
         //通用的处理
         switch(oo.head)
@@ -50,11 +59,27 @@ class PKServerManager extends egret.EventDispatcher{
             case GameEvent.pkserver.face:
                 this.onFace(oo.msg);
                 break;
+            case GameEvent.pkserver.pk_reset:
+                this.reset();
+                break;
+            case GameEvent.pkserver.new_login:
+                MyWindow.Alert('该用户已在其它地方登录',MyTool.refresh(),'重新登陆');
+                GameManager.getInstance().stopTimer();
+                PKingUI.getInstance().setStop(true)
+                break;
         }
 
 
 
         this.dispatchEventWith(oo.head,false,oo.msg);
+    }
+
+    public onCallBack(oo){
+        if(oo.callbackid && oo.from == UM.gameid)//回调
+        {
+            this.callBackFun[oo.callbackid] && this.callBackFun[oo.callbackid](oo.msg);
+            delete this.callBackFun[oo.callbackid];
+        }
     }
 
     public onSocketOpen(){
@@ -77,7 +102,9 @@ class PKServerManager extends egret.EventDispatcher{
 
     private onIOError(event:egret.IOErrorEvent):void {
         if(DEBUG) console.log(event.type);
-        MyWindow.Alert('无法连接对战服务器！')
+        if(this.ctrler && this.ctrler.pkData)
+            MyWindow.Alert('无法连接对战服务器！')
+        PairingUI.getInstance().hide();
         //this.isConnected = false;
         //if(this.reConnectTimes == 0){
         //    this.reConnect();
@@ -100,6 +127,8 @@ class PKServerManager extends egret.EventDispatcher{
     }
 
     public sendData(event,data,fun?){
+        if(!this.webSocket)
+            return;
         var oo:any = {
             head:event,
             gameid:UM.gameid,
@@ -124,6 +153,69 @@ class PKServerManager extends egret.EventDispatcher{
     }
 
     public onFace(msg){
+        PKData.getInstance().onPKFace(msg)
+    }
 
+    //取数据并重置游戏进程
+    public reset(){
+        PKServerManager.getInstance().sendData(GameEvent.pkserver.get_reset_data,{},(msg)=>{
+            this.onReset(msg);
+        })
+    }
+
+    private onReset(msg){
+        var PD = PKData.getInstance();
+        PD.init(msg.pkdata);
+        PD.quick = true;
+        PD.quickTime = msg.passtime;
+        var arr = msg.action;
+        var playerData = {};
+        for(var i=0;i<arr.length;i++)
+        {
+            //{"actiontime":0,"id":2,"mid":"3","owner":1}
+            var oo = arr[i];
+            if(!playerData[oo.owner])
+                playerData[oo.owner] = [];
+            playerData[oo.owner].push(Math.floor(oo.actiontime/PKConfig.stepCD) + '#' + oo.mid);
+        }
+
+        for(var s in playerData)
+        {
+            PD.getPlayer(s).autoList = PKTool.decodeActionList(playerData[s])
+            PD.getPlayer(s).isauto = true
+        }
+
+        PD.isAuto = true
+        PKingUI.getInstance().removeAll();
+        PD.start();
+        PKCode.getInstance().onStep()
+        for(var s in playerData)
+        {
+            PD.getPlayer(s).autoList = null;
+            PD.getPlayer(s).isauto = false
+        }
+        PD.isAuto = false
+        PKingUI.getInstance().resetView();
+    }
+
+    public onReConncet(){
+        PKServerManager.getInstance().sendData(GameEvent.pkserver.ispking,{},(msg)=>{
+            if(msg.passtime)
+            {
+                PKManager.getInstance().startPK(this.ctrler.type,msg.pkdata,{isOnline:true,isQuick:true})
+                this.onReset(msg);
+            }
+            else
+            {
+                this.close();
+            }
+        })
+    }
+
+    //测试重连
+    public reConnect(ctrl){
+        ResourceLoaderUI.getInstance().show(['pk'],()=>{
+            this.connect(ctrl);
+        });
     }
 }

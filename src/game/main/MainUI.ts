@@ -257,6 +257,12 @@ class MainUI extends game.BaseUI {
         setTimeout(function(){
             SoundManager.getInstance().loadEffectSound();
         },1000)
+
+        if(UM.pk_common.pkdata && UM.pk_common.pkdata.pkstarttime)
+        {
+            PVPCtrl.getInstance().pkData = null;
+            PKServerManager.getInstance().reConnect(PVPCtrl.getInstance());
+        }
     }
 
     private onTimer(){

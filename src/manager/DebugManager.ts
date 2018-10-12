@@ -179,6 +179,7 @@ class DebugManager {
         };
     }
 
+    //DM.testCard({list:'1,2,3,4,5'},{list:'1,2,3,4,5'},true)
     public testCard(list1,list2,view=false,hp=10){
         var PD = PKData.getInstance()
         var data = {
@@ -191,9 +192,10 @@ class DebugManager {
         var t = egret.getTimer();
         PKManager.getInstance().pkType = PKManager.TYPE_TEST
         PD.init(data);
+
         if(view)
         {
-           PKingUI.getInstance().show();
+           PKingUI.getInstance().show(true);
         }
         else
         {
@@ -207,6 +209,18 @@ class DebugManager {
             console.log('actionTime:' + DateUtil.getStringBySecond(Math.floor(PD.actionTime/1000)).substr(-5))
             console.log(PD.actionTime)
         }
+    }
+
+    public reset(cd = 30){
+        var PD = PKData.getInstance()
+        PD.init(PD.baseData);
+        PD.isAuto = true
+        PD.quick = true;
+        PD.quickTime = cd*1000;
+        PD.start();
+        PKCode.getInstance().onStep()
+        PD.isAuto = false
+        PKingUI.getInstance().resetView();
     }
 
 

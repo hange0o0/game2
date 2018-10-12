@@ -90,6 +90,7 @@
     "src/game/pk/ui/ctrl/PKMonsterInfoSkin.exml",
     "src/game/pk/ui/PKingUISkin.exml",
     "src/game/pk/ui/ctrl/PKCardItemSkin.exml",
+    "src/game/pk/ui/ctrl/PKFaceSkin.exml",
     "src/game/pk/ui/ctrl/PKPosItemSkin.exml",
     "src/game/pk/ui/scene/PKAddStateSkin.exml",
     "src/game/pk/ui/scene/PKMonsterItemSkin.exml",

@@ -26,6 +26,7 @@ class PKCtrlCon extends game.BaseContainer {
     private tipsMC: eui.Image;
     private speedBtn: eui.Group;
     private speedText: eui.Label;
+    private faceBtn: eui.Image;
 
 
 
@@ -98,12 +99,17 @@ class PKCtrlCon extends game.BaseContainer {
         this.addBtnEvent(this.helpBtn,this.onHelp)
         this.addBtnEvent(this.vPlayer,this.onPlayer)
         this.addBtnEvent(this.speedBtn,this.onSpeed)
+        this.addBtnEvent(this.faceBtn,this.onFace)
 
         PKData.getInstance().addEventListener('video',this.onVideoEvent,this);
 
         this.placeGroup.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.onTouchBegin,this)
         this.placeGroup.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.onTouchMove,this)
         this.addEventListener(egret.TouchEvent.TOUCH_END,this.onTouchEnd,this)
+    }
+
+    private onFace(){
+        PKFaceUI.getInstance().show();
     }
 
     private onSpeed(){
@@ -171,7 +177,8 @@ class PKCtrlCon extends game.BaseContainer {
             }
 
         }
-        PKingUI.getInstance().setStop(true)
+        if(!PKManager.getInstance().isOnline)
+            PKingUI.getInstance().setStop(true)
         HelpManager.getInstance().showHelp('pk',()=>{
             PKingUI.getInstance().setStop(false)
         })
@@ -425,6 +432,8 @@ class PKCtrlCon extends game.BaseContainer {
         this.needRenewInfo = false;
         this.overMC.visible = false
         this.speedBtn.visible = false
+        this.faceBtn.visible = PKManager.getInstance().isOnline
+        this.settingBtn.visible = !PKManager.getInstance().isOnline
 
         this.hideTips = false;
         this.tipsMC.visible = true;

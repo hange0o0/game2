@@ -346,6 +346,7 @@ class HangUI extends game.BaseItem {
     public stop(){
         this.callStop = true
         this.hideGift();
+        clearTimeout(this.openTimer);
     }
 
     public hideGift(){
@@ -397,6 +398,7 @@ class HangUI extends game.BaseItem {
             this.pkMV.stop();
             MyTool.removeMC(pkvideo);
         }
+        clearTimeout(this.openTimer);
     }
 
 

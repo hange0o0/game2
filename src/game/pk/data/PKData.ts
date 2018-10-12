@@ -8,6 +8,7 @@ class PKData extends egret.EventDispatcher{
     public currentState = 'def'
 
     public quick = false//快速算出结果
+    public quickTime = Number.MAX_VALUE//快速算出到这个时间
     public baseData//原始PK数据
     public isReplay;
     public replayEndTime;
@@ -60,7 +61,7 @@ class PKData extends egret.EventDispatcher{
         return this.isAuto || this.isReplay
     }
     public canSpeed(){
-        return true
+        return !PKManager.getInstance().isOnline
     }
 
     //public changeSpeed(speed){
@@ -109,6 +110,7 @@ class PKData extends egret.EventDispatcher{
         this.baseData = data;
         this.actionRecord = [];
         this.quick = false
+        this.quickTime = Number.MAX_VALUE
         this.history = {};
         this.monsterList.length = 0;
         this.playerObj = {};
@@ -502,6 +504,12 @@ class PKData extends egret.EventDispatcher{
                 return;
             }
             player.posCardFormServer(data)
+        }
+    }
+    public onPKFace(data){
+        if(data.owner != this.myPlayer.id)
+        {
+            PKFaceItem.createItem().show(data.id,-1);
         }
     }
 

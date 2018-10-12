@@ -31,6 +31,10 @@
 		{
 			"keys":"pvp_icon_1_png,pvp_icon_2_png,pvp_icon_3_png,pvp_icon_4_png,pvp_icon_5_png,pvp_icon_6_png,pvp_icon_7_png,pvp_icon_8_png,pvp_icon_9_png,pvp_icon_10_png,pvp_icon_11_png,pvp_icon_12_png,pvp_icon_13_png,pvp_icon_14_png,pvp_icon_15_png,pvp_icon_16_png,pvp_icon_17_png,pvp_icon_18_png,pvp_icon_19_png,pvp_icon_20_png,pvp_task_2_png,pvp_task_1_png,active_0_png,active_1_png,active_2_png,active_3_png,active_4_png,active_5_png,active_6_png",
 			"name":"pvp"
+		},
+		{
+			"keys":"pk_e_1_png,pk_e_2_png,pk_e_3_png,pk_e_4_png,pk_e_5_png,pk_e_6_png,pk_e_7_png,pk_e_8_png,pk_e_9_png,pk_e_10_png,pk_e_11_png,pk_e_12_png,pk_e_13_png,pk_e_14_png,pk_e_15_png,pk_e_16_png,pk_e_17_png,pk_e_18_png,pk_e_19_png,pk_e_20_png",
+			"name":"face"
 		}
 	],
 	"resources":[
@@ -1262,6 +1266,106 @@
 			"name":"task_json",
 			"type":"json",
 			"url":"data/task.json"
+		},
+		{
+			"name":"pk_e_1_png",
+			"type":"image",
+			"url":"game_assets/face/pk_e_1.png"
+		},
+		{
+			"name":"pk_e_2_png",
+			"type":"image",
+			"url":"game_assets/face/pk_e_2.png"
+		},
+		{
+			"name":"pk_e_3_png",
+			"type":"image",
+			"url":"game_assets/face/pk_e_3.png"
+		},
+		{
+			"name":"pk_e_4_png",
+			"type":"image",
+			"url":"game_assets/face/pk_e_4.png"
+		},
+		{
+			"name":"pk_e_5_png",
+			"type":"image",
+			"url":"game_assets/face/pk_e_5.png"
+		},
+		{
+			"name":"pk_e_6_png",
+			"type":"image",
+			"url":"game_assets/face/pk_e_6.png"
+		},
+		{
+			"name":"pk_e_7_png",
+			"type":"image",
+			"url":"game_assets/face/pk_e_7.png"
+		},
+		{
+			"name":"pk_e_8_png",
+			"type":"image",
+			"url":"game_assets/face/pk_e_8.png"
+		},
+		{
+			"name":"pk_e_9_png",
+			"type":"image",
+			"url":"game_assets/face/pk_e_9.png"
+		},
+		{
+			"name":"pk_e_10_png",
+			"type":"image",
+			"url":"game_assets/face/pk_e_10.png"
+		},
+		{
+			"name":"pk_e_11_png",
+			"type":"image",
+			"url":"game_assets/face/pk_e_11.png"
+		},
+		{
+			"name":"pk_e_12_png",
+			"type":"image",
+			"url":"game_assets/face/pk_e_12.png"
+		},
+		{
+			"name":"pk_e_13_png",
+			"type":"image",
+			"url":"game_assets/face/pk_e_13.png"
+		},
+		{
+			"name":"pk_e_14_png",
+			"type":"image",
+			"url":"game_assets/face/pk_e_14.png"
+		},
+		{
+			"name":"pk_e_15_png",
+			"type":"image",
+			"url":"game_assets/face/pk_e_15.png"
+		},
+		{
+			"name":"pk_e_16_png",
+			"type":"image",
+			"url":"game_assets/face/pk_e_16.png"
+		},
+		{
+			"name":"pk_e_17_png",
+			"type":"image",
+			"url":"game_assets/face/pk_e_17.png"
+		},
+		{
+			"name":"pk_e_18_png",
+			"type":"image",
+			"url":"game_assets/face/pk_e_18.png"
+		},
+		{
+			"name":"pk_e_19_png",
+			"type":"image",
+			"url":"game_assets/face/pk_e_19.png"
+		},
+		{
+			"name":"pk_e_20_png",
+			"type":"image",
+			"url":"game_assets/face/pk_e_20.png"
 		}
 	]
 }

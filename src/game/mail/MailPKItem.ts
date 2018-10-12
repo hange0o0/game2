@@ -68,21 +68,10 @@ class MailPKItem extends game.BaseItem {
         //    players.actionlist = PD.getPlayer(players.id).posHistory.join(',');
         //}
 
-        this.scoreText.text = this.data.score
+
 
         this.timeText.text = DateUtil.getStringBySeconds(Math.max(TM.now() - this.data.pktime,1),false,2) + '前 (时长：'+DateUtil.getStringBySecond(this.data.actionTime/1000).substr(-5)+')'
-        switch(this.data.result)
-        {
-            case 1:
-                this.scoreBG.source = 'title_bg1_png';
-                break;
-            case 2:
-                this.scoreBG.source = 'title_bg7_png';
-                break;
-            case 3:
-                this.scoreBG.source = 'title_bg8_png';
-                break;
-        }
+
         switch(this.data.type)
         {
             case PKManager.TYPE_HANG:
@@ -95,6 +84,7 @@ class MailPKItem extends game.BaseItem {
                 this.typeText.text = '远征模式';
                 break;
             case PKManager.TYPE_PVP_OFFLINE:
+            case PKManager.TYPE_PVP_ONLINE:
                 this.typeText.text = '竞技场PK';
                 break;
             case PKManager.TYPE_ANSWER:
@@ -107,12 +97,45 @@ class MailPKItem extends game.BaseItem {
                 this.typeText.text = '无尽模式';
                 break;
         }
-
-        for(var i=0;i<this.data.players.length;i++)
+        if(this.data.players[0].gameid == UM.gameid)
         {
-            var player = this.data.players[i];
-            this.renewPlayer(i+1,player)
+            this.scoreText.text = this.data.score
+            for(var i=0;i<this.data.players.length;i++)
+            {
+                var player = this.data.players[i];
+
+                this.renewPlayer(i+1,player)
+            }
+
+
         }
+        else//要反转
+        {
+            var temp = this.data.score.split(':')
+            temp.reverse();
+            this.scoreText.text = temp.join(':')
+            for(var i=0;i<this.data.players.length;i++)
+            {
+                var player = this.data.players[i];
+                this.renewPlayer(2-i,player)
+            }
+        }
+
+        switch(this.data.result)
+        {
+            case 1:
+                this.scoreBG.source = 'title_bg1_png';
+                break;
+            case 2:
+                this.scoreBG.source = 'title_bg7_png';
+                break;
+            case 3:
+                this.scoreBG.source = 'title_bg8_png';
+                break;
+        }
+
+
+
     }
 
     private getHeroLV(id,data){

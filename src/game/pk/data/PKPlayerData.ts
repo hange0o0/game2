@@ -302,7 +302,8 @@ class PKPlayerData {
 
     private sendToServer(posCard:PKPosCardData){
         var PD = PKData.getInstance();
-        if(this == PD.myPlayer && !PD.isReplay && PKManager.getInstance().isOnline && posCard.mid < 500) //需要通知服务器，等服务器返回成功才应答
+
+        if(this == PD.myPlayer && !PD.isReplay && !PD.quick && PKManager.getInstance().isOnline && posCard.mid < 500) //需要通知服务器，等服务器返回成功才应答
         {
             PKManager.getInstance().sendPosToServer(posCard)
         }
@@ -337,6 +338,12 @@ class PKPlayerData {
     public posCardFormServer(data){
         data.actionTime = data.actiontime;
         this.posCard[data.id] = new PKPosCardData(data);
+        var step = Math.floor(PKData.getInstance().actionTime/PKConfig.stepCD)
+        if(data.mid != 501)//自动上的卡不统计
+        {
+            this.posHistory.push(step + '#' +data.mid);
+            this.useCardList.push(data.mid)
+        }
     }
 
     //自动上阵相关
@@ -351,6 +358,7 @@ class PKPlayerData {
                 data.isAuto = true;
                 this.posCard[data.id] = new PKPosCardData(data);
                 this.autoList.shift();
+                this.posIndex = data.id + 1
 
                 this.addMP(-CM.getCardVO(data.mid).cost)
                 this.removeAutoCard(this.posCard[data.id]);

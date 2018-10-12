@@ -8,6 +8,7 @@ class PVPCtrl extends egret.EventDispatcher {
     }
 
 
+    public type = PKManager.TYPE_PVP_ONLINE
     public pkData:any = {
         score:0,
         gameid:UM.gameid,
@@ -25,13 +26,22 @@ class PVPCtrl extends egret.EventDispatcher {
     }
 
     public onConnect(){
-        PairingUI.getInstance().show(this.pkData.pkdata.card,this.pkData.pkdata.hero);
-        PKServerManager.getInstance().sendData(GameEvent.pkserver.pair,this.pkData)
+        if(this.pkData)
+        {
+            PairingUI.getInstance().show(this.pkData.pkdata.card,this.pkData.pkdata.hero,()=>{
+                PKServerManager.getInstance().sendData(GameEvent.pkserver.pair,this.pkData)
+            });
+        }
+        else
+        {
+            PKServerManager.getInstance().onReConncet()
+        }
+
+
     }
 
     public onPairSuccess(data){
-        PKManager.getInstance().startPK(PKManager.TYPE_PVP_ONLINE,data.pkdata)
-        PKManager.getInstance().isOnline = true
+        PKManager.getInstance().startPK(PKManager.TYPE_PVP_ONLINE,data.pkdata,{isOnline:true})
 
         var other;
         for(var i=0;i<data.pkdata.players.length;i++)

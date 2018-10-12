@@ -289,8 +289,11 @@ class PKTopUI extends game.BaseContainer {
 
     private renewViewPos(){
         var PD = PKData.getInstance();
-        this.view1.visible = PD.myPlayer.teamData.atkRota == PKConfig.ROTA_LEFT
-        this.view2.visible = PD.myPlayer.teamData.atkRota == PKConfig.ROTA_RIGHT
+        if(PD.isReplay)
+        {
+            this.view1.visible = PD.myPlayer.teamData.atkRota == PKConfig.ROTA_LEFT
+            this.view2.visible = PD.myPlayer.teamData.atkRota == PKConfig.ROTA_RIGHT
+        }
     }
 
     public appearMV(){

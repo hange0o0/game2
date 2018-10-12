@@ -64,6 +64,10 @@ class GameEvent {
         pk_info:'pk_info',
         face:'face',
         pk_result:'pk_result',
+        pk_reset:'pk_reset',
+        new_login:'new_login',
+        get_reset_data:'get_reset_data',
+        ispking:'ispking',
     }
     public static rank = {
         get_rank:'rank.get_rank',

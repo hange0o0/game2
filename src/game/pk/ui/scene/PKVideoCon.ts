@@ -84,6 +84,21 @@ class PKVideoCon extends game.BaseContainer {
         this.tw2.setPaused(false);
     }
 
+    public resetView(){
+        this.remove();
+        var PD = PKData.getInstance()
+        for(var i=0;i<PD.monsterList.length;i++)
+        {
+            var item = PKMonsterItem.createItem();
+            item.y =  this.monsterY + (-30 + Math.random()*60);
+
+            this.con.addChildAt(item,this.getIndexByY(item.y));
+            item.data =PD.monsterList[i];
+            this.itemArr.push(item);
+            item.stand();
+        }
+    }
+
 
 
 

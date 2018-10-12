@@ -72,4 +72,5 @@
 		<e:Image source="speed_btn_png" x="0" y="0" scaleX="0.7" scaleY="0.7"/>
 		<e:Label id="speedText" text="x1" x="52" stroke="3" verticalCenter="0"/>
 	</e:Group>
+	<e:Image id="faceBtn" source="pk_e_14_png" y="60.85" width="55" height="55" right="10"/>
 </e:Skin>

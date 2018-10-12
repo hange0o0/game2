@@ -400,16 +400,20 @@ class PKManager {
         return b;
     }
 
-    public startPK(pkType,data){
+    public startPK(pkType,data,sp?){
+        var sp = sp ||{}
         this.pkType = pkType;
         this.pkResult = null;
-        this.isOnline = false;
+        this.isOnline = sp.isOnline;
+
         var PD = PKData.getInstance();
         if(this.showTopNum)
             data.showTopNum = this.showTopNum;
         this.showTopNum = 0;
         PD.init(data);
-        PKingUI.getInstance().show();
+        PKingUI.getInstance().show(sp.isQuick);
+
+
         PVPContinueUI.getInstance().hide()
     }
 

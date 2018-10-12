@@ -30,6 +30,7 @@ class UserManager {
 
     public energy: any;
     public openData: any;
+    public pk_common: any;
     private coin: any;
 
 
@@ -47,6 +48,7 @@ class UserManager {
         this.head = data.head;
         this.uid = data.uid;
         this.type = data.type;
+        this.pk_common = data.pk_common;
         this.hourcoin = data.hourcoin;
         this.coin = data.coin;
         this.opentime = data.opentime;

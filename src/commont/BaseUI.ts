@@ -132,6 +132,7 @@ module game {
         public loadUI = null;
 
         public hideBehind = true;
+
         public showFinishFunList = []; //显示成功后回调的方法
 
         private panelEvents: any = {};

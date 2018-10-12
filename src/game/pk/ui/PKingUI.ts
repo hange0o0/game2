@@ -29,6 +29,7 @@ class PKingUI extends game.BaseUI {
 
 
 
+
     private hurt1: eui.Image;
     private hurt2: eui.Image;
     private heroMC: eui.Image;
@@ -42,6 +43,7 @@ class PKingUI extends game.BaseUI {
     public tw:egret.Tween;
 
 
+    public quickShow;
     public displayY
     public displayCon
     private isAciveStop //窗口切换导致的暂停
@@ -112,7 +114,10 @@ class PKingUI extends game.BaseUI {
         }
     }
 
-    public show(){
+
+
+    public show(quickShow?){
+        this.quickShow = quickShow;
         EM.dispatchEventWith(GameEvent.client.pk_begin)
         this.hideBehind = false;
         var self = this;
@@ -170,7 +175,22 @@ class PKingUI extends game.BaseUI {
         egret.Tween.removeTweens(this.smallMap)
         egret.Tween.removeTweens(this.scroller)
     }
+
+    //根据数据重建显示
+    public resetView(){
+        this.pkCtrlCon.onMyPlayerChange();
+        this.pkTop.onMyPlayerChange()
+        PKVideoCon.getInstance().resetView();
+    }
+
     public showMV(){
+        if(this.quickShow)
+        {
+            this.pkCtrlCon.bottom = 0
+            this.scroller.alpha = 1
+            this.startPlay();
+            return;
+        }
         var tw = egret.Tween.get(this.pkTop)
         tw.set({y:this.pkTop.y-200}).to({y:this.pkTop.y},400)
         //    .wait(200).call(()=>{
@@ -184,11 +204,9 @@ class PKingUI extends game.BaseUI {
     }
 
     public onShow(){
+
+
         SoundManager.getInstance().playSound(SoundConfig.bg_pk);
-
-
-        var PD = PKData.getInstance();
-
         this.scrollTime = 0;
         PKVideoCon.getInstance().init();
         this.pkCtrlCon.init();
@@ -224,6 +242,30 @@ class PKingUI extends game.BaseUI {
         egret.Tween.removeTweens(this.vsMC)
         egret.Tween.removeTweens(this.playerGroup1)
         egret.Tween.removeTweens(this.playerGroup2)
+
+
+        this.hurt1.visible = false
+        this.hurt2.visible = false
+        this.heroMC.visible = false
+        egret.Tween.removeTweens(this.hurt1)
+        egret.Tween.removeTweens(this.hurt2)
+        egret.Tween.removeTweens(this.heroMC)
+
+
+
+
+        this.showPlayerInfo();
+        this.showMV();
+
+        if(GuideManager.getInstance().isGuiding)
+        {
+            GuideUI.getInstance().hide();
+            this.touchChildren = false;
+        }
+    }
+
+    private showPlayerInfo(){
+        var PD = PKData.getInstance();
         var player = PD.getTeamByRota(PKConfig.ROTA_LEFT).members[0]
         this.nameText1.text = player.nick
         this.forceText1.text = player.force
@@ -236,21 +278,6 @@ class PKingUI extends game.BaseUI {
         this.forceText2.text = player.force
         this.headMC2.setData(player.head,player.type)
         MyTool.setTypeImg(this.typeMC2,player.type)
-
-        this.hurt1.visible = false
-        this.hurt2.visible = false
-        this.heroMC.visible = false
-        egret.Tween.removeTweens(this.hurt1)
-        egret.Tween.removeTweens(this.hurt2)
-        egret.Tween.removeTweens(this.heroMC)
-
-        this.showMV();
-
-        if(GuideManager.getInstance().isGuiding)
-        {
-            GuideUI.getInstance().hide();
-            this.touchChildren = false;
-        }
     }
 
     public showHero(){
@@ -307,6 +334,13 @@ class PKingUI extends game.BaseUI {
     }
 
     public showCountDown(){
+        if(this.quickShow)
+        {
+            this.startGame();
+            this.pkTop.appearMV();
+            this.pkCtrlCon.initInfo();
+            return;
+        }
         this.vsGroup.visible = true
         this.vsMC.scaleX = this.vsMC.scaleY = 2
         this.vsMC.alpha = 0
@@ -459,6 +493,13 @@ class PKingUI extends game.BaseUI {
 
 
 
+
+
+    //public showFace(id,rota){
+    //    var item = PKFaceItem.createItem().show(1,1)
+    //
+    //    item.show(id,rota)
+    //}
 
 
 

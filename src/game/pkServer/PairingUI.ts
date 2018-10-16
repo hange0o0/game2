@@ -1,4 +1,4 @@
-class PairingUI extends game.BaseWindow {
+class PairingUI extends game.BaseUI {
 
     private static _instance: PairingUI;
     public static getInstance(): PairingUI {
@@ -7,8 +7,11 @@ class PairingUI extends game.BaseWindow {
         return this._instance;
     }
 
+    private topUI: TopUI;
+    private con: eui.Group;
     private cdText: eui.Label;
     private cancelBtn: eui.Button;
+
 
 
 
@@ -26,6 +29,7 @@ class PairingUI extends game.BaseWindow {
 
     public childrenCreated() {
         super.childrenCreated();
+        this.topUI.setTitle('竞技场')
         this.addBtnEvent(this.cancelBtn,this.onClose)
     }
 
@@ -109,7 +113,7 @@ class PairingUI extends game.BaseWindow {
         {
             var id = parseInt(arr[i])
             item = PKMonsterMV.createItem();
-            this.addChild(item);
+            this.con.addChild(item);
             item.load(id)
             item.stand();
             item.scaleX = item.scaleY = 1.2;
@@ -121,7 +125,7 @@ class PairingUI extends game.BaseWindow {
         ArrayUtil.sortByField(this.monsterArr,['y'],[0]);
         for(var i=0;i<this.monsterArr.length;i++)
         {
-            this.addChild(this.monsterArr[i]);
+            this.con.addChild(this.monsterArr[i]);
         }
 
 

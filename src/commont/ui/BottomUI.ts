@@ -3,7 +3,7 @@ class BottomUI extends game.BaseContainer {
         super();
     }
 
-    private closeBtn: eui.Button;
+    public closeBtn: eui.Button;
 
     private hideFun;
     private thisObj;

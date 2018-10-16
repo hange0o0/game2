@@ -116,5 +116,9 @@
 			<e:Image source="replay_mc_png" verticalCenter="0" horizontalCenter="0" scaleX="1.2" scaleY="1.2"/>
 		</e:Group>
 	</e:Group>
+	<e:Group id="mainPKBtnGroup" left="0" right="0" top="120" bottom="100" top.pk="60">
+		<e:Rect fillAlpha="0.5" left="0" right="0" top="0" bottom="0"/>
+		<e:Button id="mainPKBtn" label="进入战斗" skinName="Btn5Skin" width="200" horizontalCenter="3" verticalCenter="50" scaleX="1.2" scaleY="1.2"/>
+	</e:Group>
 
 </e:Skin>

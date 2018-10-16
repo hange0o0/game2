@@ -439,6 +439,52 @@ class DebugManager {
         return Math.floor(3600/10*0.3*Math.pow($level,0.8)*(1+$coinLevel*0.002))
     }
 
+    //达到这个战力需要最小的升级次数
+    public getForceLevel(force){
+        var obj = {};
+        var currentForce = 0;
+        var base = TecVO.data;
+        var arr = [];
+        var totalLv = 0;
+        var totalCoin = 0;
+        var maxLevel = 0;
+        for(var s in base)
+        {
+            if(base[s].type==2)
+                arr.push(base[s])
+        }
+        while(currentForce < force)
+        {
+            var cid = 0;
+            var needCoin = 0;
+            for(var s in arr)
+            {
+                var id = arr[s].id;
+                var vo = arr[s];
+                var lv = obj[id] || 0
+                var coin = TecManager.getInstance().getCoinNeed((lv + vo.coinlv - 1)*(0.8+vo.step + vo.coinlv/200)) //需要的钱
+                if(!cid || needCoin>coin)
+                {
+                    cid = id;
+                    needCoin = coin
+                }
+            }
+            obj[cid] = (obj[cid] || 0) + 1
+            currentForce = 0;
+            totalLv = 0;
+            totalCoin = 0;
+
+            for(var s in obj)
+            {
+                currentForce += TecManager.getInstance().getForceAdd(s,obj[s])
+                totalLv += obj[s];
+                totalCoin += TecManager.getInstance().getCoinAdd(parseInt(s)+100,obj[s])
+            }
+        }
+
+        console.log('战力：' + currentForce,'等级：' + totalLv,'时产：' + totalCoin)  //,obj
+    }
+
     public showTecInfo(id){
         var TCM = TecManager.getInstance();
         var vo = TecVO.getObject(id)

@@ -29,7 +29,7 @@ class PKActiveMainPageUI extends game.BaseItem {
         this.addBtnEvent(this.activeBtn,this.onActive)
         this.addBtnEvent(this.pvpBtn,this.onPVP)
 
-        this.lockText.text = '通关战役 '+Config.pvpLevel+' 解锁';
+        this.lockText.text = '通关战役 '+Config.pvpLevel+' 解锁实时对战';
 
         this.bg.x = 0;
         this.bgTW = egret.Tween.get(this.bg,{loop:true}).to({x:-(this.bg.width-640)},3*60*1000)

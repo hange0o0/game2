@@ -78,7 +78,7 @@ class GuideManager {
 
         this.addGuideObj({
             toBottom:100,
-            mc:function(){return BasePosUI.getInstance().pkBtn},
+            mc:function(){return BasePosUI.getInstance().mainPKBtn},
             text:'现在出战卡牌我都给你配好了，就赶快开始吧！',
         })
 

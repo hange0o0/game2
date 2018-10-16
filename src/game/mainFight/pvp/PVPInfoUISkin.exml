@@ -52,10 +52,10 @@
 			</e:layout>
 		</e:Group>
 		<e:Group x="18" y="347">
-			<e:Button id="pkBtn1" label="防御阵容对决" y="353.67" width="240" skinName="Btn7Skin" height="83" x="173"/>
-			<e:Button id="pkBtn0" label="进攻阵容对决" y="812.33" width="240" height="83" skinName="Btn5Skin" x="337"/>
+			<e:Button id="pkBtn1" label="自动模式" y="353.67" width="220" skinName="Btn7Skin" height="83" x="173"/>
+			<e:Button id="pkBtn0" label="实时手动模式" y="812.33" width="260" height="100" skinName="Btn5Skin" x="337"/>
 			<e:layout>
-			<e:HorizontalLayout gap="50" paddingTop="10" paddingBottom="10"/>
+			<e:HorizontalLayout gap="30" paddingTop="10" paddingBottom="10" verticalAlign="middle" paddingLeft="40"/>
 			</e:layout>
 		</e:Group>
 		<e:layout>

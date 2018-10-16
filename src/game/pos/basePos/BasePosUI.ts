@@ -15,7 +15,7 @@ class BasePosUI extends game.BaseUI {
     private btnGroup: eui.Group;
     private deleteBtn: eui.Group;
     private testBtn: eui.Group;
-    public pkBtn: eui.Group;
+    private pkBtn: eui.Group;
     private downBtn: eui.Image;
     private upBtn: eui.Image;
     private titleText: eui.Label;
@@ -25,6 +25,8 @@ class BasePosUI extends game.BaseUI {
     private arrowMC: eui.Image;
     private changePosMC: eui.Image;
     private typeIcon: eui.Image;
+    public mainPKBtn: eui.Image;
+    private mainPKBtnGroup: eui.Group;
 
     private infoGroup: eui.Group;
     private infoList: eui.List;
@@ -109,6 +111,7 @@ class BasePosUI extends game.BaseUI {
 
         this.addBtnEvent(this.deleteBtn,this.onDelete)
         this.addBtnEvent(this.pkBtn,this.onPK)
+        this.addBtnEvent(this.mainPKBtn,this.onPK)
         this.addBtnEvent(this.testBtn,this.onTest)
         this.addBtnEvent(this.upBtn,this.onUp)
         this.addBtnEvent(this.downBtn,this.onDown)
@@ -119,6 +122,7 @@ class BasePosUI extends game.BaseUI {
         this.addBtnEvent(this.infoBtn,this.onInfo)
         this.addBtnEvent(this.infoCloseBtn,this.onInfoClose)
         this.addBtnEvent(this.videoBtn,this.onVideo)
+        this.addBtnEvent(this,this.onClick)
 
         var tw = this.arrowTW = egret.Tween.get(this.arrowMC,{loop:true});
         tw.to({scaleX:1.1,scaleY:0.8},200).to({scaleX:1,scaleY:1.1,y:this.arrowMC.y -10},200).
@@ -134,6 +138,24 @@ class BasePosUI extends game.BaseUI {
 
         this.arrowGroup.touchChildren = this.arrowGroup.touchEnabled = false;
         this.arrowGroup.visible = false;
+    }
+    
+    private onClick(e){
+        if(this.mainPKBtnGroup.visible)
+        {
+
+            if(this.tabList.hitTestPoint(e.stageX,e.stageY))
+                return;
+
+            this.mainPKBtnGroup.visible = false
+            this.btnGroup.addChild(this.pkBtn);
+
+            if(this.mainPKBtn.hitTestPoint(e.stageX,e.stageY))
+                return;
+            if(this.bottomUI.closeBtn.hitTestPoint(e.stageX,e.stageY))
+                return;
+            TaskManager.getInstance().showGuideMC(this.pkBtn)
+        }
     }
 
     private onChooseCard(){
@@ -781,6 +803,8 @@ class BasePosUI extends game.BaseUI {
         this.deleteBtnIndex = 1;
         MyTool.removeMC(this.chooseCardBtn);
         MyTool.removeMC(this.addCardBtn);
+        MyTool.removeMC(this.pkBtn)
+        this.mainPKBtnGroup.visible = false
         this.btnGroup.addChildAt(this.renameBtn,0)
         if(this.pkData && this.pkData.chooseCard)
         {
@@ -795,7 +819,8 @@ class BasePosUI extends game.BaseUI {
             if(this.pkData.otherList)
                 this.btnGroup.addChild(this.infoBtn);
             this.btnGroup.addChild(this.addCardBtn);
-            this.btnGroup.addChild(this.pkBtn);
+            //this.btnGroup.addChild(this.pkBtn);
+            this.mainPKBtnGroup.visible = true
             if(FightManager.getInstance().award)
             {
                 FightAwardUI.getInstance().show();
@@ -815,7 +840,7 @@ class BasePosUI extends game.BaseUI {
                 MyTool.removeMC(this.testBtn)
             else
                 this.btnGroup.addChild(this.testBtn)
-            this.btnGroup.addChild(this.pkBtn)
+            this.mainPKBtnGroup.visible = true
             if(this.pkData.noTab)
             {
                 this.currentState = 'pk'
@@ -831,7 +856,7 @@ class BasePosUI extends game.BaseUI {
         else
         {
             this.btnGroup.addChild(this.testBtn)
-            MyTool.removeMC(this.pkBtn)
+
             MyTool.removeMC(this.infoBtn)
         }
         this.renew();
@@ -935,7 +960,8 @@ class BasePosUI extends game.BaseUI {
             this.pkData.title = '挑战关卡';
             this.pkData.chooseCard = false;
             this.btnGroup.removeChildren();
-            this.btnGroup.addChild(this.pkBtn);
+            //this.btnGroup.addChild(this.pkBtn);
+            this.mainPKBtnGroup.visible = true
             PKChooseCardUI.getInstance().hide();
         }
         this.renewTitle();

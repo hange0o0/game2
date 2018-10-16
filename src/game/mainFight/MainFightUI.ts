@@ -44,6 +44,7 @@ class MainFightUI extends MainBase {
 
     private hideTopState
     private taskVO
+    private giftTW
 
     public constructor() {
         super();
@@ -75,6 +76,12 @@ class MainFightUI extends MainBase {
 
         this.taskGroup.visible = false;
         this.addBtnEvent(this.taskGroup, this.onTask)
+
+        var tw = this.giftTW = egret.Tween.get(this.taskFinishMC,{loop:true});
+        var bs = 0.7
+        tw.to({scaleX:1.1*bs,scaleY:0.8*bs},200).to({scaleX:1*bs,scaleY:1.1*bs,y:this.taskFinishMC.y -15},200).
+            to({scaleX:1.1*bs,scaleY:0.8*bs,y:this.taskFinishMC.y},200).to({scaleX:1*bs,scaleY:1*bs},300).wait(5000);
+        this.giftTW.setPaused(true)
 
         //this.defBtn.visible = false
         //this.atkBtn.visible = false
@@ -294,10 +301,10 @@ class MainFightUI extends MainBase {
         }
 
         var vo = this.taskVO = arr[0];
-        MyTool.setColorText(this.taskText,vo.getDes());
+        MyTool.setColorText(this.taskText,vo.getDes(),'#ffff33');
         if(vo.isFinish())
         {
-            this.taskResultText.text =  '【已完成】'
+            this.taskResultText.text =  '已完成'
             this.taskResultText.textColor =  0xFFFF00
         }
         else
@@ -307,5 +314,6 @@ class MainFightUI extends MainBase {
         }
         this.taskFinishMC.visible = count > 0;
         this.taskIcon.visible = !this.taskFinishMC.visible;
+        this.giftTW.setPaused(this.taskIcon.visible)
     }
 }

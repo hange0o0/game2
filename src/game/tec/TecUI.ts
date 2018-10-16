@@ -55,7 +55,9 @@ class TecUI extends MainBase {
     }
 
     public onShow(){
-        if(TaskManager.getInstance().nowAction == 'resource')
+        if(TaskManager.getInstance().nowAction == 'tec')
+            this.tab.selectedIndex = 0;
+        else if(TaskManager.getInstance().nowAction == 'resource')
             this.tab.selectedIndex = 3;
         this.tab.validateNow();
         this.renewTabRed();

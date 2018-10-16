@@ -75,7 +75,7 @@ class TecManager {
     //取这个等级每小时能得到的金币
     public getCoinAdd(id,lv){
         var vo = TecVO.getObject(id);
-        return this.getTecValue(lv+vo.coinlv-1,20);
+        return this.getTecValue(lv+vo.coinlv-1,20,10);
     }
 
     public getForceAdd(id,lv){
@@ -83,10 +83,9 @@ class TecManager {
         return this.getTecValue(lv+vo.coinlv-1,1.5);
     }
 
-    private getTecValue(lv,step){
+    private getTecValue(lv,step,base=1){
         if(lv == 0)
             return 0;
-        var base = 1;
         for(var i=1;i<lv;i++)
         {
             base += Math.max(1,Math.floor(step*i))
@@ -155,7 +154,7 @@ class TecManager {
             idAdd += lv - 1;
             if(id != 1)
             {
-                var nextLevel = lv + vo.level;
+                var nextLevel = lv* vo.level;
                 arr.push({type:'lv',num:nextLevel});
             }
             else

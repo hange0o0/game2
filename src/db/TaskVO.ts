@@ -99,6 +99,10 @@ class TaskVO {
                 this.currentValue = TecManager.getInstance().getTotalLevel(4)
                 return this.currentValue >= this.value1
                 break;
+            case 'tec':
+                this.currentValue = TecManager.getInstance().getLevel(1);
+                return this.currentValue >= this.value1
+                break;
             case 'cardnum':
                 this.currentValue = CardManager.getInstance().getMyMonsterList(0).length;
                 return this.currentValue >= this.value1
@@ -131,6 +135,10 @@ class TaskVO {
                 TM.showGuideMC(PKActiveMainPageUI.getInstance().activeBtn);
                 break;
             case 'resource':
+                TM.nowAction = this.type;
+                TM.showGuideMC(MainUI.getInstance().bottomItems[4]);
+                break;
+            case 'tec':
                 TM.nowAction = this.type;
                 TM.showGuideMC(MainUI.getInstance().bottomItems[4]);
                 break;
@@ -242,7 +250,7 @@ class TaskVO {
         {
 
             case 'hang':
-                return '通关 [战役' +this.value1 + ']'
+                return '通关战役 [' +this.value1 + ']'
                 break;
             case 'force':
                 return '战力达到 [' +this.value1 + ']'
@@ -254,16 +262,18 @@ class TaskVO {
                 return '拥有 [' +this.value1 + ']个奴隶'
                 break;
             case 'pvp':
-                return '竞技场积分达到 [' +this.value1 + ']'
+                return '竞技场 [' +this.value1 + ']分'
                 break;
             case 'pkactive':
                 return '参加 [1]次活动'
                 break;
             case 'resource':
-                return '资源科技总等级达到 [' +this.value1 + ']级'
+                return '资源总等级 [' +this.value1 + ']级'
                 break;
+            case 'tec':
+                return '科技革命 [' +this.value1 + ']级'
             case 'cardnum':
-                return '拥有随从卡牌数量达 [' +this.value1 + ']个'
+                return '拥有随从卡牌 [' +this.value1 + ']个'
                 break;
         }
         return '??'

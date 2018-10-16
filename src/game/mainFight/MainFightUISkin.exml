@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="MainFightUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
 
-	<e:Scroller id="scroller" width="640" horizontalCenter="0" top="0" bottom="0" bounces="false" locked="true">
+	<e:Scroller id="scroller" width="640" horizontalCenter="0" top="0" bottom="0" bounces="false">
 		<e:Group>
 			<e:Group x="0" y="65" width="640">
 				<ns1:HangUI id="mapBtn" x="0" y="75" skinName="HangUISkin" height="450"/>
@@ -59,10 +59,10 @@
 			<e:Label id="taskText" text="Label" size="24" textColor="0xffe2b7" x="0" y="0"/>
 			<e:Label id="taskResultText" text="Label" size="24" textColor="0xFFE2B7" x="221" y="0"/>
 			<e:layout>
-				<e:HorizontalLayout gap="20"/>
+				<e:HorizontalLayout gap="30"/>
 			</e:layout>
 		</e:Group>
 		<e:Image id="taskIcon" source="note_icon_png" x="10" verticalCenter="-2" scaleX="0.8" scaleY="0.8"/>
-		<e:Image id="taskFinishMC" source="gift_mc_png" scaleX="0.7" scaleY="0.7" bottom="0" x="-10"/>
+		<e:Image id="taskFinishMC" source="gift_mc_png" scaleX="0.7" scaleY="0.7" x="25" anchorOffsetX="44" anchorOffsetY="90" y="50"/>
 	</e:Group>
 </e:Skin>

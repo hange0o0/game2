@@ -63,6 +63,6 @@ class PVPCtrl extends egret.EventDispatcher {
             else
                 PVPManager.getInstance().pkOnlineFail(msg.key,fun)
             PKServerManager.getInstance().close();
-        })
+        },true)
     }
 }

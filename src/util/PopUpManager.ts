@@ -39,7 +39,7 @@ class PopUpManager {
             this.shape = new eui.Rect();
             this.shape.width = 640;
             this.shape.fillColor = 0;
-            this.shape.fillAlpha = 0.7;
+            this.shape.fillAlpha = 0.8;
 
             this.shape.top = 0
             this.shape.bottom = 0

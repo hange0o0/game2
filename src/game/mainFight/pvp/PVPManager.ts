@@ -44,7 +44,7 @@ class PVPManager {
     public getCurrentScore(){
          if(!this.offline)
             return 0;
-        return this.offline.score;
+        return this.offline.score || 0;
     }
 
     public getLevel(score){
@@ -317,7 +317,7 @@ class PVPManager {
                 MyWindow.Alert('PK初始异常，错误码：' + msg.fail)
                 return;
             }
-
+            msg.pkdata.pkversion = Config.pk_version;
             PVPCtrl.getInstance().pkData = msg.pkdata;
             PKServerManager.getInstance().connect(PVPCtrl.getInstance());
 

@@ -258,7 +258,7 @@ class MainUI extends game.BaseUI {
             SoundManager.getInstance().loadEffectSound();
         },1000)
 
-        if(UM.pk_common.pkdata && UM.pk_common.pkdata.pkstarttime)
+        if(UM.pk_common.pkdata && UM.pk_common.pkdata.pkstarttime && TM.now() - UM.pk_common.pkdata.pkstarttime < 5*60)
         {
             PVPCtrl.getInstance().pkData = null;
             PKServerManager.getInstance().reConnect(PVPCtrl.getInstance());

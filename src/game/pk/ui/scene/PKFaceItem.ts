@@ -57,11 +57,11 @@ class PKFaceItem extends game.BaseItem {
         this.y = PKingUI.getInstance().displayY + 50 + (PKingUI.getInstance().displayCon - 100)*Math.random();
 
 
-        egret.Tween.get(this.mc).to({x:100 + 50*Math.random()},800,egret.Ease.sineOut).call(()=>{
+        egret.Tween.get(this.mc).to({x:100 + 50*Math.random()},2000,egret.Ease.sineOut).call(()=>{
             PKFaceItem.freeItem(this);
         })
-        egret.Tween.get(this.mc).wait(500).to({alpha:0},300)
-        egret.Tween.get(this.mc).to({y:-20 - 20*Math.random()},800)
-        GameManager.stage.addChild(this)
+        egret.Tween.get(this.mc).wait(1700).to({alpha:0},300)
+        egret.Tween.get(this.mc).to({y:-30 - 20*Math.random()},2000)
+        GameManager.stage.addChild(this);
     }
 }

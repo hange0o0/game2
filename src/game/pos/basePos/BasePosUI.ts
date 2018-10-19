@@ -146,12 +146,13 @@ class BasePosUI extends game.BaseUI {
 
             if(this.tabList.hitTestPoint(e.stageX,e.stageY))
                 return;
+            if(this.mainPKBtn.hitTestPoint(e.stageX,e.stageY))
+                return;
 
             this.mainPKBtnGroup.visible = false
             this.btnGroup.addChild(this.pkBtn);
 
-            if(this.mainPKBtn.hitTestPoint(e.stageX,e.stageY))
-                return;
+
             if(this.bottomUI.closeBtn.hitTestPoint(e.stageX,e.stageY))
                 return;
             TaskManager.getInstance().showGuideMC(this.pkBtn)

@@ -79,7 +79,7 @@ class GuideManager {
         this.addGuideObj({
             toBottom:100,
             mc:function(){return BasePosUI.getInstance().mainPKBtn},
-            text:'现在出战卡牌我都给你配好了，就赶快开始吧！',
+            text:'现在这个顺序就挺合适的，我们直接开始吧！',
         })
 
         this.addGuideObj({
@@ -101,15 +101,6 @@ class GuideManager {
         })
 
         this.addGuideObj({
-            mc:function(){return PKingUI.getInstance().pkCtrlCon.overMC},
-            text:'这是出战区，放在出战区的卡牌会按其效果在战场上起到相应作用。',
-            guideKey:'overMC',
-            fun:function(){
-                self.showGuide()
-            }
-        })
-
-        this.addGuideObj({
             mc:function(){return PKingUI.getInstance().pkCtrlCon.cardGroup},
             text:'这是手牌区,里面是玩家可选择出战的卡牌。',
             guideKey:'cardGroup',
@@ -118,6 +109,14 @@ class GuideManager {
             }
         })
 
+        this.addGuideObj({
+            mc:function(){return PKingUI.getInstance().pkCtrlCon.overMC},
+            text:'这是出战区，放在出战区的卡牌会按其效果在战场上起到相应作用。',
+            guideKey:'overMC',
+            fun:function(){
+                self.showGuide()
+            }
+        })
 
         this.addGuideObj({
             mc:function(){return PKingUI.getInstance().pkCtrlCon.costGroup},
@@ -141,7 +140,7 @@ class GuideManager {
         })
 
         this.addGuideObj({
-            text:'当战斗卡牌被放入[出战区]时，会有3秒的准备时间，准备时间过后，卡牌才会生效。',
+            text:'当战斗卡牌被放入[出战区]时，会有[3秒]的准备时间，准备时间过后，卡牌才会生效。',
             fun:function(){
                 self.showGuide()
             }
@@ -174,7 +173,7 @@ class GuideManager {
         })
 
         this.addGuideObj({
-            text:'好了,现在就开始你的表演吧，要注意兵种间的属性相克哦',
+            text:'右下角显示的是兵种间的属性相克,现在就开始你的表演吧！',
             guideKey:'pk',
             fun:function(){
                 PKingUI.getInstance().setStop(false);
@@ -222,9 +221,9 @@ class GuideManager {
         ////////////////////////////////////
 
         this.addGuideObj({
-            text:'好了，游戏的基本玩法介绍，到这里就暂告一段落了。',
+            text:'游戏的基本玩法介绍，到这里就暂告一段落了。',
             fun:function(){
-                self.showGuide()
+                self.showGuide();
             }
         })
         //
@@ -249,6 +248,11 @@ class GuideManager {
                 CardInfoUI.getInstance().hide();
                 MainUI.getInstance().onBottomSelect(2);
                 EM.dispatch(GameEvent.client.task_change);
+
+                setTimeout(()=>{
+                    TaskManager.getInstance().showGuideMC(MainFightUI.getInstance().taskGroup)
+                },1000)
+
             }
         })
     }

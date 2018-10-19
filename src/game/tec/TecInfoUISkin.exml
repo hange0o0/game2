@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="TecInfoUISkin" width="540" height="640" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+<e:Skin class="TecInfoUISkin" width="540" height="650" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" states="normal,coin,force" >
 	<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
 	<e:Group y="40" horizontalCenter="0" width="120">
 		<e:Image source="title_bg1_png" y="0" scale9Grid="29,5,13,30" left="0" right="0"/>
@@ -56,5 +56,16 @@
 	</e:List>
 	<e:Image id="leftBtn" source="arrow1_png" scaleX="-0.8" scaleY="0.8" left="20" bottom="27"/>
 	<e:Image id="rightBtn" source="arrow1_png" right="20" scaleX="0.8" scaleY="0.8" bottom="27"/>
+	<e:Group bottom="90" includeIn="coin,force" horizontalCenter="0">
+		<e:Image source="black_bg_png" scale9Grid="43,7,7,42" left="0" right="0" top="0" bottom="0"/>
+		<e:Group height="40" y="10" left="50" right="50">
+			<e:Label text="每小时产出" y="10" size="22" x="10" text.force="当前战力"/>
+			<e:Image source="icon_coin_png" x="192" y="10" scaleX="0.8" scaleY="0.8" source.force="icon_force2_png"/>
+			<e:Label id="coinText" text="Label/小时" y="0" size="22" x="0" textColor="0xFFD866"/>
+			<e:layout>
+			<e:HorizontalLayout verticalAlign="middle"/>
+			</e:layout>
+		</e:Group>
+	</e:Group>
 
 </e:Skin>

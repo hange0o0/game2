@@ -46,6 +46,8 @@ class GuideUI extends game.BaseContainer{
         this.stopClickGroup.touchEnabled = true;
         //this.tipsBg.touchEnabled = false;
 
+        this.tipsGroup.touchChildren = this.tipsGroup.touchEnabled = false;
+
         this.handMC.x = this.handMC.y = 0
 
     }

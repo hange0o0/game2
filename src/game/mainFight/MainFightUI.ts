@@ -23,7 +23,7 @@ class MainFightUI extends MainBase {
     private defBtn: eui.Group;
     private atkBtn: eui.Group;
 
-    private taskGroup: eui.Group;
+    public taskGroup: eui.Group;
     private taskText: eui.Label;
     private taskResultText: eui.Label;
     private taskIcon: eui.Image;
@@ -45,6 +45,7 @@ class MainFightUI extends MainBase {
     private hideTopState
     private taskVO
     private giftTW
+    private stopAlertTask
 
     public constructor() {
         super();
@@ -78,9 +79,9 @@ class MainFightUI extends MainBase {
         this.addBtnEvent(this.taskGroup, this.onTask)
 
         var tw = this.giftTW = egret.Tween.get(this.taskFinishMC,{loop:true});
-        var bs = 0.7
+        var bs = 0.5
         tw.to({scaleX:1.1*bs,scaleY:0.8*bs},200).to({scaleX:1*bs,scaleY:1.1*bs,y:this.taskFinishMC.y -15},200).
-            to({scaleX:1.1*bs,scaleY:0.8*bs,y:this.taskFinishMC.y},200).to({scaleX:1*bs,scaleY:1*bs},300).wait(5000);
+            to({scaleX:1.1*bs,scaleY:0.8*bs,y:this.taskFinishMC.y},200).to({scaleX:1*bs,scaleY:1*bs},300).wait(2000);
         this.giftTW.setPaused(true)
 
         //this.defBtn.visible = false
@@ -170,9 +171,11 @@ class MainFightUI extends MainBase {
 
     public onShow(){
         GuideManager.getInstance().enableScrollV(this.scroller);
+        this.stopAlertTask = true
         this.renew();
         this.renewForce();
         this.renewRed();
+        this.stopAlertTask = false
 
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
         this.addPanelOpenEvent(GameEvent.client.red_change,this.renewRed)
@@ -292,7 +295,8 @@ class MainFightUI extends MainBase {
             {
                 if(!TaskManager.getInstance().lastFinishStat[item.id])
                 {
-                    MyWindow.ShowTips('【'+item.getDes() + '】　[已完成]',2000);
+                    if(!this.stopAlertTask)
+                        MyWindow.ShowTips('【'+item.getDes().replace(']','').replace('[','') + '】 已完成',2000);
                     TaskManager.getInstance().lastFinishStat[item.id] = true;
                     TaskManager.getInstance().nowAction = null;
                 }

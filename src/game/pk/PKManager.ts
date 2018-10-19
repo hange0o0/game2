@@ -74,7 +74,7 @@ class PKManager {
         '$%&*&$@','@#$%&','( T___T ) ','( 3__3 ) ','zzz ZZZ','╭∩╮','...']
 
 
-    public defaultCardList = '6,6,6,65,64,41,3,31,64';
+    public defaultCardList = '6,6,6,41,3,31,64,65,64';
 
     public getPKBG(){
         return this.getBG(HangManager.getInstance().getHangBGID())

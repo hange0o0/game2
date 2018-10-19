@@ -116,7 +116,7 @@ class PKCtrlCon extends game.BaseContainer {
         PKingUI.getInstance().quickBegin();
         var PD = PKData.getInstance();
         PD.playSpeed ++;
-        var max = 4//PD.isReplay?4:3
+        var max = PD.isReplay?4:3
         if(PD.playSpeed >= max)
             PD.playSpeed = 1;
         this.renewSpeedBtn()

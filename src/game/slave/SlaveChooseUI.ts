@@ -12,6 +12,8 @@ class SlaveChooseUI extends game.BaseWindow {
     private okBtn: eui.Button;
     private emptyGroup: eui.Group;
     private emptyText: eui.Label;
+    private rankBtn: eui.Button;
+
 
 
 
@@ -26,6 +28,10 @@ class SlaveChooseUI extends game.BaseWindow {
         this.list.itemRenderer = SlaveChooseItem;
         this.addBtnEvent(this.okBtn,this.onClick)
         this.addBtnEvent(this.cancelBtn,this.hide)
+        this.addBtnEvent(this.rankBtn,()=>{
+            RankUI.getInstance().show();
+            this.hide();
+        })
     }
 
     private onClick(){

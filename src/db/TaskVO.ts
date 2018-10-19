@@ -291,6 +291,7 @@ class TaskVO {
             case 'resource':
             case 'cardnum':
             case 'pvp':
+            case 'tec':
                 if(this.value1 >= 1000)
                     return '差'+  (this.value1 - this.currentValue)
                 return this.currentValue +  ' /' + this.value1;

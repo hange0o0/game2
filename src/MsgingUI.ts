@@ -5,6 +5,11 @@ class MsgingUI extends egret.Sprite {
         if (!this.instance) this.instance = new MsgingUI();
         return this.instance;
     }
+    private static instance2:MsgingUI;//PK服务器
+    public static getInstance2() {
+        if (!this.instance2) this.instance2 = new MsgingUI();
+        return this.instance2;
+    }
 
     public constructor() {
         super();

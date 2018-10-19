@@ -19,7 +19,7 @@
 
 
 
-	<e:Group id="tipsGroup" y="82" horizontalCenter="0" width="777">
+	<e:Group id="tipsGroup" y="82" horizontalCenter="0" width="777" touchEnabled="false" touchChildren="false">
 		<e:Image x="37" y="80" height="240" width="740" source="bar_bg_png" scale9Grid="11,13,187,5"/>
 		<e:Image source="guide1_png" x="26.54" y="11"/>
 		<e:Label id="tipTxt" y="102" size="26" lineSpacing="10" text="123456" textColor="0xccb48e" width="340" x="340"/>

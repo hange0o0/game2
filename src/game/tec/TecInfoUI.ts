@@ -27,6 +27,8 @@ class TecInfoUI extends game.BaseWindow {
     public okBtn: eui.Button;
     private leftBtn: eui.Image;
     private rightBtn: eui.Image;
+    private coinText: eui.Label;
+
 
 
 
@@ -106,6 +108,7 @@ class TecInfoUI extends game.BaseWindow {
         this.mc.source = this.dataIn.getThumb();
         this.desText.text = this.dataIn.des
         this.upGroup2.visible = false
+        this.currentState = 'normal';
         switch(this.dataIn.type)
         {
             case 1:
@@ -152,6 +155,8 @@ class TecInfoUI extends game.BaseWindow {
                 this.text1.text = '+' + TCM.getForceAdd(this.dataIn.id,lv)
                 this.text2.text = '+' + TCM.getForceAdd(this.dataIn.id,lv + 1)
                 this.upStr = '战力 +'  + (TCM.getForceAdd(this.dataIn.id,lv + 1) - TCM.getForceAdd(this.dataIn.id,lv))
+                this.coinText.text = ''+(UM.tec_force);
+                this.currentState = 'force';
                 break;
             case 3:
                 this.upGroup.visible = true
@@ -160,6 +165,8 @@ class TecInfoUI extends game.BaseWindow {
                 this.text1.text = '+' + TCM.getCoinAdd(this.dataIn.id,lv)
                 this.text2.text = '+' + TCM.getCoinAdd(this.dataIn.id,lv + 1)
                 this.upStr = '每小时金币 +'  + (TCM.getCoinAdd(this.dataIn.id,lv + 1) - TCM.getCoinAdd(this.dataIn.id,lv))
+                this.coinText.text = NumberUtil.addNumSeparator(UM.hourcoin);
+                this.currentState = 'coin';
                 break;
             case 4:
                 this.upGroup.visible = true

@@ -10,8 +10,11 @@ class PKServerManager extends egret.EventDispatcher{
     private webSocket:egret.WebSocket;
 
     private callBackFun = {};
+
     private callBackIndex = 1;
 
+    private modeNum = 0;
+    private modeIndex = {};
 
     public ctrler
 
@@ -24,6 +27,7 @@ class PKServerManager extends egret.EventDispatcher{
         sock.addEventListener(egret.Event.CLOSE, this.onSocketClose, this);
         sock.addEventListener(egret.IOErrorEvent.IO_ERROR, this.onIOError, this);
         sock.connect(Config.pkServerHost, Config.pkServerPose);
+        MsgingUI.getInstance2().show();
     }
 
     public onReceiveMessage(){
@@ -79,10 +83,19 @@ class PKServerManager extends egret.EventDispatcher{
         {
             this.callBackFun[oo.callbackid] && this.callBackFun[oo.callbackid](oo.msg);
             delete this.callBackFun[oo.callbackid];
+
+            if(this.modeIndex[oo.callbackid])
+            {
+                delete this.modeIndex[oo.callbackid];
+                this.modeNum--;
+                if(this.modeNum <= 0)
+                    MsgingUI.getInstance2().hide();
+            }
         }
     }
 
     public onSocketOpen(){
+        MsgingUI.getInstance2().hide();
         console.log('socket_open');
         this.ctrler.onConnect();
 
@@ -101,6 +114,7 @@ class PKServerManager extends egret.EventDispatcher{
     }
 
     private onIOError(event:egret.IOErrorEvent):void {
+        MsgingUI.getInstance2().hide();
         if(DEBUG) console.log(event.type);
         if(this.ctrler && this.ctrler.pkData)
             MyWindow.Alert('无法连接对战服务器！')
@@ -115,6 +129,7 @@ class PKServerManager extends egret.EventDispatcher{
 
 
     public close(){
+        MsgingUI.getInstance2().hide();
         this.ctrler = null;
         if(this.webSocket){
             this.webSocket.removeEventListener(egret.ProgressEvent.SOCKET_DATA, this.onReceiveMessage, this);
@@ -126,7 +141,7 @@ class PKServerManager extends egret.EventDispatcher{
         }
     }
 
-    public sendData(event,data,fun?){
+    public sendData(event,data,fun?,isMode?){
         if(!this.webSocket)
             return;
         var oo:any = {
@@ -134,16 +149,24 @@ class PKServerManager extends egret.EventDispatcher{
             gameid:UM.gameid,
             msg:data
         }
+
+        var carrBackID = this.callBackIndex;
+        oo.callbackid = carrBackID;
+        this.callBackIndex ++;
         if(fun)
         {
-            var carrBackID = this.callBackIndex;
             this.callBackFun[carrBackID] = fun;
-            oo.callbackid = carrBackID;
-            this.callBackIndex ++;
         }
         var cmd = JSON.stringify(oo);
         this.webSocket.writeUTF(cmd);
         console.log('socketSend:'+cmd);
+
+        if(isMode)
+        {
+            MsgingUI.getInstance2().show();
+            this.modeNum ++;
+            this.modeIndex[carrBackID] = true;
+        }
     }
 
 
@@ -209,7 +232,7 @@ class PKServerManager extends egret.EventDispatcher{
             {
                 this.close();
             }
-        })
+        },true)
     }
 
     //测试重连

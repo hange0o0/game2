@@ -21,6 +21,7 @@ class RegisterServerUI extends game.BaseWindow {
 
 
     private type = 1;
+    private mItem;
 
     public constructor() {
         super();
@@ -42,6 +43,11 @@ class RegisterServerUI extends game.BaseWindow {
         this.nameText.addEventListener(egret.TextEvent.CHANGE,this.onChange,this);
 
 
+        this.mItem = PKMonsterMV.createItem();
+        this.mItem.scaleX = this.mItem.scaleY = 1.2;
+        this.mItem.y = 300
+        this.mItem.x = 180
+        this.addChild(this.mItem);
     }
 
     public onClose(){
@@ -123,9 +129,10 @@ class RegisterServerUI extends game.BaseWindow {
         //    this.createHtml(PKConfig.TYPENAME[3],0x000000)
         //]
 
-        this.chooseMC.x = mc.x - 5;
-        this.chooseMC.y = mc.y - 5;
-        this.setHtml(this.desText, '加强【' + this.createHtml(PKConfig.TYPENAME[this.type]+'类型',PKConfig.TYPECOLOR[this.type]) + '】单位属性10%')
+        this.chooseMC.x = mc.x - 8;
+        this.chooseMC.y = mc.y - 8;
+        this.setHtml(this.desText,this.createHtml(PKConfig.TYPENAME[this.type],PKConfig.TYPECOLOR[this.type]))
+        //this.setHtml(this.desText, '加强【' + this.createHtml(PKConfig.TYPENAME[this.type]+'类型',PKConfig.TYPECOLOR[this.type]) + '】单位属性10%')
 
         egret.Tween.removeTweens(this.arrowMC)
         var baseY = this.chooseMC.y + this.chooseMC.height + 10;
@@ -133,6 +140,21 @@ class RegisterServerUI extends game.BaseWindow {
         this.arrowMC.x = mc.x + 64/2 - 22/2
         var tw = egret.Tween.get(this.arrowMC,{loop:true});
         tw.to({y:this.arrowMC.y + 8},500).to({y:baseY},500);
+
+
+        var typeMid = {
+            1:6,
+            2:41,
+            3:65,
+        }
+
+        var id = parseInt(typeMid[this.type])
+        var item = this.mItem
+
+        item.load(id)
+        item.stand();
+
+
     }
 
 

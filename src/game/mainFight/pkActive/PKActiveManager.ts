@@ -61,7 +61,7 @@ class PKActiveManager {
 
     //取当前的PVP分数
     public getPvpScore(){
-        return PVPManager.getInstance().getCurrentScore() || (this.pvpScore)
+        return PVPManager.getInstance().getCurrentScore() || (this.pvpScore) || 0
     }
 
     public getActiveIcon(id){

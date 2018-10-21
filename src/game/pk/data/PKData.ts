@@ -61,7 +61,7 @@ class PKData extends egret.EventDispatcher{
         return this.isAuto || this.isReplay
     }
     public canSpeed(){
-        return !PKManager.getInstance().isOnline
+        return !PKManager.getInstance().isOnline && !GuideManager.getInstance().isGuiding
     }
 
     //public changeSpeed(speed){

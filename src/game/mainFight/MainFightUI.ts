@@ -296,7 +296,7 @@ class MainFightUI extends MainBase {
                 if(!TaskManager.getInstance().lastFinishStat[item.id])
                 {
                     if(!this.stopAlertTask)
-                        MyWindow.ShowTips('【'+item.getDes().replace(']','').replace('[','') + '】 已完成',2000);
+                        MyWindow.ShowTips('任务：【'+item.getDes().replace(']','').replace('[','') + '】 已完成',2000);
                     TaskManager.getInstance().lastFinishStat[item.id] = true;
                     TaskManager.getInstance().nowAction = null;
                 }

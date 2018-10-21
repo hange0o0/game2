@@ -19,6 +19,7 @@ class GuideUI extends game.BaseContainer{
 
 
 
+    private nearMC
     private clickFun
     private textIn
     private textIndex
@@ -173,6 +174,7 @@ class GuideUI extends game.BaseContainer{
         var toBottom = dataIn.toBottom;
         this.addChild(this.handMC);
         this.handStop();
+        this.nearMC = dataIn.nearMC;
         this.tipTxt.text = '';
         this.tipTxt.removeEventListener(egret.Event.ENTER_FRAME,this.onText,this)
         egret.callLater(function(){
@@ -310,10 +312,15 @@ class GuideUI extends game.BaseContainer{
         else if(y2 > y)//点在上方
         {
             this.tipsGroup.y = (y2 - this.tipsGroup.height)/2 + y + height
+            if(this.nearMC)
+                this.tipsGroup.y = this.leftRect.height + this.leftRect.y;
+
         }
         else
         {
-            this.tipsGroup.y = (y-this.tipsGroup.height)/2
+            this.tipsGroup.y = (y-this.tipsGroup.height)/2 + 10;
+            if(this.nearMC)
+                this.tipsGroup.y = this.leftRect.y - this.tipsGroup.height - 10;
         }
 
 

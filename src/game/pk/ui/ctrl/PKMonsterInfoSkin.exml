@@ -39,14 +39,14 @@
 	</e:Group>
 	<e:Group horizontalCenter="150" bottom="15">
 		<e:Image source="icon_pos_png" x="0" y="6"/>
-		<e:Label id="totalText2" text="总体积：15" size="24" stroke="3" verticalAlign="bottom" textColor="0xfcd48d" x="28" y="0"/>
+		<e:Label id="totalText2" text="总人口：15" size="24" stroke="3" verticalAlign="bottom" textColor="0xfcd48d" x="28" y="0"/>
 		<e:layout>
 			<e:HorizontalLayout verticalAlign="middle"/>
 		</e:layout>
 	</e:Group>
 	<e:Group horizontalCenter="-150" bottom="15">
 		<e:Image source="icon_pos_png" x="0" y="6"/>
-		<e:Label id="totalText1" text="总体积：15" size="24" stroke="3" verticalAlign="bottom" textColor="0xFCD48D" x="28" y="0"/>
+		<e:Label id="totalText1" text="总人口：15" size="24" stroke="3" verticalAlign="bottom" textColor="0xFCD48D" x="28" y="0"/>
 		<e:layout>
 		<e:HorizontalLayout verticalAlign="middle"/>
 		</e:layout>

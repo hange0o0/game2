@@ -20,7 +20,7 @@ class DebugManager {
     public addSkill = false
     public addHeroLevel = 0
     public maxHeroLevel = 13 //已开放的最大英雄等级
-    public cardLen = 15
+    public cardLen = 20
     public needTestTwo = false
     public createHangFlag = false;
 

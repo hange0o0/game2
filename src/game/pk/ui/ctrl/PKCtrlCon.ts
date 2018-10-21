@@ -23,7 +23,7 @@ class PKCtrlCon extends game.BaseContainer {
     private costMC: eui.Image;
     private costText: eui.Label;
     private helpBtn: eui.Image;
-    private tipsMC: eui.Image;
+    public tipsMC: eui.Image;
     private speedBtn: eui.Group;
     private speedText: eui.Label;
     private faceBtn: eui.Image;
@@ -652,10 +652,10 @@ class PKCtrlCon extends game.BaseContainer {
                     }
                 }
             }
-            var num = PD.myPlayer.getCardNum();
+            //var num = PD.myPlayer.getCardNum();
             this.cardText.text = 'x' + PD.myPlayer.getCardNum();
-            if(num == 0)
-                this.speedBtn.visible = true;
+            //if(num == 0)
+            //    this.speedBtn.visible = true;
         }
 
     }

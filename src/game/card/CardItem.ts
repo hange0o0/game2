@@ -24,7 +24,7 @@ class CardItem extends game.BaseItem {
     public onClick(){
         if(this.currentState == 'lock')
             return;
-        CardInfoUI.getInstance().show(this.data);
+        CardInfoUI.getInstance().show(this.data,{list: CardUI.getInstance().getCurrentList()});
     }
 
     public dataChanged(){

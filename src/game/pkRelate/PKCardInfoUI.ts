@@ -213,7 +213,7 @@ class PKCardInfoUI extends game.BaseContainer {
         arr2.push({index:3,icon:'icon_def1_png',iconScale:0.4,title:'防御',value:def,valueAdd:def2 - def})
         arr2.push({index:4,icon:'icon_speed_png',iconScale:1,title:'移动速度',value:vo.speed,valueAdd:0})
         arr2.push({index:4,icon:'icon_atkhp_png',iconScale:1,title:'队伍伤害',value:vo.atk2,valueAdd:0})
-        arr2.push({index:7,icon:'icon_pos_png',iconScale:1,title:'生物体积',value:vo.space,valueAdd:0})
+        arr2.push({index:7,icon:'icon_pos_png',iconScale:1,title:'需要人口',value:vo.space,valueAdd:0})
 
         if(vo.skillcd > 0)
             arr2.push({index:0,icon:'icon_clock_png',iconScale:1,title:'技能间隔',value:MyTool.toFixed(vo.skillcd/1000,1)+'秒',valueAdd:0});

@@ -296,7 +296,7 @@ class HangUI extends game.BaseItem {
             this.guideGroup.visible = false
             if(this.pkMV.visible && HM.level <5)
             {
-                egret.Tween.get(this.guideGroup,{loop:true}).wait(1000*10).call(()=>{
+                egret.Tween.get(this.guideGroup,{loop:true}).wait(1000*5).call(()=>{
                     this.guideGroup.visible = true
                     this.pkMV.visible = false
                 }).wait(1000*5).call(()=>{

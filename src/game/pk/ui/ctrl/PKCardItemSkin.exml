@@ -13,6 +13,6 @@
 		</e:Group>
 		<e:Label id="costText" text="5" size="24" stroke="3" x="63.09" y="81.68" width="30" textAlign="center" includeIn="normal"/>
 		<e:Image id="skillType" source="skill_type2_png" x="-0.88" y="74.08" scaleX="0.9" scaleY="0.9" includeIn="normal"/>
-	<e:Label id="cdText" text="10.5s" includeIn="normal" textColor="0xffeb89" stroke="3" size="22" horizontalCenter="0.5" verticalCenter="0"/>
+	<e:Label id="cdText" text="10.5s" includeIn="normal" textColor="0xffeb89" stroke="3" size="22" horizontalCenter="0.5" y='-25'/>
 
 </e:Skin>

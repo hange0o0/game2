@@ -75,6 +75,12 @@ class RankUI extends game.BaseUI {
             for(var i=0;i<arr.length;i++)
             {
                 var oo = arr[i];
+                if(!oo)
+                {
+                    arr.splice(i,1);
+                    i--;
+                    continue;
+                }
                 oo.title = this.typeObj[this.tab.selectedIndex].title
                 if(oo.gameid == UM.gameid)
                 {

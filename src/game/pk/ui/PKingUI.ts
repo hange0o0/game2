@@ -429,7 +429,7 @@ class PKingUI extends game.BaseUI {
         {
               this.showResult();
         }
-        else if(TM.now() - this.scrollTime > 10)
+        else if(TM.now() - this.scrollTime > 5)
         {
             this.autoMoveScreen();
         }

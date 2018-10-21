@@ -136,7 +136,7 @@ class PKMonsterInfoUI extends game.BaseContainer {
             mc.data = data;
         }
 
-        this['totalText' + index].text = '总体积：' + total + '/' + PKConfig.maxMonsterSpace;
+        this['totalText' + index].text = '总人口：' + total + '/' + PKConfig.maxMonsterSpace;
     }
 
     public renew(){

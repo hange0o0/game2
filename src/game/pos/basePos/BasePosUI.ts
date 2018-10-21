@@ -146,12 +146,16 @@ class BasePosUI extends game.BaseUI {
 
             if(this.tabList.hitTestPoint(e.stageX,e.stageY))
                 return;
-            if(this.mainPKBtn.hitTestPoint(e.stageX,e.stageY))
+
+            if(GuideManager.getInstance().isGuiding)
                 return;
+
 
             this.mainPKBtnGroup.visible = false
             this.btnGroup.addChild(this.pkBtn);
 
+            if(this.mainPKBtn.hitTestPoint(e.stageX,e.stageY))
+                return;
 
             if(this.bottomUI.closeBtn.hitTestPoint(e.stageX,e.stageY))
                 return;
@@ -243,7 +247,7 @@ class BasePosUI extends game.BaseUI {
     private onPK(){
         if(!this.changeToServerList())
         {
-            MyWindow.Alert('还没设置出战卡组')
+            MyWindow.Alert('请先设置出战卡组')
             return
         }
         this.testSave(()=>{
@@ -958,8 +962,11 @@ class BasePosUI extends game.BaseUI {
         }
         else
         {
-            this.pkData.title = '挑战关卡';
-            this.pkData.chooseCard = false;
+            if(this.pkData)
+            {
+                this.pkData.title = '挑战关卡';
+                this.pkData.chooseCard = false;
+            }
             this.btnGroup.removeChildren();
             //this.btnGroup.addChild(this.pkBtn);
             this.mainPKBtnGroup.visible = true

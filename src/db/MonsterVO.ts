@@ -83,6 +83,8 @@ class MonsterVO {
         this.mv_atk = data.mv_atk * 1000
         this.mv_atk2 = data.mv_atk2
 
+        //this.speed = 50;
+
         //var arr = [];
         //for(var s in MonsterVO.data)
         //{

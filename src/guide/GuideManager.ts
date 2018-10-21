@@ -51,7 +51,7 @@ class GuideManager {
     public reInit(){
         this.guideRandom = 0;
         this.guidePK = 0;
-        this.guideArr[0].text = '['+UM.nick+'](代号)您好，欢迎来到【冲破防线】！'
+        this.guideArr[0].text = '(代号)['+UM.nick+']您好，欢迎来到[【冲破防线】]！我是你的引路人[铁牛]。'
     }
 
     private init(){
@@ -165,15 +165,16 @@ class GuideManager {
 
         this.addGuideObj({
             mc:function(){return PKingUI.getInstance().pkTop.hpGroupIcon},
-            text:'这是队伍生命,当被敌人冲破出生点后就会扣除相应生命值，生命值降为0时则失败。',
+            text:'这是队伍生命,当被敌人冲破出生点后就会扣除相应生命值，生命值降为0时战斗失败。',
             guideKey:'hp',
             fun:function(){
                 self.showGuide()
+                TaskManager.getInstance().showGuideMC(PKingUI.getInstance().pkCtrlCon.tipsMC)
             }
         })
 
         this.addGuideObj({
-            text:'右下角显示的是兵种间的属性相克,现在就开始你的表演吧！',
+            text:'请注意右下角显示的兵种相克关系,现在就开始你的表演吧！',
             guideKey:'pk',
             fun:function(){
                 PKingUI.getInstance().setStop(false);
@@ -188,12 +189,13 @@ class GuideManager {
 
         this.addGuideObj({
             mc:function(){return TecUI.getInstance().list.getChildAt(0)},
-            text:'我们可通过提升战力科技提升战力。',
+            text:'我们可通过升级战力科技提升[所有卡牌]的战力。',
         })
 
         this.addGuideObj({
             mc:function(){return TecInfoUI.getInstance().okBtn},
-            text:'战力提升会影响所有的出战卡牌，一次提升，处处可用！',
+            nearMC:true,
+            text:'只要资源足够，马上升级吧。一次提升，处处可用！',
         })
 
         this.addGuideObj({
@@ -211,6 +213,7 @@ class GuideManager {
         })
         this.addGuideObj({
             mc:function(){return CardInfoUI.getInstance().okBtn},
+            nearMC:true,
             text:'解锁后你就可以在进攻和防守阵容中使用该随从卡牌了',
         })
         //this.addGuideObj({
@@ -278,6 +281,7 @@ class GuideManager {
         guideData.fun = data.fun;
         guideData.text = data.text;
         guideData.toBottom = data.toBottom;
+        guideData.nearMC = data.nearMC;
         guideData.hideHand = data.hideHand || false;
 
         this.guideKey = data.guideKey

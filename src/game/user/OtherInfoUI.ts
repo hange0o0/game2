@@ -385,9 +385,18 @@ class OtherInfoUI extends game.BaseWindow {
         var slave = InfoManager.getInstance().otherSlave[this.gameid];
         this.nameText.text = '' + data.nick //+ '  LV.' + (data.level||1);
         this.coinText.text = '时产：' + data.hourcoin
-        this.forceText.text = '战力：' + data.tec_force
+
+        var forceStr = data.tec_force;
+        if(UM.tec_force > data.tec_force)
+            forceStr = this.createHtml(forceStr,0x66FF66)
+        else if(UM.tec_force < data.tec_force)
+            forceStr = this.createHtml(forceStr,0xFF3333)
+
+        this.setHtml(this.forceText, '战力：' +  forceStr);
         if(Config.isDebug)
             this.nameText.text += ' ' + data.uid
+
+
 
         var infoArr = [
             {title:'科技等级：',value:'LV.' + (data.level||1)},

@@ -171,10 +171,10 @@ class CardInfoUI extends game.BaseWindow {
     }
 
     public onShow(){
-        if(this.sp.num)
-            this.openList = [];
+        if(this.sp.list)
+            this.openList = this.sp.list;
         else
-            this.openList = CardUI.getInstance().getCurrentList();
+            this.openList = []
         this.r0.selected = SharedObjectManager.getInstance().getMyValue('show_card_base') || false;
         this.r1.selected = !this.r0.selected
         this.renew();

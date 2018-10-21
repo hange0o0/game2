@@ -54,7 +54,12 @@ class PKMasterInfoUI extends game.BaseWindow {
     public onShow(){
         this.nameText.text = '' + this.masterData.nick// + "  (LV."+(this.data.level || 1)+")";
         this.coinText.text = '时产：' + this.masterData.hourcoin;
-        this.forceText.text = '战力：'  + this.masterData.tec_force;
+        var forceStr = this.masterData.tec_force;
+        if(UM.tec_force > this.masterData.tec_force)
+            forceStr = this.createHtml(forceStr,0x66ff66)
+        else if(UM.tec_force < this.masterData.tec_force)
+            forceStr = this.createHtml(forceStr,0xff3333)
+        this.setHtml(this.forceText,'战力：'  + forceStr);
         this.headMC.setData(this.masterData.head,this.masterData.type);
         MyTool.setTypeImg(this.typeMC,this.masterData.type)
 

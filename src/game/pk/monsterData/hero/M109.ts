@@ -97,6 +97,8 @@ class S109StateListener extends PKStateListener {
         var user:PKMonsterData = <PKMonsterData>this.owner
         if(user.die)
             return;
+        if(user.skillTemp['109_times'] && user.skillTemp['109_times'] > 10)
+            return
         var keys = ['atk+']
         user.atk += Math.ceil(user.getVO().getHeroSkillValue(1,1)/100*user.baseAtk)
         if(user.level>=2)
@@ -104,10 +106,10 @@ class S109StateListener extends PKStateListener {
             user.addSpeed += user.getVO().getHeroSkillValue(2,1);
             keys.push('speed+')
         }
-
+        user.skillTemp['109_times'] = (user.skillTemp['109_times'] || 0) + 1;
         PKData.getInstance().addVideo({
             type:PKConfig.VIDEO_MONSTER_ADD_STATE,
-            user:target,
+            user:user,
             keys:keys
         })
     }

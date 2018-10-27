@@ -1012,15 +1012,24 @@ class BasePosUI extends game.BaseUI {
             for(var i=0;i<list.length;i++)
             {
                 var id = list[i];
-                if(!stopDelete && id>PKConfig.skillBeginID)
+                if(!stopDelete)
                 {
-                    var num =CardManager.getInstance().getSkillNum(id);
-                    var useNum = this.useCard[id] || 0
-                    if(num<=useNum)
+                    if(id>PKConfig.skillBeginID)
+                    {
+                        var num =CardManager.getInstance().getSkillNum(id);
+                        var useNum = this.useCard[id] || 0
+                        if(num<=useNum)
+                        {
+                            removeSkill.push('【'+CM.getCardVO(id).name + '】');
+                            continue;
+                        }
+                    }
+                    else if(!CardManager.getInstance().isOwnCard(id))
                     {
                         removeSkill.push('【'+CM.getCardVO(id).name + '】');
                         continue;
                     }
+
                 }
                 this.useCard[id] = (this.useCard[id] || 0) + 1;
                 arr.push({id:id})
@@ -1089,7 +1098,7 @@ class BasePosUI extends game.BaseUI {
 
         var stopRemoveTips = this.pkData && this.pkData.stopRemoveTips
         if(removeSkill.length > 0 && !stopRemoveTips)
-            MyWindow.ShowTips('移除了 ' + removeSkill.length + ' 张无效法术牌')
+            MyWindow.ShowTips('移除了 ' + removeSkill.length + ' 张无效卡牌')
 
 
     }

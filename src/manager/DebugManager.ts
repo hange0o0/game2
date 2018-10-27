@@ -740,7 +740,7 @@ class DebugManager {
             result2.push('//' + (i+1) + '->等级：' + oo.lv + '\t\t比例：' + oo.rate + '\t\t胜场：' + oo.result.length + ' /' + oo.total+'\n//' + this.changeResult(oo.result)[0])
         }
 
-        console.log('<?php\\n$question = array('+result.join(',')+');\n'+result2.join('\n')+'\n?> ')
+        console.log('<?php\n$question = array('+result.join(',')+');\n'+result2.join('\n')+'\n?> ')
         console.log('================================');
         //for(var i=0;i<result2.length;i++)
         //    console.log(result2[i])

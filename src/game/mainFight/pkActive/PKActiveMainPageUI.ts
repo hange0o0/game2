@@ -44,6 +44,11 @@ class PKActiveMainPageUI extends game.BaseItem {
     }
 
     private onActive(){
+        if(HangManager.getInstance().level < Config.activeLevel)
+        {
+            MyWindow.ShowTips('通关战役 '+Config.activeLevel+' 解锁活动')
+            return;
+        }
         if(this.currentActive)
             PKActiveUI.getInstance().show(this.currentActive);
     }
@@ -55,7 +60,11 @@ class PKActiveMainPageUI extends game.BaseItem {
         if(this.currentState == 'lock')
             return;
         var t = TM.now();
-        if(this.currentActive)
+        if(HangManager.getInstance().level < Config.activeLevel)
+        {
+            this.cdText.text = '战役 '+Config.activeLevel+''
+        }
+        else if(this.currentActive)
         {
             var cd = this.currentActive.end - t
             if(cd <=0)
@@ -102,7 +111,7 @@ class PKActiveMainPageUI extends game.BaseItem {
 
         this.currentActive = PAM.getCurrentActive();
         this.nextActive = PAM.getNextActive();
-        if(this.currentActive)
+        if(this.currentActive && HangManager.getInstance().level >= Config.activeLevel)
             this.activeMC.source = PAM.getActiveIcon(this.currentActive.type)
         else
             this.activeMC.source = PAM.getActiveIcon(0)

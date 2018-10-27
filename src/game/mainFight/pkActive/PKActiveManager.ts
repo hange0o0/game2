@@ -87,8 +87,8 @@ class PKActiveManager {
             for(var s in this.activeList)
             {
                 var oo = this.activeList[s]
-                oo.start = DateUtil.getTimestampByChineseDate(oo.start)
-                oo.end = DateUtil.getTimestampByChineseDate(oo.end)
+                //oo.start = DateUtil.getTimestampByChineseDate(oo.start)
+                //oo.end = DateUtil.getTimestampByChineseDate(oo.end)
                 if(DEBUG && oo.start > oo.end)
                     throw new Error('1111')
             }

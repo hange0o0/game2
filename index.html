@@ -516,11 +516,23 @@
 		Config.serverID = _get['serverid'] || 1;
 		Config.userHost = 'http://172.17.196.195:90/game2/userindex.php';
 		Config.host = 'http://172.17.196.195:90/game2/gameindex'+Config.serverID+'.php';
+		Config.pkServerHost = '120.77.153.203';
+		Config.pkServerPose = 9029;
 		if(_get['app'])
 		{
 //			Config.userHost = 'http://hangegame.com/userindex.php';
 			Config.userHost = 'http://hangegame.com/game2/userindex.php';
 			Config.host = 'http://hangegame.com/game2/gameindex'+Config.serverID+'.php';
+			Config.pkServerHost = '120.77.153.203';
+			Config.pkServerPose = 9029;
+		}
+		else if(_get['app2'])
+		{
+//			Config.userHost = 'http://hangegame.com/userindex.php';
+			Config.userHost = 'http://120.77.153.203/game2/userindex.php';
+			Config.host = 'http://120.77.153.203/game2/gameindex'+Config.serverID+'.php';
+			Config.pkServerHost = '120.77.153.203';
+			Config.pkServerPose = 9029;
 		}
 
 		var dw = document.body.clientWidth;

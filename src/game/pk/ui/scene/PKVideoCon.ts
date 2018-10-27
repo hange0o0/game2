@@ -374,7 +374,7 @@ class PKVideoCon extends game.BaseContainer {
     public playDoubleHit(item:PKMonsterItem,value){
          var txt = this.createTxt();
         txt.textColor = 0xFF0000;
-        txt.text = '!' + value;
+        txt.text = '!' + Math.ceil(value);
         txt.x = item.x;
         txt.y = item.y - item.data.getVO().height - 30;
         this.con.addChildAt(txt,item.parent.getChildIndex(item) + 1)

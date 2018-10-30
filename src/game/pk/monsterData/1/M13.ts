@@ -56,7 +56,7 @@ class M13StateListener extends PKStateListener {
             var des = Math.abs(user.x - targetEnemy.x);
             if(des<=atkrage)
             {
-                targetEnemy.addHp(-Math.ceil(user.getSkillValue(2,true)*user.getAtkRate(targetEnemy)))
+                targetEnemy.addHp(-Math.ceil(user.getSkillValue(2,true)*user.getAtkRate(targetEnemy)*0.5))
             }
         }
         return list;

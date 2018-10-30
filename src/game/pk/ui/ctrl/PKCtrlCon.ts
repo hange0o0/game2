@@ -432,8 +432,8 @@ class PKCtrlCon extends game.BaseContainer {
         this.needRenewInfo = false;
         this.overMC.visible = false
         this.speedBtn.visible = false
-        this.faceBtn.visible = PKManager.getInstance().isOnline
-        this.settingBtn.visible = !PKManager.getInstance().isOnline
+        this.faceBtn.visible = !PD.isReplay && PKManager.getInstance().isOnline
+        this.settingBtn.visible = !this.faceBtn.visible
 
         this.hideTips = false;
         this.tipsMC.visible = true;

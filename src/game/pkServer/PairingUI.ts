@@ -60,7 +60,7 @@ class PairingUI extends game.BaseUI {
     private onTimer(){
         var cd = TM.now() - this.startTimer + 1
         this.cdText.text = DateUtil.getStringBySecond(cd).substr(-5)
-        if(cd > 60)
+        if(cd > 25)
         {
             this.onClose();
             MyWindow.Confirm('很遗憾，没有匹配到玩家\n进群喊人一起匹配吧！',(b)=>{

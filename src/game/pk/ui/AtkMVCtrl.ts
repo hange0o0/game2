@@ -293,6 +293,49 @@ class AtkMVCtrl {
         egret.Tween.get(userItem).to({x:userItem.x + user.atkRota*50},300)
     }
 
+    public atkMV111(user,target,actionTime,endTime){
+        var mBase = MBase.getData(111)
+        var userItem = PKVideoCon.getInstance().getItemByID(user.id);
+        var targetItem = PKVideoCon.getInstance().getItemByID(target.id);
+        var mc = this.playAniOn(user.id,mBase.mvID1)
+        if(mc)
+        {
+            mc.scaleY = 1;
+            if(userItem.x > targetItem.x)
+            {
+                mc.scaleX = -1
+                mc.x -= 30
+            }
+            else
+            {
+                mc.scaleX = 1
+                mc.x += 30
+            }
+            mc.y -= 70
+        }
+    }
+    public atkMV112(user,target,actionTime,endTime){
+        var mBase = MBase.getData(112)
+        var userItem = PKVideoCon.getInstance().getItemByID(user.id);
+        var targetItem = PKVideoCon.getInstance().getItemByID(target.id);
+        var mc = this.playAniOn(user.id,mBase.mvID1)
+        if(mc)
+        {
+            mc.scaleY = 1;
+            if(userItem.x > targetItem.x)
+            {
+                mc.scaleX = -1
+                mc.x -= 30
+            }
+            else
+            {
+                mc.scaleX = 1
+                mc.x += 30
+            }
+            mc.y -= 70
+        }
+    }
+
 
     ////////////////////////////////////////////////////////////////
     public skillMV1(user,target,actionTime,endTime){

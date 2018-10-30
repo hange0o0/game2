@@ -92,7 +92,21 @@ class TecInfoUI extends game.BaseWindow {
         this.openList =  TecManager.getInstance().getListByType(this.dataIn.type);
         this.renew();
 
-        //this.addPanelOpenEvent(ServerEvent.Client.BUSINESS_BUILDING_RENEW,this.renew)
+        this.addPanelOpenEvent(GameEvent.client.coin_change,this.renewCoin)
+    }
+
+    private renewCoin(){
+        var TCM = TecManager.getInstance();
+        if(TCM.testRed(this.dataIn.id))
+        {
+            this.okBtn.skinName = 'Btn1Skin'
+            this.okBtn.touchEnabled = true
+        }
+        else
+        {
+            this.okBtn.skinName = 'Btn3Skin'
+            this.okBtn.touchEnabled = false
+        }
     }
 
     public showFinish(){
@@ -188,16 +202,7 @@ class TecInfoUI extends game.BaseWindow {
         this.dataArray.source = arr;
         this.dataArray.refresh()
 
-        if(TCM.testRed(this.dataIn.id))
-        {
-            this.okBtn.skinName = 'Btn1Skin'
-            this.okBtn.touchEnabled = true
-        }
-        else
-        {
-            this.okBtn.skinName = 'Btn3Skin'
-            this.okBtn.touchEnabled = false
-        }
+      this.renewCoin()
 
         var index = this.openList.indexOf(this.dataIn);
         this.leftBtn.visible = index > 0

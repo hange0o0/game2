@@ -66,7 +66,7 @@ class DebugManager {
 
 
 
-
+      //可测试对不上的问题
     public testHeroMonster(){
         this.addHeroLevel = 5
         this.needTestTwo = true

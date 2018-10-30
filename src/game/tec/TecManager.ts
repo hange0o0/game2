@@ -218,6 +218,7 @@ class TecManager {
         var self = this;
         var oo:any = {};
         oo.id = id;
+        oo.coin = UM.getCoin();
         Net.addUser(oo);
         Net.send(GameEvent.tec.tec_up, oo, (data)=> {
             var msg = data.msg;

@@ -30,7 +30,7 @@ class M101 extends MBase{
             buff.addValue('def',-value1);
             if(user.level>=2)
             {
-                buff.addValue('atk',-Math.floor(target.atk*value2));
+                buff.addValue('atk',-Math.floor(target.baseAtk*value2));
                 keys.push('atk-')
             }
             if(user.level>=3)
@@ -166,7 +166,7 @@ class M101StateListener extends PKStateListener {
         buff.addValue('def',-value1);
         if(mvo.level>=2)
         {
-            buff.addValue('atk',-Math.floor(target.atk*value2));
+            buff.addValue('atk',-Math.floor(target.baseAtk*value2));
             keys.push('atk-')
         }
         if(mvo.level>=3)

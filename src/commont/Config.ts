@@ -70,7 +70,7 @@ class Config {
             arr.push(this.createImg("effect" + i + ".png",'monster/'));
         }
 
-        var aniList = [5, 8,30,102,103,104,111,112,119,128,166,200,1001];
+        var aniList = [5, 8,30,102,103,104,111,112,119,128,166,200,201,1001];
         for(var i=0;i<aniList.length;i++)
         {
             arr.push(this.createJSON('skill' + aniList[i] + '.json','ani/'));

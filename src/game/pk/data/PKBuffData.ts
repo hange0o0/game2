@@ -1,6 +1,6 @@
 class PKBuffData {
-    public user;
-    public owner;
+    public user; //发起者,对象
+    public owner;        //拥有者
     public isDebuff = false;
     public removeAble = true;
 

@@ -32,7 +32,7 @@ class M115 extends MBase{
                 mid:mid,
                 owner:user.owner,
                 atkRota:atkRota,
-                x:user.x,
+                x:target.x,
                 y:-30 + Math.random()*60,
                 lastSkill:Number.MAX_VALUE,
                 actionTime:PD.actionTime

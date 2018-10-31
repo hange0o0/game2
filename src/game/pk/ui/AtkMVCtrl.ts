@@ -304,14 +304,14 @@ class AtkMVCtrl {
             if(userItem.x > targetItem.x)
             {
                 mc.scaleX = -1
-                mc.x -= 30
+                mc.x -= user.atkX
             }
             else
             {
                 mc.scaleX = 1
-                mc.x += 30
+                mc.x += user.atkX
             }
-            mc.y -= 70
+            mc.y -= 90
         }
     }
     public atkMV112(user,target,actionTime,endTime){
@@ -325,14 +325,14 @@ class AtkMVCtrl {
             if(userItem.x > targetItem.x)
             {
                 mc.scaleX = -1
-                mc.x -= 30
+                mc.x -= user.atkX
             }
             else
             {
                 mc.scaleX = 1
-                mc.x += 30
+                mc.x += user.atkX
             }
-            mc.y -= 70
+            mc.y -= 90
         }
     }
 

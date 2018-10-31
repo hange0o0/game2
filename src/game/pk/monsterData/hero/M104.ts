@@ -82,6 +82,7 @@ class M104 extends MBase{
                     {
                         var addX =  user.x<newTarget.x? backDis:-backDis;
                         newTarget.x += addX;
+                        console.log(addX) ;
                     }
 
                     //if (user.level >= 4) {
@@ -117,7 +118,7 @@ class M104 extends MBase{
             target:user,
             stopTestDie:true,
             actionTime:PD.actionTime,
-            endTime:PD.actionTime + 1000*user.getSkillValue(1)
+            endTime:PD.actionTime + 1000*user.getVO().getHeroSkillValue(5,1)
         })
     }
 

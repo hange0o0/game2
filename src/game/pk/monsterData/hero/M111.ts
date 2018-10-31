@@ -6,7 +6,7 @@ class M111 extends MBase{
     public mvID1 = 201;
 
     public initMonster(user:PKMonsterData){
-        user.atkX = 40
+        user.atkX = 100
         //user.atkY = 65
     }
 

@@ -13,7 +13,7 @@ class M105 extends MBase{
             hpRate = atkRate = user.getVO().getHeroSkillValue(5,1)/100;
         for(var i=0;i<arr.length;i++) {
             var target = arr[i];
-            if(!target.getVO().isHero())
+            if(target.getVO().isHero())
                 continue;
 
             addHp+= target.hp*hpRate
@@ -87,7 +87,7 @@ class M105StateListener extends PKStateListener {
         var PD = PKData.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
         var atkrage = mvo.getHeroSkillValue(4,1);
-        var hurt = Math.ceil(mvo.getHeroSkillValue(4,1,user)/2);
+        var hurt = Math.ceil(mvo.getHeroSkillValue(4,2,user)/2);
         var list = [];
 
 

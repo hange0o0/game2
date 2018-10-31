@@ -5,7 +5,7 @@ class M112 extends MBase{
     public mvID1 = 200;
 
     public initMonster(user:PKMonsterData){
-        user.atkX = 40
+        user.atkX = 100
         //user.atkY = 65
     }
     //伤害飞行时间
@@ -19,6 +19,28 @@ class M112 extends MBase{
         if(!b)
             return false;
         this.addEffect(user,target);
+
+        var PD = PKData.getInstance();
+        if(user.level >= 3 && PD.random()*100 < user.getVO().getHeroSkillValue(3,1))
+        {
+            var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
+            var list = [];
+            for(var i=0;i<arr.length;i++)
+            {
+                var targetX = arr[i];
+                if(!targetX.beSkillAble())
+                    continue;
+                if(targetX.haveBuff(112))
+                    continue;
+                list.push(targetX)
+            }
+            if(list.length)
+            {
+                this.addEffect(user,PKData.getInstance().randomOne(list));
+            }
+        }
+
+
         return true;
     }
 
@@ -75,37 +97,6 @@ class M112 extends MBase{
         }
     }
 
-    public getSkillTarget(user:PKMonsterData){
-        if(user.level>=3 && this.isHeroSkillCDOK(user,3))
-        {
-            var PD = PKData.getInstance();
-            var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
-            var list = [];
-            for(var i=0;i<arr.length;i++)
-            {
-                var target = arr[i];
-                if(!target.beSkillAble())
-                    continue;
-                if(target.haveBuff(112))
-                    continue;
-                list.push(target)
-            }
-            if(list.length)
-            {
-                var target = PKData.getInstance().randomOne(list)
-                user.callHeroSkill = 3;
-                return [target];
-            }
-            return [];
-        }
-    }
-
-    public skill(user:PKMonsterData,target){
-        if(user.useingHeroSkill == 3)
-        {
-            this.addEffect(user,target)
-        }
-    }
 
 
     public onDie(user:PKMonsterData){

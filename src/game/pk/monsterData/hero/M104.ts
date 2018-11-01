@@ -82,7 +82,6 @@ class M104 extends MBase{
                     {
                         var addX =  user.x<newTarget.x? backDis:-backDis;
                         newTarget.x += addX;
-                        console.log(addX) ;
                     }
 
                     //if (user.level >= 4) {

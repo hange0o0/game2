@@ -19,7 +19,7 @@ class DebugManager {
     public MML = 998;  //测试出战怪的等级
     public addSkill = false
     public addHeroLevel = 0
-    public maxHeroLevel = 13 //已开放的最大英雄等级
+    public maxHeroLevel = 20 //已开放的最大英雄等级
     public cardLen = 20
     public needTestTwo = false
     public createHangFlag = false;

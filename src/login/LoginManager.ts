@@ -164,7 +164,7 @@ class LoginManager{
         {
             oo = FromManager.getInstance().getLoginBase();
         }
-        UM.gameid = Config.platformGameidAdd + Config.serverID + '_' + this.gameid
+        UM.gameid = Config.serverID + '_' + this.gameid
         if(!MailManager.getInstance().getNotAwardNum())
             oo.mailtime = MailManager.getInstance().mailData.msgtime || 1
         //oo.serverid = serverid;

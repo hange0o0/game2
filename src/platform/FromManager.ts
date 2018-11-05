@@ -14,7 +14,7 @@ class FromManager {
         this.h5Form = true
         if(from == 'test')
             this.h5Form = false
-        Config.localResRoot = '../resource2/'// + Config.localResRoot
+        //Config.localResRoot = '../resource2/'// + Config.localResRoot
 
 
         //本地测试用
@@ -99,7 +99,7 @@ class FromManager {
         }
     }
 
-    //登录上服
+    //
     public pay(id,successFun){
         var mgr = this.getManager()
         if(mgr && mgr.pay)

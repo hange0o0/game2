@@ -118,6 +118,7 @@ class GameEvent {
     public static pay = {
         add_diamond:'pay.add_diamond',
         buy_shop:'pay.buy_shop',
+        pay_confirm:'pay.pay_confirm',
         get_shop:'pay.get_shop'
     }
 

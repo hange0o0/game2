@@ -69,6 +69,11 @@ class UserManager {
         PropManager.getInstance().init(data.prop)
     }
 
+    public addDiamond(value){
+        this.diamond += value;
+        EM.dispatch(GameEvent.client.diamond_change)
+    }
+
     //1小时内有调用过可保证准确性
     public getCoin(){
         var time = TM.now();

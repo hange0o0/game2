@@ -205,6 +205,10 @@ class Main extends eui.UILayer {
         if(_get['hide'])
             return;
         SoundManager.getInstance().preLoad();
+
+        if(FromManager.getInstance().login())
+            return;
+
         var LM = LoginManager.getInstance();
         if(SharedObjectManager.getInstance().getValue('change_user_gameid'))
         {

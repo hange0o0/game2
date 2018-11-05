@@ -14,6 +14,13 @@ class ShopDiamondItem extends game.BaseItem {
     }
 
     private onClick(){
+        if(FromManager.getInstance().h5Form)
+        {
+            FromManager.getInstance().pay(this.data.id,()=>{
+
+            });
+            return
+        }
         PayManager.getInstance().add_diamond(this.data.id,()=>{
             MyWindow.ShowTips('增加钻石成功！')
         })

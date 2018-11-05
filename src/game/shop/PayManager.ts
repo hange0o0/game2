@@ -38,6 +38,16 @@ class PayManager {
         return !DateUtil.isSameDay(this.openShopTime)
     }
 
+    public onBuyFinish(goodsid,fun){
+
+        UM.addDiamond(this.diamondBase[goodsid].value)
+        MyWindow.ShowTips('购买成功')
+        SoundManager.getInstance().playEffect(SoundConfig.effect_buy);
+        PayingUI.getInstance().hide();
+        if(fun)
+            fun();
+    }
+
     public get_shop(fun?){
         if(this.shopTime && DateUtil.isSameDay(this.shopTime))
         {
@@ -111,6 +121,25 @@ class PayManager {
             SoundManager.getInstance().playEffect(SoundConfig.effect_buy);
             if(fun)
                 fun();
+        });
+    }
+
+    public pay_confirm(order,goodsid,fun?){
+        var self = this;
+        var oo:any = {};
+        oo.order = order;
+        Net.addUser(oo);
+        Net.send(GameEvent.pay.pay_confirm,oo,function(data){
+            var msg = data.msg;
+            if(msg.fail)
+            {
+                MyWindow.Alert('未找到订单记录');
+                return;
+            }
+            self.onBuyFinish(goodsid,fun);
+
+            //if(fun)
+            //    fun();
         });
     }
 }

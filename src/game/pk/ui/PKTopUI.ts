@@ -329,6 +329,11 @@ class PKTopUI extends game.BaseContainer {
                {
                    var list = PKData.getInstance().otherPlayer.autolist.split(',');
                    this.removeTopItem();
+                   if(!CM.getCardVO(list[this.index+1]))  //容错
+                   {
+                       sendClientError('找不到MID:'+list[this.index+1]);
+                       return;
+                   }
                    this.addTopItem(this.createLockData(list[this.index+1],this.index + 2));
                    //this.addTopItem({
                    //    mid:list[this.index+1],
@@ -345,6 +350,7 @@ class PKTopUI extends game.BaseContainer {
         this.removeTopItem();
 
         //加入一个
+
         data.topIndex = this.index
         this.index ++;
         this.addTopItem(data);

@@ -10,6 +10,8 @@ class ActiveManager {
     public time;
 
     public task;
+    public first_pay;
+    public rmb_award;
 
     public like_time
     public like_obj
@@ -22,6 +24,8 @@ class ActiveManager {
 
     public init(data){
         this.task = data.task
+        this.first_pay = data.first_pay
+        this.rmb_award = data.rmb_award || 0
     }
 
     public setLike(id,like)

@@ -14,7 +14,9 @@ class ShopUI extends game.BaseUI {
     private list: eui.List;
     private diamondTitle: eui.Group;
     private diamondList: eui.List;
+    private payAwardItem: PayAwardItem;
     private bottomUI: BottomUI;
+
 
 
     private getNextData = false
@@ -59,8 +61,10 @@ class ShopUI extends game.BaseUI {
     public onShow(){
         this.getNextData = false
         this.renew();
+        this.payAwardItem.renew();
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
         this.addPanelOpenEvent(GameEvent.client.diamond_change,this.renewList)
+        this.addPanelOpenEvent(GameEvent.client.rmb_change,this.renewRMB)
         if(this.toBottom)
         {
             this.once(egret.Event.ENTER_FRAME,()=>{
@@ -74,6 +78,10 @@ class ShopUI extends game.BaseUI {
         PayManager.getInstance().openShopTime = TM.now()
         SharedObjectManager.getInstance().setMyValue('open_shop_time',PayManager.getInstance().openShopTime)
         EM.dispatch(GameEvent.client.red_change)
+    }
+
+    private renewRMB(){
+        this.payAwardItem.renew();
     }
 
     public renewList(){

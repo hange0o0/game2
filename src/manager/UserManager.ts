@@ -20,6 +20,7 @@ class UserManager {
     public nick: string;
     public head: string;
     public type: number;
+    public rmb: number;
 
     public diamond: number;
     public uid: number;
@@ -56,6 +57,7 @@ class UserManager {
         this.tec_force = data.tec_force;
         this.last_land = data.last_land;
         this.diamond = data.diamond;
+        this.rmb = data.rmb;
         this.energy = data.energy; //  '{"v":0,"t":0,"rmb":0}'
         this.openData = data.openData; //  '{"v":0,"t":0,"rmb":0}'
 

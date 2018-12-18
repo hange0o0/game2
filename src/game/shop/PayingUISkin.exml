@@ -1,7 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<e:Skin class="PayingUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="560">
-	<e:Image y="0" width="560" height="250" x="0" source="card_bg_png" scale9Grid="52,70,120,88"/>
-
+<e:Skin class="PayingUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="560" height="250">
 
 	<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
 	<e:Label y="72.39" size="26" text="正在等待交易结果..." textColor="0xE3D1B6" horizontalCenter="0" stroke="2"/>

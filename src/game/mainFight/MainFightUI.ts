@@ -28,9 +28,7 @@ class MainFightUI extends MainBase {
     private taskResultText: eui.Label;
     private taskIcon: eui.Image;
     private taskFinishMC: eui.Image;
-
-
-
+    private firstBtn: eui.Group;
 
 
 
@@ -64,6 +62,9 @@ class MainFightUI extends MainBase {
         this.addBtnEvent(this.rankBtn, this.onRank)
         this.addBtnEvent(this.shopBtn, this.onShop)
         this.addBtnEvent(this.settingBtn, this.onSetting)
+        this.addBtnEvent(this.firstBtn, ()=>{
+            FirstPayUI.getInstance().show();
+        })
 
         this.scroller.addEventListener(egret.Event.CHANGE,this.onScroll,this)
 
@@ -175,6 +176,7 @@ class MainFightUI extends MainBase {
         this.renew();
         this.renewForce();
         this.renewRed();
+        this.onFirstChange();
         this.stopAlertTask = false
 
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
@@ -184,12 +186,17 @@ class MainFightUI extends MainBase {
         this.addPanelOpenEvent(GameEvent.client.force_change,this.renewForce)
         this.addPanelOpenEvent(GameEvent.client.hang_change,this.onHangChange)
         this.addPanelOpenEvent(GameEvent.client.pvp_change,this.onPVPChange)
+        this.addPanelOpenEvent(GameEvent.client.first_change,this.onFirstChange)
 
         EM.addEvent(GameEvent.client.task_change,this.renewTask,this);
         EM.addEvent(GameEvent.client.tec_change,this.renewTask,this);
         EM.addEvent(GameEvent.client.slave_change,this.renewTask,this);
         EM.addEvent(GameEvent.client.card_change,this.renewTask,this);
         EM.addEvent(GameEvent.client.active_change,this.renewTask,this);
+    }
+
+    private onFirstChange(){
+        this.firstBtn.visible = !ActiveManager.getInstance().first_pay
     }
 
     private onHangChange(){

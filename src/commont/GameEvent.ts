@@ -15,6 +15,8 @@ class GameEvent {
         head_change:'head_change',
         hero_change:'hero_change',
         task_change:'task_change',
+        rmb_change:'rmb_change',
+        first_change:'first_change',
 
         fight_change:'fight_change',
         pvp_change:'pvp_change',
@@ -119,6 +121,8 @@ class GameEvent {
         add_diamond:'pay.add_diamond',
         buy_shop:'pay.buy_shop',
         pay_confirm:'pay.pay_confirm',
+        get_first_pay:'pay.get_first_pay',
+        get_pay_award:'pay.get_pay_award',
         get_shop:'pay.get_shop'
     }
 

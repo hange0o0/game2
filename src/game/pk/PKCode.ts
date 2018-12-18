@@ -73,7 +73,7 @@ class PKCode {
     //英雄出动
     public heroAdd(){
         var PD = PKData.getInstance();
-        if(PD.preLoadHeroStep < Math.floor((PD.actionTime + 1000*10)/PKConfig.heroCD))//预加载
+        if(PD.preLoadHeroStep < Math.floor((Math.max(0,PD.actionTime+30*1000) + 1000*10)/PKConfig.heroCD))//预加载
         {
             PD.preLoadHeroStep ++;
             for(var i=1;i<=PD.playerNum;i++) //暂时4个玩家
@@ -85,7 +85,7 @@ class PKCode {
             }
         }
 
-        if(PD.heroStep < Math.floor(PD.actionTime/PKConfig.heroCD))
+        if(PD.heroStep < Math.floor(Math.max(0,PD.actionTime+30*1000)/PKConfig.heroCD))
         {
             PD.heroStep ++;
             var b = false

@@ -10,13 +10,16 @@ class PayManager {
         '102':{'cost':30,'diamond':520},
         '103':{'cost':150,'diamond':2650},
         '104':{'cost':600,'diamond':10650},
-        '105':{'cost':1,'diamond':1}
+        //'105':{'cost':1,'diamond':1}
     }
     public diamondList
 
     public shopData
     public shopTime
     public openShopTime
+
+    //道充送5英雄
+    //道值达一定金额返还英雄宝箱
 
     public constructor() {
         this.diamondList = [];
@@ -38,12 +41,21 @@ class PayManager {
         return !DateUtil.isSameDay(this.openShopTime)
     }
 
+    public getAwardNum(){
+        return Math.floor(UM.rmb / 30);
+    }
+    public getAwardRate(){
+        return (UM.rmb % 30);
+    }
+
     public onBuyFinish(goodsid,fun){
 
-        UM.addDiamond(this.diamondBase[goodsid].value)
+        UM.addDiamond(this.diamondBase[goodsid].diamond)
+        UM.rmb += this.diamondBase[goodsid].cost
         MyWindow.ShowTips('购买成功')
         SoundManager.getInstance().playEffect(SoundConfig.effect_buy);
         PayingUI.getInstance().hide();
+        EM.dispatch(GameEvent.client.rmb_change);
         if(fun)
             fun();
     }
@@ -118,6 +130,8 @@ class PayManager {
         Net.addUser(oo);
         Net.send(GameEvent.pay.add_diamond,oo,(data) =>{
             var msg = data.msg;
+            UM.rmb += this.diamondBase[id].cost
+            EM.dispatch(GameEvent.client.rmb_change);
             SoundManager.getInstance().playEffect(SoundConfig.effect_buy);
             if(fun)
                 fun();
@@ -140,6 +154,32 @@ class PayManager {
 
             //if(fun)
             //    fun();
+        });
+    }
+
+    public getFirstPay(fun?){
+        var oo:any = {};
+        Net.addUser(oo);
+        Net.send(GameEvent.pay.get_first_pay,oo,(data) =>{
+            var msg = data.msg;
+            ActiveManager.getInstance().first_pay = true;
+            AwardUI.getInstance().show(msg.award);
+            SoundManager.getInstance().playEffect(SoundConfig.effect_buy);
+            EM.dispatch(GameEvent.client.first_change);
+            if(fun)
+                fun();
+        });
+    }
+    public getPayAward(fun?){
+        var oo:any = {};
+        Net.addUser(oo);
+        Net.send(GameEvent.pay.get_pay_award,oo,(data) =>{
+            var msg = data.msg;
+            ActiveManager.getInstance().rmb_award ++;
+            AwardUI.getInstance().show(msg.award);
+            SoundManager.getInstance().playEffect(SoundConfig.effect_buy);
+            if(fun)
+                fun();
         });
     }
 }

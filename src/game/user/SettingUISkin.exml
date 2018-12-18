@@ -35,7 +35,7 @@
 		</e:layout>
 	</e:Group>
 	<e:Group x="63" y="380">
-		<e:Group x="0" y="0">
+		<e:Group x="0" y="0" visible="false">
 			<e:Label y="4" textColor="0xEFE5AD" size="24" text="游戏官方QQ群：" x="0"/>
 			<e:Label id="qqText" y="0" textColor="0xEDCB24" size="24" text="347331204" x="192"/>
 			<e:layout>

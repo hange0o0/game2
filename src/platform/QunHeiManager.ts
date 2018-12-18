@@ -61,7 +61,7 @@ class QunHeiManager {
         var ext = UM.gameid+'|'+Config.serverID+'|' + goodsid + '|' + localOrder;
         var paydata = {
             "userId":_get['username'],
-            "gid":'3697',
+            "gid":'4089',
             "roleName":UM.nick,
             'goodsId':'' + goodsid,
             "goodsName":goodData.name || goodData.word,

@@ -38,6 +38,10 @@
 					<e:HorizontalLayout horizontalAlign="right" paddingLeft="0" paddingRight="0" gap="6"/>
 					</e:layout>
 				</e:Group>
+				<e:Group id="firstBtn" right="4" y="144">
+					<e:Image source="gift_mc_png" anchorOffsetX="44" anchorOffsetY="90" y="50" scaleX="0.6" scaleY="0.6" x="27"/>
+					<e:Label text="首充" stroke="3" size="24" strokeColor="0x471400" horizontalCenter="0" bottom="0"/>
+				</e:Group>
 			</e:Group>
 			<e:Group x="0" y="590">
 				<ns1:PKActiveMainPageUI id="activeUI" x="0" y="0" skinName="PKActiveMainPageUISkin" height="450"/>

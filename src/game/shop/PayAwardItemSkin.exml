@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="PayAwardItemSkin" width="580" height="320" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image left="0" right="0" scale9Grid="10,10,10,7" source="bg11_png" top="-10" bottom="0" locked="true"/>
+	<e:Group y="50" horizontalCenter="0">
+		<e:Group x="0" y="0">
+			<e:Image y="0" width="130" height="130" source="prop_bg_jpg" x="0"/>
+			<e:Image id="img0" width="90" height="90" y="20.15" x="20"/>
+			<e:Label text="开启24级资源宝箱" size="22" stroke="1" lineSpacing="5" textAlign="center" y="135" horizontalCenter="0" width="100"/>
+		</e:Group>
+		<e:Group x="10" y="10">
+			<e:Image y="0" width="130" height="130" source="prop_bg_jpg" x="0"/>
+			<e:Image id="img1" width="90" height="90" y="20.15" x="20"/>
+			<e:Label text="开启2级技能宝箱" size="22" stroke="1" lineSpacing="5" textAlign="center" y="135" horizontalCenter="0" width="100"/>
+		</e:Group>
+		<e:Group x="20" y="20">
+			<e:Image y="0" width="130" height="130" source="prop_bg_jpg" x="0"/>
+			<e:Image id="img2" width="90" height="90" y="20.15" x="20"/>
+			<e:Label text="开启2级英雄宝箱" size="22" stroke="1" lineSpacing="5" textAlign="center" y="135" horizontalCenter="0" width="100"/>
+		</e:Group>
+		<e:Group x="30" y="30">
+			<e:Image y="0" width="130" height="130" source="prop_bg_jpg" x="0"/>
+			<e:Image id="img3" width="90" height="90" y="20.15" x="20"/>
+			<e:Label text="进化之石x5" size="22" stroke="1" lineSpacing="5" textAlign="center" y="135" horizontalCenter="0" width="90"/>
+		</e:Group>
+		<e:layout>
+			<e:HorizontalLayout gap="10"/>
+		</e:layout>
+	</e:Group>
+	<e:Label text="每累计充值30元，即可随机获得以下奖励：" y="10" size="22" horizontalCenter="0.5"/>
+	<e:Group y="252.12" x="20">
+		<e:Label id="costText" text="Label" anchorOffsetY="0" x="220" verticalCenter="0"/>
+		<e:Group id="barGroup" x="0" scaleY="0.6" verticalCenter="0">
+			<e:Image source="bar_bg_png" x="0" y="0"/>
+			<e:Image id="barMC" source="bar1_png" x="2" y="2" fillMode="clip" width="204"/>
+		</e:Group>
+	</e:Group>
+	<e:Button id="awardBtn" label="随机领取" y="249.09" skinName="Btn1Skin" width="200" right="20"/>
+	<e:Label id="numText" text="已积累100元，剩余抽奖10次" size="18" stroke="1" lineSpacing="5" textAlign="center" y="289.55" x="20" textColor="0xffd0a3"/>
+</e:Skin>

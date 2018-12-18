@@ -35,8 +35,9 @@
 					<e:VerticalLayout paddingBottom="20" gap="10"/>
 				</e:layout>
 			</e:List>
+			<ns1:PayAwardItem id="payAwardItem" x="309" y="466" skinName="PayAwardItemSkin"/>
 			<e:layout>
-				<e:VerticalLayout horizontalAlign="center" paddingTop="10" gap="30"/>
+				<e:VerticalLayout horizontalAlign="center" paddingTop="10" gap="30" paddingBottom="10"/>
 			</e:layout>
 		</e:Group>
 	</e:Scroller>

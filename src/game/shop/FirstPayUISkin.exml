@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="FirstPayUISkin" width="480" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" height="520" >
+	<e:Image scale9Grid="33,31,4,6" x="0" y="0" width="100%" height="100%" source="bg14_png"/>
+	<e:Group y="-40" horizontalCenter="0" locked="true">
+		<e:Image source="title_bg3_png" scale9Grid="83,15,285,45" width="440" x="0" y="0"/>
+		<e:Label text="首充礼包" y="23" size="30" stroke="2" strokeColor="0x140000" horizontalCenter="0"/>
+	</e:Group>
+	<e:Group horizontalCenter="0" bottom="30">
+		<e:Button id="cancelBtn" y="4" label="取消" x="0" width="160" skinName="Btn2Skin"/>
+		<e:Button id="okBtn" label="马上领取" x="198" y="0" width="160" skinName="Btn1Skin"/>
+		<e:layout>
+			<e:HorizontalLayout gap="30"/>
+		</e:layout>
+	</e:Group>
+	<e:Label text="只要充值6元，马上可获得以上英雄" y="386" size="22" horizontalCenter="0.5" textColor="0xffe5cc"/>
+
+</e:Skin>

@@ -35,6 +35,7 @@ class PKPosItem extends game.BaseItem {
 
 
 
+    public isAddMV;
     public index;
     public defaultY;
     public tw;
@@ -82,6 +83,7 @@ class PKPosItem extends game.BaseItem {
 
 
     public dataChanged(){
+        this.isAddMV = false
         this.renewImg(this.data.mid);
         this.onTimer();
     }
@@ -132,17 +134,21 @@ class PKPosItem extends game.BaseItem {
 
         this.barMC.width = barWidth * (maxCD - cd) / maxCD;
 
-        if(cd == 0 && data.mid < PKConfig.skillBeginID)
+        if(!this.isAddMV)
         {
-             this.lightBG.visible = egret.getTimer() - this.lastFullCD < 200
-            this.tw.setPaused(false)
-            this.lastFullCD = egret.getTimer();
+            if(cd == 0 && data.mid < PKConfig.skillBeginID)
+            {
+                this.lightBG.visible = egret.getTimer() - this.lastFullCD < 200
+                this.tw.setPaused(false)
+                this.lastFullCD = egret.getTimer();
+            }
+            else
+            {
+                this.lightBG.visible = false
+                this.tw.setPaused(true)
+            }
         }
-        else
-        {
-            this.lightBG.visible = false
-            this.tw.setPaused(true)
-        }
+
     }
 
     private renewImg(mid){
@@ -152,10 +158,18 @@ class PKPosItem extends game.BaseItem {
     }
 
     public mvAdd(){
+        this.isAddMV = true
         egret.Tween.removeTweens(this.group);
         this.group.scaleX = this.group.scaleY = 0
         var tw = egret.Tween.get(this.group);
-        tw.to({scaleX:1.2,scaleY:1.2},200).to({scaleX:1,scaleY:1},200)
+        tw.to({scaleX:1.2,scaleY:1.2},200).to({scaleX:1,scaleY:1},200).call(()=>{
+            this.lightBG.visible = true
+            this.tw.setPaused(false)
+        }).wait(1000).call(()=>{
+            this.lightBG.visible = false
+            this.tw.setPaused(true)
+            this.isAddMV = false
+        })
     }
 
     public mvRemove(fun){
